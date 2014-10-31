@@ -102,7 +102,7 @@
         public const string FORUMURL = "ForumURL";
         public const string CURSEFORGEURL = "CurseForgeURL";
         public const string VERSIONCONTROL = "VersionControl";
-        public const string VERSIONCONTROLLERNAME = "VersionControllerName";
+        public const string VERSIONCONTROLERNAME = "VersionControllerName";
         public const string FILENAME = "Filename";
         public const string KSPSTARTUPOPTIONS = "KSPStartupOptions";
         public const string BORDERLESSWINDOW = "BorderlessWindow";

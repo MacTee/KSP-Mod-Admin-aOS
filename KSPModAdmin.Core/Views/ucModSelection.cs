@@ -271,6 +271,17 @@ namespace KSPModAdmin.Core.Views
                 ModSelectionController.CheckForModUpdates(new [] { SelectedNode.ZipRoot });
         }
 
+        private void tsbUpdateAllOutdatedMods_Click(object sender, EventArgs e)
+        {
+            ModSelectionController.UpdateAllOutdatedMods();
+        }
+
+        private void tsbUpdateMod_Click(object sender, EventArgs e)
+        {
+            if (SelectedNode != null)
+                ModSelectionController.UpdateMod(SelectedNode.ZipRoot);
+        }
+
         private void tssbVisitVersionControlSite_ButtonClick(object sender, EventArgs e)
         {
             MessageBox.Show(ParentForm, "Not implemented yet!", Messages.MSG_TITLE_ATTENTION, MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -283,7 +294,7 @@ namespace KSPModAdmin.Core.Views
 
         private void tsbSolveConflicts_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(ParentForm, "Not implemented yet!", Messages.MSG_TITLE_ATTENTION, MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            ModSelectionController.OpenConflictSolver();
         }
 
         private void tsmiRedetectDestination_Click(object sender, EventArgs e)

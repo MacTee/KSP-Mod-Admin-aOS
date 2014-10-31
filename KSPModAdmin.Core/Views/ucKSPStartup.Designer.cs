@@ -100,6 +100,7 @@
             this.cbForceOpenGL.Size = new System.Drawing.Size(96, 17);
             this.cbForceOpenGL.TabIndex = 14;
             this.cbForceOpenGL.Text = "Force OpenGL";
+            this.ttKSPStartup.SetToolTip(this.cbForceOpenGL, "Starts KSP with OpenGL redering mode.");
             this.cbForceOpenGL.UseVisualStyleBackColor = true;
             // 
             // cbResolutions

@@ -74,7 +74,9 @@
     <None Include="Languages\KSPMA.eng.lang">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Languages\KSPMA.fake.lang" />
+    <None Include="Languages\KSPMA.fake.lang">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

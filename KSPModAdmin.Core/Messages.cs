@@ -1459,5 +1459,257 @@ namespace KSPModAdmin.Core
             }
         }
         private const string DEFAULT_MSG_ERROR_DURING_UPDATECHECK_0_ERRORMSG_1 = "Error during update check for mod \"{0}\". Error: \"{1}\"";
+
+        public static string MSG_UPDATING_MOD_0
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_UPDATING_MOD_0"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_UPDATING_MOD_0).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_UPDATING_MOD_0 = "Updating mod \"{0}\"...";
+
+        public static string MSG_MOD_0_UPDATED
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_MOD_0_UPDATED"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_MOD_UPDATED).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_MOD_UPDATED = "Mod \"{0}\" updated";
+
+        public static string MSG_ERROR_WHILE_UPDATING_MOD_0_ERROR_1
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_ERROR_WHILE_UPDATING_MOD_0_ERROR_1"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_ERROR_WHILE_UPDATING_MOD_0_ERROR_1).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_ERROR_WHILE_UPDATING_MOD_0_ERROR_1 = "Error during updating mod \"{0}\". Error: \"{1}\"";
+
+        public static string MSG_ERROR_UPDATING_MOD_0_FAILED
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_ERROR_UPDATING_MOD_0_FAILED"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_ERROR_UPDATING_MOD_0_FAILED).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_ERROR_UPDATING_MOD_0_FAILED = "Updating of the mod \"{0}\" failed.^Manualy update required.";
+
+        public static string MSG_ADD_MOD_0_TO_MODPACK
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_ADD_MOD_0_TO_MODPACK"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_ADD_MOD_0_TO_MODPACK).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_ADD_MOD_0_TO_MODPACK = "Add mod {0} to ModPack...";
+
+        public static string MSG_MODPACK_INFOFILE_NOT_FOUND
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_MODPACK_INFOFILE_NOT_FOUND"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_MODPACK_INFOFILE_NOT_FOUND).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_MODPACK_INFOFILE_NOT_FOUND = "ModPack info file not found!";
+
+        public static string MSG_DOWNLOAD_0_STARTED
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_DOWNLOAD_0_STARTED"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_DOWNLOAD_0_STARTED).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_DOWNLOAD_0_STARTED = "Download of {0} started ...";
+
+        public static string MSG_DOWNLOAD_0_DONE
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_DOWNLOAD_0_DONE"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_DOWNLOAD_0_DONE).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_DOWNLOAD_0_DONE = "Download of {0} done.";
+
+        public static string MSG_DOWNLOAD_0_FAILED
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_DOWNLOAD_0_FAILED"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_DOWNLOAD_0_FAILED).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_DOWNLOAD_0_FAILED = "Download of {0} failed!";
+
+        public static string MSG_IMPORT_0_STARTED
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_IMPORT_0_STARTED"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_IMPORT_0_STARTED).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_IMPORT_0_STARTED = "Import of {0} started ...";
+
+        public static string MSG_IMPORT_0_DONE
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_IMPORT_0_DONE"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_IMPORT_0_DONE).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_IMPORT_0_DONE = "Import of {0} done.";
+
+        public static string MSG_IMPORT_0_FAILED_ERROR_1
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_IMPORT_0_FAILED_ERROR_1"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_IMPORT_0_FAILED_ERROR_1).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_IMPORT_0_FAILED_ERROR_1 = "Import of {0} failed! Error: {1}";
+
+        public static string MSG_IMPORT_0_FAILED
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_IMPORT_0_FAILED"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_IMPORT_0_FAILED).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_IMPORT_0_FAILED = "Import of {0} failed!";
+
+        public static string MSG_NO_MODS_TO_EXPORT
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_NO_MODS_TO_EXPORT"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_NO_MODS_TO_EXPORT).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_NO_MODS_TO_EXPORT = "There are no mods to export.";
+        
+        public static string MSG_EXPORT_TO_0
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_EXPORT_TO_0"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_EXPORT_TO_0).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_EXPORT_TO_0 = "Exporting to \"{0}\".";
+
+        public static string MSG_EXPORT_DONE
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_EXPORT_DONE"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_EXPORT_DONE).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_EXPORT_DONE = "Export done.";
+
+        public static string MSG_EXPORT_ABORTED
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_EXPORT_ABORTED"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_EXPORT_ABORTED).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_EXPORT_ABORTED = "Export aborted.";
+
+        public static string MSG_IMPORT_STARTED
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_IMPORT_STARTED"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_IMPORT_STARTED).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_IMPORT_STARTED = "Starting import.";
+
+        public static string MSG_CLEARING_MODSELECTION
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_CLEARING_MODSELECTION"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_CLEARING_MODSELECTION).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_CLEARING_MODSELECTION = "Clearing ModSelection.";
+
+        public static string MSG_IMPORTING_FROM_0
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_IMPORTING_FROM_0"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_IMPORTING_FROM_0).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_IMPORTING_FROM_0 = "Importing from \"{0}\".";
+
+        public static string MSG_IMPORTING_FAILED
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_IMPORTING_FAILED"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_IMPORTING_FAILED).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_IMPORTING_FAILED = "Import failed!";
+
+        public static string MSG_IMPORTING_DONE
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_IMPORTING_DONE"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_IMPORTING_DONE).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_IMPORTING_DONE = "Import done.";
+
+        public static string MSG_IMPORTING_ABORTED
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_IMPORTING_ABORTED"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_IMPORTING_ABORTED).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_IMPORTING_ABORTED = "Import aborted.";
+
+        public static string MSG_ERROR_DURING_MODUPDATE_0_ERROR_1
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_ERROR_DURING_MODUPDATE_0_ERROR_1"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_ERROR_DURING_MODUPDATE_0_ERROR_1).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_ERROR_DURING_MODUPDATE_0_ERROR_1 = "Error during mod update \"{0}\". Error: \"{1}\"";
+
+        public static string MSG_DOWNLOADING_MOD_0
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_DOWNLOADING_MOD_0"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_DOWNLOADING_MOD_0).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_DOWNLOADING_MOD_0 = "Downloading mod update \"{0}\"...";
+    
+    
     }
 }

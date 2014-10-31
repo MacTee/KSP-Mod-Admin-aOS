@@ -146,7 +146,7 @@ namespace KSPModAdmin.Core.Config
                     kspForumURL = att.Value;
                 else if (att.Name == Constants.CURSEFORGEURL)
                     curseForgeURL = att.Value;
-                else if (att.Name == Constants.VERSIONCONTROLLERNAME)
+                else if (att.Name == Constants.VERSIONCONTROLERNAME)
                 {
                     node.SiteHandlerName = att.Value;
 
@@ -316,7 +316,7 @@ namespace KSPModAdmin.Core.Config
             }
             if (child.SiteHandlerName != string.Empty)
             {
-                pathNodeAttribute = doc.CreateAttribute(Constants.VERSIONCONTROLLERNAME);
+                pathNodeAttribute = doc.CreateAttribute(Constants.VERSIONCONTROLERNAME);
                 pathNodeAttribute.Value = child.SiteHandlerName;
                 modNode.Attributes.Append(pathNodeAttribute);
             }

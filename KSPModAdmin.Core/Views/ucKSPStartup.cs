@@ -165,18 +165,24 @@ namespace KSPModAdmin.Core.Views
                 if (ScreenResolution == null)
                     return;
 
+				int index1 = -1;
+				int index2 = -1;
+				string temp = string.Empty;
                 string allText = File.ReadAllText(settingsPath);
                 string[] size = ScreenResolution.Split("x");
-                int index1 = allText.IndexOf(Constants.SCREEN_WIDTH);
-                int index2 = allText.IndexOf(Environment.NewLine, index1);
-                string temp = allText.Substring(index1, index2 - index1);
-                allText = allText.Replace(temp, string.Format(PARAM_0_EQUALS_1, Constants.SCREEN_WIDTH, size[0]));
-
-                index1 = allText.IndexOf(Constants.SCREEN_HEIGHT);
-                index2 = allText.IndexOf(Environment.NewLine, index1);
-                temp = allText.Substring(index1, index2 - index1);
-                allText = allText.Replace(temp, string.Format(PARAM_0_EQUALS_1, Constants.SCREEN_HEIGHT, size[1]));
-
+				if (size.Length == 2)
+				{
+					index1 = allText.IndexOf(Constants.SCREEN_WIDTH);
+					index2 = allText.IndexOf(Environment.NewLine, index1);
+					temp = allText.Substring(index1, index2 - index1);
+					allText = allText.Replace(temp, string.Format(PARAM_0_EQUALS_1, Constants.SCREEN_WIDTH, size[0]));
+					
+					index1 = allText.IndexOf(Constants.SCREEN_HEIGHT);
+					index2 = allText.IndexOf(Environment.NewLine, index1);
+					temp = allText.Substring(index1, index2 - index1);
+					allText = allText.Replace(temp, string.Format(PARAM_0_EQUALS_1, Constants.SCREEN_HEIGHT, size[1]));
+				}
+				
                 index1 = allText.IndexOf(Constants.FULLSCREEN);
                 index2 = allText.IndexOf(Environment.NewLine, index1);
                 temp = allText.Substring(index1, index2 - index1);

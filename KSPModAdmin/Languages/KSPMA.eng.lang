@@ -15,6 +15,7 @@
     <Control Name="tsmiCmsProceedAllMods" Value="Proceed all mods"/>
     <Control Name="tsmiCmsUpdatecheckForAllMods" Value="Updatecheck for all mods"/>
     <Control Name="tsmiCmsRefreshCheckedStateForAllMods" Value="Refresh checked state for all mods"/>
+    <Control Name="tsmiCmsCheckAllMods" Value="Checks all mods"/>
     <Control Name="tsmiCmsUncheckAllMods" Value="Uncheck all mods"/>
   </Control>
   <Control Name="cmsModSelectionOneMod" Value="">
@@ -162,7 +163,11 @@
   <Control Name="rbWindowed" Value="Windowed">
     <ChildControl Name="rbWindowed_ToolTip" Value="Starts KSP in windowed mode."/>
   </Control>
+  <Control Name="cbForceOpenGL" Value="Force OpenGL">
+    <ChildControl Name="cbForceOpenGL_ToolTip" Value="Starts KSP with OpenGL redering mode."/>
+  </Control>
   
+
   <Control Name="tabPageOptions" Value="Options"/>
   <Control Name="tabPageUpdate" Value="Update"/>
   <Control Name="gbModUpdate" Value="Mod updating:"/>
@@ -520,4 +525,50 @@
   <String Name="MSG_MOD_0_IS_UPTODATE" Value="The mod &amp;quot;{0}&amp;quot; is up to date."/>
   <String Name="MSG_MOD_0_IS_OUTDATED" Value="The mod &amp;quot;{0}&amp;quot; is outdated."/>
   <String Name="MSG_ERROR_DURING_UPDATECHECK_0_ERRORMSG_1" Value="Error during update check for mod &amp;quot;{0}&amp;quot;. Error: &amp;quot;{1}&amp;quot;"/>
+
+  <Control Name="frmImExport" Value="ModPack im/exporter"/>
+    <Control Name="gbImport" Value="Import:"/>
+    <Control Name="gbDestinationOption" Value="Destination options:"/>
+    <Control Name="rbCopyDestination" Value="Copy destination."/>
+    <Control Name="rbUseAutoDestDetection" Value="User Auto destination detection."/>
+    <Control Name="gbInstallOptions" Value="Install options:"/>
+    <Control Name="rbInstall" Value="Install mods."/>
+    <Control Name="rbAddOnly" Value="Add mods only (manual install)."/>
+    <Control Name="cbClearModSelection" Value="Clear ModSelection befor import."/>
+    <Control Name="cbExtract" Value="Extract mods (if in ModPack)."/>
+    <Control Name="cbDownloadIfNeeded" Value="Download needed mods (if possible)."/>
+    <Control Name="lblImportInfo" Value="Import mods from a ModPack file."/>
+    <Control Name="btnImport" Value="Import"/>
+    <Control Name="gbExport" Value="Export:"/>
+    <Control Name="cbIncludeMods" Value="Include mod archives."/>
+    <Control Name="rbExportSelectedOnly" Value="Selected mods only"/>
+    <Control Name="rbExportAll" Value="Complete ModSelection list."/>
+    <Control Name="lblExportInfo" Value="Export a ModPack for sharing with other players."/>
+    <Control Name="btnExport" Value="Export"/>
+  
+  <String Name="MSG_UPDATING_MOD_0" Value="Updating mod &amp;quot;{0}&amp;quot;..."/>
+  <String Name="MSG_MOD_0_UPDATED" Value="Mod &amp;quot;{0}&amp;quot; updated"/>
+  <String Name="MSG_ERROR_WHILE_UPDATING_MOD_0_ERROR_1" Value="Error during updating mod &amp;quot;{0}&amp;quot;. Error: &amp;quot;{1}&amp;quot;"/>
+  <String Name="MSG_ERROR_UPDATING_MOD_0_FAILED" Value="Updating of the mod &amp;quot;{0}&amp;quot; failed.^Manualy update required."/>
+  <String Name="MSG_ADD_MOD_0_TO_MODPACK" Value="Add mod &amp;quot;{0}&amp;quot; to ModPack..."/>
+  <String Name="MSG_MODPACK_INFOFILE_NOT_FOUND" Value="ModPack info file not found!"/>
+  <String Name="MSG_DOWNLOAD_0_STARTED" Value="Download of &amp;quot;{0}&amp;quot; started..."/>
+  <String Name="MSG_DOWNLOAD_0_DONE" Value="Download of &amp;quot;{0}&amp;quot; done."/>
+  <String Name="MSG_DOWNLOAD_0_FAILED" Value="Download of &amp;quot;{0}&amp;quot; failed!"/>
+  <String Name="MSG_IMPORT_0_STARTED" Value="Import of &amp;quot;{0}&amp;quot; started..."/>
+  <String Name="MSG_IMPORT_0_DONE" Value="Import of &amp;quot;{0}&amp;quot; done."/>
+  <String Name="MSG_IMPORT_0_FAILED_ERROR_1" Value="Import of &amp;quot;{0}&amp;quot; failed!"/>
+  <String Name="MSG_IMPORT_0_FAILED" Value="Import of &amp;quot;{0}&amp;quot; failed! Error: &amp;quot;{1}&amp;quot;"/>
+  <String Name="MSG_NO_MODS_TO_EXPORT" Value="There are no mods to export."/>
+  <String Name="MSG_EXPORT_TO_0" Value="Exporting to &amp;quot;{0}&amp;quot;."/>
+  <String Name="MSG_EXPORT_DONE" Value="Export done."/>
+  <String Name="MSG_EXPORT_ABORTED" Value="Export aborted."/>
+  <String Name="MSG_IMPORT_STARTED" Value="Starting import."/>
+  <String Name="MSG_CLEARING_MODSELECTION" Value="Clearing ModSelection."/>
+  <String Name="MSG_IMPORTING_FROM_0" Value="Importing from &amp;quot;{0}&amp;quot;."/>
+  <String Name="MSG_IMPORTING_FAILED" Value="Import failed!"/>
+  <String Name="MSG_IMPORTING_DONE" Value="Import done."/>
+  <String Name="MSG_IMPORTING_ABORTED" Value="Import aborted."/>
+  <String Name="MSG_ERROR_DURING_MODUPDATE_0_ERROR_1" Value="Error during mod update &amp;quot;{0}&amp;quot;. Error: &amp;quot;{1}&amp;quot;"/>
+  <String Name="MSG_DOWNLOADING_MOD_0" Value="Downloading mod update &amp;quot;{0}&amp;quot;..."/>
 </Language>

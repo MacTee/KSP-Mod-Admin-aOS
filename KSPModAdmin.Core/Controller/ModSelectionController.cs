@@ -144,80 +144,6 @@ namespace KSPModAdmin.Core.Controller
         #endregion
 
 
-        #region Processing nodes
-
-        /// <summary>
-        /// Processes all nodes of the ModSelection. (Adds/Removes the mods to/from the KSP install folders).
-        /// </summary>
-        public static void ProcessAllModsAsync(bool silent = false)
-        {
-            ProcessModsAsync(Mods, silent);
-        }
-
-        /// <summary>
-        /// Processes all passed nodes. (Adds/Removes the MOD to/from the KSP install folders).
-        /// </summary>
-        /// <param name="nodeArray">The NodeArray to process.</param>
-        /// <param name="silent">Determines if info messages should be added displayed.</param>
-        public static void ProcessMods(ModNode[] nodeArray, bool silent = false)
-        {
-            try
-            {
-                int maxNodeCount = 0;
-                int nodeCount = 0;
-                foreach (ModNode mod in nodeArray)
-                {
-                    maxNodeCount += ModSelectionTreeModel.GetFullNodeCount(new ModNode[] {mod});
-                    nodeCount += ModNodeHandler.ProcessMod(mod, silent, View.OverrideModFiles, (i) => { View.SetProgressBarStates(true, maxNodeCount, i); }, nodeCount) - nodeCount;
-                }
-            }
-            catch (Exception ex)
-            {
-                Messenger.AddError(string.Format(Messages.MSG_ERROR_DURING_PROCESSING_MOD_0, ex), ex);
-            }
-            finally
-            {
-                View.SetProgressBarStates(false);
-                InvalidateView();
-            }
-        }
-
-        /// <summary>
-        /// Processes all passed nodes. (Adds/Removes the MOD to/from the KSP install folders).
-        /// </summary>
-        /// <param name="nodeArray">The NodeArray to process.</param>
-        /// <param name="silent">Determines if info messages should be added displayed.</param>
-        public static void ProcessModsAsync(ModNode[] nodeArray, bool silent = false)
-        {
-            EventDistributor.InvokeAsyncTaskStarted(Instance);
-            View.SetEnabledOfAllControls(false);
-            View.SetProgressBarStates(true, 1, 0);
-
-            AsyncTask<bool> asyncJob = new AsyncTask<bool>();
-            asyncJob.SetCallbackFunctions(() =>
-                {
-                    ProcessMods(nodeArray, silent);
-
-                    return true;
-                },
-                (result, ex) =>
-                {
-                    EventDistributor.InvokeAsyncTaskDone(Instance);
-                    View.SetEnabledOfAllControls(true);
-                    View.SetProgressBarStates(false);
-
-                    if (ex != null)
-                    {
-                        string msg = string.Format(Messages.MSG_ERROR_DURING_PROCESSING_MOD_0, ex.Message);
-                        Messenger.AddError(msg, ex);
-                        MessageBox.Show(View, msg, Messages.MSG_TITLE_ERROR, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                });
-            asyncJob.Run();
-        }
-
-        #endregion
-
         #region Add Mod
 
         /// <summary>
@@ -431,9 +357,7 @@ namespace KSPModAdmin.Core.Controller
                     else if (mod != null && (mod.IsOutdated || modInfo.CreationDateAsDateTime > mod.CreationDateAsDateTime) &&
                              OptionsController.ModUpdateBehavior != ModUpdateBehavior.Manualy)
                     {
-                        MessageBox.Show(View, string.Format("Mod \"{0}\" is outdated.{1}BUT: Auto update is not implemented yet!", mod.Name, Environment.NewLine), 
-                            Messages.MSG_TITLE_ATTENTION, MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                        //newNode = UpdateMod(modInfo, mod);
+                        newNode = UpdateMod(modInfo, mod);
                     }
                     else
                     {
@@ -487,6 +411,80 @@ namespace KSPModAdmin.Core.Controller
             }
 
             return addedMods;
+        }
+
+        #endregion
+
+        #region Processing mods
+
+        /// <summary>
+        /// Processes all nodes of the ModSelection. (Adds/Removes the mods to/from the KSP install folders).
+        /// </summary>
+        public static void ProcessAllModsAsync(bool silent = false)
+        {
+            ProcessModsAsync(Mods, silent);
+        }
+
+        /// <summary>
+        /// Processes all passed nodes. (Adds/Removes the MOD to/from the KSP install folders).
+        /// </summary>
+        /// <param name="nodeArray">The NodeArray to process.</param>
+        /// <param name="silent">Determines if info messages should be added displayed.</param>
+        public static void ProcessMods(ModNode[] nodeArray, bool silent = false)
+        {
+            try
+            {
+                int maxNodeCount = 0;
+                int nodeCount = 0;
+                foreach (ModNode mod in nodeArray)
+                {
+                    maxNodeCount += ModSelectionTreeModel.GetFullNodeCount(new ModNode[] { mod });
+                    nodeCount += ModNodeHandler.ProcessMod(mod, silent, View.OverrideModFiles, (i) => { View.SetProgressBarStates(true, maxNodeCount, i); }, nodeCount) - nodeCount;
+                }
+            }
+            catch (Exception ex)
+            {
+                Messenger.AddError(string.Format(Messages.MSG_ERROR_DURING_PROCESSING_MOD_0, ex), ex);
+            }
+            finally
+            {
+                View.SetProgressBarStates(false);
+                InvalidateView();
+            }
+        }
+
+        /// <summary>
+        /// Processes all passed nodes. (Adds/Removes the MOD to/from the KSP install folders).
+        /// </summary>
+        /// <param name="nodeArray">The NodeArray to process.</param>
+        /// <param name="silent">Determines if info messages should be added displayed.</param>
+        public static void ProcessModsAsync(ModNode[] nodeArray, bool silent = false)
+        {
+            EventDistributor.InvokeAsyncTaskStarted(Instance);
+            View.SetEnabledOfAllControls(false);
+            View.SetProgressBarStates(true, 1, 0);
+
+            AsyncTask<bool> asyncJob = new AsyncTask<bool>();
+            asyncJob.SetCallbackFunctions(() =>
+            {
+                ProcessMods(nodeArray, silent);
+
+                return true;
+            },
+                (result, ex) =>
+                {
+                    EventDistributor.InvokeAsyncTaskDone(Instance);
+                    View.SetEnabledOfAllControls(true);
+                    View.SetProgressBarStates(false);
+
+                    if (ex != null)
+                    {
+                        string msg = string.Format(Messages.MSG_ERROR_DURING_PROCESSING_MOD_0, ex.Message);
+                        Messenger.AddError(msg, ex);
+                        MessageBox.Show(View, msg, Messages.MSG_TITLE_ERROR, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                });
+            asyncJob.Run();
         }
 
         #endregion
@@ -945,6 +943,8 @@ namespace KSPModAdmin.Core.Controller
 
         #endregion
 
+        #region Checked state
+
         #region Refresh CheckedStated
 
         /// <summary>
@@ -1207,6 +1207,194 @@ namespace KSPModAdmin.Core.Controller
             asyncJob.Run();
         }
 
+        #endregion
+
+        #region Mod update
+
+        /// <summary>
+        /// Checks each mod of the ModSelection for updates.
+        /// </summary>
+        public static void CheckForUpdatesAllMods()
+        {
+            CheckForModUpdates(Mods);
+        }
+
+        /// <summary>
+        /// Checks each mod for updates.
+        /// </summary>
+        /// <param name="mods">Array of mods to check for updates.</param>
+        public static void CheckForModUpdates(ModNode[] mods)
+        {
+            foreach (ModNode mod in mods)
+            {
+                try
+                {
+
+                    ISiteHandler siteHandler = mod.SiteHandler;
+                    if (siteHandler == null)
+                        Messenger.AddInfo(string.Format(Messages.MSG_ERROR_0_NO_VERSIONCONTROL, mod.Name));
+                    else
+                    {
+                        ModInfo newModinfo = null;
+                        Messenger.AddInfo(string.Format(Messages.MSG_UPDATECHECK_FOR_MOD_0_VIA_1, mod.Name, mod.SiteHandlerName));
+                        if (!siteHandler.CheckForUpdates(mod.ModInfo, ref newModinfo))
+                            Messenger.AddInfo(string.Format(Messages.MSG_MOD_0_IS_UPTODATE, mod.Name));
+                        else
+                        {
+                            Messenger.AddInfo(string.Format(Messages.MSG_MOD_0_IS_OUTDATED, mod.Name));
+                            mod.IsOutdated = true;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Messenger.AddInfo(string.Format(Messages.MSG_ERROR_DURING_UPDATECHECK_0_ERRORMSG_1, mod.Name, ex.Message));
+                }
+            }
+        }
+
+        /// <summary>
+        /// Starts a update check for all mods and updates all outdated mods.
+        /// </summary>
+        public static void UpdateAllOutdatedMods()
+        {
+            CheckForUpdatesAllMods();
+            
+            // Get all outdated mods.
+            var outdatedMods = from e in Mods where e.IsOutdated select e;
+
+            foreach (ModNode mod in outdatedMods)
+            {
+                try
+                {
+                    var handler = mod.SiteHandler;
+                    if (handler != null)
+                    {
+                        Messenger.AddInfo(string.Format(Messages.MSG_DOWNLOADING_MOD_0, mod.Name));
+                        ModInfo newModInfos = handler.GetModInfo(mod.ModURL);
+                        if (handler.DownloadMod(ref newModInfos))
+                            UpdateMod(newModInfos, mod);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Messenger.AddInfo(string.Format(Messages.MSG_ERROR_DURING_MODUPDATE_0_ERROR_1, mod.Name, ex.Message));
+                }
+            }
+        }
+
+        /// <summary>
+        /// Starts a update check for the mod and updates it if it's outdated.
+        /// </summary>
+        /// <param name="mod">The mod of the mod to update.</param>
+        public static void UpdateMod(ModNode mod)
+        {
+            CheckForModUpdates(new[] { mod });
+
+            try
+            {
+                if (mod.IsOutdated)
+                {
+                    var handler = mod.SiteHandler;
+                    if (handler != null)
+                    {
+                        Messenger.AddInfo(string.Format(Messages.MSG_DOWNLOADING_MOD_0, mod.Name));
+                        ModInfo newModInfos = handler.GetModInfo(mod.ModURL);
+                        if (handler.DownloadMod(ref newModInfos))
+                            UpdateMod(newModInfos, mod);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Messenger.AddInfo(string.Format(Messages.MSG_ERROR_DURING_MODUPDATE_0_ERROR_1, mod.Name, ex.Message));
+            }
+        }
+
+        /// <summary>
+        /// Updates the outdated mod.
+        /// Tries to copy the checked state and destination of a mod and its parts, then uninstalls the outdated mod and installs the new one.
+        /// </summary>
+        /// <param name="newModInfo">The ModeInfo of the new mod.</param>
+        /// <param name="outdatedMod">The root ModNode of the outdated mod.</param>
+        public static ModNode UpdateMod(ModInfo newModInfo, ModNode outdatedMod)
+        {
+            ModNode newMod = null;
+            try
+            {
+                Messenger.AddInfo(string.Format(Messages.MSG_UPDATING_MOD_0, outdatedMod.Text));
+                newMod = ModNodeHandler.CreateModNode(newModInfo);
+                if (OptionsController.ModUpdateBehavior == ModUpdateBehavior.RemoveAndAdd || (!outdatedMod.IsInstalled && !outdatedMod.HasInstalledChilds))
+                {
+                    RemoveOutdatedAndAddNewMod(outdatedMod, newMod);
+                    View.InvokeIfRequired(() => { newMod._Checked = false; });
+                }
+                else
+                {
+                    // Find matching file nodes and copy destination from old to new mod.
+                    if (ModNodeHandler.TryCopyDestToMatchingNodes(outdatedMod, newMod))
+                    {
+                        newMod.ModURL = outdatedMod.ModURL;
+                        newMod.AdditionalURL = outdatedMod.AdditionalURL;
+                        newMod.Note = outdatedMod.Note;
+                        //View.InvokeIfRequired(() =>
+                        //{
+                        RemoveOutdatedAndAddNewMod(outdatedMod, newMod);
+                        ProcessMods(new ModNode[] { newMod }, true);
+                        //});
+                    }
+                    else
+                    {
+                        // No match found -> user must handle update.
+                        View.InvokeIfRequired(() => MessageBox.Show(View.ParentForm, string.Format(Messages.MSG_ERROR_UPDATING_MOD_0_FAILED, outdatedMod.Text)));
+                    }
+
+                    View.InvokeIfRequired(() =>
+                    {
+                        if (OptionsController.ShowConflictSolver && newMod != null && newMod.HasChildCollision)
+                        {
+                            MessageBox.Show(View, "ConflictSolver not Implemented yet!");
+                            // TODO :
+                            //frmCollisionSolving dlg = new frmCollisionSolving();
+                            //dlg.CollisionMod = newMod;
+                            //dlg.ShowDialog();
+                        }
+                    });
+                }
+
+                Messenger.AddInfo(string.Format(Messages.MSG_MOD_0_UPDATED, newMod.Text));
+            }
+            catch (Exception ex)
+            {
+                Messenger.AddError(string.Format(Messages.MSG_ERROR_WHILE_UPDATING_MOD_0_ERROR_1, outdatedMod.Text, ex.Message), ex);
+            }
+
+            return newMod;
+
+
+            //MessageBox.Show(View, string.Format("Mod \"{0}\" is outdated.{1}BUT: Auto update is not implemented yet!", mod.Name, Environment.NewLine),
+            //    Messages.MSG_TITLE_ATTENTION, MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+
+            //return null;
+        }
+
+        #endregion
+
+        #region ModPack export/import
+
+        /// <summary>
+        /// Opens the ModPack Import/Export dialog.
+        /// </summary>
+        public static void OpenExportImportDialog()
+        {
+            frmImExport dlg = new frmImExport();
+            dlg.ShowDialog(View.ParentForm);
+        }
+
+        #endregion
+
+        #region Mod zipping
+
         /// <summary>
         /// Creates a zip for each root node in the passed node list.
         /// </summary>
@@ -1254,6 +1442,8 @@ namespace KSPModAdmin.Core.Controller
                 });
         }
 
+        #endregion
+
         /// <summary>
         /// Sorts the nodes of the ModSelection depending on the passed SortType.
         /// </summary>
@@ -1261,53 +1451,16 @@ namespace KSPModAdmin.Core.Controller
         /// <param name="desc">Determines if the sorting should be descending or ascending.</param>
         public static void SortModSelection(SortType sortType = SortType.ByName, bool desc = true)
         {
-            // TODO
+            // move or redirect to Model.ModSelectionTreeModel.SortModSelection
+
+            // TODO: implementation
             InvalidateView();
         }
 
         /// <summary>
-        /// Checks each mod of the ModSelection for updates.
+        /// Opens the ConflictSolver dilaog.
         /// </summary>
-        public static void CheckForUpdatesAllMods()
-        {
-            CheckForModUpdates(Mods);
-        }
-
-        /// <summary>
-        /// Checks each mod for updates.
-        /// </summary>
-        /// <param name="mods">Array of mods to check for updates.</param>
-        public static void CheckForModUpdates(ModNode[] mods)
-        {
-            foreach (ModNode mod in mods)
-            {
-                try
-                {
-
-                    ISiteHandler siteHandler = mod.SiteHandler;
-                    if (siteHandler == null)
-                        Messenger.AddInfo(string.Format(Messages.MSG_ERROR_0_NO_VERSIONCONTROL, mod.Name));
-                    else
-                    {
-                        ModInfo newModinfo = null;
-                        Messenger.AddInfo(string.Format(Messages.MSG_UPDATECHECK_FOR_MOD_0_VIA_1, mod.Name, mod.SiteHandlerName));
-                        if (!siteHandler.CheckForUpdates(mod.ModInfo, ref newModinfo))
-                            Messenger.AddInfo(string.Format(Messages.MSG_MOD_0_IS_UPTODATE, mod.Name));
-                        else
-                        {
-                            Messenger.AddInfo(string.Format(Messages.MSG_MOD_0_IS_OUTDATED, mod.Name));
-                            mod.IsOutdated = true;
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Messenger.AddInfo(string.Format(Messages.MSG_ERROR_DURING_UPDATECHECK_0_ERRORMSG_1, mod.Name, ex.Message));
-                }
-            }
-        }
-
-        public static void OpenExportImportDialog()
+        public static void OpenConflictSolver()
         {
             MessageBox.Show(View.ParentForm, "Not implemented yet!", Messages.MSG_TITLE_ATTENTION, MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }

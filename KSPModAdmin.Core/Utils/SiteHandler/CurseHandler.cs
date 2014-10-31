@@ -70,6 +70,18 @@ namespace KSPModAdmin.Core.Utils
             return modInfo.CreationDateAsDateTime < newModInfo.CreationDateAsDateTime;
         }
 
+        /// <summary>
+        /// Downloads the mod.
+        /// </summary>
+        /// <param name="modInfo">The infos of the mod. Must have at least ModURL and LocalPath</param>
+        /// <param name="downloadProgressHandler">Callback function for download progress.</param>
+        /// <returns>True if the mod was downloaded.</returns>
+        public bool DownloadMod(ref ModInfo modInfo, DownloadProgressChangedEventHandler downloadProgressHandler = null)
+        {
+            ISiteHandler curseForge = SiteHandlerManager.GetSiteHandlerByName("CurseForge");
+            return curseForge.DownloadMod(ref modInfo, downloadProgressHandler);
+        }
+
 
         /// <summary>
         /// Parse the download URL from site.

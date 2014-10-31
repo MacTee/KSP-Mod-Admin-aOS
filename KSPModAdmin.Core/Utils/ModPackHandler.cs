@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml;
-using KSPModAdmin.Core.Views;
+using KSPModAdmin.Core.Controller;
+using KSPModAdmin.Core.Model;
 using SharpCompress.Archive;
 using SharpCompress.Archive.Zip;
 using SharpCompress.Common;
-using KSPModAdmin.Core.Controller;
 
 namespace KSPModAdmin.Core.Utils
 {
+    public delegate void MessageCallbackHandler(object sender, string message);
+
     /// <summary>
     /// The ModPackHandler handles everything related to ModPack.
     /// Import / Export.
@@ -25,6 +27,8 @@ namespace KSPModAdmin.Core.Utils
         public const string ONE = "1";
         public const string XMLVERSION = "1.0";
         public const string XMLUTF8 = "UTF-8";
+        public const string MODS_FOLDER = "/Mods/";
+        public const string MODS_FOLDER_WIN = "\\Mods\\";
 
         #endregion
 
@@ -36,7 +40,7 @@ namespace KSPModAdmin.Core.Utils
         /// <param name="modsToExport">List of mods to export.</param>
         /// <param name="fileName">Filename for the new created ModPack.</param>
         /// <param name="includeMods">Flag to determine if the mod archives should be included to.</param>
-        public static void Export(List<ModNode> modsToExport, string fileName, bool includeMods = false)
+        public static void Export(List<ModNode> modsToExport, string fileName, bool includeMods = false, MessageCallbackHandler messageCallback = null)
         {
             XmlNode modsNode = CreateXmlDocument();
             XmlDocument doc = modsNode.OwnerDocument;
@@ -46,7 +50,8 @@ namespace KSPModAdmin.Core.Utils
             {
                 foreach (var mod in modsToExport)
                 {
-                    Messenger.AddInfo(string.Format("Add mod {0} to ModPack...", mod.Text));
+                    if (messageCallback != null)
+                        messageCallback(null, string.Format(Messages.MSG_ADD_MOD_0_TO_MODPACK, mod.Text));
 
                     if (includeMods && mod.ZipExists)
                         archive.AddEntry(Path.Combine(Constants.MODS, Path.GetFileName(mod.Name)), mod.Name);
@@ -100,8 +105,8 @@ namespace KSPModAdmin.Core.Utils
             nodeAttribute.Value = mod.Text;
             modNode.Attributes.Append(nodeAttribute);
 
-            nodeAttribute = doc.CreateAttribute(Constants.VERSIONCONTROL);
-            nodeAttribute.Value = ((int)mod.VersionControl).ToString();
+            nodeAttribute = doc.CreateAttribute(Constants.VERSIONCONTROLERNAME);
+            nodeAttribute.Value = mod.SiteHandlerName;
             modNode.Attributes.Append(nodeAttribute);
 
             if (!string.IsNullOrEmpty(mod.ProductID))
@@ -111,24 +116,17 @@ namespace KSPModAdmin.Core.Utils
                 modNode.Attributes.Append(nodeAttribute);
             }
 
-            if (!string.IsNullOrEmpty(mod.SpaceportURL))
+            if (!string.IsNullOrEmpty(mod.ModURL))
             {
                 nodeAttribute = doc.CreateAttribute(Constants.MODURL);
-                nodeAttribute.Value = mod.SpaceportURL;
+                nodeAttribute.Value = mod.ModURL;
                 modNode.Attributes.Append(nodeAttribute);
             }
 
-            if (!string.IsNullOrEmpty(mod.KSPForumURL))
+            if (!string.IsNullOrEmpty(mod.AdditionalURL))
             {
-                nodeAttribute = doc.CreateAttribute(Constants.FORUMURL);
-                nodeAttribute.Value = mod.KSPForumURL;
-                modNode.Attributes.Append(nodeAttribute);
-            }
-
-            if (!string.IsNullOrEmpty(mod.CurseForgeURL))
-            {
-                nodeAttribute = doc.CreateAttribute(Constants.CURSEFORGEURL);
-                nodeAttribute.Value = mod.CurseForgeURL;
+                nodeAttribute = doc.CreateAttribute(Constants.ADDITIONALURL);
+                nodeAttribute.Value = mod.AdditionalURL;
                 modNode.Attributes.Append(nodeAttribute);
             }
 
@@ -183,7 +181,8 @@ namespace KSPModAdmin.Core.Utils
         /// <param name="downloadMods">Flag to determine if the missing mods should be downloaded.</param>
         /// <param name="copyDest">Flag to determine if the destination should be copied or if the auto destination detection should be used.</param>
         /// <param name="addOnly">Flag to determine if the mod should be installed or only added to the ModSelection.</param>
-        public static void Import(frmBase parentWindow, string fileName, string modExtractDir, bool extractMods, bool downloadMods, bool copyDest, bool addOnly)
+        /// <param name="messageCallback">Callback function for messages during the import process.</param>
+        public static void Import(string fileName, string modExtractDir, bool extractMods, bool downloadMods, bool copyDest, bool addOnly, MessageCallbackHandler messageCallback = null)
         {
             string tempDocPath = Path.Combine(Path.GetTempPath(), KSPTEMPDIR);
             Directory.CreateDirectory(tempDocPath);
@@ -200,7 +199,7 @@ namespace KSPModAdmin.Core.Utils
                         if (!extractMods)
                             break;
                     }
-                    else if (extractMods && (entry.FilePath.Contains("/Mods/") || entry.FilePath.Contains("\\Mods\\")))
+                    else if (extractMods && (entry.FilePath.Contains(MODS_FOLDER) || entry.FilePath.Contains(MODS_FOLDER_WIN)))
                     {
                         entry.WriteToDirectory(modExtractDir);
                     }
@@ -221,7 +220,7 @@ namespace KSPModAdmin.Core.Utils
                     importInfo.LocalPath = Path.Combine(modExtractDir, importInfo.LocalPath);
                     if (downloadMods && !File.Exists(importInfo.LocalPath))
                     {
-                        if (!AddDownloadInfos(parentWindow, ref importInfo))
+                        if (!AddDownloadInfos(ref importInfo))
                             continue;
 
                         downloadQueue.Add(importInfo);
@@ -236,14 +235,15 @@ namespace KSPModAdmin.Core.Utils
                 }
 
                 if (downloadQueue.Count > 0)
-                    DownloadMods(downloadQueue);
+                    DownloadMods(downloadQueue, messageCallback);
 
                 if (importQueue.Count > 0)
-                    ImportMods(importQueue, copyDest, addOnly);
+                    ImportMods(importQueue, copyDest, addOnly, messageCallback);
             }
             else
             {
-                Messenger.AddInfo("ModPack info file not found!");
+                if (messageCallback != null)
+                    messageCallback(null, Messages.MSG_MODPACK_INFOFILE_NOT_FOUND);
             }
 
             if (Directory.Exists(tempDocPath))
@@ -267,16 +267,14 @@ namespace KSPModAdmin.Core.Utils
                     importInfo.LocalPath = att.Value;
                 else if (att.Name == Constants.NAME)
                     importInfo.Name = att.Value;
-                else if (att.Name == Constants.VERSIONCONTROL)
-                    importInfo.VersionControl = (VersionControl)int.Parse(att.Value);
+                else if (att.Name == Constants.VERSIONCONTROLERNAME)
+                    importInfo.SiteHandlerName = att.Value;
                 else if (att.Name == Constants.PRODUCTID)
                     importInfo.ProductID = att.Value;
                 else if (att.Name == Constants.MODURL)
-                    importInfo.SpaceportURL = att.Value;
+                    importInfo.ModURL = att.Value;
                 else if (att.Name == Constants.FORUMURL)
-                    importInfo.ForumURL = att.Value;
-                else if (att.Name == Constants.CURSEFORGEURL)
-                    importInfo.CurseForgeURL = att.Value;
+                    importInfo.AdditionalURL = att.Value;
                 else if (att.Name == Constants.ISFILE)
                     importInfo.IsFile = (att.Value == ONE);
                 else if (att.Name == Constants.INSTALL)
@@ -294,31 +292,13 @@ namespace KSPModAdmin.Core.Utils
         /// <summary>
         /// Gets the download infos of the mod (gets website and parses it to get the ModInfos).
         /// </summary>
-        /// <param name="parentWindow"></param>
         /// <param name="importInfo">The ImportInfo with the URL to the mod website.</param>
         /// <returns>True if the ModInfos could be downloaded and parsed.</returns>
-        private static bool AddDownloadInfos(frmBase parentWindow, ref ImportInfo importInfo)
+        private static bool AddDownloadInfos(ref ImportInfo importInfo)
         {
-            switch (importInfo.VersionControl)
-            {
-                case VersionControl.KSPForum:
-                    if (KSPForum.IsValidURL(importInfo.ForumURL))
-                    {
-                        string forumURL = importInfo.ForumURL;
-                        string downloadURL = string.Empty;
-                        parentWindow.InvokeIfRequired(() => downloadURL = KSPForum.GetDownloadURL(forumURL));
-                        importInfo.DownloadURL = downloadURL;
-
-                        if (!string.IsNullOrEmpty(importInfo.DownloadURL))
-                            importInfo.ModInfo = KSPForum.GetModInfo(importInfo.ForumURL);
-                    }
-                    break;
-
-                case VersionControl.CurseForge:
-                    if (CurseForge.IsValidURL(importInfo.CurseForgeURL))
-                        importInfo.ModInfo = CurseForge.GetModInfo(importInfo.CurseForgeURL);
-                    break;
-            }
+            ISiteHandler siteHandler = SiteHandlerManager.GetSiteHandlerByName(importInfo.SiteHandlerName);
+            if (siteHandler != null && siteHandler.IsValidURL(importInfo.ModURL))
+                importInfo.ModInfo = siteHandler.GetModInfo(importInfo.ModURL);
 
             return (importInfo.ModInfo != null);
         }
@@ -335,13 +315,12 @@ namespace KSPModAdmin.Core.Utils
                 modInfo = importInfo.ModInfo;
             else
             {
-                modInfo.CurseForgeURL = importInfo.CurseForgeURL;
-                modInfo.ForumURL = importInfo.ForumURL;
+                modInfo.ModURL = importInfo.ModURL;
+                modInfo.AdditionalURL = importInfo.AdditionalURL;
                 modInfo.LocalPath = importInfo.LocalPath;
                 modInfo.Name = importInfo.Name;
                 modInfo.ProductID = importInfo.ProductID;
-                modInfo.SpaceportURL = importInfo.SpaceportURL;
-                modInfo.VersionControl = importInfo.VersionControl;
+                modInfo.SiteHandlerName = importInfo.SiteHandlerName;
             }
 
             return modInfo;
@@ -351,32 +330,26 @@ namespace KSPModAdmin.Core.Utils
         /// Downloads all mods in the downloadQueue.
         /// </summary>
         /// <param name="downloadQueue">A list of ImportInfos of the mods to download.</param>
-        private static void DownloadMods(List<ImportInfo> downloadQueue)
+        /// <param name="messageCallback">Callback function for messages during the download process.</param>
+        private static void DownloadMods(List<ImportInfo> downloadQueue, MessageCallbackHandler messageCallback = null)
         {
             foreach (ImportInfo importInfo in downloadQueue)
             {
-                Messenger.AddInfo(string.Format("Download of {0} started ...", importInfo.Name));
+                if (messageCallback != null)
+                    messageCallback(importInfo, string.Format(Messages.MSG_DOWNLOAD_0_STARTED, importInfo.Name));
 
                 ModInfo modInfo = importInfo.ModInfo;
-                switch (importInfo.VersionControl)
+                ISiteHandler siteHandler = SiteHandlerManager.GetSiteHandlerByName(importInfo.SiteHandlerName);
+                if (siteHandler != null)
+                        importInfo.DownloadSuccessfull = siteHandler.DownloadMod(ref modInfo);
+
+                if (messageCallback != null)
                 {
-                    case VersionControl.KSPForum:
-                        importInfo.DownloadSuccessfull = KSPForum.DownloadMod(importInfo.DownloadURL, ref modInfo);
-                        break;
-
-                    case VersionControl.CurseForge:
-                        importInfo.DownloadSuccessfull = CurseForge.DownloadMod(ref modInfo);
-                        break;
-
-                    default:
-                        importInfo.DownloadSuccessfull = false;
-                        break;
+                    if (importInfo.DownloadSuccessfull)
+                        messageCallback(importInfo, string.Format(Messages.MSG_DOWNLOAD_0_DONE, importInfo.Name));
+                    else
+                        messageCallback(importInfo, string.Format(Messages.MSG_DOWNLOAD_0_FAILED, importInfo.Name));
                 }
-
-                if (importInfo.DownloadSuccessfull)
-                    Messenger.AddInfo(string.Format("Download of {0} done.", importInfo.Name));
-                else
-                    Messenger.AddInfo(string.Format("Download of {0} failed!", importInfo.Name));
             }
         }
 
@@ -386,25 +359,30 @@ namespace KSPModAdmin.Core.Utils
         /// <param name="importQueue">A list of ImportInfos of the mods to import.</param>
         /// <param name="copyDest">Flag to determine if the destination should be copied or if the auto destination detection should be used.</param>
         /// <param name="addOnly">Flag to determine if the mod should be installed or only added to the ModSelection.</param>
-        private static void ImportMods(List<ImportInfo> importQueue, bool copyDest, bool addOnly)
+        /// <param name="messageCallback">Callback function for messages during the import process.</param>
+        private static void ImportMods(List<ImportInfo> importQueue, bool copyDest, bool addOnly, MessageCallbackHandler messageCallback = null)
         {
             foreach (ImportInfo importInfo in importQueue)
             {
                 if (!importInfo.DownloadSuccessfull)
                     continue;
 
-                Messenger.AddInfo(string.Format("Import of {0} started ...", importInfo.Name));
+                if (messageCallback != null)
+                    messageCallback(importInfo, string.Format(Messages.MSG_IMPORT_0_STARTED, importInfo.Name));
 
                 try
                 {
                     if (importInfo.DownloadSuccessfull)
-                        ImportMod(importInfo, copyDest, addOnly);
+                        ImportMod(importInfo, copyDest, addOnly, messageCallback);
 
-                    Messenger.AddInfo(string.Format("Import of {0} done.", importInfo.Name));
+                    if (messageCallback != null)
+                        messageCallback(importInfo, string.Format(Messages.MSG_IMPORT_0_DONE, importInfo.Name));
                 }
                 catch (Exception ex)
                 {
-                    Messenger.AddInfo(string.Format("Import of {0} failed! Error: {1}", importInfo.Name, ex.Message));
+                    string errMsg = ex.Message;
+                    if (messageCallback != null)
+                        messageCallback(importInfo, string.Format(Messages.MSG_IMPORT_0_FAILED_ERROR_1, importInfo.Name, ex.Message));
                 }
             }
         }
@@ -415,7 +393,8 @@ namespace KSPModAdmin.Core.Utils
         /// <param name="importInfo">The ImportInfo </param>
         /// <param name="copyDest">Flag to determine if the destination should be copied or if the auto destination detection should be used.</param>
         /// <param name="addOnly">Flag to determine if the mod should be installed or only added to the ModSelection.</param>
-        private static void ImportMod(ImportInfo importInfo, bool copyDest, bool addOnly)
+        /// <param name="messageCallback">Callback function for messages during the import process.</param>
+        private static void ImportMod(ImportInfo importInfo, bool copyDest, bool addOnly, MessageCallbackHandler messageCallback = null)
         {
             ModInfo modInfo = importInfo.ModInfo;
             ModNode addedMod = ModSelectionController.AddMods(new ModInfo[] { modInfo }, false).FirstOrDefault();
@@ -425,19 +404,20 @@ namespace KSPModAdmin.Core.Utils
                 if (copyDest)
                 {
                     // remove all destinations and uncheck all nodes.
-                    addedMod.SetDestinationPaths("");
-                    TreeViewEx.ChangeCheckedState(addedMod, false, true, true);
+                    ModNodeHandler.SetDestinationPaths(addedMod, "");
+                    addedMod._Checked = false;
                     // copy destination
                     TryCopyDestToMatchingNodes(importInfo, addedMod);
                 }
 
                 // install the mod.
                 if (!addOnly)
-                    ModSelectionController.ProcessNodes(new ModNode[] { addedMod });
+                    ModSelectionController.ProcessMods(new ModNode[] { addedMod });
             }
             else
             {
-                Messenger.AddInfo(string.Format("Import of {0} failed!", importInfo.Name));
+                if (messageCallback != null)
+                    messageCallback(importInfo, string.Format(Messages.MSG_IMPORT_0_FAILED, importInfo.Name));
             }
         }
 
@@ -460,12 +440,12 @@ namespace KSPModAdmin.Core.Utils
                 ImportInfo parentImport = importFile.Parent;
 
                 string path = parentImport.Name + '\\' + importFile.Name;
-                ModNode matchingNew = ModNode.SearchNodeByPath(path, newMod, '\\');
+                ModNode matchingNew = ModSelectionTreeModel.SearchNodeByPath(path, newMod, '\\');
                 if (matchingNew != null)
                 {
                     matchFound = true;
                     matchingNew.Destination = GetDestination(importFile);
-                    TreeViewEx.ChangeCheckedState(matchingNew, importFile.Install, true, true);
+                    matchingNew._Checked = importFile.Install;
                 }
 
                 if (TryCopyDestToMatchingChildNodes(importFile.GetChildes(), newMod))
@@ -481,16 +461,16 @@ namespace KSPModAdmin.Core.Utils
             //        continue;
 
             //    string path = parentImport.Name + '\\' + importFile.Name;
-            //    TreeNodeMod matchingNew = MainForm.Instance.ModSelection.SearchNodeByPath(path, newMod, '\\');
+            //    ModNode matchingNew = MainForm.Instance.ModSelection.SearchNodeByPath(path, newMod, '\\');
             //    if (matchingNew == null)
             //        continue;
 
             //    matchFound = true;
             //    matchingNew.Destination = GetDestination(importFile);
-            //    ((TreeNodeMod)matchingNew.Parent).Destination = GetDestination(importFile.Parent);
+            //    ((ModNode)matchingNew.Parent).Destination = GetDestination(importFile.Parent);
             //    MainForm.Instance.ModSelection.tvModSelection.ChangeCheckedState(matchingNew, importFile.Install, true, true);
 
-            //    TreeNodeMod parentNew = matchingNew;
+            //    ModNode parentNew = matchingNew;
             //    while (parentImport != null)
             //    {
             //        if (parentImport.Parent == null)
@@ -500,7 +480,7 @@ namespace KSPModAdmin.Core.Utils
             //        if (MainForm.Instance.ModSelection.SearchNodeByPath(path, newMod, '\\') == null)
             //            break;
 
-            //        parentNew = (TreeNodeMod)parentNew.Parent;
+            //        parentNew = (ModNode)parentNew.Parent;
             //        if (parentNew == null)
             //            break;
 
@@ -516,13 +496,6 @@ namespace KSPModAdmin.Core.Utils
             return matchFound;
         }
 
-        /// <summary>
-        /// Tries to find notes in the new mod, that matches to one of the child nodes.
-        /// If a matching node was found the destination and/or the checked state of the node will be copied.
-        /// </summary>
-        /// <param name="childImportInfo">The child list of outdated mod ImportInfo.</param>
-        /// <param name="newMod">The new (updated) mod.</param>
-        /// <returns>True if matching files where found, otherwise false.</returns>
         private static bool TryCopyDestToMatchingChildNodes(List<ImportInfo> childImportInfo, ModNode newMod)
         {
             bool matchFound = false;
@@ -531,12 +504,12 @@ namespace KSPModAdmin.Core.Utils
                 ImportInfo parentImport = importFile.Parent;
 
                 string path = parentImport.Name + '\\' + importFile.Name;
-                ModNode matchingNew = ModNode.SearchNodeByPath(path, newMod, '\\');
+                ModNode matchingNew = ModSelectionTreeModel.SearchNodeByPath(path, newMod, '\\');
                 if (matchingNew != null)
                 {
                     matchFound = true;
                     matchingNew.Destination = GetDestination(importFile);
-                    TreeViewEx.ChangeCheckedState(matchingNew, importFile.Install, true, true);
+                    matchingNew._Checked = importFile.Install;
                 }
 
                 if (TryCopyDestToMatchingChildNodes(importFile.GetChildes(), newMod))
@@ -559,7 +532,7 @@ namespace KSPModAdmin.Core.Utils
             return Path.Combine(KSPPathHelper.GetPath(KSPPaths.KSPRoot), importInfo.InstallDir);
         }
 
-        #region Internal classes
+        #region internal classes
 
         /// <summary>
         /// ImportInfo contains information for the import of a mod.
@@ -572,17 +545,13 @@ namespace KSPModAdmin.Core.Utils
 
             public string Name { get; set; }
 
-            public VersionControl VersionControl { get; set; }
+            public string SiteHandlerName { get; set; }
 
             public string ProductID { get; set; }
 
-            public string SpaceportURL { get; set; }
+            public string ModURL { get; set; }
 
-            public string DownloadURL { get; set; }
-
-            public string ForumURL { get; set; }
-
-            public string CurseForgeURL { get; set; }
+            public string AdditionalURL { get; set; }
 
             public ImportInfo Parent { get; set; }
 
@@ -608,12 +577,10 @@ namespace KSPModAdmin.Core.Utils
             {
                 LocalPath = string.Empty;
                 Name = string.Empty;
-                VersionControl = VersionControl.None;
+                SiteHandlerName = Messages.NONE;
                 ProductID = string.Empty;
-                SpaceportURL = string.Empty;
-                DownloadURL = string.Empty;
-                ForumURL = string.Empty;
-                CurseForgeURL = string.Empty;
+                ModURL = string.Empty;
+                AdditionalURL = string.Empty;
                 Parent = null;
                 Childs = new List<ImportInfo>();
                 ModInfo = null;

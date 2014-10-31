@@ -84,6 +84,7 @@
     <Compile Include="Model\ModSelectionTreeModel.cs" />
     <Compile Include="Model\ModNode.cs" />
     <Compile Include="Model\NoteNode.cs" />
+    <Compile Include="Utils\ModPackHandler.cs" />
     <Compile Include="Utils\SiteHandler\CurseForgeHandler.cs" />
     <Compile Include="Utils\SiteHandler\CurseHandler.cs" />
     <Compile Include="Utils\SiteHandler\SiteHandlerManager.cs" />
@@ -351,6 +352,12 @@
     <Compile Include="Views\frmEditModInfo.Designer.cs">
       <DependentUpon>frmEditModInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\frmImExport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frmImExport.Designer.cs">
+      <DependentUpon>frmImExport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\frmLinkSelection.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -408,6 +415,10 @@
     <None Include="Resources\components_checkbox_unchecked.png" />
     <None Include="Resources\components_replace_checkbox_checked.png" />
     <None Include="Resources\components_replace_earth.png" />
+    <None Include="Resources\components_replace_clock.png" />
+    <None Include="Resources\component_replace_clock.png" />
+    <None Include="Resources\components_package_into.png" />
+    <None Include="Resources\components_package_out.png" />
     <Content Include="Utils\Controls\CheckBoxComboBox\_license\license.txt" />
     <Content Include="Utils\Controls\FolderSelectionDialog\_license\license.txt" />
     <Content Include="Utils\Controls\TreeViewAdv\_license\license.txt" />
@@ -526,6 +537,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\frmEditModInfo.resx">
       <DependentUpon>frmEditModInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\frmImExport.resx">
+      <DependentUpon>frmImExport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\frmLinkSelection.resx">
       <DependentUpon>frmLinkSelection.cs</DependentUpon>

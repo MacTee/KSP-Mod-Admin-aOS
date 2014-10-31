@@ -3,20 +3,22 @@
 
 - 
 
+
 //// To Test
 /////////////////////
 
 - Force openGL on KSP launch (-force-opengl).
+- Options 
+  -> KSP MA Update implementation.
+- VersionControl implementation.
+  - AutoUpdate of mods
+- ModPack Import/Export implementation.
 
 
 //// TODO
 /////////////////////
 
-- VersionControl implementation.
-
-- KSPForum support.
-
-- Async !!!!!
+- is everything Async ???
 
 - ModSelection
   -> MutiSelect 
@@ -26,11 +28,12 @@
 
 - Restart destination detection.
 
-- Options 
-  -> KSP MA Update implementation.
+- Conflic detection/solving
 
-- ModPack Import/Export implementation.
+- KSPForum support.
 
+- KerbalStuff support
+  -> API: https://github.com/KerbalStuff/KerbalStuff/blob/master/api.md
 
 - ReadMe
 
@@ -43,8 +46,7 @@
 
 - Column select for ModSelection from ModInfo fields
 
-- KerbalStuff support
-  -> API: https://github.com/KerbalStuff/KerbalStuff/blob/master/api.md
+
   
 - Language file Creator/Editor tab
 

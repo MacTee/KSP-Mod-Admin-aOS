@@ -43,5 +43,13 @@ namespace KSPModAdmin.Core.Utils
         /// <param name="newModInfo">A reference to a empty ModInfo to write the updated ModInfos to.</param>
         /// <returns>True if there is an update, otherwise false.</returns>
         bool CheckForUpdates(ModInfo modInfo, ref ModInfo newModInfo);
+
+        /// <summary>
+        /// Downloads the mod.
+        /// </summary>
+        /// <param name="modInfo">The infos of the mod. Must have at least ModURL and LocalPath</param>
+        /// <param name="downloadProgressHandler">Callback function for download progress.</param>
+        /// <returns>True if the mod was downloaded.</returns>
+        bool DownloadMod(ref ModInfo modInfo, DownloadProgressChangedEventHandler downloadProgressHandler = null);
     }
 }

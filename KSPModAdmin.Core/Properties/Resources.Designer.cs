@@ -403,6 +403,16 @@ namespace KSPModAdmin.Core.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap component_replace_clock {
+            get {
+                object obj = ResourceManager.GetObject("component_replace_clock", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap component_replace_earth {
             get {
                 object obj = ResourceManager.GetObject("component_replace_earth", resourceCulture);
@@ -563,6 +573,26 @@ namespace KSPModAdmin.Core.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap components_package_into {
+            get {
+                object obj = ResourceManager.GetObject("components_package_into", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap components_package_out {
+            get {
+                object obj = ResourceManager.GetObject("components_package_out", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap components_replace_checkbox_checked {
             get {
                 object obj = ResourceManager.GetObject("components_replace_checkbox_checked", resourceCulture);
@@ -576,6 +606,16 @@ namespace KSPModAdmin.Core.Properties {
         internal static System.Drawing.Bitmap components_replace_checkbox_unchecked {
             get {
                 object obj = ResourceManager.GetObject("components_replace_checkbox_unchecked", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap components_replace_clock {
+            get {
+                object obj = ResourceManager.GetObject("components_replace_clock", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
