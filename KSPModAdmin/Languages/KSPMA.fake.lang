@@ -15,7 +15,6 @@
     <Control Name="tsmiCmsProceedAllMods" Value="(T)Proceed all mods"/>
     <Control Name="tsmiCmsUpdatecheckForAllMods" Value="(T)Updatecheck for all mods"/>
     <Control Name="tsmiCmsRefreshCheckedStateForAllMods" Value="(T)Refresh checked state for all mods"/>
-    <Control Name="tsmiCmsCheckAllMods" Value="(T)Checks all mods"/>
     <Control Name="tsmiCmsUncheckAllMods" Value="(T)Uncheck all mods"/>
   </Control>
   <Control Name="cmsModSelectionOneMod" Value="">
@@ -162,9 +161,6 @@
   </Control>
   <Control Name="rbWindowed" Value="(T)Windowed">
     <ChildControl Name="rbWindowed_ToolTip" Value="(T)Starts KSP in windowed mode."/>
-  </Control>
-  <Control Name="cbForceOpenGL" Value="(T)Force OpenGL">
-    <ChildControl Name="cbForceOpenGL_ToolTip" Value="(T)Starts KSP with OpenGL redering mode."/>
   </Control>
 
   <Control Name="tabPageOptions" Value="(T)Options"/>
@@ -525,6 +521,10 @@
   <String Name="MSG_MOD_0_IS_OUTDATED" Value="(T)The mod &amp;quot;{0}&amp;quot; is outdated."/>
   <String Name="MSG_ERROR_DURING_UPDATECHECK_0_ERRORMSG_1" Value="(T)Error during update check for mod &amp;quot;{0}&amp;quot;. Error: &amp;quot;{1}&amp;quot;"/>
 
+  <Control Name="tsmiCmsCheckAllMods" Value="(T)Checks all mods"/>
+  <Control Name="cbForceOpenGL" Value="(T)Force OpenGL">
+    <ChildControl Name="cbForceOpenGL_ToolTip" Value="(T)Starts KSP with OpenGL redering mode."/>
+  </Control>
   <Control Name="tsbUpdateAllOutdatedMods" Value="tsbUpdateAllOutdatedMods">
     <Control Name="tsbUpdateAllOutdatedMods_ToolTip" Value="(T)Update all outdated mods^Starts a update check and updates all outdated mods."/>
   </Control>
