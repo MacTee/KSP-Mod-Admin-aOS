@@ -1,0 +1,523 @@
+<Language Name="eng" LongName="English">
+  <Control Name="frmMain" Value="KSP Mod Admin AnyOS"/>
+  <Control Name="lblKSPPath" Value="KSP install path:"/>
+	<Control Name="cbKSPPath" Value="">
+		<ChildControl Name="cbKSPPath_ToolTip" Value="Chose the KSP install path to perform actions on."/>
+	</Control>
+  
+  <Control Name="tabPageModSelection" Value="Mods"/>
+  <Control Name="cmsModSelectionAllMods" Value="">
+    <Control Name="tsmiCmsAddMod" Value="Add Mod"/>
+    <Control Name="tsmiCmsAddModArchive" Value="Add mod archive"/>
+    <Control Name="tsmiCmsImportExportModPack" Value="Import/Export ModPack"/>
+    <Control Name="tsmiCmsScanForAlreadyInstalledMods" Value="Scan for already installed mods"/>
+    <Control Name="tsmiCmsRemoveAllMods" Value="Remove all mods"/>
+    <Control Name="tsmiCmsProceedAllMods" Value="Proceed all mods"/>
+    <Control Name="tsmiCmsUpdatecheckForAllMods" Value="Updatecheck for all mods"/>
+    <Control Name="tsmiCmsRefreshCheckedStateForAllMods" Value="Refresh checked state for all mods"/>
+    <Control Name="tsmiCmsUncheckAllMods" Value="Uncheck all mods"/>
+  </Control>
+  <Control Name="cmsModSelectionOneMod" Value="">
+    <Control Name="tsmiCmsDestination" Value="Destination"/>
+    <Control Name="tsmiCmsSelectNewDestination" Value="Select new destination"/>
+    <Control Name="tsmiCmsResetDestination" Value="Reset destination"/>
+    <Control Name="tsmiCmsRedetectDestination" Value="Redetect destination for the mod"/>
+    <Control Name="tsmiCmsRefreschCheckedState" Value="Refresch checked state"/>
+    <Control Name="tsmiCmsEditModInfos" Value="Edit ModInfos"/>
+    <Control Name="tsmiCmsCopyModInfos" Value="Copy ModInfos"/>
+    <Control Name="tsmiCmsUpdatecheckMod" Value="Updatecheck"/>
+    <Control Name="tsmiCmsVisitVersionControlSite" Value="Visit version control URL"/>
+    <Control Name="tsmiCmsVisitAdditionalLink" Value="Visit additional link URL"/>
+    <Control Name="tsmiCmsSolveConflicts" Value="Solve conflicts"/>
+    <Control Name="tsmiCmsProceedMod" Value="Proceed mod"/>
+    <Control Name="tsmiCmsRemoveMod" Value="Remove mod"/>
+    <Control Name="tsmiCmsCreateZip" Value="Create Zip"/>
+  </Control>
+  <Control Name="tsMod" Value="toolStrip2">
+    <Control Name="tsbProceedMod" Value="toolStripButton9">
+      <ChildControl Name="tsbProceedMod_ToolTip" Value="Proceed mod^Installs/Uninstalles the checked(unchecked parts of the highlighted mod."/>
+    </Control>
+    <Control Name="tsbModUpdateCheck" Value="toolStripButton6">
+      <ChildControl Name="tsbModUpdateCheck_ToolTip" Value="Check for mod update^Checks for mod updates if version control is active."/>
+    </Control>
+    <Control Name="tssbVisitVersionControlSite" Value="toolStripDropDownButton3">
+      <ChildControl Name="tssbVisitVersionControlSite_ToolTip" Value="Visit version check site^Opens the ModBrowser an navigates to the version check site of the mod."/>
+      <Control Name="tsmiVisitVersionControlSite" Value="Visit version control URL">
+        <ChildControl Name="tsmiVisitVersionControlSite_ToolTip" Value="Visit version check site^Opens the ModBrowser an navigates to the version check site of the mod."/>
+      </Control>
+      <Control Name="tsmiVisitAdditionalLink" Value="Visit additional link URL">
+        <ChildControl Name="tsmiVisitAdditionalLink_ToolTip" Value="Visit additional link URL^Opens the ModBrowser and navigates to the additional URL of the mod."/>
+      </Control>
+    </Control>
+    <Control Name="tsbEditModInfos" Value="toolStripButton7">
+      <ChildControl Name="tsbEditModInfos_ToolTip" Value="Edit ModInfo^Opens the ModInfo editor."/>
+    </Control>
+    <Control Name="tsbCopyModInfos" Value="toolStripButton8">
+      <ChildControl Name="tsbCopyModInfos_ToolTip" Value="Copy ModInfo^Copies the ModInfo from this mod to another one."/>
+    </Control>
+    <Control Name="tsbSolveConflicts" Value="toolStripButton11">
+      <ChildControl Name="tsbSolveConflicts_ToolTip" Value="Solve mod conflicts^Opens the mod conflict solver dialog."/>
+    </Control>
+    <Control Name="tsbRefreshCheckedState" Value="toolStripButton10">
+      <ChildControl Name="tsbRefreshCheckedState_ToolTip" Value="Refresh checked state^Refrashes the checked state of the mod."/>
+    </Control>
+    <Control Name="tssbChangeDestination" Value="toolStripButton12">
+      <ChildControl Name="tssbChangeDestination_ToolTip" Value="Select destination^Select a new install destination for the currently selected mod file/folder."/>
+      <Control Name="tsmiChangeDestination" Value="Select new destination">
+        <ChildControl Name="tsmiChangeDestination_ToolTip" Value="Select destination^Select a new install destination for the currently selected mod file/folder."/>
+      </Control>
+      <Control Name="tsmiResetDestination" Value="Reset destination">
+        <ChildControl Name="tsmiResetDestination_ToolTip" Value="Reset destination^Resets the destination for the currently selected mod file/folder."/>
+      </Control>
+      <Control Name="tsmiRedetectDestination" Value="Redetect destination for the mod">
+        <ChildControl Name="tsmiRedetectDestination_ToolTip" Value="Redetect destinations for the mod^Deletes all destinations from the mod and ^and starts the auto destination detection for it."/>
+      </Control>
+    </Control>
+    <Control Name="tsbCreateZip" Value="toolStripButton14">
+      <ChildControl Name="tsbCreateZip_ToolTip" Value="Create zip archive^Create new zip archive of the mod."/>
+    </Control>
+  </Control>
+  <Control Name="lvModSelection" Value="">
+    <ChildControl Name="lvModSelection_Column_1" Value=""/>
+    <ChildControl Name="lvModSelection_Column_2" Value=""/>
+    <ChildControl Name="lvModSelection_Group_1" Value="Mod Infos"/>
+    <ChildControl Name="lvModSelection_Group_2" Value="File Infos"/>
+    <ChildControl Name="lvModSelection_Item_1" Value="Name"/>
+    <ChildControl Name="lvModSelection_Item_2" Value="Archive Path"/>
+    <ChildControl Name="lvModSelection_Item_3" Value="Version Control"/>
+    <ChildControl Name="lvModSelection_Item_4" Value="ID"/>
+    <ChildControl Name="lvModSelection_Item_5" Value="Version"/>
+    <ChildControl Name="lvModSelection_Item_6" Value="Author"/>
+    <ChildControl Name="lvModSelection_Item_7" Value="Creation date"/>
+    <ChildControl Name="lvModSelection_Item_8" Value="Change date"/>
+    <ChildControl Name="lvModSelection_Item_9" Value="Outdated"/>
+    <ChildControl Name="lvModSelection_Item_10" Value="Rating"/>
+    <ChildControl Name="lvModSelection_Item_11" Value="Downloads"/>
+    <ChildControl Name="lvModSelection_Item_12" Value="Note"/>
+    <ChildControl Name="lvModSelection_Item_13" Value="Name"/>
+    <ChildControl Name="lvModSelection_Item_14" Value="Destination"/>
+    <ChildControl Name="lvModSelection_Item_15" Value="Conflicts"/>
+    <ChildControl Name="lvModSelection_Item_16" Value="Installed"/>
+  </Control>
+  <Control Name="tsModSelection" Value="toolStrip1">
+    <Control Name="tssbAddMod" Value="toolStripButton1">
+      <ChildControl Name="tssbAddMod_ToolTip" Value="Add dialog^Opens the &amp;quot;Add mod dialog&amp;quot;."/>
+      <Control Name="tsmiAddMod" Value="Add dialog">
+        <ChildControl Name="tsmiAddMod_ToolTip" Value="Add dialog^Opens the &amp;quot;Add mod dialog&amp;quot;."/>
+      </Control>
+      <Control Name="tsmiAddModArchives" Value="Add mod archives">
+        <ChildControl Name="tsmiAddModArchives_ToolTip" Value="Add mod archive^Opens the &amp;quot;FileBrowser dialog&amp;quot; to add a mod archive."/>
+      </Control>
+    </Control>
+    <Control Name="tsbRemoveMod" Value="toolStripButton2">
+      <ChildControl Name="tsbRemoveMod_ToolTip" Value="Remove mod^Removes the highlighted mods."/>
+    </Control>
+    <Control Name="tsbRemoveAll" Value="toolStripButton3">
+      <ChildControl Name="tsbRemoveAll_ToolTip" Value="Remove all mods^Removes all mods from the ModsSelection."/>
+    </Control>
+    <Control Name="tsbExImport" Value="toolStripButton4">
+      <ChildControl Name="tsbExImport_ToolTip" Value="ModPack Import/Export^Opens the Import/Export for ModPacks."/>
+    </Control>
+    <Control Name="tsbScan" Value="toolStripButton5">
+      <ChildControl Name="tsbScan_ToolTip" Value="Scan GameData folder^Scans the KSP GameData folder for installed mods and^adds them if they are not listed in the ModSelection."/>
+    </Control>
+    <Control Name="tsbUpdatecheckAllMods" Value="toolStripButton1">
+      <ChildControl Name="tsbUpdatecheckAllMods_ToolTip" Value="Updatecheck for all mods^Starts the update check for all mods in the ModSelection."/>
+    </Control>
+    <Control Name="tsbRefreshCheckedstateForAllMods" Value="toolStripButton1">
+      <ChildControl Name="tsbRefreshCheckedstateForAllMods_ToolTip" Value="Refresh checked state of all mods.^Checks all ModNodes with a destination."/>
+    </Control>
+    <Control Name="tsbCheckAllMods" Value="toolStripButton1">
+      <ChildControl Name="tsbCheckAllMods_ToolTip" Value="Check all mods^Checks all mods."/>
+    </Control>
+    <Control Name="tsbUncheckAllMods" Value="toolStripButton1">
+      <ChildControl Name="tsbUncheckAllMods_ToolTip" Value="Uncheck all mods^Unchecks all mods."/>
+    </Control>
+    <Control Name="toolStripLabel1" Value=""/>
+    <Control Name="toolStripLabel2" Value="">
+      <ChildControl Name="toolStripLabel2_ToolTip" Value="working ..."/>
+    </Control>
+    <Control Name="tsbOverride" Value="Override">
+      <ChildControl Name="tsbOverride_ToolTip" Value="Override files^Enables/disables the override mode of files during installation of mods."/>
+    </Control>
+  </Control>
+  <Control Name="btnProceedAll" Value="Proceed all mods">
+    <ChildControl Name="btnProceedAll_ToolTip" Value="Proceed all mods^Proceeds (installs/uninstalls) all mods in the selection tree.^(To install a part of a mod just check the checkbox next to it)"/>
+  </Control>
+  <Control Name="btnProceedHighlighted" Value="Proceed highlighted mods">
+    <ChildControl Name="btnProceedHighlighted_ToolTip" Value="Proceed highlighted mods^Proceeds (installs/uninstalls) the selected (blue highlighted) mod(s).^(To install a part of a mod just check the checkbox next to it)"/>
+  </Control>
+  <Control Name="btnLaunchKSP" Value="Launch Kerbal Space Program">
+    <ChildControl Name="btnLaunchKSP_ToolTip" Value="Runs the KSP.exe of the selected KSP install path."/>
+  </Control>
+  <Control Name="cbResolutions" Value="">
+    <ChildControl Name="cbResolutions_ToolTip" Value="Sets the KSP window/screen resolution."/>
+  </Control>
+  <Control Name="cbBorderlessWin" Value="Borderless window">
+    <ChildControl Name="cbBorderlessWin_ToolTip" Value="Starts KSP with a border less window."/>
+  </Control>
+  <Control Name="rbFullscreen" Value="FullScreen">
+    <ChildControl Name="rbFullscreen_ToolTip" Value="Starts KSP in FullScreen mode."/>
+  </Control>
+  <Control Name="rbWindowed" Value="Windowed">
+    <ChildControl Name="rbWindowed_ToolTip" Value="Starts KSP in windowed mode."/>
+  </Control>
+  
+  <Control Name="tabPageOptions" Value="Options"/>
+  <Control Name="tabPageUpdate" Value="Update"/>
+  <Control Name="gbModUpdate" Value="Mod updating:"/>
+  <Control Name="lblModUpdateBehavior" Value="Mod update behaviour:"/>
+  <Control Name="cbModUpdateBehavior" Value="">
+    <ChildControl Name="cbModUpdateBehavior_ToolTip" Value="Chose the action which should be executed on a mod update."/>
+    <ChildControl Name="cbModUpdateBehavior_cbItem_1" Value="Remove and Add"/>
+    <ChildControl Name="cbModUpdateBehavior_cbItem_2" Value="Copy destination"/>
+    <ChildControl Name="cbModUpdateBehavior_cbItem_3" Value="Copy checked state"/>
+    <ChildControl Name="cbModUpdateBehavior_cbItem_4" Value="Manually"/>
+  </Control>
+  <Control Name="lblUpdateCheckInterval" Value="Update check interval:"/>
+  <Control Name="cbModUpdateInterval" Value="">
+    <ChildControl Name="cbModUpdateInterval_ToolTip" Value="Chose the interval on which the mod update check should be started."/>
+    <ChildControl Name="cbModUpdateInterval_cbItem_1" Value="Manually"/>
+    <ChildControl Name="cbModUpdateInterval_cbItem_2" Value="On startup"/>
+    <ChildControl Name="cbModUpdateInterval_cbItem_3" Value="Once a day"/>
+    <ChildControl Name="cbModUpdateInterval_cbItem_4" Value="Once a week"/>
+  </Control>
+	<Control Name="pbCheckModUpdate" Value="">
+		<ChildControl Name="pbCheckModUpdate_ToolTip" Value="working..."/>
+	</Control>
+	<Control Name="btnCheckModUpdates" Value="Check for mod updates">
+		<ChildControl Name="btnCheckModUpdates_ToolTip" Value="Check for mod updates^Starts the update check for all mods from the ModSelection."/>
+	</Control>
+  <Control Name="gbAdminVersion" Value="Update KSP Mod Admin:"/>
+  <Control Name="lblDownloadKspMA" Value="Download:"/>
+  <Control Name="lblPostDownloadAction" Value="Post download action:"/>
+  <Control Name="cbPostDownloadAction" Value="">
+    <ChildControl Name="cbPostDownloadAction_ToolTip" Value="Chose the action that should be executed after a update."/>
+    <ChildControl Name="cbPostDownloadAction_cbItem_1" Value="Ignore finished download"/>
+    <ChildControl Name="cbPostDownloadAction_cbItem_2" Value="Ask for auto install"/>
+    <ChildControl Name="cbPostDownloadAction_cbItem_3" Value="Auto install after download"/>
+  </Control>
+	<Control Name="pbUpdateLoad" Value="">
+		<ChildControl Name="pbUpdateLoad_ToolTip" Value="working..."/>
+	</Control>
+	<Control Name="btnUpdate" Value="Check for KSP MA updates">
+		<ChildControl Name="btnUpdate_ToolTip" Value="Check for KSP MA updates^Starts the check for KSP Mod Admin updates."/>
+	</Control>
+	<Control Name="cbVersionCheck" Value="Check for new version on startup">
+		<ChildControl Name="cbVersionCheck_ToolTip" Value="Check for new version on Startup^If checked KSP MA will check for updates during the start of KSP MA."/>
+	</Control>
+  
+  <Control Name="tabPagePath" Value="Paths"/>
+  <Control Name="gbPaths" Value="Paths:"/>
+  <Control Name="lblLoading" Value="searching ..."/>
+	<Control Name="cbKSPPath" Value="">
+		<ChildControl Name="cbKSPPath_ToolTip" Value="Chose the KSP install path to perform actions on."/>
+	</Control>
+  <Control Name="lblModDownloadPath" Value="Download/Mod path:"/>
+	<Control Name="btnDownloadPath" Value="">
+		<ChildControl Name="btnDownloadPath_ToolTip" Value="Opens a folder browser to select a download folder."/>
+	</Control>
+	<Control Name="btnOpenDownloadFolder" Value="">
+		<ChildControl Name="btnOpenDownloadFolder_ToolTip" Value="Open download folder^Opens the download folder."/>
+	</Control>
+	<Control Name="btnOpenKSPRoot" Value="">
+		<ChildControl Name="btnOpenKSPRoot_ToolTip" Value="Open KSP install folder.^Opens the selected KSP install folder."/>
+	</Control>
+  <Control Name="lblKnownKSPPaths" Value="Known KSP install path:"/>
+  <Control Name="lblSelectedKSPPath" Value="Selected KSP install path:"/>
+  <Control Name="btnRemove" Value="">
+		<ChildControl Name="btnRemove_ToolTip" Value="Remove KSP install folder^Removes the selected KSP install folder from the known paths."/>
+	</Control>
+	<Control Name="btnSteamSearch" Value="">
+		<ChildControl Name="btnSteamSearch_ToolTip" Value="Steam search^Searches the default steam path for KSP install folders."/>
+	</Control>
+	<Control Name="btnKSPFolderSearch" Value="">
+		<ChildControl Name="btnKSPFolderSearch_ToolTip" Value="KSP folder search^Starts/Stops a KSP folder search.^KSP MA will search all folders next (up / down) to its install paths.^The depth is depanding on the number on the right of this button."/>
+	</Control>
+	<Control Name="btnAddPath" Value="">
+		<ChildControl Name="btnAddPath_ToolTip" Value="Add KSP install path^Opens a FolderSelectDialog to add a new KSP install folder."/>
+	</Control>
+  <Control Name="lblKSPPathNote" Value="Note:"/>
+  
+  <Control Name="tabPageMisc" Value="Misc"/>
+  <Control Name="gbLaguage" Value="Language:"/>
+	<Control Name="cbLanguages" Value="">
+		<ChildControl Name="cbLanguages_ToolTip" Value="Chose your favorit language."/>
+	</Control>
+  <Control Name="gbNodeColors" Value="ModSelection node colors:"/>
+  <Control Name="lblColorDestinationDetection" Value="Destination detected:"/>
+  <Control Name="lblColorRDestinationDetection" Value="R"/>
+  <Control Name="lblColorGDestinationDetection" Value="G"/>
+  <Control Name="lblColorBDestinationDetection" Value="B"/>
+	<Control Name="btnDestinationDetected" Value="">
+		<ChildControl Name="btnDestinationDetected_ToolTip" Value="Chose node color for nodes which have a destination."/>
+	</Control>
+  <Control Name="lblColorDestinationMissing" Value="Destination missing:"/>
+  <Control Name="lblColorRDestinationMissing" Value="R"/>
+  <Control Name="lblColorGDestinationMissing" Value="G"/>
+  <Control Name="lblColorBDestinationMissing" Value="B"/>
+	<Control Name="btnDestinationMissing" Value="">
+		<ChildControl Name="btnDestinationMissing_ToolTip" Value="Chose node color for nodes where the destination is missing."/>
+	</Control>
+  <Control Name="lblColorDestinationConflicts" Value="Destination conflict:"/>
+  <Control Name="lblColorRDestinationConflict" Value="R"/>
+  <Control Name="lblColorGDestinationConflict" Value="G"/>
+  <Control Name="lblColorBDestinationConflict" Value="B"/>
+	<Control Name="btnDestinationConflict" Value="">
+		<ChildControl Name="btnDestinationConflict_ToolTip" Value="Chose node color for nodes that have conflicts."/>
+	</Control>
+  <Control Name="lblColorModIsInstalled" Value="Mod is installed:"/>
+  <Control Name="lblColorRModIsInstalled" Value="R"/>
+  <Control Name="lblColorGModIsInstalled" Value="G"/>
+  <Control Name="lblColorBModIsInstalled" Value="B"/>
+	<Control Name="btnModInstalled" Value="">
+		<ChildControl Name="btnModInstalled_ToolTip" Value="Chose node color for nodes that are installed."/>
+	</Control>
+  <Control Name="lblColorModArchiveMissing" Value="Mod archive is missing:"/>
+  <Control Name="lblColorRModArchiveMissing" Value="R"/>
+  <Control Name="lblColorGModArchiveMissing" Value="G"/>
+  <Control Name="lblColorBModArchiveMissing" Value="B"/>
+	<Control Name="btnModArchiveMissing" Value="">
+		<ChildControl Name="btnModArchiveMissing_ToolTip" Value="Chose node color for nodes where the mod archive is missing. "/>
+	</Control>
+  <Control Name="lblColorModOutdated" Value="Mod outdated:"/>
+  <Control Name="lblColorRModOutdated" Value="R"/>
+  <Control Name="lblColorGModOutdated" Value="G"/>
+  <Control Name="lblColorBModOutdated" Value="B"/>
+	<Control Name="btnModOutdated" Value="">
+		<ChildControl Name="btnModOutdated_ToolTip" Value="Chose node color for nodes where the mod is outdated."/>
+	</Control>
+  <Control Name="gpModConflictHandling" Value="Mod file conflict handling (Experimental):"/>
+  <Control Name="cbConflictDetectionOnOff" Value="Conflict detection On / Off">
+		<ChildControl Name="cbConflictDetectionOnOff_ToolTip" Value="Conflict detection On / Off^Turns the conflict detection on or off."/>
+	</Control>
+	<Control Name="cbShowConflictSolver" Value="Show conflict solving dialog">
+		<ChildControl Name="cbShowConflictSolver_ToolTip" Value="Show conflict detection dialog^Show/hides the conflict detection doalog after conflict detection."/>
+	</Control>
+  
+  <Control Name="frmAddMod" Value="Adding mod"/>
+  <Control Name="cbInstallAfterAdd" Value="Install after add.">
+    <ChildControl Name="cbInstallAfterAdd_ToolTip" Value="Check to let KSP MA install the new mod right after adding."/>
+  </Control>
+  <Control Name="btnFolderSearch" Value="">
+    <ChildControl Name="btnFolderSearch_ToolTip" Value="Opens a file browser to selecct a mod archive."/>
+  </Control>
+  <Control Name="tbModPath" Value="">
+    <ChildControl Name="tbModPath_ToolTip" Value="Enter a path to a mod archive, a craft or a URL to a mod.^(URL with http:// or https://)."/>
+  </Control>
+  <Control Name="tbModName" Value="">
+    <ChildControl Name="tbModName_ToolTip" Value="Enter a name for the mod or leave it blank for default name."/>
+  </Control>
+  <Control Name="lblNote" Value="NOTE: After KSP MA has added the mod you have to check/uncheck your wanted parts of the mod and press &amp;&quot;Proceed all mods&amp;&quot; to install the mod.^Or check the checkbox below for immediate install of the mod."/>
+  <Control Name="lblModPath" Value="Enter mod archive path or URL:"/>
+  <Control Name="lblModName" Value="ModName (leave blank for auto fill):"/>
+  <Control Name="btnCancel" Value="Cancel">
+    <ChildControl Name="btnCancel_ToolTip" Value="Abort and close the dialog."/>
+  </Control>
+  <Control Name="btnAdd" Value="Add">
+    <ChildControl Name="btnAdd_ToolTip" Value="Adds the mod to the ModSelection."/>
+  </Control>
+  
+  <Control Name="frmLinkSelection" Value="Link selection"/>
+  <Control Name="lblLinkSelectionDescription" Value="Please browse to the download link and click it."/>
+  <Control Name="frmUpdateDLG" Value="KSP MA Update"/>
+  <Control Name="cbPostDownloadAction" Value="">
+    <ChildControl Name="cbPostDownloadAction_ToolTip" Value="The action that should be executed after a update."/>
+    <ChildControl Name="cbPostDownloadAction_cbItem_1" Value="Ignore finished download"/>
+    <ChildControl Name="cbPostDownloadAction_cbItem_2" Value="Ask for auto install"/>
+    <ChildControl Name="cbPostDownloadAction_cbItem_3" Value="Auto install after download"/>
+  </Control>
+  <Control Name="lblPostDownloadAction" Value="Post download action:"/>
+  <Control Name="lblDownloadPath" Value="Download path:"/>
+  <Control Name="btnDownloadPath" Value="">
+    <ChildControl Name="btnDownloadPath_ToolTip" Value="Opens a folder browser to select a download folder."/>
+  </Control>
+  <Control Name="tbMessage" Value=""/>
+  <Control Name="btnDownload" Value="Download">
+    <ChildControl Name="btnDownload_ToolTip" Value="Start the download of the KSP MA update."/>
+  </Control>
+  
+  <Control Name="frmCopyModInfo" Value="Copy ModInfo"/>
+  <Control Name="lblCopyModInfosTo" Value="To:"/>
+  <Control Name="lblCopyModInfosModName" Value="Copy the ModInfos from:"/>
+  <Control Name="btnCopy" Value="Copy"/>
+  <Control Name="frmEditModInfo" Value="ModInfo Editor"/>
+  <Control Name="btnSave" Value="Save"/>
+  <Control Name="btnGotoSpaceport" Value="">
+    <ChildControl Name="btnGotoSpaceport_ToolTip" Value="Get the ModInfos from the version control site."/>
+  </Control>
+  <Control Name="lblDownloadsModInfoEditor" Value="Downloads:"/>
+  <Control Name="lblNoteModInfoEditor" Value="Note:"/>
+  <Control Name="lblDownloadDateModInfoEditor" Value="Download date:"/>
+  <Control Name="lblRatingModInfoEditor" Value="Rating:"/>
+  <Control Name="lblCreationDateModInfoEditor" Value="Creation date:"/>
+  <Control Name="lblAuthorModInfoEditor" Value="Author:"/>
+  <Control Name="lblProductIDModInfoEditor" Value="ProductID:"/>
+  <Control Name="lblVersionModInfoEditor" Value="Version:"/>
+  <Control Name="lblModNameModInfoEditor" Value="Mod Name:"/>
+  <Control Name="frmDestFolderSelection" Value="Install folder selection"/>
+  <Control Name="lblSelectedSource" Value="Select the source:"/>
+  <Control Name="cbListFoldersOnly" Value="List folders only"/>
+  <Control Name="rbCopySourceToDestination" Value="Copy selected source to destination."/>
+  <Control Name="rbCopyContentToDestination" Value="Copy content of source to destination."/>
+  <Control Name="lblSelectDestination" Value="Select the destination:"/>
+  <Control Name="lblSelectDestinationNote" Value="Note: If you choose a folder as source the destination will be   to all its subfolders and files too."/>
+  <Control Name="btnOK" Value="OK"/>
+  
+  <Control Name="frmWelcome" Value="KSP Mod Admin"/>
+  <Control Name="tbKSPPath" Value=""/>
+  <Control Name="btnSelectFolder" Value="Select folder">
+    <ChildControl Name="btnSelectFolder_ToolTip" Value="Opens the folder select dialog, to select a KSP install folder."/>
+  </Control>
+  <Control Name="lblWelcomeAuthor" Value="by Bastian Heinrich"/>
+  <Control Name="lblWelcomeNote" Value="NOTE: You can add more KSP paths later on the Options -&gt; Paths Tab."/>
+  <Control Name="lblWelcomeStep1" Value="Please select your KSP install folder."/>
+  <Control Name="lblWelcomeTitle" Value="Welcome to KSP Mod Admin"/>
+  <Control Name="btnExit" Value="Exit">
+    <ChildControl Name="btnExit_ToolTip" Value="Exit KSP Mod Admin."/>
+  </Control>
+  <Control Name="btnFinish" Value="Finish">
+    <ChildControl Name="btnFinish_ToolTip" Value="Finish configuration and go to KSP Mod Admin."/>
+  </Control>
+
+  <String Name="MSG_CURRENT_VERSION_0" Value="Current version: {0}"/>
+  <String Name="MSG_PLS_ENTER_VALID_ARCHIVE_URL" Value="Please enter a valid archive path or URL."/>
+  <String Name="MSG_TITLE_ATTENTION" Value="Attention!"/>
+  <String Name="MSG_TITLE_ERROR" Value="Error!"/>
+  <String Name="MSG_DOWNLOAD_PATH_CHANGED_0" Value="Download path changed to &amp;quot;{0}&amp;quot;."/>
+  <String Name="MSG_STARTING_KSP" Value="Starting KSP..."/>
+  <String Name="MSG_CANT_FIND_KSP_EXE" Value="Can't find KSP.exe."/>
+  <String Name="MSG_KSP_LAUNCH_FAILED" Value="Launching KSP failed."/>
+  <String Name="MSG_UPDATE_KSP_SETTINGS" Value="KSP settings.cfg file updated."/>
+  <String Name="MSG_CANT_FIND_KSP_SETTINGS" Value="Can't find KSP settings.cfg file."/>
+  <String Name="MSG_ADDING_MOD_FAILED" Value="Adding Mod aborted."/>
+  <String Name="MSG_ADD_MODS_FAILED_PARAM_EMPTY_MODINFOS" Value="Add mod(s) failed! Parameter &amp;quot;modInfos&amp;quot; is empty."/>
+  <String Name="MSG_MOD_ALREADY_ADDED" Value="Mod already added: &amp;quot;{0}&amp;quot;"/>
+  <String Name="MSG_SHOULD_MOD_REPLACED" Value="Should the mod be replaced?"/>
+  <String Name="MSG_REPLACING_MOD_0" Value="Replacing mod &amp;quot;{0}&amp;quot;"/>
+  <String Name="MSG_MOD_0_REPLACED" Value="Mod &amp;quot;{0}&amp;quot; replaced."/>
+  <String Name="MSG_ADD_MOD_FAILED_0" Value="Mod add failed &amp;quot;{0}&amp;quot;!"/>
+  <String Name="MSG_DONE" Value="Done!"/>
+  <String Name="MSG_ADD_MODS_FAILED_PARAM_EMPTY_FILENAMES" Value="Add mod(s) failed! Parameter &amp;quot;filenames&amp;quot; is empty."/>
+  <String Name="MSG_MOD_ADDED_0" Value="Mod added: &amp;quot;{0}&amp;quot;"/>
+  <String Name="MSG_MOD_ERROR_WHILE_READ_ZIP_0_ERROR_MSG_1" Value="Error while reading Mod Zip-File &amp;quot;{0}&amp;quot;^Error message: {1}"/>
+  <String Name="MSG_ROOT_NOT_FOUND_0" Value="Root of Zip not found! &amp;quot;{0}&amp;quot;."/>
+  <String Name="MSG_MOD_ZIP_NOT_FOUND_0" Value="Mod Zip-File not found &amp;quot;{0}&amp;quot;"/>
+  <String Name="MSG_FILE_ADDED_0" Value="File added &amp;quot;{0}&amp;quot;."/>
+  <String Name="MSG_DIR_ADDED_0" Value="Directory added &amp;quot;{0}&amp;quot;."/>
+  <String Name="MSG_REMOVING_OUTDATED_MOD_0" Value="Removing outdated mod &amp;quot;{0}&amp;quot;"/>
+  <String Name="MSG_ADDING_UPDATED_MOD_0" Value="Adding updated mod &amp;quot;{0}&amp;quot;"/>
+  <String Name="MSG_DIR_DELETED_ERROR_0" Value="Can not delete directory &amp;quot;{0}&amp;quot;."/>
+  <String Name="MSG_DIR_DELETED_0" Value="Directory deleted &amp;quot;{0}&amp;quot;."/>
+  <String Name="MSG_MOD_ERROR_CANT_DELETE_0" Value="Can't delete. &amp;quot;{0}&amp;quot;"/>
+  <String Name="MSG_MOD_ERROR_ZIP_CREATION_FAILED" Value="ZipFile creation for download failed."/>
+  <String Name="MSG_SELECT_0_FOLDER_FIRST" Value="Please select a {0} folder first."/>
+  <String Name="MSG_SELECT_KSP_FOLDER" Value="Select a KSP install folder please."/>
+  <String Name="MSG_SELECTED_KSP_FOLDER_CHANGED_0" Value="Selected KSP install path changed to &amp;quot;{0}&amp;quot;"/>
+  <String Name="MSG_NOT_KSP_FOLDER" Value="This is not a KSP install path."/>
+  <String Name="MSG_OPENING_0_FOLDER" Value="Opening {0} folder..."/>
+  <String Name="MSG_OPEN_0_FOLDER_FAILD" Value="Open {0} folder faild."/>
+  <String Name="MSG_SELECT_DOWNLOAD_FOLDER" Value="Select the folder to download the KSP mods to."/>
+  <String Name="MSG_DOWNLOADPATH_CHANGED_0" Value="Download path changed to &amp;quot;{0}&amp;quot;."/>
+  <String Name="MSG_KSP_FOLDER_ADDED_0" Value="KSP install folder added. &amp;quot;{0}&amp;quot;"/>
+  <String Name="MSG_KSP_FOLDER_REMOVED_0" Value="KSP install folder removed. &amp;quot;{0}&amp;quot;"/>
+  <String Name="MSG_STEAM_SEARCH_STARTED" Value="Steam - KSP install folder search started..."/>
+  <String Name="MSG_STEAM_FOLDER_NOT_FOUND" Value="Steam folder not found!"/>
+  <String Name="MSG_STEAM_SEARCH_DONE" Value="Steam - KSP install folder search done."/>
+  <String Name="MSG_KSP_SEARCH_STARTED" Value="KSP install folder search started..."/>
+  <String Name="MSG_KSP_FOLDER_NOT_FOUND" Value="KSP install folder not found!"/>
+  <String Name="MSG_KSP_SEARCH_DONE" Value="KSP install folder search done."/>
+  <String Name="MSG_FOLDER_SEARCH_ABORTED" Value="KSP install folder search aborted."/>
+  <String Name="MSG_ERROR_DURING_FOLDER_SEARCH_0" Value="Error during folder search &amp;quot;{0}&amp;quot;"/>
+  <String Name="MSG_ERROR_ADD_FOLDER_FAILED_0" Value="KSP install folder add failed! &amp;quot;{0}&amp;quot;"/>
+  <String Name="MSG_ERROR_NOT_A_KSP_FOLDER_0" Value="The folder is not a KSP install directory. &amp;quot;{0}&amp;quot;"/>
+  <String Name="MSG_KSP_FOLDER_FOUND_DIALOG_TITLE" Value="KSP folder found."/>
+  <String Name="MSG_KSP_FOLDER_FOUND_DIALOG_TEXT" Value="KSP folder found.^&amp;quot;{0}&amp;quot;^^Should this folder be added (yes)?^continue search (no)?^or cancel search(cancel)?"/>
+  <String Name="MSG_NEW_VERSION_0" Value="New version {0} available."/>
+  <String Name="MSG_KSP_UPTODATE" Value="KSP Mod Admin is up to date."/>
+  <String Name="MSG_ERROR_WHILE_STEAM_SEARCH" Value="Error during Steam folder search."/>
+  <String Name="MSG_ERROR_WHILE_FOLDER_SEARCH" Value="Error during folder search."/>
+  <String Name="MSG_DOWNLOAD_COMPLETE" Value="Download complete."/>
+  <String Name="MSG_DOWNLOAD_COMPLETE_INSTALL" Value="The download is complete.^Do you want to auto install the update?"/>
+  <String Name="MSG_KSPMA_UPDATE_CHECK_STARTED" Value="KSP Mod Admin update check started."/>
+  <String Name="MSG_CONFLICT_DETECTION_ON" Value="ConflictDetection On"/>
+  <String Name="MSG_CONFLICT_DETECTION_OFF" Value="ConflictDetection Off"/>
+  <String Name="MSG_CHECKING" Value="Checking ..."/>
+  <String Name="MSG_DOWNLOADING_UPDATE" Value="Downloading update ..."/>
+  <String Name="MSG_CHECK_FOR_KSPMA_UPDATES" Value="Check for KSP MA updates"/>
+  <String Name="MSG_ONLY_ONE_INSTANCE_OF_CONTROLLER_ALLOWED" Value="Only one instance of the Controller is allowed!"/>
+  <String Name="MSG_CANT_CREATE_KSPMA_LOG" Value="Can't create KSP MA log file. Error logging will be turned off."/>
+  <String Name="MSG_LOADING_KSPMA_SETTINGS" Value="Loading KSPModAdmin settings ..."/>
+  <String Name="MSG_LOADING_KSPMA_SETTINGS_FAILED" Value="Loading of KSPModAdmin settings failed!"/>
+  <String Name="MSG_KSPMA_SETTINGS_NOT_FOUND" Value="No KSP Mod Admin settings found!"/>
+  <String Name="MSG_LOADING_KSP_MOD_CONFIGURATION" Value="Loading KSP mod configuration ..."/>
+  <String Name="MSG_KSP_MOD_CONFIGURATION_NOT_FOUND" Value="KSP mod configuration not found!"/>
+  <String Name="MSG_SAVING_KSPMA_SETTINGS" Value="Saving new KSP Mod Admin settings."/>
+  <String Name="MSG_KSPMA_SETTINGS_PATH_INVALID" Value="KSP Mod Admin settings path is invalid!"/>
+  <String Name="MSG_ERROR_DURING_SAVING_KSPMA_SETTINGS" Value="Error during saving of KSP Mod Admin settings!"/>
+  <String Name="MSG_SAVING_KSP_MOD_SETTINGS" Value="Saving new KSP Mod settings."/>
+  <String Name="MSG_KSP_MOD_SETTINGS_PATH_INVALID" Value="KSP Mod settings path is invalid!"/>
+  <String Name="MSG_ERROR_DURING_SAVING_KSP_MOD_SETTINGS" Value="Error during saving of KSP Mod settings!"/>
+  <String Name="MSG_ERROR_MESSAGE_0" Value="Error message: {0}"/>
+  <String Name="MSG_ACCESS_DENIED_DIALOG_MESSAGE" Value="KSP Mod Admin can't save its config file. The access to the KSP path was denied.^If you have install KSP into the Program folder of Windows,^KSP MA needs admin rights to manipulate (save/change KSP MA config file).^You can move you install dir of KSP to another spot or start KSPMA in admin mode with:^  - a right click on the KSPModAdmin.exe and choose &amp;quot;Run as Admin&amp;quot;^or for a permanent change:^  - right click the KSPModAdmin.exe^  - choose properties^  - choose compatibility^  - check the &amp;quot;Run as Admin&amp;quot; CheckBox at the bottom.^  - press OK."/>
+  <String Name="MSG_DELETE_ALL_MODS_QUESTION" Value="Are you sure to uninstall all Mod?"/>
+  <String Name="MSG_DELETE_MOD_0_QUESTION" Value="Are you sure to uninstall the mod &amp;quot;{0}&amp;quot;?"/>
+  <String Name="MSG_INVALID_URL_SAVE_ANYWAY" Value="Invalid URL save anyway?"/>
+  <String Name="MSG_ENTER_VALID_URL_FIRST" Value="Enter a URL first please."/>
+  <String Name="MSG_ERROR_DURING_MODINFO_UPDATE" Value="Error during load of URL &amp;quot;{0}&amp;quot;{1}{1}Error message:{1}{2}"/>
+  <String Name="MSG_FOLDER_INSTALLED_UNINSTALL_IT_TO_CHANGE_DESTINATION" Value="The folder or file is installed.^Unistall it before changeing the destination."/>
+  <String Name="MSG_SELECT_DEST" Value="Please select a destination folder fist."/>
+  <String Name="MSG_SELECT_SCOURCE" Value="Please select a source folder fist."/>
+  <String Name="MSG_SOURCE_NODE_NOT_FOUND" Value="Source node not found!^Can not set destination paths."/>
+  <String Name="MSG_ZIP_CREATION_ABORTED" Value="Zip creation aborted!"/>
+  <String Name="MSG_ZIP_0_CREATED" Value="Zip &amp;quot;{0}&amp;quot; created."/>
+  <String Name="MSG_ZIP_CREATION_FAILED_0" Value="Ceating of zip failed. Error message: {0}"/>
+  <String Name="MSG_ROOT_IDENTIFIED" Value="Root of Zip identified as &amp;quot;{0}&amp;quot;."/>
+  <String Name="MSG_DIR_CREATED_0" Value="Directory created &amp;quot;{0}&amp;quot;."/>
+  <String Name="MSG_DIR_CREATED_ERROR_0" Value="Can not create directory &amp;quot;{0}&amp;quot;."/>
+  <String Name="MSG_FILE_DELETED_0" Value="File deleted &amp;quot;{0}&amp;quot;."/>
+  <String Name="MSG_FILE_DELETED_ERROR_0" Value="Can not delete file &amp;quot;{0}&amp;quot;."/>
+  <String Name="MSG_FILE_EXTRACTED_0" Value="File extracted &amp;quot;{0}&amp;quot;."/>
+  <String Name="MSG_FILE_EXTRACTED_ERROR_0" Value="Can not extract file &amp;quot;{0}&amp;quot;."/>
+  <String Name="MSG_DOWNLOAD_SELECTION_TITLE" Value="Download/Mod folder selection"/>
+  <String Name="MSG_KSP_INSTALL_FOLDER_SELECTION_TITLE" Value="KSP install folder selection"/>
+  <String Name="MSG_DESTINATION_FOLDER_SELECTION_TITLE" Value="Destination folder selection"/>
+  <String Name="MSG_DOWNLOAD_FOLDER_SELECTION_TITLE" Value="Download folder selection"/>
+  <String Name="MSG_UNCHECK_NO_ZIPARCHIVE_WARNING" Value="No Zip archive found!^If you uncheck and uninstall this ModNode you can't reinstall it!^^Uncheck anyway?"/>
+  <String Name="MSG_CHECK_NO_ZIPARCHIVE_WARNING" Value="No Zip archive found!^You can't check a ModNode which don't have a Zip archive!"/>
+  <String Name="MSG_CANT_INSTALL_MODNODE_0_ZIP_MISSING" Value="Can't install &amp;quot;{0}&amp;quot;! Mod archive is missing."/>
+  <String Name="MSG_0_HAS_CHILDES_WITHOUT_DESTINATION_WARNING" Value="The ModNode &amp;quot;{0}&amp;quot; or one or more child ModNodes don't have a destination!^Those ModNodes won't be checked!^^ Set a destination manually to install them."/>
+  <String Name="YES" Value="Yes"/>
+  <String Name="NO" Value="No"/>
+  <String Name="NONE" Value="None"/>
+  <String Name="ON" Value="On"/>
+  <String Name="OFF" Value="Off"/>
+  <String Name="MSG_PLS_SELECT_VALID_KSP_INSTALL_FOLDER" Value="This is not a KSP install folder.^Please select a valid KSP install folder."/>
+  <String Name="MSG_KSP_INSTALL_FOLDER_SELECTION" Value="KSP install folder selection."/>
+  <String Name="MSG_START_PROCESSING_0" Value="Processing of mod &amp;quot;{0}&amp;quot; started."/>
+  <String Name="MSG_START_ADDING_0" Value="Adding of mod &amp;quot;{0}&amp;quot; started."/>
+  <String Name="MSG_ERROR_DURING_PROCESSING_MOD_0" Value="Error during processing mod &amp;quot;{0}&amp;quot;."/>
+  <String Name="MSG_REMOVING_MOD_0" Value="Removing mod &amp;quot;{0}&amp;quot;."/>
+  <String Name="MSG_MOD_RMODVED_0" Value="Mod &amp;quot;{0}&amp;quot; removed."/>
+  <String Name="MSG_DELETING_REMAINING_EMTPY_DIRS" Value="Deleting remaining empty directorys."/>
+  <String Name="MSG_DIR_0_NOT_EXISTS" Value="Directory &amp;quot;{0}&amp;quot; don't exists."/>
+  <String Name="MSG_DIR_0_IS_KSPDIR" Value="Directory &amp;quot;{0}&amp;quot; is a KSP directory."/>
+  <String Name="MSG_DIR_0_IS_NOT_EMPTY" Value="Directory &amp;quot;{0}&amp;quot; is not empty."/>
+  <String Name="MSG_ERROR_DURING_REFRESH_CHECKED_STATE_0" Value="Error During RefreshCheckedState &amp;quot;{0}&amp;quot;."/>
+  <String Name="MSG_REFRESHING_CHECKEDSTATE_0" Value="Refreshing CheckedState of &amp;quot;{0}&amp;quot;..."/>
+  <String Name="MSG_UNCHECKING_ALL_MODS" Value="Unchecking all mods."/>
+  <String Name="MSG_UNCHECKING_MOD_0" Value="Unchecking mod of &amp;quot;{0}&amp;quot;."/>
+  <String Name="MSG_CHECKING_ALL_MODS" Value="Checking all mods."/>
+  <String Name="MSG_CHECKING_MOD_0" Value="Checking mod of &amp;quot;{0}&amp;quot;."/>
+  <String Name="MSG_ERROR_NO_DOWNLOAD_FOLDER_SELECTED" Value="No dowload folder selected."/>
+  <String Name="MSG_SCAN_GAMDATA_FOLDER_STARTED" Value="Scan of GameData folder started."/>
+  <String Name="MSG_DIRECTORY_0_FOUND" Value="Directory &amp;quot;{0}&amp;quot; found."/>
+  <String Name="MSG_FILE_0_FOUND" Value="File &amp;quot;{0}&amp;quot; found."/>
+  <String Name="MSG_MODNODE_0_CREATED" Value="ModNode created for &amp;quot;{0}&amp;quot;."/>
+  <String Name="MSG_ERROR_MOD_PATH_URL_0_INVALID" Value="Path or url &amp;quot;{0}&amp;quot; is not valid!"/>
+  <String Name="MSG_ERROR_0_NO_VERSIONCONTROL" Value="The mod &amp;quot;{0}&amp;quot; has no VersionControl ... update check skipped."/>
+  <String Name="MSG_UPDATECHECK_FOR_MOD_0" Value="Update check for mod &amp;quot;{0}&amp;quot; via &amp;quot;{1}&amp;quot; started..."/>
+  <String Name="MSG_MOD_0_IS_UPTODATE" Value="The mod &amp;quot;{0}&amp;quot; is up to date."/>
+  <String Name="MSG_MOD_0_IS_OUTDATED" Value="The mod &amp;quot;{0}&amp;quot; is outdated."/>
+  <String Name="MSG_ERROR_DURING_UPDATECHECK_0_ERRORMSG_1" Value="Error during update check for mod &amp;quot;{0}&amp;quot;. Error: &amp;quot;{1}&amp;quot;"/>
+</Language>

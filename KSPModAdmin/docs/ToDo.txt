@@ -1,0 +1,55 @@
+﻿//// BUGS
+/////////////////////
+
+- 
+
+//// To Test
+/////////////////////
+
+- Force openGL on KSP launch (-force-opengl).
+
+
+//// TODO
+/////////////////////
+
+- VersionControl implementation.
+
+- KSPForum support.
+
+- Async !!!!!
+
+- ModSelection
+  -> MutiSelect 
+     -> for ModNodes (for all highlighted functions)
+  -> Double click -> open selected file.
+  -> TreeView performance - Change ModNode.IsInstalled!
+
+- Restart destination detection.
+
+- Options 
+  -> KSP MA Update implementation.
+
+- ModPack Import/Export implementation.
+
+
+- ReadMe
+
+- Try loading old KSPModAdmin.cfg file if no new cfg file is available.
+  -> For AppConfig and KSPConfig!
+
+
+//// SUGGESTIONS
+/////////////////////
+
+- Column select for ModSelection from ModInfo fields
+
+- KerbalStuff support
+  -> API: https://github.com/KerbalStuff/KerbalStuff/blob/master/api.md
+  
+- Language file Creator/Editor tab
+
+- Compress for zipping.
+
+
+
+

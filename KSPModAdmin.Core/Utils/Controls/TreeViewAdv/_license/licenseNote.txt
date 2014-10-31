@@ -1,0 +1,6 @@
+﻿The TreeViewAdv control with all its classes (in the NameSpace KSPModAdmin.Core.Utils.Controls.Aga) 
+are from the project "Advanced TreeView for .NET." on CodeProject.com ,
+see http://www.codeproject.com/Articles/14741/Advanced-TreeView-for-NET or
+http://sourceforge.net/projects/treeviewadv/.
+
+This project is published under The BSD License (see license.txt).
