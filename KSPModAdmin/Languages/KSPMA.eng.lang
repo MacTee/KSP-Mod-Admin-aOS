@@ -526,6 +526,18 @@
   <String Name="MSG_MOD_0_IS_OUTDATED" Value="The mod &amp;quot;{0}&amp;quot; is outdated."/>
   <String Name="MSG_ERROR_DURING_UPDATECHECK_0_ERRORMSG_1" Value="Error during update check for mod &amp;quot;{0}&amp;quot;. Error: &amp;quot;{1}&amp;quot;"/>
 
+  <Control Name="tsbUpdateAllOutdatedMods" Value="tsbUpdateAllOutdatedMods">
+    <Control Name="tsbUpdateAllOutdatedMods_ToolTip" Value="Update all outdated mods^Starts a update check and updates all outdated mods."/>
+  </Control>
+  <Control Name="tsmiUpdateAllOutdatedMods" Value="Update mod">
+    <Control Name="tsmiUpdateAllOutdatedMods_ToolTip" Value="Starts a update check and updates all outdated mods."/>
+  </Control>
+  <Control Name="tsmiUpdateMod" Value="Update all outdated mods">
+    <Control Name="tsmiUpdateMod_ToolTip" Value=""/>
+  </Control>
+  <Control Name="tsbUpdateMod" Value="tsbUpdateMod">
+    <Control Name="tsbUpdateMod_ToolTip" Value="Update mod^Starts a update check and updates the mod if it's outdated."/>
+  </Control>
   <Control Name="frmImExport" Value="ModPack im/exporter"/>
     <Control Name="gbImport" Value="Import:"/>
     <Control Name="gbDestinationOption" Value="Destination options:"/>
@@ -571,4 +583,5 @@
   <String Name="MSG_IMPORTING_ABORTED" Value="Import aborted."/>
   <String Name="MSG_ERROR_DURING_MODUPDATE_0_ERROR_1" Value="Error during mod update &amp;quot;{0}&amp;quot;. Error: &amp;quot;{1}&amp;quot;"/>
   <String Name="MSG_DOWNLOADING_MOD_0" Value="Downloading mod update &amp;quot;{0}&amp;quot;..."/>
+  <String Name="MSG_ERROR_DURING_MOD_UPDATE_0" Value="Error during mod update check &amp;quot;{0}&amp;quot;."/>
 </Language>

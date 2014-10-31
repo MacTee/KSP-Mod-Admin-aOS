@@ -262,24 +262,24 @@ namespace KSPModAdmin.Core.Views
 
         private void tsbUpdateCheckAllMods_Click(object sender, EventArgs e)
         {
-            ModSelectionController.CheckForUpdatesAllMods();
+            ModSelectionController.CheckForUpdatesAllModsAsync();
         }
 
         private void tsbModUpdateCheck_Click(object sender, EventArgs e)
         {
             if (SelectedNode != null)
-                ModSelectionController.CheckForModUpdates(new [] { SelectedNode.ZipRoot });
+                ModSelectionController.CheckForModUpdatesAsync(new [] { SelectedNode.ZipRoot });
         }
 
         private void tsbUpdateAllOutdatedMods_Click(object sender, EventArgs e)
         {
-            ModSelectionController.UpdateAllOutdatedMods();
+            ModSelectionController.UpdateAllOutdatedModsAsync();
         }
 
         private void tsbUpdateMod_Click(object sender, EventArgs e)
         {
             if (SelectedNode != null)
-                ModSelectionController.UpdateMod(SelectedNode.ZipRoot);
+                ModSelectionController.UpdateOutdatedModsAsync(new[] { SelectedNode.ZipRoot });
         }
 
         private void tssbVisitVersionControlSite_ButtonClick(object sender, EventArgs e)

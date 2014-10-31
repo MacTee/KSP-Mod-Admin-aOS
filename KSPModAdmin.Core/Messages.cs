@@ -1709,7 +1709,15 @@ namespace KSPModAdmin.Core
             }
         }
         private const string DEFAULT_MSG_DOWNLOADING_MOD_0 = "Downloading mod update \"{0}\"...";
-    
-    
+
+        public static string MSG_ERROR_DURING_MOD_UPDATE_0
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_ERROR_DURING_MOD_UPDATE_0"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_ERROR_DURING_MOD_UPDATE_0).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_ERROR_DURING_MOD_UPDATE_0 = "Error during mod update check \"{0}\"";
     }
 }

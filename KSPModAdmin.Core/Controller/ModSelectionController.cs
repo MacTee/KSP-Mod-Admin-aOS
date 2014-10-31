@@ -1216,7 +1216,15 @@ namespace KSPModAdmin.Core.Controller
         /// </summary>
         public static void CheckForUpdatesAllMods()
         {
-            CheckForModUpdates(Mods);
+            _CheckForModUpdates(Mods);
+        }
+
+        /// <summary>
+        /// Checks each mod of the ModSelection for updates.
+        /// </summary>
+        public static void CheckForUpdatesAllModsAsync()
+        {
+            CheckForModUpdatesAsync(Mods);
         }
 
         /// <summary>
@@ -1225,11 +1233,47 @@ namespace KSPModAdmin.Core.Controller
         /// <param name="mods">Array of mods to check for updates.</param>
         public static void CheckForModUpdates(ModNode[] mods)
         {
+            _CheckForModUpdates(mods);
+        }
+
+        /// <summary>
+        /// Checks each mod for updates.
+        /// </summary>
+        /// <param name="mods">Array of mods to check for updates.</param>
+        public static void CheckForModUpdatesAsync(ModNode[] mods)
+        {
+            EventDistributor.InvokeAsyncTaskStarted(Instance);
+            View.SetEnabledOfAllControls(false);
+            View.ShowBusy = true;
+
+            AsyncTask<bool> asyncJob = new AsyncTask<bool>();
+            asyncJob.SetCallbackFunctions(() =>
+                {
+                    _CheckForModUpdates(mods);
+                    return true;
+                },
+                (result, ex) =>
+                {
+                    EventDistributor.InvokeAsyncTaskDone(Instance);
+                    View.SetEnabledOfAllControls(true);
+                    View.ShowBusy = false;
+
+                    if (ex != null)
+                        Messenger.AddError(string.Format(Messages.MSG_ERROR_DURING_MOD_UPDATE_0, ex.Message), ex);
+                });
+            asyncJob.Run();
+        }
+
+        /// <summary>
+        /// Checks each mod for updates.
+        /// </summary>
+        /// <param name="mods">Array of mods to check for updates.</param>
+        protected static void _CheckForModUpdates(ModNode[] mods)
+        {
             foreach (ModNode mod in mods)
             {
                 try
                 {
-
                     ISiteHandler siteHandler = mod.SiteHandler;
                     if (siteHandler == null)
                         Messenger.AddInfo(string.Format(Messages.MSG_ERROR_0_NO_VERSIONCONTROL, mod.Name));
@@ -1258,56 +1302,83 @@ namespace KSPModAdmin.Core.Controller
         /// </summary>
         public static void UpdateAllOutdatedMods()
         {
-            CheckForUpdatesAllMods();
-            
-            // Get all outdated mods.
-            var outdatedMods = from e in Mods where e.IsOutdated select e;
+            _UpdateOutdatedMods(Mods);
+        }
 
+        /// <summary>
+        /// Starts a update check for all mods and updates all outdated mods.
+        /// </summary>
+        public static void UpdateAllOutdatedModsAsync()
+        {
+            UpdateOutdatedModsAsync(Mods);
+        }
+
+        /// <summary>
+        /// Starts a update check for the mod and updates it if it's outdated.
+        /// </summary>
+        /// <param name="mods">The mod of the mod to update.</param>
+        public static void UpdateOutdatedMods(ModNode[] mods)
+        {
+            _UpdateOutdatedMods(mods);
+        }
+
+        /// <summary>
+        /// Starts a update check for the mod and updates it if it's outdated.
+        /// </summary>
+        /// <param name="mods">The mod of the mod to update.</param>
+        public static void UpdateOutdatedModsAsync(ModNode[] mods)
+        {
+            EventDistributor.InvokeAsyncTaskStarted(Instance);
+            View.SetEnabledOfAllControls(false);
+            View.ShowBusy = true;
+
+            AsyncTask<bool> asyncJob = new AsyncTask<bool>();
+            asyncJob.SetCallbackFunctions(() =>
+                {
+                    _UpdateOutdatedMods(mods);
+                    return true;
+                },
+                (result, ex) =>
+                {
+                    EventDistributor.InvokeAsyncTaskDone(Instance);
+                    View.SetEnabledOfAllControls(true);
+                    View.ShowBusy = false;
+
+                    if (ex != null)
+                        Messenger.AddError(string.Format(Messages.MSG_ERROR_DURING_MOD_UPDATE_0, ex.Message), ex);
+                });
+            asyncJob.Run();
+        }
+
+        /// <summary>
+        /// Starts a update check for the mod and updates it if it's outdated.
+        /// </summary>
+        /// <param name="mods">The mod of the mod to update.</param>
+        protected static void _UpdateOutdatedMods(ModNode[] mods)
+        {
+            _CheckForModUpdates(mods);
+
+            var outdatedMods = from e in Mods where e.IsOutdated select e;
             foreach (ModNode mod in outdatedMods)
             {
                 try
                 {
-                    var handler = mod.SiteHandler;
-                    if (handler != null)
+                    if (mod.IsOutdated)
                     {
-                        Messenger.AddInfo(string.Format(Messages.MSG_DOWNLOADING_MOD_0, mod.Name));
-                        ModInfo newModInfos = handler.GetModInfo(mod.ModURL);
-                        if (handler.DownloadMod(ref newModInfos))
-                            UpdateMod(newModInfos, mod);
+                        var handler = mod.SiteHandler;
+                        if (handler != null)
+                        {
+                            Messenger.AddInfo(string.Format(Messages.MSG_DOWNLOADING_MOD_0, mod.Name));
+                            ModInfo newModInfos = handler.GetModInfo(mod.ModURL);
+                            if (handler.DownloadMod(ref newModInfos))
+                                UpdateMod(newModInfos, mod);
+                        }
                     }
                 }
                 catch (Exception ex)
                 {
                     Messenger.AddInfo(string.Format(Messages.MSG_ERROR_DURING_MODUPDATE_0_ERROR_1, mod.Name, ex.Message));
                 }
-            }
-        }
-
-        /// <summary>
-        /// Starts a update check for the mod and updates it if it's outdated.
-        /// </summary>
-        /// <param name="mod">The mod of the mod to update.</param>
-        public static void UpdateMod(ModNode mod)
-        {
-            CheckForModUpdates(new[] { mod });
-
-            try
-            {
-                if (mod.IsOutdated)
-                {
-                    var handler = mod.SiteHandler;
-                    if (handler != null)
-                    {
-                        Messenger.AddInfo(string.Format(Messages.MSG_DOWNLOADING_MOD_0, mod.Name));
-                        ModInfo newModInfos = handler.GetModInfo(mod.ModURL);
-                        if (handler.DownloadMod(ref newModInfos))
-                            UpdateMod(newModInfos, mod);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Messenger.AddInfo(string.Format(Messages.MSG_ERROR_DURING_MODUPDATE_0_ERROR_1, mod.Name, ex.Message));
             }
         }
 

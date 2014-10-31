@@ -97,7 +97,7 @@
             this.tsmiCmsCopyModInfos = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiCmsUpdatecheckMod = new System.Windows.Forms.ToolStripMenuItem();
-            this.updateModToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiUpdateMod = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCmsVisitVersionControlSite = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCmsVisitAdditionalLink = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
@@ -121,7 +121,7 @@
             this.tsmiCmsProceedAllMods = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator24 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiCmsUpdatecheckForAllMods = new System.Windows.Forms.ToolStripMenuItem();
-            this.updateAllOutdatedModsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiUpdateAllOutdatedMods = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator25 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiCmsRefreshCheckedStateForAllMods = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCmsCheckAllMods = new System.Windows.Forms.ToolStripMenuItem();
@@ -244,7 +244,7 @@
             this.tsmiCmsCopyModInfos,
             this.toolStripSeparator17,
             this.tsmiCmsUpdatecheckMod,
-            this.updateModToolStripMenuItem,
+            this.tsmiUpdateMod,
             this.tsmiCmsVisitVersionControlSite,
             this.tsmiCmsVisitAdditionalLink,
             this.toolStripSeparator10,
@@ -256,7 +256,7 @@
             this.toolStripSeparator20,
             this.tsmiCmsCreateZip});
             this.cmsModSelectionOneMod.Name = "cmsModSelection";
-            this.cmsModSelectionOneMod.Size = new System.Drawing.Size(203, 304);
+            this.cmsModSelectionOneMod.Size = new System.Drawing.Size(203, 326);
             this.cmsModSelectionOneMod.Opening += new System.ComponentModel.CancelEventHandler(this.cmsModSelectionOneMod_Opening);
             // 
             // tsmiCmsDestination
@@ -342,12 +342,12 @@
             this.tsmiCmsUpdatecheckMod.Size = new System.Drawing.Size(202, 22);
             this.tsmiCmsUpdatecheckMod.Text = "Updatecheck";
             // 
-            // updateModToolStripMenuItem
+            // tsmiUpdateMod
             // 
-            this.updateModToolStripMenuItem.Image = global::KSPModAdmin.Core.Properties.Resources.component_replace_clock;
-            this.updateModToolStripMenuItem.Name = "updateModToolStripMenuItem";
-            this.updateModToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
-            this.updateModToolStripMenuItem.Text = "Update mod";
+            this.tsmiUpdateMod.Image = global::KSPModAdmin.Core.Properties.Resources.component_replace_clock;
+            this.tsmiUpdateMod.Name = "tsmiUpdateMod";
+            this.tsmiUpdateMod.Size = new System.Drawing.Size(202, 22);
+            this.tsmiUpdateMod.Text = "Update mod";
             // 
             // tsmiCmsVisitVersionControlSite
             // 
@@ -480,13 +480,13 @@
             this.tsmiCmsProceedAllMods,
             this.toolStripSeparator24,
             this.tsmiCmsUpdatecheckForAllMods,
-            this.updateAllOutdatedModsToolStripMenuItem,
+            this.tsmiUpdateAllOutdatedMods,
             this.toolStripSeparator25,
             this.tsmiCmsRefreshCheckedStateForAllMods,
             this.tsmiCmsCheckAllMods,
             this.tsmiCmsUncheckAllMods});
             this.cmsModSelectionAllMods.Name = "cmsModSelectionAllMods";
-            this.cmsModSelectionAllMods.Size = new System.Drawing.Size(255, 292);
+            this.cmsModSelectionAllMods.Size = new System.Drawing.Size(255, 270);
             // 
             // tsmiCmsAddMod
             // 
@@ -559,13 +559,13 @@
             this.tsmiCmsUpdatecheckForAllMods.Text = "Updatecheck for all mods";
             this.tsmiCmsUpdatecheckForAllMods.Click += new System.EventHandler(this.tsbUpdateCheckAllMods_Click);
             // 
-            // updateAllOutdatedModsToolStripMenuItem
+            // tsmiUpdateAllOutdatedMods
             // 
-            this.updateAllOutdatedModsToolStripMenuItem.Image = global::KSPModAdmin.Core.Properties.Resources.components_replace_clock;
-            this.updateAllOutdatedModsToolStripMenuItem.Name = "updateAllOutdatedModsToolStripMenuItem";
-            this.updateAllOutdatedModsToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
-            this.updateAllOutdatedModsToolStripMenuItem.Text = "Update all outdated mods";
-            this.updateAllOutdatedModsToolStripMenuItem.ToolTipText = "Starts a updatecheck and updates all outdated mods.";
+            this.tsmiUpdateAllOutdatedMods.Image = global::KSPModAdmin.Core.Properties.Resources.components_replace_clock;
+            this.tsmiUpdateAllOutdatedMods.Name = "tsmiUpdateAllOutdatedMods";
+            this.tsmiUpdateAllOutdatedMods.Size = new System.Drawing.Size(254, 22);
+            this.tsmiUpdateAllOutdatedMods.Text = "Update all outdated mods";
+            this.tsmiUpdateAllOutdatedMods.ToolTipText = "Starts a updatecheck and updates all outdated mods.";
             // 
             // toolStripSeparator25
             // 
@@ -1250,8 +1250,8 @@
         private System.Windows.Forms.ToolStripButton tsbCheckAllMods;
         private System.Windows.Forms.ToolStripMenuItem tsmiCmsCheckAllMods;
         private System.Windows.Forms.ToolStripButton tsbUpdateAllOutdatedMods;
-        private System.Windows.Forms.ToolStripMenuItem updateAllOutdatedModsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem updateModToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tsmiUpdateAllOutdatedMods;
+        private System.Windows.Forms.ToolStripMenuItem tsmiUpdateMod;
         private System.Windows.Forms.ToolStripButton tsbUpdateMod;
     }
 }

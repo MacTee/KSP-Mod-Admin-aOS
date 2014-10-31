@@ -412,28 +412,7 @@ namespace KSPModAdmin.Core.Model
         /// <summary>
         /// Flag to determine if the mod is outdated.
         /// </summary>
-        public bool IsOutdated
-        {
-            get
-            {
-                if (mIsOutdated) 
-                    return true;
-
-                if (!string.IsNullOrEmpty(AddDate) && !string.IsNullOrEmpty(CreationDate))
-                {
-                    try
-                    {
-                        return (DateTime.Parse(AddDate) < DateTime.Parse(CreationDate));
-                    }
-                    catch { }
-                }
-
-                return false;
-            }
-            set { mIsOutdated = value; }
-        }
-        private bool mIsOutdated = false;
-
+        public bool IsOutdated { get; set; }
 
         /// <summary>
         /// Depth level of the node within the mod tree.
