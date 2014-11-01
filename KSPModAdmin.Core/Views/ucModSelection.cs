@@ -386,7 +386,7 @@ namespace KSPModAdmin.Core.Views
                 ModVersion = VersionHelper.GetAssemblyVersion(false);
                 ModAuthor = "BHeinrich";
                 ModCreationDate = "27.05.2014";
-                ModChangeDate = "28.10.2014";
+                ModChangeDate = "1.11.2014";
                 ModOutdated = false;
                 ModRating = string.Empty;
                 ModDownloads = "75k+";
@@ -430,6 +430,9 @@ namespace KSPModAdmin.Core.Views
 
                 tsbCreateZip.Enabled = false;
             }
+
+            lvModSelection.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.ColumnContent);
+            lvModSelection.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.ColumnContent);
         }
 
         private void tvModSelection_DrawControl(object sender, DrawEventArgs e)

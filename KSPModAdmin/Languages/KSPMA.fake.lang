@@ -1,10 +1,10 @@
-<Language Name="fake" LongName="Fake language">Value="
+<Language Name="fake" LongName="Fake language">
   <Control Name="frmMain" Value="(T)KSP Mod Admin AnyOS"/>
   <Control Name="lblKSPPath" Value="(T)KSP install path:"/>
-  <Control Name="cbKSPPath" Value="">
-    <ChildControl Name="cbKSPPath_ToolTip" Value="(T)Chose the KSP install path to perform actions on."/>
-  </Control>
-
+	<Control Name="cbKSPPath" Value="">
+		<ChildControl Name="cbKSPPath_ToolTip" Value="(T)Choose the KSP install path to perform actions on."/>
+	</Control>
+  
   <Control Name="tabPageModSelection" Value="(T)Mods"/>
   <Control Name="cmsModSelectionAllMods" Value="">
     <Control Name="tsmiCmsAddMod" Value="(T)Add Mod"/>
@@ -12,8 +12,8 @@
     <Control Name="tsmiCmsImportExportModPack" Value="(T)Import/Export ModPack"/>
     <Control Name="tsmiCmsScanForAlreadyInstalledMods" Value="(T)Scan for already installed mods"/>
     <Control Name="tsmiCmsRemoveAllMods" Value="(T)Remove all mods"/>
-    <Control Name="tsmiCmsProceedAllMods" Value="(T)Proceed all mods"/>
-    <Control Name="tsmiCmsUpdatecheckForAllMods" Value="(T)Updatecheck for all mods"/>
+    <Control Name="tsmiCmsProceedAllMods" Value="(T)Process all mods"/>
+    <Control Name="tsmiCmsUpdatecheckForAllMods" Value="(T)Check all mods for updates"/>
     <Control Name="tsmiCmsRefreshCheckedStateForAllMods" Value="(T)Refresh checked state for all mods"/>
     <Control Name="tsmiCmsUncheckAllMods" Value="(T)Uncheck all mods"/>
   </Control>
@@ -21,32 +21,32 @@
     <Control Name="tsmiCmsDestination" Value="(T)Destination"/>
     <Control Name="tsmiCmsSelectNewDestination" Value="(T)Select new destination"/>
     <Control Name="tsmiCmsResetDestination" Value="(T)Reset destination"/>
-    <Control Name="tsmiCmsRedetectDestination" Value="(T)Redetect destination for the mod"/>
-    <Control Name="tsmiCmsRefreschCheckedState" Value="(T)Refresch checked state"/>
+    <Control Name="tsmiCmsRedetectDestination" Value="(T)Re-detect destination for the mod"/>
+    <Control Name="tsmiCmsRefreschCheckedState" Value="(T)Refresh checked state"/>
     <Control Name="tsmiCmsEditModInfos" Value="(T)Edit ModInfos"/>
     <Control Name="tsmiCmsCopyModInfos" Value="(T)Copy ModInfos"/>
-    <Control Name="tsmiCmsUpdatecheckMod" Value="(T)Updatecheck"/>
+    <Control Name="tsmiCmsUpdatecheckMod" Value="(T)Check for update"/>
     <Control Name="tsmiCmsVisitVersionControlSite" Value="(T)Visit version control URL"/>
     <Control Name="tsmiCmsVisitAdditionalLink" Value="(T)Visit additional link URL"/>
     <Control Name="tsmiCmsSolveConflicts" Value="(T)Solve conflicts"/>
-    <Control Name="tsmiCmsProceedMod" Value="(T)Proceed mod"/>
+    <Control Name="tsmiCmsProceedMod" Value="(T)Process mod"/>
     <Control Name="tsmiCmsRemoveMod" Value="(T)Remove mod"/>
     <Control Name="tsmiCmsCreateZip" Value="(T)Create Zip"/>
   </Control>
   <Control Name="tsMod" Value="(T)toolStrip2">
     <Control Name="tsbProceedMod" Value="(T)toolStripButton9">
-      <ChildControl Name="tsbProceedMod_ToolTip" Value="(T)Proceed mod^Installs/Uninstalles the checked(unchecked parts of the highlighted mod."/>
+      <ChildControl Name="tsbProceedMod_ToolTip" Value="(T)Process mod^Installs/Removes the checked/unchecked parts of the highlighted mod."/>
     </Control>
     <Control Name="tsbModUpdateCheck" Value="(T)toolStripButton6">
       <ChildControl Name="tsbModUpdateCheck_ToolTip" Value="(T)Check for mod update^Checks for mod updates if version control is active."/>
     </Control>
     <Control Name="tssbVisitVersionControlSite" Value="(T)toolStripDropDownButton3">
-      <ChildControl Name="tssbVisitVersionControlSite_ToolTip" Value="(T)Visit version check site^Opens the ModBrowser an navigates to the version check site of the mod."/>
+      <ChildControl Name="tssbVisitVersionControlSite_ToolTip" Value="(T)Visit version check page^Opens the ModBrowser and navigates to the version check page of the mod."/>
       <Control Name="tsmiVisitVersionControlSite" Value="(T)Visit version control URL">
         <ChildControl Name="tsmiVisitVersionControlSite_ToolTip" Value="(T)Visit version check site^Opens the ModBrowser an navigates to the version check site of the mod."/>
       </Control>
       <Control Name="tsmiVisitAdditionalLink" Value="(T)Visit additional link URL">
-        <ChildControl Name="tsmiVisitAdditionalLink_ToolTip" Value="(T)Visit additional link URL^Opens the ModBrowser and navigates to the additional URL of the mod."/>
+        <ChildControl Name="tsmiVisitAdditionalLink_ToolTip" Value="(T)Visit version check page^Opens the ModBrowser and navigates to the version check page of the mod."/>
       </Control>
     </Control>
     <Control Name="tsbEditModInfos" Value="(T)toolStripButton7">
@@ -59,7 +59,7 @@
       <ChildControl Name="tsbSolveConflicts_ToolTip" Value="(T)Solve mod conflicts^Opens the mod conflict solver dialog."/>
     </Control>
     <Control Name="tsbRefreshCheckedState" Value="(T)toolStripButton10">
-      <ChildControl Name="tsbRefreshCheckedState_ToolTip" Value="(T)Refresh checked state^Refrashes the checked state of the mod."/>
+      <ChildControl Name="tsbRefreshCheckedState_ToolTip" Value="(T)Refresh checked state^Refreshes the checked state of the mod."/>
     </Control>
     <Control Name="tssbChangeDestination" Value="(T)toolStripButton12">
       <ChildControl Name="tssbChangeDestination_ToolTip" Value="(T)Select destination^Select a new install destination for the currently selected mod file/folder."/>
@@ -69,8 +69,8 @@
       <Control Name="tsmiResetDestination" Value="(T)Reset destination">
         <ChildControl Name="tsmiResetDestination_ToolTip" Value="(T)Reset destination^Resets the destination for the currently selected mod file/folder."/>
       </Control>
-      <Control Name="tsmiRedetectDestination" Value="(T)Redetect destination for the mod">
-        <ChildControl Name="tsmiRedetectDestination_ToolTip" Value="(T)Redetect destinations for the mod^Deletes all destinations from the mod and ^and starts the auto destination detection for it."/>
+      <Control Name="tsmiRedetectDestination" Value="(T)Re-detect destination for the mod">
+        <ChildControl Name="tsmiRedetectDestination_ToolTip" Value="(T)Re-detect destinations for the mod^Deletes all destinations from the mod and^starts the auto destination detection for it."/>
       </Control>
     </Control>
     <Control Name="tsbCreateZip" Value="(T)toolStripButton14">
@@ -122,7 +122,7 @@
       <ChildControl Name="tsbScan_ToolTip" Value="(T)Scan GameData folder^Scans the KSP GameData folder for installed mods and^adds them if they are not listed in the ModSelection."/>
     </Control>
     <Control Name="tsbUpdatecheckAllMods" Value="(T)toolStripButton1">
-      <ChildControl Name="tsbUpdatecheckAllMods_ToolTip" Value="(T)Updatecheck for all mods^Starts the update check for all mods in the ModSelection."/>
+      <ChildControl Name="tsbUpdatecheckAllMods_ToolTip" Value="(T)Update check for all mods^Starts the update check for all mods in the ModSelection."/>
     </Control>
     <Control Name="tsbRefreshCheckedstateForAllMods" Value="(T)toolStripButton1">
       <ChildControl Name="tsbRefreshCheckedstateForAllMods_ToolTip" Value="(T)Refresh checked state of all mods.^Checks all ModNodes with a destination."/>
@@ -142,10 +142,10 @@
     </Control>
   </Control>
   <Control Name="btnProceedAll" Value="(T)Proceed all mods">
-    <ChildControl Name="btnProceedAll_ToolTip" Value="(T)Proceed all mods^Proceeds (installs/uninstalls) all mods in the selection tree.^(To install a part of a mod just check the checkbox next to it)"/>
+    <ChildControl Name="btnProceedAll_ToolTip" Value="(T)Process all mods^Processes (installs/removes) all mods in the selection tree.^(To install a part of a mod just check the checkbox next to it.)"/>
   </Control>
   <Control Name="btnProceedHighlighted" Value="(T)Proceed highlighted mods">
-    <ChildControl Name="btnProceedHighlighted_ToolTip" Value="(T)Proceed highlighted mods^Proceeds (installs/uninstalls) the selected (blue highlighted) mod(s).^(To install a part of a mod just check the checkbox next to it)"/>
+    <ChildControl Name="btnProceedHighlighted_ToolTip" Value="(T)Process highlighted mods^Processes (installs/removes) the selected (blue highlighted) mod(s).^(To install a part of a mod just check the checkbox next to it.)"/>
   </Control>
   <Control Name="btnLaunchKSP" Value="(T)Launch Kerbal Space Program">
     <ChildControl Name="btnLaunchKSP_ToolTip" Value="(T)Runs the KSP.exe of the selected KSP install path."/>
@@ -153,8 +153,8 @@
   <Control Name="cbResolutions" Value="">
     <ChildControl Name="cbResolutions_ToolTip" Value="(T)Sets the KSP window/screen resolution."/>
   </Control>
-  <Control Name="cbBorderlessWin" Value="(T)Borderless window">
-    <ChildControl Name="cbBorderlessWin_ToolTip" Value="(T)Starts KSP with a border less window."/>
+  <Control Name="cbBorderlessWin" Value="(T)Borderless">
+    <ChildControl Name="cbBorderlessWin_ToolTip" Value="(T)Starts KSP with a borderless window."/>
   </Control>
   <Control Name="rbFullscreen" Value="(T)FullScreen">
     <ChildControl Name="rbFullscreen_ToolTip" Value="(T)Starts KSP in FullScreen mode."/>
@@ -162,6 +162,7 @@
   <Control Name="rbWindowed" Value="(T)Windowed">
     <ChildControl Name="rbWindowed_ToolTip" Value="(T)Starts KSP in windowed mode."/>
   </Control>
+  
 
   <Control Name="tabPageOptions" Value="(T)Options"/>
   <Control Name="tabPageUpdate" Value="(T)Update"/>
@@ -172,7 +173,7 @@
     <ChildControl Name="cbModUpdateBehavior_cbItem_1" Value="(T)Remove and Add"/>
     <ChildControl Name="cbModUpdateBehavior_cbItem_2" Value="(T)Copy destination"/>
     <ChildControl Name="cbModUpdateBehavior_cbItem_3" Value="(T)Copy checked state"/>
-    <ChildControl Name="cbModUpdateBehavior_cbItem_4" Value="(T)Manually"/>
+    <ChildControl Name="cbModUpdateBehavior_cbItem_4" Value="(T)Manual"/>
   </Control>
   <Control Name="lblUpdateCheckInterval" Value="(T)Update check interval:"/>
   <Control Name="cbModUpdateInterval" Value="">
@@ -182,12 +183,12 @@
     <ChildControl Name="cbModUpdateInterval_cbItem_3" Value="(T)Once a day"/>
     <ChildControl Name="cbModUpdateInterval_cbItem_4" Value="(T)Once a week"/>
   </Control>
-  <Control Name="pbCheckModUpdate" Value="">
-    <ChildControl Name="pbCheckModUpdate_ToolTip" Value="(T)working..."/>
-  </Control>
-  <Control Name="btnCheckModUpdates" Value="(T)Check for mod updates">
-    <ChildControl Name="btnCheckModUpdates_ToolTip" Value="(T)Check for mod updates^Starts the update check for all mods from the ModSelection."/>
-  </Control>
+	<Control Name="pbCheckModUpdate" Value="">
+		<ChildControl Name="pbCheckModUpdate_ToolTip" Value="(T)working..."/>
+	</Control>
+	<Control Name="btnCheckModUpdates" Value="(T)Check for mod updates">
+		<ChildControl Name="btnCheckModUpdates_ToolTip" Value="(T)Check for mod updates^Starts the update check for all mods from the ModSelection."/>
+	</Control>
   <Control Name="gbAdminVersion" Value="(T)Update KSP Mod Admin:"/>
   <Control Name="lblDownloadKspMA" Value="(T)Download:"/>
   <Control Name="lblPostDownloadAction" Value="(T)Post download action:"/>
@@ -197,104 +198,104 @@
     <ChildControl Name="cbPostDownloadAction_cbItem_2" Value="(T)Ask for auto install"/>
     <ChildControl Name="cbPostDownloadAction_cbItem_3" Value="(T)Auto install after download"/>
   </Control>
-  <Control Name="pbUpdateLoad" Value="">
-    <ChildControl Name="pbUpdateLoad_ToolTip" Value="(T)working..."/>
-  </Control>
-  <Control Name="btnUpdate" Value="(T)Check for KSP MA updates">
-    <ChildControl Name="btnUpdate_ToolTip" Value="(T)Check for KSP MA updates^Starts the check for KSP Mod Admin updates."/>
-  </Control>
-  <Control Name="cbVersionCheck" Value="(T)Check for new version on startup">
-    <ChildControl Name="cbVersionCheck_ToolTip" Value="(T)Check for new version on Startup^If checked KSP MA will check for updates during the start of KSP MA."/>
-  </Control>
-
+	<Control Name="pbUpdateLoad" Value="">
+		<ChildControl Name="pbUpdateLoad_ToolTip" Value="(T)working..."/>
+	</Control>
+	<Control Name="btnUpdate" Value="(T)Check for KSP MA updates">
+		<ChildControl Name="btnUpdate_ToolTip" Value="(T)Check for KSP MA updates^Starts the check for KSP Mod Admin updates."/>
+	</Control>
+	<Control Name="cbVersionCheck" Value="(T)Check for new version on startup">
+		<ChildControl Name="cbVersionCheck_ToolTip" Value="(T)Check for new version on Startup^If checked KSP MA will check for updates during the start of KSP MA."/>
+	</Control>
+  
   <Control Name="tabPagePath" Value="(T)Paths"/>
   <Control Name="gbPaths" Value="(T)Paths:"/>
   <Control Name="lblLoading" Value="(T)searching ..."/>
-  <Control Name="cbKSPPath" Value="">
-    <ChildControl Name="cbKSPPath_ToolTip" Value="(T)Chose the KSP install path to perform actions on."/>
-  </Control>
+	<Control Name="cbKSPPath" Value="">
+		<ChildControl Name="cbKSPPath_ToolTip" Value="(T)Chose the KSP install path to perform actions on."/>
+	</Control>
   <Control Name="lblModDownloadPath" Value="(T)Download/Mod path:"/>
-  <Control Name="btnDownloadPath" Value="">
-    <ChildControl Name="btnDownloadPath_ToolTip" Value="(T)Opens a folder browser to select a download folder."/>
-  </Control>
-  <Control Name="btnOpenDownloadFolder" Value="">
-    <ChildControl Name="btnOpenDownloadFolder_ToolTip" Value="(T)Open download folder^Opens the download folder."/>
-  </Control>
-  <Control Name="btnOpenKSPRoot" Value="">
-    <ChildControl Name="btnOpenKSPRoot_ToolTip" Value="(T)Open KSP install folder.^Opens the selected KSP install folder."/>
-  </Control>
+	<Control Name="btnDownloadPath" Value="">
+		<ChildControl Name="btnDownloadPath_ToolTip" Value="(T)Opens a folder browser to select a download folder."/>
+	</Control>
+	<Control Name="btnOpenDownloadFolder" Value="">
+		<ChildControl Name="btnOpenDownloadFolder_ToolTip" Value="(T)Open download folder^Opens the download folder."/>
+	</Control>
+	<Control Name="btnOpenKSPRoot" Value="">
+		<ChildControl Name="btnOpenKSPRoot_ToolTip" Value="(T)Open KSP install folder.^Opens the selected KSP install folder."/>
+	</Control>
   <Control Name="lblKnownKSPPaths" Value="(T)Known KSP install path:"/>
   <Control Name="lblSelectedKSPPath" Value="(T)Selected KSP install path:"/>
   <Control Name="btnRemove" Value="">
-    <ChildControl Name="btnRemove_ToolTip" Value="(T)Remove KSP install folder^Removes the selected KSP install folder from the known paths."/>
-  </Control>
-  <Control Name="btnSteamSearch" Value="">
-    <ChildControl Name="btnSteamSearch_ToolTip" Value="(T)Steam search^Searches the default steam path for KSP install folders."/>
-  </Control>
-  <Control Name="btnKSPFolderSearch" Value="">
-    <ChildControl Name="btnKSPFolderSearch_ToolTip" Value="(T)KSP folder search^Starts/Stops a KSP folder search.^KSP MA will search all folders next (up / down) to its install paths.^The depth is depanding on the number on the right of this button."/>
-  </Control>
-  <Control Name="btnAddPath" Value="">
-    <ChildControl Name="btnAddPath_ToolTip" Value="(T)Add KSP install path^Opens a FolderSelectDialog to add a new KSP install folder."/>
-  </Control>
+		<ChildControl Name="btnRemove_ToolTip" Value="(T)Remove KSP install folder^Removes the selected KSP install folder from the known paths."/>
+	</Control>
+	<Control Name="btnSteamSearch" Value="">
+		<ChildControl Name="btnSteamSearch_ToolTip" Value="(T)Steam search^Searches the default steam path for KSP install folders."/>
+	</Control>
+	<Control Name="btnKSPFolderSearch" Value="">
+		<ChildControl Name="btnKSPFolderSearch_ToolTip" Value="(T)KSP folder search^Starts/Stops a KSP folder search.^KSP MA will search adjacent folders.^The relative distance up/down the tree is controlled by the number to the right."/>
+	</Control>
+	<Control Name="btnAddPath" Value="">
+		<ChildControl Name="btnAddPath_ToolTip" Value="(T)Add KSP install path^Opens a folder selection dialog to add a new KSP install folder."/>
+	</Control>
   <Control Name="lblKSPPathNote" Value="(T)Note:"/>
-
+  
   <Control Name="tabPageMisc" Value="(T)Misc"/>
   <Control Name="gbLaguage" Value="(T)Language:"/>
-  <Control Name="cbLanguages" Value="">
-    <ChildControl Name="cbLanguages_ToolTip" Value="(T)Chose your favorit language."/>
-  </Control>
+	<Control Name="cbLanguages" Value="">
+		<ChildControl Name="cbLanguages_ToolTip" Value="(T)Choose your preferred language."/>
+	</Control>
   <Control Name="gbNodeColors" Value="(T)ModSelection node colors:"/>
   <Control Name="lblColorDestinationDetection" Value="(T)Destination detected:"/>
   <Control Name="lblColorRDestinationDetection" Value="(T)R"/>
   <Control Name="lblColorGDestinationDetection" Value="(T)G"/>
   <Control Name="lblColorBDestinationDetection" Value="(T)B"/>
-  <Control Name="btnDestinationDetected" Value="">
-    <ChildControl Name="btnDestinationDetected_ToolTip" Value="(T)Chose node color for nodes which have a destination."/>
-  </Control>
+	<Control Name="btnDestinationDetected" Value="">
+		<ChildControl Name="btnDestinationDetected_ToolTip" Value="(T)Chose node color for nodes which have a destination."/>
+	</Control>
   <Control Name="lblColorDestinationMissing" Value="(T)Destination missing:"/>
   <Control Name="lblColorRDestinationMissing" Value="(T)R"/>
   <Control Name="lblColorGDestinationMissing" Value="(T)G"/>
   <Control Name="lblColorBDestinationMissing" Value="(T)B"/>
-  <Control Name="btnDestinationMissing" Value="">
-    <ChildControl Name="btnDestinationMissing_ToolTip" Value="(T)Chose node color for nodes where the destination is missing."/>
-  </Control>
+	<Control Name="btnDestinationMissing" Value="">
+		<ChildControl Name="btnDestinationMissing_ToolTip" Value="(T)Chose node color for nodes where the destination is missing."/>
+	</Control>
   <Control Name="lblColorDestinationConflicts" Value="(T)Destination conflict:"/>
   <Control Name="lblColorRDestinationConflict" Value="(T)R"/>
   <Control Name="lblColorGDestinationConflict" Value="(T)G"/>
   <Control Name="lblColorBDestinationConflict" Value="(T)B"/>
-  <Control Name="btnDestinationConflict" Value="">
-    <ChildControl Name="btnDestinationConflict_ToolTip" Value="(T)Chose node color for nodes that have conflicts."/>
-  </Control>
+	<Control Name="btnDestinationConflict" Value="">
+		<ChildControl Name="btnDestinationConflict_ToolTip" Value="(T)Chose node color for nodes that have conflicts."/>
+	</Control>
   <Control Name="lblColorModIsInstalled" Value="(T)Mod is installed:"/>
   <Control Name="lblColorRModIsInstalled" Value="(T)R"/>
   <Control Name="lblColorGModIsInstalled" Value="(T)G"/>
   <Control Name="lblColorBModIsInstalled" Value="(T)B"/>
-  <Control Name="btnModInstalled" Value="">
-    <ChildControl Name="btnModInstalled_ToolTip" Value="(T)Chose node color for nodes that are installed."/>
-  </Control>
+	<Control Name="btnModInstalled" Value="">
+		<ChildControl Name="btnModInstalled_ToolTip" Value="(T)Chose node color for nodes that are installed."/>
+	</Control>
   <Control Name="lblColorModArchiveMissing" Value="(T)Mod archive is missing:"/>
   <Control Name="lblColorRModArchiveMissing" Value="(T)R"/>
   <Control Name="lblColorGModArchiveMissing" Value="(T)G"/>
   <Control Name="lblColorBModArchiveMissing" Value="(T)B"/>
-  <Control Name="btnModArchiveMissing" Value="">
-    <ChildControl Name="btnModArchiveMissing_ToolTip" Value="(T)Chose node color for nodes where the mod archive is missing. "/>
-  </Control>
+	<Control Name="btnModArchiveMissing" Value="">
+		<ChildControl Name="btnModArchiveMissing_ToolTip" Value="(T)Chose node color for nodes where the mod archive is missing. "/>
+	</Control>
   <Control Name="lblColorModOutdated" Value="(T)Mod outdated:"/>
   <Control Name="lblColorRModOutdated" Value="(T)R"/>
   <Control Name="lblColorGModOutdated" Value="(T)G"/>
   <Control Name="lblColorBModOutdated" Value="(T)B"/>
-  <Control Name="btnModOutdated" Value="">
-    <ChildControl Name="btnModOutdated_ToolTip" Value="(T)Chose node color for nodes where the mod is outdated."/>
-  </Control>
+	<Control Name="btnModOutdated" Value="">
+		<ChildControl Name="btnModOutdated_ToolTip" Value="(T)Chose node color for nodes where the mod is outdated."/>
+	</Control>
   <Control Name="gpModConflictHandling" Value="(T)Mod file conflict handling (Experimental):"/>
   <Control Name="cbConflictDetectionOnOff" Value="(T)Conflict detection On / Off">
-    <ChildControl Name="cbConflictDetectionOnOff_ToolTip" Value="(T)Conflict detection On / Off^Turns the conflict detection on or off."/>
-  </Control>
-  <Control Name="cbShowConflictSolver" Value="(T)Show conflict solving dialog">
-    <ChildControl Name="cbShowConflictSolver_ToolTip" Value="(T)Show conflict detection dialog^Show/hides the conflict detection doalog after conflict detection."/>
-  </Control>
-
+		<ChildControl Name="cbConflictDetectionOnOff_ToolTip" Value="(T)Conflict detection On / Off^Turns the conflict detection on or off."/>
+	</Control>
+	<Control Name="cbShowConflictSolver" Value="(T)Show conflict solving dialog">
+		<ChildControl Name="cbShowConflictSolver_ToolTip" Value="(T)Show conflict detection dialog^Show/hides the conflict detection doalog after conflict detection."/>
+	</Control>
+  
   <Control Name="frmAddMod" Value="(T)Adding mod"/>
   <Control Name="cbInstallAfterAdd" Value="(T)Install after add.">
     <ChildControl Name="cbInstallAfterAdd_ToolTip" Value="(T)Check to let KSP MA install the new mod right after adding."/>
@@ -317,7 +318,7 @@
   <Control Name="btnAdd" Value="(T)Add">
     <ChildControl Name="btnAdd_ToolTip" Value="(T)Adds the mod to the ModSelection."/>
   </Control>
-
+  
   <Control Name="frmLinkSelection" Value="(T)Link selection"/>
   <Control Name="lblLinkSelectionDescription" Value="(T)Please browse to the download link and click it."/>
   <Control Name="frmUpdateDLG" Value="(T)KSP MA Update"/>
@@ -336,7 +337,7 @@
   <Control Name="btnDownload" Value="(T)Download">
     <ChildControl Name="btnDownload_ToolTip" Value="(T)Start the download of the KSP MA update."/>
   </Control>
-
+  
   <Control Name="frmCopyModInfo" Value="(T)Copy ModInfo"/>
   <Control Name="lblCopyModInfosTo" Value="(T)To:"/>
   <Control Name="lblCopyModInfosModName" Value="(T)Copy the ModInfos from:"/>
@@ -344,7 +345,7 @@
   <Control Name="frmEditModInfo" Value="(T)ModInfo Editor"/>
   <Control Name="btnSave" Value="(T)Save"/>
   <Control Name="btnGotoSpaceport" Value="">
-    <ChildControl Name="btnGotoSpaceport_ToolTip" Value="(T)Get the ModInfos from the version control site.."/>
+    <ChildControl Name="btnGotoSpaceport_ToolTip" Value="(T)Get the ModInfos from the version control site."/>
   </Control>
   <Control Name="lblDownloadsModInfoEditor" Value="(T)Downloads:"/>
   <Control Name="lblNoteModInfoEditor" Value="(T)Note:"/>
@@ -363,7 +364,7 @@
   <Control Name="lblSelectDestination" Value="(T)Select the destination:"/>
   <Control Name="lblSelectDestinationNote" Value="(T)Note: If you choose a folder as source the destination will be   to all its subfolders and files too."/>
   <Control Name="btnOK" Value="(T)OK"/>
-
+  
   <Control Name="frmWelcome" Value="(T)KSP Mod Admin"/>
   <Control Name="tbKSPPath" Value=""/>
   <Control Name="btnSelectFolder" Value="(T)Select folder">
@@ -512,7 +513,7 @@
   <String Name="MSG_ERROR_NO_DOWNLOAD_FOLDER_SELECTED" Value="(T)No dowload folder selected."/>
   <String Name="MSG_SCAN_GAMDATA_FOLDER_STARTED" Value="(T)Scan of GameData folder started."/>
   <String Name="MSG_DIRECTORY_0_FOUND" Value="(T)Directory &amp;quot;{0}&amp;quot; found."/>
-  <String Name="MSG_FILE_0_FOUND" Value="(T)Directory &amp;quot;{0}&amp;quot; found."/>
+  <String Name="MSG_FILE_0_FOUND" Value="(T)File &amp;quot;{0}&amp;quot; found."/>
   <String Name="MSG_MODNODE_0_CREATED" Value="(T)ModNode created for &amp;quot;{0}&amp;quot;."/>
   <String Name="MSG_ERROR_MOD_PATH_URL_0_INVALID" Value="(T)Path or url &amp;quot;{0}&amp;quot; is not valid!"/>
   <String Name="MSG_ERROR_0_NO_VERSIONCONTROL" Value="(T)The mod &amp;quot;{0}&amp;quot; has no VersionControl ... update check skipped."/>
@@ -525,11 +526,17 @@
   <Control Name="cbForceOpenGL" Value="(T)Force OpenGL">
     <ChildControl Name="cbForceOpenGL_ToolTip" Value="(T)Starts KSP with OpenGL redering mode."/>
   </Control>
-  <Control Name="tsbUpdateAllOutdatedMods" Value="tsbUpdateAllOutdatedMods">
+  <Control Name="tsbUpdateAllOutdatedMods" Value="(T)tsbUpdateAllOutdatedMods">
     <Control Name="tsbUpdateAllOutdatedMods_ToolTip" Value="(T)Update all outdated mods^Starts a update check and updates all outdated mods."/>
   </Control>
-  <Control Name="tsmiUpdateAllOutdatedMods" Value="(T)Update all outdated mods">
+  <Control Name="tsmiUpdateAllOutdatedMods" Value="(T)Update mod">
     <Control Name="tsmiUpdateAllOutdatedMods_ToolTip" Value="(T)Starts a update check and updates all outdated mods."/>
+  </Control>
+  <Control Name="tsmiUpdateMod" Value="(T)Update all outdated mods">
+    <Control Name="tsmiUpdateMod_ToolTip" Value=""/>
+  </Control>
+  <Control Name="tsbUpdateMod" Value="(T)tsbUpdateMod">
+    <Control Name="tsbUpdateMod_ToolTip" Value="(T)Update mod^Starts a update check and updates the mod if it's outdated."/>
   </Control>
   <Control Name="frmImExport" Value="(T)ModPack im/exporter"/>
     <Control Name="gbImport" Value="(T)Import:"/>
