@@ -209,7 +209,7 @@
             this.btnProceedAll.Name = "btnProceedAll";
             this.btnProceedAll.Size = new System.Drawing.Size(319, 44);
             this.btnProceedAll.TabIndex = 0;
-            this.btnProceedAll.Text = "Proceed all mods";
+            this.btnProceedAll.Text = "Process all mods";
             this.btnProceedAll.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.ttModSelection.SetToolTip(this.btnProceedAll, "Proceed all mods\r\nProceeds (installs/deinstalls) all mods in the selection tree.\r" +
         "\n(To install a part of a mod just check the checkbox next to it)");
@@ -226,7 +226,7 @@
             this.btnProceedHighlighted.Name = "btnProceedHighlighted";
             this.btnProceedHighlighted.Size = new System.Drawing.Size(319, 44);
             this.btnProceedHighlighted.TabIndex = 1;
-            this.btnProceedHighlighted.Text = "Proceed highlighted mods";
+            this.btnProceedHighlighted.Text = "Process highlighted mods";
             this.btnProceedHighlighted.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.ttModSelection.SetToolTip(this.btnProceedHighlighted, "Proceed highlighted mods\r\nProceeds (installs/deinstalls) the selected (blue highl" +
         "ighted) mod(s).\r\n(To install a part of a mod just check the checkbox next to it)" +
@@ -256,7 +256,7 @@
             this.toolStripSeparator20,
             this.tsmiCmsCreateZip});
             this.cmsModSelectionOneMod.Name = "cmsModSelection";
-            this.cmsModSelectionOneMod.Size = new System.Drawing.Size(203, 326);
+            this.cmsModSelectionOneMod.Size = new System.Drawing.Size(203, 304);
             this.cmsModSelectionOneMod.Opening += new System.ComponentModel.CancelEventHandler(this.cmsModSelectionOneMod_Opening);
             // 
             // tsmiCmsDestination
@@ -340,7 +340,8 @@
             this.tsmiCmsUpdatecheckMod.Image = global::KSPModAdmin.Core.Properties.Resources.component_replace_earth;
             this.tsmiCmsUpdatecheckMod.Name = "tsmiCmsUpdatecheckMod";
             this.tsmiCmsUpdatecheckMod.Size = new System.Drawing.Size(202, 22);
-            this.tsmiCmsUpdatecheckMod.Text = "Updatecheck";
+            this.tsmiCmsUpdatecheckMod.Text = "Update check";
+            this.tsmiCmsUpdatecheckMod.Click += new System.EventHandler(this.tsbModUpdateCheck_Click);
             // 
             // tsmiUpdateMod
             // 
@@ -348,6 +349,7 @@
             this.tsmiUpdateMod.Name = "tsmiUpdateMod";
             this.tsmiUpdateMod.Size = new System.Drawing.Size(202, 22);
             this.tsmiUpdateMod.Text = "Update mod";
+            this.tsmiUpdateMod.Click += new System.EventHandler(this.tsbUpdateMod_Click);
             // 
             // tsmiCmsVisitVersionControlSite
             // 
@@ -357,6 +359,7 @@
             this.tsmiCmsVisitVersionControlSite.Size = new System.Drawing.Size(202, 22);
             this.tsmiCmsVisitVersionControlSite.Text = "Visit version control URL";
             this.tsmiCmsVisitVersionControlSite.Visible = false;
+            this.tsmiCmsVisitVersionControlSite.Click += new System.EventHandler(this.tssbVisitVersionControlSite_ButtonClick);
             // 
             // tsmiCmsVisitAdditionalLink
             // 
@@ -366,6 +369,7 @@
             this.tsmiCmsVisitAdditionalLink.Size = new System.Drawing.Size(202, 22);
             this.tsmiCmsVisitAdditionalLink.Text = "Visit additional link URL";
             this.tsmiCmsVisitAdditionalLink.Visible = false;
+            this.tsmiCmsVisitAdditionalLink.Click += new System.EventHandler(this.tsmiVisitAdditionalLink_Click);
             // 
             // toolStripSeparator10
             // 
@@ -379,6 +383,7 @@
             this.tsmiCmsSolveConflicts.Name = "tsmiCmsSolveConflicts";
             this.tsmiCmsSolveConflicts.Size = new System.Drawing.Size(202, 22);
             this.tsmiCmsSolveConflicts.Text = "Solve conflicts";
+            this.tsmiCmsSolveConflicts.Click += new System.EventHandler(this.tsbSolveConflicts_Click);
             // 
             // toolStripSeparator19
             // 
@@ -391,6 +396,7 @@
             this.tsmiCmsProceedMod.Name = "tsmiCmsProceedMod";
             this.tsmiCmsProceedMod.Size = new System.Drawing.Size(202, 22);
             this.tsmiCmsProceedMod.Text = "Proceed mod";
+            this.tsmiCmsProceedMod.Click += new System.EventHandler(this.btnProceedHighlighted_Click);
             // 
             // toolStripSeparator13
             // 
@@ -403,6 +409,7 @@
             this.tsmiCmsRemoveMod.Name = "tsmiCmsRemoveMod";
             this.tsmiCmsRemoveMod.Size = new System.Drawing.Size(202, 22);
             this.tsmiCmsRemoveMod.Text = "Remove mod";
+            this.tsmiCmsRemoveMod.Click += new System.EventHandler(this.tsbRemoveMod_Click);
             // 
             // toolStripSeparator20
             // 
@@ -566,6 +573,7 @@
             this.tsmiUpdateAllOutdatedMods.Size = new System.Drawing.Size(254, 22);
             this.tsmiUpdateAllOutdatedMods.Text = "Update all outdated mods";
             this.tsmiUpdateAllOutdatedMods.ToolTipText = "Starts a updatecheck and updates all outdated mods.";
+            this.tsmiUpdateAllOutdatedMods.Click += new System.EventHandler(this.tsbUpdateAllOutdatedMods_Click);
             // 
             // toolStripSeparator25
             // 
@@ -628,7 +636,7 @@
             this.tsbProceedMod.Name = "tsbProceedMod";
             this.tsbProceedMod.Size = new System.Drawing.Size(23, 22);
             this.tsbProceedMod.Text = "toolStripButton9";
-            this.tsbProceedMod.ToolTipText = "Proceed mod\r\nInstalls/Uninstalles the checked(unchecked parts of the highlighted " +
+            this.tsbProceedMod.ToolTipText = "Process mod\r\nInstalls/Uninstalles the checked(unchecked parts of the highlighted " +
     "mod.";
             this.tsbProceedMod.Click += new System.EventHandler(this.btnProceedHighlighted_Click);
             // 
