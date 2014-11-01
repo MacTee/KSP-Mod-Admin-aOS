@@ -1,7 +1,8 @@
 ﻿//// BUGS
 /////////////////////
 
-- 
+- KSP Mod Admin can't install files without extensions.
+  Sample to reproduce: https://kerbalstuff.com/mod/211/Kronal%20Vessel%20Viewer%20(KVV)%20-%20Exploded%20(Orthographic)%20ship%20view
 
 
 //// To Test
@@ -13,41 +14,50 @@
 - VersionControl implementation.
   - AutoUpdate of mods
 - ModPack Import/Export implementation.
+- Language values with special chars encoded to xml (http://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references)
+  - like <Control Name="lblKSPPath" Value="(T)Directório de instalação do KSP:"/>  (oacute; = ó)
+
 
 
 //// TODO
 /////////////////////
 
 - is everything Async ???
+  - Update mod -> "loading ring" is shown as disabled -> maybe use ProgressBar instead.
 
 - ModSelection
   -> MutiSelect 
      -> for ModNodes (for all highlighted functions)
   -> Double click -> open selected file.
   -> TreeView performance - Change ModNode.IsInstalled!
+  -> key action binding -> del = remove mod ...
 
 - Restart destination detection.
 
-- Conflic detection/solving
+- Conflict detection/solving
 
 - KSPForum support.
 
 - KerbalStuff support
   -> API: https://github.com/KerbalStuff/KerbalStuff/blob/master/api.md
 
+- Column select for ModSelection from ModInfo fields
+
 - ReadMe
+
+- Revise of the English text
+  - Proceed = Process
+  - unify URL, like, site, page
+  - ...
 
 - Try loading old KSPModAdmin.cfg file if no new cfg file is available.
   -> For AppConfig and KSPConfig!
 
 
+
 //// SUGGESTIONS
 /////////////////////
 
-- Column select for ModSelection from ModInfo fields
-
-
-  
 - Language file Creator/Editor tab
 
 - Compress for zipping.
