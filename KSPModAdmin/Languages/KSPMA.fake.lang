@@ -584,4 +584,5 @@
   <String Name="MSG_ERROR_DURING_MODUPDATE_0_ERROR_1" Value="(T)Error during mod update &amp;quot;{0}&amp;quot;. Error: &amp;quot;{1}&amp;quot;"/>
   <String Name="MSG_DOWNLOADING_MOD_0" Value="(T)Downloading mod update &amp;quot;{0}&amp;quot;..."/>
   <String Name="MSG_ERROR_DURING_MOD_UPDATE_0" Value="(T)Error during mod update check &amp;quot;{0}&amp;quot;."/>
+  <String Name="MSG_SCAN_NO_NEW_MODS_FOUND" Value="(T)No new Mods found."/>
 </Language>

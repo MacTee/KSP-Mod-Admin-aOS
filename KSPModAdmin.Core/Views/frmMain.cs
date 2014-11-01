@@ -18,7 +18,7 @@ namespace KSPModAdmin.Core.Views
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public List<NoteNode> KnownKSPPaths
         {
-            get { return (from e in cbKSPPath.Items.Cast<string>() select new NoteNode(e, e, "")).ToList(); }
+            get { return (from e in cbKSPPath.Items.Cast<string>() select new NoteNode(e, e, string.Empty)).ToList(); }
             set
             {
                 cbKSPPath.Items.Clear();

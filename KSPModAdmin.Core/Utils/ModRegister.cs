@@ -176,7 +176,7 @@ namespace KSPModAdmin.Core.Utils
                     if (!delNode.IsFile && delNode.IsInstalled)
                         ModSelectionController.ProcessMods(new ModNode[] { delNode }, true);
 
-                    delNode.SetDestinationPaths("");
+                    delNode.SetDestinationPaths(string.Empty);
                 }
             }
         }

@@ -360,7 +360,7 @@ namespace KSPModAdmin.Core.Utils
             {
                 tempNode = node;
                 path = KSPPathHelper.GetPathByName(node.Name);
-                path = (path.ToLower().EndsWith(node.Name.ToLower())) ? path.ToLower().Replace("\\" + node.Name.ToLower(), "") : path;
+                path = (path.ToLower().EndsWith(node.Name.ToLower())) ? path.ToLower().Replace("\\" + node.Name.ToLower(), string.Empty) : path;
                 result = false;
             }
             else
@@ -595,11 +595,14 @@ namespace KSPModAdmin.Core.Utils
             if (!string.IsNullOrEmpty(destination))
                 destination = KSPPathHelper.GetAbsolutePath(destination);
 
+            node.IsInstalled = false;
             if (!Directory.Exists(destination))
             {
                 try
                 {
                     Directory.CreateDirectory(destination);
+                    node.IsInstalled = true;
+
                     if (!silent)
                         Messenger.AddInfo(string.Format(Messages.MSG_DIR_CREATED_0, destination));
                 }
@@ -633,12 +636,14 @@ namespace KSPModAdmin.Core.Utils
                 if (entry == null)
                     return;
 
+                node.IsInstalled = false;
                 if (!File.Exists(destination))
                 {
                     try
                     {
                         // create new file.
                         entry.WriteToFile(destination);
+                        node.IsInstalled = true;
 
                         if (!silent)
                             Messenger.AddInfo(string.Format(Messages.MSG_FILE_EXTRACTED_0, destination));
@@ -684,6 +689,7 @@ namespace KSPModAdmin.Core.Utils
                 if (!string.IsNullOrEmpty(destination))
                     destination = KSPPathHelper.GetAbsolutePath(destination);
 
+                node.IsInstalled = false;
                 if (Directory.Exists(destination))
                 {
                     if (!Directory.GetDirectories(destination).Any() && !Directory.GetFiles(destination).Any())
@@ -691,6 +697,7 @@ namespace KSPModAdmin.Core.Utils
                         try
                         {
                             Directory.Delete(destination, true);
+                            node.IsInstalled = false;
                             if (!silent)
                                 Messenger.AddInfo(string.Format(Messages.MSG_DIR_DELETED_0, destination));
                         }
@@ -723,12 +730,14 @@ namespace KSPModAdmin.Core.Utils
             if (!string.IsNullOrEmpty(destination))
                 destination = KSPPathHelper.GetAbsolutePath(destination);
 
+            node.IsInstalled = false;
             bool installedByOtherMod = ModRegister.GetCollisionModFiles(node).Any(n => n.IsInstalled);
             if (File.Exists(destination) && !installedByOtherMod)
             {
                 try
                 {
                     File.Delete(destination);
+                    node.IsInstalled = false;
                     if (!silent)
                         Messenger.AddInfo(string.Format(Messages.MSG_FILE_DELETED_0, destination));
                 }

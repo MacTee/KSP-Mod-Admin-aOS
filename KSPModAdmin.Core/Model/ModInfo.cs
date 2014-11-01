@@ -120,7 +120,7 @@ namespace KSPModAdmin.Core.Model
 
             Author = string.Empty;
 
-            ProductID = "";
+            ProductID = string.Empty;
         }
 
         public ModInfo(string localPath, string modURL = null, string siteHandlerName = null, string additionalURL = null)
@@ -146,7 +146,7 @@ namespace KSPModAdmin.Core.Model
 
             Author = string.Empty;
 
-            ProductID = "";
+            ProductID = string.Empty;
         }
     }
 }

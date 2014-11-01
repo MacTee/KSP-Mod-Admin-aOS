@@ -98,11 +98,11 @@ namespace KSPModAdmin.Core.Utils
             XmlNode modNode = doc.CreateElement(Constants.MOD);
 
             XmlAttribute nodeAttribute = doc.CreateAttribute(Constants.KEY);
-            nodeAttribute.Value = Path.GetFileName(mod.Name);
+            nodeAttribute.Value = Path.GetFileName(mod.Key);
             modNode.Attributes.Append(nodeAttribute);
 
             nodeAttribute = doc.CreateAttribute(Constants.NAME);
-            nodeAttribute.Value = mod.Text;
+            nodeAttribute.Value = mod.Name;
             modNode.Attributes.Append(nodeAttribute);
 
             nodeAttribute = doc.CreateAttribute(Constants.VERSIONCONTROLERNAME);
@@ -159,7 +159,7 @@ namespace KSPModAdmin.Core.Utils
             modEntryNode.Attributes.Append(nodeAttribute);
 
             nodeAttribute = doc.CreateAttribute(Constants.INSTALLDIR);
-            nodeAttribute.Value = mod.Destination.ToLower().Replace((OptionsController.SelectedKSPPath + "\\").ToLower(), string.Empty);
+            nodeAttribute.Value = mod.Destination;
             modEntryNode.Attributes.Append(nodeAttribute);
 
             foreach (ModNode child in mod.Nodes)
@@ -208,7 +208,6 @@ namespace KSPModAdmin.Core.Utils
 
             if (found)
             {
-                List<ImportInfo> downloadQueue = new List<ImportInfo>();
                 List<ImportInfo> importQueue = new List<ImportInfo>();
 
                 XmlDocument doc = new XmlDocument();
@@ -220,22 +219,23 @@ namespace KSPModAdmin.Core.Utils
                     importInfo.LocalPath = Path.Combine(modExtractDir, importInfo.LocalPath);
                     if (downloadMods && !File.Exists(importInfo.LocalPath))
                     {
-                        if (!AddDownloadInfos(ref importInfo))
+                        if (importInfo.SiteHandler == null || !DownloadMod(ref importInfo))
                             continue;
 
-                        downloadQueue.Add(importInfo);
                         importQueue.Add(importInfo);
                     }
                     else if (File.Exists(importInfo.LocalPath))
                     {
                         importInfo.ModInfo = GetModInfo(importInfo);
-                        importQueue.Add(importInfo);
                         importInfo.DownloadSuccessfull = true;
+                        importQueue.Add(importInfo);
+                    }
+                    else
+                    {
+                        if (messageCallback != null)
+                            messageCallback(importInfo, string.Format("Import skipped! Mod Archive \"{0}\"not found.", importInfo.LocalPath));
                     }
                 }
-
-                if (downloadQueue.Count > 0)
-                    DownloadMods(downloadQueue, messageCallback);
 
                 if (importQueue.Count > 0)
                     ImportMods(importQueue, copyDest, addOnly, messageCallback);
@@ -248,6 +248,24 @@ namespace KSPModAdmin.Core.Utils
 
             if (Directory.Exists(tempDocPath))
                 Directory.Delete(tempDocPath, true);
+        }
+
+        /// <summary>
+        /// Downloads the mod from ModURL.
+        /// </summary>
+        /// <param name="importInfo">The ImportInfo of the mod to download.</param>
+        /// <returns>True if download was successful, otherwise false.</returns>
+        private static bool DownloadMod(ref ImportInfo importInfo)
+        {
+            ISiteHandler siteHandler = importInfo.SiteHandler;
+            if (siteHandler != null)
+            {
+                ModInfo modInfo = siteHandler.GetModInfo(importInfo.ModURL);
+                importInfo.DownloadSuccessfull = siteHandler.DownloadMod(ref modInfo);
+                importInfo.ModInfo = modInfo;
+            }
+
+            return importInfo.DownloadSuccessfull;
         }
 
         /// <summary>
@@ -290,20 +308,6 @@ namespace KSPModAdmin.Core.Utils
         }
 
         /// <summary>
-        /// Gets the download infos of the mod (gets website and parses it to get the ModInfos).
-        /// </summary>
-        /// <param name="importInfo">The ImportInfo with the URL to the mod website.</param>
-        /// <returns>True if the ModInfos could be downloaded and parsed.</returns>
-        private static bool AddDownloadInfos(ref ImportInfo importInfo)
-        {
-            ISiteHandler siteHandler = SiteHandlerManager.GetSiteHandlerByName(importInfo.SiteHandlerName);
-            if (siteHandler != null && siteHandler.IsValidURL(importInfo.ModURL))
-                importInfo.ModInfo = siteHandler.GetModInfo(importInfo.ModURL);
-
-            return (importInfo.ModInfo != null);
-        }
-
-        /// <summary>
         /// Gets the ModInfo from a ImportInfo class.
         /// </summary>
         /// <param name="importInfo">The ImportInfo class to get the ModInfos from.</param>
@@ -324,33 +328,6 @@ namespace KSPModAdmin.Core.Utils
             }
 
             return modInfo;
-        }
-
-        /// <summary>
-        /// Downloads all mods in the downloadQueue.
-        /// </summary>
-        /// <param name="downloadQueue">A list of ImportInfos of the mods to download.</param>
-        /// <param name="messageCallback">Callback function for messages during the download process.</param>
-        private static void DownloadMods(List<ImportInfo> downloadQueue, MessageCallbackHandler messageCallback = null)
-        {
-            foreach (ImportInfo importInfo in downloadQueue)
-            {
-                if (messageCallback != null)
-                    messageCallback(importInfo, string.Format(Messages.MSG_DOWNLOAD_0_STARTED, importInfo.Name));
-
-                ModInfo modInfo = importInfo.ModInfo;
-                ISiteHandler siteHandler = SiteHandlerManager.GetSiteHandlerByName(importInfo.SiteHandlerName);
-                if (siteHandler != null)
-                        importInfo.DownloadSuccessfull = siteHandler.DownloadMod(ref modInfo);
-
-                if (messageCallback != null)
-                {
-                    if (importInfo.DownloadSuccessfull)
-                        messageCallback(importInfo, string.Format(Messages.MSG_DOWNLOAD_0_DONE, importInfo.Name));
-                    else
-                        messageCallback(importInfo, string.Format(Messages.MSG_DOWNLOAD_0_FAILED, importInfo.Name));
-                }
-            }
         }
 
         /// <summary>
@@ -404,7 +381,7 @@ namespace KSPModAdmin.Core.Utils
                 if (copyDest)
                 {
                     // remove all destinations and uncheck all nodes.
-                    ModNodeHandler.SetDestinationPaths(addedMod, "");
+                    ModNodeHandler.SetDestinationPaths(addedMod, string.Empty);
                     addedMod._Checked = false;
                     // copy destination
                     TryCopyDestToMatchingNodes(importInfo, addedMod);
@@ -439,8 +416,8 @@ namespace KSPModAdmin.Core.Utils
             {
                 ImportInfo parentImport = importFile.Parent;
 
-                string path = parentImport.Name + '\\' + importFile.Name;
-                ModNode matchingNew = ModSelectionTreeModel.SearchNodeByPath(path, newMod, '\\');
+                string path = parentImport.Name + '/' + importFile.Name;
+                ModNode matchingNew = ModSelectionTreeModel.SearchNodeByPath(path, newMod, '/');
                 if (matchingNew != null)
                 {
                     matchFound = true;
@@ -503,8 +480,8 @@ namespace KSPModAdmin.Core.Utils
             {
                 ImportInfo parentImport = importFile.Parent;
 
-                string path = parentImport.Name + '\\' + importFile.Name;
-                ModNode matchingNew = ModSelectionTreeModel.SearchNodeByPath(path, newMod, '\\');
+                string path = parentImport.Name + '/' + importFile.Name;
+                ModNode matchingNew = ModSelectionTreeModel.SearchNodeByPath(path, newMod, '/');
                 if (matchingNew != null)
                 {
                     matchFound = true;
@@ -529,7 +506,7 @@ namespace KSPModAdmin.Core.Utils
             if (string.IsNullOrEmpty(importInfo.InstallDir))
                 return string.Empty;
 
-            return Path.Combine(KSPPathHelper.GetPath(KSPPaths.KSPRoot), importInfo.InstallDir);
+            return importInfo.InstallDir;
         }
 
         #region internal classes
@@ -544,6 +521,8 @@ namespace KSPModAdmin.Core.Utils
             public string LocalPath { get; set; }
 
             public string Name { get; set; }
+
+            public ISiteHandler SiteHandler { get { return SiteHandlerManager.GetSiteHandlerByName(SiteHandlerName); } }
 
             public string SiteHandlerName { get; set; }
 

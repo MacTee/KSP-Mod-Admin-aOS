@@ -110,11 +110,11 @@ namespace KSPModAdmin.Core.Utils
         private string ReduceToPlainCurseForgeModURL(string curseForgeURL)
         {
             if (curseForgeURL.EndsWith("/files/latest"))
-                return curseForgeURL.Replace("/files/latest", "");
+                return curseForgeURL.Replace("/files/latest", string.Empty);
             if (curseForgeURL.EndsWith("/files"))
-                return curseForgeURL.Replace("/files", "");
+                return curseForgeURL.Replace("/files", string.Empty);
             if (curseForgeURL.EndsWith("/images"))
-                return curseForgeURL.Replace("/images", "");
+                return curseForgeURL.Replace("/images", string.Empty);
 
             return curseForgeURL;
         }
@@ -226,7 +226,7 @@ namespace KSPModAdmin.Core.Utils
 
         private string GetFileName(string siteContent)
         {
-            siteContent = siteContent.Replace(Environment.NewLine, "");
+            siteContent = siteContent.Replace(Environment.NewLine, string.Empty);
 
             string searchString = "<a class=\"overflow-tip\" href=\"";
             int i1 = siteContent.IndexOf(searchString) + searchString.Length;

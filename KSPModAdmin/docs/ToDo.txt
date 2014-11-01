@@ -22,6 +22,8 @@
 //// TODO
 /////////////////////
 
+- Im/Export should be async and should give more infos about the current action.
+
 - is everything Async ???
   - Update mod -> "loading ring" is shown as disabled -> maybe use ProgressBar instead.
 

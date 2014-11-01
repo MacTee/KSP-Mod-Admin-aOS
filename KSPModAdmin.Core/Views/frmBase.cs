@@ -48,7 +48,7 @@ namespace KSPModAdmin.Core.Views
                     FieldInfo[] fields = obj.GetType().GetFields(
                          BindingFlags.NonPublic | BindingFlags.Static);
 
-                    xml = xml.Replace("</Language>", "");
+                    xml = xml.Replace("</Language>", string.Empty);
 
                     foreach (FieldInfo fInfo in fields)
                     {
@@ -57,7 +57,7 @@ namespace KSPModAdmin.Core.Views
                             continue;
                         
                         string value = fInfo.GetValue(obj).ToString();
-                        string node = string.Format("<String Name=\"{0}\" Value=\"{1}\"/>", name.Replace("DEFAULT_", ""), ControlTranslator.GetXmlEscapedString(value));
+                        string node = string.Format("<String Name=\"{0}\" Value=\"{1}\"/>", name.Replace("DEFAULT_", string.Empty), ControlTranslator.GetXmlEscapedString(value));
                         xml += node + Environment.NewLine;
                     }
 

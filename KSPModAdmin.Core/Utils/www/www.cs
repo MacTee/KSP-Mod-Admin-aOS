@@ -159,7 +159,7 @@ namespace KSPModAdmin.Core.Utils
                 var links = (from object a in HTMLLinkRegEx.Matches(siteContent) select a.ToString()).ToList();
                 foreach (var link in links)
                 {
-                    string url = link.Replace("<a href=\"", "");
+                    string url = link.Replace("<a href=\"", string.Empty);
                     int index = url.IndexOf(">") + 1;
                     string name = RemoveHTMLTags(url.Substring(index, url.IndexOf("</a>") - index).Trim());
                     url = url.Substring(0, url.IndexOf("\"")).Trim();

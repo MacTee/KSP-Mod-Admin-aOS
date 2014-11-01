@@ -506,7 +506,7 @@ namespace KSPModAdmin.Core.Controller
                 string downloadDest = Path.Combine(DownloadPath, filename);
                 while (File.Exists(downloadDest))
                 {
-                    string temp = Path.GetFileNameWithoutExtension(downloadDest).Replace("_(" + index++ + ")", "");
+                    string temp = Path.GetFileNameWithoutExtension(downloadDest).Replace("_(" + index++ + ")", string.Empty);
                     string newFilename = String.Format("{0}_({1}){2}", temp, index, Path.GetExtension(downloadDest));
                     downloadDest = Path.Combine(Path.GetDirectoryName(downloadDest), newFilename);
                 }

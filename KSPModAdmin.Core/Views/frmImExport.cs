@@ -78,8 +78,6 @@ namespace KSPModAdmin.Core.Views
                 dlg.FileName = RemoveInvalidCharsFromPath(string.Format(MODPACK_FILENAME_TEMPLATE, DateTime.Now.ToShortDateString()));
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
-                    dlg.FileName = RemoveInvalidCharsFromPath(dlg.FileName);
-
                     AddMessage(string.Format(Messages.MSG_EXPORT_TO_0, dlg.FileName));
                     new AsyncTask<bool>(() =>
                                         {

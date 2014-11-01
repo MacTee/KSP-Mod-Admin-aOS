@@ -360,15 +360,13 @@ namespace KSPModAdmin.Core.Model
         /// <summary>
         /// Flag to determine if the node is installed.
         /// </summary>
-        public bool IsInstalled
+        public bool IsInstalled { get; set; }
+        public bool IsModNodeInstalled()
         {
-            get
-            {
-                if (IsFile)
-                    return (!String.IsNullOrEmpty(Destination) && File.Exists(KSPPathHelper.GetAbsolutePath(Destination)));
-                else
-                    return (!String.IsNullOrEmpty(Destination) && Directory.Exists(KSPPathHelper.GetAbsolutePath(Destination)));
-            }
+            if (IsFile)
+                return (!String.IsNullOrEmpty(Destination) && File.Exists(KSPPathHelper.GetAbsolutePath(Destination)));
+            else
+                return (!String.IsNullOrEmpty(Destination) && Directory.Exists(KSPPathHelper.GetAbsolutePath(Destination)));
         }
         
         /// <summary>
@@ -671,7 +669,7 @@ namespace KSPModAdmin.Core.Model
         /// <returns>The full node path.</returns>
         public string GetFullTreePath()
         {
-            return ((this.Parent != null) ? (this.Parent as ModNode).GetFullTreePath() : string.Empty) + "/" + this.Name;
+            return (((this.Parent as ModNode) != null) ? (this.Parent as ModNode).GetFullTreePath() : string.Empty) + "/" + this.Name;
         }
 
         /// <summary>
@@ -702,7 +700,7 @@ namespace KSPModAdmin.Core.Model
         {
             if (!copyContent)
             {
-                Destination = (destPath != string.Empty) ? Path.Combine(destPath, Text) : "";
+                Destination = (destPath != string.Empty) ? Path.Combine(destPath, Text) : string.Empty;
 
                 destPath = (Destination != string.Empty) ? Destination : string.Empty;
             }

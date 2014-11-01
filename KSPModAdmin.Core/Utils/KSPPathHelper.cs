@@ -86,7 +86,7 @@ namespace KSPModAdmin.Core.Utils
             string installPath = OptionsController.SelectedKSPPath;
             string path = string.Empty;
             if (kspPath == KSPPaths.AppConfig)
-                path = Path.Combine(Application.CommonAppDataPath.Replace(VersionHelper.GetAssemblyVersion(), ""), Constants.APP_CONFIG_FILE);
+                path = Path.Combine(Application.CommonAppDataPath.Replace(VersionHelper.GetAssemblyVersion(), string.Empty), Constants.APP_CONFIG_FILE);
 
             else if (kspPath == KSPPaths.LanguageFolder ||
                      kspPath == KSPPaths.KSPMA_Plugins)

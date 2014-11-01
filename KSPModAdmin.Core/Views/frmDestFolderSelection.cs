@@ -30,7 +30,7 @@ namespace KSPModAdmin.Core.Views
                     cbDestination.Items.Clear();
                 else
                 {
-                    cbDestination.Items.Add(new DestInfo("Other folder ...", ""));
+                    cbDestination.Items.Add(new DestInfo("Other folder ...", string.Empty));
                     foreach (string path in value)
                     {
                         int index = path.LastIndexOf("\\");

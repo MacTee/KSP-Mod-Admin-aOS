@@ -1071,7 +1071,7 @@ namespace KSPModAdmin.Core.Controller
                 }
                 else
                 {
-                    isInstalled = mod.IsInstalled;
+                    isInstalled = mod.IsInstalled = mod.IsModNodeInstalled();
 
                     if (mod.IsFile)
                     {
@@ -1101,13 +1101,13 @@ namespace KSPModAdmin.Core.Controller
 
                 View.InvokeIfRequired(() =>
                 {
-                    mod.Checked = isInstalled;
+                    mod._Checked = isInstalled;
                     mod.NodeType = nodeType;
                 });
             }
             catch (Exception ex)
             {
-                mod.Checked = false;
+                mod._Checked = false;
                 Messenger.AddError(string.Format(Messages.MSG_ERROR_DURING_REFRESH_CHECKED_STATE_0, ex.Message), ex);
             }
 
