@@ -49,7 +49,8 @@ namespace KSPModAdmin.Core.Utils
 
                     // create a TreeNode for every archive entry
                     foreach (IArchiveEntry entry in archive.Entries)
-                        CreateModNode(entry.FilePath, node, seperator, silent);
+                        CreateModNode(entry.FilePath, node, seperator, entry.IsDirectory, silent);
+
                 }
 
                 // Find installation root node (first folder that contains (Parts or Plugins or ...)
@@ -77,11 +78,10 @@ namespace KSPModAdmin.Core.Utils
         /// <param name="parent">The parent node where the created node will be attached attach to.</param>
         /// <param name="pathSeperator">The seperator charater used within the filename.</param>
         /// <param name="silent">Determines if info messages should be added.</param>
-        private static void CreateModNode(string filename, ModNode parent, char pathSeperator, bool silent = false)
+        private static void CreateModNode(string filename, ModNode parent, char pathSeperator, bool isDirectory, bool silent = false)
         {
             // ignore directory entries.
-            if (!filename.EndsWith(new string(pathSeperator, 1)) &&
-                Path.GetFileName(filename).Contains('.'))
+            if (!isDirectory)
                 HandleFileEntry(filename, parent, pathSeperator, silent);
         }
 
