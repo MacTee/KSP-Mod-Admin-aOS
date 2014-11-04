@@ -114,7 +114,7 @@ namespace KSPModAdmin.Core.Model
         /// <returns>The matching TreeNodeMod.</returns>
         public static ModNode SearchNodeByPath(string filename, Node startNode, char pathSeparator)
         {
-            string[] dirs = filename.Split(pathSeparator);
+            string[] dirs = filename.Split(new[] { pathSeparator }, StringSplitOptions.RemoveEmptyEntries);
 
             ModNode result = null;
             foreach (string dir in dirs)

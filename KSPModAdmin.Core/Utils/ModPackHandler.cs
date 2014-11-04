@@ -201,6 +201,9 @@ namespace KSPModAdmin.Core.Utils
                     }
                     else if (extractMods && (entry.FilePath.Contains(MODS_FOLDER) || entry.FilePath.Contains(MODS_FOLDER_WIN)))
                     {
+                        if (messageCallback != null)
+                            messageCallback(null, string.Format("Extracting mod \"{0}\"", entry.FilePath));
+
                         entry.WriteToDirectory(modExtractDir);
                     }
                 }
@@ -219,6 +222,9 @@ namespace KSPModAdmin.Core.Utils
                     importInfo.LocalPath = Path.Combine(modExtractDir, importInfo.LocalPath);
                     if (downloadMods && !File.Exists(importInfo.LocalPath))
                     {
+                        if (messageCallback != null)
+                            messageCallback(importInfo, string.Format(Messages.MSG_DOWNLOADING_MOD_0, importInfo.Name));
+
                         if (importInfo.SiteHandler == null || !DownloadMod(ref importInfo))
                             continue;
 
@@ -226,6 +232,9 @@ namespace KSPModAdmin.Core.Utils
                     }
                     else if (File.Exists(importInfo.LocalPath))
                     {
+                        if (messageCallback != null)
+                            messageCallback(importInfo, string.Format(Messages.MSG_DOWNLOADING_MOD_0, importInfo.Name));
+
                         importInfo.ModInfo = GetModInfo(importInfo);
                         importInfo.DownloadSuccessfull = true;
                         importQueue.Add(importInfo);
@@ -383,13 +392,22 @@ namespace KSPModAdmin.Core.Utils
                     // remove all destinations and uncheck all nodes.
                     ModNodeHandler.SetDestinationPaths(addedMod, string.Empty);
                     addedMod._Checked = false;
+
                     // copy destination
+                    if (messageCallback != null)
+                        messageCallback(null, string.Format("Copy desitnations of mod \"{0}\"", addedMod.Name));
+
                     TryCopyDestToMatchingNodes(importInfo, addedMod);
                 }
 
                 // install the mod.
                 if (!addOnly)
+                {
+                    if (messageCallback != null)
+                        messageCallback(null, string.Format("Installing mod \"{0}\"", addedMod.Name));
+
                     ModSelectionController.ProcessMods(new ModNode[] { addedMod });
+                }
             }
             else
             {
@@ -414,9 +432,7 @@ namespace KSPModAdmin.Core.Utils
 
             foreach (var importFile in childs)
             {
-                ImportInfo parentImport = importFile.Parent;
-
-                string path = parentImport.Name + '/' + importFile.Name;
+                string path = GetTreePathToRootNode(importFile);
                 ModNode matchingNew = ModSelectionTreeModel.SearchNodeByPath(path, newMod, '/');
                 if (matchingNew != null)
                 {
@@ -478,9 +494,7 @@ namespace KSPModAdmin.Core.Utils
             bool matchFound = false;
             foreach (var importFile in childImportInfo)
             {
-                ImportInfo parentImport = importFile.Parent;
-
-                string path = parentImport.Name + '/' + importFile.Name;
+                string path = GetTreePathToRootNode(importFile);
                 ModNode matchingNew = ModSelectionTreeModel.SearchNodeByPath(path, newMod, '/');
                 if (matchingNew != null)
                 {
@@ -494,6 +508,30 @@ namespace KSPModAdmin.Core.Utils
             }
 
             return matchFound;
+        }
+
+        /// <summary>
+        /// Gets the tree path up from the passed node up to its root node (last node with destination).
+        /// </summary>
+        /// <param name="importInfo"></param>
+        /// <returns></returns>
+        private static string GetTreePathToRootNode(ImportInfo importInfo)
+        {
+            string path = string.Empty;
+
+            path = "/" + importInfo.Name;
+            ImportInfo parent = importInfo.Parent;
+            while (parent != null)
+            {
+                if (string.IsNullOrEmpty(parent.InstallDir))
+                    break;
+
+                path = "/" + parent.Name + path;
+
+                parent = parent.Parent;
+            }
+
+            return path;
         }
 
         /// <summary>

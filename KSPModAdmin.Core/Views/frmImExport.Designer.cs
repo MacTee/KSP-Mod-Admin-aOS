@@ -223,7 +223,7 @@
             // 
             this.rbUseAutoDestDetection.AutoSize = true;
             this.rbUseAutoDestDetection.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbUseAutoDestDetection.Location = new System.Drawing.Point(139, 19);
+            this.rbUseAutoDestDetection.Location = new System.Drawing.Point(191, 19);
             this.rbUseAutoDestDetection.Name = "rbUseAutoDestDetection";
             this.rbUseAutoDestDetection.Size = new System.Drawing.Size(176, 17);
             this.rbUseAutoDestDetection.TabIndex = 2;
@@ -261,7 +261,7 @@
             // 
             this.rbAddOnly.AutoSize = true;
             this.rbAddOnly.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbAddOnly.Location = new System.Drawing.Point(139, 19);
+            this.rbAddOnly.Location = new System.Drawing.Point(191, 19);
             this.rbAddOnly.Name = "rbAddOnly";
             this.rbAddOnly.Size = new System.Drawing.Size(169, 17);
             this.rbAddOnly.TabIndex = 2;

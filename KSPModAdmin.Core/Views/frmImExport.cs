@@ -78,6 +78,7 @@ namespace KSPModAdmin.Core.Views
                 dlg.FileName = RemoveInvalidCharsFromPath(string.Format(MODPACK_FILENAME_TEMPLATE, DateTime.Now.ToShortDateString()));
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
+                    pbExport.Visible = true;
                     AddMessage(string.Format(Messages.MSG_EXPORT_TO_0, dlg.FileName));
                     new AsyncTask<bool>(() =>
                                         {
@@ -86,6 +87,7 @@ namespace KSPModAdmin.Core.Views
                                         },
                                         (b, ex) =>
                                         {
+                                            pbExport.Visible = false;
                                             if (ex != null) 
                                                 MessageBox.Show(this, ex.Message, Messages.MSG_TITLE_ERROR);
                                         }).Run();
@@ -130,6 +132,7 @@ namespace KSPModAdmin.Core.Views
             dlg.Filter = Constants.MODPACK_FILTER;
             if (dlg.ShowDialog() == DialogResult.OK)
             {
+                pbImport.Visible = true;
                 new AsyncTask<bool>(() =>
                                     {
                                         if (cbClearModSelection.Checked)
@@ -141,11 +144,12 @@ namespace KSPModAdmin.Core.Views
                                         AddMessage(string.Format(Messages.MSG_IMPORTING_FROM_0, dlg.FileName));
                                         ModPackHandler.Import(dlg.FileName, OptionsController.DownloadPath, cbExtract.Checked,
                                                               cbDownloadIfNeeded.Checked, rbCopyDestination.Checked, rbAddOnly.Checked,
-                                                              (o, msg) => AddMessage(msg));
+                                                              (o, msg) => { AddMessage(msg); });
                                         return true;
                                     },
                                     (b, ex) =>
                                     {
+                                        pbImport.Visible = false;
                                         if (ex != null)
                                         {
                                             AddMessage(Messages.MSG_IMPORTING_FAILED); 

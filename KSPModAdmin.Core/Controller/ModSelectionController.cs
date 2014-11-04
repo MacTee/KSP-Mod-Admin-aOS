@@ -607,7 +607,7 @@ namespace KSPModAdmin.Core.Controller
             ModRegister.RemoveRegisteredMod(outdatedMod);
             outdatedMod.UncheckAll();
             ProcessMods(new ModNode[] { outdatedMod }, true);
-            Model.RemoveMod(outdatedMod);
+            View.InvokeIfRequired(() => Model.RemoveMod(outdatedMod));
 
             Messenger.AddInfo(string.Format(Messages.MSG_ADDING_UPDATED_MOD_0, newMod.Text));
             Model.AddMod(newMod);
