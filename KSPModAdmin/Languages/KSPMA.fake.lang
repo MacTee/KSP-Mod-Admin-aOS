@@ -101,12 +101,12 @@
   </Control>
   <Control Name="tsModSelection" Value="(T)toolStrip1">
     <Control Name="tssbAddMod" Value="(T)toolStripButton1">
-      <ChildControl Name="tssbAddMod_ToolTip" Value="(T)Add dialog^Opens the &amp;quot;Add mod dialog&amp;quot;."/>
+      <ChildControl Name="tssbAddMod_ToolTip" Value="(T)Add dialog^Opens the &quot;Add mod dialog&quot;."/>
       <Control Name="tsmiAddMod" Value="(T)Add dialog">
-        <ChildControl Name="tsmiAddMod_ToolTip" Value="(T)Add dialog^Opens the &amp;quot;Add mod dialog&amp;quot;."/>
+        <ChildControl Name="tsmiAddMod_ToolTip" Value="(T)Add dialog^Opens the &quot;Add mod dialog&quot;."/>
       </Control>
       <Control Name="tsmiAddModArchives" Value="(T)Add mod archives">
-        <ChildControl Name="tsmiAddModArchives_ToolTip" Value="(T)Add mod archive^Opens the &amp;quot;FileBrowser dialog&amp;quot; to add a mod archive."/>
+        <ChildControl Name="tsmiAddModArchives_ToolTip" Value="(T)Add mod archive^Opens the &quot;FileBrowser dialog&quot; to add a mod archive."/>
       </Control>
     </Control>
     <Control Name="tsbRemoveMod" Value="(T)toolStripButton2">
@@ -385,43 +385,43 @@
   <String Name="MSG_PLS_ENTER_VALID_ARCHIVE_URL" Value="(T)Please enter a valid archive path or URL."/>
   <String Name="MSG_TITLE_ATTENTION" Value="(T)Attention!"/>
   <String Name="MSG_TITLE_ERROR" Value="(T)Error!"/>
-  <String Name="MSG_DOWNLOAD_PATH_CHANGED_0" Value="(T)Download path changed to &amp;quot;{0}&amp;quot;."/>
+  <String Name="MSG_DOWNLOAD_PATH_CHANGED_0" Value="(T)Download path changed to &quot;{0}&quot;."/>
   <String Name="MSG_STARTING_KSP" Value="(T)Starting KSP..."/>
   <String Name="MSG_CANT_FIND_KSP_EXE" Value="(T)Can't find KSP.exe."/>
   <String Name="MSG_KSP_LAUNCH_FAILED" Value="(T)Launching KSP failed."/>
   <String Name="MSG_UPDATE_KSP_SETTINGS" Value="(T)KSP settings.cfg file updated."/>
   <String Name="MSG_CANT_FIND_KSP_SETTINGS" Value="(T)Can't find KSP settings.cfg file."/>
   <String Name="MSG_ADDING_MOD_FAILED" Value="(T)Adding Mod aborted."/>
-  <String Name="MSG_ADD_MODS_FAILED_PARAM_EMPTY_MODINFOS" Value="(T)Add mod(s) failed! Parameter &amp;quot;modInfos&amp;quot; is empty."/>
-  <String Name="MSG_MOD_ALREADY_ADDED" Value="(T)Mod already added: &amp;quot;{0}&amp;quot;"/>
+  <String Name="MSG_ADD_MODS_FAILED_PARAM_EMPTY_MODINFOS" Value="(T)Add mod(s) failed! Parameter &quot;modInfos&quot; is empty."/>
+  <String Name="MSG_MOD_ALREADY_ADDED" Value="(T)Mod already added: &quot;{0}&quot;"/>
   <String Name="MSG_SHOULD_MOD_REPLACED" Value="(T)Should the mod be replaced?"/>
-  <String Name="MSG_REPLACING_MOD_0" Value="(T)Replacing mod &amp;quot;{0}&amp;quot;"/>
-  <String Name="MSG_MOD_0_REPLACED" Value="(T)Mod &amp;quot;{0}&amp;quot; replaced."/>
-  <String Name="MSG_ADD_MOD_FAILED_0" Value="(T)Mod add failed &amp;quot;{0}&amp;quot;!"/>
+  <String Name="MSG_REPLACING_MOD_0" Value="(T)Replacing mod &quot;{0}&quot;"/>
+  <String Name="MSG_MOD_0_REPLACED" Value="(T)Mod &quot;{0}&quot; replaced."/>
+  <String Name="MSG_ADD_MOD_FAILED_0" Value="(T)Mod add failed &quot;{0}&quot;!"/>
   <String Name="MSG_DONE" Value="(T)Done!"/>
-  <String Name="MSG_ADD_MODS_FAILED_PARAM_EMPTY_FILENAMES" Value="(T)Add mod(s) failed! Parameter &amp;quot;filenames&amp;quot; is empty."/>
-  <String Name="MSG_MOD_ADDED_0" Value="(T)Mod added: &amp;quot;{0}&amp;quot;"/>
-  <String Name="MSG_MOD_ERROR_WHILE_READ_ZIP_0_ERROR_MSG_1" Value="(T)Error while reading Mod Zip-File &amp;quot;{0}&amp;quot;^Error message: {1}"/>
-  <String Name="MSG_ROOT_NOT_FOUND_0" Value="(T)Root of Zip not found! &amp;quot;{0}&amp;quot;."/>
-  <String Name="MSG_MOD_ZIP_NOT_FOUND_0" Value="(T)Mod Zip-File not found &amp;quot;{0}&amp;quot;"/>
-  <String Name="MSG_FILE_ADDED_0" Value="(T)File added &amp;quot;{0}&amp;quot;."/>
-  <String Name="MSG_DIR_ADDED_0" Value="(T)Directory added &amp;quot;{0}&amp;quot;."/>
-  <String Name="MSG_REMOVING_OUTDATED_MOD_0" Value="(T)Removing outdated mod &amp;quot;{0}&amp;quot;"/>
-  <String Name="MSG_ADDING_UPDATED_MOD_0" Value="(T)Adding updated mod &amp;quot;{0}&amp;quot;"/>
-  <String Name="MSG_DIR_DELETED_ERROR_0" Value="(T)Can not delete directory &amp;quot;{0}&amp;quot;."/>
-  <String Name="MSG_DIR_DELETED_0" Value="(T)Directory deleted &amp;quot;{0}&amp;quot;."/>
-  <String Name="MSG_MOD_ERROR_CANT_DELETE_0" Value="(T)Can't delete. &amp;quot;{0}&amp;quot;"/>
+  <String Name="MSG_ADD_MODS_FAILED_PARAM_EMPTY_FILENAMES" Value="(T)Add mod(s) failed! Parameter &quot;filenames&quot; is empty."/>
+  <String Name="MSG_MOD_ADDED_0" Value="(T)Mod added: &quot;{0}&quot;"/>
+  <String Name="MSG_MOD_ERROR_WHILE_READ_ZIP_0_ERROR_MSG_1" Value="(T)Error while reading Mod Zip-File &quot;{0}&quot;^Error message: {1}"/>
+  <String Name="MSG_ROOT_NOT_FOUND_0" Value="(T)Root of Zip not found! &quot;{0}&quot;."/>
+  <String Name="MSG_MOD_ZIP_NOT_FOUND_0" Value="(T)Mod Zip-File not found &quot;{0}&quot;"/>
+  <String Name="MSG_FILE_ADDED_0" Value="(T)File added &quot;{0}&quot;."/>
+  <String Name="MSG_DIR_ADDED_0" Value="(T)Directory added &quot;{0}&quot;."/>
+  <String Name="MSG_REMOVING_OUTDATED_MOD_0" Value="(T)Removing outdated mod &quot;{0}&quot;"/>
+  <String Name="MSG_ADDING_UPDATED_MOD_0" Value="(T)Adding updated mod &quot;{0}&quot;"/>
+  <String Name="MSG_DIR_DELETED_ERROR_0" Value="(T)Can not delete directory &quot;{0}&quot;."/>
+  <String Name="MSG_DIR_DELETED_0" Value="(T)Directory deleted &quot;{0}&quot;."/>
+  <String Name="MSG_MOD_ERROR_CANT_DELETE_0" Value="(T)Can't delete. &quot;{0}&quot;"/>
   <String Name="MSG_MOD_ERROR_ZIP_CREATION_FAILED" Value="(T)ZipFile creation for download failed."/>
   <String Name="MSG_SELECT_0_FOLDER_FIRST" Value="(T)Please select a {0} folder first."/>
   <String Name="MSG_SELECT_KSP_FOLDER" Value="(T)Select a KSP install folder please."/>
-  <String Name="MSG_SELECTED_KSP_FOLDER_CHANGED_0" Value="(T)Selected KSP install path changed to &amp;quot;{0}&amp;quot;"/>
+  <String Name="MSG_SELECTED_KSP_FOLDER_CHANGED_0" Value="(T)Selected KSP install path changed to &quot;{0}&quot;"/>
   <String Name="MSG_NOT_KSP_FOLDER" Value="(T)This is not a KSP install path."/>
   <String Name="MSG_OPENING_0_FOLDER" Value="(T)Opening {0} folder..."/>
   <String Name="MSG_OPEN_0_FOLDER_FAILD" Value="(T)Open {0} folder faild."/>
   <String Name="MSG_SELECT_DOWNLOAD_FOLDER" Value="(T)Select the folder to download the KSP mods to."/>
-  <String Name="MSG_DOWNLOADPATH_CHANGED_0" Value="(T)Download path changed to &amp;quot;{0}&amp;quot;."/>
-  <String Name="MSG_KSP_FOLDER_ADDED_0" Value="(T)KSP install folder added. &amp;quot;{0}&amp;quot;"/>
-  <String Name="MSG_KSP_FOLDER_REMOVED_0" Value="(T)KSP install folder removed. &amp;quot;{0}&amp;quot;"/>
+  <String Name="MSG_DOWNLOADPATH_CHANGED_0" Value="(T)Download path changed to &quot;{0}&quot;."/>
+  <String Name="MSG_KSP_FOLDER_ADDED_0" Value="(T)KSP install folder added. &quot;{0}&quot;"/>
+  <String Name="MSG_KSP_FOLDER_REMOVED_0" Value="(T)KSP install folder removed. &quot;{0}&quot;"/>
   <String Name="MSG_STEAM_SEARCH_STARTED" Value="(T)Steam - KSP install folder search started..."/>
   <String Name="MSG_STEAM_FOLDER_NOT_FOUND" Value="(T)Steam folder not found!"/>
   <String Name="MSG_STEAM_SEARCH_DONE" Value="(T)Steam - KSP install folder search done."/>
@@ -429,11 +429,11 @@
   <String Name="MSG_KSP_FOLDER_NOT_FOUND" Value="(T)KSP install folder not found!"/>
   <String Name="MSG_KSP_SEARCH_DONE" Value="(T)KSP install folder search done."/>
   <String Name="MSG_FOLDER_SEARCH_ABORTED" Value="(T)KSP install folder search aborted."/>
-  <String Name="MSG_ERROR_DURING_FOLDER_SEARCH_0" Value="(T)Error during folder search &amp;quot;{0}&amp;quot;"/>
-  <String Name="MSG_ERROR_ADD_FOLDER_FAILED_0" Value="(T)KSP install folder add failed! &amp;quot;{0}&amp;quot;"/>
-  <String Name="MSG_ERROR_NOT_A_KSP_FOLDER_0" Value="(T)The folder is not a KSP install directory. &amp;quot;{0}&amp;quot;"/>
+  <String Name="MSG_ERROR_DURING_FOLDER_SEARCH_0" Value="(T)Error during folder search &quot;{0}&quot;"/>
+  <String Name="MSG_ERROR_ADD_FOLDER_FAILED_0" Value="(T)KSP install folder add failed! &quot;{0}&quot;"/>
+  <String Name="MSG_ERROR_NOT_A_KSP_FOLDER_0" Value="(T)The folder is not a KSP install directory. &quot;{0}&quot;"/>
   <String Name="MSG_KSP_FOLDER_FOUND_DIALOG_TITLE" Value="(T)KSP folder found."/>
-  <String Name="MSG_KSP_FOLDER_FOUND_DIALOG_TEXT" Value="(T)KSP folder found.^&amp;quot;{0}&amp;quot;^^Should this folder be added (yes)?^continue search (no)?^or cancel search(cancel)?"/>
+  <String Name="MSG_KSP_FOLDER_FOUND_DIALOG_TEXT" Value="(T)KSP folder found.^&quot;{0}&quot;^^Should this folder be added (yes)?^continue search (no)?^or cancel search(cancel)?"/>
   <String Name="MSG_NEW_VERSION_0" Value="(T)New version {0} available."/>
   <String Name="MSG_KSP_UPTODATE" Value="(T)KSP Mod Admin is up to date."/>
   <String Name="MSG_ERROR_WHILE_STEAM_SEARCH" Value="(T)Error during Steam folder search."/>
@@ -460,34 +460,34 @@
   <String Name="MSG_KSP_MOD_SETTINGS_PATH_INVALID" Value="(T)KSP Mod settings path is invalid!"/>
   <String Name="MSG_ERROR_DURING_SAVING_KSP_MOD_SETTINGS" Value="(T)Error during saving of KSP Mod settings!"/>
   <String Name="MSG_ERROR_MESSAGE_0" Value="(T)Error message: {0}"/>
-  <String Name="MSG_ACCESS_DENIED_DIALOG_MESSAGE" Value="(T)KSP Mod Admin can't save its config file. The access to the KSP path was denied.^If you have install KSP into the Program folder of Windows,^KSP MA needs admin rights to manipulate (save/change KSP MA config file).^You can move you install dir of KSP to another spot or start KSPMA in admin mode with:^  - a right click on the KSPModAdmin.exe and choose &amp;quot;Run as Admin&amp;quot;^or for a permanent change:^  - right click the KSPModAdmin.exe^  - choose properties^  - choose compatibility^  - check the &amp;quot;Run as Admin&amp;quot; CheckBox at the bottom.^  - press OK."/>
+  <String Name="MSG_ACCESS_DENIED_DIALOG_MESSAGE" Value="(T)KSP Mod Admin can't save its config file. The access to the KSP path was denied.^If you have install KSP into the Program folder of Windows,^KSP MA needs admin rights to manipulate (save/change KSP MA config file).^You can move you install dir of KSP to another spot or start KSPMA in admin mode with:^  - a right click on the KSPModAdmin.exe and choose &quot;Run as Admin&quot;^or for a permanent change:^  - right click the KSPModAdmin.exe^  - choose properties^  - choose compatibility^  - check the &quot;Run as Admin&quot; CheckBox at the bottom.^  - press OK."/>
   <String Name="MSG_DELETE_ALL_MODS_QUESTION" Value="(T)Are you sure to uninstall all Mod?"/>
-  <String Name="MSG_DELETE_MOD_0_QUESTION" Value="(T)Are you sure to uninstall the mod &amp;quot;{0}&amp;quot;?"/>
+  <String Name="MSG_DELETE_MOD_0_QUESTION" Value="(T)Are you sure to uninstall the mod &quot;{0}&quot;?"/>
   <String Name="MSG_INVALID_URL_SAVE_ANYWAY" Value="(T)Invalid URL save anyway?"/>
   <String Name="MSG_ENTER_VALID_URL_FIRST" Value="(T)Enter a URL first please."/>
-  <String Name="MSG_ERROR_DURING_MODINFO_UPDATE" Value="(T)Error during load of URL &amp;quot;{0}&amp;quot;{1}{1}Error message:{1}{2}"/>
+  <String Name="MSG_ERROR_DURING_MODINFO_UPDATE" Value="(T)Error during load of URL &quot;{0}&quot;{1}{1}Error message:{1}{2}"/>
   <String Name="MSG_FOLDER_INSTALLED_UNINSTALL_IT_TO_CHANGE_DESTINATION" Value="(T)The folder or file is installed.^Unistall it before changeing the destination."/>
   <String Name="MSG_SELECT_DEST" Value="(T)Please select a destination folder fist."/>
   <String Name="MSG_SELECT_SCOURCE" Value="(T)Please select a source folder fist."/>
   <String Name="MSG_SOURCE_NODE_NOT_FOUND" Value="(T)Source node not found!^Can not set destination paths."/>
   <String Name="MSG_ZIP_CREATION_ABORTED" Value="(T)Zip creation aborted!"/>
-  <String Name="MSG_ZIP_0_CREATED" Value="(T)Zip &amp;quot;{0}&amp;quot; created."/>
+  <String Name="MSG_ZIP_0_CREATED" Value="(T)Zip &quot;{0}&quot; created."/>
   <String Name="MSG_ZIP_CREATION_FAILED_0" Value="(T)Ceating of zip failed. Error message: {0}"/>
-  <String Name="MSG_ROOT_IDENTIFIED" Value="(T)Root of Zip identified as &amp;quot;{0}&amp;quot;."/>
-  <String Name="MSG_DIR_CREATED_0" Value="(T)Directory created &amp;quot;{0}&amp;quot;."/>
-  <String Name="MSG_DIR_CREATED_ERROR_0" Value="(T)Can not create directory &amp;quot;{0}&amp;quot;."/>
-  <String Name="MSG_FILE_DELETED_0" Value="(T)File deleted &amp;quot;{0}&amp;quot;."/>
-  <String Name="MSG_FILE_DELETED_ERROR_0" Value="(T)Can not delete file &amp;quot;{0}&amp;quot;."/>
-  <String Name="MSG_FILE_EXTRACTED_0" Value="(T)File extracted &amp;quot;{0}&amp;quot;."/>
-  <String Name="MSG_FILE_EXTRACTED_ERROR_0" Value="(T)Can not extract file &amp;quot;{0}&amp;quot;."/>
+  <String Name="MSG_ROOT_IDENTIFIED" Value="(T)Root of Zip identified as &quot;{0}&quot;."/>
+  <String Name="MSG_DIR_CREATED_0" Value="(T)Directory created &quot;{0}&quot;."/>
+  <String Name="MSG_DIR_CREATED_ERROR_0" Value="(T)Can not create directory &quot;{0}&quot;."/>
+  <String Name="MSG_FILE_DELETED_0" Value="(T)File deleted &quot;{0}&quot;."/>
+  <String Name="MSG_FILE_DELETED_ERROR_0" Value="(T)Can not delete file &quot;{0}&quot;."/>
+  <String Name="MSG_FILE_EXTRACTED_0" Value="(T)File extracted &quot;{0}&quot;."/>
+  <String Name="MSG_FILE_EXTRACTED_ERROR_0" Value="(T)Can not extract file &quot;{0}&quot;."/>
   <String Name="MSG_DOWNLOAD_SELECTION_TITLE" Value="(T)Download/Mod folder selection"/>
   <String Name="MSG_KSP_INSTALL_FOLDER_SELECTION_TITLE" Value="(T)KSP install folder selection"/>
   <String Name="MSG_DESTINATION_FOLDER_SELECTION_TITLE" Value="(T)Destination folder selection"/>
   <String Name="MSG_DOWNLOAD_FOLDER_SELECTION_TITLE" Value="(T)Download folder selection"/>
   <String Name="MSG_UNCHECK_NO_ZIPARCHIVE_WARNING" Value="(T)No Zip archive found!^If you uncheck and uninstall this ModNode you can't reinstall it!^^Uncheck anyway?"/>
   <String Name="MSG_CHECK_NO_ZIPARCHIVE_WARNING" Value="(T)No Zip archive found!^You can't check a ModNode which don't have a Zip archive!"/>
-  <String Name="MSG_CANT_INSTALL_MODNODE_0_ZIP_MISSING" Value="(T)Can't install &amp;quot;{0}&amp;quot;! Mod archive is missing."/>
-  <String Name="MSG_0_HAS_CHILDES_WITHOUT_DESTINATION_WARNING" Value="(T)The ModNode &amp;quot;{0}&amp;quot; or one or more child ModNodes don't have a destination!^Those ModNodes won't be checked!^^ Set a destination manually to install them."/>
+  <String Name="MSG_CANT_INSTALL_MODNODE_0_ZIP_MISSING" Value="(T)Can't install &quot;{0}&quot;! Mod archive is missing."/>
+  <String Name="MSG_0_HAS_CHILDES_WITHOUT_DESTINATION_WARNING" Value="(T)The ModNode &quot;{0}&quot; or one or more child ModNodes don't have a destination!^Those ModNodes won't be checked!^^ Set a destination manually to install them."/>
   <String Name="YES" Value="(T)Yes"/>
   <String Name="NO" Value="(T)No"/>
   <String Name="NONE" Value="(T)None"/>
@@ -495,32 +495,32 @@
   <String Name="OFF" Value="(T)Off"/>
   <String Name="MSG_PLS_SELECT_VALID_KSP_INSTALL_FOLDER" Value="(T)This is not a KSP install folder.^Please select a valid KSP install folder."/>
   <String Name="MSG_KSP_INSTALL_FOLDER_SELECTION" Value="(T)KSP install folder selection."/>
-  <String Name="MSG_START_PROCESSING_0" Value="(T)Processing of mod &amp;quot;{0}&amp;quot; started."/>
-  <String Name="MSG_START_ADDING_0" Value="(T)Adding of mod &amp;quot;{0}&amp;quot; started."/>
-  <String Name="MSG_ERROR_DURING_PROCESSING_MOD_0" Value="(T)Error during processing mod &amp;quot;{0}&amp;quot;."/>
-  <String Name="MSG_REMOVING_MOD_0" Value="(T)Removing mod &amp;quot;{0}&amp;quot;."/>
-  <String Name="MSG_MOD_RMODVED_0" Value="(T)Mod &amp;quot;{0}&amp;quot; removed."/>
+  <String Name="MSG_START_PROCESSING_0" Value="(T)Processing of mod &quot;{0}&quot; started."/>
+  <String Name="MSG_START_ADDING_0" Value="(T)Adding of mod &quot;{0}&quot; started."/>
+  <String Name="MSG_ERROR_DURING_PROCESSING_MOD_0" Value="(T)Error during processing mod &quot;{0}&quot;."/>
+  <String Name="MSG_REMOVING_MOD_0" Value="(T)Removing mod &quot;{0}&quot;."/>
+  <String Name="MSG_MOD_RMODVED_0" Value="(T)Mod &quot;{0}&quot; removed."/>
   <String Name="MSG_DELETING_REMAINING_EMTPY_DIRS" Value="(T)Deleting remaining empty directorys."/>
-  <String Name="MSG_DIR_0_NOT_EXISTS" Value="(T)Directory &amp;quot;{0}&amp;quot; don't exists."/>
-  <String Name="MSG_DIR_0_IS_KSPDIR" Value="(T)Directory &amp;quot;{0}&amp;quot; is a KSP directory."/>
-  <String Name="MSG_DIR_0_IS_NOT_EMPTY" Value="(T)Directory &amp;quot;{0}&amp;quot; is not empty."/>
-  <String Name="MSG_ERROR_DURING_REFRESH_CHECKED_STATE_0" Value="(T)Error During RefreshCheckedState &amp;quot;{0}&amp;quot;."/>
-  <String Name="MSG_REFRESHING_CHECKEDSTATE_0" Value="(T)Refreshing CheckedState of &amp;quot;{0}&amp;quot;..."/>
+  <String Name="MSG_DIR_0_NOT_EXISTS" Value="(T)Directory &quot;{0}&quot; don't exists."/>
+  <String Name="MSG_DIR_0_IS_KSPDIR" Value="(T)Directory &quot;{0}&quot; is a KSP directory."/>
+  <String Name="MSG_DIR_0_IS_NOT_EMPTY" Value="(T)Directory &quot;{0}&quot; is not empty."/>
+  <String Name="MSG_ERROR_DURING_REFRESH_CHECKED_STATE_0" Value="(T)Error During RefreshCheckedState &quot;{0}&quot;."/>
+  <String Name="MSG_REFRESHING_CHECKEDSTATE_0" Value="(T)Refreshing CheckedState of &quot;{0}&quot;..."/>
   <String Name="MSG_UNCHECKING_ALL_MODS" Value="(T)Unchecking all mods."/>
-  <String Name="MSG_UNCHECKING_MOD_0" Value="(T)Unchecking mod of &amp;quot;{0}&amp;quot;."/>
+  <String Name="MSG_UNCHECKING_MOD_0" Value="(T)Unchecking mod of &quot;{0}&quot;."/>
   <String Name="MSG_CHECKING_ALL_MODS" Value="(T)Checking all mods."/>
-  <String Name="MSG_CHECKING_MOD_0" Value="(T)Checking mod of &amp;quot;{0}&amp;quot;."/>
+  <String Name="MSG_CHECKING_MOD_0" Value="(T)Checking mod of &quot;{0}&quot;."/>
   <String Name="MSG_ERROR_NO_DOWNLOAD_FOLDER_SELECTED" Value="(T)No dowload folder selected."/>
   <String Name="MSG_SCAN_GAMDATA_FOLDER_STARTED" Value="(T)Scan of GameData folder started."/>
-  <String Name="MSG_DIRECTORY_0_FOUND" Value="(T)Directory &amp;quot;{0}&amp;quot; found."/>
-  <String Name="MSG_FILE_0_FOUND" Value="(T)File &amp;quot;{0}&amp;quot; found."/>
-  <String Name="MSG_MODNODE_0_CREATED" Value="(T)ModNode created for &amp;quot;{0}&amp;quot;."/>
-  <String Name="MSG_ERROR_MOD_PATH_URL_0_INVALID" Value="(T)Path or url &amp;quot;{0}&amp;quot; is not valid!"/>
-  <String Name="MSG_ERROR_0_NO_VERSIONCONTROL" Value="(T)The mod &amp;quot;{0}&amp;quot; has no VersionControl ... update check skipped."/>
-  <String Name="MSG_UPDATECHECK_FOR_MOD_0" Value="(T)Update check for mod &amp;quot;{0}&amp;quot; via &amp;quot;{1}&amp;quot; started..."/>
-  <String Name="MSG_MOD_0_IS_UPTODATE" Value="(T)The mod &amp;quot;{0}&amp;quot; is up to date."/>
-  <String Name="MSG_MOD_0_IS_OUTDATED" Value="(T)The mod &amp;quot;{0}&amp;quot; is outdated."/>
-  <String Name="MSG_ERROR_DURING_UPDATECHECK_0_ERRORMSG_1" Value="(T)Error during update check for mod &amp;quot;{0}&amp;quot;. Error: &amp;quot;{1}&amp;quot;"/>
+  <String Name="MSG_DIRECTORY_0_FOUND" Value="(T)Directory &quot;{0}&quot; found."/>
+  <String Name="MSG_FILE_0_FOUND" Value="(T)File &quot;{0}&quot; found."/>
+  <String Name="MSG_MODNODE_0_CREATED" Value="(T)ModNode created for &quot;{0}&quot;."/>
+  <String Name="MSG_ERROR_MOD_PATH_URL_0_INVALID" Value="(T)Path or url &quot;{0}&quot; is not valid!"/>
+  <String Name="MSG_ERROR_0_NO_VERSIONCONTROL" Value="(T)The mod &quot;{0}&quot; has no VersionControl ... update check skipped."/>
+  <String Name="MSG_UPDATECHECK_FOR_MOD_0" Value="(T)Update check for mod &quot;{0}&quot; via &quot;{1}&quot; started..."/>
+  <String Name="MSG_MOD_0_IS_UPTODATE" Value="(T)The mod &quot;{0}&quot; is up to date."/>
+  <String Name="MSG_MOD_0_IS_OUTDATED" Value="(T)The mod &quot;{0}&quot; is outdated."/>
+  <String Name="MSG_ERROR_DURING_UPDATECHECK_0_ERRORMSG_1" Value="(T)Error during update check for mod &quot;{0}&quot;. Error: &quot;{1}&quot;"/>
 
   <Control Name="tsmiCmsCheckAllMods" Value="(T)Checks all mods"/>
   <Control Name="cbForceOpenGL" Value="(T)Force OpenGL">
@@ -558,31 +558,31 @@
     <Control Name="lblExportInfo" Value="(T)Export a ModPack for sharing with other players."/>
     <Control Name="btnExport" Value="(T)Export"/>
   
-  <String Name="MSG_UPDATING_MOD_0" Value="(T)Updating mod &amp;quot;{0}&amp;quot;..."/>
-  <String Name="MSG_MOD_0_UPDATED" Value="(T)Mod &amp;quot;{0}&amp;quot; updated"/>
-  <String Name="MSG_ERROR_WHILE_UPDATING_MOD_0_ERROR_1" Value="(T)Error during updating mod &amp;quot;{0}&amp;quot;. Error: &amp;quot;{1}&amp;quot;"/>
-  <String Name="MSG_ERROR_UPDATING_MOD_0_FAILED" Value="(T)Updating of the mod &amp;quot;{0}&amp;quot; failed.^Manualy update required."/>
-  <String Name="MSG_ADD_MOD_0_TO_MODPACK" Value="(T)Add mod &amp;quot;{0}&amp;quot; to ModPack..."/>
+  <String Name="MSG_UPDATING_MOD_0" Value="(T)Updating mod &quot;{0}&quot;..."/>
+  <String Name="MSG_MOD_0_UPDATED" Value="(T)Mod &quot;{0}&quot; updated"/>
+  <String Name="MSG_ERROR_WHILE_UPDATING_MOD_0_ERROR_1" Value="(T)Error during updating mod &quot;{0}&quot;. Error: &quot;{1}&quot;"/>
+  <String Name="MSG_ERROR_UPDATING_MOD_0_FAILED" Value="(T)Updating of the mod &quot;{0}&quot; failed.^Manualy update required."/>
+  <String Name="MSG_ADD_MOD_0_TO_MODPACK" Value="(T)Add mod &quot;{0}&quot; to ModPack..."/>
   <String Name="MSG_MODPACK_INFOFILE_NOT_FOUND" Value="(T)ModPack info file not found!"/>
-  <String Name="MSG_DOWNLOAD_0_STARTED" Value="(T)Download of &amp;quot;{0}&amp;quot; started..."/>
-  <String Name="MSG_DOWNLOAD_0_DONE" Value="(T)Download of &amp;quot;{0}&amp;quot; done."/>
-  <String Name="MSG_DOWNLOAD_0_FAILED" Value="(T)Download of &amp;quot;{0}&amp;quot; failed!"/>
-  <String Name="MSG_IMPORT_0_STARTED" Value="(T)Import of &amp;quot;{0}&amp;quot; started..."/>
-  <String Name="MSG_IMPORT_0_DONE" Value="(T)Import of &amp;quot;{0}&amp;quot; done."/>
-  <String Name="MSG_IMPORT_0_FAILED_ERROR_1" Value="(T)Import of &amp;quot;{0}&amp;quot; failed!"/>
-  <String Name="MSG_IMPORT_0_FAILED" Value="(T)Import of &amp;quot;{0}&amp;quot; failed! Error: &amp;quot;{1}&amp;quot;"/>
+  <String Name="MSG_DOWNLOAD_0_STARTED" Value="(T)Download of &quot;{0}&quot; started..."/>
+  <String Name="MSG_DOWNLOAD_0_DONE" Value="(T)Download of &quot;{0}&quot; done."/>
+  <String Name="MSG_DOWNLOAD_0_FAILED" Value="(T)Download of &quot;{0}&quot; failed!"/>
+  <String Name="MSG_IMPORT_0_STARTED" Value="(T)Import of &quot;{0}&quot; started..."/>
+  <String Name="MSG_IMPORT_0_DONE" Value="(T)Import of &quot;{0}&quot; done."/>
+  <String Name="MSG_IMPORT_0_FAILED_ERROR_1" Value="(T)Import of &quot;{0}&quot; failed!"/>
+  <String Name="MSG_IMPORT_0_FAILED" Value="(T)Import of &quot;{0}&quot; failed! Error: &quot;{1}&quot;"/>
   <String Name="MSG_NO_MODS_TO_EXPORT" Value="(T)There are no mods to export."/>
-  <String Name="MSG_EXPORT_TO_0" Value="(T)Exporting to &amp;quot;{0}&amp;quot;."/>
+  <String Name="MSG_EXPORT_TO_0" Value="(T)Exporting to &quot;{0}&quot;."/>
   <String Name="MSG_EXPORT_DONE" Value="(T)Export done."/>
   <String Name="MSG_EXPORT_ABORTED" Value="(T)Export aborted."/>
   <String Name="MSG_IMPORT_STARTED" Value="(T)Starting import."/>
   <String Name="MSG_CLEARING_MODSELECTION" Value="(T)Clearing ModSelection."/>
-  <String Name="MSG_IMPORTING_FROM_0" Value="(T)Importing from &amp;quot;{0}&amp;quot;."/>
+  <String Name="MSG_IMPORTING_FROM_0" Value="(T)Importing from &quot;{0}&quot;."/>
   <String Name="MSG_IMPORTING_FAILED" Value="(T)Import failed!"/>
   <String Name="MSG_IMPORTING_DONE" Value="(T)Import done."/>
   <String Name="MSG_IMPORTING_ABORTED" Value="(T)Import aborted."/>
-  <String Name="MSG_ERROR_DURING_MODUPDATE_0_ERROR_1" Value="(T)Error during mod update &amp;quot;{0}&amp;quot;. Error: &amp;quot;{1}&amp;quot;"/>
-  <String Name="MSG_DOWNLOADING_MOD_0" Value="(T)Downloading mod update &amp;quot;{0}&amp;quot;..."/>
-  <String Name="MSG_ERROR_DURING_MOD_UPDATE_0" Value="(T)Error during mod update check &amp;quot;{0}&amp;quot;."/>
+  <String Name="MSG_ERROR_DURING_MODUPDATE_0_ERROR_1" Value="(T)Error during mod update &quot;{0}&quot;. Error: &quot;{1}&quot;"/>
+  <String Name="MSG_DOWNLOADING_MOD_0" Value="(T)Downloading mod update &quot;{0}&quot;..."/>
+  <String Name="MSG_ERROR_DURING_MOD_UPDATE_0" Value="(T)Error during mod update check &quot;{0}&quot;."/>
   <String Name="MSG_SCAN_NO_NEW_MODS_FOUND" Value="(T)No new Mods found."/>
 </Language>

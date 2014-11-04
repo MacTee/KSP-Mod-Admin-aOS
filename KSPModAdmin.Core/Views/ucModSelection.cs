@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using KSPModAdmin.Core.Model;
 using KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree;
@@ -554,8 +555,12 @@ namespace KSPModAdmin.Core.Views
         {
             InvokeIfRequired(() =>
             {
-                tsModSelection.Enabled = enable;
-                tsMod.Enabled = enable;
+                foreach (ToolStripItem c in tsModSelection.Items)
+                    if (c != tslBusy) c.Enabled = enable;
+
+                foreach (ToolStripItem c in tsMod.Items)
+                    c.Enabled = enable;
+
                 //tvModSelection.ReadOnly = !enable;
                 btnProceedHighlighted.Enabled = enable;
                 btnProceedAll.Enabled = enable;

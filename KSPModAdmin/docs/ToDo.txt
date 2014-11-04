@@ -1,10 +1,6 @@
 ﻿//// BUGS
 /////////////////////
 
-- Probem with destination copy in ModPackHandler.TryCopyDestToMatchingNodes() and ModPackHandler.TryCopyDestToMatchingChildNodes()
-  maybe in ModNodeHandler.TryCopyDestToMatchingNodes() too.
-  Problem seems to be the find matching node part.
-
 
 //// To Test
 /////////////////////
@@ -16,7 +12,8 @@
   - AutoUpdate of mods
 - ModPack Import/Export implementation.
 - Language values with special chars encoded to xml (http://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references)
-  - like <Control Name="lblKSPPath" Value="(T)Directório de instalação do KSP:"/>  (oacute; = ó)
+  - like <Control Name="lblKSPPath" Value="(T)Directório de instalação do KSP:"/>  (oacute; = ó (use hex (&#243;) instead!!!)) 
+  ---> working sample -> <Control Name="frmMain" Value="(T)&#243;KSP Mod Admin AnyOS"/> == <Control Name="frmMain" Value="(T)óKSP Mod Admin AnyOS"/>
 - KSP Mod Admin can't install files without extensions.
   Sample to reproduce: https://kerbalstuff.com/mod/211/Kronal%20Vessel%20Viewer%20(KVV)%20-%20Exploded%20(Orthographic)%20ship%20view
 
@@ -24,10 +21,7 @@
 //// TODO
 /////////////////////
 
-- Im/Export should be async and should give more infos about the current action.
-
 - is everything Async ???
-  - Update mod -> "loading ring" is shown as disabled -> maybe use ProgressBar instead.
 
 - ModSelection
   -> MutiSelect 
@@ -49,7 +43,7 @@
 - ReadMe
 
 - Revise of the English text
-  - unify URL, like, site, page
+  - unify URL, link, site, page
   - ...
 
 - Try loading old KSPModAdmin.cfg file if no new cfg file is available.
