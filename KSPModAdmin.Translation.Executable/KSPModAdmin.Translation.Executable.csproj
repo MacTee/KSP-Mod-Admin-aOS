@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9A60FE53-6B33-4F67-BDF3-FC2F3ABA2B82}</ProjectGuid>
+    <ProjectGuid>{6588DDBF-28A3-49ED-B5C4-E897E05C0349}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>KSPModAdmin</RootNamespace>
-    <AssemblyName>KSPModAdmin</AssemblyName>
+    <RootNamespace>KSPModAdmin.Translation.Executable</RootNamespace>
+    <AssemblyName>KSPModAdmin.TranslationTool</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -32,35 +32,30 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>components_tool_48x48.ico</ApplicationIcon>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug MONO|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\Debug MONO\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release MONO|AnyCPU'">
-    <OutputPath>bin\Release MONO\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="_main.cs" />
+    <Compile Include="frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -71,12 +66,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="Languages\KSPMA.eng.lang">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Languages\KSPMA.fake.lang">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -91,25 +80,19 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="components_tool_48x48.ico" />
-    <Content Include="docs\ReadMe.txt" />
-    <Content Include="docs\ToDo.txt" />
-    <Content Include="Resources\components.png" />
-    <Content Include="Resources\components_tool_48x48.ico" />
-    <Content Include="Resources\gears.png" />
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
     <ProjectReference Include="..\KSPModAdmin.Core\KSPModAdmin.Core.csproj">
       <Project>{96aa1c9f-c609-4361-8bdd-5af3968f24de}</Project>
       <Name>KSPModAdmin.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\KSPModAdmin.Translation.Plugin\KSPModAdmin.Translation.Plugin.csproj">
+      <Project>{ef04c65e-bfce-43b6-8c28-6b1793e1b2b5}</Project>
+      <Name>KSPModAdmin.Translation.Plugin</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /E /Y /R /I "$(ProjectDir)Languages" "$(ProjectDir)$(OutDir)lang"
-md "$(ProjectDir)$(OutDir)Plugins"
-xcopy /E /Y /R /I "$(SolutionDir)KSPModAdmin.Translation.Plugin\$(OutDir)KSPModAdmin.Translation.Plugin.dll" "$(ProjectDir)$(OutDir)Plugins"</PostBuildEvent>
+    <PostBuildEvent>xcopy /E /Y /R /I "$(SolutionDir)KSPModAdmin.Translation.Plugin\Languages" "$(ProjectDir)$(OutDir)lang"
+xcopy /E /Y /R /I "$(SolutionDir)KSPModAdmin\Languages" "$(ProjectDir)$(OutDir)lang"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,0 +1,28 @@
+<Language Name="fake" LongName="Fake language">
+  <Control Name="ucTranslationView" Value=""/>
+    <Control Name="cbTransToolLanguages" Value="">
+      <ChildControl Name="cbTransToolLanguages_ToolTip" Value="(T)Select a language file to edit."/>
+    </Control>
+    <Control Name="lblTransToolLanguages" Value="(T)Languages:"/>
+    <Control Name="cbTransToolEdit" Value="(T)Edit">
+      <ChildControl Name="cbTransToolEdit_ToolTip" Value="(T)Click to edit language file."/>
+    </Control>
+    <Control Name="gbTransToolLanguageFileEntries" Value="(T)Languae file entries:"/>
+    <Control Name="dgvTransToolLanguageFileEntries" Value="">
+      <ChildControl Name="nameDataGridViewTextBoxColumn" Value="(T)Name"/>
+      <ChildControl Name="valueDataGridViewTextBoxColumn" Value="(T)Value"/>
+    </Control>
+    <Control Name="gbTransToolLanguageFile" Value="(T)Language file:"/>
+    <Control Name="lblTransToolLanguageShortName" Value="(T)Short lanugage name:"/>
+    <Control Name="lblTransToolLanguageName" Value="(T)Lanugage name:"/>
+    <Control Name="lblTransToolFileName" Value="(T)Filename:"/>
+    <Control Name="btnTransToolSave" Value="(T)Save">
+      <ChildControl Name="btnTransToolSave_ToolTip" Value="(T)Saves the changes.^To create a new language file just change the Filename and click save."/>
+    </Control>
+		
+  <String Name="MSG_TRANSLATION_VIEW_TITLE" Value="(T)Translation"/>
+  <String Name="MSG_ERROR_0_DURING_LOADING_LANGUAGES" Value="(T)Error &quot;{0}&quot; during loading available languages!"/>
+  <String Name="MSG_ERROR_0_DURING_LOADING_LANGUAGE" Value="(T)Error &quot;{0}&quot; during loading of language file!"/>
+</Language>
+  
+  

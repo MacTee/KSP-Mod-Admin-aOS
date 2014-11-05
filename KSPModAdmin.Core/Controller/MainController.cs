@@ -4,7 +4,6 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
 using KSPModAdmin.Core.Config;
 using KSPModAdmin.Core.Model;
 using KSPModAdmin.Core.Utils;
@@ -164,6 +163,8 @@ namespace KSPModAdmin.Core.Controller
 
             LoadSiteHandler();
 
+            LoadPlugins();
+
             if (!KSPPathHelper.IsKSPInstallFolder(OptionsController.SelectedKSPPath))
             {
                 frmWelcome dlg = new frmWelcome();
@@ -205,7 +206,10 @@ namespace KSPModAdmin.Core.Controller
         /// </summary>
         protected override void LanguageHasChanged(object sender)
         {
-            
+            foreach (TabView tabView in mAddedTabViews.Values)
+            {
+                //tabView.TabUserControl.
+            }
         }
 
         /// <summary>
@@ -410,5 +414,66 @@ namespace KSPModAdmin.Core.Controller
             foreach (ISiteHandler handler in siteHandlers)
                 SiteHandlerManager.RegisterSiteHandler(handler);
         }
+
+        /// <summary>
+        /// Loads all Plugins for KSP Mod Admin.
+        /// </summary>
+        private void LoadPlugins()
+        {
+            try
+            {
+                var plugins = PluginLoader.LoadPlugins<IKSPMAPlugin>(KSPPathHelper.GetPath(KSPPaths.KSPMA_Plugins));
+                foreach (IKSPMAPlugin plugin in plugins)
+                {
+                    TabView[] tabViews = plugin.GetMainTabViews();
+                    foreach (TabView tabView in tabViews)
+                    {
+                        if (!mAddedTabViews.ContainsKey(tabView.TabName))
+                        {
+                            TabPage tabPage = new TabPage();
+                            tabPage.Text = tabView.TabName;
+                            tabPage.Controls.Add(tabView.TabUserControl);
+                            tabView.TabUserControl.Dock = DockStyle.Fill;
+                            if (tabView.TabIcon != null)
+                            {
+                                View.TabControl.ImageList.Images.Add(tabView.TabIcon);
+                                tabPage.ImageIndex = View.TabControl.ImageList.Images.Count - 1;
+                            }
+                            View.TabControl.TabPages.Add(tabPage);
+
+                            mAddedTabViews.Add(tabView.TabName, tabView);
+                        }
+                        else
+                        {
+                            Messenger.AddError(string.Format("Plugin loading error: TabView \"{0}\" already exists!", tabView.TabName));
+                        }
+                    }
+
+                    tabViews = plugin.GetOptionTabViews();
+                    foreach (TabView tabView in tabViews)
+                    {
+                        if (!mAddedTabViews.ContainsKey(tabView.TabName))
+                        {
+                            TabPage tabPage = new TabPage();
+                            tabPage.Text = tabView.TabName;
+                            tabPage.Controls.Add(tabView.TabUserControl);
+                            tabView.TabUserControl.Dock = DockStyle.Fill; ;
+                            OptionsController.View.TabControl.TabPages.Add(tabPage);
+
+                            mAddedTabViews.Add(tabView.TabName, tabView);
+                        }
+                        else
+                        {
+                            Messenger.AddError(string.Format("Plugin loading error: Option TabView \"{0}\" already exists!", tabView.TabName));
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Messenger.AddError(string.Format("Plugin loading error: \"{0}\"", ex.Message), ex);
+            }
+        }
+        private Dictionary<string, TabView> mAddedTabViews = new Dictionary<string, TabView>();
     }
 }

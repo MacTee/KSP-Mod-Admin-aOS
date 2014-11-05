@@ -78,6 +78,9 @@
         public const string MODUPDATEBEHAVIOR = "ModUpdateBehavior";
         public const string DOWNLOAD_PATH = "DownloadPath";
         public const string NAME = "Name";
+        public const string LONGNAME = "LongName";
+        public const string CONTROL = "Control";
+        public const string STRING = "String";
         public const string KEY = "key";
         public const string FULLPATH = "FullPath";
         public const string CHECKED = "Checked";

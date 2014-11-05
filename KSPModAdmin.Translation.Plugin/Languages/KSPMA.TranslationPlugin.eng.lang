@@ -1,0 +1,28 @@
+<Language Name="eng" LongName="English">
+  <Control Name="ucTranslationView" Value=""/>
+    <Control Name="cbTransToolLanguages" Value="">
+      <ChildControl Name="cbTransToolLanguages_ToolTip" Value="Select a language file to edit."/>
+    </Control>
+    <Control Name="lblTransToolLanguages" Value="Languages:"/>
+    <Control Name="cbTransToolEdit" Value="Edit">
+      <ChildControl Name="cbTransToolEdit_ToolTip" Value="Click to edit language file."/>
+    </Control>
+    <Control Name="gbTransToolLanguageFileEntries" Value="Languae file entries:"/>
+    <Control Name="dgvTransToolLanguageFileEntries" Value="">
+      <ChildControl Name="nameDataGridViewTextBoxColumn" Value="Name"/>
+      <ChildControl Name="valueDataGridViewTextBoxColumn" Value="Value"/>
+    </Control>
+    <Control Name="gbTransToolLanguageFile" Value="Language file:"/>
+    <Control Name="lblTransToolLanguageShortName" Value="Short lanugage name:"/>
+    <Control Name="lblTransToolLanguageName" Value="Lanugage name:"/>
+    <Control Name="lblTransToolFileName" Value="Filename:"/>
+    <Control Name="btnTransToolSave" Value="Save">
+      <ChildControl Name="btnTransToolSave_ToolTip" Value="Saves the changes.^To create a new language file just change the Filename and click save."/>
+    </Control>
+		
+  <String Name="MSG_TRANSLATION_VIEW_TITLE" Value="Translation"/>
+  <String Name="MSG_ERROR_0_DURING_LOADING_LANGUAGES" Value="Error &quot;{0}&quot; during loading available languages!"/>
+  <String Name="MSG_ERROR_0_DURING_LOADING_LANGUAGE" Value="Error &quot;{0}&quot; during loading of language file!"/>
+</Language>
+  
+  

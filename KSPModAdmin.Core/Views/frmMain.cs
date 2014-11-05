@@ -61,6 +61,12 @@ namespace KSPModAdmin.Core.Views
             }
         }
 
+        /// <summary>
+        /// Gets the MainTab control.
+        /// </summary>
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        public TabControl TabControl { get { return tabControl1; } }
+
 
         /// <summary>
         /// Creates a new instance of the frmMain class.

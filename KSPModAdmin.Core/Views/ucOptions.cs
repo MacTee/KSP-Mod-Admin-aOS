@@ -397,6 +397,12 @@ namespace KSPModAdmin.Core.Views
             }
         }
 
+        /// <summary>
+        /// Gets the OptionsTab control.
+        /// </summary>
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        public TabControl TabControl { get { return tabControl2; } }
+
         #endregion
 
 

@@ -28,7 +28,9 @@ namespace KSPModAdmin.Core.Controller
                 {
                     ConstructorInfo ci = typeof(T_Controller).GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic, 
                                                                              null, Type.EmptyTypes, null);
-                    mInstance = (T_Controller)ci.Invoke(null);
+
+                    //if (ci != null)
+                        mInstance = (T_Controller)ci.Invoke(null);
                 }
 
                 return mInstance;
@@ -54,7 +56,7 @@ namespace KSPModAdmin.Core.Controller
 
             View = view;
             MethodInfo mi = typeof(T_Controller).GetMethod("Initialize", BindingFlags.Instance | BindingFlags.NonPublic);
-            if (mi != null)
+            if (mi != null) // && Instance != null)
                 mi.Invoke(Instance, null);
         }
 
