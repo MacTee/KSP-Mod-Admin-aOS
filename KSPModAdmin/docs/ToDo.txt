@@ -14,6 +14,7 @@
 - KSP Mod Admin can't install files without extensions.
   Sample to reproduce: https://kerbalstuff.com/mod/211/Kronal%20Vessel%20Viewer%20(KVV)%20-%20Exploded%20(Orthographic)%20ship%20view
 - Translation tab
+- KSPModAdmin.Updater works again!
 
 
 //// TODO
