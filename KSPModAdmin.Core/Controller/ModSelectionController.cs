@@ -9,12 +9,13 @@ using System.Collections.Generic;
 using KSPModAdmin.Core.Model;
 using KSPModAdmin.Core.Utils;
 using KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree;
+using KSPModAdmin.Core.Utils.Localization;
 using KSPModAdmin.Core.Utils.Logging;
 using KSPModAdmin.Core.Views;
 
 namespace KSPModAdmin.Core.Controller
 {
-    public class ModSelectionController : BaseController<ModSelectionController, ucModSelection>
+    public class ModSelectionController
     {
         #region Member variables
 
@@ -26,6 +27,17 @@ namespace KSPModAdmin.Core.Controller
         #endregion
 
         #region Properties
+
+        /// <summary>
+        /// Gets the singleton of this class.
+        /// </summary>
+        protected static ModSelectionController Instance { get { return mInstance ?? (mInstance = new ModSelectionController()); } }
+        protected static ModSelectionController mInstance = null;
+
+        /// <summary>
+        /// Gets or sets the view of the controller.
+        /// </summary>
+        public static ucModSelection View { get; protected set; }
 
         /// <summary>
         /// Gets the list of all known mods of the ModSelection.
@@ -42,57 +54,74 @@ namespace KSPModAdmin.Core.Controller
 
         #endregion
 
-
         #region Constructors
 
         /// <summary>
-        /// Private constructor
+        /// Private constructor (use static function only).
         /// </summary>
         private ModSelectionController()
         {
         }
 
+        /// <summary>
+        /// Static constructor. Creates a singleton of this class.
+        /// </summary>
+        static ModSelectionController()
+        {
+            if (mInstance == null)
+                mInstance = new ModSelectionController();
+        }
+
         #endregion
 
-
-        #region Overrides
 
         /// <summary>
         /// This method gets called when your Controller should be initialized.
         /// Perform additional initialization of your UserControl here.
         /// </summary>
-        protected override void Initialize()
+        internal static void Initialize(ucModSelection view)
         {
+            View = view;
+
+            EventDistributor.AsyncTaskStarted += AsyncTaskStarted;
+            EventDistributor.AsyncTaskDone += AsyncTaskDone;
+            EventDistributor.LanguageChanged += LanguageChanged;
             EventDistributor.KSPRootChanged += KSPRootChanged;
 
             ModSelectionTreeModel.BeforeCheckedChange += BeforeCheckedChange;
         }
 
+
+        #region Event callback functions
+
+        #region EventDistributor callback functions.
+
         /// <summary>
-        /// This method gets called when a critical asynchrony task will be started.
-        /// Disable all controls of your UserControl here to avoid multiple critical KSP MA changes.
+        /// Callback function for the AsyncTaskStarted event.
+        /// Should disable all controls of the BaseView.
         /// </summary>
-        protected override void AsyncroneTaskStarted(object sender)
+        protected static void AsyncTaskStarted(object sender)
         {
             View.SetEnabledOfAllControls(false);
         }
 
         /// <summary>
-        /// This method gets called when a critical asynchrony task is complete.
-        /// Enable the controls of your UserControl again here.
+        /// Callback function for the AsyncTaskDone event.
+        /// Should enable all controls of the BaseView.
         /// </summary>
-        protected override void AsyncroneTaskDone(object sender)
+        protected static void AsyncTaskDone(object sender)
         {
             View.SetEnabledOfAllControls(true);
         }
 
         /// <summary>
-        /// This method gets called when the language of KSP MA was changed.
-        /// Perform extra translation work for your UserControl here.
+        /// Callback function for the LanguageChanged event.
+        /// Translates all controls of the BaseView.
         /// </summary>
-        protected override void LanguageHasChanged(object sender)
+        protected static void LanguageChanged(object sender)
         {
-
+            // translates the controls of the view.
+            ControlTranslator.TranslateControls(Localizer.GlobalInstance, View as Control, OptionsController.SelectedLanguage);
         }
 
         /// <summary>
@@ -105,13 +134,15 @@ namespace KSPModAdmin.Core.Controller
             //View.tvModSelection.SelectedNode = null;
         }
 
+        #endregion
+
         /// <summary>
         /// Callback of the ModSelectionTreeModle when a checked state of a ModNode is changing.
         /// </summary>
         /// <param name="sender">Invoker of the BeforeCheckedChange event.</param>
         /// <param name="args">The BeforeCheckedChangeEventArgs.</param>
         /// <returns>True if the change should be continued, otherwise false.</returns>
-        protected void BeforeCheckedChange(object sender, BeforeCheckedChangeEventArgs args)
+        protected static void BeforeCheckedChange(object sender, BeforeCheckedChangeEventArgs args)
         {
             if (args.Node == null)
                 return;
@@ -143,6 +174,14 @@ namespace KSPModAdmin.Core.Controller
 
         #endregion
 
+
+        /// <summary>
+        /// Forces the view to redraw.
+        /// </summary>
+        public static void InvalidateView()
+        {
+            View.InvalidateView();
+        }
 
         #region Add Mod
 

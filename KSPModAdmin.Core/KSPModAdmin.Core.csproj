@@ -72,7 +72,6 @@
   <ItemGroup>
     <Compile Include="Config\AdminConfig.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="Controller\BaseController.cs" />
     <Compile Include="Controller\MainController.cs" />
     <Compile Include="Controller\ModSelectionController.cs" />
     <Compile Include="Controller\OptionsController.cs" />

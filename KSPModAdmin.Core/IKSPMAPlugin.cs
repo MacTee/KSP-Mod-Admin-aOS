@@ -13,16 +13,15 @@ namespace KSPModAdmin.Core
 
     public class TabView
     {
-        public string TabName { get; private set; }
+        public string TabName { get { return TabUserControl.GetTabName(); } }
 
         public ucBase TabUserControl { get; private set; }
 
         public Image TabIcon { get; private set; }
 
 
-        public TabView(string tabName, ucBase tabUserControl, Image tabIcon = null)
+        public TabView(ucBase tabUserControl, Image tabIcon = null)
         {
-            TabName = tabName;
             TabUserControl = tabUserControl;
             TabIcon = tabIcon;
         }

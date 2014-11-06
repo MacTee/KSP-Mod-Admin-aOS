@@ -5,6 +5,7 @@ namespace KSPModAdmin.Core.Views
 {
     public partial class ucBase : UserControl, IView
     {
+
         /// <summary>
         /// Constructor for VS Designer only!
         /// </summary>
@@ -30,5 +31,14 @@ namespace KSPModAdmin.Core.Views
         /// Forces the view to redraw.
         /// </summary>
         public virtual void InvalidateView() { }
+
+        /// <summary>
+        /// Gets the Name for the parent TabPage.
+        /// </summary>
+        /// <returns>The Name for the parent TabPage.</returns>
+        public virtual string GetTabName()
+        {
+            throw new NotImplementedException("Implement GetTabName for derived classes of ucBase!");
+        }
     }
 }

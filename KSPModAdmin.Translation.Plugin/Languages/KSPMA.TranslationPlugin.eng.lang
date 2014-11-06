@@ -20,7 +20,7 @@
       <ChildControl Name="btnTransToolSave_ToolTip" Value="Saves the changes.^To create a new language file just change the Filename and click save."/>
     </Control>
 		
-  <String Name="MSG_TRANSLATION_VIEW_TITLE" Value="Translation"/>
+  <String Name="MSG_TRANSLATION_VIEW_TITLE" Value="Translator"/>
   <String Name="MSG_ERROR_0_DURING_LOADING_LANGUAGES" Value="Error &quot;{0}&quot; during loading available languages!"/>
   <String Name="MSG_ERROR_0_DURING_LOADING_LANGUAGE" Value="Error &quot;{0}&quot; during loading of language file!"/>
 </Language>

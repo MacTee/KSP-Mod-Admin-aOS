@@ -58,21 +58,12 @@ namespace KSPModAdmin.Core.Views
 
             #endregion
 
-            ModSelectionController.Init(this);
+            ModSelectionController.Initialize(this);
             tvModSelection.Model = ModSelectionController.Model;
-#if MONO
-            // TODO: Fix display error of icons & CheckBoxes when Columns are used!
-            tvModSelection.UseColumns = false;
-#endif
 
-            //// DUMMY DATA
-            //var model = ModSelectionController.Model;
-            //var mod = new KSPModNode("Test", false, false, false, VersionControl.CurseForge);
-            //mod.AddChild(new KSPModNode("Child 1.1", false, false, true));
-            //model.AddMod(mod);
-            //mod = new KSPModNode("Test 2", true, true, false, VersionControl.CurseForge);
-            //mod.AddChild(new KSPModNode("Child 2.1", true, true, true));
-            //model.AddMod(mod);
+            // TODO: Fix display error of icons & CheckBoxes when Columns are used!
+            if (Environment.OSVersion.Platform == PlatformID.Unix)
+                tvModSelection.UseColumns = false;
         }
 
         #endregion
@@ -162,10 +153,13 @@ namespace KSPModAdmin.Core.Views
         /// </summary>
         public override void InvalidateView()
         {
-            Invalidate();
-            tvModSelection.Invalidate();
-            tvModSelection.Update();
-            tvModSelection.Refresh();
+            InvokeIfRequired(() =>
+                {
+                    Invalidate();
+                    tvModSelection.Invalidate();
+                    tvModSelection.Update();
+                    tvModSelection.Refresh();
+                });
         }
 
         #region Event handling
@@ -185,9 +179,9 @@ namespace KSPModAdmin.Core.Views
         {
             ModSelectionController.ProcessAllModsAsync();
 
-            ModSelectionController.View.tvModSelection.Select();
-            ModSelectionController.View.tvModSelection.Focus();
-            ModSelectionController.View.tvModSelection.Invalidate();
+            tvModSelection.Select();
+            tvModSelection.Focus();
+            tvModSelection.Invalidate();
         }
 
         private void tsbOverride_CheckedChanged(object sender, EventArgs e)

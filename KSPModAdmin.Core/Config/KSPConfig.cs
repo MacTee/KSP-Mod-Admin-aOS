@@ -188,7 +188,6 @@ namespace KSPModAdmin.Core.Config
         /// <returns></returns>
         public static bool Save(string path, ModNode[] nodeArray)
         {
-            OptionsController oController = OptionsController.Instance;
             XmlDocument doc = new XmlDocument();
             XmlNode docNode = doc.CreateXmlDeclaration("1.0", "UTF-8", null);
             doc.AppendChild(docNode);

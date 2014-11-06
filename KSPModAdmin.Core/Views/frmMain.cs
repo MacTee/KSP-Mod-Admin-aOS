@@ -77,8 +77,6 @@ namespace KSPModAdmin.Core.Views
 
             if (DesignMode)
                 return;
-
-            MainController.Init(this);
         }
 
 

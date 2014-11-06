@@ -47,9 +47,7 @@ namespace KSPModAdmin.Translation.Plugin
             if (DesignMode)
                 return;
 
-            // TODO: Redo of BaseController concept
-            // Uncommenting the line below will lead to a NullException during BaseController.Instance (GET)
-            //TranslationController.Init(this);
+            TranslationController.Initialize(this);
         }
 
 
@@ -126,6 +124,15 @@ namespace KSPModAdmin.Translation.Plugin
             Invalidate();
             Update();
             Refresh();
+        }
+
+        /// <summary>
+        /// Gets the Name for the parent TabPage.
+        /// </summary>
+        /// <returns>The Name for the parent TabPage.</returns>
+        public override string GetTabName()
+        {
+            return Messages.MSG_TRANSLATION_VIEW_TITLE;
         }
 
         public void SetEnabledOfAllControls(bool enable)

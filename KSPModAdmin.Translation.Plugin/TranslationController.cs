@@ -6,37 +6,61 @@ using System.Xml;
 using KSPModAdmin.Core;
 using KSPModAdmin.Core.Controller;
 using KSPModAdmin.Core.Utils;
+using KSPModAdmin.Core.Utils.Localization;
 
 namespace KSPModAdmin.Translation.Plugin
 {
-    public class TranslationController : BaseController<TranslationController, ucTranslationView>
+    public class TranslationController
     {
-        #region Overrides
+        /// <summary>
+        /// Gets or sets the view of the controller.
+        /// </summary>
+        public static ucTranslationView View { get; protected set; }
 
-        protected override void Initialize()
+
+        internal static void Initialize(ucTranslationView view)
         {
+            View = view;
 
+            EventDistributor.AsyncTaskStarted += AsyncTaskStarted;
+            EventDistributor.AsyncTaskDone += AsyncTaskDone;
+            EventDistributor.LanguageChanged += LanguageChanged;
         }
+        
+        #region EventDistributor callback functions.
 
-        protected override void AsyncroneTaskDone(object sender)
+        /// <summary>
+        /// Callback function for the AsyncTaskStarted event.
+        /// Should disable all controls of the BaseView.
+        /// </summary>
+        protected static void AsyncTaskStarted(object sender)
         {
             View.SetEnabledOfAllControls(true);
         }
 
-        protected override void AsyncroneTaskStarted(object sender)
+        /// <summary>
+        /// Callback function for the AsyncTaskDone event.
+        /// Should enable all controls of the BaseView.
+        /// </summary>
+        protected static void AsyncTaskDone(object sender)
         {
             View.SetEnabledOfAllControls(false);
         }
 
-        protected override void LanguageHasChanged(object sender)
+        /// <summary>
+        /// Callback function for the LanguageChanged event.
+        /// Translates all controls of the BaseView.
+        /// </summary>
+        protected static void LanguageChanged(object sender)
         {
-            // do nothing;
+            // translates the controls of the view.
+            ControlTranslator.TranslateControls(Localizer.GlobalInstance, View as Control, OptionsController.SelectedLanguage);
         }
 
         #endregion
 
 
-        public static LanguageSelectInfo[] GetAvailableLanguages(string filePath = null)
+        internal static LanguageSelectInfo[] GetAvailableLanguages(string filePath = null)
         {
             List<LanguageSelectInfo> result = new List<LanguageSelectInfo>();
             if (string.IsNullOrEmpty(filePath))
@@ -60,7 +84,7 @@ namespace KSPModAdmin.Translation.Plugin
             return result.ToArray();
         }
 
-        public static LanguageFileContent LoadSelectedLanguage(string filename)
+        internal static LanguageFileContent LoadSelectedLanguage(string filename)
         {
             LanguageFileContent result = null;
 
@@ -89,7 +113,7 @@ namespace KSPModAdmin.Translation.Plugin
             return result;
         }
 
-        private static void CreateChildEntries(XmlNode node, ref LanguageFileContent content)
+        protected static void CreateChildEntries(XmlNode node, ref LanguageFileContent content)
         {
             foreach (XmlNode childNode in node.ChildNodes)
             {

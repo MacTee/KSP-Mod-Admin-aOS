@@ -6,6 +6,8 @@ namespace KSPModAdmin.Core
     public delegate void AsyncTaskDoneHandler(object sender);
     public delegate void StartingKSPHandler(object sender);
     public delegate void LanguageChangedHandler(object sender);
+    public delegate void KSPPathChangingHandler(string oldKSPPath, string newKSPPath);
+    public delegate void KSPPathChangedHandler(string kspPath);
 
     /// <summary>
     /// The EventDitributor is the event central of KSP MA.

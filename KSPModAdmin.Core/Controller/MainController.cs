@@ -13,10 +13,27 @@ using KSPModAdmin.Core.Views;
 
 namespace KSPModAdmin.Core.Controller
 {
-    public class MainController : BaseController<MainController, frmMain>, IMessageReceiver
+    public class MainController : IMessageReceiver
     {
         private const string KSPMA_LOG_FILENAME = "KSPMA.log";
 
+        #region Properties
+
+        /// <summary>
+        /// Gets the singleton of this class.
+        /// </summary>
+        protected static MainController Instance { get { return mInstance ?? (mInstance = new MainController()); } }
+        protected static MainController mInstance = null;
+
+        /// <summary>
+        /// Flag to determine if the shut down process is running.
+        /// </summary>
+        public static bool IsShutDown { get; set; }
+
+        /// <summary>
+        /// Gets or sets the view of the controller.
+        /// </summary>
+        public static frmMain View { get; protected set; }
 
         /// <summary>
         /// Gets or sets the selected KSP path.
@@ -44,36 +61,58 @@ namespace KSPModAdmin.Core.Controller
         }
 
         /// <summary>
-        /// Flag to determine if the shut down process is running.
+        /// Gets or sets the selected KSP path silently (without throwing events).
         /// </summary>
-        public static bool IsShutDown { get; set; }
+        internal static string _SelectedKSPPath
+        {
+            get { return SelectedKSPPath; }
+            set
+            {
+                if (View != null)
+                    View.SilentSetSelectedKSPPath(value);
+            }
+        }
 
+        #endregion
+
+        #region Constructors
 
         /// <summary>
-        /// Private constructor
+        /// Private constructor (use static function only).
         /// </summary>
         private MainController()
         {
-            if (mInstance != null)
-                throw new Exception(Messages.MSG_ONLY_ONE_INSTANCE_OF_CONTROLLER_ALLOWED);
-
-            mInstance = this;
         }
 
-
         /// <summary>
-        /// 
+        /// Static constructor. Creates a singleton of this class.
         /// </summary>
+        static MainController()
+        {
+            if (mInstance == null)
+                mInstance = new MainController();
+        }
+
+        #endregion
+
+        public static void ShowMainForm()
+        {
+            LoadLanguages();
+
+            View = new frmMain();
+
+            Initialize();
+
+            if (!IsShutDown)
+                Application.Run(View);
+        }
+
         public static void ShutDown()
         {
             IsShutDown = true;
 
             SaveAppConfig();
             SaveKSPConfig();
-
-            // TODO
-            //if (m_SearchDLG != null)
-            //    m_SearchDLG.Close();
 
             Log.AddInfoS(string.Format("---> KSP MA v{0} closed <---{1}", VersionHelper.GetAssemblyVersion(true), Environment.NewLine));
         }
@@ -134,36 +173,52 @@ namespace KSPModAdmin.Core.Controller
 
 
         /// <summary>
-        /// Sets the selected KSP path without raising event SelectedIndexChanged.
+        /// Loads all available languages.
         /// </summary>
-        /// <param name="kspPath">The new selected KSP path.</param>
-        internal static void SilentSetSelectedKSPPath(string kspPath)
+        protected static void LoadLanguages()
         {
-            if (View != null)
-                View.SilentSetSelectedKSPPath(kspPath);
-        }
+            // Try load languages.
+            bool langLoadFailed = false;
+            try
+            {
+                Localizer.GlobalInstance.DefaultLanguage = "eng";
+                langLoadFailed = !Localizer.GlobalInstance.LoadLanguages(KSPPathHelper.GetPath(KSPPaths.LanguageFolder), true);
+            }
+            catch
+            {
+                langLoadFailed = true;
+            }
 
+            if (langLoadFailed)
+            {
+                MessageBox.Show("Can not load languages!" + Environment.NewLine + "Fall back to defalut language: English", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Localizer.GlobalInstance.Clear();
+            }
+        }
 
         /// <summary>
         /// This method gets called when your Controller should be initialized.
         /// Perform additional initialization of your UserControl here.
         /// </summary>
-        protected override void Initialize()
+        protected static void Initialize()
         {
             SetupLogFile();
-            Messenger.AddListener(this);
+            Messenger.AddListener(Instance);
 
+            EventDistributor.AsyncTaskStarted += AsyncTaskStarted;
+            EventDistributor.AsyncTaskDone += AsyncTaskDone;
+            EventDistributor.LanguageChanged += LanguageChanged;
             EventDistributor.KSPRootChanging += KSPRootChanging;
             EventDistributor.KSPRootChanged += KSPRootChanged;
 
             LoadConfigs();
 
+            LoadPlugins();
+
             OptionsController.AvailableLanguages = Localizer.GlobalInstance.AvailableLanguages;
             OptionsController.SelectedLanguage = Localizer.GlobalInstance.CurrentLanguage;
 
             LoadSiteHandler();
-
-            LoadPlugins();
 
             if (!KSPPathHelper.IsKSPInstallFolder(OptionsController.SelectedKSPPath))
             {
@@ -183,62 +238,9 @@ namespace KSPModAdmin.Core.Controller
         }
 
         /// <summary>
-        /// This method gets called when a critical asynchrony task will be started.
-        /// Disable all controls of your View here to avoid multiple critical KSP MA changes.
-        /// </summary>
-        protected override void AsyncroneTaskStarted(object sender)
-        {
-            View.cbKSPPath.Enabled = false;
-        }
-
-        /// <summary>
-        /// This method gets called when a critical asynchrony task is complete.
-        /// Enable the controls of your View again here.
-        /// </summary>
-        protected override void AsyncroneTaskDone(object sender)
-        {
-            View.cbKSPPath.Enabled = true;
-        }
-
-        /// <summary>
-        /// This method gets called when the language of KSP MA was changed.
-        /// Perform extra translation work for your View here.
-        /// </summary>
-        protected override void LanguageHasChanged(object sender)
-        {
-            foreach (TabView tabView in mAddedTabViews.Values)
-            {
-                //tabView.TabUserControl.
-            }
-        }
-
-        /// <summary>
-        /// Event handler for the KSPPathChanging event from OptionsController.
-        /// </summary>
-        /// <param name="oldKSPPath">The last selected KSP path.</param>
-        /// <param name="newKSPPath">The new selected ksp path.</param>
-        private static void KSPRootChanging(string oldKSPPath, string newKSPPath)
-        {
-            if (!string.IsNullOrEmpty(oldKSPPath))
-                SaveKSPConfig();
-        }
-
-        /// <summary>
-        /// Event handler for the KSPPathChanged event from OptionsController.
-        /// </summary>
-        /// <param name="kspPath">the new selected ksp path.</param>
-        private static void KSPRootChanged(string kspPath)
-        {
-            if (!string.IsNullOrEmpty(kspPath))
-                LoadKSPConfig();
-
-            SilentSetSelectedKSPPath(kspPath);
-        }
-
-        /// <summary>
         /// Deletes the old content of the log file when file size is above 1mb and creates a new log file.
         /// </summary>
-        private static void SetupLogFile()
+        protected static void SetupLogFile()
         {
             //#if DEBUG
             Log.GlobalInstance.LogMode = LogMode.All;
@@ -269,15 +271,15 @@ namespace KSPModAdmin.Core.Controller
         /// <summary>
         /// Loads the AppConfig & KSPConfig.
         /// </summary>
-        private static void LoadConfigs()
+        protected static void LoadConfigs()
         {
-            Instance.AddInfo(Messages.MSG_LOADING_KSPMA_SETTINGS);
+            Messenger.AddInfo(Messages.MSG_LOADING_KSPMA_SETTINGS);
             string path = KSPPathHelper.GetPath(KSPPaths.AppConfig);
             if (File.Exists(path))
             {
                 if (AdminConfig.Load(path))
                 {
-                    Instance.AddInfo(Messages.MSG_DONE);
+                    Messenger.AddInfo(Messages.MSG_DONE);
 
                     // LoadKSPConfig will be started by KSPPathChange event.
                     //if (KSPPathHelper.IsKSPInstallFolder(OptionsController.SelectedKSPPath))
@@ -285,12 +287,12 @@ namespace KSPModAdmin.Core.Controller
                 }
                 else
                 {
-                    Instance.AddInfo(Messages.MSG_LOADING_KSPMA_SETTINGS_FAILED);
+                    Messenger.AddInfo(Messages.MSG_LOADING_KSPMA_SETTINGS_FAILED);
                 }
             }
             else
             {
-                Instance.AddInfo(Messages.MSG_KSPMA_SETTINGS_NOT_FOUND);
+                Messenger.AddInfo(Messages.MSG_KSPMA_SETTINGS_NOT_FOUND);
             }
 
             DeleteOldAppConfigs();
@@ -299,14 +301,14 @@ namespace KSPModAdmin.Core.Controller
         /// <summary>
         /// Loads the KSPConfig from the selected KSP folder.
         /// </summary>
-        private static void LoadKSPConfig()
+        protected static void LoadKSPConfig()
         {
             ModSelectionController.ClearMods();
 
             string configPath = KSPPathHelper.GetPath(KSPPaths.KSPConfig);
             if (File.Exists(configPath))
             {
-                Instance.AddInfo(Messages.MSG_LOADING_KSP_MOD_CONFIGURATION);
+                Messenger.AddInfo(Messages.MSG_LOADING_KSP_MOD_CONFIGURATION);
                 List<ModNode> mods = new List<ModNode>();
                 KSPConfig.Load(configPath, ref mods);
                 ModSelectionController.AddMods(mods.ToArray());
@@ -314,17 +316,17 @@ namespace KSPModAdmin.Core.Controller
             }
             else
             {
-                Instance.AddInfo(Messages.MSG_KSP_MOD_CONFIGURATION_NOT_FOUND);
+                Messenger.AddInfo(Messages.MSG_KSP_MOD_CONFIGURATION_NOT_FOUND);
             }
 
             ModSelectionController.RefreshCheckedStateAllMods();
-            Instance.AddInfo(Messages.MSG_DONE);
+            Messenger.AddInfo(Messages.MSG_DONE);
         }
 
         /// <summary>
         /// Deletes older config paths and files.
         /// </summary>
-        private static void DeleteOldAppConfigs()
+        protected static void DeleteOldAppConfigs()
         {
             string path = KSPPathHelper.GetPath(KSPPaths.AppConfig);
             string[] dirs = Directory.GetDirectories(Path.GetDirectoryName(path));
@@ -345,20 +347,20 @@ namespace KSPModAdmin.Core.Controller
         /// <summary>
         /// Saves the AppConfig to "c:\ProgramData\..."
         /// </summary>
-        private static void SaveAppConfig()
+        protected static void SaveAppConfig()
         {
             try
             {
-                Instance.AddInfo(Messages.MSG_SAVING_KSPMA_SETTINGS);
+                Messenger.AddInfo(Messages.MSG_SAVING_KSPMA_SETTINGS);
                 string path = KSPPathHelper.GetPath(KSPPaths.AppConfig);
                 if (path != string.Empty && Directory.Exists(Path.GetDirectoryName(path)))
                     AdminConfig.Save(path);
                 else
-                    Instance.AddError(Messages.MSG_KSPMA_SETTINGS_PATH_INVALID);
+                    Messenger.AddError(Messages.MSG_KSPMA_SETTINGS_PATH_INVALID);
             }
             catch (Exception ex)
             {
-                Instance.AddError(Messages.MSG_ERROR_DURING_SAVING_KSPMA_SETTINGS, ex);
+                Messenger.AddError(Messages.MSG_ERROR_DURING_SAVING_KSPMA_SETTINGS, ex);
                 ShowAdminRightsDlg(ex);
             }
         }
@@ -373,15 +375,15 @@ namespace KSPModAdmin.Core.Controller
                 string path = KSPPathHelper.GetPath(KSPPaths.KSPConfig);
                 if (path != string.Empty && Directory.Exists(Path.GetDirectoryName(path)))
                 {
-                    Instance.AddInfo(Messages.MSG_SAVING_KSP_MOD_SETTINGS);
+                    Messenger.AddInfo(Messages.MSG_SAVING_KSP_MOD_SETTINGS);
                     KSPConfig.Save(path, ModSelectionController.Mods);
                 }
                 else
-                    Instance.AddError(Messages.MSG_KSP_MOD_SETTINGS_PATH_INVALID);
+                    Messenger.AddError(Messages.MSG_KSP_MOD_SETTINGS_PATH_INVALID);
             }
             catch (Exception ex)
             {
-                Instance.AddError(Messages.MSG_ERROR_DURING_SAVING_KSP_MOD_SETTINGS, ex);
+                Messenger.AddError(Messages.MSG_ERROR_DURING_SAVING_KSP_MOD_SETTINGS, ex);
                 ShowAdminRightsDlg(ex);
             }
         }
@@ -390,7 +392,7 @@ namespace KSPModAdmin.Core.Controller
         /// Shows a MessageBox with the info, that KSP MA needs admin rights if KSP is installed to c:\Programme
         /// </summary>
         /// <param name="ex">The message of the Exception will be displayed too.</param>
-        private static void ShowAdminRightsDlg(Exception ex)
+        protected static void ShowAdminRightsDlg(Exception ex)
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine(string.Format(Messages.MSG_ERROR_MESSAGE_0, ex.Message));
@@ -402,7 +404,7 @@ namespace KSPModAdmin.Core.Controller
         /// <summary>
         /// Loads and registers all SiteHandler.
         /// </summary>
-        private void LoadSiteHandler()
+        protected static void LoadSiteHandler()
         {
             //Add default SiteHandler
             var siteHandlers = PluginLoader.GetPlugins<ISiteHandler>(new[] {Assembly.GetExecutingAssembly()});
@@ -418,7 +420,7 @@ namespace KSPModAdmin.Core.Controller
         /// <summary>
         /// Loads all Plugins for KSP Mod Admin.
         /// </summary>
-        private void LoadPlugins()
+        protected static void LoadPlugins()
         {
             try
             {
@@ -474,6 +476,68 @@ namespace KSPModAdmin.Core.Controller
                 Messenger.AddError(string.Format("Plugin loading error: \"{0}\"", ex.Message), ex);
             }
         }
-        private Dictionary<string, TabView> mAddedTabViews = new Dictionary<string, TabView>();
+        protected static Dictionary<string, TabView> mAddedTabViews = new Dictionary<string, TabView>();
+
+        #region EventDistributor callback functions.
+
+        /// <summary>
+        /// Callback function for the AsyncTaskStarted event.
+        /// Should disable all controls of the BaseView.
+        /// </summary>
+        protected static void AsyncTaskDone(object sender)
+        {
+            View.cbKSPPath.Enabled = false;
+        }
+
+        /// <summary>
+        /// Callback function for the AsyncTaskDone event.
+        /// Should enable all controls of the BaseView.
+        /// </summary>
+        protected static void AsyncTaskStarted(object sender)
+        {
+            View.cbKSPPath.Enabled = true;
+        }
+
+        /// <summary>
+        /// Callback function for the LanguageChanged event.
+        /// Translates all controls of the BaseView.
+        /// </summary>
+        protected static void LanguageChanged(object sender)
+        {
+            // translates the controls of the view.
+            ControlTranslator.TranslateControls(Localizer.GlobalInstance, View as Control, OptionsController.SelectedLanguage);
+
+            foreach (TabView addedTabView in mAddedTabViews.Values)
+            {
+                TabPage tabPage = addedTabView.TabUserControl.Parent as TabPage;
+                if (tabPage != null)
+                    tabPage.Text = addedTabView.TabName;
+            }
+        }
+
+        /// <summary>
+        /// Event handler for the KSPPathChanging event from OptionsController.
+        /// </summary>
+        /// <param name="oldKSPPath">The last selected KSP path.</param>
+        /// <param name="newKSPPath">The new selected ksp path.</param>
+        protected static void KSPRootChanging(string oldKSPPath, string newKSPPath)
+        {
+            if (!string.IsNullOrEmpty(oldKSPPath))
+                SaveKSPConfig();
+        }
+
+        /// <summary>
+        /// Event handler for the KSPPathChanged event from OptionsController.
+        /// </summary>
+        /// <param name="kspPath">the new selected ksp path.</param>
+        protected static void KSPRootChanged(string kspPath)
+        {
+            if (!string.IsNullOrEmpty(kspPath))
+                LoadKSPConfig();
+
+            _SelectedKSPPath = kspPath;
+        }
+
+        #endregion
     }
 }

@@ -20,8 +20,6 @@
 //// TODO
 /////////////////////
 
-- BaseController concept redo. Problem with loaded plugin derived BaseController classes while Get Instance.
-
 - is everything Async ???
 
 - ModSelection
@@ -54,8 +52,6 @@
 
 //// SUGGESTIONS
 /////////////////////
-
-- Language file Creator/Editor tab
 
 - Compress for zipping.
 

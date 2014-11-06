@@ -420,7 +420,7 @@ namespace KSPModAdmin.Core.Views
             if (DesignMode)
                 return;
 
-            OptionsController.Init(this);
+            OptionsController.Initialize(this);
         }
 
 

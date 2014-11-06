@@ -15,19 +15,7 @@ using KSPModAdmin.Core.Utils;
 
 namespace KSPModAdmin.Core.Controller
 {
-    /// <summary>
-    /// EventHandler for the KSPPathChanging event.
-    /// </summary>
-    /// <param name="oldKSPPath"></param>
-    /// <param name="newKSPPath"></param>
-    public delegate void KSPPathChangingHandler(string oldKSPPath, string newKSPPath);
-
-    /// <summary>
-    /// EventHandler for the KSPPathChanged event.
-    /// </summary>
-    public delegate void KSPPathChangedHandler(string kspPath);
-
-    public class OptionsController : BaseController<OptionsController, ucOptions>
+    public class OptionsController
     {
         #region Enums
 
@@ -93,6 +81,17 @@ namespace KSPModAdmin.Core.Controller
         #endregion
 
         #region Properties
+
+        /// <summary>
+        /// Gets the singleton of this class.
+        /// </summary>
+        protected static OptionsController Instance { get { return mInstance ?? (mInstance = new OptionsController()); } }
+        protected static OptionsController mInstance = null;
+
+        /// <summary>
+        /// Gets or sets the view of the controller.
+        /// </summary>
+        public static ucOptions View { get; protected set; }
 
         #region Update
 
@@ -339,8 +338,6 @@ namespace KSPModAdmin.Core.Controller
 
         #endregion
 
-        #endregion
-
         public static string[] AvailableLanguages
         {
             get { return View.AvailableLanguages; }
@@ -354,22 +351,46 @@ namespace KSPModAdmin.Core.Controller
             {
                 View.SelectedLanguage = value;
                 Localizer.GlobalInstance.CurrentLanguage = value;
-            } 
+            }
         }
+
+        #endregion
 
         #endregion
 
         #region Constructors
 
         /// <summary>
-        /// Private constructor
+        /// Private constructor (use static function only).
         /// </summary>
         private OptionsController()
         {
+        }
 
+        /// <summary>
+        /// Static constructor. Creates a singleton of this class.
+        /// </summary>
+        static OptionsController()
+        {
+            if (mInstance == null)
+                mInstance = new OptionsController();
         }
 
         #endregion
+
+        /// <summary>
+        /// This method gets called when your Controller should be initialized.
+        /// Perform additional initialization of your UserControl here.
+        /// </summary>
+        internal static void Initialize(ucOptions view)
+        {
+            View = view;
+            View.KSPMAVersion = VersionHelper.GetAssemblyVersion();
+
+            EventDistributor.AsyncTaskStarted += AsyncTaskStarted;
+            EventDistributor.AsyncTaskDone += AsyncTaskDone;
+            EventDistributor.LanguageChanged += LanguageChanged;
+        }
 
         #region Public
 
@@ -558,7 +579,7 @@ namespace KSPModAdmin.Core.Controller
                                                         Path.GetDirectoryName(Application.ExecutablePath));
             process.Start();
 
-            MainController.View.Close();
+            MainController.ShutDown();
         }
 
         /// <summary>
@@ -880,7 +901,7 @@ namespace KSPModAdmin.Core.Controller
                 {
                     // selected ksp path is the same so silent set.
                     SilentSetSelectedKSPPath(lastSelectedKSPPath);
-                    MainController.SilentSetSelectedKSPPath(lastSelectedKSPPath);
+                    MainController._SelectedKSPPath = lastSelectedKSPPath;
                     View.SelectedKnownKSPPath = knownPaths.FirstOrDefault(node => node.Text == lastSelectedKSPPath);
                 }
             }
@@ -915,7 +936,7 @@ namespace KSPModAdmin.Core.Controller
                     {
                         // selected ksp path is the same so silent set.
                         SilentSetSelectedKSPPath((knownPaths.Count <= 0) ? string.Empty : knownPaths[knownPaths.Count - 1].Name);
-                        MainController.SilentSetSelectedKSPPath(View.SelectedKSPPath);
+                        MainController._SelectedKSPPath = View.SelectedKSPPath;
                         View.SelectedKnownKSPPath = knownPaths.FirstOrDefault(node => node.Text == View.SelectedKSPPath);
                     }
                     else
@@ -1192,22 +1213,15 @@ namespace KSPModAdmin.Core.Controller
 
         #endregion
 
-        /// <summary>
-        /// This method gets called when your Controller should be initialized.
-        /// Perform additional initialization of your UserControl here.
-        /// </summary>
-        protected override void Initialize()
-        {
-            View.KSPMAVersion = VersionHelper.GetAssemblyVersion();
-        }
+        #region EventDistributor callback functions.
 
         /// <summary>
-        /// This method gets called when a critical asynchrony task will be started.
-        /// Disable all controls of your View here to avoid multiple critical KSP MA changes.
+        /// Callback function for the AsyncTaskStarted event.
+        /// Should disable all controls of the BaseView.
         /// </summary>
-        protected override void AsyncroneTaskStarted(object sender)
+        protected static void AsyncTaskStarted(object sender)
         {
-            if (sender == this)
+            if (sender == Instance)
             {
                 switch (mTaskAction)
                 {
@@ -1299,12 +1313,12 @@ namespace KSPModAdmin.Core.Controller
         }
 
         /// <summary>
-        /// This method gets called when a critical asynchrony task is complete.
-        /// Enable the controls of your View again here.
+        /// Callback function for the AsyncTaskDone event.
+        /// Should enable all controls of the BaseView.
         /// </summary>
-        protected override void AsyncroneTaskDone(object sender)
+        protected static void AsyncTaskDone(object sender)
         {
-            if (sender == this)
+            if (sender == Instance)
             {
                 switch (mTaskAction)
                 {
@@ -1395,12 +1409,15 @@ namespace KSPModAdmin.Core.Controller
         }
 
         /// <summary>
-        /// This method gets called when the language of KSP MA was changed.
-        /// Perform extra translation work for your View here.
+        /// Callback function for the LanguageChanged event.
+        /// Translates all controls of the BaseView.
         /// </summary>
-        protected override void LanguageHasChanged(object sender)
+        protected static void LanguageChanged(object sender)
         {
-
+            // translates the controls of the view.
+            ControlTranslator.TranslateControls(Localizer.GlobalInstance, View as Control, OptionsController.SelectedLanguage);
         }
+
+        #endregion
     }
 }

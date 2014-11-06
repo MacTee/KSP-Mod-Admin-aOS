@@ -9,11 +9,11 @@ namespace KSPModAdmin.Translation.Plugin
         {
             get
             {
-                string msg = Localizer.GlobalInstance["MSG_TRANS_VIEW_TITLE"];
-                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_TRANS_VIEW_TITLE).Replace("^", Environment.NewLine);
+                string msg = Localizer.GlobalInstance["MSG_TRANSLATION_VIEW_TITLE"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_TRANSLATION_VIEW_TITLE).Replace("^", Environment.NewLine);
             }
         }
-        private const string DEFAULT_MSG_TRANS_VIEW_TITLE = "Translation";
+        private const string DEFAULT_MSG_TRANSLATION_VIEW_TITLE = "Translation";
         
         public static string MSG_ERROR_0_DURING_LOADING_LANGUAGES
         {

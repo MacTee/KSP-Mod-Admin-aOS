@@ -12,7 +12,7 @@ namespace KSPModAdmin.Translation.Plugin
         public TabView[] GetMainTabViews()
         {
             if (mTabView == null)
-                mTabView = new TabView(Messages.MSG_TRANSLATION_VIEW_TITLE, new ucTranslationView(), Resources.text);
+                mTabView = new TabView(new ucTranslationView(), Resources.text);
 
             return new[] { mTabView };
         }
