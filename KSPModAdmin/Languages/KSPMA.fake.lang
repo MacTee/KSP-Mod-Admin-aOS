@@ -1,10 +1,10 @@
 <Language Name="fake" LongName="Fake language">
   <Control Name="frmMain" Value="(T)KSP Mod Admin AnyOS_Localization_Test" />
-  <Control Name="lblKSPPath" Value="(T)Directório de instalação do KSP:" />
+  <Control Name="lblKSPPath" Value="(T)DirectÃ³rio de instalaÃ§Ã£o do KSP:" />
   <Control Name="cbKSPPath" Value="">
     <ChildControl Name="cbKSPPath_ToolTip" Value="(T)Choose the KSP install path to perform actions on." />
   </Control>
-  <Control Name="tabPageModSelection" Value="(T)Mods_дхининламр" />
+  <Control Name="tabPageModSelection" Value="(T)Mods_Ð´Ñ…Ð¸Ð½Ð¸Ð½Ð»Ð°Ð¼Ñ€" />
   <Control Name="cmsModSelectionAllMods" Value="">
     <Control Name="tsmiCmsAddMod" Value="(T)Add Mod" />
     <Control Name="tsmiCmsAddModArchive" Value="(T)Add mod archive" />
@@ -573,4 +573,8 @@
   <String Name="MSG_DOWNLOADING_MOD_0" Value="(T)Downloading mod update &quot;{0}&quot;..." />
   <String Name="MSG_ERROR_DURING_MOD_UPDATE_0" Value="(T)Error during mod update check &quot;{0}&quot;." />
   <String Name="MSG_SCAN_NO_NEW_MODS_FOUND" Value="(T)No new Mods found." />
+
+  <Control Name="btnAddAndClose" Value="(T)Add &amp;&amp; Close">
+    <Control Name="btnAddAndClose_ToolTip" Value="(T)Adds the mod to the ModSelection and closes this dialog."/>
+  </Control>
 </Language>

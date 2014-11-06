@@ -585,4 +585,9 @@
   <String Name="MSG_DOWNLOADING_MOD_0" Value="Downloading mod update &quot;{0}&quot;..."/>
   <String Name="MSG_ERROR_DURING_MOD_UPDATE_0" Value="Error during mod update check &quot;{0}&quot;."/>
   <String Name="MSG_SCAN_NO_NEW_MODS_FOUND" Value="No new Mods found."/>
+
+  <Control Name="btnAddAndClose" Value="Add &amp;&amp; Close">
+    <Control Name="btnAddAndClose_ToolTip" Value="Adds the mod to the ModSelection and closes this dialog."/>
+  </Control>
+  
 </Language>

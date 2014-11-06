@@ -220,6 +220,7 @@ namespace KSPModAdmin.Core.Views
             rbWindowed.Enabled = enable;
             cbBorderlessWin.Enabled = enable;
             cbResolutions.Enabled = enable;
+            cbForceOpenGL.Enabled = enable;
         }
     }
 }

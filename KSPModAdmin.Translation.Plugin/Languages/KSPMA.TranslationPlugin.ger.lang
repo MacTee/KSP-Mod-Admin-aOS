@@ -1,0 +1,25 @@
+<Language Name="ger" LongName="Deutsch">
+  <Control Name="ucTranslationView" Value="" />
+  <Control Name="cbTransToolLanguages" Value="">
+    <ChildControl Name="cbTransToolLanguages_ToolTip" Value="Wähle eine Sprachdatei zum bearbeiten aus." />
+  </Control>
+  <Control Name="lblTransToolLanguages" Value="Sprachen:" />
+  <Control Name="cbTransToolEdit" Value="Bearbeiten">
+    <ChildControl Name="cbTransToolEdit_ToolTip" Value="Anklicken um Sprachdatei zu bearbeiten." />
+  </Control>
+  <Control Name="gbTransToolLanguageFileEntries" Value="Sprachdateieinträge:" />
+  <Control Name="dgvTransToolLanguageFileEntries" Value="">
+    <ChildControl Name="nameDataGridViewTextBoxColumn" Value="Name" />
+    <ChildControl Name="valueDataGridViewTextBoxColumn" Value="Wert" />
+  </Control>
+  <Control Name="gbTransToolLanguageFile" Value="Sprachdatei:" />
+  <Control Name="lblTransToolLanguageShortName" Value="Name der Sprache (kurz):" />
+  <Control Name="lblTransToolLanguageName" Value="Name der Sprache:" />
+  <Control Name="lblTransToolFileName" Value="Dateiname:" />
+  <Control Name="btnTransToolSave" Value="Speichern">
+    <ChildControl Name="btnTransToolSave_ToolTip" Value="Speichert die veränderungen.^Um eine neue Sprachdatei anzulegen einfach den Dateinamen sowie die Sprachnamen ändern und Speichern klicken." />
+  </Control>
+  <String Name="MSG_TRANSLATION_VIEW_TITLE" Value="Übersetzer" />
+  <String Name="MSG_ERROR_0_DURING_LOADING_LANGUAGES" Value="Fehler während des ladens der verfügbaren Sprachen! &quot;{0}&quot;" />
+  <String Name="MSG_ERROR_0_DURING_LOADING_LANGUAGE" Value="Error &quot;{0}&quot; during loading of language file!" />
+</Language>

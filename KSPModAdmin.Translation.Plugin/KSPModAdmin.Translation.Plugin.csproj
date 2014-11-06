@@ -73,6 +73,7 @@
   <ItemGroup>
     <None Include="Languages\KSPMA.TranslationPlugin.eng.lang" />
     <None Include="Languages\KSPMA.TranslationPlugin.fake.lang" />
+    <None Include="Languages\KSPMA.TranslationPlugin.ger.lang" />
     <None Include="Properties\DataSources\LanguageEntry.datasource" />
   </ItemGroup>
   <ItemGroup>
