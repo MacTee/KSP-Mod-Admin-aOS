@@ -235,7 +235,7 @@
     <ChildControl Name="btnAddPath_ToolTip" Value="KSP Installationspfad hinzufügen^Öffnet einen Folder Browser um ein KSP Installationsordner zu wählen." />
   </Control>
   <Control Name="lblKSPPathNote" Value="Notiz:" />
-  <Control Name="tabPageMisc" Value="Allgemein:" />
+  <Control Name="tabPageMisc" Value="Allgemein" />
   <Control Name="gbLaguage" Value="Sprache:" />
   <Control Name="cbLanguages" Value="">
     <ChildControl Name="cbLanguages_ToolTip" Value="Wähle deine beforzugte Sprache." />
@@ -283,9 +283,9 @@
   <Control Name="btnModOutdated" Value="">
     <ChildControl Name="btnModOutdated_ToolTip" Value="Wähle eine Farbe für Modeinträge für die es Updates gibt." />
   </Control>
-  <Control Name="gpModConflictHandling" Value="Mod Zielpfadkonfliktbehandlung:" />
-  <Control Name="cbConflictDetectionOnOff" Value="Zielkpfadkonflikteanzeigen">
-    <ChildControl Name="cbConflictDetectionOnOff_ToolTip" Value="Zielkpfadkonflikteanzeigen^Schaltet die Zielkpfadkonfliktanzeigen An oder Aus." />
+  <Control Name="gpModConflictHandling" Value="Mod Zielpfadkonflikterkennung:" />
+  <Control Name="cbConflictDetectionOnOff" Value="Zielpfadkonflikterkennung">
+    <ChildControl Name="cbConflictDetectionOnOff_ToolTip" Value="Zielpfadkonflikterkennung^Schaltet die Zielkpfadkonflikterkennung An oder Aus." />
   </Control>
   <Control Name="cbShowConflictSolver" Value="Dialog zur Zielpfadkonfliktbehebung anzeigen">
     <ChildControl Name="cbShowConflictSolver_ToolTip" Value="Dialog zur Zielpfadkonfliktbehebung anzeigen^Dialog zur Zielpfadkonfliktbehebung nach konflikt erkennung anzeingen (Ja/Nein)." />

@@ -1,10 +1,10 @@
 <Language Name="fake" LongName="Fake language">
   <Control Name="frmMain" Value="(T)KSP Mod Admin AnyOS_Localization_Test" />
-  <Control Name="lblKSPPath" Value="(T)DirectÃ³rio de instalaÃ§Ã£o do KSP:" />
+  <Control Name="lblKSPPath" Value="(T)Directório de instalação do KSP:" />
   <Control Name="cbKSPPath" Value="">
     <ChildControl Name="cbKSPPath_ToolTip" Value="(T)Choose the KSP install path to perform actions on." />
   </Control>
-  <Control Name="tabPageModSelection" Value="(T)Mods_Ð´Ñ…Ð¸Ð½Ð¸Ð½Ð»Ð°Ð¼Ñ€" />
+  <Control Name="tabPageModSelection" Value="(T)Mods_дхининламр" />
   <Control Name="cmsModSelectionAllMods" Value="">
     <Control Name="tsmiCmsAddMod" Value="(T)Add Mod" />
     <Control Name="tsmiCmsAddModArchive" Value="(T)Add mod archive" />

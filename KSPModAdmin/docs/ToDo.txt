@@ -1,5 +1,6 @@
 ﻿//// BUGS
 /////////////////////
+- Modname changes after Mod update.
 
 
 //// To Test
@@ -24,6 +25,10 @@
 - is everything Async ???
 
 - Control rearrangement for localization
+
+- Add language select in welcome screen!
+
+- Don't load all languages into memory! 
 
 - ModSelection
   -> MutiSelect 
