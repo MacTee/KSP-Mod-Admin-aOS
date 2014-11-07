@@ -17,9 +17,9 @@
   <Control Name="lblTransToolLanguageName" Value="Name der Sprache:" />
   <Control Name="lblTransToolFileName" Value="Dateiname:" />
   <Control Name="btnTransToolSave" Value="Speichern">
-    <ChildControl Name="btnTransToolSave_ToolTip" Value="Speichert die veränderungen.^Um eine neue Sprachdatei anzulegen einfach den Dateinamen sowie die Sprachnamen ändern und Speichern klicken." />
+    <ChildControl Name="btnTransToolSave_ToolTip" Value="Speichert die Veränderungen.^Um eine neue Sprachdatei anzulegen einfach den Dateinamen sowie die Sprachnamen ändern und Speichern klicken." />
   </Control>
   <String Name="MSG_TRANSLATION_VIEW_TITLE" Value="Übersetzer" />
   <String Name="MSG_ERROR_0_DURING_LOADING_LANGUAGES" Value="Fehler während des ladens der verfügbaren Sprachen! &quot;{0}&quot;" />
-  <String Name="MSG_ERROR_0_DURING_LOADING_LANGUAGE" Value="Error &quot;{0}&quot; during loading of language file!" />
+  <String Name="MSG_ERROR_0_DURING_LOADING_LANGUAGE" Value="Fehler während des ladens einer Sprache! &quot;{0}&quot;" />
 </Language>
