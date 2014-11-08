@@ -85,7 +85,7 @@
             // 
             this.pbExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pbExport.Image = ((System.Drawing.Image)(resources.GetObject("pbExport.Image")));
-            this.pbExport.Location = new System.Drawing.Point(333, 94);
+            this.pbExport.Location = new System.Drawing.Point(319, 94);
             this.pbExport.Name = "pbExport";
             this.pbExport.Size = new System.Drawing.Size(20, 20);
             this.pbExport.TabIndex = 13;
@@ -105,7 +105,7 @@
             this.cbModSelection.FormattingEnabled = true;
             this.cbModSelection.Location = new System.Drawing.Point(47, 93);
             this.cbModSelection.Name = "cbModSelection";
-            this.cbModSelection.Size = new System.Drawing.Size(275, 21);
+            this.cbModSelection.Size = new System.Drawing.Size(257, 21);
             this.cbModSelection.TabIndex = 3;
             // 
             // cbIncludeMods
@@ -160,9 +160,9 @@
             this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExport.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExport.Image = global::KSPModAdmin.Core.Properties.Resources.components_package_into;
-            this.btnExport.Location = new System.Drawing.Point(359, 91);
+            this.btnExport.Location = new System.Drawing.Point(345, 91);
             this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(75, 25);
+            this.btnExport.Size = new System.Drawing.Size(89, 25);
             this.btnExport.TabIndex = 0;
             this.btnExport.Text = "Export";
             this.btnExport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -284,7 +284,7 @@
             // 
             this.pbImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pbImport.Image = ((System.Drawing.Image)(resources.GetObject("pbImport.Image")));
-            this.pbImport.Location = new System.Drawing.Point(333, 216);
+            this.pbImport.Location = new System.Drawing.Point(319, 216);
             this.pbImport.Name = "pbImport";
             this.pbImport.Size = new System.Drawing.Size(20, 20);
             this.pbImport.TabIndex = 13;
@@ -343,9 +343,9 @@
             this.btnImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnImport.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnImport.Image = global::KSPModAdmin.Core.Properties.Resources.components_package_out;
-            this.btnImport.Location = new System.Drawing.Point(359, 213);
+            this.btnImport.Location = new System.Drawing.Point(345, 213);
             this.btnImport.Name = "btnImport";
-            this.btnImport.Size = new System.Drawing.Size(75, 25);
+            this.btnImport.Size = new System.Drawing.Size(89, 25);
             this.btnImport.TabIndex = 0;
             this.btnImport.Text = "Import";
             this.btnImport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;

@@ -50,9 +50,9 @@
             this.btnAddAndClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAddAndClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddAndClose.Image = global::KSPModAdmin.Core.Properties.Resources.component_add;
-            this.btnAddAndClose.Location = new System.Drawing.Point(300, 170);
+            this.btnAddAndClose.Location = new System.Drawing.Point(230, 203);
             this.btnAddAndClose.Name = "btnAddAndClose";
-            this.btnAddAndClose.Size = new System.Drawing.Size(121, 25);
+            this.btnAddAndClose.Size = new System.Drawing.Size(165, 25);
             this.btnAddAndClose.TabIndex = 4;
             this.btnAddAndClose.Text = "Add && Close";
             this.btnAddAndClose.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -65,9 +65,9 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.Image = global::KSPModAdmin.Core.Properties.Resources.delete2;
-            this.btnCancel.Location = new System.Drawing.Point(427, 170);
+            this.btnCancel.Location = new System.Drawing.Point(401, 203);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(84, 25);
+            this.btnCancel.Size = new System.Drawing.Size(110, 25);
             this.btnCancel.TabIndex = 5;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -131,9 +131,8 @@
             // 
             // cbInstallAfterAdd
             // 
-            this.cbInstallAfterAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cbInstallAfterAdd.AutoSize = true;
-            this.cbInstallAfterAdd.Location = new System.Drawing.Point(28, 174);
+            this.cbInstallAfterAdd.Location = new System.Drawing.Point(28, 178);
             this.cbInstallAfterAdd.Name = "cbInstallAfterAdd";
             this.cbInstallAfterAdd.Size = new System.Drawing.Size(101, 17);
             this.cbInstallAfterAdd.TabIndex = 6;
@@ -143,12 +142,11 @@
             // 
             // lblNote
             // 
-            this.lblNote.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.lblNote.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblNote.Location = new System.Drawing.Point(16, 118);
             this.lblNote.Name = "lblNote";
-            this.lblNote.Size = new System.Drawing.Size(495, 43);
+            this.lblNote.Size = new System.Drawing.Size(495, 53);
             this.lblNote.TabIndex = 1;
             this.lblNote.Text = "NOTE: After KSP MA has added the mod you have to check / uncheck your wanted part" +
     "s of the mod and press \"Process All\" to install the mod.\r\nOr check the checkbox " +
@@ -158,7 +156,7 @@
             // 
             this.picLoading.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.picLoading.Image = ((System.Drawing.Image)(resources.GetObject("picLoading.Image")));
-            this.picLoading.Location = new System.Drawing.Point(186, 173);
+            this.picLoading.Location = new System.Drawing.Point(69, 206);
             this.picLoading.Name = "picLoading";
             this.picLoading.Size = new System.Drawing.Size(18, 20);
             this.picLoading.TabIndex = 16;
@@ -170,9 +168,9 @@
             this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdd.Image = global::KSPModAdmin.Core.Properties.Resources.component_add;
-            this.btnAdd.Location = new System.Drawing.Point(210, 170);
+            this.btnAdd.Location = new System.Drawing.Point(98, 203);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(84, 25);
+            this.btnAdd.Size = new System.Drawing.Size(126, 25);
             this.btnAdd.TabIndex = 4;
             this.btnAdd.Text = "Add";
             this.btnAdd.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -184,7 +182,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(523, 205);
+            this.ClientSize = new System.Drawing.Size(523, 238);
             this.Controls.Add(this.picLoading);
             this.Controls.Add(this.cbInstallAfterAdd);
             this.Controls.Add(this.btnFolderSearch);
@@ -198,7 +196,6 @@
             this.Controls.Add(this.btnAddAndClose);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(539, 243);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(539, 243);
             this.Name = "frmAddMod";

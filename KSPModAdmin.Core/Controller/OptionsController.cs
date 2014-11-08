@@ -338,7 +338,7 @@ namespace KSPModAdmin.Core.Controller
 
         #endregion
 
-        public static string[] AvailableLanguages
+        public static List<Language> AvailableLanguages
         {
             get { return View.AvailableLanguages; }
             set { View.AvailableLanguages = value; }

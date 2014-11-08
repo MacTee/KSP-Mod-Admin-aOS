@@ -581,4 +581,6 @@
   <!--<Control Name="cbWelcomeLanguages" Value="">-->
   <Control Name="cbWelcomeLanguages_ToolTip" Value="Wähle deine bevorzugte Sprache."/>
   <!--</Control>-->
+  <Control Name="lblAdditionalURLModInfo" Value="Zusätzlicher link:"/>
+
 </Language>

@@ -125,7 +125,7 @@
             // tbRating
             // 
             this.tbRating.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbRating.Location = new System.Drawing.Point(121, 4);
+            this.tbRating.Location = new System.Drawing.Point(290, 4);
             this.tbRating.Name = "tbRating";
             this.tbRating.Size = new System.Drawing.Size(75, 20);
             this.tbRating.TabIndex = 10;
@@ -134,9 +134,9 @@
             // 
             this.lblRatingModInfoEditor.AutoSize = true;
             this.lblRatingModInfoEditor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblRatingModInfoEditor.Location = new System.Drawing.Point(3, 0);
+            this.lblRatingModInfoEditor.Location = new System.Drawing.Point(202, 0);
             this.lblRatingModInfoEditor.Name = "lblRatingModInfoEditor";
-            this.lblRatingModInfoEditor.Size = new System.Drawing.Size(112, 27);
+            this.lblRatingModInfoEditor.Size = new System.Drawing.Size(82, 27);
             this.lblRatingModInfoEditor.TabIndex = 1;
             this.lblRatingModInfoEditor.Text = "Rating:";
             this.lblRatingModInfoEditor.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -195,9 +195,9 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCancel.Image = global::KSPModAdmin.Core.Properties.Resources.delete2;
-            this.btnCancel.Location = new System.Drawing.Point(323, 336);
+            this.btnCancel.Location = new System.Drawing.Point(290, 336);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 25);
+            this.btnCancel.Size = new System.Drawing.Size(110, 25);
             this.btnCancel.TabIndex = 14;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -210,9 +210,9 @@
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.Image = global::KSPModAdmin.Core.Properties.Resources.component_scroll_floppy_disk;
-            this.btnSave.Location = new System.Drawing.Point(242, 336);
+            this.btnSave.Location = new System.Drawing.Point(174, 336);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 25);
+            this.btnSave.Size = new System.Drawing.Size(110, 25);
             this.btnSave.TabIndex = 13;
             this.btnSave.Text = "Save";
             this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -245,9 +245,9 @@
             // 
             this.lblDownloadDateModInfoEditor.AutoSize = true;
             this.lblDownloadDateModInfoEditor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblDownloadDateModInfoEditor.Location = new System.Drawing.Point(202, 0);
+            this.lblDownloadDateModInfoEditor.Location = new System.Drawing.Point(3, 0);
             this.lblDownloadDateModInfoEditor.Name = "lblDownloadDateModInfoEditor";
-            this.lblDownloadDateModInfoEditor.Size = new System.Drawing.Size(82, 27);
+            this.lblDownloadDateModInfoEditor.Size = new System.Drawing.Size(112, 27);
             this.lblDownloadDateModInfoEditor.TabIndex = 1;
             this.lblDownloadDateModInfoEditor.Text = "Download date:";
             this.lblDownloadDateModInfoEditor.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -257,7 +257,7 @@
             this.dtpDownload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dtpDownload.CustomFormat = "dd.MM.yyyy";
             this.dtpDownload.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpDownload.Location = new System.Drawing.Point(290, 4);
+            this.dtpDownload.Location = new System.Drawing.Point(121, 4);
             this.dtpDownload.Name = "dtpDownload";
             this.dtpDownload.Size = new System.Drawing.Size(75, 20);
             this.dtpDownload.TabIndex = 9;
@@ -459,10 +459,10 @@
             this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 81F));
             this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 88F));
             this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 81F));
-            this.tableLayoutPanel8.Controls.Add(this.lblRatingModInfoEditor, 0, 0);
-            this.tableLayoutPanel8.Controls.Add(this.tbRating, 1, 0);
             this.tableLayoutPanel8.Controls.Add(this.lblDownloadsModInfoEditor, 2, 0);
             this.tableLayoutPanel8.Controls.Add(this.tbDownloads, 3, 0);
+            this.tableLayoutPanel8.Controls.Add(this.lblDownloadDateModInfoEditor, 0, 0);
+            this.tableLayoutPanel8.Controls.Add(this.dtpDownload, 1, 0);
             this.tableLayoutPanel8.Location = new System.Drawing.Point(0, 210);
             this.tableLayoutPanel8.Name = "tableLayoutPanel8";
             this.tableLayoutPanel8.RowCount = 1;
@@ -477,10 +477,10 @@
             this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 81F));
             this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 88F));
             this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 81F));
+            this.tableLayoutPanel9.Controls.Add(this.lblRatingModInfoEditor, 2, 0);
             this.tableLayoutPanel9.Controls.Add(this.lblCreationDateModInfoEditor, 0, 0);
+            this.tableLayoutPanel9.Controls.Add(this.tbRating, 3, 0);
             this.tableLayoutPanel9.Controls.Add(this.dtpCreation, 1, 0);
-            this.tableLayoutPanel9.Controls.Add(this.lblDownloadDateModInfoEditor, 2, 0);
-            this.tableLayoutPanel9.Controls.Add(this.dtpDownload, 3, 0);
             this.tableLayoutPanel9.Location = new System.Drawing.Point(0, 178);
             this.tableLayoutPanel9.Name = "tableLayoutPanel9";
             this.tableLayoutPanel9.RowCount = 1;

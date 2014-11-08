@@ -113,7 +113,7 @@ namespace KSPModAdmin.Core.Controller
             catch (Exception ex)
             {
                 string msg = string.Format("Unexpected runtime error: \"{0}\"", ex.Message);
-                string displayMsg = string.Format("{0}{1}{1}If you want to help please send the {2} from the KSP Mod Admin intall dir to{1}mackerbal@mactee.de", msg, Environment.NewLine, KSPMA_LOG_FILENAME);
+                string displayMsg = string.Format("{0}{1}{1}If you want to help please send the {2} from the{1}KSP Mod Admin intall dir to{1}mackerbal@mactee.de{1}or use the issue tracker{1}https://github.com/MacTee/KSP-Mod-Admin-aOS/issues", msg, Environment.NewLine, KSPMA_LOG_FILENAME);
                 MessageBox.Show(displayMsg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Log.AddErrorS(msg, ex);
             }

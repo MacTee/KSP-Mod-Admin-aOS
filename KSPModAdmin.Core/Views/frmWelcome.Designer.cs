@@ -41,15 +41,28 @@
             this.ttWelcome = new System.Windows.Forms.ToolTip(this.components);
             this.lblWelcomeSelectLanguages = new System.Windows.Forms.Label();
             this.cbWelcomeLanguages = new System.Windows.Forms.ComboBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
+            this.tableLayoutPanel5.SuspendLayout();
+            this.tableLayoutPanel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnFinish
             // 
             this.btnFinish.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnFinish.Enabled = false;
-            this.btnFinish.Location = new System.Drawing.Point(334, 238);
+            this.btnFinish.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFinish.Location = new System.Drawing.Point(298, 238);
             this.btnFinish.Name = "btnFinish";
-            this.btnFinish.Size = new System.Drawing.Size(75, 23);
+            this.btnFinish.Size = new System.Drawing.Size(93, 23);
             this.btnFinish.TabIndex = 1;
             this.btnFinish.Text = "Finish";
             this.ttWelcome.SetToolTip(this.btnFinish, "Finish configuration and go to KSP Mod Admin.");
@@ -59,7 +72,7 @@
             // tbKSPPath
             // 
             this.tbKSPPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbKSPPath.Location = new System.Drawing.Point(15, 172);
+            this.tbKSPPath.Location = new System.Drawing.Point(15, 167);
             this.tbKSPPath.Name = "tbKSPPath";
             this.tbKSPPath.ReadOnly = true;
             this.tbKSPPath.Size = new System.Drawing.Size(475, 20);
@@ -71,9 +84,9 @@
             this.btnSelectFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnSelectFolder.Image = global::KSPModAdmin.Core.Properties.Resources.folder_add1;
             this.btnSelectFolder.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSelectFolder.Location = new System.Drawing.Point(186, 138);
+            this.btnSelectFolder.Location = new System.Drawing.Point(170, 3);
             this.btnSelectFolder.Name = "btnSelectFolder";
-            this.btnSelectFolder.Size = new System.Drawing.Size(114, 23);
+            this.btnSelectFolder.Size = new System.Drawing.Size(134, 23);
             this.btnSelectFolder.TabIndex = 4;
             this.btnSelectFolder.Text = "Select folder";
             this.btnSelectFolder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -84,7 +97,7 @@
             // lblWelcomeAuthor
             // 
             this.lblWelcomeAuthor.AutoSize = true;
-            this.lblWelcomeAuthor.Location = new System.Drawing.Point(192, 33);
+            this.lblWelcomeAuthor.Location = new System.Drawing.Point(188, 0);
             this.lblWelcomeAuthor.Name = "lblWelcomeAuthor";
             this.lblWelcomeAuthor.Size = new System.Drawing.Size(98, 13);
             this.lblWelcomeAuthor.TabIndex = 6;
@@ -95,7 +108,7 @@
             this.lblWelcomeStep1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblWelcomeStep1.AutoSize = true;
             this.lblWelcomeStep1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblWelcomeStep1.Location = new System.Drawing.Point(124, 110);
+            this.lblWelcomeStep1.Location = new System.Drawing.Point(118, 3);
             this.lblWelcomeStep1.Name = "lblWelcomeStep1";
             this.lblWelcomeStep1.Size = new System.Drawing.Size(239, 17);
             this.lblWelcomeStep1.TabIndex = 7;
@@ -105,7 +118,7 @@
             // 
             this.lblWelcomeTitle.AutoSize = true;
             this.lblWelcomeTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblWelcomeTitle.Location = new System.Drawing.Point(103, 9);
+            this.lblWelcomeTitle.Location = new System.Drawing.Point(98, 0);
             this.lblWelcomeTitle.Name = "lblWelcomeTitle";
             this.lblWelcomeTitle.Size = new System.Drawing.Size(279, 24);
             this.lblWelcomeTitle.TabIndex = 5;
@@ -114,20 +127,19 @@
             // lblWelcomeNote
             // 
             this.lblWelcomeNote.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblWelcomeNote.AutoSize = true;
             this.lblWelcomeNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblWelcomeNote.Location = new System.Drawing.Point(23, 212);
+            this.lblWelcomeNote.Location = new System.Drawing.Point(27, 200);
             this.lblWelcomeNote.Name = "lblWelcomeNote";
-            this.lblWelcomeNote.Size = new System.Drawing.Size(345, 13);
+            this.lblWelcomeNote.Size = new System.Drawing.Size(463, 35);
             this.lblWelcomeNote.TabIndex = 7;
             this.lblWelcomeNote.Text = "NOTE: You can add more KSP paths later on the Options -> Paths Tab.";
             // 
             // btnExit
             // 
             this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnExit.Location = new System.Drawing.Point(415, 238);
+            this.btnExit.Location = new System.Drawing.Point(397, 238);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(75, 23);
+            this.btnExit.Size = new System.Drawing.Size(93, 23);
             this.btnExit.TabIndex = 2;
             this.btnExit.Text = "Exit";
             this.ttWelcome.SetToolTip(this.btnExit, "Exit KSP Mod Admin.");
@@ -139,35 +151,119 @@
             this.lblWelcomeSelectLanguages.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblWelcomeSelectLanguages.AutoSize = true;
             this.lblWelcomeSelectLanguages.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblWelcomeSelectLanguages.Location = new System.Drawing.Point(117, 58);
+            this.lblWelcomeSelectLanguages.Location = new System.Drawing.Point(106, 4);
             this.lblWelcomeSelectLanguages.Name = "lblWelcomeSelectLanguages";
-            this.lblWelcomeSelectLanguages.Size = new System.Drawing.Size(249, 17);
+            this.lblWelcomeSelectLanguages.Size = new System.Drawing.Size(263, 17);
             this.lblWelcomeSelectLanguages.TabIndex = 9;
-            this.lblWelcomeSelectLanguages.Text = "Please select your prefered language.";
+            this.lblWelcomeSelectLanguages.Text = "Please choose your preferred language.";
             // 
             // cbWelcomeLanguages
             // 
             this.cbWelcomeLanguages.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbWelcomeLanguages.FormattingEnabled = true;
-            this.cbWelcomeLanguages.Location = new System.Drawing.Point(169, 78);
+            this.cbWelcomeLanguages.Location = new System.Drawing.Point(160, 3);
             this.cbWelcomeLanguages.Name = "cbWelcomeLanguages";
-            this.cbWelcomeLanguages.Size = new System.Drawing.Size(146, 21);
+            this.cbWelcomeLanguages.Size = new System.Drawing.Size(154, 21);
             this.cbWelcomeLanguages.TabIndex = 10;
             this.cbWelcomeLanguages.SelectedIndexChanged += new System.EventHandler(this.cbWelcomeLanguages_SelectedIndexChanged);
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.lblWelcomeTitle, 1, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(15, 11);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(475, 24);
+            this.tableLayoutPanel1.TabIndex = 11;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 3;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Controls.Add(this.lblWelcomeAuthor, 1, 0);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(15, 38);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(475, 17);
+            this.tableLayoutPanel2.TabIndex = 12;
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 3;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Controls.Add(this.lblWelcomeSelectLanguages, 1, 0);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(15, 58);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 1;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(475, 21);
+            this.tableLayoutPanel3.TabIndex = 13;
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.ColumnCount = 3;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.Controls.Add(this.cbWelcomeLanguages, 1, 0);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(15, 82);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 1;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(475, 26);
+            this.tableLayoutPanel4.TabIndex = 14;
+            // 
+            // tableLayoutPanel5
+            // 
+            this.tableLayoutPanel5.ColumnCount = 3;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.Controls.Add(this.lblWelcomeStep1, 1, 0);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(15, 112);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            this.tableLayoutPanel5.RowCount = 1;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(475, 20);
+            this.tableLayoutPanel5.TabIndex = 15;
+            // 
+            // tableLayoutPanel6
+            // 
+            this.tableLayoutPanel6.ColumnCount = 3;
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel6.Controls.Add(this.btnSelectFolder, 1, 0);
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(15, 135);
+            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
+            this.tableLayoutPanel6.RowCount = 1;
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(475, 29);
+            this.tableLayoutPanel6.TabIndex = 16;
             // 
             // frmWelcome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(502, 273);
-            this.Controls.Add(this.cbWelcomeLanguages);
-            this.Controls.Add(this.lblWelcomeSelectLanguages);
+            this.Controls.Add(this.tableLayoutPanel6);
+            this.Controls.Add(this.tableLayoutPanel5);
+            this.Controls.Add(this.tableLayoutPanel4);
+            this.Controls.Add(this.tableLayoutPanel3);
+            this.Controls.Add(this.tableLayoutPanel2);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.tbKSPPath);
-            this.Controls.Add(this.btnSelectFolder);
-            this.Controls.Add(this.lblWelcomeAuthor);
             this.Controls.Add(this.lblWelcomeNote);
-            this.Controls.Add(this.lblWelcomeStep1);
-            this.Controls.Add(this.lblWelcomeTitle);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnFinish);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -175,6 +271,16 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "KSP Mod Admin";
             this.Load += new System.EventHandler(this.frmWelcome_Load);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel5.ResumeLayout(false);
+            this.tableLayoutPanel5.PerformLayout();
+            this.tableLayoutPanel6.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -193,5 +299,11 @@
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Label lblWelcomeSelectLanguages;
         private System.Windows.Forms.ComboBox cbWelcomeLanguages;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
     }
 }

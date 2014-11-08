@@ -42,9 +42,9 @@
             // 
             this.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnCancel.Image = global::KSPModAdmin.Core.Properties.Resources.delete2;
-            this.btnCancel.Location = new System.Drawing.Point(297, 127);
+            this.btnCancel.Location = new System.Drawing.Point(262, 127);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 25);
+            this.btnCancel.Size = new System.Drawing.Size(110, 25);
             this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -57,9 +57,9 @@
             this.btnCopy.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnCopy.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCopy.Image = global::KSPModAdmin.Core.Properties.Resources.components_into;
-            this.btnCopy.Location = new System.Drawing.Point(216, 127);
+            this.btnCopy.Location = new System.Drawing.Point(146, 127);
             this.btnCopy.Name = "btnCopy";
-            this.btnCopy.Size = new System.Drawing.Size(75, 25);
+            this.btnCopy.Size = new System.Drawing.Size(110, 25);
             this.btnCopy.TabIndex = 3;
             this.btnCopy.Text = "Copy";
             this.btnCopy.TextAlign = System.Drawing.ContentAlignment.MiddleRight;

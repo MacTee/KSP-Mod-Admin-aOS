@@ -1,4 +1,7 @@
-﻿namespace KSPModAdmin.Core.Views
+﻿using System.Collections.Generic;
+using KSPModAdmin.Core.Utils.Localization;
+
+namespace KSPModAdmin.Core.Views
 {
     partial class frmMain
     {
@@ -132,7 +135,7 @@
             // 
             // ucOptions1
             // 
-            this.ucOptions1.AvailableLanguages = new string[0];
+            this.ucOptions1.AvailableLanguages = new List<Language>();
             this.ucOptions1.ColorDestinationConflict = System.Drawing.Color.Orange;
             this.ucOptions1.ColorDestinationDetected = System.Drawing.Color.Black;
             this.ucOptions1.ColorDestinationMissing = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(130)))), ((int)(((byte)(130)))));

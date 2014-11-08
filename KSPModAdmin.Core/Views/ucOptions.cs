@@ -361,14 +361,14 @@ namespace KSPModAdmin.Core.Views
 
         #endregion
 
-        public string[] AvailableLanguages
+        public List<Language> AvailableLanguages
         {
-            get { return cbLanguages.Items.Cast<string>().ToArray();  }
+            get { return cbLanguages.Items.Cast<Language>().ToList(); }
             set
             {
                 cbLanguages.Items.Clear(); 
                 if (value != null) 
-                    cbLanguages.Items.AddRange(value);
+                    cbLanguages.Items.AddRange(value.ToArray());
             }
         }
 
@@ -379,7 +379,7 @@ namespace KSPModAdmin.Core.Views
         {
             get
             {
-                return (cbLanguages.SelectedItem == null) ? string.Empty : cbLanguages.SelectedItem.ToString();
+                return (cbLanguages.SelectedItem == null) ? string.Empty : ((Language)cbLanguages.SelectedItem).Name;
             }
             set
             {
@@ -388,7 +388,7 @@ namespace KSPModAdmin.Core.Views
 
                 foreach (var item in cbLanguages.Items)
                 {
-                    if (item.ToString() == Localizer.GlobalInstance.CurrentLanguage)
+                    if (((Language)item).Name == Localizer.GlobalInstance.CurrentLanguage)
                     {
                         cbLanguages.SelectedItem = item;
                         break;
@@ -695,7 +695,7 @@ namespace KSPModAdmin.Core.Views
         private void cbLanguages_SelectedIndexChanged(object sender, EventArgs e)
         {
             var lang = (cbLanguages.SelectedItem != null && !string.IsNullOrEmpty(cbLanguages.SelectedItem.ToString())) ? cbLanguages.SelectedItem.ToString() : string.Empty;
-            Localizer.GlobalInstance.CurrentLanguage = lang;
+            Localizer.GlobalInstance.CurrentLanguage = Localizer.GlobalInstance.GetLanguageNameByLongName(lang);
             EventDistributor.InvokeLanguageChanged(this);
         }
     }

@@ -38,10 +38,9 @@ namespace KSPModAdmin.Core.Utils.Localization
 
         private static Localizer mInstance = null;
 
-
         protected LanguagesDictionary mLanguageDictionary = new LanguagesDictionary();
 
-        protected Dictionary<string, string> mLanguageLongNames = new Dictionary<string, string>();
+        protected List<Language> mLanguages = new List<Language>();
 
         #endregion
 
@@ -75,18 +74,7 @@ namespace KSPModAdmin.Core.Utils.Localization
         /// <summary>
         /// Gets all available languages (short).
         /// </summary>
-        public string[] AvailableLanguages
-        {
-            get { return mLanguageDictionary.Count == 0 ? new List<string>().ToArray() : mLanguageDictionary.Keys.ToArray(); }
-        }
-
-        /// <summary>
-        /// Gets all available languages (long name).
-        /// </summary>
-        public string[] AvailableLanguagesLong
-        {
-            get { return mLanguageLongNames.Count == 0 ? new List<string>().ToArray() : mLanguageLongNames.Values.ToArray(); }
-        }
+        public List<Language> AvailableLanguages { get { return mLanguages; } }
 
         /// <summary>
         /// Gets or sets the value for the specified key for the CurrentLanguage.
@@ -275,8 +263,8 @@ namespace KSPModAdmin.Core.Utils.Localization
                 if (line.Contains(LONGNAME))
                 {
                     string longName = line.Substring(line.IndexOf(EQUAL_SIGN) + EQUAL_SIGN.Length).Trim();
-                    if (!mLanguageLongNames.ContainsKey(longName))
-                        mLanguageLongNames.Add(language, longName);
+                    if (!ContainsLanguageByLongName(longName))
+                        mLanguages.Add(new Language(language, longName));
                 }
 
                 else if (!string.IsNullOrEmpty(language))
@@ -315,8 +303,8 @@ namespace KSPModAdmin.Core.Utils.Localization
             if (nodes.Count > 0 && nodes[0].Attributes != null && nodes[0].Attributes[NAME] != null)
             {
                 language = nodes[0].Attributes[NAME].Value.Trim();
-                if (nodes[0].Attributes[LONGNAME] != null && !mLanguageLongNames.ContainsKey(language))
-                    mLanguageLongNames.Add(language, nodes[0].Attributes[LONGNAME].Value.Trim());
+                if (nodes[0].Attributes[LONGNAME] != null && !ContainsLanguageByName(language))
+                    mLanguages.Add(new Language(language, nodes[0].Attributes[LONGNAME].Value.Trim()));
             }
 
             if (string.IsNullOrEmpty(language))
@@ -374,9 +362,18 @@ namespace KSPModAdmin.Core.Utils.Localization
         /// </summary>
         /// <param name="language">The language to get the LongName from.</param>
         /// <returns>The LongName of the passed language.</returns>
-        public string GetLanguageLongName(string language)
+        public string GetLanguageLongName(string name)
         {
-            return mLanguageLongNames.ContainsKey(language) ? mLanguageLongNames[language] : string.Empty;
+            if (string.IsNullOrEmpty(name))
+                return string.Empty;
+
+            foreach (Language language in mLanguages)
+            {
+                if (language.Name == name)
+                    return language.LongName;
+            }
+
+            return string.Empty;
         }
 
         /// <summary>
@@ -389,8 +386,13 @@ namespace KSPModAdmin.Core.Utils.Localization
             if (string.IsNullOrEmpty(longName))
                 return string.Empty;
 
-            var key = (from e in mLanguageLongNames where e.Value == longName select e.Key).FirstOrDefault();
-            return (key == null) ? string.Empty : key;
+            foreach (Language language in mLanguages)
+            {
+                if (language.LongName == longName)
+                    return language.Name;
+            }
+
+            return string.Empty;
         }
 
         /// <summary>
@@ -451,7 +453,7 @@ namespace KSPModAdmin.Core.Utils.Localization
         public void Clear()
         {
             mLanguageDictionary.Clear();
-            mLanguageLongNames.Clear();
+            mLanguages.Clear();
         }
 
 
@@ -480,6 +482,46 @@ namespace KSPModAdmin.Core.Utils.Localization
                 if (node.HasChildNodes)
                     ReadNodes(node.ChildNodes, language);
             }
+        }
+
+        private bool ContainsLanguageByLongName(string longName)
+        {
+            foreach (Language language in mLanguages)
+            {
+                if (language.LongName == longName)
+                    return true;
+            }
+
+            return false;
+        }
+
+        private bool ContainsLanguageByName(string name)
+        {
+            foreach (Language language in mLanguages)
+            {
+                if (language.Name == name)
+                    return true;
+            }
+
+            return false;
+        }
+    }
+
+
+    public class Language
+    {
+        public string Name { get; set; }
+        public string LongName { get; set; }
+
+        public Language(string name, string longName)
+        {
+            Name = name;
+            LongName = longName;
+        }
+
+        public override string ToString()
+        {
+            return LongName;
         }
     }
 }

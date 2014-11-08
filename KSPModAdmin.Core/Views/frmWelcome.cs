@@ -21,7 +21,7 @@ namespace KSPModAdmin.Core.Views
         private void frmWelcome_Load(object sender, EventArgs e)
         {
             cbWelcomeLanguages.Items.Clear();
-            cbWelcomeLanguages.Items.AddRange(Localizer.GlobalInstance.AvailableLanguages);
+            cbWelcomeLanguages.Items.AddRange(Localizer.GlobalInstance.AvailableLanguages.ToArray());
             cbWelcomeLanguages.SelectedItem = Localizer.GlobalInstance.DefaultLanguage;
         }
 
@@ -64,7 +64,7 @@ namespace KSPModAdmin.Core.Views
             string lang = cbWelcomeLanguages.SelectedItem as string;
             if (!string.IsNullOrEmpty(lang))
             {
-                OptionsController.SelectedLanguage = lang;
+                OptionsController.SelectedLanguage = Localizer.GlobalInstance.GetLanguageNameByLongName(lang);
                 ControlTranslator.TranslateControls(Localizer.GlobalInstance, this);
                 EventDistributor.InvokeLanguageChanged(this);
             }

@@ -67,7 +67,7 @@
             // 
             this.pbTransToolExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pbTransToolExport.Image = ((System.Drawing.Image)(resources.GetObject("pbTransToolExport.Image")));
-            this.pbTransToolExport.Location = new System.Drawing.Point(-363, 8);
+            this.pbTransToolExport.Location = new System.Drawing.Point(-299, 8);
             this.pbTransToolExport.Name = "pbTransToolExport";
             this.pbTransToolExport.Size = new System.Drawing.Size(20, 20);
             this.pbTransToolExport.TabIndex = 24;
@@ -92,7 +92,7 @@
             this.dgvTransToolLanguageFileEntries.Name = "dgvTransToolLanguageFileEntries";
             this.dgvTransToolLanguageFileEntries.RowHeadersVisible = false;
             this.dgvTransToolLanguageFileEntries.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvTransToolLanguageFileEntries.Size = new System.Drawing.Size(425, 223);
+            this.dgvTransToolLanguageFileEntries.Size = new System.Drawing.Size(489, 223);
             this.dgvTransToolLanguageFileEntries.TabIndex = 22;
             // 
             // nameDataGridViewTextBoxColumn
@@ -122,13 +122,15 @@
             this.gbTransToolLanguageFile.Enabled = false;
             this.gbTransToolLanguageFile.Location = new System.Drawing.Point(6, 36);
             this.gbTransToolLanguageFile.Name = "gbTransToolLanguageFile";
-            this.gbTransToolLanguageFile.Size = new System.Drawing.Size(438, 104);
+            this.gbTransToolLanguageFile.Size = new System.Drawing.Size(501, 104);
             this.gbTransToolLanguageFile.TabIndex = 20;
             this.gbTransToolLanguageFile.TabStop = false;
             this.gbTransToolLanguageFile.Text = "Language file:";
             // 
             // tableLayoutPanel3
             // 
+            this.tableLayoutPanel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel3.ColumnCount = 2;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 129F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -138,7 +140,7 @@
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(425, 26);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(489, 26);
             this.tableLayoutPanel3.TabIndex = 9;
             // 
             // tbTransToolLanguageShortName
@@ -147,7 +149,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbTransToolLanguageShortName.Location = new System.Drawing.Point(132, 3);
             this.tbTransToolLanguageShortName.Name = "tbTransToolLanguageShortName";
-            this.tbTransToolLanguageShortName.Size = new System.Drawing.Size(290, 20);
+            this.tbTransToolLanguageShortName.Size = new System.Drawing.Size(354, 20);
             this.tbTransToolLanguageShortName.TabIndex = 6;
             // 
             // lblTransToolLanguageShortName
@@ -163,6 +165,8 @@
             // 
             // tableLayoutPanel2
             // 
+            this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel2.ColumnCount = 2;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 129F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -172,7 +176,7 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(425, 27);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(489, 27);
             this.tableLayoutPanel2.TabIndex = 8;
             // 
             // tbTransToolLanguageName
@@ -181,7 +185,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbTransToolLanguageName.Location = new System.Drawing.Point(132, 3);
             this.tbTransToolLanguageName.Name = "tbTransToolLanguageName";
-            this.tbTransToolLanguageName.Size = new System.Drawing.Size(290, 20);
+            this.tbTransToolLanguageName.Size = new System.Drawing.Size(354, 20);
             this.tbTransToolLanguageName.TabIndex = 5;
             // 
             // lblTransToolLanguageName
@@ -197,6 +201,8 @@
             // 
             // tableLayoutPanel1
             // 
+            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 129F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -206,7 +212,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(425, 27);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(489, 27);
             this.tableLayoutPanel1.TabIndex = 7;
             // 
             // tbTransToolFileName
@@ -215,7 +221,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbTransToolFileName.Location = new System.Drawing.Point(132, 3);
             this.tbTransToolFileName.Name = "tbTransToolFileName";
-            this.tbTransToolFileName.Size = new System.Drawing.Size(290, 20);
+            this.tbTransToolFileName.Size = new System.Drawing.Size(354, 20);
             this.tbTransToolFileName.TabIndex = 4;
             // 
             // lblTransToolFileName
@@ -234,9 +240,9 @@
             this.btnTransToolSave.Enabled = false;
             this.btnTransToolSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTransToolSave.Image = global::KSPModAdmin.Translation.Plugin.Properties.Resources.disk_blue;
-            this.btnTransToolSave.Location = new System.Drawing.Point(362, 8);
+            this.btnTransToolSave.Location = new System.Drawing.Point(407, 8);
             this.btnTransToolSave.Name = "btnTransToolSave";
-            this.btnTransToolSave.Size = new System.Drawing.Size(75, 23);
+            this.btnTransToolSave.Size = new System.Drawing.Size(100, 23);
             this.btnTransToolSave.TabIndex = 23;
             this.btnTransToolSave.Text = "Save";
             this.btnTransToolSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -248,11 +254,12 @@
             // 
             // cbTransToolLanguages
             // 
+            this.cbTransToolLanguages.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbTransToolLanguages.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTransToolLanguages.FormattingEnabled = true;
-            this.cbTransToolLanguages.Location = new System.Drawing.Point(95, 3);
+            this.cbTransToolLanguages.Location = new System.Drawing.Point(102, 3);
             this.cbTransToolLanguages.Name = "cbTransToolLanguages";
-            this.cbTransToolLanguages.Size = new System.Drawing.Size(172, 21);
+            this.cbTransToolLanguages.Size = new System.Drawing.Size(186, 21);
             this.cbTransToolLanguages.TabIndex = 17;
             this.ttTransTool.SetToolTip(this.cbTransToolLanguages, "Select a language file to edit.");
             this.cbTransToolLanguages.SelectedIndexChanged += new System.EventHandler(this.cbTransToolLanguages_SelectedIndexChanged);
@@ -263,7 +270,7 @@
             this.lblTransToolLanguages.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblTransToolLanguages.Location = new System.Drawing.Point(3, 0);
             this.lblTransToolLanguages.Name = "lblTransToolLanguages";
-            this.lblTransToolLanguages.Size = new System.Drawing.Size(86, 27);
+            this.lblTransToolLanguages.Size = new System.Drawing.Size(93, 27);
             this.lblTransToolLanguages.TabIndex = 18;
             this.lblTransToolLanguages.Text = "Languages:";
             this.lblTransToolLanguages.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -276,7 +283,7 @@
             this.gbTransToolLanguageFileEntries.Controls.Add(this.dgvTransToolLanguageFileEntries);
             this.gbTransToolLanguageFileEntries.Location = new System.Drawing.Point(6, 146);
             this.gbTransToolLanguageFileEntries.Name = "gbTransToolLanguageFileEntries";
-            this.gbTransToolLanguageFileEntries.Size = new System.Drawing.Size(437, 248);
+            this.gbTransToolLanguageFileEntries.Size = new System.Drawing.Size(501, 248);
             this.gbTransToolLanguageFileEntries.TabIndex = 25;
             this.gbTransToolLanguageFileEntries.TabStop = false;
             this.gbTransToolLanguageFileEntries.Text = "Languae file entries:";
@@ -285,9 +292,9 @@
             // 
             this.cbTransToolEdit.Appearance = System.Windows.Forms.Appearance.Button;
             this.cbTransToolEdit.Image = global::KSPModAdmin.Translation.Plugin.Properties.Resources.pencil2_delete;
-            this.cbTransToolEdit.Location = new System.Drawing.Point(283, 8);
+            this.cbTransToolEdit.Location = new System.Drawing.Point(303, 8);
             this.cbTransToolEdit.Name = "cbTransToolEdit";
-            this.cbTransToolEdit.Size = new System.Drawing.Size(73, 23);
+            this.cbTransToolEdit.Size = new System.Drawing.Size(98, 23);
             this.cbTransToolEdit.TabIndex = 26;
             this.cbTransToolEdit.Text = "Edit";
             this.cbTransToolEdit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -307,7 +314,7 @@
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(271, 27);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(291, 27);
             this.tableLayoutPanel4.TabIndex = 27;
             // 
             // ucTranslationView
@@ -322,7 +329,7 @@
             this.Controls.Add(this.btnTransToolSave);
             this.MinimumSize = new System.Drawing.Size(450, 400);
             this.Name = "ucTranslationView";
-            this.Size = new System.Drawing.Size(450, 400);
+            this.Size = new System.Drawing.Size(514, 400);
             this.Load += new System.EventHandler(this.ucTranslationView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbTransToolExport)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTransToolLanguageFileEntries)).EndInit();

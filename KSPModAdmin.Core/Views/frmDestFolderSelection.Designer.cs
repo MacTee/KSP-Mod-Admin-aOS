@@ -48,9 +48,9 @@
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOK.Image = global::KSPModAdmin.Core.Properties.Resources.component_into;
-            this.btnOK.Location = new System.Drawing.Point(304, 173);
+            this.btnOK.Location = new System.Drawing.Point(238, 173);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(75, 25);
+            this.btnOK.Size = new System.Drawing.Size(110, 25);
             this.btnOK.TabIndex = 0;
             this.btnOK.Text = "OK";
             this.btnOK.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -62,9 +62,9 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.Image = global::KSPModAdmin.Core.Properties.Resources.delete2;
-            this.btnCancel.Location = new System.Drawing.Point(385, 173);
+            this.btnCancel.Location = new System.Drawing.Point(354, 173);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 25);
+            this.btnCancel.Size = new System.Drawing.Size(110, 25);
             this.btnCancel.TabIndex = 0;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;

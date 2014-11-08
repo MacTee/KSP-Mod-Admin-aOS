@@ -61,7 +61,13 @@ namespace KSPModAdmin.Core.Views
             this.btnOpenDownloads = new System.Windows.Forms.Button();
             this.tabPagePath = new System.Windows.Forms.TabPage();
             this.gbPaths = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
+            this.lblKnownKSPPaths = new System.Windows.Forms.Label();
             this.tbDepth = new KSPModAdmin.Core.Utils.Controls.TextBoxNumeric();
+            this.btnAddPath = new System.Windows.Forms.Button();
+            this.btnRemove = new System.Windows.Forms.Button();
+            this.btnSteamSearch = new System.Windows.Forms.Button();
+            this.btnKSPFolderSearch = new System.Windows.Forms.Button();
             this.tlpSearchBG = new System.Windows.Forms.TableLayoutPanel();
             this.tlpSearch = new System.Windows.Forms.TableLayoutPanel();
             this.lblLoading = new System.Windows.Forms.Label();
@@ -72,12 +78,7 @@ namespace KSPModAdmin.Core.Views
             this.btnDownloadPath = new System.Windows.Forms.Button();
             this.btnOpenDownloadFolder = new System.Windows.Forms.Button();
             this.btnOpenKSPRoot = new System.Windows.Forms.Button();
-            this.lblKnownKSPPaths = new System.Windows.Forms.Label();
             this.lblSelectedKSPPath = new System.Windows.Forms.Label();
-            this.btnRemove = new System.Windows.Forms.Button();
-            this.btnSteamSearch = new System.Windows.Forms.Button();
-            this.btnKSPFolderSearch = new System.Windows.Forms.Button();
-            this.btnAddPath = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tvKnownPaths = new System.Windows.Forms.TreeView();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -165,6 +166,7 @@ namespace KSPModAdmin.Core.Views
             ((System.ComponentModel.ISupportInitialize)(this.pbUpdateLoad)).BeginInit();
             this.tabPagePath.SuspendLayout();
             this.gbPaths.SuspendLayout();
+            this.tableLayoutPanel12.SuspendLayout();
             this.tlpSearchBG.SuspendLayout();
             this.tlpSearch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLoading)).BeginInit();
@@ -244,7 +246,7 @@ namespace KSPModAdmin.Core.Views
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 1;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(360, 27);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(394, 27);
             this.tableLayoutPanel5.TabIndex = 18;
             // 
             // lblModUpdateBehavior
@@ -271,7 +273,7 @@ namespace KSPModAdmin.Core.Views
             "Manually"});
             this.cbModUpdateBehavior.Location = new System.Drawing.Point(153, 3);
             this.cbModUpdateBehavior.Name = "cbModUpdateBehavior";
-            this.cbModUpdateBehavior.Size = new System.Drawing.Size(204, 21);
+            this.cbModUpdateBehavior.Size = new System.Drawing.Size(238, 21);
             this.cbModUpdateBehavior.TabIndex = 7;
             this.ttOptions.SetToolTip(this.cbModUpdateBehavior, "Chose the action which should be executed on a mod update.");
             // 
@@ -286,7 +288,7 @@ namespace KSPModAdmin.Core.Views
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(360, 27);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(394, 27);
             this.tableLayoutPanel4.TabIndex = 17;
             // 
             // lblUpdateCheckInterval
@@ -313,7 +315,7 @@ namespace KSPModAdmin.Core.Views
             "Once a week"});
             this.cbModUpdateInterval.Location = new System.Drawing.Point(153, 3);
             this.cbModUpdateInterval.Name = "cbModUpdateInterval";
-            this.cbModUpdateInterval.Size = new System.Drawing.Size(204, 21);
+            this.cbModUpdateInterval.Size = new System.Drawing.Size(238, 21);
             this.cbModUpdateInterval.TabIndex = 6;
             this.ttOptions.SetToolTip(this.cbModUpdateInterval, "Chose the interval on which the mod update check should be started.");
             // 
@@ -373,7 +375,7 @@ namespace KSPModAdmin.Core.Views
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(360, 16);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(394, 16);
             this.tableLayoutPanel3.TabIndex = 17;
             // 
             // lblDownloadKspMA
@@ -409,7 +411,7 @@ namespace KSPModAdmin.Core.Views
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(360, 26);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(394, 26);
             this.tableLayoutPanel2.TabIndex = 16;
             // 
             // lblPostDownloadAction
@@ -435,7 +437,7 @@ namespace KSPModAdmin.Core.Views
             "Auto install after download"});
             this.cbPostDownloadAction.Location = new System.Drawing.Point(153, 3);
             this.cbPostDownloadAction.Name = "cbPostDownloadAction";
-            this.cbPostDownloadAction.Size = new System.Drawing.Size(204, 21);
+            this.cbPostDownloadAction.Size = new System.Drawing.Size(238, 21);
             this.cbPostDownloadAction.TabIndex = 3;
             this.ttOptions.SetToolTip(this.cbPostDownloadAction, "Chose the action that should be executed after a update.");
             // 
@@ -548,7 +550,7 @@ namespace KSPModAdmin.Core.Views
             // 
             // gbPaths
             // 
-            this.gbPaths.Controls.Add(this.tbDepth);
+            this.gbPaths.Controls.Add(this.tableLayoutPanel12);
             this.gbPaths.Controls.Add(this.tlpSearchBG);
             this.gbPaths.Controls.Add(this.cbKSPPath);
             this.gbPaths.Controls.Add(this.lblModDownloadPath);
@@ -556,12 +558,7 @@ namespace KSPModAdmin.Core.Views
             this.gbPaths.Controls.Add(this.btnDownloadPath);
             this.gbPaths.Controls.Add(this.btnOpenDownloadFolder);
             this.gbPaths.Controls.Add(this.btnOpenKSPRoot);
-            this.gbPaths.Controls.Add(this.lblKnownKSPPaths);
             this.gbPaths.Controls.Add(this.lblSelectedKSPPath);
-            this.gbPaths.Controls.Add(this.btnRemove);
-            this.gbPaths.Controls.Add(this.btnSteamSearch);
-            this.gbPaths.Controls.Add(this.btnKSPFolderSearch);
-            this.gbPaths.Controls.Add(this.btnAddPath);
             this.gbPaths.Controls.Add(this.splitContainer1);
             this.gbPaths.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbPaths.Location = new System.Drawing.Point(3, 3);
@@ -571,10 +568,44 @@ namespace KSPModAdmin.Core.Views
             this.gbPaths.TabStop = false;
             this.gbPaths.Text = "Paths:";
             // 
+            // tableLayoutPanel12
+            // 
+            this.tableLayoutPanel12.ColumnCount = 7;
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 8F));
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 36F));
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 36F));
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel12.Controls.Add(this.lblKnownKSPPaths, 0, 0);
+            this.tableLayoutPanel12.Controls.Add(this.tbDepth, 6, 0);
+            this.tableLayoutPanel12.Controls.Add(this.btnAddPath, 2, 0);
+            this.tableLayoutPanel12.Controls.Add(this.btnRemove, 3, 0);
+            this.tableLayoutPanel12.Controls.Add(this.btnSteamSearch, 4, 0);
+            this.tableLayoutPanel12.Controls.Add(this.btnKSPFolderSearch, 5, 0);
+            this.tableLayoutPanel12.Location = new System.Drawing.Point(9, 63);
+            this.tableLayoutPanel12.Name = "tableLayoutPanel12";
+            this.tableLayoutPanel12.RowCount = 1;
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel12.Size = new System.Drawing.Size(594, 30);
+            this.tableLayoutPanel12.TabIndex = 24;
+            // 
+            // lblKnownKSPPaths
+            // 
+            this.lblKnownKSPPaths.AutoSize = true;
+            this.lblKnownKSPPaths.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblKnownKSPPaths.Location = new System.Drawing.Point(3, 0);
+            this.lblKnownKSPPaths.Name = "lblKnownKSPPaths";
+            this.lblKnownKSPPaths.Size = new System.Drawing.Size(120, 30);
+            this.lblKnownKSPPaths.TabIndex = 2;
+            this.lblKnownKSPPaths.Text = "Known KSP install path:";
+            this.lblKnownKSPPaths.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // tbDepth
             // 
             this.tbDepth.DecimalSeparator = ",";
-            this.tbDepth.Location = new System.Drawing.Point(308, 69);
+            this.tbDepth.Location = new System.Drawing.Point(271, 3);
             this.tbDepth.Maximum = 9D;
             this.tbDepth.Minimum = 1D;
             this.tbDepth.Minus = "-";
@@ -585,6 +616,60 @@ namespace KSPModAdmin.Core.Views
             this.tbDepth.Text = "3";
             this.tbDepth.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.tbDepth.ValidCharacters = "1234567890";
+            // 
+            // btnAddPath
+            // 
+            this.btnAddPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddPath.Image = ((System.Drawing.Image)(resources.GetObject("btnAddPath.Image")));
+            this.btnAddPath.Location = new System.Drawing.Point(137, 3);
+            this.btnAddPath.Name = "btnAddPath";
+            this.btnAddPath.Size = new System.Drawing.Size(25, 24);
+            this.btnAddPath.TabIndex = 2;
+            this.ttOptions.SetToolTip(this.btnAddPath, "Add KSP install path\r\nOpens a FolderSelectDialog to add a new KSP install folder." +
+        "");
+            this.btnAddPath.UseVisualStyleBackColor = true;
+            this.btnAddPath.Click += new System.EventHandler(this.btnAddPath_Click);
+            // 
+            // btnRemove
+            // 
+            this.btnRemove.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRemove.Image = ((System.Drawing.Image)(resources.GetObject("btnRemove.Image")));
+            this.btnRemove.Location = new System.Drawing.Point(168, 3);
+            this.btnRemove.Name = "btnRemove";
+            this.btnRemove.Size = new System.Drawing.Size(25, 24);
+            this.btnRemove.TabIndex = 3;
+            this.ttOptions.SetToolTip(this.btnRemove, "Remove KSP install folder\r\nRemoves the selected KSP install folder from the known" +
+        " paths.");
+            this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
+            // 
+            // btnSteamSearch
+            // 
+            this.btnSteamSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSteamSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSteamSearch.Image")));
+            this.btnSteamSearch.Location = new System.Drawing.Point(204, 3);
+            this.btnSteamSearch.Name = "btnSteamSearch";
+            this.btnSteamSearch.Size = new System.Drawing.Size(25, 24);
+            this.btnSteamSearch.TabIndex = 4;
+            this.btnSteamSearch.Tag = "Start";
+            this.ttOptions.SetToolTip(this.btnSteamSearch, "Steam search\r\nSearches the default steam path for KSP install folders.");
+            this.btnSteamSearch.UseVisualStyleBackColor = true;
+            this.btnSteamSearch.Click += new System.EventHandler(this.btnSteamSearch_Click);
+            // 
+            // btnKSPFolderSearch
+            // 
+            this.btnKSPFolderSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnKSPFolderSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnKSPFolderSearch.Image")));
+            this.btnKSPFolderSearch.Location = new System.Drawing.Point(240, 3);
+            this.btnKSPFolderSearch.Name = "btnKSPFolderSearch";
+            this.btnKSPFolderSearch.Size = new System.Drawing.Size(25, 24);
+            this.btnKSPFolderSearch.TabIndex = 5;
+            this.btnKSPFolderSearch.Tag = "Start";
+            this.ttOptions.SetToolTip(this.btnKSPFolderSearch, "KSP folder search\r\nStarts/Stops a KSP folder search. \r\nKSP MA will search all fol" +
+        "ders next (up & down) to its install paths.\r\nThe depth is depanding on the numbe" +
+        "r on the right of this button.");
+            this.btnKSPFolderSearch.UseVisualStyleBackColor = true;
+            this.btnKSPFolderSearch.Click += new System.EventHandler(this.btnFolderSearch_Click);
             // 
             // tlpSearchBG
             // 
@@ -715,15 +800,6 @@ namespace KSPModAdmin.Core.Views
             this.btnOpenKSPRoot.UseVisualStyleBackColor = true;
             this.btnOpenKSPRoot.Click += new System.EventHandler(this.btnOpenKSPRoot_Click);
             // 
-            // lblKnownKSPPaths
-            // 
-            this.lblKnownKSPPaths.AutoSize = true;
-            this.lblKnownKSPPaths.Location = new System.Drawing.Point(12, 72);
-            this.lblKnownKSPPaths.Name = "lblKnownKSPPaths";
-            this.lblKnownKSPPaths.Size = new System.Drawing.Size(120, 13);
-            this.lblKnownKSPPaths.TabIndex = 2;
-            this.lblKnownKSPPaths.Text = "Known KSP install path:";
-            // 
             // lblSelectedKSPPath
             // 
             this.lblSelectedKSPPath.AutoSize = true;
@@ -732,60 +808,6 @@ namespace KSPModAdmin.Core.Views
             this.lblSelectedKSPPath.Size = new System.Drawing.Size(129, 13);
             this.lblSelectedKSPPath.TabIndex = 2;
             this.lblSelectedKSPPath.Text = "Selected KSP install path:";
-            // 
-            // btnRemove
-            // 
-            this.btnRemove.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRemove.Image = ((System.Drawing.Image)(resources.GetObject("btnRemove.Image")));
-            this.btnRemove.Location = new System.Drawing.Point(190, 66);
-            this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(25, 24);
-            this.btnRemove.TabIndex = 3;
-            this.ttOptions.SetToolTip(this.btnRemove, "Remove KSP install folder\r\nRemoves the selected KSP install folder from the known" +
-        " paths.");
-            this.btnRemove.UseVisualStyleBackColor = true;
-            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
-            // 
-            // btnSteamSearch
-            // 
-            this.btnSteamSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSteamSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSteamSearch.Image")));
-            this.btnSteamSearch.Location = new System.Drawing.Point(234, 66);
-            this.btnSteamSearch.Name = "btnSteamSearch";
-            this.btnSteamSearch.Size = new System.Drawing.Size(25, 24);
-            this.btnSteamSearch.TabIndex = 4;
-            this.btnSteamSearch.Tag = "Start";
-            this.ttOptions.SetToolTip(this.btnSteamSearch, "Steam search\r\nSearches the default steam path for KSP install folders.");
-            this.btnSteamSearch.UseVisualStyleBackColor = true;
-            this.btnSteamSearch.Click += new System.EventHandler(this.btnSteamSearch_Click);
-            // 
-            // btnKSPFolderSearch
-            // 
-            this.btnKSPFolderSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnKSPFolderSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnKSPFolderSearch.Image")));
-            this.btnKSPFolderSearch.Location = new System.Drawing.Point(277, 66);
-            this.btnKSPFolderSearch.Name = "btnKSPFolderSearch";
-            this.btnKSPFolderSearch.Size = new System.Drawing.Size(25, 24);
-            this.btnKSPFolderSearch.TabIndex = 5;
-            this.btnKSPFolderSearch.Tag = "Start";
-            this.ttOptions.SetToolTip(this.btnKSPFolderSearch, "KSP folder search\r\nStarts/Stops a KSP folder search. \r\nKSP MA will search all fol" +
-        "ders next (up & down) to its install paths.\r\nThe depth is depanding on the numbe" +
-        "r on the right of this button.");
-            this.btnKSPFolderSearch.UseVisualStyleBackColor = true;
-            this.btnKSPFolderSearch.Click += new System.EventHandler(this.btnFolderSearch_Click);
-            // 
-            // btnAddPath
-            // 
-            this.btnAddPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddPath.Image = ((System.Drawing.Image)(resources.GetObject("btnAddPath.Image")));
-            this.btnAddPath.Location = new System.Drawing.Point(159, 66);
-            this.btnAddPath.Name = "btnAddPath";
-            this.btnAddPath.Size = new System.Drawing.Size(25, 24);
-            this.btnAddPath.TabIndex = 2;
-            this.ttOptions.SetToolTip(this.btnAddPath, "Add KSP install path\r\nOpens a FolderSelectDialog to add a new KSP install folder." +
-        "");
-            this.btnAddPath.UseVisualStyleBackColor = true;
-            this.btnAddPath.Click += new System.EventHandler(this.btnAddPath_Click);
             // 
             // splitContainer1
             // 
@@ -1838,6 +1860,8 @@ namespace KSPModAdmin.Core.Views
             this.tabPagePath.ResumeLayout(false);
             this.gbPaths.ResumeLayout(false);
             this.gbPaths.PerformLayout();
+            this.tableLayoutPanel12.ResumeLayout(false);
+            this.tableLayoutPanel12.PerformLayout();
             this.tlpSearchBG.ResumeLayout(false);
             this.tlpSearchBG.PerformLayout();
             this.tlpSearch.ResumeLayout(false);
@@ -1991,5 +2015,6 @@ namespace KSPModAdmin.Core.Views
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel11;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel10;
         private System.Windows.Forms.ToolTip ttOptions;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel12;
     }
 }

@@ -50,9 +50,9 @@
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.Image = global::KSPModAdmin.Core.Properties.Resources.delete2;
-            this.btnCancel.Location = new System.Drawing.Point(447, 228);
+            this.btnCancel.Location = new System.Drawing.Point(502, 261);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 25);
+            this.btnCancel.Size = new System.Drawing.Size(110, 25);
             this.btnCancel.TabIndex = 2;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -71,7 +71,7 @@
             this.tbMessage.Name = "tbMessage";
             this.tbMessage.ReadOnly = true;
             this.tbMessage.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbMessage.Size = new System.Drawing.Size(534, 181);
+            this.tbMessage.Size = new System.Drawing.Size(622, 214);
             this.tbMessage.TabIndex = 1;
             this.tbMessage.TabStop = false;
             this.tbMessage.WordWrap = false;
@@ -83,7 +83,7 @@
             this.tbDownloadPath.Location = new System.Drawing.Point(128, 3);
             this.tbDownloadPath.Name = "tbDownloadPath";
             this.tbDownloadPath.ReadOnly = true;
-            this.tbDownloadPath.Size = new System.Drawing.Size(345, 20);
+            this.tbDownloadPath.Size = new System.Drawing.Size(433, 20);
             this.tbDownloadPath.TabIndex = 3;
             // 
             // lblDownloadPath
@@ -119,7 +119,7 @@
             "Auto install after download"});
             this.cbPostDownloadAction.Location = new System.Drawing.Point(128, 3);
             this.cbPostDownloadAction.Name = "cbPostDownloadAction";
-            this.cbPostDownloadAction.Size = new System.Drawing.Size(199, 21);
+            this.cbPostDownloadAction.Size = new System.Drawing.Size(236, 21);
             this.cbPostDownloadAction.TabIndex = 5;
             this.ttUpdateDLG.SetToolTip(this.cbPostDownloadAction, "The action that should be executed after a update.");
             // 
@@ -128,9 +128,9 @@
             this.btnDownload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDownload.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDownload.Image = global::KSPModAdmin.Core.Properties.Resources.download;
-            this.btnDownload.Location = new System.Drawing.Point(351, 228);
+            this.btnDownload.Location = new System.Drawing.Point(388, 261);
             this.btnDownload.Name = "btnDownload";
-            this.btnDownload.Size = new System.Drawing.Size(90, 25);
+            this.btnDownload.Size = new System.Drawing.Size(108, 25);
             this.btnDownload.TabIndex = 1;
             this.btnDownload.Text = "Download";
             this.btnDownload.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -143,7 +143,7 @@
             // 
             this.btnDownloadPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDownloadPath.Image = global::KSPModAdmin.Core.Properties.Resources.folder_view;
-            this.btnDownloadPath.Location = new System.Drawing.Point(497, 193);
+            this.btnDownloadPath.Location = new System.Drawing.Point(585, 226);
             this.btnDownloadPath.Name = "btnDownloadPath";
             this.btnDownloadPath.Size = new System.Drawing.Size(25, 23);
             this.btnDownloadPath.TabIndex = 4;
@@ -160,11 +160,11 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.tbDownloadPath, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblDownloadPath, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(15, 191);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(15, 224);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(476, 25);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(564, 25);
             this.tableLayoutPanel1.TabIndex = 6;
             // 
             // tableLayoutPanel2
@@ -176,11 +176,11 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Controls.Add(this.cbPostDownloadAction, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.lblPostDownloadAction, 0, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(15, 228);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(15, 261);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(330, 25);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(367, 25);
             this.tableLayoutPanel2.TabIndex = 7;
             // 
             // frmUpdateDLG
@@ -188,7 +188,7 @@
             this.AcceptButton = this.btnDownload;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(534, 262);
+            this.ClientSize = new System.Drawing.Size(622, 295);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.btnDownloadPath);
