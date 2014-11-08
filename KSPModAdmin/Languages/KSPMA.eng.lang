@@ -589,5 +589,10 @@
   <Control Name="btnAddAndClose" Value="Add &amp;&amp; Close">
     <Control Name="btnAddAndClose_ToolTip" Value="Adds the mod to the ModSelection and closes this dialog."/>
   </Control>
-  
+
+  <Control Name="lblWelcomeSelectLanguages" Value="Please choose your preferred language."/>
+  <!--<Control Name="cbWelcomeLanguages" Value="">-->
+    <Control Name="cbWelcomeLanguages_ToolTip" Value="Choose your preferred language."/>
+  <!--</Control>-->
+
 </Language>

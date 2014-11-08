@@ -577,4 +577,8 @@
   <Control Name="btnAddAndClose" Value="Hinzufügen &amp;&amp; schließen">
     <Control Name="btnAddAndClose_ToolTip" Value="Fügt die Mod der Modauswahl hinzu und schließt diesen Dialog."/>
   </Control>
+  <Control Name="lblWelcomeSelectLanguages" Value="Bitte wähle deine bevorzugte Sprache."/>
+  <!--<Control Name="cbWelcomeLanguages" Value="">-->
+  <Control Name="cbWelcomeLanguages_ToolTip" Value="Wähle deine bevorzugte Sprache."/>
+  <!--</Control>-->
 </Language>

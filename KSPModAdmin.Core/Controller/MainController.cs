@@ -97,14 +97,28 @@ namespace KSPModAdmin.Core.Controller
 
         public static void ShowMainForm()
         {
-            LoadLanguages();
+            try
+            {
+                SetupLogFile();
 
-            View = new frmMain();
+                LoadLanguages();
 
-            Initialize();
+                View = new frmMain();
 
-            if (!IsShutDown)
-                Application.Run(View);
+                Initialize();
+
+                if (!IsShutDown)
+                    Application.Run(View);
+            }
+            catch (Exception ex)
+            {
+                string msg = string.Format("Unexpected runtime error: \"{0}\"", ex.Message);
+                string displayMsg = string.Format("{0}{1}{1}If you want to help please send the {2} from the KSP Mod Admin intall dir to{1}mackerbal@mactee.de", msg, Environment.NewLine, KSPMA_LOG_FILENAME);
+                MessageBox.Show(displayMsg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Log.AddErrorS(msg, ex);
+            }
+
+            Log.AddInfoS(string.Format("---> KSP MA v{0} closed <---{1}", VersionHelper.GetAssemblyVersion(true), Environment.NewLine));
         }
 
         public static void ShutDown()
@@ -113,8 +127,6 @@ namespace KSPModAdmin.Core.Controller
 
             SaveAppConfig();
             SaveKSPConfig();
-
-            Log.AddInfoS(string.Format("---> KSP MA v{0} closed <---{1}", VersionHelper.GetAssemblyVersion(true), Environment.NewLine));
         }
 
         #region IMessageReceiver implementation
@@ -202,7 +214,6 @@ namespace KSPModAdmin.Core.Controller
         /// </summary>
         protected static void Initialize()
         {
-            SetupLogFile();
             Messenger.AddListener(Instance);
 
             EventDistributor.AsyncTaskStarted += AsyncTaskStarted;

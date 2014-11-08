@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
 using FolderSelect;
+using KSPModAdmin.Core.Controller;
 using KSPModAdmin.Core.Utils;
+using KSPModAdmin.Core.Utils.Localization;
 
 namespace KSPModAdmin.Core.Views
 {
@@ -15,6 +17,13 @@ namespace KSPModAdmin.Core.Views
             InitializeComponent();
         }
 
+
+        private void frmWelcome_Load(object sender, EventArgs e)
+        {
+            cbWelcomeLanguages.Items.Clear();
+            cbWelcomeLanguages.Items.AddRange(Localizer.GlobalInstance.AvailableLanguages);
+            cbWelcomeLanguages.SelectedItem = Localizer.GlobalInstance.DefaultLanguage;
+        }
 
         private void btnSelectFolder_Click(object sender, EventArgs e)
         {
@@ -48,6 +57,17 @@ namespace KSPModAdmin.Core.Views
         {
             DialogResult = DialogResult.Cancel;
             Close();
+        }
+
+        private void cbWelcomeLanguages_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string lang = cbWelcomeLanguages.SelectedItem as string;
+            if (!string.IsNullOrEmpty(lang))
+            {
+                OptionsController.SelectedLanguage = lang;
+                ControlTranslator.TranslateControls(Localizer.GlobalInstance, this);
+                EventDistributor.InvokeLanguageChanged(this);
+            }
         }
     }
 }
