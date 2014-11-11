@@ -28,8 +28,8 @@ namespace KSPModAdmin.Core.Utils
             List<Assembly> assemblies = new List<Assembly>(dllFileNames.Length);
             foreach (string dllFile in dllFileNames)
             {
-                AssemblyName assemblyName = AssemblyName.GetAssemblyName(dllFile);
-                Assembly assembly = Assembly.Load(assemblyName);
+                //AssemblyName assemblyName = AssemblyName.GetAssemblyName(dllFile);
+                Assembly assembly = Assembly.LoadFile(dllFile);
                 assemblies.Add(assembly);
             }
 
