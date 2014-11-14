@@ -92,7 +92,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="components_tool_48x48.ico" />
     <Content Include="docs\ReadMe.txt" />
     <Content Include="docs\ToDo.txt" />
     <Content Include="KSP_MA_aOS.ico" />
