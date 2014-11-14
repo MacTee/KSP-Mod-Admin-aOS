@@ -36,6 +36,7 @@ namespace KSPModAdmin.Core.Views
         /// Gets or sets the selected KSP path.
         /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string SelectedKSPPath
         {
             get
@@ -65,6 +66,7 @@ namespace KSPModAdmin.Core.Views
         /// Gets the MainTab control.
         /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public TabControl TabControl { get { return tabControl1; } }
 
 
