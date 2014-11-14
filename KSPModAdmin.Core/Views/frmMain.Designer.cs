@@ -90,7 +90,6 @@ namespace KSPModAdmin.Core.Views
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ucModSelection1.Location = new System.Drawing.Point(3, 0);
             this.ucModSelection1.Name = "ucModSelection1";
-            this.ucModSelection1.OverrideModFiles = false;
             this.ucModSelection1.Size = new System.Drawing.Size(675, 442);
             this.ucModSelection1.TabIndex = 0;
             // 
@@ -98,26 +97,8 @@ namespace KSPModAdmin.Core.Views
             // 
             this.ucKSPStartup1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ucKSPStartup1.BorderlessWin = false;
-            this.ucKSPStartup1.Fullscreen = false;
             this.ucKSPStartup1.Location = new System.Drawing.Point(3, 443);
             this.ucKSPStartup1.Name = "ucKSPStartup1";
-            this.ucKSPStartup1.ScreenResolution = "320x200";
-            this.ucKSPStartup1.ScreenResolutions = new string[] {
-        "320x200",
-        "320x240",
-        "400x300",
-        "512x384",
-        "640x400",
-        "640x480",
-        "768x480",
-        "800x600",
-        "960x600",
-        "1024x768",
-        "1280x720",
-        "1280x768",
-        "1360x768",
-        "1366x768"};
             this.ucKSPStartup1.Size = new System.Drawing.Size(675, 67);
             this.ucKSPStartup1.TabIndex = 1;
             // 
@@ -135,20 +116,9 @@ namespace KSPModAdmin.Core.Views
             // 
             // ucOptions1
             // 
-            this.ucOptions1.AvailableLanguages = new List<Language>();
-            this.ucOptions1.ColorDestinationConflict = System.Drawing.Color.Orange;
-            this.ucOptions1.ColorDestinationDetected = System.Drawing.Color.Black;
-            this.ucOptions1.ColorDestinationMissing = System.Drawing.Color.FromArgb(((int)(((byte)(130)))), ((int)(((byte)(130)))), ((int)(((byte)(130)))));
-            this.ucOptions1.ColorModArchiveMissing = System.Drawing.Color.Red;
-            this.ucOptions1.ColorModInstalled = System.Drawing.Color.Green;
-            this.ucOptions1.ColorModOutdated = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-            this.ucOptions1.ConflictDetectionOnOff = true;
             this.ucOptions1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucOptions1.LastModUpdateTry = new System.DateTime(((long)(0)));
             this.ucOptions1.Location = new System.Drawing.Point(3, 3);
-            this.ucOptions1.ModUpdateBehavior = KSPModAdmin.Core.ModUpdateBehavior.CopyCheckedState;
             this.ucOptions1.Name = "ucOptions1";
-            this.ucOptions1.SelectedLanguage = "";
             this.ucOptions1.Size = new System.Drawing.Size(675, 507);
             this.ucOptions1.TabIndex = 0;
             // 

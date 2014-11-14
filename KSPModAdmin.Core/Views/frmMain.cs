@@ -75,7 +75,7 @@ namespace KSPModAdmin.Core.Views
         {
             InitializeComponent();
 
-            if (DesignMode)
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime || DesignMode)
                 return;
         }
 

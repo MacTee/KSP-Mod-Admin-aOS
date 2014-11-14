@@ -31,6 +31,7 @@ namespace KSPModAdmin.Core.Views
         #region Update Tab
 
         [DefaultValue(false), Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public string KSPMAVersion
         {
             get { return lblKSPModAdminVersion.Text.Split(':')[1].Trim(); }
@@ -42,12 +43,14 @@ namespace KSPModAdmin.Core.Views
         /// Determines whether we should check for updates at start up.
         /// </summary>
         [DefaultValue(false), Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public bool VersionCheck { get { return cbVersionCheck.Checked; } set { cbVersionCheck.Checked = value; } }
 
         /// <summary>
         /// The action the should be performed after an update download.
         /// </summary>
         [DefaultValue(PostDownloadAction.Ask), Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public PostDownloadAction PostDownloadAction
         {
             get
@@ -67,6 +70,7 @@ namespace KSPModAdmin.Core.Views
         /// The interval of mod updating.
         /// </summary>
         [DefaultValue(ModUpdateInterval.Manualy), Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public ModUpdateInterval ModUpdateInterval
         {
             get
@@ -86,12 +90,14 @@ namespace KSPModAdmin.Core.Views
         /// Date of last mod update check
         /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public DateTime LastModUpdateTry { get; set; }
 
         /// <summary>
         /// Gets or sets the action that should be performed when the mod will be auto updated.
         /// </summary>
         [DefaultValue(ModUpdateBehavior.RemoveAndAdd), Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public ModUpdateBehavior ModUpdateBehavior
         {
             get
@@ -116,6 +122,7 @@ namespace KSPModAdmin.Core.Views
         /// Get or sets the up to date image visibility.
         /// </summary>
         [DefaultValue(false), Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public bool Up2Date { get { return pbUp2Date.Visible; } set { pbUp2Date.Visible = value; } }
 
         #endregion
@@ -126,12 +133,14 @@ namespace KSPModAdmin.Core.Views
         /// Gets or sets the download/mods path.
         /// </summary>
         [DefaultValue(""), Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public string DownloadPath { get { return tbDownloadPath.Text; } set { tbDownloadPath.Text = value; } }
 
         /// <summary>
         /// Gets or sets the selected KSP path.
         /// </summary>
         [DefaultValue(""), Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public string SelectedKSPPath
         {
             get
@@ -171,6 +180,7 @@ namespace KSPModAdmin.Core.Views
         /// Gets or sets the selected KSP path.
         /// </summary>
         [DefaultValue(null), Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public NoteNode SelectedKnownKSPPath
         {
             get
@@ -223,6 +233,7 @@ namespace KSPModAdmin.Core.Views
         /// Gets or sets the search depth.
         /// </summary>
         [DefaultValue(3), Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public int SearchDepth { get { return int.Parse(tbDepth.Text); } set { tbDepth.Text = value.ToString(); } }
 
         #endregion
@@ -233,12 +244,14 @@ namespace KSPModAdmin.Core.Views
         /// Gets or sets the flag to determine if the Conflict detection should be turned on or off.
         /// </summary>
         [DefaultValue(false), Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public bool ConflictDetectionOnOff { get { return cbConflictDetectionOnOff.Checked; } set { cbConflictDetectionOnOff.Checked = value; } }
 
         /// <summary>
         /// Gets or sets the flag to determine if the ConflictSolver dialog should be shown or not.
         /// </summary>
         [DefaultValue(false), Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public bool ShowConflictSolver { get { return cbShowConflictSolver.Checked; } set { cbShowConflictSolver.Checked = value; } }
 
         #region Colors
@@ -247,6 +260,7 @@ namespace KSPModAdmin.Core.Views
         /// Gets or sets the color for TreeNodes where a destination was found.
         /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public Color ColorDestinationDetected
         {
             get
@@ -266,6 +280,7 @@ namespace KSPModAdmin.Core.Views
         /// Gets or sets the color for TreeNodes where a destination is missing.
         /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public Color ColorDestinationMissing
         {
             get
@@ -285,6 +300,7 @@ namespace KSPModAdmin.Core.Views
         /// Gets or sets the color for TreeNodes where the mod has conflicts with other mods.
         /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public Color ColorDestinationConflict
         {
             get
@@ -304,6 +320,7 @@ namespace KSPModAdmin.Core.Views
         /// Gets or sets the color for TreeNodes where is installed.
         /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public Color ColorModInstalled
         {
             get
@@ -323,6 +340,7 @@ namespace KSPModAdmin.Core.Views
         /// Gets or sets the color for TreeNodes where mod archive missing.
         /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public Color ColorModArchiveMissing
         {
             get
@@ -342,6 +360,7 @@ namespace KSPModAdmin.Core.Views
         /// Gets or sets the color for TreeNodes with outdated mods.
         /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public Color ColorModOutdated
         {
             get
@@ -361,6 +380,8 @@ namespace KSPModAdmin.Core.Views
 
         #endregion
 
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public List<Language> AvailableLanguages
         {
             get { return cbLanguages.Items.Cast<Language>().ToList(); }
@@ -375,6 +396,8 @@ namespace KSPModAdmin.Core.Views
         /// <summary>
         /// Gets or sets the selected language.
         /// </summary>
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public string SelectedLanguage
         {
             get
@@ -401,6 +424,7 @@ namespace KSPModAdmin.Core.Views
         /// Gets the OptionsTab control.
         /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public TabControl TabControl { get { return tabControl2; } }
 
         #endregion
@@ -417,7 +441,7 @@ namespace KSPModAdmin.Core.Views
             cbModUpdateInterval.SelectedIndex = 0;
             cbModUpdateBehavior.SelectedIndex = 2;
 
-            if (DesignMode)
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime || DesignMode)
                 return;
 
             OptionsController.Initialize(this);

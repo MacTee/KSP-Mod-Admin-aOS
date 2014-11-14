@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -25,12 +26,16 @@ namespace KSPModAdmin.Core.Views
         /// <summary>
         /// Flag to determine if the KPS should be started with a BorderLess windows.
         /// </summary>
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool BorderlessWin
         {
             get { return cbBorderlessWin.Checked; }
             set { cbBorderlessWin.Checked = value; }
         }
 
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public string[] ScreenResolutions
         {
             get { return cbResolutions.Items.Cast<string>().ToArray(); }
@@ -45,6 +50,8 @@ namespace KSPModAdmin.Core.Views
             }
         }
 
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public string ScreenResolution
         {
             get
@@ -57,6 +64,8 @@ namespace KSPModAdmin.Core.Views
             set { cbResolutions.SelectedItem = value; }
         }
 
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public bool Fullscreen { get { return rbFullscreen.Checked; } set { rbFullscreen.Checked = value; rbWindowed.Checked = !value; } }
 
         #endregion

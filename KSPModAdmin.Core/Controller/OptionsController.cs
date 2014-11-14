@@ -346,7 +346,7 @@ namespace KSPModAdmin.Core.Controller
 
         public static string SelectedLanguage 
         {
-            get { return View.SelectedLanguage; }
+            get { return (View != null) ? View.SelectedLanguage : string.Empty; }
             set
             {
                 View.SelectedLanguage = value;

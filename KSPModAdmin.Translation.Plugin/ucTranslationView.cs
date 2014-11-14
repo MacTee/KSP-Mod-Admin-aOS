@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.IO;
 using KSPModAdmin.Core.Views;
 using KSPModAdmin.Translation.Plugin.Properties;
@@ -12,6 +13,8 @@ namespace KSPModAdmin.Translation.Plugin
 
         #region Properties
 
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public LanguageFileContent LanguageFileContent
         {
             get { return mLanguageFileContent; }
@@ -44,7 +47,7 @@ namespace KSPModAdmin.Translation.Plugin
         {
             InitializeComponent();
 
-            if (DesignMode)
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime || DesignMode)
                 return;
 
             TranslationController.Initialize(this);

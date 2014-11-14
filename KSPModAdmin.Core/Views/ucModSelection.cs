@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using KSPModAdmin.Core.Model;
 using KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree;
@@ -21,7 +21,7 @@ namespace KSPModAdmin.Core.Views
         {
             InitializeComponent();
 
-            if (DesignMode)
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime || DesignMode)
                 return;
 
             #region Init TreeView NodeControls here to avoid init during DesignTime
@@ -106,11 +106,15 @@ namespace KSPModAdmin.Core.Views
 
         #endregion
 
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public ModNode SelectedNode
         {
             get { return (tvModSelection.SelectedNode != null) ? tvModSelection.SelectedNode.Tag as ModNode : null; }
         }
 
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public List<ModNode> SelectedNodes
         {
             get 
@@ -126,12 +130,16 @@ namespace KSPModAdmin.Core.Views
             }
         }
 
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public bool OverrideModFiles
         {
             get { return tsbOverride.Checked; }
             set { tsbOverride.Checked = value; }
         }
 
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public bool ShowBusy
         {
             get
@@ -166,7 +174,9 @@ namespace KSPModAdmin.Core.Views
 
         private void ucModSelection_Load(object sender, EventArgs e)
         {
-            if (DesignMode) return;
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime || DesignMode)
+                return;
+
             tvModSelection_SelectionChanged(null, null);
         }
 
@@ -314,6 +324,9 @@ namespace KSPModAdmin.Core.Views
 
         private void tvModSelection_SelectionChanged(object sender, EventArgs e)
         {
+            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime || DesignMode)
+                return;
+
             ModNode selNode = SelectedNode;
             tvModSelection.ContextMenuStrip = (selNode == null) ? cmsModSelectionAllMods : cmsModSelectionOneMod;
             ControlTranslator.TranslateControls(Localizer.GlobalInstance, tvModSelection.ContextMenuStrip, OptionsController.SelectedLanguage);

@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>components_tool_48x48.ico</ApplicationIcon>
+    <ApplicationIcon>KSP_MA_aOS.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug MONO|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
@@ -95,6 +95,7 @@
     <Content Include="components_tool_48x48.ico" />
     <Content Include="docs\ReadMe.txt" />
     <Content Include="docs\ToDo.txt" />
+    <Content Include="KSP_MA_aOS.ico" />
     <Content Include="Resources\components.png" />
     <Content Include="Resources\components_tool_48x48.ico" />
     <Content Include="Resources\gears.png" />
