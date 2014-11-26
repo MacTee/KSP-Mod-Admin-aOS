@@ -4,6 +4,7 @@ using System.Net;
 using System.Web;
 using KSPModAdmin.Core.Controller;
 using KSPModAdmin.Core.Model;
+using HtmlAgilityPack;
 
 namespace KSPModAdmin.Core.Utils
 {
@@ -66,7 +67,7 @@ namespace KSPModAdmin.Core.Utils
             ModInfo modInfo = new ModInfo();
             modInfo.SiteHandlerName = Name;
             modInfo.ModURL = url;
-            if (ParseSite(www.Load(url), ref modInfo))
+            if (ParseSite(url, ref modInfo))
                 return modInfo;
             else
                 return null;
@@ -119,56 +120,82 @@ namespace KSPModAdmin.Core.Utils
             return curseForgeURL;
         }
 
-        private bool ParseSite(string siteContent, ref ModInfo modInfo)
+        private bool ParseSite(string url, ref ModInfo modInfo)
         {
-            int i1 = modInfo.ModURL.LastIndexOf("/") + 1;
-            if (i1 < 0) return false;
-            int i2 = modInfo.ModURL.IndexOf("-", i1);
-            if (i2 < 0) return false;
-            int l = i2 - i1;
-            if (l <= 0) return false;
-            modInfo.ProductID = modInfo.ModURL.Substring(i1, l);
+            HtmlWeb web = new HtmlWeb();
 
-            string searchString = "<h1 class=\"project-title\">";
-            i1 = siteContent.IndexOf(searchString) + searchString.Length;
-            if (i1 < 0) return false;
-            i2 = siteContent.IndexOf("</h1>", i1);
-            if (i2 < 0) return false;
-            modInfo.Name = GetName(siteContent.Substring(i1, i2 - i1));
-            siteContent = siteContent.Substring(i2);
+            modInfo.ProductID = string.Empty;
 
-            // get creation date
-            searchString = "<li>Created: <span><abbr class=\"tip standard-date standard-datetime\" title=\"";
-            int index = siteContent.IndexOf(searchString);
-            if (index < 0) return false;
-            siteContent = siteContent.Substring(index + searchString.Length);
-            index = siteContent.IndexOf("\"");
-            if (index < 0) return false;
-            string creationDate = siteContent.Substring(0, index).Trim();
-            modInfo.CreationDate = GetDateTime(creationDate).ToString();
+            HtmlDocument htmlDoc = web.Load(url);
 
-            // get last released file date
-            searchString = "<li>Last Released File: <span><abbr class=\"tip standard-date standard-datetime\" title=\"";
-            index = siteContent.IndexOf(searchString);
-            if (index >= 0)
+            htmlDoc.OptionFixNestedTags = true;
+
+            HtmlNode nameNode = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='project-details-container']/div[@class='project-user']/h1[@class='project-title']/a/span");
+            HtmlNode idNode = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='sidebar-actions']/ul/li[@class='view-on-curse']/a");
+            HtmlNode createNode = htmlDoc.DocumentNode.SelectSingleNode("//ul[@class='cf-details project-details']/li/div[starts-with(., 'Last Released')]/following::div[1]/abbr");
+            HtmlNode downloadNode = htmlDoc.DocumentNode.SelectSingleNode("//ul[@class='cf-details project-details']/li/div[starts-with(., 'Total Downloads')]/following::div[1]");
+
+            if (nameNode !=null)
             {
-                siteContent = siteContent.Substring(index + searchString.Length);
-                index = siteContent.IndexOf("\"");
-                if (index >= 0)
-                {
-                    creationDate = siteContent.Substring(0, index).Trim();
-                    if (GetDateTime(creationDate) > modInfo.CreationDateAsDateTime)
-                        modInfo.CreationDate = GetDateTime(creationDate).ToString();
-                }
+                modInfo.Name = nameNode.InnerHtml;
+                modInfo.ProductID = idNode.Attributes["href"].Value;
+                modInfo.ProductID = modInfo.ProductID.Substring(modInfo.ProductID.LastIndexOf("/") + 1);
+                modInfo.CreationDate = createNode.InnerHtml;
+                modInfo.Downloads = downloadNode.InnerHtml;
             }
 
-            // get rating count
-            index = siteContent.IndexOf("<li>Total Downloads: <span>");
-            if (index < 0) return false;
-            siteContent = siteContent.Substring(index + 27);
-            index = siteContent.IndexOf("</span>");
-            if (index < 0) return false;
-            modInfo.Downloads = siteContent.Substring(0, index).Trim();
+            //****  need to add modInfo.UpdateDate
+            
+            //int i1 = modInfo.ModURL.LastIndexOf("/") + 1;
+            //if (i1 < 0) return false;
+            //int i2 = modInfo.ModURL.IndexOf("-", i1);
+            //if (i2 < 0) return false;
+            //int l = i2 - i1;
+            //if (l <= 0) return false;
+            //modInfo.ProductID = modInfo.ModURL.Substring(i1, l);
+
+            //string searchString = "<h1 class=\"project-title\">";
+            //i1 = siteContent.IndexOf(searchString) + searchString.Length;
+            //if (i1 < 0) return false;
+            //i2 = siteContent.IndexOf("</h1>", i1);
+            //if (i2 < 0) return false;
+            //modInfo.Name = GetName(siteContent.Substring(i1, i2 - i1));
+            //siteContent = siteContent.Substring(i2);
+
+            //// get creation date
+            ////searchString = "<li>Created: <span><abbr class=\"tip standard-date standard-datetime\" title=\"";
+            //searchString = "<li><div class=\"info-label\">Created</div><div class=\"info-data\"><abbr class=\"tip standard-date standard-datetime\" title=\"";
+            //int index = siteContent.IndexOf(searchString);
+            //if (index < 0) return false;
+            //siteContent = siteContent.Substring(index + searchString.Length);
+            //index = siteContent.IndexOf("\"");
+            //if (index < 0) return false;
+            
+            //string creationDate = siteContent.Substring(0, index).Trim();
+            //modInfo.CreationDate = GetDateTime(creationDate).ToString();
+
+            // get last released file date
+            //searchString = "<li>Last Released File: <span><abbr class=\"tip standard-date standard-datetime\" title=\"";
+            //index = siteContent.IndexOf(searchString);
+            //if (index >= 0)
+            //{
+            //    siteContent = siteContent.Substring(index + searchString.Length);
+            //    index = siteContent.IndexOf("\"");
+            //    if (index >= 0)
+            //    {
+            //        creationDate = siteContent.Substring(0, index).Trim();
+            //        if (GetDateTime(creationDate) > modInfo.CreationDateAsDateTime)
+                        //modInfo.CreationDate = GetDateTime(creationDate).ToString();
+            //    }
+            //}
+
+            //// get rating count
+            //index = siteContent.IndexOf("<li>Total Downloads: <span>");
+            //if (index < 0) return false;
+            //siteContent = siteContent.Substring(index + 27);
+            //index = siteContent.IndexOf("</span>");
+            //if (index < 0) return false;
+            //modInfo.Downloads = siteContent.Substring(0, index).Trim();
 
             // more infos could be parsed here (like: short description, Tab content (overview, installation, ...), comments, ...)
             return true;
