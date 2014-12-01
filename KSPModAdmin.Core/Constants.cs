@@ -97,6 +97,7 @@
         public const string NOTE = "Note";
         public const string PRODUCTID = "ProductID";
         public const string CREATIONDATE = "CreationDate";
+        public const string CHANGEDATE = "ChangeDate";
         public const string AUTHOR = "Author";
         public const string RATING = "Rating";
         public const string DOWNLOADS = "Downloads";

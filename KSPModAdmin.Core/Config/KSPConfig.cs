@@ -283,6 +283,12 @@ namespace KSPModAdmin.Core.Config
                 pathNodeAttribute.Value = child.CreationDate;
                 modNode.Attributes.Append(pathNodeAttribute);
             }
+            if (child.ChangeDate != string.Empty)
+            {
+                pathNodeAttribute = doc.CreateAttribute(Constants.CHANGEDATE);
+                pathNodeAttribute.Value = child.ChangeDate;
+                modNode.Attributes.Append(pathNodeAttribute);
+            }
             if (child.Author != string.Empty)
             {
                 pathNodeAttribute = doc.CreateAttribute(Constants.AUTHOR);
