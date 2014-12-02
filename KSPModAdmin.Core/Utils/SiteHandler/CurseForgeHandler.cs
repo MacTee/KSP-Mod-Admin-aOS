@@ -101,8 +101,19 @@ namespace KSPModAdmin.Core.Utils
             htmlDoc.OptionFixNestedTags = true;
 
             //get filename from hover text
-            HtmlNode fileNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='content']/section[2]/div[4]/div[2]/ul/li/div[2]/p/a/span");
-            string filename = fileNode.Attributes["title"].Value;
+            HtmlNode fileNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='content']/section[2]/div[4]/div[2]/ul/li[1]/div[2]/p/a");
+            HtmlNode fileNode2 = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='content']/section[2]/div[4]/div[2]/ul/li/div[2]/p/a/span");
+
+            string filename = string.Empty;
+
+            if (fileNode.InnerHtml.Contains("..."))
+            {
+                filename = fileNode2.Attributes["title"].Value; //Long filename was truncated
+            }
+            else
+            {
+                filename = fileNode.InnerHtml;
+            }
 
             string downloadURL = GetDownloadURL(modInfo.ModURL);
 
