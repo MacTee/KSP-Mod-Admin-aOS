@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Security.Policy;
-using System.Web;
 using KerbalStuff;
 using KSPModAdmin.Core.Controller;
 using KSPModAdmin.Core.Model;
