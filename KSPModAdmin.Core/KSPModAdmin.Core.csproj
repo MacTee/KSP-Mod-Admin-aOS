@@ -422,6 +422,7 @@
     <None Include="Resources\component_replace_clock.png" />
     <None Include="Resources\components_package_into.png" />
     <None Include="Resources\components_package_out.png" />
+    <Content Include="Externals\KerbalStuffReadOnly.dll" />
     <Content Include="Utils\Controls\CheckBoxComboBox\_license\license.txt" />
     <Content Include="Utils\Controls\FolderSelectionDialog\_license\license.txt" />
     <Content Include="Utils\Controls\TreeViewAdv\_license\license.txt" />
