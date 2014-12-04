@@ -68,32 +68,6 @@ namespace KSPModAdmin.Core.Model
             }
         }
 
-        public string ChangeDate { get; set; }
-
-        public DateTime ChangeDateAsDateTime
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(ChangeDate))
-                    return DateTime.MinValue;
-                else
-                {
-                    DateTime value = DateTime.MinValue;
-                    if (DateTime.TryParse(ChangeDate, out value))
-                        return value;
-                    else
-                        return DateTime.MinValue;
-                }
-            }
-            set
-            {
-                if (value == DateTime.MinValue)
-                    ChangeDate = string.Empty;
-                else
-                    ChangeDate = value.ToString();
-            }
-        }
-
         public string Rating { get; set; }
 
         public string Downloads { get; set; }
@@ -101,6 +75,8 @@ namespace KSPModAdmin.Core.Model
         public string Author { get; set; }
 
         public string ProductID { get; set; }
+
+		public string Version { get; set; }
 
         public bool IsArchive
         {
@@ -170,7 +146,7 @@ namespace KSPModAdmin.Core.Model
 
             Author = string.Empty;
 
-            ProductID = (string.IsNullOrEmpty(ProductID)) ? string.Empty : ProductID;
+            ProductID = string.Empty;
         }
     }
 }
