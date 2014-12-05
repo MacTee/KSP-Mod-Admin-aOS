@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -69,10 +70,10 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 			{
 				SiteHandlerName = Name,
 				ModURL = url,
-				Name = parts[2],
-				Author = parts[1]
+				Name = parts[3],
+				Author = parts[2]
 			};
-			//modInfo.CreationDate = kerbalMod.Versions.Last().Date;	// TODO when KS API supports dates from versions
+			//modInfo.CreationDate = kerbalMod.Versions.Last().Date;	// TODO when Adding github tags parser
 
 			return modInfo;
         }
@@ -101,11 +102,7 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
                 return false;
 
             string downloadUrl = GetDownloadURL(modInfo);
-
-			//string siteContent = www.Load(GetFilesURL(modInfo.ModURL));
-			//string filename = GetFileName(siteContent);
 			modInfo.LocalPath = Path.Combine(OptionsController.DownloadPath, GetDownloadName(downloadUrl));
-
             www.DownloadFile(downloadUrl, modInfo.LocalPath, downloadProgressHandler);
 
             return File.Exists(modInfo.LocalPath);
@@ -157,7 +154,18 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 
         private string GetDownloadURL(ModInfo modInfo)
         {
-			return GitHub.GetDownloadURL(modInfo.ModURL);
+	        string url;
+	        if (!modInfo.ModURL.Contains("releases"))
+	        {
+				var parts = GetUrlParts(modInfo.ModURL);
+				url = parts[0] + "://" + parts[1] + "/" + parts[2] + "/" + parts[3] + "/releases";
+	        }
+	        else
+	        {
+		        url = modInfo.ModURL;
+	        }
+
+			return GitHub.GetDownloadURL(url);
         }
 
 		private string GetDownloadName(string url)
@@ -169,15 +177,25 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 		/// Splits a url into it's segment parts
 		/// </summary>
 		/// <param name="url">A url to split</param>
+		/// <exception cref="ArgumentException"></exception>
 		/// <returns>An array of the url segments</returns>
-		private string[] GetUrlParts(string url)
+		private List<string> GetUrlParts(string url)
 		{
-			var parts = new Uri(url).Segments;
+			// Split the url into parts
+			var parts = new List<string> {new Uri(url).Scheme, new Uri(url).Authority};
+			parts.AddRange(new Uri(url).Segments);
 
-			for (int index = 0; index < parts.Length; index++)
+			for (int index = 0; index < parts.Count; index++)
 			{
 				parts[index] = parts[index].Trim(new char[] { '/' });
 			}
+
+			// Remove empty parts from the list
+			parts = parts.Where(s => !string.IsNullOrWhiteSpace(s)).Distinct().ToList();
+
+			// TODO Error message should go wherever strings are going.
+			if (parts.Count < 4)
+				throw new System.ArgumentException("GitHub URL must point to a repository.");
 
 			return parts;
 		}
