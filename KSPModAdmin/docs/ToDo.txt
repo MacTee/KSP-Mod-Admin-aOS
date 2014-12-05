@@ -28,6 +28,11 @@
 
 - Don't load all languages into memory! 
 
+- Tab to enable/disable plugins
+  - Don't enable unknown plugins during loading.
+  - Save known plugins (+ enable state) to AppConfig.
+  - Remove known but not found plugins (or ask the user).
+
 - ModSelection
   -> MutiSelect 
      -> for ModNodes (for all highlighted functions)
@@ -54,6 +59,9 @@
 
 - Try loading old KSPModAdmin.cfg file if no new cfg file is available.
   -> For AppConfig and KSPConfig!
+
+
+- Implementation of a waffle iron !!! =)
 
 
 

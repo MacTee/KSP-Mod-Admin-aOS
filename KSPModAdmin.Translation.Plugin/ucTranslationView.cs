@@ -133,7 +133,7 @@ namespace KSPModAdmin.Translation.Plugin
         /// Gets the Name for the parent TabPage.
         /// </summary>
         /// <returns>The Name for the parent TabPage.</returns>
-        public override string GetTabName()
+        public override string GetTabCaption()
         {
             return Messages.MSG_TRANSLATION_VIEW_TITLE;
         }

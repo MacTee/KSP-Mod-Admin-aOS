@@ -1,0 +1,586 @@
+<Language Name="ru" LongName="Русский">
+  <Control Name="frmMain" Value="KSP Mod Admin AnyOS" />
+  <Control Name="lblKSPPath" Value="Путь к папке установки KSP:" />
+  <Control Name="cbKSPPath" Value="">
+    <ChildControl Name="cbKSPPath_ToolTip" Value="Укажите путь к папке KSP, с которой программа будет работать." />
+  </Control>
+  <Control Name="tabPageModSelection" Value="Моды" />
+  <Control Name="cmsModSelectionAllMods" Value="">
+    <Control Name="tsmiCmsAddMod" Value="Добавить мод" />
+    <Control Name="tsmiCmsAddModArchive" Value="Добавить архив с модом" />
+    <Control Name="tsmiCmsImportExportModPack" Value="Загрузить/выгрузить пакет с модами" />
+    <Control Name="tsmiCmsScanForAlreadyInstalledMods" Value="Найти уже установленные моды" />
+    <Control Name="tsmiCmsRemoveAllMods" Value="Удалить все моды" />
+    <Control Name="tsmiCmsProceedAllMods" Value="Обработать все моды" />
+    <Control Name="tsmiCmsUpdatecheckForAllMods" Value="Проверить наличие обновлений для всех модов" />
+    <Control Name="tsmiCmsRefreshCheckedStateForAllMods" Value="Обновить отметки для всех модов" />
+    <Control Name="tsmiCmsUncheckAllMods" Value="Снять отметки со всех модов" />
+  </Control>
+  <Control Name="cmsModSelectionOneMod" Value="">
+    <Control Name="tsmiCmsDestination" Value="Путь" />
+    <Control Name="tsmiCmsSelectNewDestination" Value="Выбрать новый путь" />
+    <Control Name="tsmiCmsResetDestination" Value="Сбросить путь" />
+    <Control Name="tsmiCmsRedetectDestination" Value="Автоопределение пути для мода" />
+    <Control Name="tsmiCmsRefreschCheckedState" Value="Обновить отметки" />
+    <Control Name="tsmiCmsEditModInfos" Value="Изменить информацию о моде" />
+    <Control Name="tsmiCmsCopyModInfos" Value="Копировать информацию о моде" />
+    <Control Name="tsmiCmsUpdatecheckMod" Value="Поиск обновлений" />
+    <Control Name="tsmiCmsVisitVersionControlSite" Value="Посетить ссылку проверки версии" />
+    <Control Name="tsmiCmsVisitAdditionalLink" Value="Посетить дополнительную ссылку" />
+    <Control Name="tsmiCmsSolveConflicts" Value="Разрешение конфликтов" />
+    <Control Name="tsmiCmsProceedMod" Value="Обработать мод" />
+    <Control Name="tsmiCmsRemoveMod" Value="Удалить мод" />
+    <Control Name="tsmiCmsCreateZip" Value="Создать Zip-архив" />
+  </Control>
+  <Control Name="tsMod" Value="(T)toolStrip2">
+    <Control Name="tsbProceedMod" Value="(T)toolStripButton9">
+      <ChildControl Name="tsbProceedMod_ToolTip" Value="Обработать мод^Устанавливает отмеченные и удаляет неотмеченные части выбранного мода." />
+    </Control>
+    <Control Name="tsbModUpdateCheck" Value="(T)toolStripButton6">
+      <ChildControl Name="tsbModUpdateCheck_ToolTip" Value="Проверить обновления модов^Проверяет наличие обновлений для модов, если включено управление версиями." />
+    </Control>
+    <Control Name="tssbVisitVersionControlSite" Value="(T)toolStripDropDownButton3">
+      <ChildControl Name="tssbVisitVersionControlSite_ToolTip" Value="Посетить страницу проверки версии^Открывает обозреватель и переходит на страницу проверки версии мода." />
+      <Control Name="tsmiVisitVersionControlSite" Value="Посетить сайт проверки версии">
+        <ChildControl Name="tsmiVisitVersionControlSite_ToolTip" Value="Посетить сайт проверки версии^Открывает обозреватель и переходит на сайт проверки версии мода." />
+      </Control>
+      <Control Name="tsmiVisitAdditionalLink" Value="Посетить дополнительную ссылку">
+        <ChildControl Name="tsmiVisitAdditionalLink_ToolTip" Value="Перейти на страницу по дополнительной ссылке^Открывает обозреватель и переходит по дополнительной ссылке мода мода." />
+      </Control>
+    </Control>
+    <Control Name="tsbEditModInfos" Value="(T)toolStripButton7">
+      <ChildControl Name="tsbEditModInfos_ToolTip" Value="Изменить информацию о моде^Открывает редактор информации о моде." />
+    </Control>
+    <Control Name="tsbCopyModInfos" Value="(T)toolStripButton8">
+      <ChildControl Name="tsbCopyModInfos_ToolTip" Value="Копировать информацию о моде^Копирует информацию этого моду в другой мод." />
+    </Control>
+    <Control Name="tsbSolveConflicts" Value="(T)toolStripButton11">
+      <ChildControl Name="tsbSolveConflicts_ToolTip" Value="Разрешение конфликтов^Открывает диалог разрешения конфликтов модов." />
+    </Control>
+    <Control Name="tsbRefreshCheckedState" Value="(T)toolStripButton10">
+      <ChildControl Name="tsbRefreshCheckedState_ToolTip" Value="Обновить отметки^Обновляет состояние отметок-галочек для частей модов" />
+    </Control>
+    <Control Name="tssbChangeDestination" Value="(T)toolStripButton12">
+      <ChildControl Name="tssbChangeDestination_ToolTip" Value="Выбрать путь^Указывает путь установки для выбранной папки или файла мода." />
+      <Control Name="tsmiChangeDestination" Value="Выбрать новый путь установки">
+        <ChildControl Name="tsmiChangeDestination_ToolTip" Value="Выбрать путь^Указывает путь установки для выбранной папки или файла мода." />
+      </Control>
+      <Control Name="tsmiResetDestination" Value="Сбросить путь">
+        <ChildControl Name="tsmiResetDestination_ToolTip" Value="Сбросить путь^Сбрасывает путь установки для выбранной папки или файла мода." />
+      </Control>
+      <Control Name="tsmiRedetectDestination" Value="Автоопределение пути для мода">
+        <ChildControl Name="tsmiRedetectDestination_ToolTip" Value="Автоопределение пути для мода^Удаляет все пути для мода и^автоматически определяет их заново." />
+      </Control>
+    </Control>
+    <Control Name="tsbCreateZip" Value="(T)toolStripButton14">
+      <ChildControl Name="tsbCreateZip_ToolTip" Value="Создать Zip-архив^Создаёт новый zip-архив с модом." />
+    </Control>
+  </Control>
+  <Control Name="lvModSelection" Value="">
+    <ChildControl Name="lvModSelection_Column_1" Value="" />
+    <ChildControl Name="lvModSelection_Column_2" Value="" />
+    <ChildControl Name="lvModSelection_Group_1" Value="Информация о моде" />
+    <ChildControl Name="lvModSelection_Group_2" Value="Информация о файле" />
+    <ChildControl Name="lvModSelection_Item_1" Value="Название" />
+    <ChildControl Name="lvModSelection_Item_2" Value="Путь к архиву" />
+    <ChildControl Name="lvModSelection_Item_3" Value="Управление версиями" />
+    <ChildControl Name="lvModSelection_Item_4" Value="Идентификатор" />
+    <ChildControl Name="lvModSelection_Item_5" Value="Версия" />
+    <ChildControl Name="lvModSelection_Item_6" Value="Автор" />
+    <ChildControl Name="lvModSelection_Item_7" Value="Дата создания" />
+    <ChildControl Name="lvModSelection_Item_8" Value="Дата изменения" />
+    <ChildControl Name="lvModSelection_Item_9" Value="Устарел" />
+    <ChildControl Name="lvModSelection_Item_10" Value="Оценка" />
+    <ChildControl Name="lvModSelection_Item_11" Value="Загрузки" />
+    <ChildControl Name="lvModSelection_Item_12" Value="Примечания" />
+    <ChildControl Name="lvModSelection_Item_13" Value="Название" />
+    <ChildControl Name="lvModSelection_Item_14" Value="Путь установки" />
+    <ChildControl Name="lvModSelection_Item_15" Value="Конфликты" />
+    <ChildControl Name="lvModSelection_Item_16" Value="Установлен" />
+  </Control>
+  <Control Name="tsModSelection" Value="(T)toolStrip1">
+    <Control Name="tssbAddMod" Value="(T)toolStripButton1">
+      <ChildControl Name="tssbAddMod_ToolTip" Value="Добавить^Открывает диалог &quot;Добавить мод&quot;." />
+      <Control Name="tsmiAddMod" Value="Добавить">
+        <ChildControl Name="tsmiAddMod_ToolTip" Value="Добавить^Открывает диалог &quot;Добавить мод&quot;." />
+      </Control>
+      <Control Name="tsmiAddModArchives" Value="Добавить архив">
+        <ChildControl Name="tsmiAddModArchives_ToolTip" Value="Добавить архив^Открывает &quot;Проводник&quot; для выбора архивов с модами." />
+      </Control>
+    </Control>
+    <Control Name="tsbRemoveMod" Value="(T)toolStripButton2">
+      <ChildControl Name="tsbRemoveMod_ToolTip" Value="Удалить мод^Удаляет выбранный мод." />
+    </Control>
+    <Control Name="tsbRemoveAll" Value="(T)toolStripButton3">
+      <ChildControl Name="tsbRemoveAll_ToolTip" Value="Удалить все моды^Удаляет все моды из списка." />
+    </Control>
+    <Control Name="tsbExImport" Value="(T)toolStripButton4">
+      <ChildControl Name="tsbExImport_ToolTip" Value="Импорт/экспорт пакетов с модами^Открывает Импорт/экспорт пакетов." />
+    </Control>
+    <Control Name="tsbScan" Value="(T)toolStripButton5">
+      <ChildControl Name="tsbScan_ToolTip" Value="Сканировать папку GameData^Ищет в папке KSP GameData установленные моды и^ добавляет их в список модов, если их там нет." />
+    </Control>
+    <Control Name="tsbUpdatecheckAllMods" Value="(T)toolStripButton1">
+      <ChildControl Name="tsbUpdatecheckAllMods_ToolTip" Value="Поиск обновлений для всех модов^Запускает поиск обновлений для всех модов в списке." />
+    </Control>
+    <Control Name="tsbRefreshCheckedstateForAllMods" Value="(T)toolStripButton1">
+      <ChildControl Name="tsbRefreshCheckedstateForAllMods_ToolTip" Value="Обновить отметки у всех модов.^Проверяет установку всех элементов модов по указанным путям." />
+    </Control>
+    <Control Name="tsbCheckAllMods" Value="(T)toolStripButton1">
+      <ChildControl Name="tsbCheckAllMods_ToolTip" Value="Отметить все моды^Отмечает все моды." />
+    </Control>
+    <Control Name="tsbUncheckAllMods" Value="(T)toolStripButton1">
+      <ChildControl Name="tsbUncheckAllMods_ToolTip" Value="Снять отметку у всех модов^Снимает отметку у всех модов." />
+    </Control>
+    <Control Name="toolStripLabel1" Value="" />
+    <Control Name="toolStripLabel2" Value="">
+      <ChildControl Name="toolStripLabel2_ToolTip" Value="работаю..." />
+    </Control>
+    <Control Name="tsbOverride" Value="Перезаписывать">
+      <ChildControl Name="tsbOverride_ToolTip" Value="Перезаписывать файлы^Включает/выключает перезапись имеющихся файлов при установке модов." />
+    </Control>
+  </Control>
+  <Control Name="btnProceedAll" Value="Обработать все моды">
+    <ChildControl Name="btnProceedAll_ToolTip" Value="Обработать все моды^Обрабатывает (устанавливает или удаляет) все моды в списке.^(Для установки части мода поставьте отметку в чекбоксе рядом с ней)" />
+  </Control>
+  <Control Name="btnProceedHighlighted" Value="Обработать выбранные моды">
+    <ChildControl Name="btnProceedHighlighted_ToolTip" Value="Обработать выбранные моды^Обрабатывает (устанавливает или удаляет) все моды в списке выбранные (подсвеченные синим) мод(ы).^(Для установки части мода поставьте отметку в чекбоксе рядом с ней.)" />
+  </Control>
+  <Control Name="btnLaunchKSP" Value="Запустить Kerbal Space Program">
+    <ChildControl Name="btnLaunchKSP_ToolTip" Value="Запускает KSP.exe в выбранной папке с игрой." />
+  </Control>
+  <Control Name="cbResolutions" Value="">
+    <ChildControl Name="cbResolutions_ToolTip" Value="Устанавливает разрешение экрана/окна KSP." />
+  </Control>
+  <Control Name="cbBorderlessWin" Value="Без рамки">
+    <ChildControl Name="cbBorderlessWin_ToolTip" Value="Запускает  KSP в окне без рамки." />
+  </Control>
+  <Control Name="rbFullscreen" Value="Полноэкранный">
+    <ChildControl Name="rbFullscreen_ToolTip" Value="Запускает KSP в полноэкранном режиме." />
+  </Control>
+  <Control Name="rbWindowed" Value="Оконный">
+    <ChildControl Name="rbWindowed_ToolTip" Value="Запускает KSP в оконном режиме." />
+  </Control>
+  <Control Name="tabPageOptions" Value="Настройки" />
+  <Control Name="tabPageUpdate" Value="Обновление" />
+  <Control Name="gbModUpdate" Value="Обновление модов:" />
+  <Control Name="lblModUpdateBehavior" Value="Режим обновления модов:" />
+  <Control Name="cbModUpdateBehavior" Value="">
+    <ChildControl Name="cbModUpdateBehavior_ToolTip" Value="Выберите действие, которое будет выполняться при обновлении мода." />
+    <ChildControl Name="cbModUpdateBehavior_cbItem_1" Value="Удалить и добавить" />
+    <ChildControl Name="cbModUpdateBehavior_cbItem_2" Value="Скопировать пути установки" />
+    <ChildControl Name="cbModUpdateBehavior_cbItem_3" Value="Скопировать отметки" />
+    <ChildControl Name="cbModUpdateBehavior_cbItem_4" Value="Ручной режим" />
+  </Control>
+  <Control Name="lblUpdateCheckInterval" Value="Период обновления:" />
+  <Control Name="cbModUpdateInterval" Value="">
+    <ChildControl Name="cbModUpdateInterval_ToolTip" Value="Выберите, как часто запускать поиск обновлений модов." />
+    <ChildControl Name="cbModUpdateInterval_cbItem_1" Value="Вручную" />
+    <ChildControl Name="cbModUpdateInterval_cbItem_2" Value="При запуске" />
+    <ChildControl Name="cbModUpdateInterval_cbItem_3" Value="Раз в день" />
+    <ChildControl Name="cbModUpdateInterval_cbItem_4" Value="Раз в неделю" />
+  </Control>
+  <Control Name="pbCheckModUpdate" Value="">
+    <ChildControl Name="pbCheckModUpdate_ToolTip" Value="проверка обновлений..." />
+  </Control>
+  <Control Name="btnCheckModUpdates" Value="Поиск обновлений модов">
+    <ChildControl Name="btnCheckModUpdates_ToolTip" Value="Поиск обновлений модов^Запускает поиск обновлений для всех модов в списке." />
+  </Control>
+  <Control Name="gbAdminVersion" Value="Обновить KSP Mod Admin:" />
+  <Control Name="lblDownloadKspMA" Value="Загрузка:" />
+  <Control Name="lblPostDownloadAction" Value="Действие после загрузки:" />
+  <Control Name="cbPostDownloadAction" Value="">
+    <ChildControl Name="cbPostDownloadAction_ToolTip" Value="Выберите действие, которое будет выполняться после загрузки." />
+    <ChildControl Name="cbPostDownloadAction_cbItem_1" Value="Ничего не делать" />
+    <ChildControl Name="cbPostDownloadAction_cbItem_2" Value="Спросить перед установкой" />
+    <ChildControl Name="cbPostDownloadAction_cbItem_3" Value="Автоматически установить после загрузки" />
+  </Control>
+  <Control Name="pbUpdateLoad" Value="">
+    <ChildControl Name="pbUpdateLoad_ToolTip" Value="загрузка обновлений..." />
+  </Control>
+  <Control Name="btnUpdate" Value="Поиск обновлений KSP MA">
+    <ChildControl Name="btnUpdate_ToolTip" Value="Поиск обновлений KSP MA^Запускает поиск обновлений для KSP Mod Admin." />
+  </Control>
+  <Control Name="cbVersionCheck" Value="Проверять наличие новой версии при запуске">
+    <ChildControl Name="cbVersionCheck_ToolTip" Value="Проверять наличие новой версии при запуске^KSP MA будет искать обновления для себя при каждом запуске." />
+  </Control>
+  <Control Name="tabPagePath" Value="Пути" />
+  <Control Name="gbPaths" Value="Пути:" />
+  <Control Name="lblLoading" Value="Идёт поиск..." />
+  <Control Name="cbKSPPath" Value="">
+    <ChildControl Name="cbKSPPath_ToolTip" Value="Выберите папку установки KSP с которой будете работать." />
+  </Control>
+  <Control Name="lblModDownloadPath" Value="Папка загрузки модов:" />
+  <Control Name="btnDownloadPath" Value="">
+    <ChildControl Name="btnDownloadPath_ToolTip" Value="Открывает проводник для выбора папки загрузки." />
+  </Control>
+  <Control Name="btnOpenDownloadFolder" Value="">
+    <ChildControl Name="btnOpenDownloadFolder_ToolTip" Value="Открыть папку загруки^Открывает папку загрузки модов." />
+  </Control>
+  <Control Name="btnOpenKSPRoot" Value="">
+    <ChildControl Name="btnOpenKSPRoot_ToolTip" Value="Открыть папку установки KSP.^Открывает выбранную папку установки KSP." />
+  </Control>
+  <Control Name="lblKnownKSPPaths" Value="Известные папки установки KSP:" />
+  <Control Name="lblSelectedKSPPath" Value="Выбрать папку установки KSP:" />
+  <Control Name="btnRemove" Value="">
+    <ChildControl Name="btnRemove_ToolTip" Value="Удалить папку установки KSP^Удаляет папку установки KSP из списка известных." />
+  </Control>
+  <Control Name="btnSteamSearch" Value="">
+    <ChildControl Name="btnSteamSearch_ToolTip" Value="Поиск Steam^Ищет папку установки KSP в Steam." />
+  </Control>
+  <Control Name="btnKSPFolderSearch" Value="">
+    <ChildControl Name="btnKSPFolderSearch_ToolTip" Value="Поиск папки установки KSP^Запускает/Останавливает поиск папок установки KSP.^KSP MA ищет подходящие папки.^Относительная глубина поиска вверх/вниз по дереву настраивается числом справа." />
+  </Control>
+  <Control Name="btnAddPath" Value="">
+    <ChildControl Name="btnAddPath_ToolTip" Value="Добавить папку установки KSP^Открывает диалог для выбора папки папку установки KSP." />
+  </Control>
+  <Control Name="lblKSPPathNote" Value="Примечание:" />
+  <Control Name="tabPageMisc" Value="Разное" />
+  <Control Name="gbLaguage" Value="Язык:" />
+  <Control Name="cbLanguages" Value="">
+    <ChildControl Name="cbLanguages_ToolTip" Value="Выберите язык." />
+  </Control>
+  <Control Name="gbNodeColors" Value="Цвета списка модов:" />
+  <Control Name="lblColorDestinationDetection" Value="Путь установки найден:" />
+  <Control Name="lblColorRDestinationDetection" Value="R" />
+  <Control Name="lblColorGDestinationDetection" Value="G" />
+  <Control Name="lblColorBDestinationDetection" Value="B" />
+  <Control Name="btnDestinationDetected" Value="">
+    <ChildControl Name="btnDestinationDetected_ToolTip" Value="Выберите цвет элементов мода, для которых найден путь установки." />
+  </Control>
+  <Control Name="lblColorDestinationMissing" Value="Путь отсутствует:" />
+  <Control Name="lblColorRDestinationMissing" Value="R" />
+  <Control Name="lblColorGDestinationMissing" Value="G" />
+  <Control Name="lblColorBDestinationMissing" Value="B" />
+  <Control Name="btnDestinationMissing" Value="">
+    <ChildControl Name="btnDestinationMissing_ToolTip" Value="Выберите цвет элементов мода, для которых отсутствует путь установки." />
+  </Control>
+  <Control Name="lblColorDestinationConflicts" Value="Конфликт путей:" />
+  <Control Name="lblColorRDestinationConflict" Value="R" />
+  <Control Name="lblColorGDestinationConflict" Value="G" />
+  <Control Name="lblColorBDestinationConflict" Value="B" />
+  <Control Name="btnDestinationConflict" Value="">
+    <ChildControl Name="btnDestinationConflict_ToolTip" Value="Выберите цвет для конфликтующих элементов модов." />
+  </Control>
+  <Control Name="lblColorModIsInstalled" Value="Мод установлен:" />
+  <Control Name="lblColorRModIsInstalled" Value="R" />
+  <Control Name="lblColorGModIsInstalled" Value="G" />
+  <Control Name="lblColorBModIsInstalled" Value="B" />
+  <Control Name="btnModInstalled" Value="">
+    <ChildControl Name="btnModInstalled_ToolTip" Value="Выберите цвет для установленных элементов модов." />
+  </Control>
+  <Control Name="lblColorModArchiveMissing" Value="Отсутствует архив:" />
+  <Control Name="lblColorRModArchiveMissing" Value="R" />
+  <Control Name="lblColorGModArchiveMissing" Value="G" />
+  <Control Name="lblColorBModArchiveMissing" Value="B" />
+  <Control Name="btnModArchiveMissing" Value="">
+    <ChildControl Name="btnModArchiveMissing_ToolTip" Value="Выберите цвет элементов мода, для которых отсутствует архив. " />
+  </Control>
+  <Control Name="lblColorModOutdated" Value="Мод устарел:" />
+  <Control Name="lblColorRModOutdated" Value="R" />
+  <Control Name="lblColorGModOutdated" Value="G" />
+  <Control Name="lblColorBModOutdated" Value="B" />
+  <Control Name="btnModOutdated" Value="">
+    <ChildControl Name="btnModOutdated_ToolTip" Value="Выберите цвет для устаревших элементов модов." />
+  </Control>
+  <Control Name="gpModConflictHandling" Value="Разрешение конфликтов модов (Экспериментальная функция):" />
+  <Control Name="cbConflictDetectionOnOff" Value="Обнаружение конфликтов">
+    <ChildControl Name="cbConflictDetectionOnOff_ToolTip" Value="Обнаружение конфликтов^Включает/выключает обнаружение конфликтов элементов модов." />
+  </Control>
+  <Control Name="cbShowConflictSolver" Value="Показать диалог разрешения конфликтов">
+    <ChildControl Name="cbShowConflictSolver_ToolTip" Value="Показать диалог разрешения конфликтов^Показывать диалог разрешения конфликтов после обнаружения конфликта." />
+  </Control>
+  <Control Name="frmAddMod" Value="Добавить мод" />
+  <Control Name="cbInstallAfterAdd" Value="Установить после добавления.">
+    <ChildControl Name="cbInstallAfterAdd_ToolTip" Value="Поставьте отметку в чекбоксе,^что бы KSP MA устанавливал моды сразу после добавления." />
+  </Control>
+  <Control Name="btnFolderSearch" Value="">
+    <ChildControl Name="btnFolderSearch_ToolTip" Value="Открывает проводник для выбора архива с модом." />
+  </Control>
+  <Control Name="tbModPath" Value="">
+    <ChildControl Name="tbModPath_ToolTip" Value="Укажите путь к архиву с модом, файлу .craft или URL мода.^(URL с http:// или https://)." />
+  </Control>
+  <Control Name="tbModName" Value="">
+    <ChildControl Name="tbModName_ToolTip" Value="Укажите название мода или оставьте пустым что бы использовать название по умолчанию." />
+  </Control>
+  <Control Name="lblNote" Value="ПРИМЕЧАНИЕ: После того, как KSP MA добавит мод, вы должны отметить (или снять отметку) части мода и нажать кнопку &amp;&quot;Обработать все моды&amp;&quot; для установки мода.^Или отметить чекбокс снизу для немедленной установки мода." />
+  <Control Name="lblModPath" Value="Укажите путь или URL архива мода:" />
+  <Control Name="lblModName" Value="Название мода (оставьте пустым для автозаполнения):" />
+  <Control Name="btnCancel" Value="Отмена">
+    <ChildControl Name="btnCancel_ToolTip" Value="Отменить и закрыть диалог." />
+  </Control>
+  <Control Name="btnAdd" Value="Добавить">
+    <ChildControl Name="btnAdd_ToolTip" Value="Добавить мод в список модов." />
+  </Control>
+  <Control Name="frmLinkSelection" Value="Выбор ссылки" />
+  <Control Name="lblLinkSelectionDescription" Value="Пожалуйста, перейдите к ссылке загрузки и кликните по ней." />
+  <Control Name="frmUpdateDLG" Value="Обновление KSP MA" />
+  <Control Name="cbPostDownloadAction" Value="">
+    <ChildControl Name="cbPostDownloadAction_ToolTip" Value="Действие, которое будет выполняться после обновления." />
+    <ChildControl Name="cbPostDownloadAction_cbItem_1" Value="Ничего не делать" />
+    <ChildControl Name="cbPostDownloadAction_cbItem_2" Value="Спросить перед автоматической установкой" />
+    <ChildControl Name="cbPostDownloadAction_cbItem_3" Value="Автоматически устанавливать после загрузки" />
+  </Control>
+  <Control Name="lblPostDownloadAction" Value="Действие после загрузки:" />
+  <Control Name="lblDownloadPath" Value="Путь загрузки:" />
+  <Control Name="btnDownloadPath" Value="">
+    <ChildControl Name="btnDownloadPath_ToolTip" Value="Открывает проводник, что бы выбрать путь к папку загрузки." />
+  </Control>
+  <Control Name="tbMessage" Value="" />
+  <Control Name="btnDownload" Value="Загрузить">
+    <ChildControl Name="btnDownload_ToolTip" Value="Запускает загрузку обновления KSP MA." />
+  </Control>
+  <Control Name="frmCopyModInfo" Value="Копировать информацию о моде" />
+  <Control Name="lblCopyModInfosTo" Value="в:" />
+  <Control Name="lblCopyModInfosModName" Value="Копировать информацию о моде из:" />
+  <Control Name="btnCopy" Value="Копировать" />
+  <Control Name="frmEditModInfo" Value="Редактор информации о моде" />
+  <Control Name="btnSave" Value="Сохранить" />
+  <Control Name="btnGotoSpaceport" Value="">
+    <ChildControl Name="btnGotoSpaceport_ToolTip" Value="Получить информацию о моде с сайта контроля версии." />
+  </Control>
+  <Control Name="lblDownloadsModInfoEditor" Value="Загрузки:" />
+  <Control Name="lblNoteModInfoEditor" Value="Примечание:" />
+  <Control Name="lblDownloadDateModInfoEditor" Value="Дата загрузки:" />
+  <Control Name="lblRatingModInfoEditor" Value="Рейтинг:" />
+  <Control Name="lblCreationDateModInfoEditor" Value="Дата создания:" />
+  <Control Name="lblAuthorModInfoEditor" Value="Автор:" />
+  <Control Name="lblProductIDModInfoEditor" Value="ИД:" />
+  <Control Name="lblVersionModInfoEditor" Value="Версия:" />
+  <Control Name="lblModNameModInfoEditor" Value="Название мода:" />
+  <Control Name="frmDestFolderSelection" Value="Выбор папки установки" />
+  <Control Name="lblSelectedSource" Value="Выберите элемент:" />
+  <Control Name="cbListFoldersOnly" Value="Только папки" />
+  <Control Name="rbCopySourceToDestination" Value="Копировать выбранный элемент в указанный путь." />
+  <Control Name="rbCopyContentToDestination" Value="Копировать содержимое выбранного элемента в указанный путь." />
+  <Control Name="lblSelectDestination" Value="Выбрать путь установки:" />
+  <Control Name="lblSelectDestinationNote" Value="Внимание: Если выбрать папку, то путь установки будет назначен всем её подпапкам и файлам." />
+  <Control Name="btnOK" Value="Ок" />
+  <Control Name="frmWelcome" Value="KSP Mod Admin" />
+  <Control Name="tbKSPPath" Value="" />
+  <Control Name="btnSelectFolder" Value="Выбрать папку">
+    <ChildControl Name="btnSelectFolder_ToolTip" Value="Открывает проводник для выбора папку установки KSP." />
+  </Control>
+  <Control Name="lblWelcomeAuthor" Value="автор Bastian Heinrich" />
+  <Control Name="lblWelcomeNote" Value="ВНИМАНИЕ: Дополнительные пути установки KSP можно добавить позже во вкладке Настройки -&gt; Пути." />
+  <Control Name="lblWelcomeStep1" Value="Пожалуйста, выберите папку установки KSP." />
+  <Control Name="lblWelcomeTitle" Value="Добро пожаловать в KSP Mod Admin" />
+  <Control Name="btnExit" Value="Выход">
+    <ChildControl Name="btnExit_ToolTip" Value="Выйти из KSP Mod Admin." />
+  </Control>
+  <Control Name="btnFinish" Value="Готово">
+    <ChildControl Name="btnFinish_ToolTip" Value="Закончить настройки и перейти в KSP Mod Admin." />
+  </Control>
+  <String Name="MSG_CURRENT_VERSION_0" Value="Текущая версия: {0}" />
+  <String Name="MSG_PLS_ENTER_VALID_ARCHIVE_URL" Value="Пожалуйста, введите корректный путь к архиву или URL." />
+  <String Name="MSG_TITLE_ATTENTION" Value="Внимание!" />
+  <String Name="MSG_TITLE_ERROR" Value="Ошибка!" />
+  <String Name="MSG_DOWNLOAD_PATH_CHANGED_0" Value="Путь загрузки изменился на &quot;{0}&quot;." />
+  <String Name="MSG_STARTING_KSP" Value="Запуск KSP..." />
+  <String Name="MSG_CANT_FIND_KSP_EXE" Value="Не удалось найти KSP.exe." />
+  <String Name="MSG_KSP_LAUNCH_FAILED" Value="Запуск KSP не удался." />
+  <String Name="MSG_UPDATE_KSP_SETTINGS" Value="Файл KSP settings.cfg обновлён." />
+  <String Name="MSG_CANT_FIND_KSP_SETTINGS" Value="Не удалось найти файл KSP settings.cfg." />
+  <String Name="MSG_ADDING_MOD_FAILED" Value="Добавление мода отменено." />
+  <String Name="MSG_ADD_MODS_FAILED_PARAM_EMPTY_MODINFOS" Value="Не удалось добавить мод(ы)! Параметр &quot;Информация о моде&quot; пуст." />
+  <String Name="MSG_MOD_ALREADY_ADDED" Value="Мод уже добавлен: &quot;{0}&quot;" />
+  <String Name="MSG_SHOULD_MOD_REPLACED" Value="Заменить мод?" />
+  <String Name="MSG_REPLACING_MOD_0" Value="Замена мода &quot;{0}&quot;" />
+  <String Name="MSG_MOD_0_REPLACED" Value="Мод &quot;{0}&quot; заменён." />
+  <String Name="MSG_ADD_MOD_FAILED_0" Value="Добавление мода &quot;{0}&quot; не удалось!" />
+  <String Name="MSG_DONE" Value="Готово!" />
+  <String Name="MSG_ADD_MODS_FAILED_PARAM_EMPTY_FILENAMES" Value="Не удалось добавить мод(ы)! Параметр &quot;Имя файла&quot; пуст." />
+  <String Name="MSG_MOD_ADDED_0" Value="Добавлен мод: &quot;{0}&quot;" />
+  <String Name="MSG_MOD_ERROR_WHILE_READ_ZIP_0_ERROR_MSG_1" Value="Ошибка при чтении Zip-файла мода &quot;{0}&quot;^Сообщение об ошибке: {1}" />
+  <String Name="MSG_ROOT_NOT_FOUND_0" Value="Не найден корень Zip! &quot;{0}&quot;." />
+  <String Name="MSG_MOD_ZIP_NOT_FOUND_0" Value="Не найден Zip-архив с модом &quot;{0}&quot;" />
+  <String Name="MSG_FILE_ADDED_0" Value="Добавлен файл &quot;{0}&quot;." />
+  <String Name="MSG_DIR_ADDED_0" Value="Добавлена папка &quot;{0}&quot;." />
+  <String Name="MSG_REMOVING_OUTDATED_MOD_0" Value="Удаление устаревшего мода &quot;{0}&quot;" />
+  <String Name="MSG_ADDING_UPDATED_MOD_0" Value="Добавление обновлённого мода &quot;{0}&quot;" />
+  <String Name="MSG_DIR_DELETED_ERROR_0" Value="Не удалось удалить папку &quot;{0}&quot;." />
+  <String Name="MSG_DIR_DELETED_0" Value="Удалена папка &quot;{0}&quot;." />
+  <String Name="MSG_MOD_ERROR_CANT_DELETE_0" Value="Не удалось удалить. &quot;{0}&quot;" />
+  <String Name="MSG_MOD_ERROR_ZIP_CREATION_FAILED" Value="Не удалось создать Zip-архив для загрузки." />
+  <String Name="MSG_SELECT_0_FOLDER_FIRST" Value="Пожалуйста, сначала выберите {0} папку." />
+  <String Name="MSG_SELECT_KSP_FOLDER" Value="Пожалуйста, выберите папку установки KSP." />
+  <String Name="MSG_SELECTED_KSP_FOLDER_CHANGED_0" Value="Выбранная папка установки KSP изменена на &quot;{0}&quot;" />
+  <String Name="MSG_NOT_KSP_FOLDER" Value="Это не папка установки KSP." />
+  <String Name="MSG_OPENING_0_FOLDER" Value="Открытие папки {0}..." />
+  <String Name="MSG_OPEN_0_FOLDER_FAILD" Value="Не удалось открыть папку {0}." />
+  <String Name="MSG_SELECT_DOWNLOAD_FOLDER" Value="Выберите папку для загрузки модов KSP." />
+  <String Name="MSG_DOWNLOADPATH_CHANGED_0" Value="Адрес папки для загрузки изменён на &quot;{0}&quot;." />
+  <String Name="MSG_KSP_FOLDER_ADDED_0" Value="Добавлена папка установки KSP. &quot;{0}&quot;" />
+  <String Name="MSG_KSP_FOLDER_REMOVED_0" Value="Удалена папка установки KSP. &quot;{0}&quot;" />
+  <String Name="MSG_STEAM_SEARCH_STARTED" Value="Запущен поиск папки установки Steam - KSP..." />
+  <String Name="MSG_STEAM_FOLDER_NOT_FOUND" Value="Не найдена папка Steam!" />
+  <String Name="MSG_STEAM_SEARCH_DONE" Value="Поиск папки Steam - KSP закончен." />
+  <String Name="MSG_KSP_SEARCH_STARTED" Value="Запущен поиск папки установки KSP..." />
+  <String Name="MSG_KSP_FOLDER_NOT_FOUND" Value="Не найдена папка KSP!" />
+  <String Name="MSG_KSP_SEARCH_DONE" Value="Поиск папки KSP закончен." />
+  <String Name="MSG_FOLDER_SEARCH_ABORTED" Value="Поиск папки KSP отменён." />
+  <String Name="MSG_ERROR_DURING_FOLDER_SEARCH_0" Value="Ошибка при поиске папки &quot;{0}&quot;" />
+  <String Name="MSG_ERROR_ADD_FOLDER_FAILED_0" Value="Не удалось добавить папки установки KSP! &quot;{0}&quot;" />
+  <String Name="MSG_ERROR_NOT_A_KSP_FOLDER_0" Value="Папка не папки установки KSP. &quot;{0}&quot;" />
+  <String Name="MSG_KSP_FOLDER_FOUND_DIALOG_TITLE" Value="Папка KSP найдена." />
+  <String Name="MSG_KSP_FOLDER_FOUND_DIALOG_TEXT" Value="Папка KSP найдена.^&quot;{0}&quot;^^Добавить папку (да)?^продолжить поиск (нет)?^или отменить поиск(отмена)?" />
+  <String Name="MSG_NEW_VERSION_0" Value="Доступна новая версия {0}." />
+  <String Name="MSG_KSP_UPTODATE" Value="KSP Mod Admin последней версии." />
+  <String Name="MSG_ERROR_WHILE_STEAM_SEARCH" Value="Ошибка при поиске папки Steam." />
+  <String Name="MSG_ERROR_WHILE_FOLDER_SEARCH" Value="Ошибка при поиске папки." />
+  <String Name="MSG_DOWNLOAD_COMPLETE" Value="Загрузка завершена." />
+  <String Name="MSG_DOWNLOAD_COMPLETE_INSTALL" Value="Загрузка завершена.^Вы хотите автоматически установить обновление?" />
+  <String Name="MSG_KSPMA_UPDATE_CHECK_STARTED" Value="Запущена проверка обновлений KSP Mod Admin." />
+  <String Name="MSG_CONFLICT_DETECTION_ON" Value="Обнаружение конфликтов включено" />
+  <String Name="MSG_CONFLICT_DETECTION_OFF" Value="Обнаружение конфликтов выключено" />
+  <String Name="MSG_CHECKING" Value="Проверка..." />
+  <String Name="MSG_DOWNLOADING_UPDATE" Value="Загрузка обновлений..." />
+  <String Name="MSG_CHECK_FOR_KSPMA_UPDATES" Value="Проверка обновлений KSP MA" />
+  <String Name="MSG_ONLY_ONE_INSTANCE_OF_CONTROLLER_ALLOWED" Value="Возможен только один экземпляр Controller!" />
+  <String Name="MSG_CANT_CREATE_KSPMA_LOG" Value="Не удалось создать файл лога KSP MA. Запись ошибок в лог будет выключена." />
+  <String Name="MSG_LOADING_KSPMA_SETTINGS" Value="Загрузка настроек KSPModAdmin..." />
+  <String Name="MSG_LOADING_KSPMA_SETTINGS_FAILED" Value="Не удалось загрузить настройки KSPModAdmin!" />
+  <String Name="MSG_KSPMA_SETTINGS_NOT_FOUND" Value="Не найдены настройки KSPModAdmin!" />
+  <String Name="MSG_LOADING_KSP_MOD_CONFIGURATION" Value="Загрузка настроек модов KSP..." />
+  <String Name="MSG_KSP_MOD_CONFIGURATION_NOT_FOUND" Value="Не найдены настройки модов KSP!" />
+  <String Name="MSG_SAVING_KSPMA_SETTINGS" Value="Сохранение новых настроек KSP Mod Admin." />
+  <String Name="MSG_KSPMA_SETTINGS_PATH_INVALID" Value="Неверный путь к настройкам KSP Mod Admin!" />
+  <String Name="MSG_ERROR_DURING_SAVING_KSPMA_SETTINGS" Value="Ошибка при сохранении настроек KSP Mod Admin!" />
+  <String Name="MSG_SAVING_KSP_MOD_SETTINGS" Value="Сохранение новых настроек мода KSP Mod." />
+  <String Name="MSG_KSP_MOD_SETTINGS_PATH_INVALID" Value="Неверный путь к настройкам мода KSP Mod!" />
+  <String Name="MSG_ERROR_DURING_SAVING_KSP_MOD_SETTINGS" Value="Ошибка при сохранении настроек мода KSP!" />
+  <String Name="MSG_ERROR_MESSAGE_0" Value="Сообщение об ошибке: {0}" />
+  <String Name="MSG_ACCESS_DENIED_DIALOG_MESSAGE" Value="KSP Mod Admin не может сохранить файл с настройками. Доступ к пути KSP запрещён.^Если вы установили KSP в папку с программами Windows,^KSP MA нужны права администратора для работы (сохранять и изменять файл настроек KSP MA).^Вы можете переместить KSP в другую папку или запустить KSPMA с правами администратора:^  - кликните правой кнопкой на KSPModAdmin.exe и выберите &quot;Запуск от имени администратора&quot;^или постоянное решение:^  - правый клик на KSPModAdmin.exe^  - Свойства^  - Совместимость^  - отметить &quot;Выполнять эту программу от имени администратора&quot; внизу.^  - Нажать ОК." />
+  <String Name="MSG_DELETE_ALL_MODS_QUESTION" Value="Вы уверены, что хотите удалить все моды?" />
+  <String Name="MSG_DELETE_MOD_0_QUESTION" Value="Вы уверены, что хотите удалить мод &quot;{0}&quot;?" />
+  <String Name="MSG_INVALID_URL_SAVE_ANYWAY" Value="Неверный адрес, всё равно сохранить?" />
+  <String Name="MSG_ENTER_VALID_URL_FIRST" Value="Пожалуйста, сначала укажите URL." />
+  <String Name="MSG_ERROR_DURING_MODINFO_UPDATE" Value="Ошибка при загрузке URL &quot;{0}&quot;{1}{1}Сообщение об ошибке:{1}{2}" />
+  <String Name="MSG_FOLDER_INSTALLED_UNINSTALL_IT_TO_CHANGE_DESTINATION" Value="Папка или файл уже установлен.^Удалите его что бы сменить путь установки." />
+  <String Name="MSG_SELECT_DEST" Value="Пожалуйста, выберите сначала папку установки." />
+  <String Name="MSG_SELECT_SCOURCE" Value="Пожалуйста, выберите сначала папку." />
+  <String Name="MSG_SOURCE_NODE_NOT_FOUND" Value="Элемент не найден!^Невозможно задать путь установки." />
+  <String Name="MSG_ZIP_CREATION_ABORTED" Value="СОздание Zip отменено!" />
+  <String Name="MSG_ZIP_0_CREATED" Value="Zip &quot;{0}&quot; создан." />
+  <String Name="MSG_ZIP_CREATION_FAILED_0" Value="Не удалось создать Zip. Сообщение об ошибке: {0}" />
+  <String Name="MSG_ROOT_IDENTIFIED" Value="Корень Zip определён как &quot;{0}&quot;." />
+  <String Name="MSG_DIR_CREATED_0" Value="Создана папка &quot;{0}&quot;." />
+  <String Name="MSG_DIR_CREATED_ERROR_0" Value="Не удалось создать папку &quot;{0}&quot;." />
+  <String Name="MSG_FILE_DELETED_0" Value="Удалён файл &quot;{0}&quot;." />
+  <String Name="MSG_FILE_DELETED_ERROR_0" Value="Не удалось удалить файл &quot;{0}&quot;." />
+  <String Name="MSG_FILE_EXTRACTED_0" Value="Излечен файл &quot;{0}&quot;." />
+  <String Name="MSG_FILE_EXTRACTED_ERROR_0" Value="Не удалось извлечь файл &quot;{0}&quot;." />
+  <String Name="MSG_DOWNLOAD_SELECTION_TITLE" Value="Выбор папки загрузки модов" />
+  <String Name="MSG_KSP_INSTALL_FOLDER_SELECTION_TITLE" Value="Выбор папки установки KSP" />
+  <String Name="MSG_DESTINATION_FOLDER_SELECTION_TITLE" Value="Выбор папки установки" />
+  <String Name="MSG_DOWNLOAD_FOLDER_SELECTION_TITLE" Value="Выбор папки загрузки" />
+  <String Name="MSG_UNCHECK_NO_ZIPARCHIVE_WARNING" Value="Не найден Zip-архив!^Если вы снимете отметку и удалите этот элемент мода, вы не сможете восстановить его!^^Всё равно снять отметку?" />
+  <String Name="MSG_CHECK_NO_ZIPARCHIVE_WARNING" Value="Не найден Zip-архив!^Вы не можете отметить элемент мода, у которого нет Zip-архива!" />
+  <String Name="MSG_CANT_INSTALL_MODNODE_0_ZIP_MISSING" Value="Не удалось установить &quot;{0}&quot;! Не найден архив мода." />
+  <String Name="MSG_0_HAS_CHILDES_WITHOUT_DESTINATION_WARNING" Value="Для элемент мода &quot;{0}&quot; или одного из дочерних элементов не указан путь установки!^Эти жлементы нельзя отметить!^^ Укажите их путь установки вручную." />
+  <String Name="YES" Value="Да" />
+  <String Name="NO" Value="Нет" />
+  <String Name="NONE" Value="Нету" />
+  <String Name="ON" Value="Вкл." />
+  <String Name="OFF" Value="Выкл." />
+  <String Name="MSG_PLS_SELECT_VALID_KSP_INSTALL_FOLDER" Value="Это не папка установки KSP.^Пожалуйста, выберите папку установки KSP." />
+  <String Name="MSG_KSP_INSTALL_FOLDER_SELECTION" Value="Выбор папки установки KSP." />
+  <String Name="MSG_START_PROCESSING_0" Value="Начата обработка мода &quot;{0}&quot;." />
+  <String Name="MSG_START_ADDING_0" Value="Начато добавление мода &quot;{0}&quot;." />
+  <String Name="MSG_ERROR_DURING_PROCESSING_MOD_0" Value="Ошибка при обработке мода &quot;{0}&quot;." />
+  <String Name="MSG_REMOVING_MOD_0" Value="Удаление мода &quot;{0}&quot;." />
+  <String Name="MSG_MOD_RMODVED_0" Value="Удалён мод &quot;{0}&quot;." />
+  <String Name="MSG_DELETING_REMAINING_EMTPY_DIRS" Value="Удаление оставшихся пустых папок." />
+  <String Name="MSG_DIR_0_NOT_EXISTS" Value="Папка &quot;{0}&quot; не существует." />
+  <String Name="MSG_DIR_0_IS_KSPDIR" Value="Папка &quot;{0}&quot; - это папка установки KSP." />
+  <String Name="MSG_DIR_0_IS_NOT_EMPTY" Value="Папка &quot;{0}&quot; не пуста." />
+  <String Name="MSG_ERROR_DURING_REFRESH_CHECKED_STATE_0" Value="Ошибка при обновлении состояния отметок &quot;{0}&quot;." />
+  <String Name="MSG_REFRESHING_CHECKEDSTATE_0" Value="Обновление состояния отметок &quot;{0}&quot;..." />
+  <String Name="MSG_UNCHECKING_ALL_MODS" Value="Снятие отметок со всех модов." />
+  <String Name="MSG_UNCHECKING_MOD_0" Value="Снятие отметок мода &quot;{0}&quot;." />
+  <String Name="MSG_CHECKING_ALL_MODS" Value="Установка отметок на всех модах." />
+  <String Name="MSG_CHECKING_MOD_0" Value="Установка отметок на моде &quot;{0}&quot;." />
+  <String Name="MSG_ERROR_NO_DOWNLOAD_FOLDER_SELECTED" Value="Папка загрузки не выбрана." />
+  <String Name="MSG_SCAN_GAMDATA_FOLDER_STARTED" Value="Запущено сканирование папки GameData." />
+  <String Name="MSG_DIRECTORY_0_FOUND" Value="Найдена папка &quot;{0}&quot;." />
+  <String Name="MSG_FILE_0_FOUND" Value="Найден файл File &quot;{0}&quot;." />
+  <String Name="MSG_MODNODE_0_CREATED" Value="Создан элемент мода &quot;{0}&quot;." />
+  <String Name="MSG_ERROR_MOD_PATH_URL_0_INVALID" Value="Путь или url &quot;{0}&quot; неверный!" />
+  <String Name="MSG_ERROR_0_NO_VERSIONCONTROL" Value="У мода &quot;{0}&quot; нет управления версиями... проверка обновлений пропущена." />
+  <String Name="MSG_UPDATECHECK_FOR_MOD_0" Value="Запущена проверка обновлений мода &quot;{0}&quot; via &quot;{1}&quot;..." />
+  <String Name="MSG_MOD_0_IS_UPTODATE" Value="Мод &quot;{0}&quot; последней версии." />
+  <String Name="MSG_MOD_0_IS_OUTDATED" Value="Мод &quot;{0}&quot; устарел." />
+  <String Name="MSG_ERROR_DURING_UPDATECHECK_0_ERRORMSG_1" Value="Ошибка при проверке обновлений мода &quot;{0}&quot;. Ошибка: &quot;{1}&quot;" />
+  <Control Name="tsmiCmsCheckAllMods" Value="Отметить все моды" />
+  <Control Name="cbForceOpenGL" Value="Принудительный OpenGL">
+    <ChildControl Name="cbForceOpenGL_ToolTip" Value="Запускает KSP в режиме OpenGL." />
+  </Control>
+  <Control Name="tsbUpdateAllOutdatedMods" Value="(T)tsbUpdateAllOutdatedMods">
+    <Control Name="tsbUpdateAllOutdatedMods_ToolTip" Value="Обновить все устаревшие моды^Запускает проверку обновлений и обновляет все устаревшие моды." />
+  </Control>
+  <Control Name="tsmiUpdateAllOutdatedMods" Value="Обновить мод">
+    <Control Name="tsmiUpdateAllOutdatedMods_ToolTip" Value="Запускает проверку обновлений и обновляет все устаревшие моды." />
+  </Control>
+  <Control Name="tsmiUpdateMod" Value="Обновить все устаревшие моды">
+    <Control Name="tsmiUpdateMod_ToolTip" Value="" />
+  </Control>
+  <Control Name="tsbUpdateMod" Value="(T)tsbUpdateMod">
+    <Control Name="tsbUpdateMod_ToolTip" Value="Обновить мод^Запускает проверку обновлений и обновляет мод, если он устарел." />
+  </Control>
+  <Control Name="frmImExport" Value="Импорт/экспорт пакетов модов" />
+  <Control Name="gbImport" Value="Импорт:" />
+  <Control Name="gbDestinationOption" Value="Настройки путей:" />
+  <Control Name="rbCopyDestination" Value="Копировать путь." />
+  <Control Name="rbUseAutoDestDetection" Value="Автоматически определять пути." />
+  <Control Name="gbInstallOptions" Value="Настройки установки:" />
+  <Control Name="rbInstall" Value="Устанавливать моды." />
+  <Control Name="rbAddOnly" Value="Только добавлять моды (ручная установка)." />
+  <Control Name="cbClearModSelection" Value="Очистить список модов перед импортом." />
+  <Control Name="cbExtract" Value="Распаковывать моды (если в пакете)." />
+  <Control Name="cbDownloadIfNeeded" Value="Загружать недостающие моды (по возможности)." />
+  <Control Name="lblImportInfo" Value="Импортировать моды из пакета." />
+  <Control Name="btnImport" Value="Импортировать" />
+  <Control Name="gbExport" Value="Экспорт:" />
+  <Control Name="cbIncludeMods" Value="Включать архивы с модами." />
+  <Control Name="rbExportSelectedOnly" Value="Только выбранные моды" />
+  <Control Name="rbExportAll" Value="Все моды." />
+  <Control Name="lblExportInfo" Value="Экспортировать пакет с модами, что бы делиться с другими игроками." />
+  <Control Name="btnExport" Value="Экспортировать" />
+  <String Name="MSG_UPDATING_MOD_0" Value="Обновление мода &quot;{0}&quot;..." />
+  <String Name="MSG_MOD_0_UPDATED" Value="Мод &quot;{0}&quot; обновлен" />
+  <String Name="MSG_ERROR_WHILE_UPDATING_MOD_0_ERROR_1" Value="Ошибка при обновлении мода &quot;{0}&quot;. Ошибка: &quot;{1}&quot;" />
+  <String Name="MSG_ERROR_UPDATING_MOD_0_FAILED" Value="Не удалось обновить мод &quot;{0}&quot;.^Требуется обновление вручную." />
+  <String Name="MSG_ADD_MOD_0_TO_MODPACK" Value="Добавление мода &quot;{0}&quot; в пакет..." />
+  <String Name="MSG_MODPACK_INFOFILE_NOT_FOUND" Value="Не найден файл с информацией о пакете!" />
+  <String Name="MSG_DOWNLOAD_0_STARTED" Value="Запущена загрузка &quot;{0}&quot;..." />
+  <String Name="MSG_DOWNLOAD_0_DONE" Value="Завершена загрузка &quot;{0}&quot;." />
+  <String Name="MSG_DOWNLOAD_0_FAILED" Value="Не удалось загрузить &quot;{0}&quot;!" />
+  <String Name="MSG_IMPORT_0_STARTED" Value="Запущен импорт &quot;{0}&quot;..." />
+  <String Name="MSG_IMPORT_0_DONE" Value="Завершён импорт &quot;{0}&quot;." />
+  <String Name="MSG_IMPORT_0_FAILED_ERROR_1" Value="Не удалось импортировать &quot;{0}&quot;!" />
+  <String Name="MSG_IMPORT_0_FAILED" Value="Не удалось импортировать &quot;{0}&quot;! Ошибка: &quot;{1}&quot;" />
+  <String Name="MSG_NO_MODS_TO_EXPORT" Value="Нет модов для экспорта." />
+  <String Name="MSG_EXPORT_TO_0" Value="Экспорт &quot;{0}&quot;." />
+  <String Name="MSG_EXPORT_DONE" Value="Экспорт завершён." />
+  <String Name="MSG_EXPORT_ABORTED" Value="Экспорт отменён." />
+  <String Name="MSG_IMPORT_STARTED" Value="Запущен импорт." />
+  <String Name="MSG_CLEARING_MODSELECTION" Value="Очистка списка модов." />
+  <String Name="MSG_IMPORTING_FROM_0" Value="Импорт из &quot;{0}&quot;." />
+  <String Name="MSG_IMPORTING_FAILED" Value="Не удалось импортировать!" />
+  <String Name="MSG_IMPORTING_DONE" Value="Импорт завершён." />
+  <String Name="MSG_IMPORTING_ABORTED" Value="Импорт отменён." />
+  <String Name="MSG_ERROR_DURING_MODUPDATE_0_ERROR_1" Value="Ошибка при обновлении мода &quot;{0}&quot;. Ошибка: &quot;{1}&quot;" />
+  <String Name="MSG_DOWNLOADING_MOD_0" Value="Загрузка обновления мода &quot;{0}&quot;..." />
+  <String Name="MSG_ERROR_DURING_MOD_UPDATE_0" Value="Ошибка при обновлении мода &quot;{0}&quot;." />
+  <String Name="MSG_SCAN_NO_NEW_MODS_FOUND" Value="Новых модов не найдено." />
+  <Control Name="btnAddAndClose" Value="Добавить и закрыть">
+    <Control Name="btnAddAndClose_ToolTip" Value="Добавляет мод в список модов и закрывает диалог." />
+  </Control>
+  <Control Name="lblWelcomeSelectLanguages" Value="Пожалуйста, укажите язык." />
+  <!--<Control Name="cbWelcomeLanguages" Value="">-->
+  <Control Name="cbWelcomeLanguages_ToolTip" Value="Выберите язык." />
+  <!--</Control>-->
+  <Control Name="lblAdditionalURLModInfo" Value="Дополнительная ссылка:" />
+  <String Name="MSG_ERROR_PLUGIN_LOADING_TABVIEWS_0" Value="Ошибка при загрузке плагина: Вкладка &quot;{0}&quot; уже существует!"/>
+  <String Name="MSG_ERROR_PLUGIN_LOADING_OPTIONVIEWS_0" Value="Ошибка при загрузке плагина: вкладка настроек &quot;{0}&quot; уже существует!"/>
+</Language>

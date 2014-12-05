@@ -80,6 +80,7 @@
     <ProjectReference Include="..\KSPModAdmin.Core\KSPModAdmin.Core.csproj">
       <Project>{96aa1c9f-c609-4361-8bdd-5af3968f24de}</Project>
       <Name>KSPModAdmin.Core</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

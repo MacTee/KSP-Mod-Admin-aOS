@@ -583,4 +583,7 @@
   <!--</Control>-->
   <Control Name="lblAdditionalURLModInfo" Value="Zusätzlicher link:"/>
 
+  <String Name="MSG_ERROR_PLUGIN_LOADING_TABVIEWS_0" Value="Fehler während laden des Plugin TabView &quot;{0}&quot;. Ein TabView mit diesem Namen existiert bereits!"/>
+  <String Name="MSG_ERROR_PLUGIN_LOADING_OPTIONVIEWS_0" Value="Fehler während laden des Plugin OptionTabView &quot;{0}&quot;. Ein OptionTabView mit diesem Namen existiert bereits!"/>
+
 </Language>

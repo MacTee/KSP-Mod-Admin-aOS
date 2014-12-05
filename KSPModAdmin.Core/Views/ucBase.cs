@@ -36,9 +36,9 @@ namespace KSPModAdmin.Core.Views
         /// Gets the Name for the parent TabPage.
         /// </summary>
         /// <returns>The Name for the parent TabPage.</returns>
-        public virtual string GetTabName()
+        public virtual string GetTabCaption()
         {
-            throw new NotImplementedException("Implement GetTabName for derived classes of ucBase!");
+            throw new NotImplementedException("Implement GetTabCaption for derived classes of ucBase!");
         }
     }
 }
