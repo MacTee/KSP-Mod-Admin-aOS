@@ -93,7 +93,7 @@
     <Compile Include="Utils\ModPackHandler.cs" />
     <Compile Include="Utils\SiteHandler\CurseForgeHandler.cs" />
     <Compile Include="Utils\SiteHandler\CurseHandler.cs" />
-    <Compile Include="Utils\SiteHandler\KerbalStufHandler.cs" />
+    <Compile Include="Utils\SiteHandler\KerbalStuffHandler.cs" />
     <Compile Include="Utils\SiteHandler\SiteHandlerManager.cs" />
     <Compile Include="Utils\SiteHandler\ISiteHandler.cs" />
     <Compile Include="Utils\ScanInfo.cs" />

@@ -331,6 +331,12 @@ namespace KSPModAdmin.Core.Config
                 pathNodeAttribute.Value = child.Destination;
                 modNode.Attributes.Append(pathNodeAttribute);
             }
+			if (child.Version != string.Empty)
+			{
+				pathNodeAttribute = doc.CreateAttribute(Constants.VERSION);
+				pathNodeAttribute.Value = child.Version;
+				modNode.Attributes.Append(pathNodeAttribute);
+			}
             parent.AppendChild(modNode);
 
             foreach (ModNode childchild in child.Nodes)

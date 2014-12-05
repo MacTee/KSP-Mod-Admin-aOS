@@ -8,7 +8,7 @@ using KSPModAdmin.Core.Model;
 
 namespace KSPModAdmin.Core.Utils.SiteHandler
 {
-	public class KerbalStufHandler : ISiteHandler
+	public class KerbalStuffHandler : ISiteHandler
 	{
 		private const string cName = "KerbalStuff";
 		private const string cURL = "http://kerbalstuff.com/";
@@ -87,7 +87,7 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
         public bool CheckForUpdates(ModInfo modInfo, ref ModInfo newModInfo)
         {
             newModInfo = GetModInfo(modInfo.ModURL);
-            return modInfo.CreationDateAsDateTime < newModInfo.CreationDateAsDateTime;
+	        return !modInfo.Version.Equals(newModInfo.Version);
         }
 
         /// <summary>
