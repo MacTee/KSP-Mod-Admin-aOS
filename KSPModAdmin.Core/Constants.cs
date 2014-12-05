@@ -1,4 +1,7 @@
-﻿namespace KSPModAdmin.Core
+﻿using KSPModAdmin.Core.Controller;
+using KSPModAdmin.Core.Model;
+
+namespace KSPModAdmin.Core
 {
     /// <summary>
     /// All constants used for the KSP Mod Admin.
@@ -6,6 +9,7 @@
     public class Constants
     {
         // General
+		// ReSharper disable InconsistentNaming
         public const string DOWNLOAD_FILENAME_TEMPLATE = "KSPModAdmin-v{0}.zip";
 
         public const string SERVICE_DOWNLOAD_LINK = "http://www.services.mactee.de/KSP/getKSP_MA_Zip2.php5";
@@ -66,6 +70,7 @@
         public const string ROOTNODE = "ModAdminConfig";
         public const string ROOT = "Root";
         public const string VERSION = "Version";
+	    public const string GAMEVERSION = "Game_Version";
         public const string MESSAGE = "Message";
         public const string GENERAL = "General";
         public const string LANGUAGE = "Language";
