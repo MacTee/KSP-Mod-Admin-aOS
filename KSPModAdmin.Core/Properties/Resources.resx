@@ -163,6 +163,9 @@
   <data name="checkbox_unknown" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\checkbox_unknown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="components_package_out" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\components_package_out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="component_data_next" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\component_data_next.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -193,8 +196,8 @@
   <data name="anvil" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\anvil.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="data_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\data_add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="component_scroll_edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\component_scroll_edit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="airplane_delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\airplane_delete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -256,9 +259,6 @@
   <data name="compress" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\compress.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="component_scroll_edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\component_scroll_edit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="loader" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\loader.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -273,6 +273,9 @@
   </data>
   <data name="component_replace" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\component_replace.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="data_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\data_add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="cc_license" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cc_license.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -418,7 +421,7 @@
   <data name="earth_checkbox_checked" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\earth_checkbox_checked.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="components_package_out" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\components_package_out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="KMA2_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\KMA2_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

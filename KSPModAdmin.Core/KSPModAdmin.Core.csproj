@@ -418,6 +418,7 @@
     <None Include="Resources\component_replace_clock.png" />
     <None Include="Resources\components_package_into.png" />
     <None Include="Resources\components_package_out.png" />
+    <None Include="Resources\KMA2_48.png" />
     <Content Include="Utils\Controls\CheckBoxComboBox\_license\license.txt" />
     <Content Include="Utils\Controls\FolderSelectionDialog\_license\license.txt" />
     <Content Include="Utils\Controls\TreeViewAdv\_license\license.txt" />

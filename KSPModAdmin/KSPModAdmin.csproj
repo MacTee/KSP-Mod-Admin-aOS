@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>KSP_MA_aOS.ico</ApplicationIcon>
+    <ApplicationIcon>KSPMA2.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug MONO|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
@@ -78,6 +78,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Languages\KSPMA.ger.lang" />
+    <None Include="Languages\KSPMA.rus.lang" />
+    <None Include="Pics\KSPMA Icon\KMA_and_KMA2_icon.psd" />
+    <None Include="Pics\KSPMA Icon\KMA_Vectors.ai" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -94,7 +97,19 @@
   <ItemGroup>
     <Content Include="docs\ReadMe.txt" />
     <Content Include="docs\ToDo.txt" />
-    <Content Include="KSP_MA_aOS.ico" />
+    <Content Include="KSPMA2.ico" />
+    <Content Include="Pics\KSPMA Icon\Icons\KMA2_16.ico" />
+    <Content Include="Pics\KSPMA Icon\Icons\KMA2_24.ico" />
+    <Content Include="Pics\KSPMA Icon\Icons\KMA2_256.ico" />
+    <Content Include="Pics\KSPMA Icon\Icons\KMA2_32.ico" />
+    <Content Include="Pics\KSPMA Icon\Icons\KMA2_48.ico" />
+    <Content Include="Pics\KSPMA Icon\Icons\KSPMA2.ico" />
+    <Content Include="Pics\KSPMA Icon\PNGs\KMA2_128.png" />
+    <Content Include="Pics\KSPMA Icon\PNGs\KMA2_16.png" />
+    <Content Include="Pics\KSPMA Icon\PNGs\KMA2_24.png" />
+    <Content Include="Pics\KSPMA Icon\PNGs\KMA2_256.png" />
+    <Content Include="Pics\KSPMA Icon\PNGs\KMA2_32.png" />
+    <Content Include="Pics\KSPMA Icon\PNGs\KMA2_48.png" />
     <Content Include="Resources\components.png" />
     <Content Include="Resources\components_tool_48x48.ico" />
     <Content Include="Resources\gears.png" />

@@ -32,7 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmWelcome));
             this.btnFinish = new System.Windows.Forms.Button();
             this.tbKSPPath = new System.Windows.Forms.TextBox();
-            this.btnSelectFolder = new System.Windows.Forms.Button();
             this.lblWelcomeAuthor = new System.Windows.Forms.Label();
             this.lblWelcomeStep1 = new System.Windows.Forms.Label();
             this.lblWelcomeTitle = new System.Windows.Forms.Label();
@@ -47,12 +46,15 @@
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnSelectFolder = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnFinish
@@ -78,21 +80,6 @@
             this.tbKSPPath.Size = new System.Drawing.Size(475, 20);
             this.tbKSPPath.TabIndex = 8;
             this.tbKSPPath.TabStop = false;
-            // 
-            // btnSelectFolder
-            // 
-            this.btnSelectFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSelectFolder.Image = global::KSPModAdmin.Core.Properties.Resources.folder_add1;
-            this.btnSelectFolder.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSelectFolder.Location = new System.Drawing.Point(170, 3);
-            this.btnSelectFolder.Name = "btnSelectFolder";
-            this.btnSelectFolder.Size = new System.Drawing.Size(134, 23);
-            this.btnSelectFolder.TabIndex = 4;
-            this.btnSelectFolder.Text = "Select folder";
-            this.btnSelectFolder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.ttWelcome.SetToolTip(this.btnSelectFolder, "Opens the folder select dialog, to select a KSP install folder.");
-            this.btnSelectFolder.UseVisualStyleBackColor = true;
-            this.btnSelectFolder.Click += new System.EventHandler(this.btnSelectFolder_Click);
             // 
             // lblWelcomeAuthor
             // 
@@ -251,11 +238,37 @@
             this.tableLayoutPanel6.Size = new System.Drawing.Size(475, 29);
             this.tableLayoutPanel6.TabIndex = 16;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::KSPModAdmin.Core.Properties.Resources.KMA2_48;
+            this.pictureBox1.InitialImage = null;
+            this.pictureBox1.Location = new System.Drawing.Point(15, 11);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(50, 50);
+            this.pictureBox1.TabIndex = 17;
+            this.pictureBox1.TabStop = false;
+            // 
+            // btnSelectFolder
+            // 
+            this.btnSelectFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnSelectFolder.Image = global::KSPModAdmin.Core.Properties.Resources.folder_add1;
+            this.btnSelectFolder.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSelectFolder.Location = new System.Drawing.Point(170, 3);
+            this.btnSelectFolder.Name = "btnSelectFolder";
+            this.btnSelectFolder.Size = new System.Drawing.Size(134, 23);
+            this.btnSelectFolder.TabIndex = 4;
+            this.btnSelectFolder.Text = "Select folder";
+            this.btnSelectFolder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.ttWelcome.SetToolTip(this.btnSelectFolder, "Opens the folder select dialog, to select a KSP install folder.");
+            this.btnSelectFolder.UseVisualStyleBackColor = true;
+            this.btnSelectFolder.Click += new System.EventHandler(this.btnSelectFolder_Click);
+            // 
             // frmWelcome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(502, 273);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.tableLayoutPanel6);
             this.Controls.Add(this.tableLayoutPanel5);
             this.Controls.Add(this.tableLayoutPanel4);
@@ -266,6 +279,7 @@
             this.Controls.Add(this.lblWelcomeNote);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnFinish);
+            this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmWelcome";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -281,6 +295,7 @@
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel5.PerformLayout();
             this.tableLayoutPanel6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -305,5 +320,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
