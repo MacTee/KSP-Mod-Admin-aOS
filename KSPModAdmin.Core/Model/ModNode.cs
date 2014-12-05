@@ -89,6 +89,7 @@ namespace KSPModAdmin.Core.Model
                 ModInfo modInfo = new ModInfo();
                 modInfo.Author = Author;
                 modInfo.CreationDate = CreationDate;
+                modInfo.ChangeDate = ChangeDate;
                 //modInfo.DownloadDate = DownloadDate;
                 modInfo.Downloads = Downloads;
                 modInfo.LocalPath = LocalPath;
@@ -106,6 +107,7 @@ namespace KSPModAdmin.Core.Model
                 {
                     Author = value.Author;
                     CreationDate = value.CreationDate;
+                    ChangeDate = value.ChangeDate;
                     //DownloadDate = value.DownloadDate;
                     Downloads = value.Downloads;
                     LocalPath = value.LocalPath;
@@ -171,6 +173,33 @@ namespace KSPModAdmin.Core.Model
         /// The last change date of the mod.
         /// </summary>
         public string ChangeDate { get; set; }
+
+        /// <summary>
+        /// The last change date of the mod as a DateTime object..
+        /// </summary>
+        public DateTime ChangeDateAsDateTime
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(ChangeDate))
+                    return DateTime.MinValue;
+                else
+                {
+                    DateTime value = DateTime.MinValue;
+                    if (DateTime.TryParse(ChangeDate, out value))
+                        return value;
+                    else
+                        return DateTime.MinValue;
+                }
+            }
+            set
+            {
+                if (value == DateTime.MinValue)
+                    ChangeDate = string.Empty;
+                else
+                    ChangeDate = value.ToString();
+            }
+        }
 
         /// <summary>
         /// The date of adding the mod to the ModSelection.

@@ -4,6 +4,7 @@ using System.Net;
 using System.Web;
 using KSPModAdmin.Core.Controller;
 using KSPModAdmin.Core.Model;
+using HtmlAgilityPack;
 
 namespace KSPModAdmin.Core.Utils
 {
@@ -66,7 +67,7 @@ namespace KSPModAdmin.Core.Utils
             ModInfo modInfo = new ModInfo();
             modInfo.SiteHandlerName = Name;
             modInfo.ModURL = url;
-            if (ParseSite(www.Load(url), ref modInfo))
+            if (ParseSite(url, ref modInfo))
                 return modInfo;
             else
                 return null;
@@ -81,7 +82,7 @@ namespace KSPModAdmin.Core.Utils
         public bool CheckForUpdates(ModInfo modInfo, ref ModInfo newModInfo)
         {
             newModInfo = GetModInfo(modInfo.ModURL);
-            return modInfo.CreationDateAsDateTime < newModInfo.CreationDateAsDateTime;
+            return modInfo.ChangeDateAsDateTime < newModInfo.ChangeDateAsDateTime;
         }
 
         /// <summary>
@@ -95,17 +96,33 @@ namespace KSPModAdmin.Core.Utils
             if (modInfo == null)
                 return false;
 
+            HtmlWeb web = new HtmlWeb();
+            HtmlDocument htmlDoc = web.Load(modInfo.ModURL);
+            htmlDoc.OptionFixNestedTags = true;
+
+            //get filename from hover text
+            HtmlNode fileNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='content']/section[2]/div[4]/div[2]/ul/li[1]/div[2]/p/a");
+            HtmlNode fileNode2 = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='content']/section[2]/div[4]/div[2]/ul/li/div[2]/p/a/span");
+
+            string filename = string.Empty;
+
+            if (fileNode.InnerHtml.Contains("..."))
+            {
+                filename = fileNode2.Attributes["title"].Value; //Long filename was truncated
+            }
+            else
+            {
+                filename = fileNode.InnerHtml;
+            }
+
             string downloadURL = GetDownloadURL(modInfo.ModURL);
 
-            string siteContent = www.Load(GetFilesURL(modInfo.ModURL));
-            string filename = GetFileName(siteContent);
             modInfo.LocalPath = Path.Combine(OptionsController.DownloadPath, filename);
 
             www.DownloadFile(downloadURL, modInfo.LocalPath, downloadProgressHandler);
 
             return File.Exists(modInfo.LocalPath);
         }
-
 
         private string ReduceToPlainCurseForgeModURL(string curseForgeURL)
         {
@@ -119,69 +136,46 @@ namespace KSPModAdmin.Core.Utils
             return curseForgeURL;
         }
 
-        private bool ParseSite(string siteContent, ref ModInfo modInfo)
+        private bool ParseSite(string url, ref ModInfo modInfo)
         {
-            int i1 = modInfo.ModURL.LastIndexOf("/") + 1;
-            if (i1 < 0) return false;
-            int i2 = modInfo.ModURL.IndexOf("-", i1);
-            if (i2 < 0) return false;
-            int l = i2 - i1;
-            if (l <= 0) return false;
-            modInfo.ProductID = modInfo.ModURL.Substring(i1, l);
+            HtmlWeb web = new HtmlWeb();
+            HtmlDocument htmlDoc = web.Load(url);
+            htmlDoc.OptionFixNestedTags = true;
 
-            string searchString = "<h1 class=\"project-title\">";
-            i1 = siteContent.IndexOf(searchString) + searchString.Length;
-            if (i1 < 0) return false;
-            i2 = siteContent.IndexOf("</h1>", i1);
-            if (i2 < 0) return false;
-            modInfo.Name = GetName(siteContent.Substring(i1, i2 - i1));
-            siteContent = siteContent.Substring(i2);
+            // To scrape the fields, now using HtmlAgilityPack and XPATH search strings.
+            // Easy way to get XPATH search: use chrome, inspect element, highlight the needed data and right-click and copy XPATH
+            HtmlNode nameNode = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='project-details-container']/div[@class='project-user']/h1[@class='project-title']/a/span");
+            HtmlNode idNode = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='sidebar-actions']/ul/li[@class='view-on-curse']/a");
+            HtmlNode createNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='content']/section[2]/div[1]/div[2]/ul/li[1]/div[2]/abbr");
+            HtmlNode updateNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='content']/section[2]/div[1]/div[2]/ul/li[2]/div[2]/abbr");
+            HtmlNode downloadNode = htmlDoc.DocumentNode.SelectSingleNode("//ul[@class='cf-details project-details']/li/div[starts-with(., 'Total Downloads')]/following::div[1]");
+            HtmlNode authorNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='content']/section[2]/div[3]/div[2]/ul/li/div[2]/p/a/span");
 
-            // get creation date
-            searchString = "<li>Created: <span><abbr class=\"tip standard-date standard-datetime\" title=\"";
-            int index = siteContent.IndexOf(searchString);
-            if (index < 0) return false;
-            siteContent = siteContent.Substring(index + searchString.Length);
-            index = siteContent.IndexOf("\"");
-            if (index < 0) return false;
-            string creationDate = siteContent.Substring(0, index).Trim();
-            modInfo.CreationDate = GetDateTime(creationDate).ToString();
-
-            // get last released file date
-            searchString = "<li>Last Released File: <span><abbr class=\"tip standard-date standard-datetime\" title=\"";
-            index = siteContent.IndexOf(searchString);
-            if (index >= 0)
+            var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc); //Curse stores the date as both text and as Epoch. Go for the most precise value (Epoch).
+            
+            if (nameNode !=null)
             {
-                siteContent = siteContent.Substring(index + searchString.Length);
-                index = siteContent.IndexOf("\"");
-                if (index >= 0)
-                {
-                    creationDate = siteContent.Substring(0, index).Trim();
-                    if (GetDateTime(creationDate) > modInfo.CreationDateAsDateTime)
-                        modInfo.CreationDate = GetDateTime(creationDate).ToString();
-                }
+                modInfo.Name = nameNode.InnerHtml;
+                modInfo.ProductID = idNode.Attributes["href"].Value.Substring(idNode.Attributes["href"].Value.LastIndexOf("/") + 1);
+                modInfo.CreationDateAsDateTime = epoch.AddSeconds(Convert.ToDouble(createNode.Attributes["data-epoch"].Value));
+                modInfo.ChangeDateAsDateTime = epoch.AddSeconds(Convert.ToDouble(updateNode.Attributes["data-epoch"].Value));
+                modInfo.Downloads = downloadNode.InnerHtml;
+                modInfo.Author = authorNode.InnerHtml;
+                return true;
             }
-
-            // get rating count
-            index = siteContent.IndexOf("<li>Total Downloads: <span>");
-            if (index < 0) return false;
-            siteContent = siteContent.Substring(index + 27);
-            index = siteContent.IndexOf("</span>");
-            if (index < 0) return false;
-            modInfo.Downloads = siteContent.Substring(0, index).Trim();
-
+            
             // more infos could be parsed here (like: short description, Tab content (overview, installation, ...), comments, ...)
-            return true;
+            return false;
         }
 
-        private string GetName(string titleHTMLString)
-        {
-            int index = titleHTMLString.IndexOf("title=\"");
-            titleHTMLString = titleHTMLString.Substring(index + 7);
-            index = titleHTMLString.IndexOf("\">");
-            string name = titleHTMLString.Substring(0, index);
-            return name.Trim();
-        }
+        //private string GetName(string titleHTMLString) // not in use?
+        //{
+        //    int index = titleHTMLString.IndexOf("title=\"");
+        //    titleHTMLString = titleHTMLString.Substring(index + 7);
+        //    index = titleHTMLString.IndexOf("\">");
+        //    string name = titleHTMLString.Substring(0, index);
+        //    return name.Trim();
+        //}
 
         private DateTime GetDateTime(string curseForgeDateString)
         {
