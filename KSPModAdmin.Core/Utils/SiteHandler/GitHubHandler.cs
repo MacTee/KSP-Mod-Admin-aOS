@@ -6,7 +6,6 @@ using System.Reflection.Emit;
 using System.Threading.Tasks;
 using KSPModAdmin.Core.Controller;
 using KSPModAdmin.Core.Model;
-using Octokit;
 using KSPModAdmin.Core.Utils;
 
 namespace KSPModAdmin.Core.Utils.SiteHandler
@@ -182,21 +181,5 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 
 			return parts;
 		}
-
-		private async Task<string[]> GetReleases(string url)
-		{
-			// TODO Figure out how to get this api working for better results
-			var client = new GitHubClient(new ProductHeaderValue("KSP-Mod-Admin-aOS"));
-			var tags = await client.Repository.GetAllTags("octokit", "octokit.net");
-
-			
-			var urlParts = GetUrlParts(url);
-			var releases = client.Release.GetAll(urlParts[1], urlParts[2]);
-
-
-			return urlParts;
-		}
-
-
     }
 }

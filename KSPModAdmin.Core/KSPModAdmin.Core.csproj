@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>KSPModAdmin.Core</RootNamespace>
     <AssemblyName>KSPModAdmin.Core</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -63,10 +63,6 @@
     <Reference Include="KerbalStuffReadOnly, Version=0.3.5450.37786, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Externals\KerbalStuffReadOnly.dll</HintPath>
-    </Reference>
-    <Reference Include="Octokit">
-      <HintPath>..\packages\Octokit.0.5.2\lib\net45\Octokit.dll</HintPath>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="SharpCompress, Version=0.10.3.0, Culture=neutral, PublicKeyToken=beaf6f427e128133, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
