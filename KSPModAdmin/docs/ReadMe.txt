@@ -10,9 +10,9 @@ License:
      - the redistribution is non commercial!
      - and your redistribution have the same license)
 
-  - KSP Mod Admin uses several other open source projects with different licenses:
+  - KSP Mod Admin uses several other open source projects with different licenses (a copy of most licenses could be found here KSPModAdmin\docs\Licenses\...):
     - TreeViewAdv (see http://www.codeproject.com/Articles/14741/Advanced-TreeView-for-NET)
-	  License: Berkeley Software Distribution License (see license.txt in KSPModAdmin.Core/Utils/Controls/TreeViewAdv/_license/license.txt).
+	  License: Berkeley Software Distribution License (see KSPModAdmin/Docs/Licenses/TreeViewAdvLicense.txt. license.txt).
 	- SharpCompress (see https://sharpcompress.codeplex.com/) 
 	  License: Microsoft Public License (Ms-PL) (see http://sharpcompress.codeplex.com/license).
 	- FolderSelectionDialog (see http://www.lyquidity.com/devblog/?p=136) 
@@ -21,3 +21,5 @@ License:
 	  License: The Code Project Open License (CPOL) 1.02 (see http://www.codeproject.com/info/cpol10.aspx).
     - HtmlAgilityPack (see http://htmlagilitypack.codeplex.com/)
 	  License: Microsoft Public License (Ms-PL) (see http://htmlagilitypack.codeplex.com/license).
+	- KerbalStuffWrapper (see http://forum.kerbalspaceprogram.com/threads/94891-KerbalStuffWrapper)
+	  License: Custom license see KSPModAdmin/Docs/Licenses/KerbalStuffWrapperLicense.txt for details.

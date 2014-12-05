@@ -95,6 +95,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="docs\Licenses\CheckBoxComboBoxLicense.txt" />
+    <Content Include="docs\Licenses\KerbalStuffWrapperLicense.txt" />
+    <Content Include="docs\Licenses\FolderSelectionDialogLicense.txt" />
+    <Content Include="docs\Licenses\TreeViewAdvLicense.txt" />
     <Content Include="docs\ReadMe.txt" />
     <Content Include="docs\ToDo.txt" />
     <Content Include="KSPMA2.ico" />

@@ -1,0 +1,8 @@
+﻿I have found the FolderSelectionDialog and the Reflector classes on this Blog:
+http://www.lyquidity.com/devblog/?p=136
+
+Download the source code here:
+http://s3downloads.lyquidity.com/FolderSelectDialog/FolderSelectDialog.zip
+
+
+There’s no license as such as you are free to take and do with the code what you will.
