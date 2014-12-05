@@ -120,6 +120,8 @@ namespace KSPModAdmin.Core.Config
                     node.AddDate = att.Value;
                 else if (att.Name == Constants.VERSION)
                     node.Version = att.Value;
+	            else if (att.Name == Constants.GAMEVERSION)
+		            node.GameVersion = att.Value;
                 else if (att.Name == Constants.NOTE)
                     node.Note = att.Value;
                 else if (att.Name == Constants.PRODUCTID)
@@ -264,7 +266,13 @@ namespace KSPModAdmin.Core.Config
                 pathNodeAttribute = doc.CreateAttribute(Constants.VERSION);
                 pathNodeAttribute.Value = child.Version;
                 modNode.Attributes.Append(pathNodeAttribute);
-            }
+			}
+			if (child.Version != string.Empty)
+			{
+				pathNodeAttribute = doc.CreateAttribute(Constants.GAMEVERSION);
+				pathNodeAttribute.Value = child.GameVersion;
+				modNode.Attributes.Append(pathNodeAttribute);
+			}
             if (child.Note != string.Empty)
             {
                 pathNodeAttribute = doc.CreateAttribute(Constants.NOTE);

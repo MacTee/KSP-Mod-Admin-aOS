@@ -62,18 +62,20 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
         /// <returns>The ModInfos parsed from the site of the passed URL.</returns>
         public ModInfo GetModInfo(string url)
         {
-            ModInfo modInfo = new ModInfo();
-            modInfo.SiteHandlerName = Name;
-            modInfo.ModURL = url;
-
 			var kerbalMod = KerbalStuffReadOnly.ModInfo(
-				Convert.ToInt64((modInfo.ModURL.Split(new string[] { "/" }, StringSplitOptions.None).ToList())[4]));
-
-			modInfo.ProductID = kerbalMod.Id.ToString();
-			modInfo.Name = kerbalMod.Name;
-			modInfo.Downloads = kerbalMod.Downloads.ToString();
-			modInfo.Author = kerbalMod.Author;
-			modInfo.Version = kerbalMod.Versions.First().FriendlyVersion.ToString();
+				Convert.ToInt64((url.Split(new string[] { "/" }, StringSplitOptions.None).ToList())[4]));
+            var modInfo = new ModInfo
+            {
+	            SiteHandlerName = Name,
+	            ModURL = url,
+	            ProductID = kerbalMod.Id.ToString(),
+	            Name = kerbalMod.Name,
+	            Downloads = kerbalMod.Downloads.ToString(),
+	            Author = kerbalMod.Author,
+	            Version = kerbalMod.Versions.First().FriendlyVersion.ToString(),
+				GameVersion = kerbalMod.DefaultVersionId.ToString()
+            };
+			//modInfo.CreationDate = kerbalMod.Versions.Last().Date;	// TODO when KS API supports dates from versions
 
 			return modInfo;
         }

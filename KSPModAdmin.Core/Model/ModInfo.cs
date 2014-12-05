@@ -20,6 +20,8 @@ namespace KSPModAdmin.Core.Model
 
 		public string Version { get; set; }
 
+		public String GameVersion { get; set; }
+
 		public DateTime DownloadDateAsDateTime
 		{
 			get

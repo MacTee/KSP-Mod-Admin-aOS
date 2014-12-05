@@ -133,6 +133,11 @@ namespace KSPModAdmin.Core.Model
         /// </summary>
         public string Version { get; set; }
 
+		/// <summary>
+		/// Version of the game this mod is for
+		/// </summary>
+		public string GameVersion { get; set; }
+
         /// <summary>
         /// The author of the mod.
         /// </summary>
