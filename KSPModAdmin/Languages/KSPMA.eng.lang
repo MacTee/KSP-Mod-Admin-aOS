@@ -596,4 +596,8 @@
   <!--</Control>-->
   <Control Name="lblAdditionalURLModInfo" Value="Additional link:"/>
 
+  <String Name="MSG_ERROR_PLUGIN_LOADING_TABVIEWS_0" Value="Plugin loading error: TabView &quot;{0}&quot; already exists!"/>
+  <String Name="MSG_ERROR_PLUGIN_LOADING_OPTIONVIEWS_0" Value="Plugin loading error: Option TabView &quot;{0}&quot; already exists!"/>
+
+  
 </Language>

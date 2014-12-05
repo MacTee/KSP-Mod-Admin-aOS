@@ -113,8 +113,8 @@ namespace KSPModAdmin.Core.Controller
             catch (Exception ex)
             {
                 string msg = string.Format("Unexpected runtime error: \"{0}\"", ex.Message);
-                string displayMsg = string.Format("{0}{1}{1}If you want to help please send the {2} from the{1}KSP Mod Admin intall dir to{1}mackerbal@mactee.de{1}or use the issue tracker{1}https://github.com/MacTee/KSP-Mod-Admin-aOS/issues", msg, Environment.NewLine, KSPMA_LOG_FILENAME);
-                MessageBox.Show(displayMsg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                string displayMsg = string.Format("{0}{1}{1}If you want to help please send the {2} from the KSP Mod Admin intall dir to{1}mackerbal@mactee.de{1}or use the issue tracker{1}https://github.com/MacTee/KSP-Mod-Admin-aOS/issues", msg, Environment.NewLine, KSPMA_LOG_FILENAME);
+                MessageBox.Show(displayMsg, Messages.MSG_TITLE_ERROR, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Log.AddErrorS(msg, ex);
             }
 
@@ -189,6 +189,8 @@ namespace KSPModAdmin.Core.Controller
         /// </summary>
         protected static void LoadLanguages()
         {
+            Log.AddDebugS("Loading languages ...");
+
             // Try load languages.
             bool langLoadFailed = false;
             try
@@ -206,6 +208,8 @@ namespace KSPModAdmin.Core.Controller
                 MessageBox.Show("Can not load languages!" + Environment.NewLine + "Fall back to defalut language: English", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Localizer.GlobalInstance.Clear();
             }
+
+            Log.AddDebugS(string.Format("Loading languages done. ({0})", string.Join(", ", Localizer.GlobalInstance.AvailableLanguages)));
         }
 
         /// <summary>
@@ -433,18 +437,23 @@ namespace KSPModAdmin.Core.Controller
         /// </summary>
         protected static void LoadPlugins()
         {
+            Log.AddDebugS("Loading plugins ...");
             try
             {
                 var plugins = PluginLoader.LoadPlugins<IKSPMAPlugin>(KSPPathHelper.GetPath(KSPPaths.KSPMA_Plugins));
                 foreach (IKSPMAPlugin plugin in plugins)
                 {
-                    TabView[] tabViews = plugin.GetMainTabViews();
+                    Log.AddDebugS(string.Format("Try add plugin \"{0}\" ...", plugin.Name));
+
+                    TabView[] tabViews = plugin.MainTabViews;
                     foreach (TabView tabView in tabViews)
                     {
-                        if (!mAddedTabViews.ContainsKey(tabView.TabName))
+                        if (!mAddedTabViews.ContainsKey(tabView.TabUserControl.GetTabCaption()))
                         {
+                            Log.AddDebugS(string.Format("Try add TabPage \"{0}\" ...", tabView.TabUserControl.GetTabCaption()));
+
                             TabPage tabPage = new TabPage();
-                            tabPage.Text = tabView.TabName;
+                            tabPage.Text = tabView.TabUserControl.GetTabCaption();
                             tabPage.Controls.Add(tabView.TabUserControl);
                             tabView.TabUserControl.Dock = DockStyle.Fill;
                             if (tabView.TabIcon != null)
@@ -454,30 +463,32 @@ namespace KSPModAdmin.Core.Controller
                             }
                             View.TabControl.TabPages.Add(tabPage);
 
-                            mAddedTabViews.Add(tabView.TabName, tabView);
+                            mAddedTabViews.Add(tabView.TabUserControl.GetTabCaption(), tabView);
                         }
                         else
                         {
-                            Messenger.AddError(string.Format("Plugin loading error: TabView \"{0}\" already exists!", tabView.TabName));
+                            Messenger.AddError(string.Format(Messages.MSG_ERROR_PLUGIN_LOADING_TABVIEWS_0, tabView.TabUserControl.GetTabCaption()));
                         }
                     }
 
-                    tabViews = plugin.GetOptionTabViews();
+                    tabViews = plugin.OptionTabViews;
                     foreach (TabView tabView in tabViews)
                     {
-                        if (!mAddedTabViews.ContainsKey(tabView.TabName))
+                        if (!mAddedTabViews.ContainsKey(tabView.TabUserControl.GetTabCaption()))
                         {
+                            Log.AddDebugS(string.Format("Try add Options TabPage \"{0}\" ...", tabView.TabUserControl.GetTabCaption()));
+
                             TabPage tabPage = new TabPage();
-                            tabPage.Text = tabView.TabName;
+                            tabPage.Text = tabView.TabUserControl.GetTabCaption();
                             tabPage.Controls.Add(tabView.TabUserControl);
                             tabView.TabUserControl.Dock = DockStyle.Fill; ;
                             OptionsController.View.TabControl.TabPages.Add(tabPage);
 
-                            mAddedTabViews.Add(tabView.TabName, tabView);
+                            mAddedTabViews.Add(tabView.TabUserControl.GetTabCaption(), tabView);
                         }
                         else
                         {
-                            Messenger.AddError(string.Format("Plugin loading error: Option TabView \"{0}\" already exists!", tabView.TabName));
+                            Messenger.AddError(string.Format(Messages.MSG_ERROR_PLUGIN_LOADING_OPTIONVIEWS_0, tabView.TabUserControl.GetTabCaption()));
                         }
                     }
                 }
@@ -522,7 +533,7 @@ namespace KSPModAdmin.Core.Controller
             {
                 TabPage tabPage = addedTabView.TabUserControl.Parent as TabPage;
                 if (tabPage != null)
-                    tabPage.Text = addedTabView.TabName;
+                    tabPage.Text = addedTabView.TabUserControl.GetTabCaption();
             }
         }
 

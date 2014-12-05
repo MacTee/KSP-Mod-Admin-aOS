@@ -1719,5 +1719,25 @@ namespace KSPModAdmin.Core
             }
         }
         private const string DEFAULT_MSG_ERROR_DURING_MOD_UPDATE_0 = "Error during mod update check \"{0}\"";
+
+        public static string MSG_ERROR_PLUGIN_LOADING_TABVIEWS_0
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_ERROR_PLUGIN_LOADING_TABVIEWS_0"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_ERROR_PLUGIN_LOADING_TABVIEWS_0).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_ERROR_PLUGIN_LOADING_TABVIEWS_0 = "Plugin loading error: TabView \"{0}\" already exists!";
+
+        public static string MSG_ERROR_PLUGIN_LOADING_OPTIONVIEWS_0
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_ERROR_PLUGIN_LOADING_OPTIONVIEWS_0"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_ERROR_PLUGIN_LOADING_OPTIONVIEWS_0).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_ERROR_PLUGIN_LOADING_OPTIONVIEWS_0 = "Plugin loading error: Option TabView \"{0}\" already exists!";
     }
 }

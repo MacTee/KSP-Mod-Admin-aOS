@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using KSPModAdmin.Core;
 using KSPModAdmin.Translation.Plugin.Properties;
 
@@ -6,20 +7,37 @@ namespace KSPModAdmin.Translation.Plugin
 {
     public class KSPMATranslationPlugin : IKSPMAPlugin
     {
-        private TabView mTabView = null;
+        private TabView[] mMainTabViews = null;
+        private TabView[] mOptionTabViews = new List<TabView>().ToArray();
 
 
-        public TabView[] GetMainTabViews()
+        public string Name { get { return "Translation Plugin"; } }
+
+        public string Description
         {
-            if (mTabView == null)
-                mTabView = new TabView(new ucTranslationView(), Resources.text);
-
-            return new[] { mTabView };
+            get
+            {
+                return "This Plugin adds a tab to help translation of all KSP ModAdmin aOS controls and messages.";
+            }
         }
 
-        public TabView[] GetOptionTabViews()
+        public TabView[] MainTabViews
         {
-            return new List<TabView>().ToArray();
+            get
+            {
+                if (mMainTabViews == null)
+                    mMainTabViews = new[] { new TabView(new ucTranslationView(), Resources.text) };
+
+                return mMainTabViews;
+            }
+        }
+
+        public TabView[] OptionTabViews
+        {
+            get
+            {
+                return mOptionTabViews;
+            }
         }
     }
 }
