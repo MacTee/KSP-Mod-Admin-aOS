@@ -1,10 +1,12 @@
-﻿namespace KSPModAdmin.Core.Utils
+﻿using System;
+
+namespace KSPModAdmin.Core.Utils
 {
     public abstract class GitHub
     {
         public static bool IsValidURL(string url)
         {
-            return (url.StartsWith("https://github.com") || url.StartsWith("http://github.com"));
+			return (new Uri(url).Authority.Equals("github.com"));
         }
 
         public static string GetDownloadURL(string url)
