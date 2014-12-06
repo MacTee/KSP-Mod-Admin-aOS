@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Reflection.Emit;
-using System.Threading.Tasks;
+using HtmlAgilityPack;
 using KSPModAdmin.Core.Controller;
 using KSPModAdmin.Core.Model;
-using KSPModAdmin.Core.Utils;
 
 namespace KSPModAdmin.Core.Utils.SiteHandler
 {
@@ -65,7 +64,6 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
         public ModInfo GetModInfo(string url)
 		{
 			var parts = GetUrlParts(url);
-
 			var modInfo = new ModInfo
 			{
 				SiteHandlerName = Name,
@@ -73,8 +71,7 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 				Name = parts[3],
 				Author = parts[2]
 			};
-			//modInfo.CreationDate = kerbalMod.Versions.Last().Date;	// TODO when Adding github tags parser
-
+			ParseSite(ref modInfo);
 			return modInfo;
         }
 
@@ -101,58 +98,39 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
             if (modInfo == null)
                 return false;
 
-            string downloadUrl = GetDownloadURL(modInfo);
+            string downloadUrl = GetDownloadUrl(modInfo);
 			modInfo.LocalPath = Path.Combine(OptionsController.DownloadPath, GetDownloadName(downloadUrl));
             www.DownloadFile(downloadUrl, modInfo.LocalPath, downloadProgressHandler);
 
             return File.Exists(modInfo.LocalPath);
         }
 
+		public void ParseSite(ref ModInfo modInfo)
+		{
+			var web = new HtmlWeb();
+			var htmlDoc = web.Load(modInfo.ModURL);
+			htmlDoc.OptionFixNestedTags = true;
+
+			// To scrape the fields, now using HtmlAgilityPack and XPATH search strings.
+			// Easy way to get XPATH search: use chrome, inspect element, highlight the needed data and right-click and copy XPATH
+			HtmlNode versionNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='js-repo-pjax-container']/div[2]/div[1]/div[1]/ul/li[1]/a/span[2]");
+			HtmlNode updateNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='js-repo-pjax-container']/div[2]/div[1]/div[2]/div[1]/p/time");
+			HtmlNode downloadNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='js-repo-pjax-container']/div[2]/div[1]/div[2]/ul/li[1]/a");
+
+			if (versionNode == null) return;
+
+			modInfo.Version = versionNode.InnerText;
+			modInfo.ChangeDateAsDateTime = GetDateTime(updateNode.Attributes["datetime"].Value);
+		}
+
         private DateTime GetDateTime(string dateString)
         {
-	        var dateParts = dateString.Split(new string[] {"-"}, StringSplitOptions.None);
-			return new DateTime(Convert.ToInt32(dateParts[0]), Convert.ToInt32(dateParts[2]), Convert.ToInt32(dateParts[1]));
-
-			//int index = dateString.IndexOf(",") + 2;
-			//dateString = dateString.Substring(index);
-			//index = dateString.IndexOf(" ") + 1;
-			//index = dateString.IndexOf(" ", index) + 1;
-			//index = dateString.IndexOf(" ", index) + 1;
-			//index = dateString.IndexOf(" ", index);
-			//string date = dateString.Substring(0, index);
-			//index = dateString.IndexOf("(");
-			//string tempTimeZone = dateString.Substring(index).Substring(0);
-			//index = tempTimeZone.IndexOf("-");
-			//if (index < 0)
-			//	index = tempTimeZone.IndexOf("+") + 1;
-			//else
-			//	index += 1;
-			//string timeZone = tempTimeZone.Substring(0, index);
-			//tempTimeZone = tempTimeZone.Substring(index);
-			//index = tempTimeZone.IndexOf(":");
-			//if (index < 2)
-			//	timeZone += "0" + tempTimeZone;
-			//else
-			//	timeZone += tempTimeZone;
-
-			//TimeZoneInfo curseZone = null;
-			//foreach (TimeZoneInfo zone in TimeZoneInfo.GetSystemTimeZones())
-			//{
-			//	if (!zone.DisplayName.StartsWith(timeZone))
-			//		continue;
-
-			//	curseZone = zone;
-			//	break;
-			//}
-
-			//DateTime myDate = DateTime.MinValue;
-			//if (DateTime.TryParse(date, out myDate) && curseZone != null)
-			//	return TimeZoneInfo.ConvertTime(myDate, curseZone, TimeZoneInfo.Local);
-			//else
-			//	return DateTime.MinValue;
+	        var date = dateString.Split('T')[0].ToString();
+			var dtfi = new DateTimeFormatInfo {ShortDatePattern = "yyyy-MM-dd", DateSeparator = "-"};
+	        return Convert.ToDateTime(date, dtfi);
         }
 
-        private string GetDownloadURL(ModInfo modInfo)
+        private string GetDownloadUrl(ModInfo modInfo)
         {
 	        string url;
 	        if (!modInfo.ModURL.Contains("releases"))
@@ -199,5 +177,12 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 
 			return parts;
 		}
+
+
+		
+
+
+
+
     }
 }

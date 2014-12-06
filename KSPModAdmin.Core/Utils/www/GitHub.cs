@@ -25,10 +25,10 @@ namespace KSPModAdmin.Core.Utils
             return (downloadURL.StartsWith("http:/") || downloadURL.StartsWith("https:/")) ? downloadURL : string.Empty;
         }
 
-        public static string GetFileName(string downloadURL)
+        public static string GetFileName(string downloadUrl)
         {
-            int index = downloadURL.LastIndexOf("/");
-            string filename = downloadURL.Substring(index + 1);
+            int index = downloadUrl.LastIndexOf("/");
+            string filename = downloadUrl.Substring(index + 1);
             if (filename.Contains("?"))
                 filename = filename.Substring(0, filename.IndexOf("?"));
 
