@@ -165,7 +165,7 @@
             this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbScan = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbUpdateCheckAllMods = new System.Windows.Forms.ToolStripButton();
+            this.tsbUpdatecheckAllMods = new System.Windows.Forms.ToolStripButton();
             this.tsbUpdateAllOutdatedMods = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbRefreshCheckedstateForAllMods = new System.Windows.Forms.ToolStripButton();
@@ -911,7 +911,7 @@
             this.toolStripSeparator11,
             this.tsbScan,
             this.toolStripSeparator4,
-            this.tsbUpdateCheckAllMods,
+            this.tsbUpdatecheckAllMods,
             this.tsbUpdateAllOutdatedMods,
             this.toolStripSeparator12,
             this.tsbRefreshCheckedstateForAllMods,
@@ -1025,17 +1025,17 @@
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
             // 
-            // tsbUpdateCheckAllMods
+            // tsbUpdatecheckAllMods
             // 
-            this.tsbUpdateCheckAllMods.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbUpdateCheckAllMods.Image = global::KSPModAdmin.Core.Properties.Resources.components_replace_earth;
-            this.tsbUpdateCheckAllMods.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbUpdateCheckAllMods.Name = "tsbUpdateCheckAllMods";
-            this.tsbUpdateCheckAllMods.Size = new System.Drawing.Size(23, 22);
-            this.tsbUpdateCheckAllMods.Text = "toolStripButton1";
-            this.tsbUpdateCheckAllMods.ToolTipText = "Updatecheck for all mods\r\nStarts the update check for all mods in the ModSelectio" +
+            this.tsbUpdatecheckAllMods.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbUpdatecheckAllMods.Image = global::KSPModAdmin.Core.Properties.Resources.components_replace_earth;
+            this.tsbUpdatecheckAllMods.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbUpdatecheckAllMods.Name = "tsbUpdatecheckAllMods";
+            this.tsbUpdatecheckAllMods.Size = new System.Drawing.Size(23, 22);
+            this.tsbUpdatecheckAllMods.Text = "toolStripButton1";
+            this.tsbUpdatecheckAllMods.ToolTipText = "Updatecheck for all mods\r\nStarts the update check for all mods in the ModSelectio" +
     "n.";
-            this.tsbUpdateCheckAllMods.Click += new System.EventHandler(this.tsbUpdateCheckAllMods_Click);
+            this.tsbUpdatecheckAllMods.Click += new System.EventHandler(this.tsbUpdateCheckAllMods_Click);
             // 
             // tsbUpdateAllOutdatedMods
             // 
@@ -1241,7 +1241,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiRedetectDestination;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
-        private System.Windows.Forms.ToolStripButton tsbUpdateCheckAllMods;
+        private System.Windows.Forms.ToolStripButton tsbUpdatecheckAllMods;
         private System.Windows.Forms.ToolStripMenuItem tsmiCmsRefreschCheckedState;
         private System.Windows.Forms.ContextMenuStrip cmsModSelectionAllMods;
         private System.Windows.Forms.ToolStripMenuItem tsmiCmsAddMod;

@@ -366,7 +366,7 @@ namespace KSPModAdmin.Core.Views
 
                 //tsbExImport.Enabled = true;
                 tsbScan.Enabled = true;
-                tsbUpdateCheckAllMods.Enabled = true;
+                tsbUpdatecheckAllMods.Enabled = true;
                 tsbUpdateMod.Enabled = true;
 
                 tsbProceedMod.Enabled = true;
