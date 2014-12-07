@@ -59,12 +59,15 @@ namespace FolderSelect
 		/// <param name="typeName">The name of the type</param>
 		/// <returns>A type instance</returns>
 		public Type GetType(string typeName)
-		{
+        {
 			Type type = null;
-			string[] names = typeName.Split('.');
+            string[] names = typeName.Split('.');
 
 			if (names.Length > 0)
 				type = m_asmb.GetType(m_ns + "." + names[0]);
+
+		    if (type == null)
+		        return null;
 
 			for (int i = 1; i < names.Length; ++i) {
 				type = type.GetNestedType(names[i], BindingFlags.NonPublic);

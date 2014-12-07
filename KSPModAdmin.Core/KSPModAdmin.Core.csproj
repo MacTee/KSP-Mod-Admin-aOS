@@ -374,12 +374,6 @@
     <Compile Include="Views\frmImExport.Designer.cs">
       <DependentUpon>frmImExport.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\frmLinkSelection.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\frmLinkSelection.Designer.cs">
-      <DependentUpon>frmLinkSelection.cs</DependentUpon>
-    </Compile>
     <Compile Include="Views\frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -559,9 +553,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\frmImExport.resx">
       <DependentUpon>frmImExport.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\frmLinkSelection.resx">
-      <DependentUpon>frmLinkSelection.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>

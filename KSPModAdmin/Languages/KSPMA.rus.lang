@@ -121,8 +121,8 @@
     <Control Name="tsbScan" Value="(T)toolStripButton5">
       <ChildControl Name="tsbScan_ToolTip" Value="Сканировать папку GameData^Ищет в папке KSP GameData установленные моды и^ добавляет их в список модов, если их там нет." />
     </Control>
-    <Control Name="tsbUpdatecheckAllMods" Value="(T)toolStripButton1">
-      <ChildControl Name="tsbUpdatecheckAllMods_ToolTip" Value="Поиск обновлений для всех модов^Запускает поиск обновлений для всех модов в списке." />
+    <Control Name="tsbUpdateCheckAllMods" Value="(T)toolStripButton1">
+      <ChildControl Name="tsbUpdateCheckAllMods_ToolTip" Value="Поиск обновлений для всех модов^Запускает поиск обновлений для всех модов в списке." />
     </Control>
     <Control Name="tsbRefreshCheckedstateForAllMods" Value="(T)toolStripButton1">
       <ChildControl Name="tsbRefreshCheckedstateForAllMods_ToolTip" Value="Обновить отметки у всех модов.^Проверяет установку всех элементов модов по указанным путям." />

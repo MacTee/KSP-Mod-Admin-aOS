@@ -1,7 +1,7 @@
 ﻿//// BUGS
 /////////////////////
 - ModName changes after Mod update.
-- Localization for tsbUpdatecheckAllMods_ToolTip don't works
+
 
 //// To Test
 /////////////////////

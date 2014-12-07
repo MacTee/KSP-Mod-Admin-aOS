@@ -121,8 +121,8 @@
     <Control Name="tsbScan" Value="">
       <ChildControl Name="tsbScan_ToolTip" Value="GameData Ordner durchsuchen^Durchsucht den KSP GameData Ordner nach bereits installierten Mods und fügt diese der Modauswahl hinzu, falls sie nicht schon vorhanden sind." />
     </Control>
-    <Control Name="tsbUpdatecheckAllMods" Value="">
-      <ChildControl Name="tsbUpdatecheckAllMods_ToolTip" Value="Alle Mods nach Updates überprüfen^Prüft ob für die Mods der Modauswahl Updates verfügbar sind." />
+    <Control Name="tsbUpdateCheckAllMods" Value="">
+      <ChildControl Name="tsbUpdateCheckAllMods_ToolTip" Value="Alle Mods nach Updates überprüfen^Prüft ob für die Mods der Modauswahl Updates verfügbar sind." />
     </Control>
     <Control Name="tsbRefreshCheckedstateForAllMods" Value="">
       <ChildControl Name="tsbRefreshCheckedstateForAllMods_ToolTip" Value="Häkchen Status aller Mods erneuern.^Erneuert den Häkchen Status aller Mods.^Alle Modeinträge mit Zielpfad werden angehakt." />

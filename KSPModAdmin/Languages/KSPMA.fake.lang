@@ -121,8 +121,8 @@
     <Control Name="tsbScan" Value="(T)toolStripButton5">
       <ChildControl Name="tsbScan_ToolTip" Value="(T)Scan GameData folder^Scans the KSP GameData folder for installed mods and^adds them if they are not listed in the ModSelection." />
     </Control>
-    <Control Name="tsbUpdatecheckAllMods" Value="(T)toolStripButton1">
-      <ChildControl Name="tsbUpdatecheckAllMods_ToolTip" Value="(T)Update check for all mods^Starts the update check for all mods in the ModSelection." />
+    <Control Name="tsbUpdateCheckAllMods" Value="(T)toolStripButton1">
+      <ChildControl Name="tsbUpdateCheckAllMods_ToolTip" Value="(T)Update check for all mods^Starts the update check for all mods in the ModSelection." />
     </Control>
     <Control Name="tsbRefreshCheckedstateForAllMods" Value="(T)toolStripButton1">
       <ChildControl Name="tsbRefreshCheckedstateForAllMods_ToolTip" Value="(T)Refresh checked state of all mods.^Checks all ModNodes with a destination." />
