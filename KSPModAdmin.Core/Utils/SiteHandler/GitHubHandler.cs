@@ -22,13 +22,32 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 		public string Name { get { return cName; } }
 
 		/// <summary>
-		/// Checks if the passed URL is a KerbalStuff URL.
+		/// Checks if the passed URL is a valid URL for GitHub.
 		/// </summary>
 		/// <param name="url">The URL to check.</param>
-		/// <returns>True if the passed URL is a valid KerbalStuff URL, otherwise false.</returns>
+		/// <returns>True if the passed URL is a valid URL, otherwise false.</returns>
 		public bool IsValidURL(string url)
 		{
 			return (!string.IsNullOrEmpty(url) && Host.Equals(new Uri(url).Authority));
+		}
+
+		/// <summary>
+		/// Gets the content of the site of the passed URL and parses it for ModInfos.
+		/// </summary>
+		/// <param name="url">The URL of the site to parse the ModInfos from.</param>
+		/// <returns>The ModInfos parsed from the site of the passed URL.</returns>
+		public ModInfo GetModInfo(string url)
+		{
+			var parts = GetUrlParts(url);
+			var modInfo = new ModInfo
+			{
+				SiteHandlerName = Name,
+				ModURL = url,
+				Name = parts[3],
+				Author = parts[2]
+			};
+			ParseSite(ref modInfo);
+			return modInfo;
 		}
 
 		/// <summary>
@@ -56,25 +75,6 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 			return newMod;
 		}
 
-		/// <summary>
-        /// Gets the content of the site of the passed URL and parses it for ModInfos.
-        /// </summary>
-        /// <param name="url">The URL of the site to parse the ModInfos from.</param>
-        /// <returns>The ModInfos parsed from the site of the passed URL.</returns>
-        public ModInfo GetModInfo(string url)
-		{
-			var parts = GetUrlParts(url);
-			var modInfo = new ModInfo
-			{
-				SiteHandlerName = Name,
-				ModURL = url,
-				Name = parts[3],
-				Author = parts[2]
-			};
-			ParseSite(ref modInfo);
-			return modInfo;
-        }
-
         /// <summary>
         /// Checks if updates are available for the passed mod.
         /// </summary>
@@ -98,7 +98,7 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
             if (modInfo == null)
                 return false;
 
-            string downloadUrl = GetDownloadUrl(modInfo);
+            string downloadUrl = GetDownloadUrl(modInfo.ModURL);
 			modInfo.LocalPath = Path.Combine(OptionsController.DownloadPath, GetDownloadName(downloadUrl));
             www.DownloadFile(downloadUrl, modInfo.LocalPath, downloadProgressHandler);
 
@@ -107,8 +107,7 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 
 		public void ParseSite(ref ModInfo modInfo)
 		{
-			var web = new HtmlWeb();
-			var htmlDoc = web.Load(modInfo.ModURL);
+			var htmlDoc = new HtmlWeb().Load(modInfo.ModURL);
 			htmlDoc.OptionFixNestedTags = true;
 
 			// To scrape the fields, now using HtmlAgilityPack and XPATH search strings.
@@ -123,30 +122,26 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 			modInfo.ChangeDateAsDateTime = GetDateTime(updateNode.Attributes["datetime"].Value);
 		}
 
-        private DateTime GetDateTime(string dateString)
+        private static DateTime GetDateTime(string dateString)
         {
 	        var date = dateString.Split('T')[0].ToString();
 			var dtfi = new DateTimeFormatInfo {ShortDatePattern = "yyyy-MM-dd", DateSeparator = "-"};
 	        return Convert.ToDateTime(date, dtfi);
         }
 
-        private string GetDownloadUrl(ModInfo modInfo)
+        private static string GetDownloadUrl(string modUrl)
         {
-	        string url;
-	        if (!modInfo.ModURL.Contains("releases"))
+	        string url = modUrl;
+			if (!modUrl.Contains("releases"))
 	        {
-				var parts = GetUrlParts(modInfo.ModURL);
+				var parts = GetUrlParts(modUrl);
 				url = parts[0] + "://" + parts[1] + "/" + parts[2] + "/" + parts[3] + "/releases";
-	        }
-	        else
-	        {
-		        url = modInfo.ModURL;
 	        }
 
 			return GitHub.GetDownloadURL(url);
         }
 
-		private string GetDownloadName(string url)
+		private static string GetDownloadName(string url)
 		{
 			return new Uri(url).Segments.Last();
 		}
@@ -157,7 +152,7 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 		/// <param name="url">A url to split</param>
 		/// <exception cref="ArgumentException"></exception>
 		/// <returns>An array of the url segments</returns>
-		private List<string> GetUrlParts(string url)
+		private static List<string> GetUrlParts(string url)
 		{
 			// Split the url into parts
 			var parts = new List<string> {new Uri(url).Scheme, new Uri(url).Authority};
@@ -177,12 +172,5 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 
 			return parts;
 		}
-
-
-		
-
-
-
-
     }
 }
