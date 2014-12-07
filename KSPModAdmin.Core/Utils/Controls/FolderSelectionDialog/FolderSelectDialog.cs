@@ -92,13 +92,11 @@ namespace FolderSelect
 				var r = new Reflector("System.Windows.Forms");
 
 				uint num = 0;
-			    MessageBox.Show(r.ToString());
 				Type typeIFileDialog = r.GetType("FileDialogNative.IFileDialog");
 			    if (typeIFileDialog == null)
                     flag = FallBackToFolderBrowserDialog(hWndOwner);
 			    else
 			    {
-                    MessageBox.Show(r.ToString());
                     object dialog = r.Call(ofd, "CreateVistaDialog");
 				    r.Call(ofd, "OnBeforeVistaDialog", dialog);
 
