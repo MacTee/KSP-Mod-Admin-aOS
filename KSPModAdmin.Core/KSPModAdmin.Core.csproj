@@ -83,6 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config\AdminConfig.cs" />
+    <Compile Include="Config\ConfigHelper.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Controller\MainController.cs" />
     <Compile Include="Controller\ModSelectionController.cs" />

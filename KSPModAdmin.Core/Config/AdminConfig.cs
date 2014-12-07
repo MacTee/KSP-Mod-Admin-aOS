@@ -1,16 +1,13 @@
-﻿using System;
-using System.ComponentModel.Design;
-using System.Drawing;
-using System.IO;
-using System.Windows.Forms;
-using System.Xml;
-using KSPModAdmin.Core.Controller;
+﻿using KSPModAdmin.Core.Controller;
 using KSPModAdmin.Core.Model;
 using KSPModAdmin.Core.Utils;
-using System.Collections.Generic;
 using KSPModAdmin.Core.Utils.Localization;
 using KSPModAdmin.Core.Views;
-using SharpCompress.Common;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Xml;
 
 namespace KSPModAdmin.Core.Config
 {
@@ -382,180 +379,144 @@ namespace KSPModAdmin.Core.Config
             XmlNode generalNode = doc.CreateElement(Constants.GENERAL);
             root.AppendChild(generalNode);
 
-            node = doc.CreateElement(Constants.LANGUAGE);
-            XmlAttribute nodeAttribute = doc.CreateAttribute(Constants.NAME);
-            nodeAttribute.Value = Localizer.GlobalInstance.CurrentLanguage;
-            node.Attributes.Append(nodeAttribute);
+            // Language
+            node = ConfigHelper.CreateConfigNode(doc, Constants.LANGUAGE, Constants.NAME, Localizer.GlobalInstance.CurrentLanguage);
             generalNode.AppendChild(node);
 
-            node = doc.CreateElement(Constants.POSITION);
-            nodeAttribute = doc.CreateAttribute(Constants.X);
-            nodeAttribute.Value = MainController.View.Location.X.ToString();
-            node.Attributes.Append(nodeAttribute);
-            nodeAttribute = doc.CreateAttribute(Constants.Y);
-            nodeAttribute.Value = MainController.View.Location.Y.ToString();
-            node.Attributes.Append(nodeAttribute);
+            // Window position
+            node = ConfigHelper.CreateConfigNode(doc, Constants.POSITION, new string[,]
+            {
+                { Constants.X, MainController.View.Location.X.ToString() },
+                { Constants.Y, MainController.View.Location.Y.ToString() }
+            });
             generalNode.AppendChild(node);
 
-            node = doc.CreateElement(Constants.SIZE);
-            nodeAttribute = doc.CreateAttribute(Constants.WIDTH);
-            nodeAttribute.Value = MainController.View.Width.ToString();
-            node.Attributes.Append(nodeAttribute);
-            nodeAttribute = doc.CreateAttribute(Constants.HEIGHT);
-            nodeAttribute.Value = MainController.View.Height.ToString();
-            node.Attributes.Append(nodeAttribute);
+            // Window size
+            node = ConfigHelper.CreateConfigNode(doc, Constants.SIZE, new string[,]
+            {
+                { Constants.WIDTH, MainController.View.Width.ToString() },
+                { Constants.HEIGHT, MainController.View.Height.ToString() }
+            });
             generalNode.AppendChild(node);
 
-            node = doc.CreateElement(Constants.WINDOWSTATE);
-            nodeAttribute = doc.CreateAttribute(Constants.MAXIM);
-            nodeAttribute.Value = (MainController.View.WindowState == FormWindowState.Maximized).ToString();
-            node.Attributes.Append(nodeAttribute);
+            // Window maximize state
+            node = ConfigHelper.CreateConfigNode(doc, Constants.WINDOWSTATE, Constants.MAXIM, (MainController.View.WindowState == FormWindowState.Maximized).ToString());
             generalNode.AppendChild(node);
 
+            // ModSelection column widths
             int i = 0;
             node = doc.CreateElement(Constants.MODSELECTIONCOLUMNS);
             var vInfo = ModSelectionController.View.GetModSelectionViewInfo();
             foreach (var colWidth in vInfo.ModSelectionColumnWidths)
             {
-                XmlNode columnNode = doc.CreateElement(Constants.COLUMN);
-
-                nodeAttribute = doc.CreateAttribute(Constants.ID);
-                nodeAttribute.Value = i.ToString();
-                columnNode.Attributes.Append(nodeAttribute);
-
-                nodeAttribute = doc.CreateAttribute(Constants.WIDTH);
-                nodeAttribute.Value = colWidth.ToString();
-                columnNode.Attributes.Append(nodeAttribute);
-
+                XmlNode columnNode = ConfigHelper.CreateConfigNode(doc, Constants.COLUMN, new string[,]
+                {
+                    { Constants.ID, i.ToString() },
+                    { Constants.WIDTH, colWidth.ToString() }
+                });
                 node.AppendChild(columnNode);
+
                 i++;
             }
             generalNode.AppendChild(node);
 
+            // ModInfo column widths
             i = 0;
             node = doc.CreateElement(Constants.MODINFOCOLUMNS);
             foreach (var colWidth in vInfo.ModInfosColumnWidths)
             {
-                XmlNode columnNode = doc.CreateElement(Constants.COLUMN);
-
-                nodeAttribute = doc.CreateAttribute(Constants.ID);
-                nodeAttribute.Value = i.ToString();
-                columnNode.Attributes.Append(nodeAttribute);
-
-                nodeAttribute = doc.CreateAttribute(Constants.WIDTH);
-                nodeAttribute.Value = colWidth.ToString();
-                columnNode.Attributes.Append(nodeAttribute);
-
+                XmlNode columnNode = ConfigHelper.CreateConfigNode(doc, Constants.COLUMN, new string[,]
+                {
+                    { Constants.ID, i.ToString() },
+                    { Constants.WIDTH, colWidth.ToString() }
+                });
                 node.AppendChild(columnNode);
+                
                 i++;
             }
             generalNode.AppendChild(node);
 
-            node = doc.CreateElement(Constants.MODINFOSSPLITTERPOS);
-            nodeAttribute = doc.CreateAttribute(Constants.POSITION);
-            nodeAttribute.Value = vInfo.ModInfosSplitterPos.ToString();
-            node.Attributes.Append(nodeAttribute);
+            // ModSelection splitter position
+            node = ConfigHelper.CreateConfigNode(doc, Constants.MODINFOSSPLITTERPOS, Constants.POSITION, vInfo.ModInfosSplitterPos.ToString());
             generalNode.AppendChild(node);
 
-            node = doc.CreateElement(Constants.CONFLICTDETECTIONOPTIONS);
-            nodeAttribute = doc.CreateAttribute(Constants.ONOFF);
-            nodeAttribute.Value = OptionsController.ConflictDetectionOnOff.ToString();
-            node.Attributes.Append(nodeAttribute);
-            nodeAttribute = doc.CreateAttribute(Constants.SHOWCONFLICTSOLVER);
-            nodeAttribute.Value = OptionsController.ShowConflictSolver.ToString();
-            node.Attributes.Append(nodeAttribute);
+            // Conflict detection options
+            node = ConfigHelper.CreateConfigNode(doc, Constants.CONFLICTDETECTIONOPTIONS, new string[,]
+            {
+                { Constants.ONOFF, OptionsController.ConflictDetectionOnOff.ToString() },
+                { Constants.SHOWCONFLICTSOLVER, OptionsController.ShowConflictSolver.ToString() }
+            });
             generalNode.AppendChild(node);
 
+            // ModSelection TreeNode colors
             node = doc.CreateElement(Constants.NODECOLORS);
             generalNode.AppendChild(node);
 
-            XmlNode childNode = doc.CreateElement(Constants.DESTINATIONDETECTED);
-            nodeAttribute = doc.CreateAttribute(Constants.COLOR);
-            nodeAttribute.Value = String.Format("{0};{1};{2}", OptionsController.ColorDestinationDetected.R, OptionsController.ColorDestinationDetected.G, OptionsController.ColorDestinationDetected.B);
-            childNode.Attributes.Append(nodeAttribute);
+            // Destination detected
+            XmlNode childNode = ConfigHelper.CreateConfigNode(doc, Constants.DESTINATIONDETECTED, Constants.COLOR,
+                string.Format("{0};{1};{2}", OptionsController.ColorDestinationDetected.R, OptionsController.ColorDestinationDetected.G, OptionsController.ColorDestinationDetected.B));
             node.AppendChild(childNode);
 
-            childNode = doc.CreateElement(Constants.DESTINATIONMISSING);
-            nodeAttribute = doc.CreateAttribute(Constants.COLOR);
-            nodeAttribute.Value = String.Format("{0};{1};{2}", OptionsController.ColorDestinationMissing.R, OptionsController.ColorDestinationMissing.G, OptionsController.ColorDestinationMissing.B);
-            childNode.Attributes.Append(nodeAttribute);
+            // Destination missing
+            childNode = ConfigHelper.CreateConfigNode(doc, Constants.DESTINATIONMISSING, Constants.COLOR,
+                string.Format("{0};{1};{2}", OptionsController.ColorDestinationMissing.R, OptionsController.ColorDestinationMissing.G, OptionsController.ColorDestinationMissing.B));
             node.AppendChild(childNode);
 
-            childNode = doc.CreateElement(Constants.DESTINATIONCONFLICT);
-            nodeAttribute = doc.CreateAttribute(Constants.COLOR);
-            nodeAttribute.Value = String.Format("{0};{1};{2}", OptionsController.ColorDestinationConflict.R, OptionsController.ColorDestinationConflict.G, OptionsController.ColorDestinationConflict.B);
-            childNode.Attributes.Append(nodeAttribute);
+            // Destination conflict
+            childNode = ConfigHelper.CreateConfigNode(doc, Constants.DESTINATIONCONFLICT, Constants.COLOR,
+                string.Format("{0};{1};{2}", OptionsController.ColorDestinationConflict.R, OptionsController.ColorDestinationConflict.G, OptionsController.ColorDestinationConflict.B));
             node.AppendChild(childNode);
 
-            childNode = doc.CreateElement(Constants.MODINSTALLED);
-            nodeAttribute = doc.CreateAttribute(Constants.COLOR);
-            nodeAttribute.Value = String.Format("{0};{1};{2}", OptionsController.ColorModInstalled.R, OptionsController.ColorModInstalled.G, OptionsController.ColorModInstalled.B);
-            childNode.Attributes.Append(nodeAttribute);
+            // Mod installed
+            childNode = ConfigHelper.CreateConfigNode(doc, Constants.MODINSTALLED, Constants.COLOR,
+                string.Format("{0};{1};{2}", OptionsController.ColorModInstalled.R, OptionsController.ColorModInstalled.G, OptionsController.ColorModInstalled.B));
             node.AppendChild(childNode);
 
-            childNode = doc.CreateElement(Constants.MODARCHIVEMISSING);
-            nodeAttribute = doc.CreateAttribute(Constants.COLOR);
-            nodeAttribute.Value = String.Format("{0};{1};{2}", OptionsController.ColorModArchiveMissing.R, OptionsController.ColorModArchiveMissing.G, OptionsController.ColorModArchiveMissing.B);
-            childNode.Attributes.Append(nodeAttribute);
+            // Mod archive missing
+            childNode = ConfigHelper.CreateConfigNode(doc, Constants.MODARCHIVEMISSING, Constants.COLOR,
+                string.Format("{0};{1};{2}", OptionsController.ColorModArchiveMissing.R, OptionsController.ColorModArchiveMissing.G, OptionsController.ColorModArchiveMissing.B));
             node.AppendChild(childNode);
 
-            childNode = doc.CreateElement(Constants.MODOUTDATED);
-            nodeAttribute = doc.CreateAttribute(Constants.COLOR);
-            nodeAttribute.Value = String.Format("{0};{1};{2}", OptionsController.ColorModOutdated.R, OptionsController.ColorModOutdated.G, OptionsController.ColorModOutdated.B);
-            childNode.Attributes.Append(nodeAttribute);
+            // Mod is outdated
+            childNode = ConfigHelper.CreateConfigNode(doc, Constants.MODOUTDATED, Constants.COLOR,
+                string.Format("{0};{1};{2}", OptionsController.ColorModOutdated.R, OptionsController.ColorModOutdated.G, OptionsController.ColorModOutdated.B));
             node.AppendChild(childNode);
 
-            XmlNode pathNode = doc.CreateElement(Constants.KSP_PATH);
-            XmlAttribute pathNodeAttribute = doc.CreateAttribute(Constants.NAME);
-            pathNodeAttribute.Value = OptionsController.SelectedKSPPath;
-            pathNode.Attributes.Append(pathNodeAttribute);
-            generalNode.AppendChild(pathNode);
+            // Selected KSP path.
+            node = ConfigHelper.CreateConfigNode(doc, Constants.KSP_PATH, Constants.NAME, OptionsController.SelectedKSPPath);
+            generalNode.AppendChild(node);
 
+            // Known KSP paths.
             XmlNode pathNodes = doc.CreateElement(Constants.KNOWN_KSP_PATHS);
             foreach (NoteNode info in OptionsController.KnownKSPPaths)
             {
-                pathNode = doc.CreateElement(Constants.KNOWN_KSP_PATH);
-
-                pathNodeAttribute = doc.CreateAttribute(Constants.FULLPATH);
-                pathNodeAttribute.Value = info.Name;
-                pathNode.Attributes.Append(pathNodeAttribute);
-
-                pathNodeAttribute = doc.CreateAttribute(Constants.NOTE);
-                pathNodeAttribute.Value = info.Note;
-                pathNode.Attributes.Append(pathNodeAttribute);
-
+                XmlNode pathNode = ConfigHelper.CreateConfigNode(doc, Constants.KNOWN_KSP_PATH, new string[,]
+                {
+                    { Constants.FULLPATH, info.Name },
+                    { Constants.NOTE, info.Note }
+                });
                 pathNodes.AppendChild(pathNode);
             }
             generalNode.AppendChild(pathNodes);
 
-            node = doc.CreateElement(Constants.POSTDOWNLOADACTION);
-            nodeAttribute = doc.CreateAttribute(Constants.VALUE);
-            nodeAttribute.Value = ((int)OptionsController.PostDownloadAction).ToString();
-            node.Attributes.Append(nodeAttribute);
+            // KSP MA post download action
+            node = ConfigHelper.CreateConfigNode(doc, Constants.POSTDOWNLOADACTION, Constants.VALUE, ((int)OptionsController.PostDownloadAction).ToString());
             generalNode.AppendChild(node);
 
-            node = doc.CreateElement(Constants.CHECKFORUPDATES);
-            nodeAttribute = doc.CreateAttribute(Constants.VALUE);
-            nodeAttribute.Value = OptionsController.VersionCheck.ToString();
-            node.Attributes.Append(nodeAttribute);
+            // KSP MA check for updates
+            node = ConfigHelper.CreateConfigNode(doc, Constants.CHECKFORUPDATES, Constants.VALUE, OptionsController.VersionCheck.ToString());
             generalNode.AppendChild(node);
 
-            node = doc.CreateElement(Constants.LASTMODUPDATETRY);
-            nodeAttribute = doc.CreateAttribute(Constants.VALUE);
-            nodeAttribute.Value = OptionsController.LastModUpdateTry.ToString();
-            node.Attributes.Append(nodeAttribute);
+            // Last mod update check DateTime
+            node = ConfigHelper.CreateConfigNode(doc, Constants.LASTMODUPDATETRY, Constants.VALUE, OptionsController.LastModUpdateTry.ToString());
             generalNode.AppendChild(node);
 
-            node = doc.CreateElement(Constants.MODUPDATEINTERVAL);
-            nodeAttribute = doc.CreateAttribute(Constants.VALUE);
-            nodeAttribute.Value = ((int)OptionsController.ModUpdateInterval).ToString();
-            node.Attributes.Append(nodeAttribute);
+            // Mod update check interval
+            node = ConfigHelper.CreateConfigNode(doc, Constants.MODUPDATEINTERVAL, Constants.VALUE, ((int)OptionsController.ModUpdateInterval).ToString());
             generalNode.AppendChild(node);
 
-            node = doc.CreateElement(Constants.MODUPDATEBEHAVIOR);
-            nodeAttribute = doc.CreateAttribute(Constants.VALUE);
-            nodeAttribute.Value = ((int)OptionsController.ModUpdateBehavior).ToString();
-            node.Attributes.Append(nodeAttribute);
+            // Mod update behavior
+            node = ConfigHelper.CreateConfigNode(doc, Constants.MODUPDATEBEHAVIOR, Constants.VALUE, ((int)OptionsController.ModUpdateBehavior).ToString());
             generalNode.AppendChild(node);
 
             doc.Save(path);

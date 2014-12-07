@@ -83,6 +83,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Languages\KSPMA.ger.lang" />
+    <None Include="Languages\KSPMA.ital.lang" />
     <None Include="Languages\KSPMA.rus.lang" />
     <None Include="Pics\KSPMA Icon\KMA_and_KMA2_icon.psd" />
     <None Include="Pics\KSPMA Icon\KMA_Vectors.ai" />

@@ -48,36 +48,39 @@
             "Version",
             "1.0.0"}, -1);
             System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem(new string[] {
+            "KSP Version",
+            "0.25"}, -1);
+            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem(new string[] {
             "Author",
             "BHeinrich"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem(new string[] {
             "Creation date",
             "27.05.2014"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem(new string[] {
             "Change date",
             "28.10.2014"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem(new string[] {
             "Outdated",
             "No"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem11 = new System.Windows.Forms.ListViewItem(new string[] {
             "Rating",
             ""}, -1);
-            System.Windows.Forms.ListViewItem listViewItem11 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem12 = new System.Windows.Forms.ListViewItem(new string[] {
             "Downloads",
             "75k+"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem12 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem13 = new System.Windows.Forms.ListViewItem(new string[] {
             "Note",
             "KSP MA aOS is the mod managing tool for KSP on any OS."}, -1);
-            System.Windows.Forms.ListViewItem listViewItem13 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem14 = new System.Windows.Forms.ListViewItem(new string[] {
             "Name",
             "KSPModAdmin.exe"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem14 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem15 = new System.Windows.Forms.ListViewItem(new string[] {
             "Destination",
             "<No destination>"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem15 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem16 = new System.Windows.Forms.ListViewItem(new string[] {
             "Conflicts",
             "None"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem16 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem17 = new System.Windows.Forms.ListViewItem(new string[] {
             "Installed",
             "Yes"}, -1);
             this.treeColumn1 = new KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.TreeColumn();
@@ -855,10 +858,11 @@
             listViewItem10.Group = listViewGroup1;
             listViewItem11.Group = listViewGroup1;
             listViewItem12.Group = listViewGroup1;
-            listViewItem13.Group = listViewGroup2;
+            listViewItem13.Group = listViewGroup1;
             listViewItem14.Group = listViewGroup2;
             listViewItem15.Group = listViewGroup2;
             listViewItem16.Group = listViewGroup2;
+            listViewItem17.Group = listViewGroup2;
             this.lvModSelection.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem1,
             listViewItem2,
@@ -875,7 +879,8 @@
             listViewItem13,
             listViewItem14,
             listViewItem15,
-            listViewItem16});
+            listViewItem16,
+            listViewItem17});
             this.lvModSelection.Location = new System.Drawing.Point(0, 3);
             this.lvModSelection.MultiSelect = false;
             this.lvModSelection.Name = "lvModSelection";

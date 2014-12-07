@@ -65,6 +65,7 @@ namespace KSPModAdmin.Core
         public const string KSP_X64_EXE = "KSP_x64.exe";
         public const string APP_CONFIG_FILE = "KSPModAdmin_aOS.cfg";
         public const string MODS_CONFIG_FILE = "KSPModAdmin_aOS.cfg";
+        public const string LINUX_PATH = "$HOME/.ksp_mod_manager";
 
         // XMLNode names
         public const string ROOTNODE = "ModAdminConfig";

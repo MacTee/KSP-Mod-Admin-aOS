@@ -1,7 +1,7 @@
 ﻿//// BUGS
 /////////////////////
-- Modname changes after Mod update.
-
+- ModName changes after Mod update.
+- Localization for tsbUpdatecheckAllMods_ToolTip don't works
 
 //// To Test
 /////////////////////
@@ -17,6 +17,8 @@
 - Translation tab
 - KSPModAdmin.Updater works again!
 - Language select on welcome screen.
+- KerbalStuff support
+- is HtmlAgilityPack mono compatible?
 
 
 //// TODO
@@ -44,9 +46,6 @@
 - Conflict detection/solving
 
 - KSPForum support.
-
-- KerbalStuff support
-  -> API: https://github.com/KerbalStuff/KerbalStuff/blob/master/api.md
 
 - Column select for ModSelection from ModInfo fields
 

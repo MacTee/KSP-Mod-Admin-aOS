@@ -1,10 +1,10 @@
-﻿using System;
+﻿using KSPModAdmin.Core.Controller;
+using KSPModAdmin.Core.Model;
+using KSPModAdmin.Core.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
-using KSPModAdmin.Core.Controller;
-using KSPModAdmin.Core.Model;
-using KSPModAdmin.Core.Utils;
 
 namespace KSPModAdmin.Core.Config
 {
@@ -204,22 +204,13 @@ namespace KSPModAdmin.Core.Config
             XmlNode generalNode = doc.CreateElement(Constants.GENERAL);
             root.AppendChild(generalNode);
 
-            XmlNode node = doc.CreateElement(Constants.DOWNLOAD_PATH);
-            XmlAttribute nodeAttribute = doc.CreateAttribute(Constants.NAME);
-            nodeAttribute.Value = OptionsController.DownloadPath;
-            node.Attributes.Append(nodeAttribute);
+            XmlNode node = ConfigHelper.CreateConfigNode(doc, Constants.DOWNLOAD_PATH, Constants.NAME, OptionsController.DownloadPath);
             generalNode.AppendChild(node);
 
-            //node = doc.CreateElement(Constants.OVERRRIDE);
-            //nodeAttribute = doc.CreateAttribute(Constants.VALUE);
-            //nodeAttribute.Value = mOverride.ToString();
-            //node.Attributes.Append(nodeAttribute);
+            //node = CreateKSPConfigNode(doc, Constants.OVERRRIDE, Constants.VALUE, mOverride.ToString());
             //generalNode.AppendChild(node);
 
-            //XmlNode node = doc.CreateElement(Constants.KSPSTARTUPOPTIONS);
-            //XmlAttribute nodeAttribute = doc.CreateAttribute(Constants.BORDERLESSWINDOW);
-            //nodeAttribute.Value = mStartWithBorderlessWindow.ToString(); ;
-            //node.Attributes.Append(nodeAttribute);
+            //node = CreateKSPConfigNode(doc, Constants.KSPSTARTUPOPTIONS, Constants.BORDERLESSWINDOW, mStartWithBorderlessWindow.ToString());
             //generalNode.AppendChild(node);
 
             XmlNode modsNode = doc.CreateElement(Constants.MODS);
@@ -243,108 +234,41 @@ namespace KSPModAdmin.Core.Config
         {
             XmlDocument doc = parent.OwnerDocument;
             XmlNode modNode = doc.CreateElement(nodeName);
-            XmlAttribute pathNodeAttribute = doc.CreateAttribute(Constants.KEY);
-            pathNodeAttribute.Value = child.Key;
-            modNode.Attributes.Append(pathNodeAttribute);
-            pathNodeAttribute = doc.CreateAttribute(Constants.NAME);
-            pathNodeAttribute.Value = child.Name;
-            modNode.Attributes.Append(pathNodeAttribute);
-            pathNodeAttribute = doc.CreateAttribute(Constants.NODETYPE);
-            pathNodeAttribute.Value = ((int)child.NodeType).ToString();
-            modNode.Attributes.Append(pathNodeAttribute);
-            pathNodeAttribute = doc.CreateAttribute(Constants.CHECKED);
-            pathNodeAttribute.Value = child.Checked.ToString();
-            modNode.Attributes.Append(pathNodeAttribute);
+            modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.KEY, child.Key));
+            modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.NAME, child.Name));
+            modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.NODETYPE, ((int)child.NodeType).ToString()));
+            modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.CHECKED, child.Checked.ToString()));
             if (child.AddDate != string.Empty)
-            {
-                pathNodeAttribute = doc.CreateAttribute(Constants.ADDDATE);
-                pathNodeAttribute.Value = child.AddDate;
-                modNode.Attributes.Append(pathNodeAttribute);
-            }
+                modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.ADDDATE, child.AddDate));
             if (child.Version != string.Empty)
-            {
-                pathNodeAttribute = doc.CreateAttribute(Constants.VERSION);
-                pathNodeAttribute.Value = child.Version;
-                modNode.Attributes.Append(pathNodeAttribute);
-			}
+                modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.VERSION, child.Version));
 			if (child.Version != string.Empty)
-			{
-				pathNodeAttribute = doc.CreateAttribute(Constants.GAMEVERSION);
-				pathNodeAttribute.Value = child.GameVersion;
-				modNode.Attributes.Append(pathNodeAttribute);
-			}
+                modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.GAMEVERSION, child.GameVersion));
             if (child.Note != string.Empty)
-            {
-                pathNodeAttribute = doc.CreateAttribute(Constants.NOTE);
-                pathNodeAttribute.Value = child.Note;
-                modNode.Attributes.Append(pathNodeAttribute);
-            }
+                modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.NOTE, child.Note));
             if (child.ProductID != string.Empty)
-            {
-                pathNodeAttribute = doc.CreateAttribute(Constants.PRODUCTID);
-                pathNodeAttribute.Value = child.ProductID;
-                modNode.Attributes.Append(pathNodeAttribute);
-            }
+                modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.PRODUCTID, child.ProductID));
             if (child.CreationDate != string.Empty)
-            {
-                pathNodeAttribute = doc.CreateAttribute(Constants.CREATIONDATE);
-                pathNodeAttribute.Value = child.CreationDate;
-                modNode.Attributes.Append(pathNodeAttribute);
-            }
+                modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.CREATIONDATE, child.CreationDate));
             if (child.ChangeDate != string.Empty)
-            {
-                pathNodeAttribute = doc.CreateAttribute(Constants.CHANGEDATE);
-                pathNodeAttribute.Value = child.ChangeDate;
-                modNode.Attributes.Append(pathNodeAttribute);
-            }
+                modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.CHANGEDATE, child.ChangeDate));
             if (child.Author != string.Empty)
-            {
-                pathNodeAttribute = doc.CreateAttribute(Constants.AUTHOR);
-                pathNodeAttribute.Value = child.Author;
-                modNode.Attributes.Append(pathNodeAttribute);
-            }
+                modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.AUTHOR, child.Author));
             if (child.Rating != string.Empty)
-            {
-                pathNodeAttribute = doc.CreateAttribute(Constants.RATING);
-                pathNodeAttribute.Value = child.Rating;
-                modNode.Attributes.Append(pathNodeAttribute);
-            }
+                modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.RATING, child.Rating));
             if (child.Downloads != string.Empty)
-            {
-                pathNodeAttribute = doc.CreateAttribute(Constants.DOWNLOADS);
-                pathNodeAttribute.Value = child.Downloads;
-                modNode.Attributes.Append(pathNodeAttribute);
-            }
+                modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.DOWNLOADS, child.Downloads));
             if (child.ModURL != string.Empty)
-            {
-                pathNodeAttribute = doc.CreateAttribute(Constants.MODURL);
-                pathNodeAttribute.Value = child.ModURL;
-                modNode.Attributes.Append(pathNodeAttribute);
-            }
+                modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.MODURL, child.ModURL));
             if (child.AdditionalURL != string.Empty)
-            {
-                pathNodeAttribute = doc.CreateAttribute(Constants.ADDITIONALURL);
-                pathNodeAttribute.Value = child.AdditionalURL;
-                modNode.Attributes.Append(pathNodeAttribute);
-            }
+                modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.ADDITIONALURL, child.AdditionalURL));
             if (child.SiteHandlerName != string.Empty)
-            {
-                pathNodeAttribute = doc.CreateAttribute(Constants.VERSIONCONTROLERNAME);
-                pathNodeAttribute.Value = child.SiteHandlerName;
-                modNode.Attributes.Append(pathNodeAttribute);
-            }
+                modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.VERSIONCONTROLERNAME, child.SiteHandlerName));
             if (child.Destination != string.Empty)
-            {
-                pathNodeAttribute = doc.CreateAttribute(Constants.DESTINATION);
-                pathNodeAttribute.Value = child.Destination;
-                modNode.Attributes.Append(pathNodeAttribute);
-            }
+                modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.DESTINATION, child.Destination));
 			if (child.Version != string.Empty)
-			{
-				pathNodeAttribute = doc.CreateAttribute(Constants.VERSION);
-				pathNodeAttribute.Value = child.Version;
-				modNode.Attributes.Append(pathNodeAttribute);
-			}
+                modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.VERSION, child.Version));
+
             parent.AppendChild(modNode);
 
             foreach (ModNode childchild in child.Nodes)
@@ -352,7 +276,7 @@ namespace KSPModAdmin.Core.Config
 
             return modNode;
         }
-        
+
         #endregion
     }
 }

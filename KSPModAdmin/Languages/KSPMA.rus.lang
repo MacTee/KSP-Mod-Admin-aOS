@@ -86,17 +86,18 @@
     <ChildControl Name="lvModSelection_Item_3" Value="Управление версиями" />
     <ChildControl Name="lvModSelection_Item_4" Value="Идентификатор" />
     <ChildControl Name="lvModSelection_Item_5" Value="Версия" />
-    <ChildControl Name="lvModSelection_Item_6" Value="Автор" />
-    <ChildControl Name="lvModSelection_Item_7" Value="Дата создания" />
-    <ChildControl Name="lvModSelection_Item_8" Value="Дата изменения" />
-    <ChildControl Name="lvModSelection_Item_9" Value="Устарел" />
-    <ChildControl Name="lvModSelection_Item_10" Value="Оценка" />
-    <ChildControl Name="lvModSelection_Item_11" Value="Загрузки" />
-    <ChildControl Name="lvModSelection_Item_12" Value="Примечания" />
-    <ChildControl Name="lvModSelection_Item_13" Value="Название" />
-    <ChildControl Name="lvModSelection_Item_14" Value="Путь установки" />
-    <ChildControl Name="lvModSelection_Item_15" Value="Конфликты" />
-    <ChildControl Name="lvModSelection_Item_16" Value="Установлен" />
+    <ChildControl Name="lvModSelection_Item_6" Value="KSP Версия"/>
+    <ChildControl Name="lvModSelection_Item_7" Value="Автор" />
+    <ChildControl Name="lvModSelection_Item_8" Value="Дата создания" />
+    <ChildControl Name="lvModSelection_Item_9" Value="Дата изменения" />
+    <ChildControl Name="lvModSelection_Item_10" Value="Устарел" />
+    <ChildControl Name="lvModSelection_Item_11" Value="Оценка" />
+    <ChildControl Name="lvModSelection_Item_12" Value="Загрузки" />
+    <ChildControl Name="lvModSelection_Item_13" Value="Примечания" />
+    <ChildControl Name="lvModSelection_Item_14" Value="Название" />
+    <ChildControl Name="lvModSelection_Item_15" Value="Путь установки" />
+    <ChildControl Name="lvModSelection_Item_16" Value="Конфликты" />
+    <ChildControl Name="lvModSelection_Item_17" Value="Установлен" />
   </Control>
   <Control Name="tsModSelection" Value="(T)toolStrip1">
     <Control Name="tssbAddMod" Value="(T)toolStripButton1">
@@ -347,6 +348,7 @@
   <Control Name="lblAuthorModInfoEditor" Value="Автор:" />
   <Control Name="lblProductIDModInfoEditor" Value="ИД:" />
   <Control Name="lblVersionModInfoEditor" Value="Версия:" />
+  <Control Name="lblKSPVersionModInfoEditor" Value="KSP Версия:"/>
   <Control Name="lblModNameModInfoEditor" Value="Название мода:" />
   <Control Name="frmDestFolderSelection" Value="Выбор папки установки" />
   <Control Name="lblSelectedSource" Value="Выберите элемент:" />
