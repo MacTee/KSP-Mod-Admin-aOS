@@ -80,51 +80,62 @@ namespace FolderSelect
 		public bool ShowDialog(IntPtr hWndOwner)
 		{
 			bool flag = false;
-#if !MONO
-			if (Environment.OSVersion.Version.Major >= 6)
+
+		    if (Environment.OSVersion.Platform == PlatformID.MacOSX ||
+		        Environment.OSVersion.Platform == PlatformID.Unix ||
+		        Environment.OSVersion.Version.Major < 6)
+            {
+                flag = FallBackToFolderBrowserDialog(hWndOwner);
+		    }
+            else
 			{
 				var r = new Reflector("System.Windows.Forms");
 
 				uint num = 0;
+			    MessageBox.Show(r.ToString());
 				Type typeIFileDialog = r.GetType("FileDialogNative.IFileDialog");
-				object dialog = r.Call(ofd, "CreateVistaDialog");
-				r.Call(ofd, "OnBeforeVistaDialog", dialog);
+			    if (typeIFileDialog == null)
+                    flag = FallBackToFolderBrowserDialog(hWndOwner);
+			    else
+			    {
+                    MessageBox.Show(r.ToString());
+                    object dialog = r.Call(ofd, "CreateVistaDialog");
+				    r.Call(ofd, "OnBeforeVistaDialog", dialog);
 
-				uint options = (uint)r.CallAs(typeof(System.Windows.Forms.FileDialog), ofd, "GetOptions");
-				options |= (uint)r.GetEnum("FileDialogNative.FOS", "FOS_PICKFOLDERS");
-				r.CallAs(typeIFileDialog, dialog, "SetOptions", options);
+				    uint options = (uint)r.CallAs(typeof(System.Windows.Forms.FileDialog), ofd, "GetOptions");
+				    options |= (uint)r.GetEnum("FileDialogNative.FOS", "FOS_PICKFOLDERS");
+				    r.CallAs(typeIFileDialog, dialog, "SetOptions", options);
 
-				object pfde = r.New("FileDialog.VistaDialogEvents", ofd);
-				object[] parameters = new object[] { pfde, num };
-				r.CallAs2(typeIFileDialog, dialog, "Advise", parameters);
-				num = (uint)parameters[1];
-				try
-				{
-					int num2 = (int)r.CallAs(typeIFileDialog, dialog, "Show", hWndOwner);
-					flag = 0 == num2;
-				}
-				finally
-				{
-					r.CallAs(typeIFileDialog, dialog, "Unadvise", num);
-					GC.KeepAlive(pfde);
-				}
+				    object pfde = r.New("FileDialog.VistaDialogEvents", ofd);
+				    object[] parameters = new object[] { pfde, num };
+				    r.CallAs2(typeIFileDialog, dialog, "Advise", parameters);
+				    num = (uint)parameters[1];
+				    try
+				    {
+					    int num2 = (int)r.CallAs(typeIFileDialog, dialog, "Show", hWndOwner);
+					    flag = 0 == num2;
+				    }
+				    finally
+				    {
+					    r.CallAs(typeIFileDialog, dialog, "Unadvise", num);
+					    GC.KeepAlive(pfde);
+                    }
+                }
 			}
-			else
-			{
-#endif
-				var fbd = new FolderBrowserDialog();
-				fbd.Description = this.Title;
-				fbd.SelectedPath = this.InitialDirectory;
-				fbd.ShowNewFolderButton = false;
-				if (fbd.ShowDialog(new WindowWrapper(hWndOwner)) != DialogResult.OK) return false;
-				ofd.FileName = fbd.SelectedPath;
-				flag = true;
-#if !MONO
-			}
-#endif
 
 			return flag;
 		}
+
+        private bool FallBackToFolderBrowserDialog(IntPtr hWndOwner)
+        {
+            var fbd = new FolderBrowserDialog();
+            fbd.Description = this.Title;
+            fbd.SelectedPath = this.InitialDirectory;
+            fbd.ShowNewFolderButton = false;
+            if (fbd.ShowDialog(new WindowWrapper(hWndOwner)) != DialogResult.OK) return false;
+            ofd.FileName = fbd.SelectedPath;
+            return true;
+        }
 
 		#endregion
 	}
