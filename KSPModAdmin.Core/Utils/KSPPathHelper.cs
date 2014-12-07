@@ -1,10 +1,7 @@
 ﻿using System.Reflection;
 using KSPModAdmin.Core.Controller;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using KSPModAdmin.Core.Model;
 
@@ -86,7 +83,20 @@ namespace KSPModAdmin.Core.Utils
             string installPath = OptionsController.SelectedKSPPath;
             string path = string.Empty;
             if (kspPath == KSPPaths.AppConfig)
-                path = Path.Combine(Application.CommonAppDataPath.Replace(VersionHelper.GetAssemblyVersion(), string.Empty), Constants.APP_CONFIG_FILE);
+            {
+                switch (Environment.OSVersion.Platform)
+                {
+                    case PlatformID.Unix:
+                        path = Path.Combine(Constants.LINUX_PATH, Constants.APP_CONFIG_FILE);
+                        break;
+                    case PlatformID.MacOSX:
+                        path = Path.Combine(Assembly.GetExecutingAssembly().Location, Constants.APP_CONFIG_FILE);
+                        break;
+                    default:
+                        path = Path.Combine(Application.CommonAppDataPath.Replace(VersionHelper.GetAssemblyVersion(), string.Empty), Constants.APP_CONFIG_FILE);
+                        break;
+                }
+            }
 
             else if (kspPath == KSPPaths.LanguageFolder ||
                      kspPath == KSPPaths.KSPMA_Plugins)
