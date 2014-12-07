@@ -82,27 +82,29 @@ namespace KSPModAdmin.Core.Views
 
         private string ModVersion { set { lvModSelection.Items[4].SubItems[1].Text = value; } }
 
-        private string ModAuthor { set { lvModSelection.Items[5].SubItems[1].Text = value; } }
+        private string KSPVersion { set { lvModSelection.Items[5].SubItems[1].Text = value; } }
 
-        private string ModCreationDate { set { lvModSelection.Items[6].SubItems[1].Text = value; } }
+        private string ModAuthor { set { lvModSelection.Items[6].SubItems[1].Text = value; } }
 
-        private string ModChangeDate { set { lvModSelection.Items[7].SubItems[1].Text = value; } }
+        private string ModCreationDate { set { lvModSelection.Items[7].SubItems[1].Text = value; } }
 
-        private bool ModOutdated { set { lvModSelection.Items[8].SubItems[1].Text = (value) ? Messages.YES : Messages.NO; } }
+        private string ModChangeDate { set { lvModSelection.Items[8].SubItems[1].Text = value; } }
 
-        private string ModRating { set { lvModSelection.Items[9].SubItems[1].Text = value; } }
+        private bool ModOutdated { set { lvModSelection.Items[9].SubItems[1].Text = (value) ? Messages.YES : Messages.NO; } }
 
-        private string ModDownloads { set { lvModSelection.Items[10].SubItems[1].Text = value; } }
+        private string ModRating { set { lvModSelection.Items[10].SubItems[1].Text = value; } }
 
-        private string ModNote { set { lvModSelection.Items[11].SubItems[1].Text = value; } }
+        private string ModDownloads { set { lvModSelection.Items[11].SubItems[1].Text = value; } }
 
-        private string FileName { set { lvModSelection.Items[12].SubItems[1].Text = value; } }
+        private string ModNote { set { lvModSelection.Items[12].SubItems[1].Text = value; } }
 
-        private string FileDestination { set { lvModSelection.Items[13].SubItems[1].Text = (string.IsNullOrEmpty(value)) ? Messages.NONE : value; } }
+        private string FileName { set { lvModSelection.Items[13].SubItems[1].Text = value; } }
 
-        private bool FileConflict { set { lvModSelection.Items[14].SubItems[1].Text = (value) ? Messages.YES : Messages.NONE; } }
+        private string FileDestination { set { lvModSelection.Items[14].SubItems[1].Text = (string.IsNullOrEmpty(value)) ? Messages.NONE : value; } }
 
-        private bool FileInstalled { set { lvModSelection.Items[15].SubItems[1].Text = (value) ? Messages.YES : Messages.NO; } }
+        private bool FileConflict { set { lvModSelection.Items[15].SubItems[1].Text = (value) ? Messages.YES : Messages.NONE; } }
+
+        private bool FileInstalled { set { lvModSelection.Items[16].SubItems[1].Text = (value) ? Messages.YES : Messages.NO; } }
 
         #endregion
 
@@ -339,6 +341,7 @@ namespace KSPModAdmin.Core.Views
                 ModVersionControl = zipRoot.SiteHandlerName;
                 ModID = zipRoot.ProductID;
                 ModVersion = zipRoot.Version;
+                KSPVersion = zipRoot.GameVersion;
                 ModAuthor = zipRoot.Author;
                 ModCreationDate = zipRoot.CreationDate;
                 ModChangeDate = zipRoot.ChangeDate;
@@ -393,6 +396,7 @@ namespace KSPModAdmin.Core.Views
                 ModVersionControl = (OptionsController.VersionCheck) ? Messages.ON : Messages.OFF;
                 ModID = string.Empty;
                 ModVersion = VersionHelper.GetAssemblyVersion(false);
+                KSPVersion = "0.21";
                 ModAuthor = "BHeinrich";
                 ModCreationDate = "27.05.2014";
                 ModChangeDate = "1.11.2014";

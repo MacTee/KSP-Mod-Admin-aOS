@@ -49,6 +49,7 @@ namespace KSPModAdmin.Core.Views
                 modInfo.DownloadDate = DownloadDate;
                 modInfo.Downloads = Downloads;
                 modInfo.Name = ModName;
+                modInfo.GameVersion = KSPVersion;
                 modInfo.ProductID = ProductID;
                 modInfo.Rating = Rating;
                 modInfo.SiteHandlerName = SiteHandlerName;
@@ -71,6 +72,7 @@ namespace KSPModAdmin.Core.Views
                     SiteHandlerName = value.SiteHandlerName;
                     ModURL = value.ModURL;
                     AdditionalURL = value.AdditionalURL;
+                    KSPVersion = value.GameVersion;
                 }
                 else
                 {
@@ -84,6 +86,7 @@ namespace KSPModAdmin.Core.Views
                     SiteHandlerName = Messages.NONE;
                     ModURL = string.Empty;
                     AdditionalURL = AdditionalURL;
+                    KSPVersion = string.Empty;
                 }
             }
         }
@@ -269,6 +272,19 @@ namespace KSPModAdmin.Core.Views
             set
             {
                 tbAdditionalURL.Text = value;
+            }
+        }
+
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        public string KSPVersion
+        {
+            get
+            {
+                return textBox1.Text;
+            }
+            set
+            {
+                textBox1.Text = value;
             }
         }
 

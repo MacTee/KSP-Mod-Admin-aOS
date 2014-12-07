@@ -61,10 +61,10 @@ namespace KSPModAdmin.Core.Views
 
         private void cbWelcomeLanguages_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string lang = cbWelcomeLanguages.SelectedItem as string;
-            if (!string.IsNullOrEmpty(lang))
+            Language lang = cbWelcomeLanguages.SelectedItem as Language;
+            if (lang != null)
             {
-                OptionsController.SelectedLanguage = Localizer.GlobalInstance.GetLanguageNameByLongName(lang);
+                OptionsController.SelectedLanguage = Localizer.GlobalInstance.GetLanguageNameByLongName(lang.LongName);
                 ControlTranslator.TranslateControls(Localizer.GlobalInstance, this);
                 EventDistributor.InvokeLanguageChanged(this);
             }

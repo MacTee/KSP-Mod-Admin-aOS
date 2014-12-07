@@ -66,6 +66,9 @@
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
+            this.lblKSPVersionModInfoEditor = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -75,6 +78,7 @@
             this.tableLayoutPanel7.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
+            this.tableLayoutPanel10.SuspendLayout();
             this.SuspendLayout();
             // 
             // tbName
@@ -195,7 +199,7 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCancel.Image = global::KSPModAdmin.Core.Properties.Resources.delete2;
-            this.btnCancel.Location = new System.Drawing.Point(290, 336);
+            this.btnCancel.Location = new System.Drawing.Point(290, 362);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(110, 25);
             this.btnCancel.TabIndex = 14;
@@ -210,7 +214,7 @@
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.Image = global::KSPModAdmin.Core.Properties.Resources.component_scroll_floppy_disk;
-            this.btnSave.Location = new System.Drawing.Point(174, 336);
+            this.btnSave.Location = new System.Drawing.Point(174, 362);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(110, 25);
             this.btnSave.TabIndex = 13;
@@ -356,12 +360,13 @@
             // 
             // tableLayoutPanel4
             // 
+            this.tableLayoutPanel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tableLayoutPanel4.ColumnCount = 2;
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.33696F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 67.66304F));
             this.tableLayoutPanel4.Controls.Add(this.lblNoteModInfoEditor, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.tbNote, 1, 0);
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 237);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 263);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -440,20 +445,23 @@
             // 
             // tableLayoutPanel7
             // 
+            this.tableLayoutPanel7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tableLayoutPanel7.ColumnCount = 2;
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 118F));
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel7.Controls.Add(this.lblAuthorModInfoEditor, 0, 0);
             this.tableLayoutPanel7.Controls.Add(this.tbAuthor, 1, 0);
-            this.tableLayoutPanel7.Location = new System.Drawing.Point(0, 151);
+            this.tableLayoutPanel7.Location = new System.Drawing.Point(0, 175);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             this.tableLayoutPanel7.RowCount = 1;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
             this.tableLayoutPanel7.Size = new System.Drawing.Size(368, 27);
             this.tableLayoutPanel7.TabIndex = 17;
             // 
             // tableLayoutPanel8
             // 
+            this.tableLayoutPanel8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tableLayoutPanel8.ColumnCount = 4;
             this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 118F));
             this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 81F));
@@ -463,7 +471,7 @@
             this.tableLayoutPanel8.Controls.Add(this.tbDownloads, 3, 0);
             this.tableLayoutPanel8.Controls.Add(this.lblDownloadDateModInfoEditor, 0, 0);
             this.tableLayoutPanel8.Controls.Add(this.dtpDownload, 1, 0);
-            this.tableLayoutPanel8.Location = new System.Drawing.Point(0, 210);
+            this.tableLayoutPanel8.Location = new System.Drawing.Point(0, 236);
             this.tableLayoutPanel8.Name = "tableLayoutPanel8";
             this.tableLayoutPanel8.RowCount = 1;
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -472,6 +480,7 @@
             // 
             // tableLayoutPanel9
             // 
+            this.tableLayoutPanel9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tableLayoutPanel9.ColumnCount = 4;
             this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 118F));
             this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 81F));
@@ -481,18 +490,53 @@
             this.tableLayoutPanel9.Controls.Add(this.lblCreationDateModInfoEditor, 0, 0);
             this.tableLayoutPanel9.Controls.Add(this.tbRating, 3, 0);
             this.tableLayoutPanel9.Controls.Add(this.dtpCreation, 1, 0);
-            this.tableLayoutPanel9.Location = new System.Drawing.Point(0, 178);
+            this.tableLayoutPanel9.Location = new System.Drawing.Point(0, 204);
             this.tableLayoutPanel9.Name = "tableLayoutPanel9";
             this.tableLayoutPanel9.RowCount = 1;
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel9.Size = new System.Drawing.Size(368, 27);
             this.tableLayoutPanel9.TabIndex = 18;
             // 
+            // tableLayoutPanel10
+            // 
+            this.tableLayoutPanel10.ColumnCount = 2;
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 118F));
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel10.Controls.Add(this.lblKSPVersionModInfoEditor, 0, 0);
+            this.tableLayoutPanel10.Controls.Add(this.textBox1, 1, 0);
+            this.tableLayoutPanel10.Location = new System.Drawing.Point(0, 146);
+            this.tableLayoutPanel10.Name = "tableLayoutPanel10";
+            this.tableLayoutPanel10.RowCount = 1;
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            this.tableLayoutPanel10.Size = new System.Drawing.Size(368, 27);
+            this.tableLayoutPanel10.TabIndex = 19;
+            // 
+            // lblKSPVersionModInfoEditor
+            // 
+            this.lblKSPVersionModInfoEditor.AutoSize = true;
+            this.lblKSPVersionModInfoEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblKSPVersionModInfoEditor.Location = new System.Drawing.Point(3, 0);
+            this.lblKSPVersionModInfoEditor.Name = "lblKSPVersionModInfoEditor";
+            this.lblKSPVersionModInfoEditor.Size = new System.Drawing.Size(112, 27);
+            this.lblKSPVersionModInfoEditor.TabIndex = 1;
+            this.lblKSPVersionModInfoEditor.Text = "KSP Version:";
+            this.lblKSPVersionModInfoEditor.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.textBox1.Location = new System.Drawing.Point(121, 4);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(244, 20);
+            this.textBox1.TabIndex = 7;
+            // 
             // frmEditModInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(418, 371);
+            this.ClientSize = new System.Drawing.Size(418, 397);
+            this.Controls.Add(this.tableLayoutPanel10);
             this.Controls.Add(this.tableLayoutPanel9);
             this.Controls.Add(this.tableLayoutPanel5);
             this.Controls.Add(this.tableLayoutPanel8);
@@ -529,6 +573,8 @@
             this.tableLayoutPanel8.PerformLayout();
             this.tableLayoutPanel9.ResumeLayout(false);
             this.tableLayoutPanel9.PerformLayout();
+            this.tableLayoutPanel10.ResumeLayout(false);
+            this.tableLayoutPanel10.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -572,5 +618,8 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel9;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel10;
+        private System.Windows.Forms.Label lblKSPVersionModInfoEditor;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

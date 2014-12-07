@@ -86,17 +86,18 @@
     <ChildControl Name="lvModSelection_Item_3" Value="(T)Version Control" />
     <ChildControl Name="lvModSelection_Item_4" Value="(T)ID" />
     <ChildControl Name="lvModSelection_Item_5" Value="(T)Version" />
-    <ChildControl Name="lvModSelection_Item_6" Value="(T)Author" />
-    <ChildControl Name="lvModSelection_Item_7" Value="(T)Creation date" />
-    <ChildControl Name="lvModSelection_Item_8" Value="(T)Change date" />
-    <ChildControl Name="lvModSelection_Item_9" Value="(T)Outdated" />
-    <ChildControl Name="lvModSelection_Item_10" Value="(T)Rating" />
-    <ChildControl Name="lvModSelection_Item_11" Value="(T)Downloads" />
-    <ChildControl Name="lvModSelection_Item_12" Value="(T)Note" />
-    <ChildControl Name="lvModSelection_Item_13" Value="(T)Name" />
-    <ChildControl Name="lvModSelection_Item_14" Value="(T)Destination" />
-    <ChildControl Name="lvModSelection_Item_15" Value="(T)Conflicts" />
-    <ChildControl Name="lvModSelection_Item_16" Value="(T)Installed" />
+    <ChildControl Name="lvModSelection_Item_6" Value="(T)KSP Version"/>
+    <ChildControl Name="lvModSelection_Item_7" Value="(T)Author" />
+    <ChildControl Name="lvModSelection_Item_8" Value="(T)Creation date" />
+    <ChildControl Name="lvModSelection_Item_9" Value="(T)Change date" />
+    <ChildControl Name="lvModSelection_Item_10" Value="(T)Outdated" />
+    <ChildControl Name="lvModSelection_Item_11" Value="(T)Rating" />
+    <ChildControl Name="lvModSelection_Item_12" Value="(T)Downloads" />
+    <ChildControl Name="lvModSelection_Item_13" Value="(T)Note" />
+    <ChildControl Name="lvModSelection_Item_14" Value="(T)Name" />
+    <ChildControl Name="lvModSelection_Item_15" Value="(T)Destination" />
+    <ChildControl Name="lvModSelection_Item_16" Value="(T)Conflicts" />
+    <ChildControl Name="lvModSelection_Item_17" Value="(T)Installed" />
   </Control>
   <Control Name="tsModSelection" Value="(T)toolStrip1">
     <Control Name="tssbAddMod" Value="(T)toolStripButton1">
@@ -347,6 +348,7 @@
   <Control Name="lblAuthorModInfoEditor" Value="(T)Author:" />
   <Control Name="lblProductIDModInfoEditor" Value="(T)ProductID:" />
   <Control Name="lblVersionModInfoEditor" Value="(T)Version:" />
+  <Control Name="lblKSPVersionModInfoEditor" Value="(T)KSP Version:"/>
   <Control Name="lblModNameModInfoEditor" Value="(T)Mod Name:" />
   <Control Name="frmDestFolderSelection" Value="(T)Install folder selection" />
   <Control Name="lblSelectedSource" Value="(T)Select the source:" />
