@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -42,7 +41,7 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 			var modInfo = new ModInfo
 			{
 				SiteHandlerName = Name,
-				ModURL = url,
+				ModURL = ReduceToPlainUrl(url),
 				Name = parts[3],
 				Author = parts[2]
 			};
@@ -98,65 +97,63 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
             if (modInfo == null)
                 return false;
 
-            string downloadUrl = GetDownloadUrl(modInfo.ModURL);
-			modInfo.LocalPath = Path.Combine(OptionsController.DownloadPath, GetDownloadName(downloadUrl));
+			string downloadUrl = GetDownloadPath(GetPathToDownloads(modInfo.ModURL));
+			modInfo.LocalPath = Path.Combine(OptionsController.DownloadPath, downloadUrl.Split("/").Last());
             www.DownloadFile(downloadUrl, modInfo.LocalPath, downloadProgressHandler);
 
             return File.Exists(modInfo.LocalPath);
         }
 
+		/// <summary>
+		/// Takes a site url and parses the site for mod info
+		/// </summary>
+		/// <param name="modInfo">The modInfo to add data to</param>
 		public void ParseSite(ref ModInfo modInfo)
 		{
-			var htmlDoc = new HtmlWeb().Load(modInfo.ModURL);
+			var htmlDoc = new HtmlWeb().Load(GetPathToDownloads(modInfo.ModURL));
 			htmlDoc.OptionFixNestedTags = true;
 
 			// To scrape the fields, now using HtmlAgilityPack and XPATH search strings.
 			// Easy way to get XPATH search: use chrome, inspect element, highlight the needed data and right-click and copy XPATH
 			HtmlNode versionNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='js-repo-pjax-container']/div[2]/div[1]/div[1]/ul/li[1]/a/span[2]");
 			HtmlNode updateNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='js-repo-pjax-container']/div[2]/div[1]/div[2]/div[1]/p/time");
-			HtmlNode downloadNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='js-repo-pjax-container']/div[2]/div[1]/div[2]/ul/li[1]/a");
 
 			if (versionNode == null) return;
 
 			modInfo.Version = versionNode.InnerText;
-			modInfo.ChangeDateAsDateTime = GetDateTime(updateNode.Attributes["datetime"].Value);
+			modInfo.ChangeDateAsDateTime = DateTime.Parse(updateNode.Attributes["datetime"].Value);
 		}
 
-        private static DateTime GetDateTime(string dateString)
-        {
-	        var date = dateString.Split('T')[0].ToString();
-			var dtfi = new DateTimeFormatInfo {ShortDatePattern = "yyyy-MM-dd", DateSeparator = "-"};
-	        return Convert.ToDateTime(date, dtfi);
-        }
-
-        private static string GetDownloadUrl(string modUrl)
-        {
-	        string url = modUrl;
-			if (!modUrl.Contains("releases"))
-	        {
-				var parts = GetUrlParts(modUrl);
-				url = parts[0] + "://" + parts[1] + "/" + parts[2] + "/" + parts[3] + "/releases";
-	        }
-
-			return GitHub.GetDownloadURL(url);
-        }
-
-		private static string GetDownloadName(string url)
+		/// <summary>
+		/// Takes a GitHub url and sets it to the shortest path to the project
+		/// </summary>
+		/// <param name="url">GitHub project url</param>
+		/// <returns>Shortest GitHub project url</returns>
+		private static string ReduceToPlainUrl(string url)
 		{
-			return new Uri(url).Segments.Last();
+			var parts = GetUrlParts(url);
+			return parts[0] + "://" + parts[1] + "/" + parts[2] + "/" + parts[3];
 		}
 
 		/// <summary>
 		/// Splits a url into it's segment parts
 		/// </summary>
-		/// <param name="url">A url to split</param>
+		/// <param name="modUrl">A url to split</param>
 		/// <exception cref="ArgumentException"></exception>
-		/// <returns>An array of the url segments</returns>
-		private static List<string> GetUrlParts(string url)
+		/// <returns>An array of the url segments
+		/// 1: Scheme
+		/// 2: Authority
+		/// 4+: Additional path</returns>
+		private static List<string> GetUrlParts(string modUrl)
 		{
 			// Split the url into parts
-			var parts = new List<string> {new Uri(url).Scheme, new Uri(url).Authority};
-			parts.AddRange(new Uri(url).Segments);
+			var parts = new List<string>
+			{
+				new Uri(modUrl).Scheme, 
+				new Uri(modUrl).Authority
+			};
+
+			parts.AddRange(new Uri(modUrl).Segments);
 
 			for (int index = 0; index < parts.Count; index++)
 			{
@@ -172,5 +169,35 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 
 			return parts;
 		}
+
+		/// <summary>
+		/// Gets a URL to a repository's releases
+		/// </summary>
+		/// <param name="modUrl">The URL to resolve</param>
+		/// <returns>The resolved URL</returns>
+        private static string GetPathToDownloads(string modUrl)
+        {
+	        var url = modUrl;
+			if (modUrl.Contains("releases")) return url;
+
+			var parts = GetUrlParts(modUrl);
+			url = parts[0] + "://" + parts[1] + "/" + parts[2] + "/" + parts[3] + "/releases";
+
+			return url;
+        }
+		
+		/// <summary>
+		/// Gets the download path to the latest release in a repository
+		/// </summary>
+		/// <param name="modUrl">URL to the repository's releases page</param>
+		/// <returns>Direct download path of latest release</returns>
+		private static string GetDownloadPath(string modUrl)
+		{
+			var htmlDoc = new HtmlWeb().Load(modUrl);
+			htmlDoc.OptionFixNestedTags = true;
+			var partial = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='js-repo-pjax-container']/div[2]/div[1]/div[2]/ul/li[1]/a").Attributes["href"].Value;
+			return GetUrlParts(modUrl)[0] + "://" + GetUrlParts(modUrl)[1] + partial;
+		}
+
     }
 }

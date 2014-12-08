@@ -4,11 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using HtmlAgilityPack;
-using KerbalStuff;
 using KSPModAdmin.Core.Controller;
 using KSPModAdmin.Core.Model;
 
-namespace KSPModAdmin.Core.Utils
+namespace KSPModAdmin.Core.Utils.SiteHandler
 {
     public class BitbucketHandler : ISiteHandler
     {
@@ -41,7 +40,7 @@ namespace KSPModAdmin.Core.Utils
 			var modInfo = new ModInfo
 			{
 				SiteHandlerName = Name,
-				ModURL = url
+				ModURL = ReduceToPlainUrl(url)
 			};
 			ParseSite(ref modInfo);
 			return modInfo;
@@ -81,7 +80,7 @@ namespace KSPModAdmin.Core.Utils
         public bool CheckForUpdates(ModInfo modInfo, ref ModInfo newModInfo)
         {
             newModInfo = GetModInfo(modInfo.ModURL);
-	        return !modInfo.Version.Equals(newModInfo.Version);
+	        return modInfo.ChangeDateAsDateTime == newModInfo.ChangeDateAsDateTime;
         }
 
         /// <summary>
@@ -95,9 +94,8 @@ namespace KSPModAdmin.Core.Utils
             if (modInfo == null)
                 return false;
 
-	        string downloadFile = GetDownloadFileName(modInfo.ModURL);
-	        string downloadUrl = GetDownloadPath(modInfo.ModURL) + "/" + downloadFile;
-			modInfo.LocalPath = Path.Combine(OptionsController.DownloadPath, downloadFile);
+			string downloadUrl = GetDownloadPath(GetPathToDownloads(modInfo.ModURL));
+			modInfo.LocalPath = Path.Combine(OptionsController.DownloadPath, downloadUrl.Split("/").Last());
 			www.DownloadFile(downloadUrl, modInfo.LocalPath, downloadProgressHandler);
 
 			return File.Exists(modInfo.LocalPath);
@@ -109,7 +107,7 @@ namespace KSPModAdmin.Core.Utils
 		/// <param name="modInfo">A mod to add info to</param>
 	    private static void ParseSite(ref ModInfo modInfo)
 	    {
-			var htmlDoc = new HtmlWeb().Load(GetDownloadPath(modInfo.ModURL));
+			var htmlDoc = new HtmlWeb().Load(GetPathToDownloads(modInfo.ModURL));
 			htmlDoc.OptionFixNestedTags = true;
 
 			// To scrape the fields, now using HtmlAgilityPack and XPATH search strings.
@@ -126,16 +124,27 @@ namespace KSPModAdmin.Core.Utils
 	    }
 
 		/// <summary>
+		/// Takes a Bitbucket url and sets it to the shortest path to the project
+		/// </summary>
+		/// <param name="modUrl">Bitbucket project url</param>
+		/// <returns>Shortest Bitbucket project url</returns>
+		private static string ReduceToPlainUrl(string modUrl)
+		{
+			var parts = GetUrlParts(modUrl);
+			return parts[0] + "://" + parts[1] + "/" + parts[2] + "/" + parts[3];
+		}
+
+		/// <summary>
 		/// Splits a url into it's segment parts
 		/// </summary>
-		/// <param name="url">A url to split</param>
+		/// <param name="modUrl">A url to split</param>
 		/// <exception cref="ArgumentException"></exception>
 		/// <returns>An array of the url segments</returns>
-		private static List<string> GetUrlParts(string url)
+		private static List<string> GetUrlParts(string modUrl)
 		{
 			// Split the url into parts
-			var parts = new List<string> { new Uri(url).Scheme, new Uri(url).Authority };
-			parts.AddRange(new Uri(url).Segments);
+			var parts = new List<string> { new Uri(modUrl).Scheme, new Uri(modUrl).Authority };
+			parts.AddRange(new Uri(modUrl).Segments);
 
 			for (int index = 0; index < parts.Count; index++)
 			{
@@ -157,15 +166,15 @@ namespace KSPModAdmin.Core.Utils
 		/// </summary>
 		/// <param name="modUrl">URL to a Bitbucket repository</param>
 		/// <returns>A url that points to the downloads section of a Bitbucket repository</returns>
-	    private static string GetDownloadPath(string modUrl)
+	    private static string GetPathToDownloads(string modUrl)
 	    {
 			var url = modUrl;
-			if (!modUrl.Contains("downloads"))
-			{
-				var parts = GetUrlParts(modUrl);
-				url = parts[0] + "://" + parts[1] + "/" + parts[2] + "/" + parts[3] + "/downloads";
-			}
-		    return url;
+			if (modUrl.Contains("downloads")) return url;
+
+			var parts = GetUrlParts(modUrl);
+			url = parts[0] + "://" + parts[1] + "/" + parts[2] + "/" + parts[3] + "/downloads";
+
+			return url;
 	    }
 
 		/// <summary>
@@ -173,15 +182,12 @@ namespace KSPModAdmin.Core.Utils
 		/// </summary>
 		/// <param name="modUrl">URL to a Bitbucket repository</param>
 		/// <returns>The name of the latest file in the repository</returns>
-		private static string GetDownloadFileName(string modUrl)
+		private static string GetDownloadPath(string modUrl)
 		{
-			var url = GetDownloadPath(modUrl);
-
-			var htmlDoc = new HtmlWeb().Load(url);
+			var htmlDoc = new HtmlWeb().Load(GetPathToDownloads(modUrl));
 			htmlDoc.OptionFixNestedTags = true;
-			var downloadNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='uploaded-files']/tbody/tr[2]/td[1]");
-
-			return downloadNode.InnerText;
+			var partial = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='uploaded-files']/tbody/tr[2]/td[1]").Attributes["href"].Value;
+			return GetUrlParts(modUrl)[0] + "://" + GetUrlParts(modUrl)[1] + partial;
 		}
     }
 }
