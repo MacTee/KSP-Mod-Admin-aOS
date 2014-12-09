@@ -120,14 +120,16 @@ namespace KSPModAdmin.Core.Config
                     node.AddDate = att.Value;
                 else if (att.Name == Constants.VERSION)
                     node.Version = att.Value;
-	            else if (att.Name == Constants.GAMEVERSION)
-		            node.GameVersion = att.Value;
+                else if (att.Name == Constants.GAMEVERSION)
+                    node.GameVersion = att.Value;
                 else if (att.Name == Constants.NOTE)
                     node.Note = att.Value;
                 else if (att.Name == Constants.PRODUCTID)
                     node.ProductID = att.Value;
                 else if (att.Name == Constants.CREATIONDATE)
                     node.CreationDate = att.Value;
+                else if (att.Name == Constants.CHANGEDATE)
+                    node.ChangeDate = att.Value;
                 else if (att.Name == Constants.AUTHOR)
                     node.Author = att.Value;
                 else if (att.Name == Constants.RATING)

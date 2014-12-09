@@ -30,6 +30,7 @@ namespace KSPModAdmin.Core.Views
                     Version = value.Version;
                     Author = value.Author;
                     DownloadDate = value.AddDate;
+                    ChangeDate = value.ChangeDate;
                     CreationDate = value.CreationDate;
                     Rating = value.Rating;
                     Downloads = value.Downloads;
@@ -47,6 +48,7 @@ namespace KSPModAdmin.Core.Views
                 modInfo.Author = Author;
                 modInfo.CreationDate = CreationDate;
                 modInfo.DownloadDate = DownloadDate;
+                modInfo.ChangeDate = ChangeDate;
                 modInfo.Downloads = Downloads;
                 modInfo.Name = ModName;
                 modInfo.GameVersion = KSPVersion;
@@ -68,6 +70,7 @@ namespace KSPModAdmin.Core.Views
                     ProductID = value.ProductID;
                     Rating = value.Rating;
                     CreationDate = value.CreationDate;
+                    ChangeDate = value.ChangeDate;
                     DownloadDate = value.DownloadDate;
                     SiteHandlerName = value.SiteHandlerName;
                     ModURL = value.ModURL;
@@ -80,6 +83,7 @@ namespace KSPModAdmin.Core.Views
                     Author = string.Empty;
                     dtpCreation.Value = DateTime.Now.Date;
                     dtpDownload.Value = dtpCreation.Value;
+                    dtpChange.Value = dtpCreation.Value;
                     Downloads = "0";
                     ProductID = string.Empty;
                     Rating = "0 (0)";
@@ -202,6 +206,25 @@ namespace KSPModAdmin.Core.Views
                 }
                 else
                     dtpCreation.Value = dtpDownload.Value == DateTime.MinValue ? DateTime.Now.Date : dtpDownload.Value;
+            }
+        }
+
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        public string ChangeDate
+        {
+            get
+            {
+                return dtpChange.Value.ToString();
+            }
+            set
+            {
+                if (value != null)
+                {
+                    DateTime dtTemp = DateTime.Now.Date;
+                    dtpChange.Value = (DateTime.TryParse(value, out dtTemp)) ? dtTemp : DateTime.Now.Date;
+                }
+                else
+                    dtpChange.Value = DateTime.Now.Date;
             }
         }
 
