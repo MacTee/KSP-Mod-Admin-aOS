@@ -11,8 +11,7 @@ namespace KSPModAdmin.Core.Utils
     public class CurseForgeHandler : ISiteHandler
     {
         private const string cName = "CurseForge";
-        private const string cURL = "http://kerbal.curseforge.com/";
-        private const string cURL2 = "http://www.kerbal.curseforge.com/";
+	    private const string Host = "kerbal.curseforge.com";
 
         /// <summary>
         /// Gets the Name of the ISiteHandler.
@@ -27,7 +26,7 @@ namespace KSPModAdmin.Core.Utils
         /// <returns>True if the passed URL is a valid CurseForge URL, otherwise false.</returns>
         public bool IsValidURL(string url)
         {
-            return (!string.IsNullOrEmpty(url) && (url.ToLower().StartsWith(cURL) || url.ToLower().StartsWith(cURL2)));
+	        return (!string.IsNullOrEmpty(url) && Host.Equals(new Uri(url).Authority));
         }
 
         /// <summary>
@@ -64,13 +63,15 @@ namespace KSPModAdmin.Core.Utils
         /// <returns>The ModInfos parsed from the site of the passed URL.</returns>
         public ModInfo GetModInfo(string url)
         {
-            ModInfo modInfo = new ModInfo();
-            modInfo.SiteHandlerName = Name;
-            modInfo.ModURL = url;
-            if (ParseSite(url, ref modInfo))
+            ModInfo modInfo = new ModInfo
+            {
+	            SiteHandlerName = Name, 
+				ModURL = url
+            };
+	        if (ParseSite(url, ref modInfo))
                 return modInfo;
-            else
-                return null;
+
+            return null;
         }
 
         /// <summary>
@@ -124,50 +125,86 @@ namespace KSPModAdmin.Core.Utils
             return File.Exists(modInfo.LocalPath);
         }
 
-        private string ReduceToPlainCurseForgeModURL(string curseForgeURL)
+		/// <summary>
+		/// Takes a CurseForge url and sets it to the shortest path to the project
+		/// </summary>
+		/// <param name="url">Curse project url</param>
+		/// <returns>Shortest Curse project url</returns>
+		private string ReduceToPlainCurseForgeModURL(string url)
         {
-            if (curseForgeURL.EndsWith("/files/latest"))
-                return curseForgeURL.Replace("/files/latest", string.Empty);
-            if (curseForgeURL.EndsWith("/files"))
-                return curseForgeURL.Replace("/files", string.Empty);
-            if (curseForgeURL.EndsWith("/images"))
-                return curseForgeURL.Replace("/images", string.Empty);
+			if (url.EndsWith("/files/latest"))
+				return url.Replace("/files/latest", string.Empty);
+			if (url.EndsWith("/files"))
+				return url.Replace("/files", string.Empty);
+			if (url.EndsWith("/images"))
+				return url.Replace("/images", string.Empty);
 
-            return curseForgeURL;
+			return url;
         }
 
+		/// <summary>
+		/// Takes a curse project site, fetches the page, and extracts mod info from the page
+		/// </summary>
+		/// <param name="url">URL to a kerbal.curseforge.com project</param>
+		/// <param name="modInfo">Stores the extracted mod data</param>
+		/// <returns>Returns true if successfully extracts data</returns>
         private bool ParseSite(string url, ref ModInfo modInfo)
         {
+			// changed to use the curse page as it provides the same info but also game version
+			// there's no good way to get a mod version from curse. Could use file name? Is using update date (best method?)
+	        string cursePage = "http://www.curse.com/ksp-mods/kerbal/" + new Uri(url).Segments[2];
             HtmlWeb web = new HtmlWeb();
-            HtmlDocument htmlDoc = web.Load(url);
+			HtmlDocument htmlDoc = web.Load(cursePage);
             htmlDoc.OptionFixNestedTags = true;
 
             // To scrape the fields, now using HtmlAgilityPack and XPATH search strings.
             // Easy way to get XPATH search: use chrome, inspect element, highlight the needed data and right-click and copy XPATH
-            HtmlNode nameNode = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='project-details-container']/div[@class='project-user']/h1[@class='project-title']/a/span");
-            HtmlNode idNode = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='sidebar-actions']/ul/li[@class='view-on-curse']/a");
-            HtmlNode createNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='content']/section[2]/div[1]/div[2]/ul/li[1]/div[2]/abbr");
-            HtmlNode updateNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='content']/section[2]/div[1]/div[2]/ul/li[2]/div[2]/abbr");
-            HtmlNode downloadNode = htmlDoc.DocumentNode.SelectSingleNode("//ul[@class='cf-details project-details']/li/div[starts-with(., 'Total Downloads')]/following::div[1]");
-            HtmlNode authorNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='content']/section[2]/div[3]/div[2]/ul/li/div[2]/p/a/span");
+			//HtmlNode nameNode = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='project-details-container']/div[@class='project-user']/h1[@class='project-title']/a/span");
+			//HtmlNode idNode = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='sidebar-actions']/ul/li[@class='view-on-curse']/a");
+			//HtmlNode createNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='content']/section[2]/div[1]/div[2]/ul/li[1]/div[2]/abbr");
+			//HtmlNode updateNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='content']/section[2]/div[1]/div[2]/ul/li[2]/div[2]/abbr");
+			//HtmlNode downloadNode = htmlDoc.DocumentNode.SelectSingleNode("//ul[@class='cf-details project-details']/li/div[starts-with(., 'Total Downloads')]/following::div[1]");
+			//HtmlNode authorNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='content']/section[2]/div[3]/div[2]/ul/li/div[2]/p/a/span");
+
+			HtmlNode nameNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='project-overview']/div/div[1]/h2/span/span/span");
+			HtmlNode idNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='project-overview']/div/div[2]/div/div/div[1]/div[2]/ul[2]/li[8]/a");
+			HtmlNode createNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='project-overview']/div/div[2]/div/div/div[1]/div[2]/ul[2]/li[6]/abbr");
+			HtmlNode updateNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='project-overview']/div/div[2]/div/div/div[1]/div[2]/ul[2]/li[5]/abbr");
+			HtmlNode downloadNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='project-overview']/div/div[2]/div/div/div[1]/div[2]/ul[2]/li[4]");
+			HtmlNode authorNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='project-overview']/div/div[2]/div/div/div[1]/div[2]/ul[1]/li[1]/a");
+			HtmlNode gameVersionNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='project-overview']/div/div[2]/div/div/div[1]/div[2]/ul[2]/li[3]");
 
             var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc); //Curse stores the date as both text and as Epoch. Go for the most precise value (Epoch).
+
+	        if (nameNode == null)
+		        return false;
             
-            if (nameNode !=null)
-            {
-                modInfo.Name = nameNode.InnerHtml;
-                modInfo.ProductID = idNode.Attributes["href"].Value.Substring(idNode.Attributes["href"].Value.LastIndexOf("/") + 1);
-                modInfo.CreationDateAsDateTime = epoch.AddSeconds(Convert.ToDouble(createNode.Attributes["data-epoch"].Value));
-                modInfo.ChangeDateAsDateTime = epoch.AddSeconds(Convert.ToDouble(updateNode.Attributes["data-epoch"].Value));
-                modInfo.Downloads = downloadNode.InnerHtml;
-                modInfo.Author = authorNode.InnerHtml;
-                return true;
-            }
+            modInfo.Name = nameNode.InnerHtml;
+            modInfo.ProductID = idNode.Attributes["href"].Value.Substring(idNode.Attributes["href"].Value.LastIndexOf("/") + 1);
+            modInfo.CreationDateAsDateTime = epoch.AddSeconds(Convert.ToDouble(createNode.Attributes["data-epoch"].Value));
+            modInfo.ChangeDateAsDateTime = epoch.AddSeconds(Convert.ToDouble(updateNode.Attributes["data-epoch"].Value));
+			modInfo.Downloads = downloadNode.InnerHtml.Split(" ")[0];
+            modInfo.Author = authorNode.InnerHtml;
+	        modInfo.GameVersion = gameVersionNode.InnerHtml.Split(" ")[1];
+            return true;
             
             // more infos could be parsed here (like: short description, Tab content (overview, installation, ...), comments, ...)
-            return false;
         }
 
+		/// <summary>
+		/// Gets the latest download URL of a curse project
+		/// </summary>
+		/// <param name="curseForgeURL">URL of a curse project</param>
+		/// <returns>URL pointing to the latest file download</returns>
+		private string GetDownloadURL(string url)
+		{
+			if (url.EndsWith("/"))
+				return url + "files/latest";
+			else
+				return url + "/files/latest";
+		}
+
+		// Do we need any of these anymore, if they're nto being used?
         //private string GetName(string titleHTMLString) // not in use?
         //{
         //    int index = titleHTMLString.IndexOf("title=\"");
@@ -216,14 +253,6 @@ namespace KSPModAdmin.Core.Utils
                 return TimeZoneInfo.ConvertTime(myDate, curseZone, TimeZoneInfo.Local);
             else
                 return DateTime.MinValue;
-        }
-
-        private string GetDownloadURL(string curseForgeURL)
-        {
-            if (curseForgeURL.EndsWith("/"))
-                return curseForgeURL + "files/latest";
-            else
-                return curseForgeURL + "/files/latest";
         }
 
         private string GetFilesURL(string curseForgeURL)

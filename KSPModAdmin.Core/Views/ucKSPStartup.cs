@@ -99,7 +99,7 @@ namespace KSPModAdmin.Core.Views
             string fullpath64 = KSPPathHelper.GetPath(KSPPaths.KSPX64Exe);
             try
             {
-                if (File.Exists(fullpath64))
+                if (File.Exists(fullpath64) && cbUse64Bit.Checked)
                     fullpath = fullpath64;
 
                 if (File.Exists(fullpath))

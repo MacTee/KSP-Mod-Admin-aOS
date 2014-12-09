@@ -1,10 +1,13 @@
-﻿namespace KSPModAdmin.Core.Utils
+﻿using System;
+
+namespace KSPModAdmin.Core.Utils
 {
     public abstract class DropBox
     {
         public static bool IsValidURL(string url)
         {
-            return (url.StartsWith("https://www.dropbox.com") || url.StartsWith("http://www.dropbox.com"));
+	        var host = new Uri(url).Authority;
+			return (host.Equals("dropbox.com"));
         }
 
         public static string GetDownloadURL(string url)

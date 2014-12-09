@@ -1,10 +1,12 @@
-﻿namespace KSPModAdmin.Core.Utils
+﻿using System;
+
+namespace KSPModAdmin.Core.Utils
 {
     public abstract class GitHub
     {
         public static bool IsValidURL(string url)
         {
-            return (url.StartsWith("https://github.com") || url.StartsWith("http://github.com"));
+			return (new Uri(url).Authority.Equals("github.com"));
         }
 
         public static string GetDownloadURL(string url)
@@ -23,10 +25,10 @@
             return (downloadURL.StartsWith("http:/") || downloadURL.StartsWith("https:/")) ? downloadURL : string.Empty;
         }
 
-        public static string GetFileName(string downloadURL)
+        public static string GetFileName(string downloadUrl)
         {
-            int index = downloadURL.LastIndexOf("/");
-            string filename = downloadURL.Substring(index + 1);
+            int index = downloadUrl.LastIndexOf("/");
+            string filename = downloadUrl.Substring(index + 1);
             if (filename.Contains("?"))
                 filename = filename.Substring(0, filename.IndexOf("?"));
 
