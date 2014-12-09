@@ -193,7 +193,7 @@ namespace KSPModAdmin.Core.Utils
             //    new List<Tuple<TreeNodeMod, Tuple<TreeNodeMod, TreeNodeMod>>>();
             foreach (var node in outdatedFileNodes)
             {
-                ModNode parentOld = (ModNode)node.Parent;
+                ModNode parentOld = node.Parent as ModNode;
                 if (parentOld == null)
                     continue;
 
@@ -221,14 +221,14 @@ namespace KSPModAdmin.Core.Utils
                     if (ModSelectionTreeModel.SearchNodeByPath(path, newMod, '/') == null)
                         break;
 
-                    parentNew = (ModNode)parentNew.Parent;
+                    parentNew = parentNew.Parent as ModNode;
                     if (parentNew == null)
                         break;
 
                     if (OptionsController.ModUpdateBehavior == ModUpdateBehavior.CopyDestination)
                         parentNew.Destination = parentOld.Destination;
                     parentNew.Checked = parentOld.Checked;
-                    parentOld = (ModNode)parentOld.Parent;
+                    parentOld = parentOld.Parent as ModNode;
                 }
 
                 //newMatchingFileNodes1.Add(new Tuple<TreeNodeMod, Tuple<TreeNodeMod, TreeNodeMod>>(parentOld,
