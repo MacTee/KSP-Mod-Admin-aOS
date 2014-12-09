@@ -119,6 +119,7 @@ namespace KSPModAdmin.Core.Model
                     SiteHandlerName = value.SiteHandlerName;
                     ModURL = value.ModURL;
                     AdditionalURL = value.AdditionalURL;
+                    Version = value.Version;
                 }
             }
         }

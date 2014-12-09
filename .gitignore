@@ -60,9 +60,6 @@ Temporary Items
 **/_Releases
 **/_Releases/KSPModAdmin/lang
 **/_Releases/KSPModAdmin/Plugins
-<<<<<<< HEAD
-packages/Octokit.0.5.2/
-=======
 packages/HtmlAgilityPack.1.4.9/lib/Net20/*.dll
 packages/HtmlAgilityPack.1.4.9/lib/Net20/*.pdb
 packages/HtmlAgilityPack.1.4.9/lib/Net40-client/*.dll
@@ -81,4 +78,3 @@ packages/HtmlAgilityPack.1.4.9/lib/sl4/*.dll
 packages/HtmlAgilityPack.1.4.9/lib/sl4/*.pdb
 packages/HtmlAgilityPack.1.4.9/lib/sl5/*.dll
 packages/HtmlAgilityPack.1.4.9/lib/sl5/*.pdb
->>>>>>> fa167319b0662c2ade33a144ce293f2a8b28e5e5

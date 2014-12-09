@@ -101,12 +101,24 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="docs\Licenses\CheckBoxComboBoxLicense.txt" />
-    <Content Include="docs\Licenses\KerbalStuffWrapperLicense.txt" />
-    <Content Include="docs\Licenses\FolderSelectionDialogLicense.txt" />
-    <Content Include="docs\Licenses\TreeViewAdvLicense.txt" />
-    <Content Include="docs\ReadMe.txt" />
-    <Content Include="docs\ToDo.txt" />
+    <Content Include="docs\Licenses\CheckBoxComboBoxLicense.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="docs\Licenses\KerbalStuffWrapperLicense.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="docs\Licenses\FolderSelectionDialogLicense.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="docs\Licenses\TreeViewAdvLicense.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="docs\ReadMe.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="docs\ToDo.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="KSPMA2.ico" />
     <Content Include="Pics\KSPMA Icon\Icons\KMA2_16.ico" />
     <Content Include="Pics\KSPMA Icon\Icons\KMA2_24.ico" />

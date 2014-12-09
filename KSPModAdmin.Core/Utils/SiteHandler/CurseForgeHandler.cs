@@ -255,29 +255,6 @@ namespace KSPModAdmin.Core.Utils
                 return DateTime.MinValue;
         }
 
-        private string GetFileName(string siteContent)
-        {
-            siteContent = siteContent.Replace(Environment.NewLine, string.Empty);
-
-            string searchString = "<a class=\"overflow-tip\" href=\"";
-            int i1 = siteContent.IndexOf(searchString) + searchString.Length;
-            if (i1 <= searchString.Length) return string.Empty;
-            int i2 = siteContent.IndexOf("</a>", i1);
-            if (i2 < 0) return string.Empty;
-            siteContent = siteContent.Substring(i1, i2 - i1);
-            int index = siteContent.IndexOf("\">") + 2;
-            string fileName = siteContent.Substring(index);
-            if (fileName.Contains("<span title=\""))
-            {
-                i1 = fileName.IndexOf("<span title=\"") + 13;
-                if (i1 < 0) return string.Empty;
-                i2 = fileName.IndexOf("\"", i1);
-                if (i2 < 0) return string.Empty;
-                fileName = fileName.Substring(i1, i2 - i1);
-            }
-            return HttpUtility.HtmlDecode(fileName.Trim());
-        }
-
         private string GetFilesURL(string curseForgeURL)
         {
             if (curseForgeURL.EndsWith("/"))
