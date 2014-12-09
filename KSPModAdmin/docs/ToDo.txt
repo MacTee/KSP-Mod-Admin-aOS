@@ -24,6 +24,8 @@
 //// TODO
 /////////////////////
 
+- saving of 64-bit flag state
+
 - is everything Async ???
 
 - Control rearrangement for localization
