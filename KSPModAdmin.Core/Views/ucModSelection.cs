@@ -172,6 +172,14 @@ namespace KSPModAdmin.Core.Views
                 });
         }
 
+        /// <summary>
+        /// Sets the Selected Node of the TreeViewAdv Control to null.
+        /// </summary>
+        public void ResetSelectedNode()
+        {
+            tvModSelection.SelectedNode = null;
+        }
+
         #region Event handling
 
         private void ucModSelection_Load(object sender, EventArgs e)

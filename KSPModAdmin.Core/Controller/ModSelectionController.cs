@@ -546,17 +546,25 @@ namespace KSPModAdmin.Core.Controller
         /// <param name="silent">Flag to avoid pop up messages.</param>
         public static void RemoveMod(ModNode[] modsToRemove, bool silent = false)
         {
-            if (modsToRemove == null || modsToRemove.Count() == 0)
+            if (modsToRemove == null || modsToRemove.Length == 0)
                 return;
+
+            List<ModNode> mods = new List<ModNode>();
+            foreach (var mod in modsToRemove)
+            {
+                ModNode root = mod.ZipRoot;
+                if (!mods.Contains(root))
+                    mods.Add(root);
+            }
 
             string msg = string.Empty;
             if (modsToRemove.Count() == 1)
-                msg = string.Format(Messages.MSG_DELETE_MOD_0_QUESTION, modsToRemove[0].ToString());
+                msg = string.Format(Messages.MSG_DELETE_MOD_0_QUESTION, mods[0].ZipRoot);
             else
-                msg = string.Format(Messages.MSG_DELETE_MODS_0_QUESTION, Environment.NewLine + string.Join<ModNode>(Environment.NewLine, modsToRemove));
+                msg = string.Format(Messages.MSG_DELETE_MODS_0_QUESTION, Environment.NewLine + string.Join<ModNode>(Environment.NewLine, mods));
 
             if (silent || DialogResult.Yes == MessageBox.Show(View.ParentForm, msg, Messages.MSG_TITLE_ATTENTION, MessageBoxButtons.YesNo))
-                RemoveModsAsync(modsToRemove, silent);
+                RemoveModsAsync(mods.ToArray(), silent);
         }
 
         /// <summary>
@@ -626,6 +634,7 @@ namespace KSPModAdmin.Core.Controller
                     EventDistributor.InvokeAsyncTaskDone(Instance);
                     View.SetEnabledOfAllControls(true);
                     View.SetProgressBarStates(false);
+                    View.ResetSelectedNode();
 
                     InvalidateView();
 
