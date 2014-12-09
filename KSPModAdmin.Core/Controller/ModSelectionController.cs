@@ -1397,7 +1397,7 @@ namespace KSPModAdmin.Core.Controller
         {
             _CheckForModUpdates(mods);
 
-            var outdatedMods = from e in Mods where e.IsOutdated select e;
+            var outdatedMods = from e in mods where e.IsOutdated select e;
             foreach (ModNode mod in outdatedMods)
             {
                 try

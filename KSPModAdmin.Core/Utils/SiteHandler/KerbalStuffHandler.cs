@@ -89,7 +89,15 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
         public bool CheckForUpdates(ModInfo modInfo, ref ModInfo newModInfo)
         {
             newModInfo = GetModInfo(modInfo.ModURL);
-	        return !modInfo.Version.Equals(newModInfo.Version);
+            if (modInfo.Version == null)
+            {
+                return true;
+            }
+            else if (!modInfo.Version.Equals(newModInfo.Version))
+            {
+                return true;
+            }
+	        return false;
         }
 
         /// <summary>
