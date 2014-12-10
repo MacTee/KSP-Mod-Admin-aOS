@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using FolderSelect;
 using KSPModAdmin.Core.Model;
 using KSPModAdmin.Core.Utils;
+using System.IO;
 
 namespace KSPModAdmin.Core.Views
 {
@@ -33,7 +34,7 @@ namespace KSPModAdmin.Core.Views
                     cbDestination.Items.Add(new DestInfo("Other folder ...", string.Empty));
                     foreach (string path in value)
                     {
-                        int index = path.LastIndexOf("\\");
+                        int index = path.LastIndexOf(Path.DirectorySeparatorChar);
                         if (index >= 0)
                         {
                             string name = path.Substring(index);
@@ -86,7 +87,7 @@ namespace KSPModAdmin.Core.Views
             {
                 foreach (DestInfo entry in cbDestination.Items)
                 {
-                    if (entry.Name.Equals("\\" + value, StringComparison.CurrentCultureIgnoreCase))
+                    if (entry.Name.Equals(Path.DirectorySeparatorChar + value, StringComparison.CurrentCultureIgnoreCase))
                     {
                         cbDestination.SelectedItem = entry;
                         break;
@@ -190,7 +191,7 @@ namespace KSPModAdmin.Core.Views
                 if (dlg.ShowDialog(this.Handle))
                 {
                     string dest = dlg.FileName;
-                    int i = dest.LastIndexOf("\\");
+                    int i = dest.LastIndexOf(Path.DirectorySeparatorChar);
                     if (i >= 0)
                         dest = dest.Substring(i);
                     cbDestination.Items.Add(new DestInfo(dest, dlg.FileName));
@@ -205,7 +206,7 @@ namespace KSPModAdmin.Core.Views
                 //if (dlg.ShowDialog() == DialogResult.OK)
                 //{
                 //    string dest = dlg.SelectedPath;
-                //    string destName = dest.Substring(dest.LastIndexOf("\\"));
+                //    string destName = dest.Substring(dest.LastIndexOf(Path.DirectorySeparatorChar));
                 //    cbDestination.Items.Add(new DestInfo(destName, dlg.SelectedPath));
                 //    cbDestination.SelectedIndex = cbDestination.Items.Count - 1;
                 //}

@@ -760,9 +760,9 @@ namespace KSPModAdmin.Core.Controller
                 return false;
 
             string dest = node.Destination.Replace(Constants.KSPFOLDERTAG, string.Empty);
-            if (dest.StartsWith("\\"))
+            if (dest.StartsWith(Path.DirectorySeparatorChar.ToString()))
                 dest = dest.Substring(1);
-            int index = dest.IndexOf("\\");
+            int index = dest.IndexOf(Path.DirectorySeparatorChar);
             if (index > -1)
                 dest = dest.Substring(0, index);
 
@@ -773,7 +773,7 @@ namespace KSPModAdmin.Core.Controller
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 string src = dlg.SrcFolder;
-                if (dlg.SrcFolder.Contains("/") || dlg.SrcFolder.Contains("\\"))
+                if (dlg.SrcFolder.Contains(Path.DirectorySeparatorChar))
                     src = Path.GetFileName(dlg.SrcFolder);
 
                 ModNode srcNode = ModSelectionTreeModel.SearchNode(src, node);
@@ -844,7 +844,7 @@ namespace KSPModAdmin.Core.Controller
                         string[] dirs = Directory.GetDirectories(scanDir);
                         foreach (string dir in dirs)
                         {
-                            string dirname = dir.Substring(dir.LastIndexOf("\\") + 1);
+                            string dirname = dir.Substring(dir.LastIndexOf(Path.DirectorySeparatorChar) + 1);
                             if (!ignoreDirs.Contains(dirname.ToLower()))
                             {
                                 Messenger.AddDebug(string.Format(Messages.MSG_DIRECTORY_0_FOUND, dirname));
@@ -905,7 +905,7 @@ namespace KSPModAdmin.Core.Controller
             foreach (string dir in dirs)
             {
                 Messenger.AddDebug(string.Format(Messages.MSG_DIRECTORY_0_FOUND, dir));
-                string dirname = dir.Substring(dir.LastIndexOf("\\") + 1);
+                string dirname = dir.Substring(dir.LastIndexOf(Path.DirectorySeparatorChar) + 1);
                 ScanInfo scanInfo = new ScanInfo(dirname, dir, false, scanDir);
                 ScanDir(scanInfo);
             }

@@ -226,6 +226,7 @@ namespace KSPModAdmin.Core.Controller
             EventDistributor.KSPRootChanging += KSPRootChanging;
             EventDistributor.KSPRootChanged += KSPRootChanged;
 
+            CreateConfigDir();
             LoadConfigs();
 
             LoadPlugins();
@@ -283,6 +284,20 @@ namespace KSPModAdmin.Core.Controller
             }
         }
 
+        /// <summary> 
+        /// First run initialization of config directory.
+        /// </summary>    
+        protected static void CreateConfigDir()
+        {
+            string path = KSPPathHelper.GetPath(KSPPaths.AppConfig);
+            path = Directory.GetParent(path).ToString();
+            if(!Directory.Exists(path))
+            {
+                Messenger.AddDebug("Creating config directory: " + path);
+                Directory.CreateDirectory(path);
+            }
+        }
+        
         /// <summary>
         /// Loads the AppConfig & KSPConfig.
         /// </summary>

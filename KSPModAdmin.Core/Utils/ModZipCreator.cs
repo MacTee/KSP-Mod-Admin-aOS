@@ -112,7 +112,7 @@ namespace KSPModAdmin.Core.Utils
         {
             string absPath = KSPPathHelper.GetAbsolutePath(node.Destination);
             string gameDataPath = KSPPathHelper.GetPath(KSPPaths.GameData);
-            string path = absPath.Replace(gameDataPath + "\\", string.Empty);
+            string path = absPath.Replace(gameDataPath + Path.DirectorySeparatorChar, string.Empty);
             if (node.IsFile)
                 zip.AddEntry(path, absPath);
 
