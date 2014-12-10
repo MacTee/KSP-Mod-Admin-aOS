@@ -48,12 +48,28 @@ namespace KSPModAdmin.Core.Utils.Controls.Aga.Controls
 			return (finish - start) / (double)freq;
 		}
 
-		[DllImport("Kernel32.dll")]
-		[return: MarshalAs(UnmanagedType.Bool)]
-		static extern bool QueryPerformanceCounter(ref Int64 performanceCount);
+#if !__MonoCS__
 
-		[DllImport("Kernel32.dll")]
-		[return: MarshalAs(UnmanagedType.Bool)]
-		static extern bool QueryPerformanceFrequency(ref Int64 frequency);
+        [DllImport("Kernel32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool QueryPerformanceCounter(ref Int64 performanceCount);
+
+        [DllImport("Kernel32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool QueryPerformanceFrequency(ref Int64 frequency);
+
+#else
+        static bool QueryPerformanceCounter(ref Int64 performanceCount)
+        {
+            performanceCount = DateTime.Now.Ticks;
+            return true;
+        }
+
+        static bool QueryPerformanceFrequency(ref Int64 frequency)
+        {
+            frequency = 10000000;
+            return true;
+        }
+#endif
 	}
 }
