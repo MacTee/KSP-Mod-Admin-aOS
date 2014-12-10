@@ -190,8 +190,10 @@ namespace KSPModAdmin.Core.Views
                 if (dlg.ShowDialog(this.Handle))
                 {
                     string dest = dlg.FileName;
-                    string destName = dest.Substring(dest.LastIndexOf("\\"));
-                    cbDestination.Items.Add(new DestInfo(destName, dlg.FileName));
+                    int i = dest.LastIndexOf("\\");
+                    if (i >= 0)
+                        dest = dest.Substring(i);
+                    cbDestination.Items.Add(new DestInfo(dest, dlg.FileName));
                     cbDestination.SelectedIndex = cbDestination.Items.Count - 1;
                 }
                 else
