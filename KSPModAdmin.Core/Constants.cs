@@ -1,5 +1,10 @@
-﻿using KSPModAdmin.Core.Controller;
+﻿using System;
+using System.IO;
+using System.Reflection;
+using System.Windows.Forms;
+using KSPModAdmin.Core.Controller;
 using KSPModAdmin.Core.Model;
+using KSPModAdmin.Core.Utils;
 
 namespace KSPModAdmin.Core
 {
@@ -61,11 +66,41 @@ namespace KSPModAdmin.Core
         }
 
         // Files
-        public const string KSP_EXE = "KSP.exe";
-        public const string KSP_X64_EXE = "KSP_x64.exe";
+        public static string KSP_EXE 
+        {
+            get
+            {
+                switch (Environment.OSVersion.Platform)
+                {
+                    case PlatformID.Unix:
+                        return KSP_EXE_LINUX;
+                    case PlatformID.MacOSX:
+                    default:
+                        return KSP_EXE_WIN;
+                }
+            }
+        }
+        public static string KSP_X64_EXE
+        {
+            get
+            {
+                switch (Environment.OSVersion.Platform)
+                {
+                    case PlatformID.Unix:
+                        return KSP_X64_EXE_LINUX;
+                    case PlatformID.MacOSX:
+                    default:
+                        return KSP_X64_EXE_WIN;
+                }
+            }
+        }
+        public const string KSP_EXE_LINUX = "KSP.x86";
+        public const string KSP_EXE_WIN = "KSP.exe";
+        public const string KSP_X64_EXE_LINUX = "KSP.x86_64";
+        public const string KSP_X64_EXE_WIN = "KSP_x64.exe";
         public const string APP_CONFIG_FILE = "KSPModAdmin_aOS.cfg";
         public const string MODS_CONFIG_FILE = "KSPModAdmin_aOS.cfg";
-        public const string LINUX_PATH = "$HOME/.ksp_mod_manager";
+        public const string LINUX_PATH = ".ksp_mod_manager";
 
         // XMLNode names
         public const string ROOTNODE = "ModAdminConfig";

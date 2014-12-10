@@ -87,7 +87,7 @@ namespace KSPModAdmin.Core.Utils
                 switch (Environment.OSVersion.Platform)
                 {
                     case PlatformID.Unix:
-                        path = Path.Combine(Constants.LINUX_PATH, Constants.APP_CONFIG_FILE);
+                        path = Path.Combine(Environment.GetEnvironmentVariable("HOME"), Constants.LINUX_PATH, Constants.APP_CONFIG_FILE);
                         break;
                     case PlatformID.MacOSX:
                         path = Path.Combine(Assembly.GetExecutingAssembly().Location, Constants.APP_CONFIG_FILE);
@@ -216,11 +216,11 @@ namespace KSPModAdmin.Core.Utils
                     case Constants.KSP_ROOT:
                         path = installPath;
                         break;
-                    case Constants.KSP_EXE:
-                        path = Path.Combine(installPath, Constants.KSP_EXE);
-                        break;
-                    case Constants.KSP_X64_EXE:
-                        path = Path.Combine(installPath, Constants.KSP_X64_EXE);
+                    default:
+                        if (pathName.ToLower() == Constants.KSP_EXE)
+                            path = Path.Combine(installPath, Constants.KSP_EXE);
+                        else if (pathName.ToLower() == Constants.KSP_X64_EXE)
+                            path = Path.Combine(installPath, Constants.KSP_X64_EXE);
                         break;
                 }
             }
