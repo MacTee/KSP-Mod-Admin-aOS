@@ -111,7 +111,7 @@ namespace KSPModAdmin.Core.Model
                     ChangeDate = value.ChangeDate;
                     //DownloadDate = value.DownloadDate;
                     Downloads = value.Downloads;
-                    LocalPath = value.LocalPath;
+                    //LocalPath = value.LocalPath;
                     Key = value.LocalPath;
                     Name = value.Name;
                     ProductID = value.ProductID;
@@ -295,7 +295,7 @@ namespace KSPModAdmin.Core.Model
         /// <summary>
         /// Local path of the mod zip archive.
         /// </summary>
-        public string LocalPath { get; set; }
+        public string LocalPath { get { return Key; } }
 
         /// <summary>
         /// The install destination of the node.
@@ -415,10 +415,10 @@ namespace KSPModAdmin.Core.Model
                 foreach (ModNode child in Nodes)
                     if (child.IsInstalled || child.HasInstalledChilds)
                     {
-                        if (child.Text.ToLower() == Constants.GAMEDATA ||
-                            child.Text.ToLower() == Constants.SHIPS ||
-                            child.Text.ToLower() == Constants.VAB ||
-                            child.Text.ToLower() == Constants.SPH)
+                        if (child.Text.Equals(Constants.GAMEDATA, StringComparison.CurrentCultureIgnoreCase) ||
+                            child.Text.Equals(Constants.SHIPS, StringComparison.CurrentCultureIgnoreCase) ||
+                            child.Text.Equals(Constants.VAB, StringComparison.CurrentCultureIgnoreCase) ||
+                            child.Text.Equals(Constants.SPH, StringComparison.CurrentCultureIgnoreCase))
                         {
                             if (child.HasInstalledChilds)
                                 return true;

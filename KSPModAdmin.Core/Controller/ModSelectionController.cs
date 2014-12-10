@@ -366,7 +366,7 @@ namespace KSPModAdmin.Core.Controller
                     {
                         try
                         {
-                            if (modInfo.LocalPath.ToLower().EndsWith(Constants.EXT_CRAFT) && File.Exists(modInfo.LocalPath))
+                            if (modInfo.LocalPath.EndsWith(Constants.EXT_CRAFT, StringComparison.CurrentCultureIgnoreCase) && File.Exists(modInfo.LocalPath))
                                 modInfo.LocalPath = ModZipCreator.CreateZipOfCraftFile(modInfo.LocalPath);
 
                             newNode = ModNodeHandler.CreateModNode(modInfo);
@@ -756,10 +756,10 @@ namespace KSPModAdmin.Core.Controller
         /// <returns>True if dialog was quit with DialogResult.OK</returns>
         private static bool SelectDestinationFolder(ModNode node)
         {
-            if (node == null) return false;
+            if (node == null)
+                return false;
 
-            string kspRootPath = KSPPathHelper.GetPath(KSPPaths.KSPRoot).ToLower();
-            string dest = node.Destination.Replace(kspRootPath.ToLower(), string.Empty);
+            string dest = node.Destination.Replace(Constants.KSPFOLDERTAG, string.Empty);
             if (dest.StartsWith("\\"))
                 dest = dest.Substring(1);
             int index = dest.IndexOf("\\");
@@ -948,12 +948,12 @@ namespace KSPModAdmin.Core.Controller
         /// <returns>True if a match was found, otherwise false.</returns>
         private static bool CompareNodes(ScanInfo scanInfo, ModNode parent)
         {
-            if (scanInfo.Name == parent.Text)
+            if (scanInfo.Name.Equals(parent.Text, StringComparison.CurrentCultureIgnoreCase))
                 return true;
 
             foreach (ModNode child in parent.Nodes)
             {
-                if (child.Text == scanInfo.Name)
+                if (child.Text.Equals(scanInfo.Name, StringComparison.CurrentCultureIgnoreCase))
                     return true;
 
                 if (CompareNodes(scanInfo, child))

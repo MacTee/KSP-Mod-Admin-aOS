@@ -141,7 +141,7 @@ namespace KSPModAdmin.Core.Config
                 else if (att.Name == Constants.ADDITIONALURL)
                     node.AdditionalURL = att.Value;
                 else if (att.Name == Constants.CHECKED)
-                    node.SetChecked((att.Value.ToLower() == Constants.TRUE), true);
+                    node.SetChecked((att.Value.Equals(Constants.TRUE, StringComparison.CurrentCultureIgnoreCase)), true);
                 else if (att.Name == Constants.NODETYPE)
                     node.NodeType = (NodeType)int.Parse(att.Value);
                 else if (att.Name == Constants.DESTINATION)

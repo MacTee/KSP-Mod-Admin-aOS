@@ -142,7 +142,7 @@ namespace KSPModAdmin.Core.Model
         public static ModNode SearchNode(string searchText, Node startNode)
         {
             ModNode node = null;
-            if (startNode.Text.ToLower() == (searchText.ToLower()))
+            if (startNode.Text.Equals(searchText, StringComparison.CurrentCultureIgnoreCase))
             {
                 node = (ModNode)startNode;
             }
@@ -172,7 +172,7 @@ namespace KSPModAdmin.Core.Model
             if (node.IsKSPFolder && !IsChildOfAny(node, kspFolders))
                 kspFolders.Add(node);
 
-            if (node.Text.EndsWith(Constants.EXT_CRAFT))
+            if (node.Text.EndsWith(Constants.EXT_CRAFT, StringComparison.CurrentCultureIgnoreCase))
                 craftFiles.Add(node);
 
             foreach (ModNode child in node.Nodes)
@@ -239,7 +239,14 @@ namespace KSPModAdmin.Core.Model
         /// <returns>The ModNode (ZipRoot) with the passed local path or null.</returns>
         protected ModNode GetModByLocalPath(string localPath)
         {
-            return Nodes.Cast<ModNode>().FirstOrDefault(node => node.LocalPath == localPath);
+            foreach (ModNode node in Nodes)
+            {
+                if (!string.IsNullOrEmpty(node.Key) && node.Key.Equals(localPath, StringComparison.CurrentCultureIgnoreCase))
+                    return node;
+            }
+
+            return null;
+            //return Nodes.Cast<ModNode>().FirstOrDefault(node => node.LocalPath.Equals(localPath, StringComparison.CurrentCultureIgnoreCase));
         }
 
 

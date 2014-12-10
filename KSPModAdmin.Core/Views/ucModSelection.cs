@@ -465,7 +465,7 @@ namespace KSPModAdmin.Core.Views
 
             if (node.IsInstalled || node.HasInstalledChilds)
             {
-                if (node.Text.ToLower() == Constants.GAMEDATA)
+                if (node.Text.Equals(Constants.GAMEDATA, StringComparison.CurrentCultureIgnoreCase))
                 {
                     if (node.HasInstalledChilds)
                         e.TextColor = OptionsController.ColorModInstalled;

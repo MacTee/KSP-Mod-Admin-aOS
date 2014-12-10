@@ -80,13 +80,13 @@ namespace KSPModAdmin.Core.Views
                 if (cbDestination.SelectedIndex >= 0)
                     result = ((DestInfo)cbDestination.SelectedItem).Fullpath;
 
-                return result.ToLower();
+                return result;
             }
             set
             {
                 foreach (DestInfo entry in cbDestination.Items)
                 {
-                    if (entry.Name.ToLower() == value.ToLower())
+                    if (entry.Name.Equals("\\" + value, StringComparison.CurrentCultureIgnoreCase))
                     {
                         cbDestination.SelectedItem = entry;
                         break;

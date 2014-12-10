@@ -24,7 +24,8 @@ namespace KSPModAdmin.Core.Utils
 
             foreach (var path in Constants.KSPFolders)
             {
-                if (path == dir.ToLower() || GetPathByName(path.ToLower()).ToLower() == dir.ToLower())
+                if (path.Equals(dir, StringComparison.CurrentCultureIgnoreCase) || 
+                    GetPathByName(path).Equals(dir, StringComparison.CurrentCultureIgnoreCase))
                     return true;
             }
 
@@ -150,10 +151,10 @@ namespace KSPModAdmin.Core.Utils
                         path = Path.Combine(installPath, Constants.SHIPS);
                         break;
                     case KSPPaths.VAB:
-                        path = Path.Combine(Path.Combine(installPath, Constants.SHIPS), Constants.VAB);
+                        path = Path.Combine(installPath, Constants.SHIPS, Constants.VAB);
                         break;
                     case KSPPaths.SPH:
-                        path = Path.Combine(Path.Combine(installPath, Constants.SHIPS), Constants.SPH);
+                        path = Path.Combine(installPath, Constants.SHIPS, Constants.SPH);
                         break;
                     case KSPPaths.Internals:
                         path = Path.Combine(installPath, Constants.INTERNALS);
@@ -178,51 +179,34 @@ namespace KSPModAdmin.Core.Utils
             string path = string.Empty;
             if (!string.IsNullOrEmpty(installPath) && Directory.Exists(installPath))
             {
-                switch (pathName.ToLower())
-                {
-                    case Constants.SAVES:
-                        path = Path.Combine(installPath, Constants.SAVES);
-                        break;
-                    case Constants.PARTS:
-                        path = Path.Combine(installPath, Constants.PARTS);
-                        break;
-                    case Constants.PLUGINS:
-                        path = Path.Combine(installPath, Constants.PLUGINS);
-                        break;
-                    case Constants.PLUGINDATA:
-                        path = Path.Combine(installPath, Constants.PLUGINDATA);
-                        break;
-                    case Constants.RESOURCES:
-                        path = Path.Combine(installPath, Constants.RESOURCES);
-                        break;
-                    case Constants.GAMEDATA:
-                        path = Path.Combine(installPath, Constants.GAMEDATA);
-                        break;
-                    case Constants.SHIPS:
-                        path = Path.Combine(installPath, Constants.SHIPS);
-                        break;
-                    case Constants.INTERNALS:
-                        path = Path.Combine(installPath, Constants.INTERNALS);
-                        break;
-                    case Constants.VAB:
-                        path = Path.Combine(installPath, Path.Combine(Constants.SHIPS, Constants.VAB));
-                        break;
-                    case Constants.SPH:
-                        path = Path.Combine(installPath, Path.Combine(Constants.SHIPS, Constants.SPH));
-                        break;
-                    case Constants.KSPDATA:
-                        path = Path.Combine(installPath, Constants.KSPDATA);
-                        break;
-                    case Constants.KSP_ROOT:
-                        path = installPath;
-                        break;
-                    default:
-                        if (pathName.ToLower() == Constants.KSP_EXE)
-                            path = Path.Combine(installPath, Constants.KSP_EXE);
-                        else if (pathName.ToLower() == Constants.KSP_X64_EXE)
-                            path = Path.Combine(installPath, Constants.KSP_X64_EXE);
-                        break;
-                }
+                if (pathName.Equals(Constants.SAVES, StringComparison.CurrentCultureIgnoreCase))
+                    path = Path.Combine(installPath, Constants.SAVES);
+                else if (pathName.Equals(Constants.PARTS, StringComparison.CurrentCultureIgnoreCase))
+                    path = Path.Combine(installPath, Constants.PARTS);
+                else if (pathName.Equals(Constants.PLUGINS, StringComparison.CurrentCultureIgnoreCase))
+                    path = Path.Combine(installPath, Constants.PLUGINS);
+                else if (pathName.Equals(Constants.PLUGINDATA, StringComparison.CurrentCultureIgnoreCase))
+                    path = Path.Combine(installPath, Constants.PLUGINDATA);
+                else if (pathName.Equals(Constants.RESOURCES, StringComparison.CurrentCultureIgnoreCase))
+                    path = Path.Combine(installPath, Constants.RESOURCES);
+                else if (pathName.Equals(Constants.GAMEDATA, StringComparison.CurrentCultureIgnoreCase))
+                    path = Path.Combine(installPath, Constants.GAMEDATA);
+                else if (pathName.Equals(Constants.SHIPS, StringComparison.CurrentCultureIgnoreCase))
+                    path = Path.Combine(installPath, Constants.SHIPS);
+                else if (pathName.Equals(Constants.INTERNALS, StringComparison.CurrentCultureIgnoreCase))
+                    path = Path.Combine(installPath, Constants.INTERNALS);
+                else if (pathName.Equals(Constants.VAB, StringComparison.CurrentCultureIgnoreCase))
+                    path = Path.Combine(installPath, Constants.VAB);
+                else if (pathName.Equals(Constants.SPH, StringComparison.CurrentCultureIgnoreCase))
+                    path = Path.Combine(installPath, Constants.SPH);
+                else if (pathName.Equals(Constants.KSPDATA, StringComparison.CurrentCultureIgnoreCase))
+                    path = Path.Combine(installPath, Constants.KSPDATA);
+                else if (pathName.Equals(Constants.KSP_ROOT, StringComparison.CurrentCultureIgnoreCase))
+                    path = installPath;
+                else if (pathName.Equals(Constants.KSP_EXE, StringComparison.CurrentCultureIgnoreCase))
+                    path = Path.Combine(installPath, Constants.KSP_EXE);
+                else if (pathName.Equals(Constants.KSP_X64_EXE, StringComparison.CurrentCultureIgnoreCase))
+                    path = Path.Combine(installPath, Constants.KSP_X64_EXE);
             }
 
             return path;

@@ -36,7 +36,7 @@ namespace KSPModAdmin.Core.Utils
                     if (index != -1)
                     {
                         string shipType = line.Substring(index + TYPE.Length, 3);
-                        if (shipType.ToLower() == Constants.SPH)
+                        if (shipType.Equals(Constants.SPH, StringComparison.CurrentCultureIgnoreCase))
                             dir = SHIPSPH;
                         else
                             dir = SHIPVAB;

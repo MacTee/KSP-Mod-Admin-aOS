@@ -1,10 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Reflection;
-using System.Windows.Forms;
-using KSPModAdmin.Core.Controller;
-using KSPModAdmin.Core.Model;
-using KSPModAdmin.Core.Utils;
 
 namespace KSPModAdmin.Core
 {
@@ -42,18 +36,18 @@ namespace KSPModAdmin.Core
         public const string LANGUAGE_FOLDER = "lang"; //"Languages";
 
         // KSP folders
-        public const string KSP_ROOT = "ksp_root";
-        public const string PARTS = "parts";
-        public const string PLUGINS = "plugins";
-        public const string PLUGINDATA = "plugindata";
-        public const string RESOURCES = "resources";
-        public const string INTERNALS = "internals";
-        public const string SHIPS = "ships";
-        public const string VAB = "vab";
-        public const string SPH = "sph";
-        public const string KSPDATA = "ksp_data";
-        public const string SAVES = "saves";
-        public const string GAMEDATA = "gamedata";
+        public const string KSP_ROOT = "KSP_Root";
+        public const string PARTS = "Parts";
+        public const string PLUGINS = "Plugins";
+        public const string PLUGINDATA = "PluginData";
+        public const string RESOURCES = "Resources";
+        public const string INTERNALS = "Internals";
+        public const string SHIPS = "Ships";
+        public const string VAB = "VAB";
+        public const string SPH = "SPH";
+        public const string KSPDATA = "KSP_Data";
+        public const string SAVES = "Saves";
+        public const string GAMEDATA = "GameData";
         public static string[] KSPFolders
         {
             get
@@ -100,7 +94,7 @@ namespace KSPModAdmin.Core
         public const string KSP_X64_EXE_WIN = "KSP_x64.exe";
         public const string APP_CONFIG_FILE = "KSPModAdmin_aOS.cfg";
         public const string MODS_CONFIG_FILE = "KSPModAdmin_aOS.cfg";
-        public const string LINUX_PATH = ".ksp_mod_manager";
+        public const string LINUX_PATH = ".ksp_mod_admin";
 
         // XMLNode names
         public const string ROOTNODE = "ModAdminConfig";

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.IO;
 using System.Linq;
 using KSPModAdmin.Core.Controller;
@@ -44,7 +43,7 @@ namespace KSPModAdmin.Core.Utils
                 {
                     char seperator = '/';
                     string extension = Path.GetExtension(modInfo.LocalPath);
-                    if (extension != null && extension.ToLower() == Constants.EXT_RAR)
+                    if (extension != null && extension.Equals(Constants.EXT_RAR, StringComparison.CurrentCultureIgnoreCase))
                         seperator = '\\';
 
                     // create a TreeNode for every archive entry
@@ -314,7 +313,8 @@ namespace KSPModAdmin.Core.Utils
                 {
                     string vab = KSPPathHelper.GetPath(KSPPaths.VAB);
                     string sph = KSPPathHelper.GetPath(KSPPaths.SPH);
-                    if (!craftNode.HasDestination || (!craftNode.Destination.StartsWith(vab) && !craftNode.Destination.StartsWith(sph)))
+                    if (!craftNode.HasDestination || (!craftNode.Destination.StartsWith(vab, StringComparison.CurrentCultureIgnoreCase) && 
+                                                      !craftNode.Destination.StartsWith(sph, StringComparison.CurrentCultureIgnoreCase)))
                         SetCraftDestination(craftNode);
                 }
             }
@@ -337,20 +337,20 @@ namespace KSPModAdmin.Core.Utils
             bool result = false;
             string path = string.Empty;
             ModNode tempNode = node;
-            if (node.Text.ToLower() == Constants.GAMEDATA)
+            if (node.Text.Equals(Constants.GAMEDATA, StringComparison.CurrentCultureIgnoreCase))
             {
                 tempNode = node;
                 path = KSPPathHelper.GetPath(KSPPaths.KSPRoot);
                 result = true;
             }
-            else if (node.Text.ToLower() == Constants.SHIPS)
+            else if (node.Text.Equals(Constants.SHIPS, StringComparison.CurrentCultureIgnoreCase))
             {
                 tempNode = node;
                 path = KSPPathHelper.GetPath(KSPPaths.KSPRoot);
                 result = false;
             }
-            else if (node.Text.ToLower() == Constants.VAB ||
-                     node.Text.ToLower() == Constants.SPH)
+            else if (node.Text.Equals(Constants.VAB, StringComparison.CurrentCultureIgnoreCase) ||
+                     node.Text.Equals(Constants.SPH, StringComparison.CurrentCultureIgnoreCase))
             {
                 tempNode = node;
                 path = KSPPathHelper.GetPath(KSPPaths.Ships);
@@ -415,7 +415,7 @@ namespace KSPModAdmin.Core.Utils
             {
                 foreach (IArchiveEntry entry in archive.Entries)
                 {
-                    if (!entry.FilePath.EndsWith(craftNode.Text))
+                    if (!entry.FilePath.EndsWith(craftNode.Text, StringComparison.CurrentCultureIgnoreCase))
                         continue;
 
                     using (MemoryStream ms = new MemoryStream())
@@ -434,7 +434,7 @@ namespace KSPModAdmin.Core.Utils
                                 continue;
 
                             string shipType = fullText.Substring(index + 7, 3);
-                            if (shipType.ToLower() == Constants.SPH)
+                            if (shipType.Equals(Constants.SPH, StringComparison.CurrentCultureIgnoreCase))
                                 craftNode.Destination = Path.Combine(KSPPathHelper.GetPath(KSPPaths.SPH), filename);
                             else
                                 craftNode.Destination = Path.Combine(KSPPathHelper.GetPath(KSPPaths.VAB), filename);
@@ -629,10 +629,9 @@ namespace KSPModAdmin.Core.Utils
             if (!string.IsNullOrEmpty(destination))
                 destination = KSPPathHelper.GetAbsolutePath(destination);
 
-
             using (IArchive archive = ArchiveFactory.Open(node.ZipRoot.Key))
             {
-                IArchiveEntry entry = archive.Entries.FirstOrDefault(e => e.FilePath == node.Key);
+                IArchiveEntry entry = archive.Entries.FirstOrDefault(e => e.FilePath.Equals(node.Key, StringComparison.CurrentCultureIgnoreCase));
                 if (entry == null)
                     return;
 
