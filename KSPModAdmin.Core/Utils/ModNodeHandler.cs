@@ -360,7 +360,7 @@ namespace KSPModAdmin.Core.Utils
             {
                 tempNode = node;
                 path = KSPPathHelper.GetPathByName(node.Name);
-                path = (path.ToLower().EndsWith(node.Name.ToLower())) ? path.ToLower().Replace("\\" + node.Name.ToLower(), string.Empty) : path;
+                path = (path.ToLower().EndsWith(node.Name.ToLower())) ? path.ToLower().Replace(Path.DirectorySeparatorChar + node.Name.ToLower(), string.Empty) : path;
                 result = false;
             }
             else
