@@ -293,7 +293,7 @@ namespace KSPModAdmin.Core.Controller
             path = Directory.GetParent(path).ToString();
             if(!Directory.Exists(path))
             {
-                Log.AddDebugS("Creating config directory: " + path);
+                Messenger.AddDebug("Creating config directory: " + path);
                 Directory.CreateDirectory(path);
             }
         }
