@@ -9,7 +9,7 @@ namespace KSPModAdmin.Core.Utils
     /// </summary>
     public class NativeMethods
     {
-#if !MONOBUILD
+#if !__MonoCS__
         public static readonly int WM_SHOWME = RegisterWindowMessage("WM_SHOWME");
 #endif
 
@@ -178,7 +178,7 @@ namespace KSPModAdmin.Core.Utils
         }
 
 
-#if !MONOBUILD
+#if !__MonoCS__
         [DllImport("user32")]
         public static extern bool PostMessage(IntPtr hwnd, int msg, IntPtr wparam, IntPtr lparam);
 

@@ -57,6 +57,7 @@ namespace KSPModAdmin.Core.Utils
             }
         }
 
+#if !__MonoCS__
         /// <summary>
         /// Gets all available display settings.
         /// </summary>
@@ -83,6 +84,7 @@ namespace KSPModAdmin.Core.Utils
 
             return result.Values.ToList();
         }
+#endif
 
         /// <summary>
         /// Gets all possible screen resolution.
@@ -168,6 +170,7 @@ namespace KSPModAdmin.Core.Utils
         {
             List<string> resolutions = new List<string>();
 
+#if !__MonoCS__
             var list = GetDisplaySettings();
 
             foreach (DisplaySettings displaySettings in list)
@@ -176,7 +179,7 @@ namespace KSPModAdmin.Core.Utils
                 if (!resolutions.Contains(newResolution))
                     resolutions.Add(newResolution);
             }
-
+#endif
             return resolutions;
         }
     }
