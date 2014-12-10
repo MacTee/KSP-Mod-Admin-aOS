@@ -110,6 +110,10 @@ namespace KSPModAdmin.Core.Views
 
                     Messenger.AddInfo(Messages.MSG_STARTING_KSP);
                     System.Diagnostics.Process kspexe = new System.Diagnostics.Process();
+#if __MonoCS__
+					kspexe.StartInfo.UseShellExecute = false;
+					kspexe.StartInfo.EnvironmentVariables.Add ("LC_ALL", "C");
+#endif
                     kspexe.StartInfo.FileName = fullpath;
                     kspexe.StartInfo.WorkingDirectory = Path.GetDirectoryName(fullpath);
                     if (rbWindowed.Checked && cbBorderlessWin.Checked)
