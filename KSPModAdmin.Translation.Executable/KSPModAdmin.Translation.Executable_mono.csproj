@@ -9,9 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>KSPModAdmin.Translation.Executable</RootNamespace>
     <AssemblyName>KSPModAdmin.TranslationTool</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -80,13 +80,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\KSPModAdmin.Core\KSPModAdmin.Core.csproj">
-      <Project>{96aa1c9f-c609-4361-8bdd-5af3968f24de}</Project>
-      <Name>KSPModAdmin.Core</Name>
+    <ProjectReference Include="..\KSPModAdmin.Core\KSPModAdmin.Core_mono.csproj">
+      <Project>{96AA1C9F-C609-4361-8BDD-5AF3968F24DE}</Project>
+      <Name>KSPModAdmin.Core_mono</Name>
     </ProjectReference>
-    <ProjectReference Include="..\KSPModAdmin.Translation.Plugin\KSPModAdmin.Translation.Plugin.csproj">
-      <Project>{ef04c65e-bfce-43b6-8c28-6b1793e1b2b5}</Project>
-      <Name>KSPModAdmin.Translation.Plugin</Name>
+    <ProjectReference Include="..\KSPModAdmin.Translation.Plugin\KSPModAdmin.Translation.Plugin_mono.csproj">
+      <Project>{EF04C65E-BFCE-43B6-8C28-6B1793E1B2B5}</Project>
+      <Name>KSPModAdmin.Translation.Plugin_mono</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

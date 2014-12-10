@@ -9,9 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>KSPModAdmin</RootNamespace>
     <AssemblyName>KSPModAdmin</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -46,6 +46,8 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
+    <WarningLevel>4</WarningLevel>
+    <Optimize>false</Optimize>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release MONO|AnyCPU'">
     <OutputPath>bin\Release MONO\</OutputPath>
@@ -56,6 +58,7 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -137,12 +140,6 @@
     <Content Include="Resources\gears.png" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <ProjectReference Include="..\KSPModAdmin.Core\KSPModAdmin.Core.csproj">
-      <Project>{96aa1c9f-c609-4361-8bdd-5af3968f24de}</Project>
-      <Name>KSPModAdmin.Core</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy /E /Y /R /I "$(ProjectDir)Languages" "$(ProjectDir)$(OutDir)lang"
@@ -156,4 +153,10 @@ xcopy /E /Y /R /I "$(SolutionDir)KSPModAdmin.Translation.Plugin\$(OutDir)KSPModA
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <ProjectReference Include="Core\KSPModAdmin.Core_mono.csproj">
+      <Project>{96AA1C9F-C609-4361-8BDD-5AF3968F24DE}</Project>
+      <Name>KSPModAdmin.Core_mono</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>
