@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using KSPModAdmin.Core.Controller;
 using KSPModAdmin.Core.Model;
+using KSPModAdmin.Core.Utils;
 using KSPModAdmin.Core.Utils.Localization;
 
 namespace KSPModAdmin.Core.Views
@@ -121,6 +122,13 @@ namespace KSPModAdmin.Core.Views
             SelectedKSPPath = null;
             SelectedKSPPath = kspPath;
             cbKSPPath.SelectedIndexChanged += cbKSPPath_SelectedIndexChanged;
+        }
+
+
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MainController.ShowFormTest();
         }
     }
 }

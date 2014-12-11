@@ -32,6 +32,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // cbLinks
@@ -85,7 +86,21 @@
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
-            // frmSelectDownloadURL
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.Black;
+            this.button1.Location = new System.Drawing.Point(40, 72);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(198, 35);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Crash test for MainController.ShowForm<>";
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // frmSelectDownload
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -93,10 +108,11 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cbLinks);
             this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnOK);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmSelectDownloadURL";
+            this.Name = "frmSelectDownload";
             this.ShowIcon = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -112,5 +128,6 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.ComboBox cbLinks;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button1;
     }
 }
