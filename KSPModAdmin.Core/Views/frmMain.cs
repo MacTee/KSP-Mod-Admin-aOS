@@ -123,12 +123,5 @@ namespace KSPModAdmin.Core.Views
             SelectedKSPPath = kspPath;
             cbKSPPath.SelectedIndexChanged += cbKSPPath_SelectedIndexChanged;
         }
-
-
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            MainController.ShowFormTest();
-        }
     }
 }

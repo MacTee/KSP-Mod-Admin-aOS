@@ -101,10 +101,5 @@ namespace KSPModAdmin.Core.Views
         {
             return new KSPDialogResult(DialogResult, SelectedLink);
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            MainController.SelectedKSPPath = "test";
-        }
     }
 }

@@ -620,39 +620,39 @@ namespace KSPModAdmin.Core.Controller
 
 
 
-        internal static void ShowFormTest()
-        {
-            AsyncTask<KSPDialogResult>.DoWork(() =>
-                {
-                    //return MainController.ShowForm<frmSelectDownload>();
-                    List<DownloadInfo> links = new List<DownloadInfo>();
-                    links.Add(new DownloadInfo() { Name = "Test 1", DownloadURL = "www.test1.de/mod.zip", Filename = "mod.zip", KnownHost = true });
-                    links.Add(new DownloadInfo() { Name = "Test 2", DownloadURL = "www.test2.de/anothermod.zip", Filename = "anothermod.zip", KnownHost = true });
-                    //return MainController.ShowForm<frmSelectDownload>(new object[] { links });
-                    return MainController.ShowForm<frmSelectDownload>(new object[] { links, links[1] });
+        //internal static void ShowFormTest()
+        //{
+        //    AsyncTask<KSPDialogResult>.DoWork(() =>
+        //        {
+        //            //return MainController.ShowForm<frmSelectDownload>();
+        //            List<DownloadInfo> links = new List<DownloadInfo>();
+        //            links.Add(new DownloadInfo() { Name = "Test 1", DownloadURL = "www.test1.de/mod.zip", Filename = "mod.zip", KnownHost = true });
+        //            links.Add(new DownloadInfo() { Name = "Test 2", DownloadURL = "www.test2.de/anothermod.zip", Filename = "anothermod.zip", KnownHost = true });
+        //            //return MainController.ShowForm<frmSelectDownload>(new object[] { links });
+        //            return MainController.ShowForm<frmSelectDownload>(new object[] { links, links[1] });
 
-                    // Why the hell does this code below work???
-                    // Shouldn't this throw an exception cause of displaying a Form in a worker thread... =(
-                    // NO, ONLY IF THE FORM CHANGES SOMETHING ON THE MAIN GUI ...
-                    // If the displayed Form doesn't change any thing on the main GUI you can safely use the code below.
-                    //frmSelectDownload frm = new frmSelectDownload(links, links[1]);
-                    //frm.ShowDialog();
-                    //return frm.GetKSPDialogResults();
-                },
-                (result, ex) =>
-                {
-                    if (ex != null)
-                        // Show errors
-                        MessageBox.Show(View,
-                            string.Format("Error: {0}{1}StackTrace:{1}{2}", ex.Message, Environment.NewLine,
-                                ex.StackTrace), "Error");
-                    else
-                        // Show results
-                        MessageBox.Show(View,
-                            string.Format("DialogResult: {0}{1}AdditionalResult: {2}{1}Exception: {3}",
-                                result.DialogResult, Environment.NewLine, result.AdditionalResult, result.Exception),
-                            "KSPDialogResults");
-                });
-        }
+        //            // Why the hell does this code below work???
+        //            // Shouldn't this throw an exception cause of displaying a Form in a worker thread... =(
+        //            // NO, ONLY IF THE FORM CHANGES SOMETHING ON THE MAIN GUI ...
+        //            // If the displayed Form doesn't change any thing on the main GUI you can safely use the code below.
+        //            //frmSelectDownload frm = new frmSelectDownload(links, links[1]);
+        //            //frm.ShowDialog();
+        //            //return frm.GetKSPDialogResults();
+        //        },
+        //        (result, ex) =>
+        //        {
+        //            if (ex != null)
+        //                // Show errors
+        //                MessageBox.Show(View,
+        //                    string.Format("Error: {0}{1}StackTrace:{1}{2}", ex.Message, Environment.NewLine,
+        //                        ex.StackTrace), "Error");
+        //            else
+        //                // Show results
+        //                MessageBox.Show(View,
+        //                    string.Format("DialogResult: {0}{1}AdditionalResult: {2}{1}Exception: {3}",
+        //                        result.DialogResult, Environment.NewLine, result.AdditionalResult, result.Exception),
+        //                    "KSPDialogResults");
+        //        });
+        //}
     }
 }
