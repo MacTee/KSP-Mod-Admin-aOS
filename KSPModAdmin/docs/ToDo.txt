@@ -17,7 +17,7 @@
 - Translation tab
 - KSPModAdmin.Updater works again!
 - Language select on welcome screen.
-- KerbalStuff support
+- KerbalStuff, GitHub & BitBucket support
 - is HtmlAgilityPack mono compatible?
 
 
