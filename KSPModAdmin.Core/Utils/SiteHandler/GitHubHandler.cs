@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Windows.Forms;
 using HtmlAgilityPack;
 using KSPModAdmin.Core.Controller;
 using KSPModAdmin.Core.Model;
+using KSPModAdmin.Core.Views;
 
 namespace KSPModAdmin.Core.Utils.SiteHandler
 {
@@ -97,11 +99,32 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
             if (modInfo == null)
                 return false;
 
-			string downloadUrl = GetDownloadPath(GetPathToDownloads(modInfo.ModURL));
-			modInfo.LocalPath = Path.Combine(OptionsController.DownloadPath, downloadUrl.Split("/").Last());
-            www.DownloadFile(downloadUrl, modInfo.LocalPath, downloadProgressHandler);
+	        var downloadInfos = GetDownloadInfo(modInfo);
+	        DownloadInfo selected = null;
 
-            return File.Exists(modInfo.LocalPath);
+			if (downloadInfos.Count > 1)
+			{
+				// create new selection form if more than one download option found
+				var dlg = new frmSelectDownload(downloadInfos);
+				if (dlg.ShowDialog() == DialogResult.OK)
+				{
+					selected = dlg.SelectedLink;
+					dlg.InvalidateView();
+				}
+			}
+			else
+			{
+				selected = downloadInfos.First();
+			}
+
+	        if (selected != null)
+	        {
+		        string downloadUrl = selected.DownloadURL;
+		        modInfo.LocalPath = Path.Combine(OptionsController.DownloadPath, selected.Filename);
+		        www.DownloadFile(downloadUrl, modInfo.LocalPath, downloadProgressHandler);
+	        }
+
+	        return File.Exists(modInfo.LocalPath);
         }
 
 		/// <summary>
@@ -110,7 +133,7 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 		/// <param name="modInfo">The modInfo to add data to</param>
 		public void ParseSite(ref ModInfo modInfo)
 		{
-			var htmlDoc = new HtmlWeb().Load(GetPathToDownloads(modInfo.ModURL));
+			var htmlDoc = new HtmlWeb().Load(GetPathToReleases(modInfo.ModURL));
 			htmlDoc.OptionFixNestedTags = true;
 
 			// To scrape the fields, now using HtmlAgilityPack and XPATH search strings.
@@ -175,7 +198,7 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 		/// </summary>
 		/// <param name="modUrl">The URL to resolve</param>
 		/// <returns>The resolved URL</returns>
-        private static string GetPathToDownloads(string modUrl)
+        private static string GetPathToReleases(string modUrl)
         {
 	        var url = modUrl;
 			if (modUrl.Contains("releases")) return url;
@@ -199,5 +222,32 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 			return GetUrlParts(modUrl)[0] + "://" + GetUrlParts(modUrl)[1] + partial;
 		}
 
+		/// <summary>
+		/// Creates a list of DownloadInfos from a GitHub release
+		/// </summary>
+		/// <param name="modInfo">The mod to genereate the list from</param>
+		/// <returns>A list of one or more DownloadInfos for the most recent release of the selected repository</returns>
+		private static List<DownloadInfo> GetDownloadInfo(ModInfo modInfo)
+		{
+			var htmlDoc = new HtmlWeb().Load(GetPathToReleases(modInfo.ModURL));
+			htmlDoc.OptionFixNestedTags = true;
+
+			var releases = new List<DownloadInfo>();
+
+			foreach (var s in htmlDoc.DocumentNode.SelectNodes("//*[@id='js-repo-pjax-container']/div[2]/div[1]/div[2]/ul/li/a[@class='button primary']"))
+			{
+				var url = "https://github.com" + s.Attributes["href"].Value;
+				var dInfo = new DownloadInfo
+				{
+					DownloadURL = url,
+					Filename = GetUrlParts(url).Last(),
+					Name = Path.GetFileNameWithoutExtension(GetUrlParts(url).Last())
+				};
+
+				releases.Add(dInfo);
+			}
+
+			return releases;
+		}
     }
 }
