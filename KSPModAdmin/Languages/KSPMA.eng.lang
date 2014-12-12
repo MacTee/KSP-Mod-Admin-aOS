@@ -608,5 +608,7 @@
   <Control Name="tsmiCmsRemoveHighlightedMods" Value="Remove highlighted mods"/>
   <String Name="MSG_NOT_AVAILABLE" Value="Not available"/>
   <String Name="MSG_NO_DESTINATION" Value="No destination"/>
+  <String Name="MSG_FILE_NOT_FOUND_0" Value="File not found &quot;{0}&quot;."/>
+  <String Name="MSG_ERROR_WHILE_READING_0" Value="Error while reading &quot;{0}&quot;."/>
 
 </Language>

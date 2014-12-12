@@ -9,6 +9,7 @@ using KSPModAdmin.Core.Model;
 using KSPModAdmin.Core.Utils;
 using KSPModAdmin.Core.Utils.Localization;
 using KSPModAdmin.Core.Views;
+using SharpCompress.Archive;
 
 namespace KSPModAdmin.Core.Controller
 {
@@ -1547,6 +1548,83 @@ namespace KSPModAdmin.Core.Controller
         public static void OpenConflictSolver()
         {
             MessageBox.Show(View.ParentForm, "Not implemented yet!", Messages.MSG_TITLE_ATTENTION, MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+        }
+
+        /// <summary>
+        /// Opens the TextDisplayer dialog with the content of the passed node (if it is a representation of a file).
+        /// </summary>
+        /// <param name="node">The ModNode that contains the file information.</param>
+        /// <param name="replaceNewLine">If true, the newline/linebreak chars will be replace to the one(s) that the OS normally uses.</param>
+        public static void OpenTextDisplayer(ModNode node, bool replaceNewLine = true)
+        {
+            string content = string.Empty;
+
+            if (node.IsInstalled)
+                content = File.ReadAllText(KSPPathHelper.GetAbsolutePath(node.Destination));
+            else if (node.ZipExists)
+                content = TryReadFile(node);
+
+            if (!string.IsNullOrEmpty(content))
+            {
+                if (replaceNewLine)
+                {
+                    content = content.Replace("\n", "{KSPPlaceholder}");
+                    content = content.Replace("\r", "{KSPPlaceholder}");
+                    content = content.Replace("{KSPPlaceholder}{KSPPlaceholder}", "{KSPPlaceholder}");
+                    content = content.Replace("{KSPPlaceholder}", Environment.NewLine);
+                }
+
+                frmTextDisplayer frm = new frmTextDisplayer();
+                frm.TextBox.Text = content;
+                frm.ShowDialog(View.ParentForm);
+            }
+        }
+
+        /// <summary>
+        /// Tries to reads the content of the file that is represented by the passen ModNode.
+        /// </summary>
+        /// <param name="node">The ModNode that contains thie File information.</param>
+        /// <returns>The content of the file.</returns>
+        private static string TryReadFile(ModNode node)
+        {
+            if (node == null || !node.IsFile) return string.Empty;
+
+            ModNode root = node.ZipRoot;
+            string fullpath = root.Key;
+            try
+            {
+                if (File.Exists(fullpath))
+                {
+                    using (IArchive archiv = ArchiveFactory.Open(fullpath))
+                    {
+                        string fullPath = node.GetFullTreePath();
+                        foreach (IArchiveEntry entry in archiv.Entries)
+                        {
+                            if (entry.IsDirectory)
+                                continue;
+
+                            if (fullPath.Contains(entry.FilePath))
+                            {
+                                using (MemoryStream memStream = new MemoryStream())
+                                {
+                                    entry.WriteTo(memStream);
+                                    memStream.Position = 0;
+                                    StreamReader reader = new StreamReader(memStream);
+                                    return reader.ReadToEnd();
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                    Messenger.AddInfo(string.Format(Messages.MSG_FILE_NOT_FOUND_0, fullpath));
+            }
+            catch (Exception ex)
+            {
+                Messenger.AddError(string.Format(Messages.MSG_ERROR_WHILE_READING_0, fullpath), ex);
+            }
+
+            return string.Empty;
         }
     }
 }

@@ -19,14 +19,20 @@
 - Language select on welcome screen.
 - KerbalStuff, GitHub & BitBucket support
 - is HtmlAgilityPack mono compatible?
+- ModSelection
+  -> MutiSelect 
+     -> for ModNodes (for all highlighted functions)
+  -> Double click -> open selected file.
 
 
 //// TODO
 /////////////////////
 
-- saving of 64-bit flag state
+- ReadMe
 
 - is everything Async ???
+
+- KSPForum support.
 
 - Control rearrangement for localization
 
@@ -38,20 +44,13 @@
   - Remove known but not found plugins (or ask the user).
 
 - ModSelection
-  -> MutiSelect 
-     -> for ModNodes (for all highlighted functions)
-  -> Double click -> open selected file.
   -> key action binding -> del = remove mod ...
 
 - Restart destination detection.
 
 - Conflict detection/solving
 
-- KSPForum support.
-
 - Column select for ModSelection from ModInfo fields
-
-- ReadMe
 
 - Revise of the English/German text
   - unify URL, link, site, page

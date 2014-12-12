@@ -596,4 +596,6 @@
   <Control Name="tsmiCmsRemoveHighlightedMods" Value="Ausgewählte Mods entfernen"/>
   <String Name="MSG_NOT_AVAILABLE" Value="Nicht verfügbar"/>
   <String Name="MSG_NO_DESTINATION" Value="Kein Zielpfad"/>
+  <String Name="MSG_FILE_NOT_FOUND_0" Value="Datei nicht gefunden &quot;{0}&quot;."/>
+  <String Name="MSG_ERROR_WHILE_READING_0" Value="Fehler während des lesend der Datei &quot;{0}&quot;."/>
 </Language>

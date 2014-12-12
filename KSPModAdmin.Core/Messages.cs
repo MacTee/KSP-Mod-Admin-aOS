@@ -1759,5 +1759,25 @@ namespace KSPModAdmin.Core
             }
         }
         private const string DEFAULT_MSG_NO_DESTINATION = "Not destination";
+        
+        public static string MSG_FILE_NOT_FOUND_0
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_FILE_NOT_FOUND_0"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_FILE_NOT_FOUND_0).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_FILE_NOT_FOUND_0 = "File not found \"{0}\".";
+
+        public static string MSG_ERROR_WHILE_READING_0
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_ERROR_WHILE_READING_0"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_ERROR_WHILE_READING_0).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_ERROR_WHILE_READING_0 = "Error while reading \"{0}\".";
     }
 }

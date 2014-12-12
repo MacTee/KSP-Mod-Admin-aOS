@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
+using System.Web.UI.WebControls;
 using System.Windows.Forms;
 using KSPModAdmin.Core.Model;
 using KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree;
@@ -565,6 +567,13 @@ namespace KSPModAdmin.Core.Views
                 if (accepted.Count > 0)
                     ModSelectionController.AddModsAsync(accepted.ToArray());
             }
+        }
+
+        private void tvModSelection_DoubleClick(object sender, EventArgs e)
+        {
+            ModNode node = SelectedNode as ModNode;
+            if (node != null && node.IsFile)
+                ModSelectionController.OpenTextDisplayer(node);
         }
 
         private void cmsModSelectionOneMod_Opened(object sender, EventArgs e)
