@@ -73,6 +73,8 @@ namespace KSPModAdmin.Core.Controller
             }
         }
 
+        public static ucKSPStartup LaunchPanel { get { return View.ucKSPStartup1; } }
+
         #endregion
 
         #region Constructors
@@ -127,6 +129,45 @@ namespace KSPModAdmin.Core.Controller
 
             SaveAppConfig();
             SaveKSPConfig();
+        }
+
+        /// <summary>
+        /// Invokes the ShowsDialog of a frmBase derived Form.
+        /// This way you can show a dialog from a worker thread.
+        /// </summary>
+        /// <typeparam name="T_FormType">The form that should be shown.</typeparam>
+        /// <param name="parameters">Optional array of From constructor parameters.</param>
+        /// <returns>The KSPDialogResults of the dialog.</returns>
+        public static KSPDialogResult ShowForm<T_FormType>(object[] parameters = null) where T_FormType : frmBase
+        {
+            KSPDialogResult result = null;
+            try
+            {
+                View.Invoke(new Action(() =>
+                {
+                    T_FormType frm = null;
+                    if (parameters != null)
+                        frm = Activator.CreateInstance(typeof(T_FormType), parameters) as T_FormType;
+                    else
+                        frm = Activator.CreateInstance<T_FormType>();
+
+                    if (frm != null)
+                    {
+                        frm.ShowDialog(View);
+                        result = frm.GetKSPDialogResults();
+                    }
+                    else
+                    {
+                        result = new KSPDialogResult(DialogResult.Cancel, null, new Exception(string.Format("Can not create a Form of type {0}!", typeof(T_FormType))));
+                    }
+                }));
+            }
+            catch (Exception ex)
+            {
+                result = new KSPDialogResult(DialogResult.Cancel, null, ex);
+            }
+
+            return result;
         }
 
         #region IMessageReceiver implementation
@@ -226,6 +267,7 @@ namespace KSPModAdmin.Core.Controller
             EventDistributor.KSPRootChanging += KSPRootChanging;
             EventDistributor.KSPRootChanged += KSPRootChanged;
 
+            CreateConfigDir();
             LoadConfigs();
 
             LoadPlugins();
@@ -283,6 +325,20 @@ namespace KSPModAdmin.Core.Controller
             }
         }
 
+        /// <summary> 
+        /// First run initialization of config directory.
+        /// </summary>    
+        protected static void CreateConfigDir()
+        {
+            string path = KSPPathHelper.GetPath(KSPPaths.AppConfig);
+            path = Directory.GetParent(path).ToString();
+            if(!Directory.Exists(path))
+            {
+                Messenger.AddDebug("Creating config directory: " + path);
+                Directory.CreateDirectory(path);
+            }
+        }
+        
         /// <summary>
         /// Loads the AppConfig & KSPConfig.
         /// </summary>
@@ -561,5 +617,44 @@ namespace KSPModAdmin.Core.Controller
         }
 
         #endregion
+
+
+
+
+
+        //internal static void ShowFormTest()
+        //{
+        //    AsyncTask<KSPDialogResult>.DoWork(() =>
+        //        {
+        //            //return MainController.ShowForm<frmSelectDownload>();
+        //            List<DownloadInfo> links = new List<DownloadInfo>();
+        //            links.Add(new DownloadInfo() { Name = "Test 1", DownloadURL = "www.test1.de/mod.zip", Filename = "mod.zip", KnownHost = true });
+        //            links.Add(new DownloadInfo() { Name = "Test 2", DownloadURL = "www.test2.de/anothermod.zip", Filename = "anothermod.zip", KnownHost = true });
+        //            //return MainController.ShowForm<frmSelectDownload>(new object[] { links });
+        //            return MainController.ShowForm<frmSelectDownload>(new object[] { links, links[1] });
+
+        //            // Why the hell does this code below work???
+        //            // Shouldn't this throw an exception cause of displaying a Form in a worker thread... =(
+        //            // NO, ONLY IF THE FORM CHANGES SOMETHING ON THE MAIN GUI ...
+        //            // If the displayed Form doesn't change any thing on the main GUI you can safely use the code below.
+        //            //frmSelectDownload frm = new frmSelectDownload(links, links[1]);
+        //            //frm.ShowDialog();
+        //            //return frm.GetKSPDialogResults();
+        //        },
+        //        (result, ex) =>
+        //        {
+        //            if (ex != null)
+        //                // Show errors
+        //                MessageBox.Show(View,
+        //                    string.Format("Error: {0}{1}StackTrace:{1}{2}", ex.Message, Environment.NewLine,
+        //                        ex.StackTrace), "Error");
+        //            else
+        //                // Show results
+        //                MessageBox.Show(View,
+        //                    string.Format("DialogResult: {0}{1}AdditionalResult: {2}{1}Exception: {3}",
+        //                        result.DialogResult, Environment.NewLine, result.AdditionalResult, result.Exception),
+        //                    "KSPDialogResults");
+        //        });
+        //}
     }
 }

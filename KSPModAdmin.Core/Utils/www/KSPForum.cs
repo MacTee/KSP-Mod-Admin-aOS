@@ -91,7 +91,7 @@ namespace KSPModAdmin.Core.Utils
 //            }
 //            else
 //            {
-//#if !MONOBUILD
+//#if !__MonoCS__
 //                MessageBox.Show("No direct download link detected, please use the ModBrowser to download the mod.");
 //#else
 //                MessageBox.Show("No direct download link detected, please use your favorite browser to download the mod and add it manually.");

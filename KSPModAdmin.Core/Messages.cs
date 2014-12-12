@@ -1739,5 +1739,45 @@ namespace KSPModAdmin.Core
             }
         }
         private const string DEFAULT_MSG_ERROR_PLUGIN_LOADING_OPTIONVIEWS_0 = "Plugin loading error: Option TabView \"{0}\" already exists!";
+
+        public static string MSG_NOT_AVAILABLE
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_NOT_AVAILABLE"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_NOT_AVAILABLE).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_NOT_AVAILABLE = "Not available";
+
+        public static string MSG_NO_DESTINATION
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_NO_DESTINATION"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_NO_DESTINATION).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_NO_DESTINATION = "Not destination";
+        
+        public static string MSG_FILE_NOT_FOUND_0
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_FILE_NOT_FOUND_0"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_FILE_NOT_FOUND_0).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_FILE_NOT_FOUND_0 = "File not found \"{0}\".";
+
+        public static string MSG_ERROR_WHILE_READING_0
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_ERROR_WHILE_READING_0"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_ERROR_WHILE_READING_0).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_ERROR_WHILE_READING_0 = "Error while reading \"{0}\".";
     }
 }

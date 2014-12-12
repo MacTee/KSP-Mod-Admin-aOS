@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using KSPModAdmin.Core.Controller;
 using KSPModAdmin.Core.Model;
@@ -85,7 +86,7 @@ namespace KSPModAdmin.Core.Utils
                     }
                     else
                     {
-                        if (HaveCollisionsSameRoot(fileNode) || fileNode.Text.Trim().ToLower() == Constants.GAMEDATA)
+                        if (HaveCollisionsSameRoot(fileNode) || fileNode.Text.Trim().Equals(Constants.GAMEDATA, StringComparison.CurrentCultureIgnoreCase))
                             return false;
 
                         foreach (ModNode node in m_RegisterdModFiles[fileNode.Destination.ToLower()])

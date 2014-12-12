@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using KSPModAdmin.Core.Controller;
 using KSPModAdmin.Core.Model;
+using KSPModAdmin.Core.Utils;
 using KSPModAdmin.Core.Utils.Localization;
 
 namespace KSPModAdmin.Core.Views

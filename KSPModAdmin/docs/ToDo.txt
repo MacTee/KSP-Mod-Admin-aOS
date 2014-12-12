@@ -7,24 +7,31 @@
 /////////////////////
 
 - Force openGL on KSP launch (-force-opengl).
+- 64Bit option on KSP launch.
 - Options 
   -> KSP MA Update implementation.
 - VersionControl implementation.
   - AutoUpdate of mods
 - ModPack Import/Export implementation.
-- KSP Mod Admin can't install files without extensions.
+- Fix of "KSP Mod Admin can't install files without extensions".
   Sample to reproduce: https://kerbalstuff.com/mod/211/Kronal%20Vessel%20Viewer%20(KVV)%20-%20Exploded%20(Orthographic)%20ship%20view
-- Translation tab
 - KSPModAdmin.Updater works again!
-- Language select on welcome screen.
-- KerbalStuff support
+- Curse, CurseForge, KerbalStuff, GitHub & BitBucket support
 - is HtmlAgilityPack mono compatible?
+- ModSelection
+  -> MultiSelect 
+     -> Do all "highlighted mods" buttons work.
+  -> Double click -> Displays the content of the selected file.
 
 
 //// TODO
 /////////////////////
 
+- ReadMe
+
 - is everything Async ???
+
+- KSPForum support.
 
 - Control rearrangement for localization
 
@@ -36,20 +43,13 @@
   - Remove known but not found plugins (or ask the user).
 
 - ModSelection
-  -> MutiSelect 
-     -> for ModNodes (for all highlighted functions)
-  -> Double click -> open selected file.
   -> key action binding -> del = remove mod ...
 
 - Restart destination detection.
 
 - Conflict detection/solving
 
-- KSPForum support.
-
 - Column select for ModSelection from ModInfo fields
-
-- ReadMe
 
 - Revise of the English/German text
   - unify URL, link, site, page

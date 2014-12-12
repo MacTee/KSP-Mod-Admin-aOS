@@ -110,5 +110,28 @@ namespace KSPModAdmin.Core.Views
             ControlTranslator.TranslateControls(Localizer.GlobalInstance, this);
             base.Show(p);
         }
+
+
+        public virtual KSPDialogResult GetKSPDialogResults()
+        {
+            return new KSPDialogResult(DialogResult);
+        }
+    }
+
+    public class KSPDialogResult
+    {
+        public DialogResult DialogResult { get; private set; }
+
+        public object AdditionalResult { get; private set; }
+
+        public Exception Exception { get; private set; }
+
+
+        public KSPDialogResult(DialogResult dialogResult, object additionalResult = null, Exception ex = null)
+        {
+            DialogResult = dialogResult;
+            AdditionalResult = additionalResult;
+            Exception = ex;
+        }
     }
 }

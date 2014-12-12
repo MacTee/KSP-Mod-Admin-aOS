@@ -67,6 +67,18 @@ namespace KSPModAdmin.Core.Config
                 }
             }
 
+            nodeList = doc.GetElementsByTagName(Constants.LAUNCHPARAMETER);
+            if (nodeList.Count >= 1 && nodeList[0].Attributes != null)
+            {
+                foreach (XmlAttribute att in nodeList[0].Attributes)
+                {
+                    if (att.Name == Constants.USE64BIT)
+                        MainController.LaunchPanel.Use64Bit = att.Value.Equals("true", StringComparison.CurrentCultureIgnoreCase);
+                    else if (att.Name == Constants.FORCEOPENGL)
+                        MainController.LaunchPanel.ForceOpenGL = att.Value.Equals("true", StringComparison.CurrentCultureIgnoreCase);
+                }
+            }
+
             //nodeList = doc.GetElementsByTagName(Constants.OVERRRIDE);
             //if (nodeList.Count >= 1 && nodeList[0].Attributes != null)
             //{
@@ -120,14 +132,16 @@ namespace KSPModAdmin.Core.Config
                     node.AddDate = att.Value;
                 else if (att.Name == Constants.VERSION)
                     node.Version = att.Value;
-	            else if (att.Name == Constants.GAMEVERSION)
-		            node.GameVersion = att.Value;
+                else if (att.Name == Constants.GAMEVERSION)
+                    node.GameVersion = att.Value;
                 else if (att.Name == Constants.NOTE)
                     node.Note = att.Value;
                 else if (att.Name == Constants.PRODUCTID)
                     node.ProductID = att.Value;
                 else if (att.Name == Constants.CREATIONDATE)
                     node.CreationDate = att.Value;
+                else if (att.Name == Constants.CHANGEDATE)
+                    node.ChangeDate = att.Value;
                 else if (att.Name == Constants.AUTHOR)
                     node.Author = att.Value;
                 else if (att.Name == Constants.RATING)
@@ -139,7 +153,7 @@ namespace KSPModAdmin.Core.Config
                 else if (att.Name == Constants.ADDITIONALURL)
                     node.AdditionalURL = att.Value;
                 else if (att.Name == Constants.CHECKED)
-                    node.SetChecked((att.Value.ToLower() == Constants.TRUE), true);
+                    node.SetChecked((att.Value.Equals(Constants.TRUE, StringComparison.CurrentCultureIgnoreCase)), true);
                 else if (att.Name == Constants.NODETYPE)
                     node.NodeType = (NodeType)int.Parse(att.Value);
                 else if (att.Name == Constants.DESTINATION)
@@ -205,6 +219,13 @@ namespace KSPModAdmin.Core.Config
             root.AppendChild(generalNode);
 
             XmlNode node = ConfigHelper.CreateConfigNode(doc, Constants.DOWNLOAD_PATH, Constants.NAME, OptionsController.DownloadPath);
+            generalNode.AppendChild(node);
+
+            node = ConfigHelper.CreateConfigNode(doc, Constants.LAUNCHPARAMETER, new string[,]
+            {
+                { Constants.USE64BIT, MainController.LaunchPanel.Use64Bit.ToString() }, 
+                { Constants.FORCEOPENGL, MainController.LaunchPanel.ForceOpenGL.ToString() }
+            });
             generalNode.AppendChild(node);
 
             //node = CreateKSPConfigNode(doc, Constants.OVERRRIDE, Constants.VALUE, mOverride.ToString());

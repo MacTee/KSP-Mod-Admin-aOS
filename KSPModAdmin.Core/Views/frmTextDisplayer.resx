@@ -117,7 +117,29 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="ttKSPStartup.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAEAEBAAAAAAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAA
+        AAD///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8B////AalxUanDjmj/wItm/76IZP+7hWH/uYNf/7R+XP+yfFr/sXtY/655V/+tdlb/q3VU/6lz
+        U/+pcVH/qXFRqf///wHIkmz/////////////////////////////////////////////////////////
+        /////////////6lyUf////8BypRu///////////////+/////f/+/v3//v78//7+/P/+/vz//v78//7+
+        +v/+/vr//Pz5//////+qc1P/////AcyXb//////////8/////f/+/vz//v78//7++//9/fr//f36//39
+        +v/9/fr//Pz3//v79v//////rHVU/////wHRnHP///////7+/P/+/vz//v78//39+//9/fv//f36//39
+        +P/7+/n/+/r3//v69v/7+PT//////7B6WP////8B1J51///////+/vz//f37//39/P/9/fv//f35//z8
+        +P/7+ff/+/n1//v49P/79/L/+/Xy//////+yfFr/////AdWgdv///////f38//39+//9/fr//Pz5//z7
+        9//7+fX/+/j0//v38//79fL/+vPv//jy7P//////tX5c/////wHYonn///////39+v/8/Pr//Pv5//v6
+        9v/7+PX/+/f0//v28f/49O7/9/Lr//fw6v/27Oj//////7eBXv////8B2aN5///////8+/n//Pv4//v5
+        9//79/T/+vfy//n18P/38+3/9u/q//Xr5//z6uT/8ufe//////+6hWD/////Adukev//////////////
+        ////////////////////////////////////////////////////////vYdj/////wHcp3v/3Kd7/9yn
+        e//cp3v/3Kd7/9yne//cp3v/3Kd7/9yne//cp3v/3Kd7/9yne//cp3v/3Kd7/8CLZv////8B3ayF/ei5
+        kv/ouZL/6LmS/+i5kv/ouZL/6LmS/+i5kv/ouZL/6LmS/+i5kv/ouZL/6LmS/+i5kv/BkG/9////Aalx
+        UWvdsY313Kd7/9ymev/apHr/2KJ5/9Wgdv/UnnX/0p1z/8+acv/OmXD/y5Zv/8mUbP/Emnr1qXFRa///
+        /wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af///wH///8B////Af//
+        /wH///8BAAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA
+        //8AAP//AAD//w==
+</value>
+  </data>
 </root>

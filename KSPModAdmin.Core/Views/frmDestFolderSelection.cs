@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using FolderSelect;
 using KSPModAdmin.Core.Model;
 using KSPModAdmin.Core.Utils;
+using System.IO;
 
 namespace KSPModAdmin.Core.Views
 {
@@ -33,7 +34,7 @@ namespace KSPModAdmin.Core.Views
                     cbDestination.Items.Add(new DestInfo("Other folder ...", string.Empty));
                     foreach (string path in value)
                     {
-                        int index = path.LastIndexOf("\\");
+                        int index = path.LastIndexOf(Path.DirectorySeparatorChar);
                         if (index >= 0)
                         {
                             string name = path.Substring(index);
@@ -80,13 +81,13 @@ namespace KSPModAdmin.Core.Views
                 if (cbDestination.SelectedIndex >= 0)
                     result = ((DestInfo)cbDestination.SelectedItem).Fullpath;
 
-                return result.ToLower();
+                return result;
             }
             set
             {
                 foreach (DestInfo entry in cbDestination.Items)
                 {
-                    if (entry.Name.ToLower() == value.ToLower())
+                    if (entry.Name.Equals(Path.DirectorySeparatorChar + value, StringComparison.CurrentCultureIgnoreCase))
                     {
                         cbDestination.SelectedItem = entry;
                         break;
@@ -190,8 +191,10 @@ namespace KSPModAdmin.Core.Views
                 if (dlg.ShowDialog(this.Handle))
                 {
                     string dest = dlg.FileName;
-                    string destName = dest.Substring(dest.LastIndexOf("\\"));
-                    cbDestination.Items.Add(new DestInfo(destName, dlg.FileName));
+                    int i = dest.LastIndexOf(Path.DirectorySeparatorChar);
+                    if (i >= 0)
+                        dest = dest.Substring(i);
+                    cbDestination.Items.Add(new DestInfo(dest, dlg.FileName));
                     cbDestination.SelectedIndex = cbDestination.Items.Count - 1;
                 }
                 else
@@ -203,7 +206,7 @@ namespace KSPModAdmin.Core.Views
                 //if (dlg.ShowDialog() == DialogResult.OK)
                 //{
                 //    string dest = dlg.SelectedPath;
-                //    string destName = dest.Substring(dest.LastIndexOf("\\"));
+                //    string destName = dest.Substring(dest.LastIndexOf(Path.DirectorySeparatorChar));
                 //    cbDestination.Items.Add(new DestInfo(destName, dlg.SelectedPath));
                 //    cbDestination.SelectedIndex = cbDestination.Items.Count - 1;
                 //}

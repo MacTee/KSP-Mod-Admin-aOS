@@ -521,7 +521,11 @@ namespace KSPModAdmin.Core.Controller
             if (!string.IsNullOrEmpty(DownloadPath) && Directory.Exists(DownloadPath))
             {
                 string filename = View.llblAdminDownload.Text;
-                string url = Constants.SERVICE_DOWNLOAD_LINK;
+                string url = string.Empty;
+                if(Environment.OSVersion.Platform == PlatformID.MacOSX || Environment.OSVersion.Platform == PlatformID.Unix)
+                    url = Constants.SERVICE_DOWNLOAD_LINK_MONO;
+                else
+                    url = Constants.SERVICE_DOWNLOAD_LINK_WIN;
 
                 int index = 1;
                 string downloadDest = Path.Combine(DownloadPath, filename);

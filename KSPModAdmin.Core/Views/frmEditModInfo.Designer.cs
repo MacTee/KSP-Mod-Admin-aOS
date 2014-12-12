@@ -69,6 +69,9 @@
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
             this.lblKSPVersionModInfoEditor = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
+            this.lblChangeDateModInfoEditor = new System.Windows.Forms.Label();
+            this.dtpChange = new System.Windows.Forms.DateTimePicker();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -79,6 +82,7 @@
             this.tableLayoutPanel8.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
             this.tableLayoutPanel10.SuspendLayout();
+            this.tableLayoutPanel11.SuspendLayout();
             this.SuspendLayout();
             // 
             // tbName
@@ -199,7 +203,7 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCancel.Image = global::KSPModAdmin.Core.Properties.Resources.delete2;
-            this.btnCancel.Location = new System.Drawing.Point(290, 362);
+            this.btnCancel.Location = new System.Drawing.Point(290, 386);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(110, 25);
             this.btnCancel.TabIndex = 14;
@@ -214,7 +218,7 @@
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.Image = global::KSPModAdmin.Core.Properties.Resources.component_scroll_floppy_disk;
-            this.btnSave.Location = new System.Drawing.Point(174, 362);
+            this.btnSave.Location = new System.Drawing.Point(174, 386);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(110, 25);
             this.btnSave.TabIndex = 13;
@@ -337,7 +341,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Controls.Add(this.tbAdditionalURL, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.lblAdditionalURLModInfo, 0, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 60);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 62);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -351,7 +355,7 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.Controls.Add(this.lblModURLModInfo, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.tbVersionControlURL, 1, 0);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 33);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 34);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -366,7 +370,7 @@
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 67.66304F));
             this.tableLayoutPanel4.Controls.Add(this.lblNoteModInfoEditor, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.tbNote, 1, 0);
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 263);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 287);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -380,7 +384,7 @@
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel5.Controls.Add(this.lblModNameModInfoEditor, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.tbName, 1, 0);
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(0, 92);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(0, 90);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 1;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -398,7 +402,7 @@
             this.tableLayoutPanel6.Controls.Add(this.tbProductID, 1, 0);
             this.tableLayoutPanel6.Controls.Add(this.lblVersionModInfoEditor, 2, 0);
             this.tableLayoutPanel6.Controls.Add(this.tbVersion, 3, 0);
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 119);
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 118);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             this.tableLayoutPanel6.RowCount = 1;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -445,13 +449,12 @@
             // 
             // tableLayoutPanel7
             // 
-            this.tableLayoutPanel7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tableLayoutPanel7.ColumnCount = 2;
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 118F));
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel7.Controls.Add(this.lblAuthorModInfoEditor, 0, 0);
             this.tableLayoutPanel7.Controls.Add(this.tbAuthor, 1, 0);
-            this.tableLayoutPanel7.Location = new System.Drawing.Point(0, 175);
+            this.tableLayoutPanel7.Location = new System.Drawing.Point(0, 174);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             this.tableLayoutPanel7.RowCount = 1;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -461,26 +464,23 @@
             // 
             // tableLayoutPanel8
             // 
-            this.tableLayoutPanel8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tableLayoutPanel8.ColumnCount = 4;
             this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 118F));
             this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 81F));
             this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 88F));
             this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 81F));
-            this.tableLayoutPanel8.Controls.Add(this.lblDownloadsModInfoEditor, 2, 0);
-            this.tableLayoutPanel8.Controls.Add(this.tbDownloads, 3, 0);
             this.tableLayoutPanel8.Controls.Add(this.lblDownloadDateModInfoEditor, 0, 0);
             this.tableLayoutPanel8.Controls.Add(this.dtpDownload, 1, 0);
-            this.tableLayoutPanel8.Location = new System.Drawing.Point(0, 236);
+            this.tableLayoutPanel8.Location = new System.Drawing.Point(0, 258);
             this.tableLayoutPanel8.Name = "tableLayoutPanel8";
             this.tableLayoutPanel8.RowCount = 1;
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel8.Size = new System.Drawing.Size(368, 27);
             this.tableLayoutPanel8.TabIndex = 17;
             // 
             // tableLayoutPanel9
             // 
-            this.tableLayoutPanel9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tableLayoutPanel9.ColumnCount = 4;
             this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 118F));
             this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 81F));
@@ -490,7 +490,7 @@
             this.tableLayoutPanel9.Controls.Add(this.lblCreationDateModInfoEditor, 0, 0);
             this.tableLayoutPanel9.Controls.Add(this.tbRating, 3, 0);
             this.tableLayoutPanel9.Controls.Add(this.dtpCreation, 1, 0);
-            this.tableLayoutPanel9.Location = new System.Drawing.Point(0, 204);
+            this.tableLayoutPanel9.Location = new System.Drawing.Point(0, 202);
             this.tableLayoutPanel9.Name = "tableLayoutPanel9";
             this.tableLayoutPanel9.RowCount = 1;
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -531,11 +531,51 @@
             this.textBox1.Size = new System.Drawing.Size(244, 20);
             this.textBox1.TabIndex = 7;
             // 
+            // tableLayoutPanel11
+            // 
+            this.tableLayoutPanel11.ColumnCount = 4;
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 118F));
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 81F));
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 88F));
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 81F));
+            this.tableLayoutPanel11.Controls.Add(this.lblChangeDateModInfoEditor, 0, 0);
+            this.tableLayoutPanel11.Controls.Add(this.dtpChange, 1, 0);
+            this.tableLayoutPanel11.Controls.Add(this.tbDownloads, 3, 0);
+            this.tableLayoutPanel11.Controls.Add(this.lblDownloadsModInfoEditor, 2, 0);
+            this.tableLayoutPanel11.Location = new System.Drawing.Point(0, 230);
+            this.tableLayoutPanel11.Name = "tableLayoutPanel11";
+            this.tableLayoutPanel11.RowCount = 1;
+            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel11.Size = new System.Drawing.Size(368, 27);
+            this.tableLayoutPanel11.TabIndex = 20;
+            // 
+            // lblChangeDateModInfoEditor
+            // 
+            this.lblChangeDateModInfoEditor.AutoSize = true;
+            this.lblChangeDateModInfoEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblChangeDateModInfoEditor.Location = new System.Drawing.Point(3, 0);
+            this.lblChangeDateModInfoEditor.Name = "lblChangeDateModInfoEditor";
+            this.lblChangeDateModInfoEditor.Size = new System.Drawing.Size(112, 27);
+            this.lblChangeDateModInfoEditor.TabIndex = 1;
+            this.lblChangeDateModInfoEditor.Text = "Changed date:";
+            this.lblChangeDateModInfoEditor.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // dtpChange
+            // 
+            this.dtpChange.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.dtpChange.CustomFormat = "dd.MM.yyyy";
+            this.dtpChange.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpChange.Location = new System.Drawing.Point(121, 4);
+            this.dtpChange.Name = "dtpChange";
+            this.dtpChange.Size = new System.Drawing.Size(75, 20);
+            this.dtpChange.TabIndex = 9;
+            // 
             // frmEditModInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(418, 397);
+            this.ClientSize = new System.Drawing.Size(418, 421);
+            this.Controls.Add(this.tableLayoutPanel11);
             this.Controls.Add(this.tableLayoutPanel10);
             this.Controls.Add(this.tableLayoutPanel9);
             this.Controls.Add(this.tableLayoutPanel5);
@@ -575,6 +615,8 @@
             this.tableLayoutPanel9.PerformLayout();
             this.tableLayoutPanel10.ResumeLayout(false);
             this.tableLayoutPanel10.PerformLayout();
+            this.tableLayoutPanel11.ResumeLayout(false);
+            this.tableLayoutPanel11.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -621,5 +663,8 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel10;
         private System.Windows.Forms.Label lblKSPVersionModInfoEditor;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel11;
+        private System.Windows.Forms.Label lblChangeDateModInfoEditor;
+        private System.Windows.Forms.DateTimePicker dtpChange;
     }
 }

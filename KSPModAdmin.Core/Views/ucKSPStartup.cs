@@ -68,6 +68,14 @@ namespace KSPModAdmin.Core.Views
         [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public bool Fullscreen { get { return rbFullscreen.Checked; } set { rbFullscreen.Checked = value; rbWindowed.Checked = !value; } }
 
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
+        public bool Use64Bit { get { return cbUse64Bit.Checked; } set { cbUse64Bit.Checked = value; } }
+
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
+        public bool ForceOpenGL { get { return cbForceOpenGL.Checked; } set { cbForceOpenGL.Checked = value; } }
+
         #endregion
 
         #region Constructors
@@ -110,6 +118,10 @@ namespace KSPModAdmin.Core.Views
 
                     Messenger.AddInfo(Messages.MSG_STARTING_KSP);
                     System.Diagnostics.Process kspexe = new System.Diagnostics.Process();
+#if __MonoCS__
+					kspexe.StartInfo.UseShellExecute = false;
+					kspexe.StartInfo.EnvironmentVariables.Add ("LC_ALL", "C");
+#endif
                     kspexe.StartInfo.FileName = fullpath;
                     kspexe.StartInfo.WorkingDirectory = Path.GetDirectoryName(fullpath);
                     if (rbWindowed.Checked && cbBorderlessWin.Checked)
@@ -227,9 +239,11 @@ namespace KSPModAdmin.Core.Views
             btnLaunchKSP.Enabled = enable;
             rbFullscreen.Enabled = enable;
             rbWindowed.Enabled = enable;
-            cbBorderlessWin.Enabled = enable;
-            cbResolutions.Enabled = enable;
-            cbForceOpenGL.Enabled = enable;
+            cbBorderlessWin.Enabled = (enable && rbWindowed.Checked);
+            cbResolutions.Enabled = (enable && cbResolutions.Items != null && cbResolutions.Items.Count > 0);
+            cbForceOpenGL.Enabled = (enable && Environment.OSVersion.Platform != PlatformID.MacOSX && Environment.OSVersion.Platform != PlatformID.Unix);
+            cbForceOpenGL.Visible = (Environment.OSVersion.Platform != PlatformID.MacOSX && Environment.OSVersion.Platform != PlatformID.Unix);
+            cbUse64Bit.Enabled = enable;
         }
     }
 }
