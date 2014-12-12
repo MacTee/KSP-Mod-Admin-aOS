@@ -159,6 +159,9 @@ namespace KSPModAdmin.Core
         public const string MODINSTALLED = "ModInstalled";
         public const string MODARCHIVEMISSING = "ModArchiveMissing";
         public const string MODOUTDATED = "ModOutdated";
+        public const string LAUNCHPARAMETER = "LaunchParameter";
+        public const string USE64BIT = "Use64Bit";
+        public const string FORCEOPENGL = "ForceOpenGL";
 
         // Form related
         public const string POSITION = "Position";

@@ -254,7 +254,7 @@ namespace KSPModAdmin.Core.Views
         private System.Windows.Forms.Panel panel1;
         private ucOptions ucOptions1;
         public System.Windows.Forms.TextBox tbMessages;
-        private ucKSPStartup ucKSPStartup1;
+        internal ucKSPStartup ucKSPStartup1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.ToolTip ttMain;
     }

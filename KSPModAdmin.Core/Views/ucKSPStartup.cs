@@ -68,6 +68,14 @@ namespace KSPModAdmin.Core.Views
         [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public bool Fullscreen { get { return rbFullscreen.Checked; } set { rbFullscreen.Checked = value; rbWindowed.Checked = !value; } }
 
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
+        public bool Use64Bit { get { return cbUse64Bit.Checked; } set { cbUse64Bit.Checked = value; } }
+
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
+        public bool ForceOpenGL { get { return cbForceOpenGL.Checked; } set { cbForceOpenGL.Checked = value; } }
+
         #endregion
 
         #region Constructors

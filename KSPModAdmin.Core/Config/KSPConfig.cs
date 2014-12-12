@@ -67,6 +67,18 @@ namespace KSPModAdmin.Core.Config
                 }
             }
 
+            nodeList = doc.GetElementsByTagName(Constants.LAUNCHPARAMETER);
+            if (nodeList.Count >= 1 && nodeList[0].Attributes != null)
+            {
+                foreach (XmlAttribute att in nodeList[0].Attributes)
+                {
+                    if (att.Name == Constants.USE64BIT)
+                        MainController.LaunchPanel.Use64Bit = att.Value.Equals("true", StringComparison.CurrentCultureIgnoreCase);
+                    else if (att.Name == Constants.FORCEOPENGL)
+                        MainController.LaunchPanel.ForceOpenGL = att.Value.Equals("true", StringComparison.CurrentCultureIgnoreCase);
+                }
+            }
+
             //nodeList = doc.GetElementsByTagName(Constants.OVERRRIDE);
             //if (nodeList.Count >= 1 && nodeList[0].Attributes != null)
             //{
@@ -207,6 +219,13 @@ namespace KSPModAdmin.Core.Config
             root.AppendChild(generalNode);
 
             XmlNode node = ConfigHelper.CreateConfigNode(doc, Constants.DOWNLOAD_PATH, Constants.NAME, OptionsController.DownloadPath);
+            generalNode.AppendChild(node);
+
+            node = ConfigHelper.CreateConfigNode(doc, Constants.LAUNCHPARAMETER, new string[,]
+            {
+                { Constants.USE64BIT, MainController.LaunchPanel.Use64Bit.ToString() }, 
+                { Constants.FORCEOPENGL, MainController.LaunchPanel.ForceOpenGL.ToString() }
+            });
             generalNode.AppendChild(node);
 
             //node = CreateKSPConfigNode(doc, Constants.OVERRRIDE, Constants.VALUE, mOverride.ToString());

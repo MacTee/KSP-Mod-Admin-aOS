@@ -73,6 +73,8 @@ namespace KSPModAdmin.Core.Controller
             }
         }
 
+        public static ucKSPStartup LaunchPanel { get { return View.ucKSPStartup1; } }
+
         #endregion
 
         #region Constructors
