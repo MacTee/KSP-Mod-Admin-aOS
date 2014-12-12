@@ -11,7 +11,8 @@ namespace KSPModAdmin.Core
 		// ReSharper disable InconsistentNaming
         public const string DOWNLOAD_FILENAME_TEMPLATE = "KSPModAdmin-v{0}.zip";
 
-        public const string SERVICE_DOWNLOAD_LINK = "http://www.services.mactee.de/KSP/getKSP_MA_Zip2.php5";
+        public const string SERVICE_DOWNLOAD_LINK_WIN = "http://www.services.mactee.de/KSP/getKSP_MA_Zip2.php5?build=win";
+        public const string SERVICE_DOWNLOAD_LINK_MONO = "http://www.services.mactee.de/KSP/getKSP_MA_Zip2.php5?build=mono";
         public const string SERVICE_ADMIN_VERSION = "http://www.services.mactee.de/KSP/getKSP_MA_Version2.php5";
 
         public const string PATHSEPERATOR = "\\";
