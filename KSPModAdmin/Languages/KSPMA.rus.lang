@@ -585,4 +585,12 @@
   <Control Name="lblAdditionalURLModInfo" Value="Дополнительная ссылка:" />
   <String Name="MSG_ERROR_PLUGIN_LOADING_TABVIEWS_0" Value="Ошибка при загрузке плагина: Вкладка &quot;{0}&quot; уже существует!"/>
   <String Name="MSG_ERROR_PLUGIN_LOADING_OPTIONVIEWS_0" Value="Ошибка при загрузке плагина: вкладка настроек &quot;{0}&quot; уже существует!"/>
+
+  <Control Name="tsmiCmsRefreshCheckedStateForHighlightedMods" Value="(T)Refresh checked state for highlighted mods"/>
+  <Control Name="tsmiCmsCheckHighlightedModsForUpdates" Value="(T)Check highlighted mods for updates"/>
+  <Control Name="tsmiUpdateHiglightedMods" Value="(T)Update highlighted mods"/>
+  <Control Name="tsmiCmsProceedHighlightedMods" Value="(T)Proceed highlighted mods"/>
+  <Control Name="tsmiCmsRemoveHighlightedMods" Value="(T)Remove highlighted mods"/>
+  <String Name="MSG_NOT_AVAILABLE" Value="(T)Not available"/>
+  <String Name="MSG_NO_DESTINATION" Value="(T)No destination"/>
 </Language>

@@ -110,6 +110,13 @@ namespace KSPModAdmin.Core.Views
 
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
+        public bool HasSelectedNode
+        {
+            get { return (tvModSelection.SelectedNode != null); }
+        }
+
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public ModNode SelectedNode
         {
             get { return (tvModSelection.SelectedNode != null) ? tvModSelection.SelectedNode.Tag as ModNode : null; }
@@ -117,7 +124,14 @@ namespace KSPModAdmin.Core.Views
 
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
-        public List<ModNode> SelectedNodes
+        public ModNode SelectedMod
+        {
+            get { return (tvModSelection.SelectedNode != null) ? (tvModSelection.SelectedNode.Tag as ModNode).ZipRoot : null; }
+        }
+
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
+        public List<ModNode> SelectedMods
         {
             get 
             { 
@@ -125,7 +139,11 @@ namespace KSPModAdmin.Core.Views
                 if (tvModSelection.SelectedNodes.Count > 0)
                 {
                     foreach (var node in tvModSelection.SelectedNodes)
-                        mods.Add((ModNode)node.Tag);
+                    {
+                        ModNode root = (node.Tag as ModNode).ZipRoot;
+                        if (!mods.Contains(root))
+                            mods.Add(root);
+                    }
                 }
                 
                 return mods;
@@ -190,9 +208,14 @@ namespace KSPModAdmin.Core.Views
             tvModSelection_SelectionChanged(null, null);
         }
 
+        private void btnProceedMod_Click(object sender, EventArgs e)
+        {
+            ModSelectionController.ProcessModsAsync(new[] { SelectedMod });
+        }
+
         private void btnProceedHighlighted_Click(object sender, EventArgs e)
         {
-            ModSelectionController.ProcessModsAsync(new ModNode[] { SelectedNode as ModNode });
+            ModSelectionController.ProcessModsAsync(SelectedMods.ToArray());
         }
 
         private void btnProceedAll_Click(object sender, EventArgs e)
@@ -221,8 +244,14 @@ namespace KSPModAdmin.Core.Views
 
         private void tsbRemoveMod_Click(object sender, EventArgs e)
         {
-            if (SelectedNode != null)
-                ModSelectionController.RemoveMod(SelectedNodes.ToArray());
+            if (HasSelectedNode)
+                ModSelectionController.RemoveMod(new [] { SelectedMod });
+        }
+
+        private void tsmiCmsRemoveHighlightedMods_Click(object sender, EventArgs e)
+        {
+            if (HasSelectedNode)
+                ModSelectionController.RemoveMod(SelectedMods.ToArray());
         }
 
         private void tsbRemoveAll_Click(object sender, EventArgs e)
@@ -232,37 +261,42 @@ namespace KSPModAdmin.Core.Views
 
         private void tsbEditModInfos_Click(object sender, EventArgs e)
         {
-            if (SelectedNode != null)
-                ModSelectionController.EditModInfos(SelectedNode);
+            if (HasSelectedNode)
+                ModSelectionController.EditModInfos(SelectedMod);
         }
 
         private void tsbCopyModInfos_Click(object sender, EventArgs e)
         {
-            if (SelectedNode != null)
-                ModSelectionController.CopyModInfos(SelectedNode);
+            if (HasSelectedNode)
+                ModSelectionController.CopyModInfos(SelectedMod);
         }
 
         private void tsbRefreshCheckedState_Click(object sender, EventArgs e)
         {
-            ModSelectionController.RefreshCheckedStateOfModAsync(SelectedNode);
+            ModSelectionController.RefreshCheckedStateOfModsAsync(new[] { SelectedMod });
+        }
+
+        private void tsmiCmsRefreshCheckedStateForHighlightedMods_Click(object sender, EventArgs e)
+        {
+            ModSelectionController.RefreshCheckedStateOfModsAsync(SelectedMods.ToArray());
         }
 
         private void tsbChangeDestination_Click(object sender, EventArgs e)
         {
-            if (SelectedNode != null)
-                ModSelectionController.ChangeDestination(SelectedNode);
+            if (HasSelectedNode)
+                ModSelectionController.ChangeDestination(SelectedMod);
         }
 
         private void tsmiResetDestination_Click(object sender, EventArgs e)
         {
-            if (SelectedNode != null)
-                ModSelectionController.ResetDestination(SelectedNode);
+            if (HasSelectedNode)
+                ModSelectionController.ResetDestination(SelectedMod);
         }
 
         private void tsbCreateZip_Click(object sender, EventArgs e)
         {
-            if (SelectedNode != null)
-                ModSelectionController.CreateZip(new ModNode[] { SelectedNode }.ToList());
+            if (HasSelectedNode)
+                ModSelectionController.CreateZip(new ModNode[] { SelectedMod }.ToList());
         }
 
         private void tsbExImport_Click(object sender, EventArgs e)
@@ -282,8 +316,14 @@ namespace KSPModAdmin.Core.Views
 
         private void tsbModUpdateCheck_Click(object sender, EventArgs e)
         {
-            if (SelectedNode != null)
-                ModSelectionController.CheckForModUpdatesAsync(new [] { SelectedNode.ZipRoot });
+            if (HasSelectedNode)
+                ModSelectionController.CheckForModUpdatesAsync(new[] { SelectedMod });
+        }
+
+        private void tsmiCmsCheckHighlightedModsForUpdates_Click(object sender, EventArgs e)
+        {
+            if (HasSelectedNode)
+                ModSelectionController.CheckForModUpdatesAsync(SelectedMods.ToArray());
         }
 
         private void tsbUpdateAllOutdatedMods_Click(object sender, EventArgs e)
@@ -293,8 +333,14 @@ namespace KSPModAdmin.Core.Views
 
         private void tsbUpdateMod_Click(object sender, EventArgs e)
         {
-            if (SelectedNode != null)
-                ModSelectionController.UpdateOutdatedModsAsync(new[] { SelectedNode.ZipRoot });
+            if (HasSelectedNode)
+                ModSelectionController.UpdateOutdatedModsAsync(new[] { SelectedMod });
+        }
+
+        private void tsmiUpdateHiglightedMods_Click(object sender, EventArgs e)
+        {
+            if (HasSelectedNode)
+                ModSelectionController.UpdateOutdatedModsAsync(SelectedMods.ToArray());
         }
 
         private void tssbVisitVersionControlSite_ButtonClick(object sender, EventArgs e)
@@ -337,13 +383,13 @@ namespace KSPModAdmin.Core.Views
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime || DesignMode)
                 return;
 
-            ModNode selNode = SelectedNode;
-            tvModSelection.ContextMenuStrip = (selNode == null) ? cmsModSelectionAllMods : cmsModSelectionOneMod;
+            ModNode selectedNode = SelectedNode;
+            tvModSelection.ContextMenuStrip = (selectedNode == null) ? cmsModSelectionAllMods : cmsModSelectionOneMod;
             ControlTranslator.TranslateControls(Localizer.GlobalInstance, tvModSelection.ContextMenuStrip, OptionsController.SelectedLanguage);
 
-            if (selNode != null)
+            if (selectedNode != null)
             {
-                ModNode zipRoot = selNode.ZipRoot;
+                ModNode zipRoot = selectedNode.ZipRoot;
                 ArchivePath = string.IsNullOrEmpty(zipRoot.Key) ? Messages.NONE : zipRoot.Key;
                 ModName = zipRoot.Name;
                 ModVersionControl = zipRoot.SiteHandlerName;
@@ -357,10 +403,10 @@ namespace KSPModAdmin.Core.Views
                 ModRating = zipRoot.Rating;
                 ModDownloads = zipRoot.Downloads;
                 ModNote = zipRoot.Note;
-                FileName = selNode.Name;
-                FileDestination = selNode.Destination;
-                FileConflict = selNode.HasCollision;
-                FileInstalled = selNode.IsInstalled;
+                FileName = selectedNode.Name;
+                FileDestination = selectedNode.Destination;
+                FileConflict = selectedNode.HasCollision;
+                FileInstalled = selectedNode.IsInstalled;
 
                 btnProceedHighlighted.Enabled = true;
                 tsbProceedMod.Enabled = true;
@@ -395,7 +441,7 @@ namespace KSPModAdmin.Core.Views
                 tsmiChangeDestination.Enabled = true;
                 tsmiResetDestination.Enabled = true;
 
-                tsbCreateZip.Enabled = !selNode.ZipExists;
+                tsbCreateZip.Enabled = !selectedNode.ZipExists;
             }
             else
             {
@@ -407,7 +453,7 @@ namespace KSPModAdmin.Core.Views
                 KSPVersion = "0.21";
                 ModAuthor = "BHeinrich";
                 ModCreationDate = "27.05.2014";
-                ModChangeDate = "1.11.2014";
+                ModChangeDate = "12.12.2014";
                 ModOutdated = false;
                 ModRating = string.Empty;
                 ModDownloads = "75k+";
@@ -521,51 +567,34 @@ namespace KSPModAdmin.Core.Views
             }
         }
 
-        private void cmsModSelectionOneMod_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        private void cmsModSelectionOneMod_Opened(object sender, EventArgs e)
         {
+            int selectedModCount = SelectedMods.Count;
             ModNode selectedNode = SelectedNode;
-            if (selectedNode == null)
+            if (HasSelectedNode)
             {
-                tsmiCmsDestination.Visible = false;
-                tsmiCmsRefreschCheckedState.Visible = false;
-                toolStripSeparator18.Visible = false;
-                tsmiCmsEditModInfos.Visible = false;
-                tsmiCmsCopyModInfos.Visible = false;
-                toolStripSeparator17.Visible = false;
-                tsmiCmsUpdatecheckMod.Visible = false;
-                tsmiCmsVisitVersionControlSite.Visible = false;
-                tsmiCmsVisitAdditionalLink.Visible = false;
-                toolStripSeparator10.Visible = false;
-                tsmiCmsSolveConflicts.Visible = false;
-                toolStripSeparator19.Visible = false;
-                tsmiCmsProceedMod.Visible = false;
-                toolStripSeparator13.Visible = false;
-                tsmiCmsRemoveMod.Visible = false;
-                toolStripSeparator20.Visible = false;
-                tsmiCmsCreateZip.Visible = false;
-            }
-            else
-            {
-                tsmiCmsDestination.Visible = true;
-                tsmiCmsRefreschCheckedState.Visible = true;
-                toolStripSeparator18.Visible = true;
-                tsmiCmsEditModInfos.Visible = true;
-                tsmiCmsCopyModInfos.Visible = true;
-                toolStripSeparator17.Visible = true;
-                tsmiCmsUpdatecheckMod.Visible = true;
-                //tsmiCmsVisitVersionControlSite.Visible = true;
-                //tsmiCmsVisitAdditionalLink.Visible = true;
-                toolStripSeparator10.Visible = true;
-                tsmiCmsSolveConflicts.Visible = true;
-                toolStripSeparator19.Visible = true;
-                tsmiCmsProceedMod.Visible = true;
-                toolStripSeparator13.Visible = true;
-                tsmiCmsRemoveMod.Visible = true;
-                toolStripSeparator20.Visible = true;
-                tsmiCmsCreateZip.Visible = true;
+                if (selectedModCount != 1)
+                    tsmiCmsDestinationPath.Text = "<" + Messages.MSG_NOT_AVAILABLE + ">";
+                else
+                    tsmiCmsDestinationPath.Text = string.IsNullOrEmpty(selectedNode.Destination) ? "<" + Messages.MSG_NO_DESTINATION + ">" : selectedNode.Destination;
+
+                tsmiCmsSelectNewDestination.Enabled = (selectedModCount == 1);
+                tsmiCmsResetDestination.Enabled = (selectedModCount == 1);
+                tsmiCmsRedetectDestination.Enabled = (selectedModCount == 1);
+                tsmiCmsRefreschCheckedState.Visible = (selectedModCount == 1);
+                tsmiCmsRefreshCheckedStateForHighlightedMods.Visible = !tsmiCmsRefreschCheckedState.Visible;
+                tsmiCmsEditModInfos.Enabled = (selectedModCount == 1);
+                tsmiCmsCopyModInfos.Enabled = (selectedModCount == 1);
+                tsmiCmsUpdatecheckMod.Visible = (selectedModCount == 1);
+                tsmiCmsCheckHighlightedModsForUpdates.Visible = !tsmiCmsUpdatecheckMod.Visible;
+                tsmiUpdateMod.Visible = (selectedModCount == 1);
+                tsmiUpdateHiglightedMods.Visible = !tsmiUpdateMod.Visible;
+                tsmiCmsRemoveMod.Visible = (selectedModCount == 1);
+                tsmiCmsRemoveHighlightedMods.Visible = !tsmiCmsRemoveMod.Visible;
+                tsmiCmsProceedMod.Visible = (selectedModCount == 1);
+                tsmiCmsProceedHighlightedMods.Visible = !tsmiCmsProceedMod.Visible;
                 tsmiCmsCreateZip.Enabled = !selectedNode.ZipExists;
             }
-
         }
 
         #endregion

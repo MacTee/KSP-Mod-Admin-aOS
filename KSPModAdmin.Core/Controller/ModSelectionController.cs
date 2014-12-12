@@ -857,7 +857,7 @@ namespace KSPModAdmin.Core.Controller
                             foreach (ScanInfo unknown in unknowns)
                             {
                                 ModNode node = ScanInfoToKSPMA_TreeNode(unknown);
-                                RefreshCheckedStateOfMod(node);
+                                RefreshCheckedStateOfMods(new[] { node });
                                 Model.Nodes.Add(node);
                                 Messenger.AddInfo(string.Format(Messages.MSG_MOD_ADDED_0, node.Text));
                             }
@@ -997,12 +997,26 @@ namespace KSPModAdmin.Core.Controller
         /// </summary>
         public static void RefreshCheckedStateAllModsAsync()
         {
-            ModNode[] allMods = Mods;
+            RefreshCheckedStateOfModsAsync(Mods);
+        }
 
+        /// <summary>
+        /// Traversing the complete tree and renews the checked state of all nodes.
+        /// </summary>
+        public static void RefreshCheckedStateAllMods()
+        {
+            RefreshCheckedStateOfMods(Mods);
+        }
+
+        /// <summary>
+        /// Traversing the complete tree and renews the checked state of all nodes.
+        /// </summary>
+        public static void RefreshCheckedStateOfModsAsync(ModNode[] mods)
+        {
             EventDistributor.InvokeAsyncTaskStarted(Instance);
             View.SetEnabledOfAllControls(false);
 
-            int maxCount = ModSelectionTreeModel.GetFullNodeCount(allMods);
+            int maxCount = ModSelectionTreeModel.GetFullNodeCount(mods);
             View.SetProgressBarStates(true, maxCount, 0);
 
             int count = 0;
@@ -1010,12 +1024,12 @@ namespace KSPModAdmin.Core.Controller
             asyncJob.SetCallbackFunctions(
                 () =>
                 {
-                    foreach (var mod in allMods)
+                    foreach (ModNode mod in mods)
                     {
                         Messenger.AddDebug(string.Format(Messages.MSG_REFRESHING_CHECKEDSTATE_0, mod.Name));
-                        RefreshCheckedState(mod, ref count, asyncJob);
+                        ModNode rootNode = mod.ZipRoot;
+                        RefreshCheckedState(rootNode, ref count, asyncJob);
                     }
-
                     return true;
                 },
                 (result, ex) =>
@@ -1038,60 +1052,14 @@ namespace KSPModAdmin.Core.Controller
         /// <summary>
         /// Traversing the complete tree and renews the checked state of all nodes.
         /// </summary>
-        public static void RefreshCheckedStateAllMods()
+        public static void RefreshCheckedStateOfMods(ModNode[] mods)
         {
-            foreach (var mod in Mods)
-                RefreshCheckedStateOfMod(mod);
-
-            InvalidateView();
-        }
-
-        /// <summary>
-        /// Traversing the complete tree and renews the checked state of all nodes.
-        /// </summary>
-        public static void RefreshCheckedStateOfModAsync(ModNode mod)
-        {
-            ModNode rootNode = mod.ZipRoot;
-            Messenger.AddDebug(string.Format(Messages.MSG_REFRESHING_CHECKEDSTATE_0, rootNode.Name));
-
-            EventDistributor.InvokeAsyncTaskStarted(Instance);
-            View.SetEnabledOfAllControls(false);
-
-            int maxCount = ModSelectionTreeModel.GetFullNodeCount(new[] { rootNode });
-            View.SetProgressBarStates(true, maxCount, 0);
-
-            int count = 0;
-            AsyncTask<bool> asyncJob = new AsyncTask<bool>();
-            asyncJob.SetCallbackFunctions(
-                () =>
-                {
-                    RefreshCheckedState(rootNode, ref count, asyncJob);
-                    return true;
-                },
-                (result, ex) =>
-                {
-                    EventDistributor.InvokeAsyncTaskDone(Instance);
-                    View.SetEnabledOfAllControls(true);
-                    View.SetProgressBarStates(false);
-
-                    if (ex != null)
-                        Messenger.AddError(string.Format(Messages.MSG_ERROR_DURING_REFRESH_CHECKED_STATE_0, ex.Message), ex);
-                },
-                (processedCount) =>
-                {
-                    View.SetProgressBarStates(true, maxCount, processedCount);
-                });
-            asyncJob.Run();
-        }
-
-        /// <summary>
-        /// Traversing the complete tree and renews the checked state of all nodes.
-        /// </summary>
-        public static void RefreshCheckedStateOfMod(ModNode mod)
-        {
-            Messenger.AddDebug(string.Format(Messages.MSG_REFRESHING_CHECKEDSTATE_0, mod.Name));
-            int count = 0;
-            RefreshCheckedState(mod.ZipRoot, ref count);
+            foreach (ModNode mod in mods)
+            {
+                Messenger.AddDebug(string.Format(Messages.MSG_REFRESHING_CHECKEDSTATE_0, mod.Name));
+                int count = 0;
+                RefreshCheckedState(mod.ZipRoot, ref count);
+            }
             InvalidateView();
         }
 

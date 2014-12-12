@@ -601,5 +601,12 @@
   <String Name="MSG_ERROR_PLUGIN_LOADING_TABVIEWS_0" Value="Plugin loading error: TabView &quot;{0}&quot; already exists!"/>
   <String Name="MSG_ERROR_PLUGIN_LOADING_OPTIONVIEWS_0" Value="Plugin loading error: Option TabView &quot;{0}&quot; already exists!"/>
 
-  
+  <Control Name="tsmiCmsRefreshCheckedStateForHighlightedMods" Value="Refresh checked state for highlighted mods"/>
+  <Control Name="tsmiCmsCheckHighlightedModsForUpdates" Value="Check highlighted mods for updates"/>
+  <Control Name="tsmiUpdateHiglightedMods" Value="Update highlighted mods"/>
+  <Control Name="tsmiCmsProceedHighlightedMods" Value="Proceed highlighted mods"/>
+  <Control Name="tsmiCmsRemoveHighlightedMods" Value="Remove highlighted mods"/>
+  <String Name="MSG_NOT_AVAILABLE" Value="Not available"/>
+  <String Name="MSG_NO_DESTINATION" Value="No destination"/>
+
 </Language>
