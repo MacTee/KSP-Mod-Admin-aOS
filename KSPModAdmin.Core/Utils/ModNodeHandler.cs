@@ -671,7 +671,8 @@ namespace KSPModAdmin.Core.Utils
                     }
                 }
 
-                node.NodeType = NodeType.UnknownFileInstalled;
+                node.IsInstalled = File.Exists(destination);
+                node.NodeType = (node.IsInstalled) ? NodeType.UnknownFileInstalled : NodeType.UnknownFile;
             }
         }
 
