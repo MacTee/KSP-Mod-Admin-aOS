@@ -197,5 +197,7 @@ namespace KSPModAdmin.Core
 
 
         public const string KSPFOLDERTAG = "<KSPFolder>";
+
+        public const string HOME = "HOME";
     }
 }

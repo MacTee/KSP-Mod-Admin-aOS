@@ -88,7 +88,7 @@ namespace KSPModAdmin.Core.Utils
                 switch (Environment.OSVersion.Platform)
                 {
                     case PlatformID.Unix:
-                        path = Path.Combine(Environment.GetEnvironmentVariable("HOME"), Constants.LINUX_PATH, Constants.APP_CONFIG_FILE);
+                        path = Path.Combine(Environment.GetEnvironmentVariable(Constants.HOME), Constants.LINUX_PATH, Constants.APP_CONFIG_FILE);
                         break;
                     case PlatformID.MacOSX:
                         path = Path.Combine(Assembly.GetExecutingAssembly().Location, Constants.APP_CONFIG_FILE);
