@@ -64,6 +64,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Externals\KerbalStuffReadOnly.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="SharpCompress, Version=0.10.3.0, Culture=neutral, PublicKeyToken=beaf6f427e128133, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Externals\SharpCompress.dll</HintPath>
@@ -96,6 +100,7 @@
     <Compile Include="Model\ModSelectionTreeModel.cs" />
     <Compile Include="Model\ModNode.cs" />
     <Compile Include="Model\NoteNode.cs" />
+    <Compile Include="Utils\AVCParser.cs" />
     <Compile Include="Utils\ModPackHandler.cs" />
     <Compile Include="Utils\SiteHandler\CurseForgeHandler.cs" />
     <Compile Include="Utils\SiteHandler\CurseHandler.cs" />
