@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq.Expressions;
 using System.Text;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace KSPModAdmin.Core.Utils
@@ -13,7 +10,6 @@ namespace KSPModAdmin.Core.Utils
     /// </summary>
     public class AVCParser
     {
-
         public static AVCInfo ReadVersionFile(string path)
         {
             if (!File.Exists(path))
@@ -26,17 +22,17 @@ namespace KSPModAdmin.Core.Utils
         {
             AVCInfo avcInfo = new AVCInfo();
             JObject jObject = JObject.Parse(jsonString);
-            avcInfo.Name = (string)jObject["NAME"];
-            avcInfo.Url = (string)jObject["URL"];
-            avcInfo.Download = (string)jObject["DOWNLOAD"];
-            avcInfo.ChangeLog = (string)jObject["CHANGE_LOG"];
-            avcInfo.ChangeLogUrl = (string)jObject["CHANGE_LOG_URL"];
+            avcInfo.Name = GetString(jObject["NAME"]);
+            avcInfo.Url = GetString(jObject["URL"]);
+            avcInfo.Download = GetString(jObject["DOWNLOAD"]);
+            avcInfo.ChangeLog = GetString(jObject["CHANGE_LOG"]);
+            avcInfo.ChangeLogUrl = GetString(jObject["CHANGE_LOG_URL"]);
             JToken jGitHub = jObject["GITHUB"];
             if (jGitHub != null)
             {
-                avcInfo.GitHubUsername = (string)jGitHub["USERNAME"];
-                avcInfo.GitHubRepository = (string)jGitHub["REPOSITORY"];
-                avcInfo.GitHubAllowPreRelease = jGitHub["ALLOW_PRE_RELEASE"].ToString().Equals("true", StringComparison.CurrentCultureIgnoreCase);
+                avcInfo.GitHubUsername = GetString(jGitHub["USERNAME"]);
+                avcInfo.GitHubRepository = GetString(jGitHub["REPOSITORY"]);
+                avcInfo.GitHubAllowPreRelease = GetString(jGitHub["ALLOW_PRE_RELEASE"]).Equals("true", StringComparison.CurrentCultureIgnoreCase);
             }
             avcInfo.Version = GetVersion(jObject["VERSION"] as JToken);
             avcInfo.KspVersion = GetVersion(jObject["KSP_VERSION"] as JToken, 3);
@@ -46,10 +42,18 @@ namespace KSPModAdmin.Core.Utils
             return avcInfo;
         }
 
+        private static string GetString(JToken jToken)
+        {
+            if (jToken == null)
+                return string.Empty;
+
+            return (string)jToken;
+        }
+
         private static string GetVersion(JToken jToken, int depth = 4)
         {
             if (jToken == null)
-                return "0.0.0.0";
+                return string.Empty;
 
             if (depth < 1)
                 depth = 1;
@@ -89,5 +93,22 @@ namespace KSPModAdmin.Core.Utils
         public string KspVersion { get; set; }
         public string KspVersionMin { get; set; }
         public string KspVersionMax { get; set; }
+
+
+        public AVCInfo()
+        {
+            Name = string.Empty;
+            Url = string.Empty;
+            Download = string.Empty;
+            ChangeLog = string.Empty;
+            ChangeLogUrl = string.Empty;
+            GitHubUsername = string.Empty;
+            GitHubRepository = string.Empty;
+            GitHubAllowPreRelease = false;
+            Version = string.Empty;
+            KspVersion = string.Empty;
+            KspVersionMin = string.Empty;
+            KspVersionMax = string.Empty;
+        }
     }
 }
