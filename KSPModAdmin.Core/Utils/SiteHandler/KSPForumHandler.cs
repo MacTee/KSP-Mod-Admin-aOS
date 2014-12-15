@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
 using HtmlAgilityPack;
 using KSPModAdmin.Core.Controller;
 using KSPModAdmin.Core.Model;
+using KSPModAdmin.Core.Views;
 
 namespace KSPModAdmin.Core.Utils.SiteHandler
 {
@@ -56,152 +59,167 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 		}
 
 		/// <summary>
-        /// Gets the content of the site of the passed URL and parses it for ModInfos.
-        /// </summary>
-        /// <param name="url">The URL of the site to parse the ModInfos from.</param>
-        /// <returns>The ModInfos parsed from the site of the passed URL.</returns>
-        public ModInfo GetModInfo(string url)
+		/// Gets the content of the site of the passed URL and parses it for ModInfos.
+		/// </summary>
+		/// <param name="url">The URL of the site to parse the ModInfos from.</param>
+		/// <returns>The ModInfos parsed from the site of the passed URL.</returns>
+		public ModInfo GetModInfo(string url)
 		{
-			var modInfo = KSPForum.GetModInfo(url);
+			var modInfo = new ModInfo
+			{
+				SiteHandlerName = Name,
+				ModURL = url,
+			};
+			if (ParseSite(url, ref modInfo))
+				return modInfo;
+			return null;
+		}
 
-			//var modInfo = new ModInfo
-			//{
-			//	SiteHandlerName = Name,
-			//	ModURL = url,
-			//	Name = parts[3],
-			//	Author = parts[2]
-			//};
-			//modInfo.CreationDate = kerbalMod.Versions.Last().Date;	// TODO when Adding github tags parser
+		/// <summary>
+		/// Checks if updates are available for the passed mod.
+		/// </summary>
+		/// <param name="modInfo">The ModInfos of the mod to check for updates.</param>
+		/// <param name="newModInfo">A reference to an empty ModInfo to write the updated ModInfos to.</param>
+		/// <returns>True if there is an update, otherwise false.</returns>
+		public bool CheckForUpdates(ModInfo modInfo, ref ModInfo newModInfo)
+		{
+			newModInfo = GetModInfo(modInfo.ModURL);
+			return !modInfo.Version.Equals(newModInfo.Version);
+		}
 
-			return modInfo;
-        }
-
-        /// <summary>
-        /// Checks if updates are available for the passed mod.
-        /// </summary>
-        /// <param name="modInfo">The ModInfos of the mod to check for updates.</param>
-        /// <param name="newModInfo">A reference to an empty ModInfo to write the updated ModInfos to.</param>
-        /// <returns>True if there is an update, otherwise false.</returns>
-        public bool CheckForUpdates(ModInfo modInfo, ref ModInfo newModInfo)
-        {
-            newModInfo = GetModInfo(modInfo.ModURL);
-	        return !modInfo.Version.Equals(newModInfo.Version);
-        }
-
-		private bool ParseSite(string url, ref ModInfo modInfo)
+		private static bool ParseSite(string url, ref ModInfo modInfo)
 		{
 			// changed to use the curse page as it provides the same info but also game version
 			// there's no good way to get a mod version from curse. Could use file name? Is using update date (best method?)
-			HtmlWeb web = new HtmlWeb();
-			HtmlDocument htmlDoc = web.Load(url);
+			var htmlDoc = new HtmlWeb().Load(url);
 			htmlDoc.OptionFixNestedTags = true;
 
-			//// To scrape the fields, now using HtmlAgilityPack and XPATH search strings.
-			//// Easy way to get XPATH search: use chrome, inspect element, highlight the needed data and right-click and copy XPATH
-			//HtmlNode nameNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='pagetitle']/h1/span/a");
-			////HtmlNode idNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='project-overview']/div/div[2]/div/div/div[1]/div[2]/ul[2]/li[8]/a");
-			//HtmlNode createNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='post_1464892']/div[1]/span[1]/span");
+			// To scrape the fields, now using HtmlAgilityPack and XPATH search strings.
+			// Easy way to get XPATH search: use chrome, inspect element, highlight the needed data and right-click and copy XPATH
 
-			//HtmlNode updateNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='project-overview']/div/div[2]/div/div/div[1]/div[2]/ul[2]/li[5]/abbr");
+			// gets name, version, and ID
+			HtmlNode nameNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='pagetitle']/h1/span/a");
+			HtmlNode authorNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='posts']/li[1]/div[2]/div[1]/div[1]/div[1]/a");
+			HtmlNode createNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='posts']/li[1]/div[1]/span[1]");
+			HtmlNode updateNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='posts']/li[1]/div[2]/div[2]/div[2]/blockquote[1]");
 
-			////HtmlNode authorNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id="yui-gen26"]/strong");
+			//*[@id='posts']/li[1]/div[2]/div[2]/div[1]/div
 
-			//HtmlNode gameVersionNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='project-overview']/div/div[2]/div/div/div[1]/div[2]/ul[2]/li[3]");
 
-			//var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc); //Curse stores the date as both text and as Epoch. Go for the most precise value (Epoch).
+			if (nameNode == null)
+				return false;
 
-			//if (nameNode == null)
-			//	return false;
+			modInfo.Name = nameNode.InnerHtml;
+			modInfo.ProductID = new Regex(@".*\/(.*?)-.*").Replace(nameNode.Attributes["href"].Value, "$1");
+			modInfo.GameVersion = new Regex(@"\[(.*)\].*").Replace(nameNode.InnerHtml, "$1");
+			modInfo.Author = authorNode.InnerText.Trim();
 
-			//modInfo.Name = nameNode.InnerHtml;
-			//modInfo.ProductID = idNode.Attributes["href"].Value.Substring(idNode.Attributes["href"].Value.LastIndexOf("/") + 1);
-			//modInfo.CreationDateAsDateTime = epoch.AddSeconds(Convert.ToDouble(createNode.Attributes["data-epoch"].Value));
-			//modInfo.ChangeDateAsDateTime = epoch.AddSeconds(Convert.ToDouble(updateNode.Attributes["data-epoch"].Value));
-			//modInfo.Downloads = downloadNode.InnerHtml.Split(" ")[0];
-			//modInfo.Author = authorNode.InnerHtml;
-			//modInfo.GameVersion = gameVersionNode.InnerHtml.Split(" ")[1];
+			modInfo.CreationDateAsDateTime = GetDateTime(createNode.InnerText.Trim());
+			modInfo.ChangeDateAsDateTime = GetDateTime(updateNode.InnerText.Trim());
+
+			var links = new List<DownloadInfo>();
+			foreach (var link in htmlDoc.DocumentNode.SelectNodes("//*[@id='posts']/li[1]/div[2]/div[2]/div/div/div/blockquote//a[@href]"))
+			{
+				if (Uri.IsWellFormedUriString(link.Attributes["href"].Value, UriKind.Absolute))
+				{
+					var hostUrl = link.Attributes["href"].Value;
+					if (hostUrl != null)
+					{
+						var dInfo = www.GetDirectDownloadURLFromHostSite(hostUrl);
+
+						if (dInfo.KnownHost)
+						{
+							if (link.InnerText != null)
+								dInfo.Name = link.InnerText;
+
+							links.Add(dInfo);
+						}
+					}
+				}
+				
+			}
+
+			var dlg = new frmSelectDownload {Links = links};
+			if (dlg.ShowDialog() == DialogResult.OK)
+			{
+				
+
+				dlg.InvalidateView();
+			}
+
+
+
 			return true;
 
 			// more infos could be parsed here (like: short description, Tab content (overview, installation, ...), comments, ...)
 		}
 
-        /// <summary>
-        /// Downloads the mod.
-        /// </summary>
-        /// <param name="modInfo">The infos of the mod. Must have at least ModURL and LocalPath</param>
-        /// <param name="downloadProgressHandler">Callback function for download progress.</param>
-        /// <returns>True if the mod was downloaded.</returns>
-        public bool DownloadMod(ref ModInfo modInfo, DownloadProgressChangedEventHandler downloadProgressHandler = null)
-        {
-            if (modInfo == null)
-                return false;
+		/// <summary>
+		/// Downloads the mod.
+		/// </summary>
+		/// <param name="modInfo">The infos of the mod. Must have at least ModURL and LocalPath</param>
+		/// <param name="downloadProgressHandler">Callback function for download progress.</param>
+		/// <returns>True if the mod was downloaded.</returns>
+		public bool DownloadMod(ref ModInfo modInfo, DownloadProgressChangedEventHandler downloadProgressHandler = null)
+		{
+			if (modInfo == null)
+				return false;
 
-            string downloadUrl = GetDownloadUrl(modInfo);
+			string downloadUrl = GetDownloadUrl(modInfo);
 			modInfo.LocalPath = Path.Combine(OptionsController.DownloadPath, GetDownloadName(downloadUrl));
-            www.DownloadFile(downloadUrl, modInfo.LocalPath, downloadProgressHandler);
+			www.DownloadFile(downloadUrl, modInfo.LocalPath, downloadProgressHandler);
 
-            return File.Exists(modInfo.LocalPath);
-        }
+			return File.Exists(modInfo.LocalPath);
+		}
 
-        private DateTime GetDateTime(string dateString)
-        {
-	        var dateParts = dateString.Split(new string[] {"-"}, StringSplitOptions.None);
-			return new DateTime(Convert.ToInt32(dateParts[0]), Convert.ToInt32(dateParts[2]), Convert.ToInt32(dateParts[1]));
+		private static DateTime GetDateTime(string dateString)
+		{
+			dateString = HtmlEntity.DeEntitize(dateString);
 
-			//int index = dateString.IndexOf(",") + 2;
-			//dateString = dateString.Substring(index);
-			//index = dateString.IndexOf(" ") + 1;
-			//index = dateString.IndexOf(" ", index) + 1;
-			//index = dateString.IndexOf(" ", index) + 1;
-			//index = dateString.IndexOf(" ", index);
-			//string date = dateString.Substring(0, index);
-			//index = dateString.IndexOf("(");
-			//string tempTimeZone = dateString.Substring(index).Substring(0);
-			//index = tempTimeZone.IndexOf("-");
-			//if (index < 0)
-			//	index = tempTimeZone.IndexOf("+") + 1;
-			//else
-			//	index += 1;
-			//string timeZone = tempTimeZone.Substring(0, index);
-			//tempTimeZone = tempTimeZone.Substring(index);
-			//index = tempTimeZone.IndexOf(":");
-			//if (index < 2)
-			//	timeZone += "0" + tempTimeZone;
-			//else
-			//	timeZone += tempTimeZone;
+			DateTime date;
 
-			//TimeZoneInfo curseZone = null;
-			//foreach (TimeZoneInfo zone in TimeZoneInfo.GetSystemTimeZones())
-			//{
-			//	if (!zone.DisplayName.StartsWith(timeZone))
-			//		continue;
+			// Standard creation date and edit date longer than 2 days
+			if (DateTime.TryParse(new Regex(@"(st|rd|th|nd|at)").Replace(dateString, ""), out date))
+				return date;
 
-			//	curseZone = zone;
-			//	break;
-			//}
+			// Prepare an edited date for parsing
+			dateString = dateString.Substring(dateString.IndexOf(';') + 1);
+			// TODO if forums use localization these strings need localization
+			if (dateString.Contains("Today"))
+			{
+				date = DateTime.Now;
+				dateString = dateString.Replace("Today at", "").Trim();
+				var time = Convert.ToDateTime(dateString);
+				return new DateTime(date.Year, date.Month, date.Day, time.Hour, time.Minute, time.Second);
+			}
 
-			//DateTime myDate = DateTime.MinValue;
-			//if (DateTime.TryParse(date, out myDate) && curseZone != null)
-			//	return TimeZoneInfo.ConvertTime(myDate, curseZone, TimeZoneInfo.Local);
-			//else
-			//	return DateTime.MinValue;
-        }
+			if (dateString.Contains("Yesterday"))
+			{
+				date = DateTime.Now.AddDays(-1);
+				dateString = dateString.Replace("Yesterday at", "").Trim();
+				var time = Convert.ToDateTime(dateString);
+				return new DateTime(date.Year, date.Month, date.Day, time.Hour, time.Minute, time.Second);
+			}
 
-        private string GetDownloadUrl(ModInfo modInfo)
-        {
-	        string url;
-	        if (!modInfo.ModURL.Contains("releases"))
-	        {
+			// If all else fails just make the date today
+			return DateTime.Now;
+		}
+
+		private string GetDownloadUrl(ModInfo modInfo)
+		{
+			string url;
+			if (!modInfo.ModURL.Contains("releases"))
+			{
 				var parts = GetUrlParts(modInfo.ModURL);
 				url = parts[0] + "://" + parts[1] + "/" + parts[2] + "/" + parts[3] + "/releases";
-	        }
-	        else
-	        {
-		        url = modInfo.ModURL;
-	        }
+			}
+			else
+			{
+				url = modInfo.ModURL;
+			}
 
 			return url;
-        }
+		}
 
 		private string GetDownloadName(string url)
 		{
@@ -217,7 +235,7 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 		private List<string> GetUrlParts(string url)
 		{
 			// Split the url into parts
-			var parts = new List<string> {new Uri(url).Scheme, new Uri(url).Authority};
+			var parts = new List<string> { new Uri(url).Scheme, new Uri(url).Authority };
 			parts.AddRange(new Uri(url).Segments);
 
 			for (int index = 0; index < parts.Count; index++)
@@ -234,5 +252,5 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 
 			return parts;
 		}
-    }
+	}
 }
