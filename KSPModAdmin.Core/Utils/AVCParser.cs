@@ -42,6 +42,8 @@ namespace KSPModAdmin.Core.Utils
             avcInfo.KspVersion = GetVersion(jObject["KSP_VERSION"] as JToken, 3);
             avcInfo.KspVersionMin = GetVersion(jObject["KSP_VERSION_MIN"] as JToken, 3);
             avcInfo.KspVersionMax = GetVersion(jObject["KSP_VERSION_MAX"] as JToken, 3);
+
+            return avcInfo;
         }
 
         private static string GetVersion(JToken jToken, int depth = 4)
