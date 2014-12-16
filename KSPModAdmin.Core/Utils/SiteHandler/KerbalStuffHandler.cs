@@ -73,7 +73,7 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 	            Downloads = kerbalMod.Downloads.ToString(),
 	            Author = kerbalMod.Author,
 	            Version = kerbalMod.Versions.First().FriendlyVersion.ToString(),
-				GameVersion = kerbalMod.DefaultVersionId.ToString()
+				KSPVersion = kerbalMod.DefaultVersionId.ToString()
             };
 			//modInfo.CreationDate = kerbalMod.Versions.Last().Date;	// TODO when KS API supports dates from versions
 

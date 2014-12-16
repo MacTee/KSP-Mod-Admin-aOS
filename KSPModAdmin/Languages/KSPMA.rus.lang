@@ -595,4 +595,12 @@
   <String Name="MSG_NO_DESTINATION" Value="(T)No destination"/>
   <String Name="MSG_FILE_NOT_FOUND_0" Value="(T)File not found &quot;{0}&quot;."/>
   <String Name="MSG_ERROR_WHILE_READING_0" Value="(T)Error while reading &quot;{0}&quot;."/>
+
+  <String Name="MSG_AVC_VERSIONFILE_FOUND" Value="(T)AVC Plugin version file found."/>
+  <String Name="MSG_NO_AVC_VERSIONFILE_FOUND" Value="(T)No AVC Plugin version file found!"/>
+  <String Name="MSG_READING_AVC_VERSIONFILE_INFO" Value="(T)Reading AVC Plugin version file..."/>
+  <String Name="MSG_IMPORTING_AVC_VERSIONFILE_INFO_0" Value="(T)Importing AVC Plugin version file information for &quot;{0}&quot;..."/>
+  <String Name="MSG_NO_COMPATIBLE_SITEHANDLER_FOUND_0" Value="(T)No compatible SiteHandler found for &quot;{0}&quot;! Mod update support not available for this mod."/>
+  <String Name="MSG_COMPATIBLE_SITEHANDLER_0_FOUND_1" Value="(T)Compatible SiteHandler ({0}) found for &quot;{1}&quot;! Mod update support active!"/>
+
 </Language>

@@ -185,7 +185,7 @@ namespace KSPModAdmin.Core.Utils
             modInfo.ChangeDateAsDateTime = epoch.AddSeconds(Convert.ToDouble(updateNode.Attributes["data-epoch"].Value));
 			modInfo.Downloads = downloadNode.InnerHtml.Split(" ")[0];
             modInfo.Author = authorNode.InnerHtml;
-	        modInfo.GameVersion = gameVersionNode.InnerHtml.Split(" ")[1];
+	        modInfo.KSPVersion = gameVersionNode.InnerHtml.Split(" ")[1];
             return true;
             
             // more infos could be parsed here (like: short description, Tab content (overview, installation, ...), comments, ...)

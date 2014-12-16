@@ -397,7 +397,7 @@ namespace KSPModAdmin.Core.Views
                 ModVersionControl = zipRoot.SiteHandlerName;
                 ModID = zipRoot.ProductID;
                 ModVersion = zipRoot.Version;
-                KSPVersion = zipRoot.GameVersion;
+                KSPVersion = zipRoot.KSPVersion;
                 ModAuthor = zipRoot.Author;
                 ModCreationDate = zipRoot.CreationDate;
                 ModChangeDate = zipRoot.ChangeDate;

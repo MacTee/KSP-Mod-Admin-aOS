@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using KSPModAdmin.Core.Utils;
 
 namespace KSPModAdmin.Core.Model
 {
@@ -10,9 +9,14 @@ namespace KSPModAdmin.Core.Model
 
 		public string LocalPath { get; set; }
 
-		public string SiteHandlerName { get; set; }
+        public string SiteHandlerName { get; set; }
 
-		public string ModURL { get; set; }
+	    public bool HasSiteHandler
+	    {
+	        get { return (SiteHandlerName != Messages.NONE && !string.IsNullOrEmpty(SiteHandlerName)); }
+	    }
+
+	    public string ModURL { get; set; }
 
 		public string AdditionalURL { get; set; }
 
@@ -20,7 +24,7 @@ namespace KSPModAdmin.Core.Model
 
 		public string Version { get; set; }
 
-		public String GameVersion { get; set; }
+		public String KSPVersion { get; set; }
 
 		public DateTime DownloadDateAsDateTime
 		{
@@ -149,6 +153,9 @@ namespace KSPModAdmin.Core.Model
 			Author = string.Empty;
 
 			ProductID = string.Empty;
+
+            Version = string.Empty;
+            KSPVersion = string.Empty;
 		}
 
 		public ModInfo(string localPath, string modURL = null, string siteHandlerName = null, string additionalURL = null)
@@ -175,6 +182,9 @@ namespace KSPModAdmin.Core.Model
 			Author = string.Empty;
 
 			ProductID = (string.IsNullOrEmpty(ProductID)) ? string.Empty : ProductID;
+
+            Version = string.Empty;
+            KSPVersion = string.Empty;
 		}
-	}
+    }
 }

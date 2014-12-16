@@ -51,7 +51,7 @@ namespace KSPModAdmin.Core.Views
                 modInfo.ChangeDate = ChangeDate;
                 modInfo.Downloads = Downloads;
                 modInfo.Name = ModName;
-                modInfo.GameVersion = KSPVersion;
+                modInfo.KSPVersion = KSPVersion;
                 modInfo.ProductID = ProductID;
                 modInfo.Rating = Rating;
                 modInfo.SiteHandlerName = SiteHandlerName;
@@ -75,7 +75,7 @@ namespace KSPModAdmin.Core.Views
                     SiteHandlerName = value.SiteHandlerName;
                     ModURL = value.ModURL;
                     AdditionalURL = value.AdditionalURL;
-                    KSPVersion = value.GameVersion;
+                    KSPVersion = value.KSPVersion;
                 }
                 else
                 {

@@ -99,7 +99,8 @@ namespace KSPModAdmin.Core.Model
                 modInfo.SiteHandlerName = SiteHandlerName;
                 modInfo.ModURL = ModURL;
                 modInfo.AdditionalURL = AdditionalURL;
-	            modInfo.Version = Version;
+                modInfo.Version = Version;
+                modInfo.KSPVersion = KSPVersion;
                 return modInfo;
             }
             set
@@ -120,6 +121,7 @@ namespace KSPModAdmin.Core.Model
                     ModURL = value.ModURL;
                     AdditionalURL = value.AdditionalURL;
                     Version = value.Version;
+                    KSPVersion = value.KSPVersion;
                 }
             }
         }
@@ -137,7 +139,7 @@ namespace KSPModAdmin.Core.Model
 		/// <summary>
 		/// Version of the game this mod is for
 		/// </summary>
-		public string GameVersion { get; set; }
+		public string KSPVersion { get; set; }
 
         /// <summary>
         /// The author of the mod.

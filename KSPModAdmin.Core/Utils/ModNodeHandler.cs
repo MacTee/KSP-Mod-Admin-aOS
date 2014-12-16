@@ -14,6 +14,7 @@ namespace KSPModAdmin.Core.Utils
         #region Constants
 
         const string TYPE = "type = ";
+        const string AVC_VERSION_FILE_EXTENSION = ".version";
 
         #endregion
 
@@ -38,6 +39,36 @@ namespace KSPModAdmin.Core.Utils
         {
             if (File.Exists(modInfo.LocalPath))
             {
+                // Get AVC version file informations.
+                AVCInfo avcInfo = TryReadAVCVersionFile(modInfo.LocalPath);
+                if (avcInfo != null)
+                {
+                    Messenger.AddDebug(string.Format(Messages.MSG_IMPORTING_AVC_VERSIONFILE_INFO_0, modInfo.Name));
+
+                    string fileName = Path.GetFileNameWithoutExtension(modInfo.LocalPath);
+                    if (!string.IsNullOrEmpty(avcInfo.Name) && (string.IsNullOrEmpty(modInfo.Name) || modInfo.Name == fileName))
+                        modInfo.Name = avcInfo.Name;
+                    if (!string.IsNullOrEmpty(avcInfo.Download) && (string.IsNullOrEmpty(modInfo.ModURL)))
+                        modInfo.ModURL = avcInfo.Download;
+                    if (!string.IsNullOrEmpty(avcInfo.Version) && (string.IsNullOrEmpty(modInfo.Version)))
+                        modInfo.Version = avcInfo.Version;
+                    if (!string.IsNullOrEmpty(avcInfo.KspVersion) && (string.IsNullOrEmpty(modInfo.KSPVersion)))
+                        modInfo.KSPVersion = avcInfo.KspVersion;
+
+                    ISiteHandler siteHandler = SiteHandlerManager.GetSiteHandlerByURL(modInfo.ModURL);
+                    if (siteHandler != null && !modInfo.HasSiteHandler)
+                    {
+                        modInfo.SiteHandlerName = siteHandler.Name;
+                        Messenger.AddDebug(string.Format(Messages.MSG_COMPATIBLE_SITEHANDLER_0_FOUND_1, siteHandler.Name, modInfo.Name));
+                    }
+                    else
+                        Messenger.AddDebug(string.Format(Messages.MSG_NO_COMPATIBLE_SITEHANDLER_FOUND_0, modInfo.Name));
+                }
+
+                // Still no name? Use filename then
+                if (string.IsNullOrEmpty(modInfo.Name))
+                    modInfo.Name = Path.GetFileNameWithoutExtension(modInfo.LocalPath);
+
                 ModNode node = new ModNode(modInfo);
                 using (IArchive archive = ArchiveFactory.Open(modInfo.LocalPath))
                 {
@@ -49,13 +80,13 @@ namespace KSPModAdmin.Core.Utils
                     // create a TreeNode for every archive entry
                     foreach (IArchiveEntry entry in archive.Entries)
                         CreateModNode(entry.FilePath, node, seperator, entry.IsDirectory, silent);
-
                 }
 
                 // Find installation root node (first folder that contains (Parts or Plugins or ...)
                 if (!FindAndSetDestinationPaths(node) && !silent)
                     Messenger.AddInfo(string.Format(Messages.MSG_ROOT_NOT_FOUND_0, node.Text));
 
+                
                 SetToolTips(node);
                 CheckNodesWithDestination(node);
 
@@ -68,6 +99,57 @@ namespace KSPModAdmin.Core.Utils
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// Searches the mod archive for a AVC Plugin version file and reads it.
+        /// </summary>
+        /// <param name="fullpath">The path to the mod archive.</param>
+        /// <returns>The AVCInfos from the AVC Plugin version file or null if no such file was found.</returns>
+        private static AVCInfo TryReadAVCVersionFile(string fullpath)
+        {
+            string fileContent = string.Empty;
+            try
+            {
+                if (File.Exists(fullpath))
+                {
+                    using (IArchive archiv = ArchiveFactory.Open(fullpath))
+                    {
+                        foreach (IArchiveEntry entry in archiv.Entries)
+                        {
+                            if (entry.IsDirectory)
+                                continue;
+
+                            if (entry.FilePath.EndsWith(AVC_VERSION_FILE_EXTENSION, StringComparison.CurrentCultureIgnoreCase))
+                            {
+                                Messenger.AddDebug(string.Format(Messages.MSG_AVC_VERSIONFILE_FOUND));
+                                using (MemoryStream memStream = new MemoryStream())
+                                {
+                                    entry.WriteTo(memStream);
+                                    memStream.Position = 0;
+                                    StreamReader reader = new StreamReader(memStream);
+                                    fileContent = reader.ReadToEnd();
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (string.IsNullOrEmpty(fileContent))
+                            Messenger.AddDebug(string.Format(Messages.MSG_NO_AVC_VERSIONFILE_FOUND));
+                    }
+                }
+                else
+                    Messenger.AddInfo(string.Format(Messages.MSG_FILE_NOT_FOUND_0, fullpath));
+            }
+            catch (Exception ex)
+            {
+                Messenger.AddError(string.Format(Messages.MSG_ERROR_WHILE_READING_0, fullpath), ex);
+            }
+
+            if (string.IsNullOrEmpty(fileContent))
+                return null;
+            else
+                return AVCParser.ReadFromString(fileContent);
         }
 
         /// <summary>

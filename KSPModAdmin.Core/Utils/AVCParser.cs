@@ -18,8 +18,9 @@ namespace KSPModAdmin.Core.Utils
             return ReadFromString(File.ReadAllText(path));
         }
 
-        private static AVCInfo ReadFromString(string jsonString)
+        public static AVCInfo ReadFromString(string jsonString)
         {
+            Messenger.AddDebug(string.Format(Messages.MSG_READING_AVC_VERSIONFILE_INFO));
             AVCInfo avcInfo = new AVCInfo();
             JObject jObject = JObject.Parse(jsonString);
             avcInfo.Name = GetString(jObject["NAME"]);

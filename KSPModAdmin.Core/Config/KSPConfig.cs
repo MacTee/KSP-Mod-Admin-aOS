@@ -133,7 +133,7 @@ namespace KSPModAdmin.Core.Config
                 else if (att.Name == Constants.VERSION)
                     node.Version = att.Value;
                 else if (att.Name == Constants.GAMEVERSION)
-                    node.GameVersion = att.Value;
+                    node.KSPVersion = att.Value;
                 else if (att.Name == Constants.NOTE)
                     node.Note = att.Value;
                 else if (att.Name == Constants.PRODUCTID)
@@ -264,7 +264,7 @@ namespace KSPModAdmin.Core.Config
             if (child.Version != string.Empty)
                 modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.VERSION, child.Version));
 			if (child.Version != string.Empty)
-                modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.GAMEVERSION, child.GameVersion));
+                modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.GAMEVERSION, child.KSPVersion));
             if (child.Note != string.Empty)
                 modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.NOTE, child.Note));
             if (child.ProductID != string.Empty)
