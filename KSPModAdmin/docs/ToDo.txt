@@ -22,12 +22,14 @@
   -> MultiSelect 
      -> Do all "highlighted mods" buttons work.
   -> Double click -> Displays the content of the selected file.
+- Simple AVC Plugin version file support implemented. 
+  If KSP MA finds a AVC version file in a mod archive it tries to find a compatible SiteHandler for the DOWNLOAD link provided.
+
 
 
 //// TODO
 /////////////////////
 
-- support for AVC .version files
 
 - ReadMe
 
