@@ -142,16 +142,16 @@ namespace KSPModAdmin.Core.Utils
                 }
                 else
                     Messenger.AddInfo(string.Format(Messages.MSG_FILE_NOT_FOUND_0, fullpath));
+
+                if (!string.IsNullOrEmpty(fileContent))
+                    return AVCParser.ReadFromString(fileContent);
             }
             catch (Exception ex)
             {
-                Messenger.AddError(string.Format(Messages.MSG_ERROR_WHILE_READING_0, fullpath), ex);
+                Messenger.AddError(Messages.MSG_ERROR_WHILE_READING_AVC_VERION_FILE, ex);
             }
 
-            if (string.IsNullOrEmpty(fileContent))
-                return null;
-            else
-                return AVCParser.ReadFromString(fileContent);
+            return null;
         }
 
         /// <summary>

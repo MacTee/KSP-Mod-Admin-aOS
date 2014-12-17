@@ -1,6 +1,9 @@
 ﻿//// BUGS
 /////////////////////
 - ModName changes after Mod update.
+- KerbalStuff KSP Version is wrong.
+- No question for Download folder if it is not set (atleast during add via url)
+- AVC Plugin - Problem when a mod archive contains multiple version files. (Sample: Mission Controller 2 on KerbalStuff)
 
 
 //// To Test
@@ -26,10 +29,8 @@
   If KSP MA finds a AVC version file in a mod archive it tries to find a compatible SiteHandler for the DOWNLOAD link provided.
 
 
-
 //// TODO
 /////////////////////
-
 
 - ReadMe
 
@@ -67,12 +68,7 @@
 - Implementation of a waffle iron !!! =)
 
 
-
 //// SUGGESTIONS
 /////////////////////
 
 - Compress for zipping.
-
-
-
-

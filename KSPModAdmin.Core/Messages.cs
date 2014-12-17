@@ -1839,5 +1839,16 @@ namespace KSPModAdmin.Core
             }
         }
         private const string DEFAULT_MSG_COMPATIBLE_SITEHANDLER_0_FOUND_1 = "Compatible SiteHandler ({0}) found for \"{1}\"! Mod update support active!";
+    
+        public static string MSG_ERROR_WHILE_READING_AVC_VERION_FILE
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_ERROR_WHILE_READING_AVC_VERION_FILE"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_ERROR_WHILE_READING_AVC_VERION_FILE).Replace("^", Environment.NewLine);
+            }
+        }
+
+        private const string DEFAULT_MSG_ERROR_WHILE_READING_AVC_VERION_FILE = "Error while reading AVC Plugin version file!";
     }
 }

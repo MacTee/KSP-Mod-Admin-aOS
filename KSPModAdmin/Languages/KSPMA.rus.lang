@@ -602,5 +602,6 @@
   <String Name="MSG_IMPORTING_AVC_VERSIONFILE_INFO_0" Value="(T)Importing AVC Plugin version file information for &quot;{0}&quot;..."/>
   <String Name="MSG_NO_COMPATIBLE_SITEHANDLER_FOUND_0" Value="(T)No compatible SiteHandler found for &quot;{0}&quot;! Mod update support not available for this mod."/>
   <String Name="MSG_COMPATIBLE_SITEHANDLER_0_FOUND_1" Value="(T)Compatible SiteHandler ({0}) found for &quot;{1}&quot;! Mod update support active!"/>
+  <String Name="MSG_ERROR_WHILE_READING_AVC_VERION_FILE" Value="(T)Error while reading AVC Plugin version file!"/>
 
 </Language>
