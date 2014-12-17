@@ -138,6 +138,7 @@ namespace KSPModAdmin.Core
         public const string RATING = "Rating";
         public const string DOWNLOADS = "Downloads";
         public const string MODURL = "ModURL";
+        public const string AVCURL = "AvcURL";
         public const string ADDITIONALURL = "AdditionalURL";
         public const string FORUMURL = "ForumURL";
         public const string CURSEFORGEURL = "CurseForgeURL";

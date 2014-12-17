@@ -50,6 +50,8 @@ namespace KSPModAdmin.Core.Utils
                         modInfo.Name = avcInfo.Name;
                     if (!string.IsNullOrEmpty(avcInfo.Download) && (string.IsNullOrEmpty(modInfo.ModURL)))
                         modInfo.ModURL = avcInfo.Download;
+                    if (!string.IsNullOrEmpty(avcInfo.Url) && (string.IsNullOrEmpty(modInfo.AvcURL)))
+                        modInfo.AvcURL = avcInfo.Url;
                     if (!string.IsNullOrEmpty(avcInfo.Version) && (string.IsNullOrEmpty(modInfo.Version)))
                         modInfo.Version = avcInfo.Version;
                     if (!string.IsNullOrEmpty(avcInfo.KspVersion) && (string.IsNullOrEmpty(modInfo.KSPVersion)))

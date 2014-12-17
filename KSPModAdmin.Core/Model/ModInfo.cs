@@ -16,7 +16,9 @@ namespace KSPModAdmin.Core.Model
 	        get { return (SiteHandlerName != Messages.NONE && !string.IsNullOrEmpty(SiteHandlerName)); }
 	    }
 
-	    public string ModURL { get; set; }
+        public string ModURL { get; set; }
+
+        public string AvcURL { get; set; }
 
 		public string AdditionalURL { get; set; }
 
@@ -142,6 +144,7 @@ namespace KSPModAdmin.Core.Model
 
 			ModURL = string.Empty;
 			AdditionalURL = string.Empty;
+		    AvcURL = string.Empty;
 
 			DownloadDate = DateTime.Now.ToString();
 			CreationDate = string.Empty;
@@ -153,35 +156,6 @@ namespace KSPModAdmin.Core.Model
 			Author = string.Empty;
 
 			ProductID = string.Empty;
-
-            Version = string.Empty;
-            KSPVersion = string.Empty;
-		}
-
-		public ModInfo(string localPath, string modURL = null, string siteHandlerName = null, string additionalURL = null)
-		{
-			Name = Path.GetFileNameWithoutExtension(localPath);
-
-			LocalPath = localPath;
-
-			if (string.IsNullOrEmpty(siteHandlerName))
-				siteHandlerName = Messages.NONE;
-			else
-				SiteHandlerName = siteHandlerName;
-
-			ModURL = (string.IsNullOrEmpty(modURL)) ? string.Empty : modURL;
-			AdditionalURL = (string.IsNullOrEmpty(additionalURL)) ? string.Empty : additionalURL;
-
-			DownloadDate = DateTime.Now.ToString();
-			CreationDate = string.Empty;
-
-			Rating = "0 (0)";
-
-			Downloads = "0";
-
-			Author = string.Empty;
-
-			ProductID = (string.IsNullOrEmpty(ProductID)) ? string.Empty : ProductID;
 
             Version = string.Empty;
             KSPVersion = string.Empty;
