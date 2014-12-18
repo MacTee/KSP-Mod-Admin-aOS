@@ -42,30 +42,7 @@ namespace KSPModAdmin.Core.Utils
                 // Get AVC version file informations.
                 AVCInfo avcInfo = TryReadAVCVersionFile(modInfo.LocalPath);
                 if (avcInfo != null)
-                {
-                    Messenger.AddDebug(string.Format(Messages.MSG_IMPORTING_AVC_VERSIONFILE_INFO_0, modInfo.Name));
-
-                    string fileName = Path.GetFileNameWithoutExtension(modInfo.LocalPath);
-                    if (!string.IsNullOrEmpty(avcInfo.Name) && (string.IsNullOrEmpty(modInfo.Name) || modInfo.Name == fileName))
-                        modInfo.Name = avcInfo.Name;
-                    if (!string.IsNullOrEmpty(avcInfo.Download) && (string.IsNullOrEmpty(modInfo.ModURL)))
-                        modInfo.ModURL = avcInfo.Download;
-                    if (!string.IsNullOrEmpty(avcInfo.Url) && (string.IsNullOrEmpty(modInfo.AvcURL)))
-                        modInfo.AvcURL = avcInfo.Url;
-                    if (!string.IsNullOrEmpty(avcInfo.Version) && (string.IsNullOrEmpty(modInfo.Version)))
-                        modInfo.Version = avcInfo.Version;
-                    if (!string.IsNullOrEmpty(avcInfo.KspVersion) && (string.IsNullOrEmpty(modInfo.KSPVersion)))
-                        modInfo.KSPVersion = avcInfo.KspVersion;
-
-                    ISiteHandler siteHandler = SiteHandlerManager.GetSiteHandlerByURL(modInfo.ModURL);
-                    if (siteHandler != null && !modInfo.HasSiteHandler)
-                    {
-                        modInfo.SiteHandlerName = siteHandler.Name;
-                        Messenger.AddDebug(string.Format(Messages.MSG_COMPATIBLE_SITEHANDLER_0_FOUND_1, siteHandler.Name, modInfo.Name));
-                    }
-                    else
-                        Messenger.AddDebug(string.Format(Messages.MSG_NO_COMPATIBLE_SITEHANDLER_FOUND_0, modInfo.Name));
-                }
+                    ImportAvcInfo(avcInfo, ref modInfo);
 
                 // Still no name? Use filename then
                 if (string.IsNullOrEmpty(modInfo.Name))
@@ -152,6 +129,48 @@ namespace KSPModAdmin.Core.Utils
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// Copies Infos to the ModInfo.
+        /// Try to find a compatible SiteHandler for the provided urls (like Download, URL, ChangeLogUrl, GitHub)
+        /// </summary>
+        /// <param name="avcInfo"></param>
+        /// <param name="modInfo"></param>
+        private static void ImportAvcInfo(AVCInfo avcInfo, ref ModInfo modInfo)
+        {
+            Messenger.AddDebug(string.Format(Messages.MSG_IMPORTING_AVC_VERSIONFILE_INFO_0, modInfo.Name));
+
+            string fileName = Path.GetFileNameWithoutExtension(modInfo.LocalPath);
+            if (!string.IsNullOrEmpty(avcInfo.Name) && (string.IsNullOrEmpty(modInfo.Name) || modInfo.Name == fileName))
+                modInfo.Name = avcInfo.Name;
+            if (!string.IsNullOrEmpty(avcInfo.Version) && (string.IsNullOrEmpty(modInfo.Version)))
+                modInfo.Version = avcInfo.Version;
+            if (!string.IsNullOrEmpty(avcInfo.KspVersion) && (string.IsNullOrEmpty(modInfo.KSPVersion)))
+                modInfo.KSPVersion = avcInfo.KspVersion;
+
+            if (!string.IsNullOrEmpty(avcInfo.Url) && (string.IsNullOrEmpty(modInfo.AvcURL)))
+            {
+                //AVCInfo newAvcInfo = AVCParser.ReadFromWeb(avcInfo.Url);
+                //if (newAvcInfo != null)
+                //{
+                //    // TODO:
+                    modInfo.AvcURL = avcInfo.Url;
+                //}
+            }
+            if (!string.IsNullOrEmpty(avcInfo.Download) && (string.IsNullOrEmpty(modInfo.ModURL)))
+            {
+                modInfo.ModURL = avcInfo.Download;
+            }
+
+            ISiteHandler siteHandler = SiteHandlerManager.GetSiteHandlerByURL(modInfo.ModURL);
+            if (siteHandler != null && !modInfo.HasSiteHandler)
+            {
+                modInfo.SiteHandlerName = siteHandler.Name;
+                Messenger.AddDebug(string.Format(Messages.MSG_COMPATIBLE_SITEHANDLER_0_FOUND_1, siteHandler.Name, modInfo.Name));
+            }
+            else
+                Messenger.AddDebug(string.Format(Messages.MSG_NO_COMPATIBLE_SITEHANDLER_FOUND_0, modInfo.Name));
         }
 
         /// <summary>
