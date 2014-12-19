@@ -601,5 +601,23 @@
   <String Name="MSG_ERROR_PLUGIN_LOADING_TABVIEWS_0" Value="Plugin loading error: TabView &quot;{0}&quot; already exists!"/>
   <String Name="MSG_ERROR_PLUGIN_LOADING_OPTIONVIEWS_0" Value="Plugin loading error: Option TabView &quot;{0}&quot; already exists!"/>
 
-  
+  <Control Name="tsmiCmsRefreshCheckedStateForHighlightedMods" Value="Refresh checked state for highlighted mods"/>
+  <Control Name="tsmiCmsCheckHighlightedModsForUpdates" Value="Check highlighted mods for updates"/>
+  <Control Name="tsmiUpdateHiglightedMods" Value="Update highlighted mods"/>
+  <Control Name="tsmiCmsProceedHighlightedMods" Value="Proceed highlighted mods"/>
+  <Control Name="tsmiCmsRemoveHighlightedMods" Value="Remove highlighted mods"/>
+  <String Name="MSG_NOT_AVAILABLE" Value="Not available"/>
+  <String Name="MSG_NO_DESTINATION" Value="No destination"/>
+  <String Name="MSG_FILE_NOT_FOUND_0" Value="File not found &quot;{0}&quot;."/>
+  <String Name="MSG_ERROR_WHILE_READING_0" Value="Error while reading &quot;{0}&quot;."/>
+
+  <String Name="MSG_AVC_VERSIONFILE_FOUND" Value="AVC Plugin version file found."/>
+  <String Name="MSG_NO_AVC_VERSIONFILE_FOUND" Value="No AVC Plugin version file found!"/>
+  <String Name="MSG_READING_AVC_VERSIONFILE_INFO" Value="Reading AVC Plugin version file..."/>
+  <String Name="MSG_IMPORTING_AVC_VERSIONFILE_INFO_0" Value="Importing AVC Plugin version file information for &quot;{0}&quot;..."/>
+  <String Name="MSG_NO_COMPATIBLE_SITEHANDLER_FOUND_0" Value="No compatible SiteHandler found for &quot;{0}&quot;! Mod update support not available for this mod."/>
+  <String Name="MSG_COMPATIBLE_SITEHANDLER_0_FOUND_1" Value="Compatible SiteHandler ({0}) found for &quot;{1}&quot;! Mod update support active!"/>
+  <String Name="MSG_ERROR_WHILE_READING_AVC_VERION_FILE" Value="Error while reading AVC Plugin version file!"/>
+  <String Name="MSG_ERROR_DOWNLOADING_NEW_AVC_VERION_FILE_FAILED" Value="Downloading of new AVC Plugin version file failded!"/>
+
 </Language>

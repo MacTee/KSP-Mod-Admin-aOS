@@ -95,20 +95,25 @@
             this.tsmiCmsResetDestination = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCmsRedetectDestination = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCmsRefreschCheckedState = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCmsRefreshCheckedStateForHighlightedMods = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiCmsEditModInfos = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCmsCopyModInfos = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiCmsUpdatecheckMod = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCmsCheckHighlightedModsForUpdates = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiUpdateMod = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiUpdateHiglightedMods = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCmsVisitVersionControlSite = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCmsVisitAdditionalLink = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiCmsSolveConflicts = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator19 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiCmsProceedMod = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCmsProceedHighlightedMods = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiCmsRemoveMod = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCmsRemoveHighlightedMods = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiCmsCreateZip = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -242,25 +247,30 @@
             this.cmsModSelectionOneMod.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiCmsDestination,
             this.tsmiCmsRefreschCheckedState,
+            this.tsmiCmsRefreshCheckedStateForHighlightedMods,
             this.toolStripSeparator18,
             this.tsmiCmsEditModInfos,
             this.tsmiCmsCopyModInfos,
             this.toolStripSeparator17,
             this.tsmiCmsUpdatecheckMod,
+            this.tsmiCmsCheckHighlightedModsForUpdates,
             this.tsmiUpdateMod,
+            this.tsmiUpdateHiglightedMods,
             this.tsmiCmsVisitVersionControlSite,
             this.tsmiCmsVisitAdditionalLink,
             this.toolStripSeparator10,
             this.tsmiCmsSolveConflicts,
             this.toolStripSeparator19,
             this.tsmiCmsProceedMod,
+            this.tsmiCmsProceedHighlightedMods,
             this.toolStripSeparator13,
             this.tsmiCmsRemoveMod,
+            this.tsmiCmsRemoveHighlightedMods,
             this.toolStripSeparator20,
             this.tsmiCmsCreateZip});
             this.cmsModSelectionOneMod.Name = "cmsModSelection";
-            this.cmsModSelectionOneMod.Size = new System.Drawing.Size(203, 304);
-            this.cmsModSelectionOneMod.Opening += new System.ComponentModel.CancelEventHandler(this.cmsModSelectionOneMod_Opening);
+            this.cmsModSelectionOneMod.Size = new System.Drawing.Size(304, 414);
+            this.cmsModSelectionOneMod.Opened += new System.EventHandler(this.cmsModSelectionOneMod_Opened);
             // 
             // tsmiCmsDestination
             // 
@@ -270,7 +280,7 @@
             this.tsmiCmsResetDestination,
             this.tsmiCmsRedetectDestination});
             this.tsmiCmsDestination.Name = "tsmiCmsDestination";
-            this.tsmiCmsDestination.Size = new System.Drawing.Size(202, 22);
+            this.tsmiCmsDestination.Size = new System.Drawing.Size(303, 22);
             this.tsmiCmsDestination.Text = "Destination";
             // 
             // tsmiCmsDestinationPath
@@ -308,20 +318,28 @@
             // 
             this.tsmiCmsRefreschCheckedState.Image = global::KSPModAdmin.Core.Properties.Resources.component_replace_checkbox_checked;
             this.tsmiCmsRefreschCheckedState.Name = "tsmiCmsRefreschCheckedState";
-            this.tsmiCmsRefreschCheckedState.Size = new System.Drawing.Size(202, 22);
-            this.tsmiCmsRefreschCheckedState.Text = "Refresch checked state";
+            this.tsmiCmsRefreschCheckedState.Size = new System.Drawing.Size(303, 22);
+            this.tsmiCmsRefreschCheckedState.Text = "Refresh checked state";
             this.tsmiCmsRefreschCheckedState.Click += new System.EventHandler(this.tsbRefreshCheckedState_Click);
+            // 
+            // tsmiCmsRefreshCheckedStateForHighlightedMods
+            // 
+            this.tsmiCmsRefreshCheckedStateForHighlightedMods.Image = global::KSPModAdmin.Core.Properties.Resources.components_replace_checkbox_unchecked;
+            this.tsmiCmsRefreshCheckedStateForHighlightedMods.Name = "tsmiCmsRefreshCheckedStateForHighlightedMods";
+            this.tsmiCmsRefreshCheckedStateForHighlightedMods.Size = new System.Drawing.Size(303, 22);
+            this.tsmiCmsRefreshCheckedStateForHighlightedMods.Text = "Refresh checked state for highlighted mods";
+            this.tsmiCmsRefreshCheckedStateForHighlightedMods.Click += new System.EventHandler(this.tsmiCmsRefreshCheckedStateForHighlightedMods_Click);
             // 
             // toolStripSeparator18
             // 
             this.toolStripSeparator18.Name = "toolStripSeparator18";
-            this.toolStripSeparator18.Size = new System.Drawing.Size(199, 6);
+            this.toolStripSeparator18.Size = new System.Drawing.Size(300, 6);
             // 
             // tsmiCmsEditModInfos
             // 
             this.tsmiCmsEditModInfos.Image = global::KSPModAdmin.Core.Properties.Resources.component_scroll_edit;
             this.tsmiCmsEditModInfos.Name = "tsmiCmsEditModInfos";
-            this.tsmiCmsEditModInfos.Size = new System.Drawing.Size(202, 22);
+            this.tsmiCmsEditModInfos.Size = new System.Drawing.Size(303, 22);
             this.tsmiCmsEditModInfos.Text = "Edit ModInfos";
             this.tsmiCmsEditModInfos.Click += new System.EventHandler(this.tsbEditModInfos_Click);
             // 
@@ -329,37 +347,53 @@
             // 
             this.tsmiCmsCopyModInfos.Image = global::KSPModAdmin.Core.Properties.Resources.component_scroll_scroll;
             this.tsmiCmsCopyModInfos.Name = "tsmiCmsCopyModInfos";
-            this.tsmiCmsCopyModInfos.Size = new System.Drawing.Size(202, 22);
+            this.tsmiCmsCopyModInfos.Size = new System.Drawing.Size(303, 22);
             this.tsmiCmsCopyModInfos.Text = "Copy ModInfos";
             this.tsmiCmsCopyModInfos.Click += new System.EventHandler(this.tsbCopyModInfos_Click);
             // 
             // toolStripSeparator17
             // 
             this.toolStripSeparator17.Name = "toolStripSeparator17";
-            this.toolStripSeparator17.Size = new System.Drawing.Size(199, 6);
+            this.toolStripSeparator17.Size = new System.Drawing.Size(300, 6);
             // 
             // tsmiCmsUpdatecheckMod
             // 
             this.tsmiCmsUpdatecheckMod.Image = global::KSPModAdmin.Core.Properties.Resources.component_replace_earth;
             this.tsmiCmsUpdatecheckMod.Name = "tsmiCmsUpdatecheckMod";
-            this.tsmiCmsUpdatecheckMod.Size = new System.Drawing.Size(202, 22);
-            this.tsmiCmsUpdatecheckMod.Text = "Update check";
+            this.tsmiCmsUpdatecheckMod.Size = new System.Drawing.Size(303, 22);
+            this.tsmiCmsUpdatecheckMod.Text = "Check for update";
             this.tsmiCmsUpdatecheckMod.Click += new System.EventHandler(this.tsbModUpdateCheck_Click);
+            // 
+            // tsmiCmsCheckHighlightedModsForUpdates
+            // 
+            this.tsmiCmsCheckHighlightedModsForUpdates.Image = global::KSPModAdmin.Core.Properties.Resources.components_replace_earth;
+            this.tsmiCmsCheckHighlightedModsForUpdates.Name = "tsmiCmsCheckHighlightedModsForUpdates";
+            this.tsmiCmsCheckHighlightedModsForUpdates.Size = new System.Drawing.Size(303, 22);
+            this.tsmiCmsCheckHighlightedModsForUpdates.Text = "Check highlighted mods for updates";
+            this.tsmiCmsCheckHighlightedModsForUpdates.Click += new System.EventHandler(this.tsmiCmsCheckHighlightedModsForUpdates_Click);
             // 
             // tsmiUpdateMod
             // 
             this.tsmiUpdateMod.Image = global::KSPModAdmin.Core.Properties.Resources.component_replace_clock;
             this.tsmiUpdateMod.Name = "tsmiUpdateMod";
-            this.tsmiUpdateMod.Size = new System.Drawing.Size(202, 22);
+            this.tsmiUpdateMod.Size = new System.Drawing.Size(303, 22);
             this.tsmiUpdateMod.Text = "Update mod";
             this.tsmiUpdateMod.Click += new System.EventHandler(this.tsbUpdateMod_Click);
+            // 
+            // tsmiUpdateHiglightedMods
+            // 
+            this.tsmiUpdateHiglightedMods.Image = global::KSPModAdmin.Core.Properties.Resources.components_replace_clock;
+            this.tsmiUpdateHiglightedMods.Name = "tsmiUpdateHiglightedMods";
+            this.tsmiUpdateHiglightedMods.Size = new System.Drawing.Size(303, 22);
+            this.tsmiUpdateHiglightedMods.Text = "Update highlighted mods";
+            this.tsmiUpdateHiglightedMods.Click += new System.EventHandler(this.tsmiUpdateHiglightedMods_Click);
             // 
             // tsmiCmsVisitVersionControlSite
             // 
             this.tsmiCmsVisitVersionControlSite.Enabled = false;
             this.tsmiCmsVisitVersionControlSite.Image = global::KSPModAdmin.Core.Properties.Resources.component_next_earth;
             this.tsmiCmsVisitVersionControlSite.Name = "tsmiCmsVisitVersionControlSite";
-            this.tsmiCmsVisitVersionControlSite.Size = new System.Drawing.Size(202, 22);
+            this.tsmiCmsVisitVersionControlSite.Size = new System.Drawing.Size(303, 22);
             this.tsmiCmsVisitVersionControlSite.Text = "Visit version control URL";
             this.tsmiCmsVisitVersionControlSite.Visible = false;
             this.tsmiCmsVisitVersionControlSite.Click += new System.EventHandler(this.tssbVisitVersionControlSite_ButtonClick);
@@ -369,7 +403,7 @@
             this.tsmiCmsVisitAdditionalLink.Enabled = false;
             this.tsmiCmsVisitAdditionalLink.Image = global::KSPModAdmin.Core.Properties.Resources.component_next_earth;
             this.tsmiCmsVisitAdditionalLink.Name = "tsmiCmsVisitAdditionalLink";
-            this.tsmiCmsVisitAdditionalLink.Size = new System.Drawing.Size(202, 22);
+            this.tsmiCmsVisitAdditionalLink.Size = new System.Drawing.Size(303, 22);
             this.tsmiCmsVisitAdditionalLink.Text = "Visit additional link URL";
             this.tsmiCmsVisitAdditionalLink.Visible = false;
             this.tsmiCmsVisitAdditionalLink.Click += new System.EventHandler(this.tsmiVisitAdditionalLink_Click);
@@ -377,53 +411,69 @@
             // toolStripSeparator10
             // 
             this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(199, 6);
+            this.toolStripSeparator10.Size = new System.Drawing.Size(300, 6);
             // 
             // tsmiCmsSolveConflicts
             // 
             this.tsmiCmsSolveConflicts.Enabled = false;
             this.tsmiCmsSolveConflicts.Image = global::KSPModAdmin.Core.Properties.Resources.component_warning;
             this.tsmiCmsSolveConflicts.Name = "tsmiCmsSolveConflicts";
-            this.tsmiCmsSolveConflicts.Size = new System.Drawing.Size(202, 22);
+            this.tsmiCmsSolveConflicts.Size = new System.Drawing.Size(303, 22);
             this.tsmiCmsSolveConflicts.Text = "Solve conflicts";
             this.tsmiCmsSolveConflicts.Click += new System.EventHandler(this.tsbSolveConflicts_Click);
             // 
             // toolStripSeparator19
             // 
             this.toolStripSeparator19.Name = "toolStripSeparator19";
-            this.toolStripSeparator19.Size = new System.Drawing.Size(199, 6);
+            this.toolStripSeparator19.Size = new System.Drawing.Size(300, 6);
             // 
             // tsmiCmsProceedMod
             // 
             this.tsmiCmsProceedMod.Image = global::KSPModAdmin.Core.Properties.Resources.component_gearwheel;
             this.tsmiCmsProceedMod.Name = "tsmiCmsProceedMod";
-            this.tsmiCmsProceedMod.Size = new System.Drawing.Size(202, 22);
+            this.tsmiCmsProceedMod.Size = new System.Drawing.Size(303, 22);
             this.tsmiCmsProceedMod.Text = "Proceed mod";
-            this.tsmiCmsProceedMod.Click += new System.EventHandler(this.btnProceedHighlighted_Click);
+            this.tsmiCmsProceedMod.Click += new System.EventHandler(this.btnProceedMod_Click);
+            // 
+            // tsmiCmsProceedHighlightedMods
+            // 
+            this.tsmiCmsProceedHighlightedMods.Image = global::KSPModAdmin.Core.Properties.Resources.components_gearwheel;
+            this.tsmiCmsProceedHighlightedMods.Name = "tsmiCmsProceedHighlightedMods";
+            this.tsmiCmsProceedHighlightedMods.Size = new System.Drawing.Size(303, 22);
+            this.tsmiCmsProceedHighlightedMods.Text = "Proceed highlighted mods";
+            this.tsmiCmsProceedHighlightedMods.Click += new System.EventHandler(this.btnProceedHighlighted_Click);
             // 
             // toolStripSeparator13
             // 
             this.toolStripSeparator13.Name = "toolStripSeparator13";
-            this.toolStripSeparator13.Size = new System.Drawing.Size(199, 6);
+            this.toolStripSeparator13.Size = new System.Drawing.Size(300, 6);
             // 
             // tsmiCmsRemoveMod
             // 
             this.tsmiCmsRemoveMod.Image = global::KSPModAdmin.Core.Properties.Resources.component_delete;
             this.tsmiCmsRemoveMod.Name = "tsmiCmsRemoveMod";
-            this.tsmiCmsRemoveMod.Size = new System.Drawing.Size(202, 22);
+            this.tsmiCmsRemoveMod.Size = new System.Drawing.Size(303, 22);
             this.tsmiCmsRemoveMod.Text = "Remove mod";
             this.tsmiCmsRemoveMod.Click += new System.EventHandler(this.tsbRemoveMod_Click);
+            // 
+            // tsmiCmsRemoveHighlightedMods
+            // 
+            this.tsmiCmsRemoveHighlightedMods.Image = global::KSPModAdmin.Core.Properties.Resources.components_delete;
+            this.tsmiCmsRemoveHighlightedMods.Name = "tsmiCmsRemoveHighlightedMods";
+            this.tsmiCmsRemoveHighlightedMods.Size = new System.Drawing.Size(303, 22);
+            this.tsmiCmsRemoveHighlightedMods.Text = "Remove highlighted mods";
+            this.tsmiCmsRemoveHighlightedMods.Click += new System.EventHandler(this.tsmiCmsRemoveHighlightedMods_Click);
             // 
             // toolStripSeparator20
             // 
             this.toolStripSeparator20.Name = "toolStripSeparator20";
-            this.toolStripSeparator20.Size = new System.Drawing.Size(199, 6);
+            this.toolStripSeparator20.Size = new System.Drawing.Size(300, 6);
             // 
             // tsmiCmsCreateZip
             // 
             this.tsmiCmsCreateZip.Image = global::KSPModAdmin.Core.Properties.Resources.compress;
             this.tsmiCmsCreateZip.Name = "tsmiCmsCreateZip";
-            this.tsmiCmsCreateZip.Size = new System.Drawing.Size(202, 22);
+            this.tsmiCmsCreateZip.Size = new System.Drawing.Size(303, 22);
             this.tsmiCmsCreateZip.Text = "Create zip";
             this.tsmiCmsCreateZip.Click += new System.EventHandler(this.tsbCreateZip_Click);
             // 
@@ -476,6 +526,7 @@
             this.tvModSelection.DrawControl += new System.EventHandler<KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.NodeControls.DrawEventArgs>(this.tvModSelection_DrawControl);
             this.tvModSelection.DragDrop += new System.Windows.Forms.DragEventHandler(this.tvModSelection_DragDrop);
             this.tvModSelection.DragEnter += new System.Windows.Forms.DragEventHandler(this.tvModSelection_DragEnter);
+            this.tvModSelection.DoubleClick += new System.EventHandler(this.tvModSelection_DoubleClick);
             // 
             // cmsModSelectionAllMods
             // 
@@ -974,7 +1025,7 @@
             this.tsbRemoveMod.Size = new System.Drawing.Size(23, 22);
             this.tsbRemoveMod.Text = "toolStripButton2";
             this.tsbRemoveMod.ToolTipText = "Remove mod\r\nRemoves the highlighted mods.";
-            this.tsbRemoveMod.Click += new System.EventHandler(this.tsbRemoveMod_Click);
+            this.tsbRemoveMod.Click += new System.EventHandler(this.tsmiCmsRemoveHighlightedMods_Click);
             // 
             // tsbRemoveAll
             // 
@@ -1266,5 +1317,10 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiUpdateAllOutdatedMods;
         private System.Windows.Forms.ToolStripMenuItem tsmiUpdateMod;
         private System.Windows.Forms.ToolStripButton tsbUpdateMod;
+        private System.Windows.Forms.ToolStripMenuItem tsmiCmsProceedHighlightedMods;
+        private System.Windows.Forms.ToolStripMenuItem tsmiCmsRemoveHighlightedMods;
+        private System.Windows.Forms.ToolStripMenuItem tsmiUpdateHiglightedMods;
+        private System.Windows.Forms.ToolStripMenuItem tsmiCmsCheckHighlightedModsForUpdates;
+        private System.Windows.Forms.ToolStripMenuItem tsmiCmsRefreshCheckedStateForHighlightedMods;
     }
 }

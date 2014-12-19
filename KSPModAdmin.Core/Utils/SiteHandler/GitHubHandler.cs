@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -14,8 +15,23 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 	public class GitHubHandler : ISiteHandler
 	{
 		private const string cName = "GitHub";
-		private const string Host = "github.com";
+        private const string Host = "github.com";
+        private const string Url_0_1 = "https://github.com/{0}/{1}";
 		private const string Host2 = "raw.githubusercontent.com";
+
+        /// <summary>
+        /// Builds the url from the passed user and project name.
+        /// </summary>
+        /// <param name="userName">Name of the user from the GitHub repository.</param>
+        /// <param name="projectName">Name of the project from the GitHub repository.</param>
+        /// <returns>The build GitHub project URL or empty string.</returns>
+        public static string GetProjectUrl(string userName, string projectName)
+        {
+            if (!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(projectName))
+                return string.Format(Url_0_1, userName, projectName);
+
+            return string.Empty;
+        }
 
 		/// <summary>
 		/// Gets the Name of the ISiteHandler.
@@ -153,7 +169,7 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 		/// </summary>
 		/// <param name="url">GitHub project url</param>
 		/// <returns>Shortest GitHub project url</returns>
-		private static string ReduceToPlainUrl(string url)
+        public string ReduceToPlainUrl(string url)
 		{
 			var parts = GetUrlParts(url);
 			if (parts[1].Equals(Host2))

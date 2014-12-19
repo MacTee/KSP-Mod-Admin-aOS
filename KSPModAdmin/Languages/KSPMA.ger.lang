@@ -31,6 +31,7 @@
     <Control Name="tsmiCmsProceedMod" Value="Mod bearbeiten" />
     <Control Name="tsmiCmsRemoveMod" Value="Mod entfernen" />
     <Control Name="tsmiCmsCreateZip" Value="Zip erzeugen" />
+    
   </Control>
   <Control Name="tsMod" Value="">
     <Control Name="tsbProceedMod" Value="">
@@ -523,7 +524,7 @@
   <Control Name="tsmiUpdateAllOutdatedMods" Value="Update aller Mods">
     <Control Name="tsmiUpdateAllOutdatedMods_ToolTip" Value="" />
   </Control>
-  <Control Name="tsmiUpdateMod" Value="Update aller Mods">
+  <Control Name="tsmiUpdateMod" Value="Mod aktualisieren">
     <Control Name="tsmiUpdateMod_ToolTip" Value="" />
   </Control>
   <Control Name="tsbUpdateMod" Value="">
@@ -571,7 +572,7 @@
   <String Name="MSG_IMPORTING_FAILED" Value="Import fehlgeschlagen!" />
   <String Name="MSG_IMPORTING_DONE" Value="Import abgeschlossen." />
   <String Name="MSG_IMPORTING_ABORTED" Value="Import abgebrochen." />
-  <String Name="MSG_ERROR_DURING_MODUPDATE_0_ERROR_1" Value="Fehler während der Mod Aktualisierung! &quot;{0}&quot;. Fehlermeldung: &quot;{1}&quot;" />
+  <String Name="MSG_ERROR_DURING_MODUPDATE_0_ERROR_1" Value="Fehler während der Mod Aktualisierung von &quot;{0}&quot;! Fehlermeldung: &quot;{1}&quot;" />
   <String Name="MSG_DOWNLOADING_MOD_0" Value="Download des Mod Updates &quot;{0}&quot; gestartet..." />
   <String Name="MSG_ERROR_DURING_MOD_UPDATE_0" Value="Fehler während des Mod Updatechecks! &quot;{0}&quot;" />
   <String Name="MSG_SCAN_NO_NEW_MODS_FOUND" Value="Keine neuen Mods gefunden." />
@@ -587,5 +588,24 @@
 
   <String Name="MSG_ERROR_PLUGIN_LOADING_TABVIEWS_0" Value="Fehler während laden des Plugin TabView &quot;{0}&quot;. Ein TabView mit diesem Namen existiert bereits!"/>
   <String Name="MSG_ERROR_PLUGIN_LOADING_OPTIONVIEWS_0" Value="Fehler während laden des Plugin OptionTabView &quot;{0}&quot;. Ein OptionTabView mit diesem Namen existiert bereits!"/>
+
+  <Control Name="tsmiCmsRefreshCheckedStateForHighlightedMods" Value="Häkchen Status für ausgewählte Mods erneuern"/>
+  <Control Name="tsmiCmsCheckHighlightedModsForUpdates" Value="Nach Updates für ausgewählte Mods suchen."/>
+  <Control Name="tsmiUpdateHiglightedMods" Value="Ausgewählte Mods aktualisieren"/>
+  <Control Name="tsmiCmsProceedHighlightedMods" Value="Ausgewählte Mods bearbeiten"/>
+  <Control Name="tsmiCmsRemoveHighlightedMods" Value="Ausgewählte Mods entfernen"/>
+  <String Name="MSG_NOT_AVAILABLE" Value="Nicht verfügbar"/>
+  <String Name="MSG_NO_DESTINATION" Value="Kein Zielpfad"/>
+  <String Name="MSG_FILE_NOT_FOUND_0" Value="Datei nicht gefunden &quot;{0}&quot;."/>
+  <String Name="MSG_ERROR_WHILE_READING_0" Value="Fehler während des lesend der Datei &quot;{0}&quot;."/>
+
+  <String Name="MSG_AVC_VERSIONFILE_FOUND" Value="AVC Plugin Versiondatei gefunden."/>
+  <String Name="MSG_NO_AVC_VERSIONFILE_FOUND" Value="Keine AVC Plugin Versionsdatei gefunden!"/>
+  <String Name="MSG_READING_AVC_VERSIONFILE_INFO" Value="Lese AVC Plugin Versionsdatei..."/>
+  <String Name="MSG_IMPORTING_AVC_VERSIONFILE_INFO_0" Value="Importiere AVC Plugin Versionsdatei informationen für &quot;{0}&quot;..."/>
+  <String Name="MSG_NO_COMPATIBLE_SITEHANDLER_FOUND_0" Value="Keinen kompatieblen SiteHandler für &quot;{0}&quot; gefunden! Kein Mod Update Support verfügbar."/>
+  <String Name="MSG_COMPATIBLE_SITEHANDLER_0_FOUND_1" Value="Kompatieblen SiteHandler ({0}) für &quot;{1}&quot; gefunden! Mod Update Support aktiv!"/>
+  <String Name="MSG_ERROR_WHILE_READING_AVC_VERION_FILE" Value="Fehler während des lesen der AVC Plugin Versionsdatei!"/>
+  <String Name="MSG_ERROR_DOWNLOADING_NEW_AVC_VERION_FILE_FAILED" Value="Download der neuen AVC Plugin Versionsdatei fehlgeschlagen!"/>
 
 </Language>

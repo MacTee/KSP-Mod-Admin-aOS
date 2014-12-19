@@ -51,5 +51,12 @@ namespace KSPModAdmin.Core.Utils
         /// <param name="downloadProgressHandler">Callback function for download progress.</param>
         /// <returns>True if the mod was downloaded.</returns>
         bool DownloadMod(ref ModInfo modInfo, DownloadProgressChangedEventHandler downloadProgressHandler = null);
+
+        /// <summary>
+        /// Returns the plain url to the mod, where the ModInfos would be get from.
+        /// </summary>
+        /// <param name="url">The url to reduce.</param>
+        /// <returns>The plain url to the mod, where the ModInfos would be get from.</returns>
+        string ReduceToPlainUrl(string url);
     }
 }

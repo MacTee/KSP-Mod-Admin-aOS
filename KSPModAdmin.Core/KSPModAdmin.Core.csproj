@@ -64,6 +64,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Externals\KerbalStuffReadOnly.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="SharpCompress, Version=0.10.3.0, Culture=neutral, PublicKeyToken=beaf6f427e128133, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Externals\SharpCompress.dll</HintPath>
@@ -96,6 +100,7 @@
     <Compile Include="Model\ModSelectionTreeModel.cs" />
     <Compile Include="Model\ModNode.cs" />
     <Compile Include="Model\NoteNode.cs" />
+    <Compile Include="Utils\AVCParser.cs" />
     <Compile Include="Utils\ModPackHandler.cs" />
     <Compile Include="Utils\SiteHandler\CurseForgeHandler.cs" />
     <Compile Include="Utils\SiteHandler\CurseHandler.cs" />
@@ -332,10 +337,9 @@
     <Compile Include="Utils\Misc\PluginLoader.cs" />
     <Compile Include="Utils\Misc\ScreenHelper.cs" />
     <Compile Include="Utils\Misc\VersionHelper.cs" />
-    <Compile Include="Utils\www\DropBox.cs" />
-    <Compile Include="Utils\www\GitHub.cs" />
-    <Compile Include="Utils\www\KSPForum.cs" />
-    <Compile Include="Utils\www\MediaFire.cs" />
+    <Compile Include="Utils\www\KSPForum.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Utils\www\www.cs" />
     <Compile Include="Utils\ModZipCreator.cs" />
     <Compile Include="Views\frmAddMod.cs">
@@ -385,6 +389,12 @@
     </Compile>
     <Compile Include="Views\frmSelectDownload.Designer.cs">
       <DependentUpon>frmSelectDownload.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\frmTextDisplayer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frmTextDisplayer.Designer.cs">
+      <DependentUpon>frmTextDisplayer.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\frmUpdateDLG.cs">
       <SubType>Form</SubType>
@@ -566,6 +576,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\frmSelectDownload.resx">
       <DependentUpon>frmSelectDownload.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\frmTextDisplayer.resx">
+      <DependentUpon>frmTextDisplayer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\frmUpdateDLG.resx">
       <DependentUpon>frmUpdateDLG.cs</DependentUpon>

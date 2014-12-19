@@ -52,13 +52,14 @@ namespace KSPModAdmin.Core.Controller
 
         #region Constants
 
-        public const string KSP = "KSP";
+        public const string KSP_SEARCH_PATTERN = "*K*S*P*";
+        public const string STEAM_PATH = "Steam\\SteamApps\\common";
+        public const string STEAM_PATH_LINUX = "/.steam/steam/SteamApps/common";
+        public const string STEAM_PATH_MAC = "/Library/Application Support/Steam";
         public const string KSPMA = "KSPModAdmin";
         public const string KSPINSTALL = "KSP install";
         public const string DOWNLOAD = "download";
         public const string DOWNLOADS = "Downloads";
-        public const string STEAM = "Steam";
-        public const string STEAMAPP_PATH = "SteamApps\\common";
         public const string RECYCLE_BIN = "recycle.bin";
         public const string START = "Start";
         public const string STOP = "Stop";
@@ -521,7 +522,11 @@ namespace KSPModAdmin.Core.Controller
             if (!string.IsNullOrEmpty(DownloadPath) && Directory.Exists(DownloadPath))
             {
                 string filename = View.llblAdminDownload.Text;
-                string url = Constants.SERVICE_DOWNLOAD_LINK;
+                string url = string.Empty;
+                if(Environment.OSVersion.Platform == PlatformID.MacOSX || Environment.OSVersion.Platform == PlatformID.Unix)
+                    url = Constants.SERVICE_DOWNLOAD_LINK_MONO;
+                else
+                    url = Constants.SERVICE_DOWNLOAD_LINK_WIN;
 
                 int index = 1;
                 string downloadDest = Path.Combine(DownloadPath, filename);
@@ -966,16 +971,41 @@ namespace KSPModAdmin.Core.Controller
             EventDistributor.InvokeAsyncTaskStarted(Instance);
             AsyncTask<string[]>.DoWork(() =>
             {
-                // ToDo: Search for other OSs!
-                string path = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
-                string[] paths = Directory.GetDirectories(path, STEAM, SearchOption.TopDirectoryOnly);
-                if (paths.Length == 0)
+                string steamPath = string.Empty;
+                if (Environment.OSVersion.Platform == PlatformID.MacOSX)
+                    steamPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), STEAM_PATH_MAC);
+                else if (Environment.OSVersion.Platform == PlatformID.Unix)
+                    steamPath = Path.Combine(Environment.GetEnvironmentVariable(Constants.HOME), STEAM_PATH_LINUX);
+                else
                 {
-                    path = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
-                    paths = Directory.GetDirectories(path, STEAM, SearchOption.TopDirectoryOnly);
+                    steamPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), STEAM_PATH);
+                    if (!Directory.Exists(steamPath))
+                        steamPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), STEAM_PATH);
                 }
 
-                return paths;
+                List<string> kspPaths = new List<string>();
+                if (!string.IsNullOrEmpty(steamPath) && Directory.Exists(steamPath))
+                {
+                    string[] dirs = Directory.GetDirectories(steamPath, KSP_SEARCH_PATTERN, SearchOption.TopDirectoryOnly);
+                    foreach (string dir in dirs)
+                    {
+                        if (KSPPathHelper.IsKSPInstallFolder(dir))
+                            kspPaths.Add(dir);
+                        else
+                        {
+                            string[] subDirs = Directory.GetDirectories(dir);
+                            foreach (string subDir in subDirs)
+                            {
+                                if (KSPPathHelper.IsKSPInstallFolder(subDir))
+                                    kspPaths.Add(subDir);
+                            }
+                        }
+                    }
+                }
+                else
+                    Messenger.AddInfo(Messages.MSG_STEAM_FOLDER_NOT_FOUND);
+
+                return kspPaths.ToArray();
             }, (paths, ex) =>
             {
                 EventDistributor.InvokeAsyncTaskDone(Instance);
@@ -987,25 +1017,26 @@ namespace KSPModAdmin.Core.Controller
                 }
                 else
                 {
-                    foreach (string p in paths)
+                    foreach (string path in paths)
                     {
-                        string d = Path.Combine(p, STEAMAPP_PATH);
-                        string[] dirs = Directory.GetDirectories(d, KSP, SearchOption.TopDirectoryOnly);
-
-                        List<string> list = new List<string>();
-                        foreach (string dir in dirs)
+                        bool stop = false;
+                        switch (AskUser(path))
                         {
-                            if (mStopSearch || !SearchSubDirs(dir, 2, ref list))
+                            case DialogResult.Yes:
+                                TryAddPaths(new[] {path});
+                                break;
+                            case DialogResult.Cancel:
+                                stop = true;
                                 break;
                         }
-
-                        TryAddPaths(list.ToArray());
+                        if (stop)
+                            break;
                     }
 
-                    if (paths.Length == 0)
-                        Messenger.AddInfo(Messages.MSG_STEAM_FOLDER_NOT_FOUND);
-                    else
+                    if (paths.Length > 0)
                         Messenger.AddInfo(Messages.MSG_STEAM_SEARCH_DONE);
+                    else
+                        Messenger.AddInfo(Messages.MSG_KSP_FOLDER_NOT_FOUND);
                 }
             });
         }

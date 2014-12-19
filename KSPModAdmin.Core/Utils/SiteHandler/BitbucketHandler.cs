@@ -14,11 +14,13 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 		private const string cName = "Bitbucket";
 		private const string Host = "bitbucket.org";
 
+
         /// <summary>
         /// Gets the Name of the ISiteHandler.
         /// </summary>
         /// <returns>The Name of the ISiteHandler.</returns>
         public string Name { get { return cName; } }
+
 
         /// <summary>
         /// Checks if the passed URL is a valid URL for Bitbucket.
@@ -101,6 +103,18 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 			return File.Exists(modInfo.LocalPath);
         }
 
+        /// <summary>
+        /// Takes a Bitbucket url and sets it to the shortest path to the project
+        /// </summary>
+        /// <param name="modUrl">Bitbucket project url</param>
+        /// <returns>Shortest Bitbucket project url</returns>
+        public string ReduceToPlainUrl(string modUrl)
+        {
+            var parts = GetUrlParts(modUrl);
+            return parts[0] + "://" + parts[1] + "/" + parts[2] + "/" + parts[3];
+        }
+
+
 		/// <summary>
 		/// Loads a mod's source page and extracts mod info from it
 		/// </summary>
@@ -122,17 +136,6 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 			modInfo.ChangeDateAsDateTime = DateTime.Parse(updateNode.Attributes["datetime"].Value);
 		    modInfo.Downloads = downloadNode.InnerHtml;
 	    }
-
-		/// <summary>
-		/// Takes a Bitbucket url and sets it to the shortest path to the project
-		/// </summary>
-		/// <param name="modUrl">Bitbucket project url</param>
-		/// <returns>Shortest Bitbucket project url</returns>
-		private static string ReduceToPlainUrl(string modUrl)
-		{
-			var parts = GetUrlParts(modUrl);
-			return parts[0] + "://" + parts[1] + "/" + parts[2] + "/" + parts[3];
-		}
 
 		/// <summary>
 		/// Splits a url into it's segment parts

@@ -13,13 +13,16 @@ License:
   - KSP Mod Admin uses several other open source projects with different licenses (a copy of most licenses could be found here KSPModAdmin\docs\Licenses\...):
     - TreeViewAdv (see http://www.codeproject.com/Articles/14741/Advanced-TreeView-for-NET)
 	  License: Berkeley Software Distribution License (see KSPModAdmin/Docs/Licenses/TreeViewAdvLicense.txt. license.txt).
-	- SharpCompress (see https://sharpcompress.codeplex.com/) 
-	  License: Microsoft Public License (Ms-PL) (see http://sharpcompress.codeplex.com/license).
-	- FolderSelectionDialog (see http://www.lyquidity.com/devblog/?p=136) 
-	  License: There’s no license as such as you are free to take and do with the code what you will.
 	- CheckBoxComboBox (see http://www.codeproject.com/Articles/21085/CheckBox-ComboBox-Extending-the-ComboBox-Class-and)
 	  License: The Code Project Open License (CPOL) 1.02 (see http://www.codeproject.com/info/cpol10.aspx).
-    - HtmlAgilityPack (see http://htmlagilitypack.codeplex.com/)
-	  License: Microsoft Public License (Ms-PL) (see http://htmlagilitypack.codeplex.com/license).
+    - FolderSelectionDialog (see http://www.lyquidity.com/devblog/?p=136) 
+	  License: There’s no license as such as you are free to take and do with the code what you will.
 	- KerbalStuffWrapper (see http://forum.kerbalspaceprogram.com/threads/94891-KerbalStuffWrapper)
 	  License: Custom license see KSPModAdmin/Docs/Licenses/KerbalStuffWrapperLicense.txt for details.
+    - SharpCompress (see https://sharpcompress.codeplex.com/) 
+	  License: Microsoft Public License (Ms-PL) (see http://sharpcompress.codeplex.com/license).
+	- HtmlAgilityPack (see http://htmlagilitypack.codeplex.com/)
+	  License: Microsoft Public License (Ms-PL) (see http://htmlagilitypack.codeplex.com/license).
+	- Newtonsoft.Json (see http://json.codeplex.com/)
+	  License: The MIT License (MIT) (see http://json.codeplex.com/license).
+	

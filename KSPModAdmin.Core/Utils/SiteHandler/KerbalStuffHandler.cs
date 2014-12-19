@@ -14,11 +14,13 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 		private const string cURL = "http://kerbalstuff.com/";
 		private const string cURL2 = "https://kerbalstuff.com/";
 
+
 		/// <summary>
 		/// Gets the Name of the ISiteHandler.
 		/// </summary>
 		/// <returns>The Name of the ISiteHandler.</returns>
 		public string Name { get { return cName; } }
+
 
 		/// <summary>
 		/// Checks if the passed URL is a KerbalStuff URL.
@@ -73,7 +75,7 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 	            Downloads = kerbalMod.Downloads.ToString(),
 	            Author = kerbalMod.Author,
 	            Version = kerbalMod.Versions.First().FriendlyVersion.ToString(),
-				GameVersion = kerbalMod.DefaultVersionId.ToString()
+				KSPVersion = kerbalMod.Versions.First().KspVersion
             };
 			//modInfo.CreationDate = kerbalMod.Versions.Last().Date;	// TODO when KS API supports dates from versions
 
@@ -121,6 +123,17 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 
             return File.Exists(modInfo.LocalPath);
         }
+
+        /// <summary>
+        /// Returns the plain url to the mod, where the ModInfos would be get from.
+        /// </summary>
+        /// <param name="url">The url to reduce.</param>
+        /// <returns>The plain url to the mod, where the ModInfos would be get from.</returns>
+        public string ReduceToPlainUrl(string url)
+        {
+            return url;
+        }
+
 
         private DateTime GetDateTime(string dateString)
         {

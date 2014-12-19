@@ -11,7 +11,8 @@ namespace KSPModAdmin.Core
 		// ReSharper disable InconsistentNaming
         public const string DOWNLOAD_FILENAME_TEMPLATE = "KSPModAdmin-v{0}.zip";
 
-        public const string SERVICE_DOWNLOAD_LINK = "http://www.services.mactee.de/KSP/getKSP_MA_Zip2.php5";
+        public const string SERVICE_DOWNLOAD_LINK_WIN = "http://www.services.mactee.de/KSP/getKSP_MA_Zip2.php5?build=win";
+        public const string SERVICE_DOWNLOAD_LINK_MONO = "http://www.services.mactee.de/KSP/getKSP_MA_Zip2.php5?build=mono";
         public const string SERVICE_ADMIN_VERSION = "http://www.services.mactee.de/KSP/getKSP_MA_Version2.php5";
 
         public const string PATHSEPERATOR = "\\";
@@ -69,6 +70,7 @@ namespace KSPModAdmin.Core
                     case PlatformID.Unix:
                         return KSP_EXE_LINUX;
                     case PlatformID.MacOSX:
+                        return KSP_EXE_MAC;
                     default:
                         return KSP_EXE_WIN;
                 }
@@ -83,6 +85,7 @@ namespace KSPModAdmin.Core
                     case PlatformID.Unix:
                         return KSP_X64_EXE_LINUX;
                     case PlatformID.MacOSX:
+                        return KSP_X64_EXE_MAC;
                     default:
                         return KSP_X64_EXE_WIN;
                 }
@@ -90,11 +93,15 @@ namespace KSPModAdmin.Core
         }
         public const string KSP_EXE_LINUX = "KSP.x86";
         public const string KSP_EXE_WIN = "KSP.exe";
+        public const string KSP_EXE_MAC = "KSP";
         public const string KSP_X64_EXE_LINUX = "KSP.x86_64";
         public const string KSP_X64_EXE_WIN = "KSP_x64.exe";
+        public const string KSP_X64_EXE_MAC = KSP_EXE_MAC;
         public const string APP_CONFIG_FILE = "KSPModAdmin_aOS.cfg";
         public const string MODS_CONFIG_FILE = "KSPModAdmin_aOS.cfg";
         public const string LINUX_PATH = ".ksp_mod_admin";
+        public const string MAC_EXE_PATH = "KSP.app\\Contents\\MacOS";
+        public const string MAC_EXE_FOLDER_NAME = "KSP.app";
 
         // XMLNode names
         public const string ROOTNODE = "ModAdminConfig";
@@ -137,6 +144,7 @@ namespace KSPModAdmin.Core
         public const string RATING = "Rating";
         public const string DOWNLOADS = "Downloads";
         public const string MODURL = "ModURL";
+        public const string AVCURL = "AvcURL";
         public const string ADDITIONALURL = "AdditionalURL";
         public const string FORUMURL = "ForumURL";
         public const string CURSEFORGEURL = "CurseForgeURL";
@@ -159,6 +167,9 @@ namespace KSPModAdmin.Core
         public const string MODINSTALLED = "ModInstalled";
         public const string MODARCHIVEMISSING = "ModArchiveMissing";
         public const string MODOUTDATED = "ModOutdated";
+        public const string LAUNCHPARAMETER = "LaunchParameter";
+        public const string USE64BIT = "Use64Bit";
+        public const string FORCEOPENGL = "ForceOpenGL";
 
         // Form related
         public const string POSITION = "Position";
@@ -193,5 +204,7 @@ namespace KSPModAdmin.Core
 
 
         public const string KSPFOLDERTAG = "<KSPFolder>";
+
+        public const string HOME = "HOME";
     }
 }

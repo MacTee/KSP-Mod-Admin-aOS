@@ -9,6 +9,7 @@ using KSPModAdmin.Core.Model;
 using KSPModAdmin.Core.Utils;
 using KSPModAdmin.Core.Utils.Localization;
 using KSPModAdmin.Core.Views;
+using SharpCompress.Archive;
 
 namespace KSPModAdmin.Core.Controller
 {
@@ -41,7 +42,7 @@ namespace KSPModAdmin.Core.Controller
         /// </summary>
         public static ModSelectionTreeModel Model
         {
-            get { return mModel; } 
+            get { return mModel; }
         }
 
         /// <summary>
@@ -152,7 +153,7 @@ namespace KSPModAdmin.Core.Controller
                 {
                     if (args.Node.IsInstalled)
                         return;
-                    
+
                     MessageBox.Show(View.ParentForm, Messages.MSG_CHECK_NO_ZIPARCHIVE_WARNING, Messages.MSG_TITLE_ATTENTION);
                     args.Cancel = true;
                 }
@@ -235,20 +236,7 @@ namespace KSPModAdmin.Core.Controller
         /// <returns>The new added mod (maybe null).</returns>
         public static ModNode HandleModAddViaPath(string modPath, string modName, bool installAfterAdd)
         {
-            return HandleModAddViaModInfo(new ModInfo { LocalPath = modPath, Name = Path.GetFileNameWithoutExtension(modPath) }, installAfterAdd);
-
-            //ModNode newMod = null;
-            //List<ModNode> addedMods = AddMods(new ModInfo[] { new ModInfo { LocalPath = modPath, Name = Path.GetFileNameWithoutExtension(modPath) } }, true, null);
-            //if (addedMods.Count > 0 && !string.IsNullOrEmpty(modName))
-            //    addedMods[0].Text = modName;
-
-            //if (installAfterAdd)
-            //    ProcessMods(addedMods.ToArray());
-
-            //if (addedMods.Count > 0)
-            //    newMod = addedMods[0];
-
-            //return newMod;
+            return HandleModAddViaModInfo(new ModInfo { LocalPath = modPath, Name = string.IsNullOrEmpty(modName) ? Path.GetFileNameWithoutExtension(modPath) : modName }, installAfterAdd);
         }
 
         /// <summary>
@@ -322,9 +310,9 @@ namespace KSPModAdmin.Core.Controller
 
             AsyncTask<List<ModNode>> asnyJob = new AsyncTask<List<ModNode>>();
             asnyJob.SetCallbackFunctions(() =>
-                {
-                    return AddMods(modInfos, showCollisionDialog, asnyJob);
-                },
+            {
+                return AddMods(modInfos, showCollisionDialog, asnyJob);
+            },
                 (result, ex) =>
                 {
                     EventDistributor.InvokeAsyncTaskDone(Instance);
@@ -678,6 +666,7 @@ namespace KSPModAdmin.Core.Controller
                 root.AddDate = dlg.DownloadDate;
                 root.Author = dlg.Author;
                 root.CreationDate = dlg.CreationDate;
+                root.ChangeDate = dlg.ChangeDate;
                 root.Downloads = dlg.Downloads;
                 root.Note = dlg.Note;
                 root.ProductID = dlg.ProductID;
@@ -685,6 +674,7 @@ namespace KSPModAdmin.Core.Controller
                 root.ModURL = dlg.ModURL;
                 root.AdditionalURL = dlg.AdditionalURL;
                 root.Version = dlg.Version;
+	            root.KSPVersion = dlg.KSPVersion;
 
                 InvalidateView();
             }
@@ -831,47 +821,47 @@ namespace KSPModAdmin.Core.Controller
             View.ShowBusy = true;
 
             AsyncTask<bool> asyncJob = new AsyncTask<bool>();
-            asyncJob.SetCallbackFunctions(() => 
+            asyncJob.SetCallbackFunctions(() =>
+            {
+                string[] ignoreDirs = new string[] { "squad", "myflags", "nasamission" };
+                List<ScanInfo> entries = new List<ScanInfo>();
+                try
                 {
-                    string[] ignoreDirs = new string[] { "squad", "myflags", "nasamission" };
-                    List<ScanInfo> entries = new List<ScanInfo>();
-                    try
+                    string scanDir = KSPPathHelper.GetPath(KSPPaths.GameData);
+                    string[] dirs = Directory.GetDirectories(scanDir);
+                    foreach (string dir in dirs)
                     {
-                        string scanDir = KSPPathHelper.GetPath(KSPPaths.GameData);
-                        string[] dirs = Directory.GetDirectories(scanDir);
-                        foreach (string dir in dirs)
+                        string dirname = dir.Substring(dir.LastIndexOf(Path.DirectorySeparatorChar) + 1);
+                        if (!ignoreDirs.Contains(dirname.ToLower()))
                         {
-                            string dirname = dir.Substring(dir.LastIndexOf(Path.DirectorySeparatorChar) + 1);
-                            if (!ignoreDirs.Contains(dirname.ToLower()))
-                            {
-                                Messenger.AddDebug(string.Format(Messages.MSG_DIRECTORY_0_FOUND, dirname));
-                                ScanInfo scanInfo = new ScanInfo(dirname, dir, false);
-                                entries.Add(scanInfo);
-                                ScanDir(scanInfo);
-                            }
+                            Messenger.AddDebug(string.Format(Messages.MSG_DIRECTORY_0_FOUND, dirname));
+                            ScanInfo scanInfo = new ScanInfo(dirname, dir, false);
+                            entries.Add(scanInfo);
+                            ScanDir(scanInfo);
                         }
-
-                        List<ScanInfo> unknowns = GetUnknowenNodes(entries);
-                        if (unknowns.Count > 0)
-                        {
-                            foreach (ScanInfo unknown in unknowns)
-                            {
-                                ModNode node = ScanInfoToKSPMA_TreeNode(unknown);
-                                RefreshCheckedStateOfMod(node);
-                                Model.Nodes.Add(node);
-                                Messenger.AddInfo(string.Format(Messages.MSG_MOD_ADDED_0, node.Text));
-                            }
-                        }
-                        else
-                            Messenger.AddInfo(Messages.MSG_SCAN_NO_NEW_MODS_FOUND);
-                    }
-                    catch (Exception ex)
-                    {
-                        Messenger.AddError(Messages.MSG_SCAN_ERROR_DURING_SCAN, ex);
                     }
 
-                    return true;
-                },
+                    List<ScanInfo> unknowns = GetUnknowenNodes(entries);
+                    if (unknowns.Count > 0)
+                    {
+                        foreach (ScanInfo unknown in unknowns)
+                        {
+                            ModNode node = ScanInfoToKSPMA_TreeNode(unknown);
+                            RefreshCheckedStateOfMods(new[] { node });
+                            Model.Nodes.Add(node);
+                            Messenger.AddInfo(string.Format(Messages.MSG_MOD_ADDED_0, node.Text));
+                        }
+                    }
+                    else
+                        Messenger.AddInfo(Messages.MSG_SCAN_NO_NEW_MODS_FOUND);
+                }
+                catch (Exception ex)
+                {
+                    Messenger.AddError(Messages.MSG_SCAN_ERROR_DURING_SCAN, ex);
+                }
+
+                return true;
+            },
                 (result, ex) =>
                 {
                     Messenger.AddDebug(Constants.SEPARATOR);
@@ -997,12 +987,26 @@ namespace KSPModAdmin.Core.Controller
         /// </summary>
         public static void RefreshCheckedStateAllModsAsync()
         {
-            ModNode[] allMods = Mods;
+            RefreshCheckedStateOfModsAsync(Mods);
+        }
 
+        /// <summary>
+        /// Traversing the complete tree and renews the checked state of all nodes.
+        /// </summary>
+        public static void RefreshCheckedStateAllMods()
+        {
+            RefreshCheckedStateOfMods(Mods);
+        }
+
+        /// <summary>
+        /// Traversing the complete tree and renews the checked state of all nodes.
+        /// </summary>
+        public static void RefreshCheckedStateOfModsAsync(ModNode[] mods)
+        {
             EventDistributor.InvokeAsyncTaskStarted(Instance);
             View.SetEnabledOfAllControls(false);
 
-            int maxCount = ModSelectionTreeModel.GetFullNodeCount(allMods);
+            int maxCount = ModSelectionTreeModel.GetFullNodeCount(mods);
             View.SetProgressBarStates(true, maxCount, 0);
 
             int count = 0;
@@ -1010,12 +1014,12 @@ namespace KSPModAdmin.Core.Controller
             asyncJob.SetCallbackFunctions(
                 () =>
                 {
-                    foreach (var mod in allMods)
+                    foreach (ModNode mod in mods)
                     {
                         Messenger.AddDebug(string.Format(Messages.MSG_REFRESHING_CHECKEDSTATE_0, mod.Name));
-                        RefreshCheckedState(mod, ref count, asyncJob);
+                        ModNode rootNode = mod.ZipRoot;
+                        RefreshCheckedState(rootNode, ref count, asyncJob);
                     }
-
                     return true;
                 },
                 (result, ex) =>
@@ -1038,60 +1042,14 @@ namespace KSPModAdmin.Core.Controller
         /// <summary>
         /// Traversing the complete tree and renews the checked state of all nodes.
         /// </summary>
-        public static void RefreshCheckedStateAllMods()
+        public static void RefreshCheckedStateOfMods(ModNode[] mods)
         {
-            foreach (var mod in Mods)
-                RefreshCheckedStateOfMod(mod);
-
-            InvalidateView();
-        }
-
-        /// <summary>
-        /// Traversing the complete tree and renews the checked state of all nodes.
-        /// </summary>
-        public static void RefreshCheckedStateOfModAsync(ModNode mod)
-        {
-            ModNode rootNode = mod.ZipRoot;
-            Messenger.AddDebug(string.Format(Messages.MSG_REFRESHING_CHECKEDSTATE_0, rootNode.Name));
-
-            EventDistributor.InvokeAsyncTaskStarted(Instance);
-            View.SetEnabledOfAllControls(false);
-
-            int maxCount = ModSelectionTreeModel.GetFullNodeCount(new[] { rootNode });
-            View.SetProgressBarStates(true, maxCount, 0);
-
-            int count = 0;
-            AsyncTask<bool> asyncJob = new AsyncTask<bool>();
-            asyncJob.SetCallbackFunctions(
-                () =>
-                {
-                    RefreshCheckedState(rootNode, ref count, asyncJob);
-                    return true;
-                },
-                (result, ex) =>
-                {
-                    EventDistributor.InvokeAsyncTaskDone(Instance);
-                    View.SetEnabledOfAllControls(true);
-                    View.SetProgressBarStates(false);
-
-                    if (ex != null)
-                        Messenger.AddError(string.Format(Messages.MSG_ERROR_DURING_REFRESH_CHECKED_STATE_0, ex.Message), ex);
-                },
-                (processedCount) =>
-                {
-                    View.SetProgressBarStates(true, maxCount, processedCount);
-                });
-            asyncJob.Run();
-        }
-
-        /// <summary>
-        /// Traversing the complete tree and renews the checked state of all nodes.
-        /// </summary>
-        public static void RefreshCheckedStateOfMod(ModNode mod)
-        {
-            Messenger.AddDebug(string.Format(Messages.MSG_REFRESHING_CHECKEDSTATE_0, mod.Name));
-            int count = 0;
-            RefreshCheckedState(mod.ZipRoot, ref count);
+            foreach (ModNode mod in mods)
+            {
+                Messenger.AddDebug(string.Format(Messages.MSG_REFRESHING_CHECKEDSTATE_0, mod.Name));
+                int count = 0;
+                RefreshCheckedState(mod.ZipRoot, ref count);
+            }
             InvalidateView();
         }
 
@@ -1184,7 +1142,7 @@ namespace KSPModAdmin.Core.Controller
                     {
                         Messenger.AddDebug(string.Format(Messages.MSG_UNCHECKING_MOD_0, mod.Name));
                         asyncJob.ProgressChanged(null, new ProgressChangedEventArgs(++count, null));
-                        View.InvokeIfRequired(() => { mod.Checked = false; } );
+                        View.InvokeIfRequired(() => { mod.Checked = false; });
                     }
 
                     return true;
@@ -1293,10 +1251,10 @@ namespace KSPModAdmin.Core.Controller
 
             AsyncTask<bool> asyncJob = new AsyncTask<bool>();
             asyncJob.SetCallbackFunctions(() =>
-                {
-                    _CheckForModUpdates(mods);
-                    return true;
-                },
+            {
+                _CheckForModUpdates(mods);
+                return true;
+            },
                 (result, ex) =>
                 {
                     EventDistributor.InvokeAsyncTaskDone(Instance);
@@ -1379,10 +1337,10 @@ namespace KSPModAdmin.Core.Controller
 
             AsyncTask<bool> asyncJob = new AsyncTask<bool>();
             asyncJob.SetCallbackFunctions(() =>
-                {
-                    _UpdateOutdatedMods(mods);
-                    return true;
-                },
+            {
+                _UpdateOutdatedMods(mods);
+                return true;
+            },
                 (result, ex) =>
                 {
                     EventDistributor.InvokeAsyncTaskDone(Instance);
@@ -1408,21 +1366,18 @@ namespace KSPModAdmin.Core.Controller
             {
                 try
                 {
-                    if (mod.IsOutdated)
+                    var handler = mod.SiteHandler;
+                    if (handler != null)
                     {
-                        var handler = mod.SiteHandler;
-                        if (handler != null)
-                        {
-                            Messenger.AddInfo(string.Format(Messages.MSG_DOWNLOADING_MOD_0, mod.Name));
-                            ModInfo newModInfos = handler.GetModInfo(mod.ModURL);
-                            if (handler.DownloadMod(ref newModInfos))
-                                UpdateMod(newModInfos, mod);
-                        }
+                        Messenger.AddInfo(string.Format(Messages.MSG_DOWNLOADING_MOD_0, mod.Name));
+                        ModInfo newModInfos = handler.GetModInfo(mod.ModURL);
+                        if (handler.DownloadMod(ref newModInfos))
+                            UpdateMod(newModInfos, mod);
                     }
                 }
                 catch (Exception ex)
                 {
-                    Messenger.AddInfo(string.Format(Messages.MSG_ERROR_DURING_MODUPDATE_0_ERROR_1, mod.Name, ex.Message));
+                    Messenger.AddError(string.Format(Messages.MSG_ERROR_DURING_MODUPDATE_0_ERROR_1, mod.Name, ex.Message), ex);
                 }
             }
         }
@@ -1440,6 +1395,9 @@ namespace KSPModAdmin.Core.Controller
             {
                 Messenger.AddInfo(string.Format(Messages.MSG_UPDATING_MOD_0, outdatedMod.Text));
                 newMod = ModNodeHandler.CreateModNode(newModInfo);
+                newMod.AdditionalURL = outdatedMod.AdditionalURL;
+                newMod.AvcURL = outdatedMod.AvcURL;
+                newMod.Note = outdatedMod.Note;
                 if (OptionsController.ModUpdateBehavior == ModUpdateBehavior.RemoveAndAdd || (!outdatedMod.IsInstalled && !outdatedMod.HasInstalledChilds))
                 {
                     RemoveOutdatedAndAddNewMod(outdatedMod, newMod);
@@ -1451,13 +1409,8 @@ namespace KSPModAdmin.Core.Controller
                     if (ModNodeHandler.TryCopyDestToMatchingNodes(outdatedMod, newMod))
                     {
                         newMod.ModURL = outdatedMod.ModURL;
-                        newMod.AdditionalURL = outdatedMod.AdditionalURL;
-                        newMod.Note = outdatedMod.Note;
-                        //View.InvokeIfRequired(() =>
-                        //{
                         RemoveOutdatedAndAddNewMod(outdatedMod, newMod);
                         ProcessMods(new ModNode[] { newMod }, true);
-                        //});
                     }
                     else
                     {
@@ -1579,6 +1532,83 @@ namespace KSPModAdmin.Core.Controller
         public static void OpenConflictSolver()
         {
             MessageBox.Show(View.ParentForm, "Not implemented yet!", Messages.MSG_TITLE_ATTENTION, MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+        }
+
+        /// <summary>
+        /// Opens the TextDisplayer dialog with the content of the passed node (if it is a representation of a file).
+        /// </summary>
+        /// <param name="node">The ModNode that contains the file information.</param>
+        /// <param name="replaceNewLine">If true, the newline/linebreak chars will be replace to the one(s) that the OS normally uses.</param>
+        public static void OpenTextDisplayer(ModNode node, bool replaceNewLine = true)
+        {
+            string content = string.Empty;
+
+            if (node.IsInstalled)
+                content = File.ReadAllText(KSPPathHelper.GetAbsolutePath(node.Destination));
+            else if (node.ZipExists)
+                content = TryReadFile(node);
+
+            if (!string.IsNullOrEmpty(content))
+            {
+                if (replaceNewLine)
+                {
+                    content = content.Replace("\n", "{KSPPlaceholder}");
+                    content = content.Replace("\r", "{KSPPlaceholder}");
+                    content = content.Replace("{KSPPlaceholder}{KSPPlaceholder}", "{KSPPlaceholder}");
+                    content = content.Replace("{KSPPlaceholder}", Environment.NewLine);
+                }
+
+                frmTextDisplayer frm = new frmTextDisplayer();
+                frm.TextBox.Text = content;
+                frm.ShowDialog(View.ParentForm);
+            }
+        }
+
+        /// <summary>
+        /// Tries to reads the content of the file that is represented by the passen ModNode.
+        /// </summary>
+        /// <param name="node">The ModNode that contains thie File information.</param>
+        /// <returns>The content of the file.</returns>
+        private static string TryReadFile(ModNode node)
+        {
+            if (node == null || !node.IsFile) return string.Empty;
+
+            ModNode root = node.ZipRoot;
+            string fullpath = root.Key;
+            try
+            {
+                if (File.Exists(fullpath))
+                {
+                    using (IArchive archiv = ArchiveFactory.Open(fullpath))
+                    {
+                        string fullPath = node.GetFullTreePath();
+                        foreach (IArchiveEntry entry in archiv.Entries)
+                        {
+                            if (entry.IsDirectory)
+                                continue;
+
+                            if (fullPath.Contains(entry.FilePath))
+                            {
+                                using (MemoryStream memStream = new MemoryStream())
+                                {
+                                    entry.WriteTo(memStream);
+                                    memStream.Position = 0;
+                                    StreamReader reader = new StreamReader(memStream);
+                                    return reader.ReadToEnd();
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                    Messenger.AddInfo(string.Format(Messages.MSG_FILE_NOT_FOUND_0, fullpath));
+            }
+            catch (Exception ex)
+            {
+                Messenger.AddError(string.Format(Messages.MSG_ERROR_WHILE_READING_0, fullpath), ex);
+            }
+
+            return string.Empty;
         }
     }
 }
