@@ -666,6 +666,7 @@ namespace KSPModAdmin.Core.Controller
                 root.AddDate = dlg.DownloadDate;
                 root.Author = dlg.Author;
                 root.CreationDate = dlg.CreationDate;
+                root.ChangeDate = dlg.ChangeDate;
                 root.Downloads = dlg.Downloads;
                 root.Note = dlg.Note;
                 root.ProductID = dlg.ProductID;

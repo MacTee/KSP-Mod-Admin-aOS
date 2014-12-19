@@ -122,7 +122,10 @@ namespace KSPModAdmin.Core.Utils
                     Messenger.AddInfo(string.Format(Messages.MSG_FILE_NOT_FOUND_0, fullpath));
 
                 if (!string.IsNullOrEmpty(fileContent))
+                {
+                    Messenger.AddDebug(string.Format(Messages.MSG_READING_AVC_VERSIONFILE_INFO));
                     return AVCParser.ReadFromString(fileContent);
+                }
             }
             catch (Exception ex)
             {
@@ -184,7 +187,7 @@ namespace KSPModAdmin.Core.Utils
 
                 if (siteHandler != null)
                 {
-                    modInfo.ModURL = downloadUrl; //siteHandler.ReduceToPlainUrl(downloadUrl);
+                    modInfo.ModURL = downloadUrl;
                     modInfo.SiteHandlerName = siteHandler.Name;
                     Messenger.AddDebug(string.Format(Messages.MSG_COMPATIBLE_SITEHANDLER_0_FOUND_1, siteHandler.Name, modInfo.Name));
                 }
