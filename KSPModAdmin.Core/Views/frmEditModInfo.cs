@@ -76,6 +76,7 @@ namespace KSPModAdmin.Core.Views
                     ModURL = value.ModURL;
                     AdditionalURL = value.AdditionalURL;
                     KSPVersion = value.KSPVersion;
+	                Version = value.Version;
                 }
                 else
                 {
