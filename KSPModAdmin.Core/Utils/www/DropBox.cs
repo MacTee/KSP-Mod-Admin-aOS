@@ -1,5 +1,4 @@
 ﻿using System;
-using HtmlAgilityPack;
 
 namespace KSPModAdmin.Core.Utils
 {
@@ -8,14 +7,21 @@ namespace KSPModAdmin.Core.Utils
         public static bool IsValidURL(string url)
         {
 	        var host = new Uri(url).Authority;
-			return (host.Contains("dropbox.com"));
+			return (host.Equals("dropbox.com"));
         }
 
         public static string GetDownloadURL(string url)
         {
-			var htmlDoc = new HtmlWeb().Load(url);
-			htmlDoc.OptionFixNestedTags = true;
-			string downloadURL = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='default_content_download_button']").Attributes["href"].Value;
+            string siteContent = www.Load(url);
+            int index1 = siteContent.IndexOf("<div class=\"meta\">");
+            if (index1 < 0)
+                return string.Empty;
+            index1 = siteContent.IndexOf("href=\"", index1) + 6;
+            siteContent = siteContent.Substring(index1);
+            index1 = siteContent.IndexOf("\"");
+            if (index1 < 0)
+                return string.Empty;
+            string downloadURL = siteContent.Substring(0, index1);
 
             return (downloadURL.StartsWith("http:/") || downloadURL.StartsWith("https:/")) ? downloadURL : string.Empty;
         }

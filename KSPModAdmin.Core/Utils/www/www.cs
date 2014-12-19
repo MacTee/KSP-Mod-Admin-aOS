@@ -5,7 +5,6 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
-using KSPModAdmin.Core.Utils.SiteHandler;
 
 namespace KSPModAdmin.Core.Utils
 {
@@ -131,10 +130,6 @@ namespace KSPModAdmin.Core.Utils
                 dInfo.Filename = DropBox.GetFileName(dInfo.DownloadURL);
                 dInfo.KnownHost = true;
             }
-			else if (new KerbalStuffHandler().IsValidURL(hostURL))
-			{
-				dInfo.DownloadURL = new KerbalStuffHandler().
-			}
             //else if (Curse.IsValidURL(hostURL))
             //{
             //    string filename = string.Empty;
@@ -153,7 +148,7 @@ namespace KSPModAdmin.Core.Utils
             return dInfo;
         }
 
-		// TODO Not used?
+
         public static List<LinkInfo> GetHTMLLinks(string siteContent)
         {
             if (string.IsNullOrEmpty(siteContent))
@@ -176,7 +171,6 @@ namespace KSPModAdmin.Core.Utils
             }
         }
 
-		// TODO Only used in above function
         private static string RemoveHTMLTags(string str)
         {
             bool open = false;
@@ -199,7 +193,6 @@ namespace KSPModAdmin.Core.Utils
             return sb.ToString();
         }
 
-		// TODO Not used?
         public static List<string> GetArchiveDownloadLinks(string siteContent)
         {
             if (string.IsNullOrEmpty(siteContent))
@@ -208,13 +201,12 @@ namespace KSPModAdmin.Core.Utils
                 return (from object a in ArchiveRegEx.Matches(siteContent) select a.ToString()).ToList();
         }
 
-		// TODO Not used?
         public static bool IsValidArchiveDownloadURL(string url)
         {
             return ArchiveRegEx.IsMatch(url);
         }
 
-		// TODO Not used?
+
         public static string GetFileName(string downloadURL)
         {
             int index = downloadURL.LastIndexOf("/");
