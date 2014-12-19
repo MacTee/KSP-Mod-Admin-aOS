@@ -674,6 +674,7 @@ namespace KSPModAdmin.Core.Controller
                 root.ModURL = dlg.ModURL;
                 root.AdditionalURL = dlg.AdditionalURL;
                 root.Version = dlg.Version;
+	            root.KSPVersion = dlg.KSPVersion;
 
                 InvalidateView();
             }

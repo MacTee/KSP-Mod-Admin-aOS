@@ -28,6 +28,7 @@ namespace KSPModAdmin.Core.Views
 
                     ProductID = value.ProductID;
                     Version = value.Version;
+	                KSPVersion = value.KSPVersion;
                     Author = value.Author;
                     DownloadDate = value.AddDate;
                     ChangeDate = value.ChangeDate;
