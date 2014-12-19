@@ -28,6 +28,7 @@ namespace KSPModAdmin.Core.Views
 
                     ProductID = value.ProductID;
                     Version = value.Version;
+	                KSPVersion = value.KSPVersion;
                     Author = value.Author;
                     DownloadDate = value.AddDate;
                     ChangeDate = value.ChangeDate;
@@ -76,6 +77,7 @@ namespace KSPModAdmin.Core.Views
                     ModURL = value.ModURL;
                     AdditionalURL = value.AdditionalURL;
                     KSPVersion = value.KSPVersion;
+	                Version = value.Version;
                 }
                 else
                 {
