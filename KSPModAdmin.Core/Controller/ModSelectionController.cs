@@ -1364,21 +1364,18 @@ namespace KSPModAdmin.Core.Controller
             {
                 try
                 {
-                    if (mod.IsOutdated)
+                    var handler = mod.SiteHandler;
+                    if (handler != null)
                     {
-                        var handler = mod.SiteHandler;
-                        if (handler != null)
-                        {
-                            Messenger.AddInfo(string.Format(Messages.MSG_DOWNLOADING_MOD_0, mod.Name));
-                            ModInfo newModInfos = handler.GetModInfo(mod.ModURL);
-                            if (handler.DownloadMod(ref newModInfos))
-                                UpdateMod(newModInfos, mod);
-                        }
+                        Messenger.AddInfo(string.Format(Messages.MSG_DOWNLOADING_MOD_0, mod.Name));
+                        ModInfo newModInfos = handler.GetModInfo(mod.ModURL);
+                        if (handler.DownloadMod(ref newModInfos))
+                            UpdateMod(newModInfos, mod);
                     }
                 }
                 catch (Exception ex)
                 {
-                    Messenger.AddInfo(string.Format(Messages.MSG_ERROR_DURING_MODUPDATE_0_ERROR_1, mod.Name, ex.Message));
+                    Messenger.AddError(string.Format(Messages.MSG_ERROR_DURING_MODUPDATE_0_ERROR_1, mod.Name, ex.Message), ex);
                 }
             }
         }
@@ -1396,6 +1393,9 @@ namespace KSPModAdmin.Core.Controller
             {
                 Messenger.AddInfo(string.Format(Messages.MSG_UPDATING_MOD_0, outdatedMod.Text));
                 newMod = ModNodeHandler.CreateModNode(newModInfo);
+                newMod.AdditionalURL = outdatedMod.AdditionalURL;
+                newMod.AvcURL = outdatedMod.AvcURL;
+                newMod.Note = outdatedMod.Note;
                 if (OptionsController.ModUpdateBehavior == ModUpdateBehavior.RemoveAndAdd || (!outdatedMod.IsInstalled && !outdatedMod.HasInstalledChilds))
                 {
                     RemoveOutdatedAndAddNewMod(outdatedMod, newMod);
@@ -1407,13 +1407,8 @@ namespace KSPModAdmin.Core.Controller
                     if (ModNodeHandler.TryCopyDestToMatchingNodes(outdatedMod, newMod))
                     {
                         newMod.ModURL = outdatedMod.ModURL;
-                        newMod.AdditionalURL = outdatedMod.AdditionalURL;
-                        newMod.Note = outdatedMod.Note;
-                        //View.InvokeIfRequired(() =>
-                        //{
                         RemoveOutdatedAndAddNewMod(outdatedMod, newMod);
                         ProcessMods(new ModNode[] { newMod }, true);
-                        //});
                     }
                     else
                     {

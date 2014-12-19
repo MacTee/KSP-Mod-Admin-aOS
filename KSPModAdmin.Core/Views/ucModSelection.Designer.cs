@@ -1025,7 +1025,7 @@
             this.tsbRemoveMod.Size = new System.Drawing.Size(23, 22);
             this.tsbRemoveMod.Text = "toolStripButton2";
             this.tsbRemoveMod.ToolTipText = "Remove mod\r\nRemoves the highlighted mods.";
-            this.tsbRemoveMod.Click += new System.EventHandler(this.tsbRemoveMod_Click);
+            this.tsbRemoveMod.Click += new System.EventHandler(this.tsmiCmsRemoveHighlightedMods_Click);
             // 
             // tsbRemoveAll
             // 

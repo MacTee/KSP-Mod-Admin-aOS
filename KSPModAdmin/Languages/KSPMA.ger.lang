@@ -572,7 +572,7 @@
   <String Name="MSG_IMPORTING_FAILED" Value="Import fehlgeschlagen!" />
   <String Name="MSG_IMPORTING_DONE" Value="Import abgeschlossen." />
   <String Name="MSG_IMPORTING_ABORTED" Value="Import abgebrochen." />
-  <String Name="MSG_ERROR_DURING_MODUPDATE_0_ERROR_1" Value="Fehler während der Mod Aktualisierung! &quot;{0}&quot;. Fehlermeldung: &quot;{1}&quot;" />
+  <String Name="MSG_ERROR_DURING_MODUPDATE_0_ERROR_1" Value="Fehler während der Mod Aktualisierung von &quot;{0}&quot;! Fehlermeldung: &quot;{1}&quot;" />
   <String Name="MSG_DOWNLOADING_MOD_0" Value="Download des Mod Updates &quot;{0}&quot; gestartet..." />
   <String Name="MSG_ERROR_DURING_MOD_UPDATE_0" Value="Fehler während des Mod Updatechecks! &quot;{0}&quot;" />
   <String Name="MSG_SCAN_NO_NEW_MODS_FOUND" Value="Keine neuen Mods gefunden." />
@@ -606,5 +606,6 @@
   <String Name="MSG_NO_COMPATIBLE_SITEHANDLER_FOUND_0" Value="Keinen kompatieblen SiteHandler für &quot;{0}&quot; gefunden! Kein Mod Update Support verfügbar."/>
   <String Name="MSG_COMPATIBLE_SITEHANDLER_0_FOUND_1" Value="Kompatieblen SiteHandler ({0}) für &quot;{1}&quot; gefunden! Mod Update Support aktiv!"/>
   <String Name="MSG_ERROR_WHILE_READING_AVC_VERION_FILE" Value="Fehler während des lesen der AVC Plugin Versionsdatei!"/>
+  <String Name="MSG_ERROR_DOWNLOADING_NEW_AVC_VERION_FILE_FAILED" Value="Download der neuen AVC Plugin Versionsdatei fehlgeschlagen!"/>
 
 </Language>

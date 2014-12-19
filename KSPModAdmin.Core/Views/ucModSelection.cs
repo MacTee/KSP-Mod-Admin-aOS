@@ -292,7 +292,7 @@ namespace KSPModAdmin.Core.Views
         private void tsmiResetDestination_Click(object sender, EventArgs e)
         {
             if (HasSelectedNode)
-                ModSelectionController.ResetDestination(SelectedMod);
+                ModSelectionController.ResetDestination(SelectedNode);
         }
 
         private void tsbCreateZip_Click(object sender, EventArgs e)

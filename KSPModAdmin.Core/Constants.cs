@@ -70,6 +70,7 @@ namespace KSPModAdmin.Core
                     case PlatformID.Unix:
                         return KSP_EXE_LINUX;
                     case PlatformID.MacOSX:
+                        return KSP_EXE_MAC;
                     default:
                         return KSP_EXE_WIN;
                 }
@@ -84,6 +85,7 @@ namespace KSPModAdmin.Core
                     case PlatformID.Unix:
                         return KSP_X64_EXE_LINUX;
                     case PlatformID.MacOSX:
+                        return KSP_X64_EXE_MAC;
                     default:
                         return KSP_X64_EXE_WIN;
                 }
@@ -91,11 +93,15 @@ namespace KSPModAdmin.Core
         }
         public const string KSP_EXE_LINUX = "KSP.x86";
         public const string KSP_EXE_WIN = "KSP.exe";
+        public const string KSP_EXE_MAC = "KSP";
         public const string KSP_X64_EXE_LINUX = "KSP.x86_64";
         public const string KSP_X64_EXE_WIN = "KSP_x64.exe";
+        public const string KSP_X64_EXE_MAC = KSP_EXE_MAC;
         public const string APP_CONFIG_FILE = "KSPModAdmin_aOS.cfg";
         public const string MODS_CONFIG_FILE = "KSPModAdmin_aOS.cfg";
         public const string LINUX_PATH = ".ksp_mod_admin";
+        public const string MAC_EXE_PATH = "KSP.app\\Contents\\MacOS";
+        public const string MAC_EXE_FOLDER_NAME = "KSP.app";
 
         // XMLNode names
         public const string ROOTNODE = "ModAdminConfig";

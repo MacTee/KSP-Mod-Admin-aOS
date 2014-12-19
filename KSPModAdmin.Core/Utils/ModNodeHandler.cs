@@ -5,6 +5,7 @@ using System.Linq;
 using KSPModAdmin.Core.Controller;
 using KSPModAdmin.Core.Model;
 using KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree;
+using KSPModAdmin.Core.Utils.SiteHandler;
 using SharpCompress.Archive;
 
 namespace KSPModAdmin.Core.Utils
@@ -151,26 +152,45 @@ namespace KSPModAdmin.Core.Utils
 
             if (!string.IsNullOrEmpty(avcInfo.Url) && (string.IsNullOrEmpty(modInfo.AvcURL)))
             {
-                //AVCInfo newAvcInfo = AVCParser.ReadFromWeb(avcInfo.Url);
-                //if (newAvcInfo != null)
-                //{
-                //    // TODO:
+                AVCInfo newAvcInfo = null;
+                try { newAvcInfo = AVCParser.ReadFromWeb(avcInfo.Url); }
+                catch (Exception ex) { Messenger.AddError(string.Format(Messages.MSG_ERROR_DOWNLOADING_NEW_AVC_VERION_FILE_FAILED)); }
+
+                if (newAvcInfo != null)
+                {
                     modInfo.AvcURL = avcInfo.Url;
-                //}
-            }
-            if (!string.IsNullOrEmpty(avcInfo.Download) && (string.IsNullOrEmpty(modInfo.ModURL)))
-            {
-                modInfo.ModURL = avcInfo.Download;
+                    avcInfo.Download = newAvcInfo.Download;
+                    avcInfo.ChangeLog = newAvcInfo.ChangeLog;
+                    avcInfo.ChangeLogUrl = newAvcInfo.ChangeLogUrl;
+                    avcInfo.GitHubUsername = newAvcInfo.GitHubUsername;
+                    avcInfo.GitHubRepository = newAvcInfo.GitHubRepository;
+                    avcInfo.GitHubAllowPreRelease = newAvcInfo.GitHubAllowPreRelease;
+                }
             }
 
-            ISiteHandler siteHandler = SiteHandlerManager.GetSiteHandlerByURL(modInfo.ModURL);
-            if (siteHandler != null && !modInfo.HasSiteHandler)
+            if (string.IsNullOrEmpty(modInfo.ModURL) && !modInfo.HasSiteHandler)
             {
-                modInfo.SiteHandlerName = siteHandler.Name;
-                Messenger.AddDebug(string.Format(Messages.MSG_COMPATIBLE_SITEHANDLER_0_FOUND_1, siteHandler.Name, modInfo.Name));
+                ISiteHandler siteHandler = null;
+                string downloadUrl = string.Empty;
+                string[] urls = new[] { GitHubHandler.GetProjectUrl(avcInfo.GitHubUsername, avcInfo.GitHubRepository), avcInfo.Download, avcInfo.Url, avcInfo.ChangeLogUrl };
+                foreach (string url in urls)
+                {
+                    downloadUrl = url;
+                    siteHandler = SiteHandlerManager.GetSiteHandlerByURL(downloadUrl);
+
+                    if (siteHandler != null)
+                        break;
+                }
+
+                if (siteHandler != null)
+                {
+                    modInfo.ModURL = downloadUrl; //siteHandler.ReduceToPlainUrl(downloadUrl);
+                    modInfo.SiteHandlerName = siteHandler.Name;
+                    Messenger.AddDebug(string.Format(Messages.MSG_COMPATIBLE_SITEHANDLER_0_FOUND_1, siteHandler.Name, modInfo.Name));
+                }
+                else
+                    Messenger.AddDebug(string.Format(Messages.MSG_NO_COMPATIBLE_SITEHANDLER_FOUND_0, modInfo.Name));
             }
-            else
-                Messenger.AddDebug(string.Format(Messages.MSG_NO_COMPATIBLE_SITEHANDLER_FOUND_0, modInfo.Name));
         }
 
         /// <summary>
@@ -178,7 +198,7 @@ namespace KSPModAdmin.Core.Utils
         /// </summary>
         /// <param name="filename">Zip-File path</param>
         /// <param name="parent">The parent node where the created node will be attached attach to.</param>
-        /// <param name="pathSeperator">The seperator charater used within the filename.</param>
+        /// <param name="pathSeperator">The separator character used within the filename.</param>
         /// <param name="silent">Determines if info messages should be added.</param>
         private static void CreateModNode(string filename, ModNode parent, char pathSeperator, bool isDirectory, bool silent = false)
         {
@@ -192,7 +212,7 @@ namespace KSPModAdmin.Core.Utils
         /// </summary>
         /// <param name="filename">Zip-File path</param>
         /// <param name="parent">The parent node where the created node will be attached attach to.</param>
-        /// <param name="pathSeperator">The seperator charater used within the filename.</param>
+        /// <param name="pathSeperator">The separator character used within the filename.</param>
         /// <param name="silent">Determines if info messages should be added.</param>
         private static void HandleFileEntry(string filename, ModNode parent, char pathSeperator, bool silent = false)
         {
@@ -213,7 +233,7 @@ namespace KSPModAdmin.Core.Utils
         /// </summary>
         /// <param name="filename">Fullpath within the archive.</param>
         /// <param name="parent">The parent TreeNode.</param>
-        /// <param name="pathSeperator">The path seperator that is used within the archive.</param>
+        /// <param name="pathSeperator">The path separator that is used within the archive.</param>
         /// <returns>The last created node.</returns>
         private static ModNode CreateNeededDirNodes(string filename, ModNode parent, char pathSeperator)
         {

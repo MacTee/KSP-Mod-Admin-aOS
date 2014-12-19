@@ -1850,5 +1850,16 @@ namespace KSPModAdmin.Core
         }
 
         private const string DEFAULT_MSG_ERROR_WHILE_READING_AVC_VERION_FILE = "Error while reading AVC Plugin version file!";
+
+        public static string MSG_ERROR_DOWNLOADING_NEW_AVC_VERION_FILE_FAILED
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_ERROR_DOWNLOADING_NEW_AVC_VERION_FILE_FAILED"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_ERROR_DOWNLOADING_NEW_AVC_VERION_FILE_FAILED).Replace("^", Environment.NewLine);
+            }
+        }
+
+        private const string DEFAULT_MSG_ERROR_DOWNLOADING_NEW_AVC_VERION_FILE_FAILED = "Downloading of new AVC Plugin version file failded!";
     }
 }

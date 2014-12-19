@@ -337,10 +337,9 @@
     <Compile Include="Utils\Misc\PluginLoader.cs" />
     <Compile Include="Utils\Misc\ScreenHelper.cs" />
     <Compile Include="Utils\Misc\VersionHelper.cs" />
-    <Compile Include="Utils\www\DropBox.cs" />
-    <Compile Include="Utils\www\GitHub.cs" />
-    <Compile Include="Utils\www\KSPForum.cs" />
-    <Compile Include="Utils\www\MediaFire.cs" />
+    <Compile Include="Utils\www\KSPForum.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Utils\www\www.cs" />
     <Compile Include="Utils\ModZipCreator.cs" />
     <Compile Include="Views\frmAddMod.cs">
