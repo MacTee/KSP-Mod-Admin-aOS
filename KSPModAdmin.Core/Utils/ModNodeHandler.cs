@@ -157,7 +157,7 @@ namespace KSPModAdmin.Core.Utils
             {
                 AVCInfo newAvcInfo = null;
                 try { newAvcInfo = AVCParser.ReadFromWeb(avcInfo.Url); }
-                catch (Exception ex) { Messenger.AddError(string.Format(Messages.MSG_ERROR_DOWNLOADING_NEW_AVC_VERION_FILE_FAILED)); }
+                catch (Exception ex) { Messenger.AddError(string.Format(Messages.MSG_ERROR_DOWNLOADING_NEW_AVC_VERION_FILE_FAILED), ex); }
 
                 if (newAvcInfo != null)
                 {

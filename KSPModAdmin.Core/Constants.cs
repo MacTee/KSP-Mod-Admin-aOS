@@ -121,6 +121,8 @@ namespace KSPModAdmin.Core
         public const string DOWNLOAD_PATH = "DownloadPath";
         public const string NAME = "Name";
         public const string LONGNAME = "LongName";
+        public const string SORTORDER = "SortOrder";
+        public const string TOOLTIPTEXT = "TooltipText";
         public const string CONTROL = "Control";
         public const string STRING = "String";
         public const string KEY = "key";
@@ -170,6 +172,12 @@ namespace KSPModAdmin.Core
         public const string LAUNCHPARAMETER = "LaunchParameter";
         public const string USE64BIT = "Use64Bit";
         public const string FORCEOPENGL = "ForceOpenGL";
+        public const string TYPE = "Type";
+        public const string DATAPROPERTYNAME = "DataPropertyName";
+        public const string EDITENABLED = "EditEnabled";
+        public const string INCREMENTALSEARCHENABLED = "IncrementalSearchEnabled";
+        public const string LEFTMARGIN = "LeftMargin";
+        public const string SCALEMODE = "ScaleMode";
 
         // Form related
         public const string POSITION = "Position";
@@ -181,7 +189,7 @@ namespace KSPModAdmin.Core
         public const string WINDOWSTATE = "WindowState";
         public const string MINIM = "minimized";
         public const string MAXIM = "maximized";
-        public const string MODSELECTIONCOLUMNS = "ModSelectionColumns";
+        public const string TREEVIEWADVCOLUMNSINFO = "TreeViewAdvColumnsInfo";
         public const string MODINFOCOLUMNS = "ModInfoColumns";
         public const string MODINFOSSPLITTERPOS = "ModInfoSplitterPos";
         public const string COLUMN = "Column";

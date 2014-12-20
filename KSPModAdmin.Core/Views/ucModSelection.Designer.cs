@@ -83,8 +83,6 @@
             System.Windows.Forms.ListViewItem listViewItem17 = new System.Windows.Forms.ListViewItem(new string[] {
             "Installed",
             "Yes"}, -1);
-            this.treeColumn1 = new KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.TreeColumn();
-            this.treeColumn2 = new KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.TreeColumn();
             this.ttModSelection = new System.Windows.Forms.ToolTip(this.components);
             this.btnProceedAll = new System.Windows.Forms.Button();
             this.btnProceedHighlighted = new System.Windows.Forms.Button();
@@ -192,20 +190,6 @@
             this.tsModSelection.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // treeColumn1
-            // 
-            this.treeColumn1.Header = "Mod";
-            this.treeColumn1.SortOrder = System.Windows.Forms.SortOrder.None;
-            this.treeColumn1.TooltipText = null;
-            this.treeColumn1.Width = 230;
-            // 
-            // treeColumn2
-            // 
-            this.treeColumn2.Header = "VersionCheck";
-            this.treeColumn2.SortOrder = System.Windows.Forms.SortOrder.None;
-            this.treeColumn2.TooltipText = null;
-            this.treeColumn2.Width = 80;
             // 
             // btnProceedAll
             // 
@@ -503,8 +487,6 @@
             this.tvModSelection.AllowDrop = true;
             this.tvModSelection.BackColor = System.Drawing.SystemColors.Window;
             this.tvModSelection.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tvModSelection.Columns.Add(this.treeColumn1);
-            this.tvModSelection.Columns.Add(this.treeColumn2);
             this.tvModSelection.ContextMenuStrip = this.cmsModSelectionAllMods;
             this.tvModSelection.Cursor = System.Windows.Forms.Cursors.Default;
             this.tvModSelection.DefaultToolTipProvider = null;
@@ -1259,8 +1241,6 @@
         public System.Windows.Forms.ToolStrip tsModSelection;
         public System.Windows.Forms.ToolStrip tsMod;
         public Utils.Controls.Aga.Controls.Tree.TreeViewAdv tvModSelection;
-        private Utils.Controls.Aga.Controls.Tree.TreeColumn treeColumn1;
-        private Utils.Controls.Aga.Controls.Tree.TreeColumn treeColumn2;
         private System.Windows.Forms.ToolStripSplitButton tssbAddMod;
         private System.Windows.Forms.ToolStripMenuItem tsmiAddMod;
         private System.Windows.Forms.ToolStripMenuItem tsmiAddModArchives;
