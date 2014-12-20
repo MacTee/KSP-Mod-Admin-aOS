@@ -17,6 +17,7 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 		private const string cName = "GitHub";
         private const string Host = "github.com";
         private const string Url_0_1 = "https://github.com/{0}/{1}";
+		private const string Host2 = "raw.githubusercontent.com";
 
         /// <summary>
         /// Builds the url from the passed user and project name.
@@ -45,7 +46,7 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 		/// <returns>True if the passed URL is a valid URL, otherwise false.</returns>
 		public bool IsValidURL(string url)
 		{
-			return (!string.IsNullOrEmpty(url) && Host.Equals(new Uri(url).Authority));
+			return (!string.IsNullOrEmpty(url) && Host.Equals(new Uri(url).Authority) || Host2.Equals(new Uri(url).Authority));
 		}
 
 		/// <summary>
@@ -171,6 +172,10 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
         public string ReduceToPlainUrl(string url)
 		{
 			var parts = GetUrlParts(url);
+			if (parts[1].Equals(Host2))
+			{
+				return parts[0] + "://www.github.com/" + parts[2] + "/" + parts[3];
+			}
 			return parts[0] + "://" + parts[1] + "/" + parts[2] + "/" + parts[3];
 		}
 
