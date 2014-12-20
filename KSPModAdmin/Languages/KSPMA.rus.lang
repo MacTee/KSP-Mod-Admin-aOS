@@ -86,7 +86,7 @@
     <ChildControl Name="lvModSelection_Item_3" Value="Управление версиями" />
     <ChildControl Name="lvModSelection_Item_4" Value="Идентификатор" />
     <ChildControl Name="lvModSelection_Item_5" Value="Версия" />
-    <ChildControl Name="lvModSelection_Item_6" Value="KSP Версия"/>
+    <ChildControl Name="lvModSelection_Item_6" Value="Версия KSP"/>
     <ChildControl Name="lvModSelection_Item_7" Value="Автор" />
     <ChildControl Name="lvModSelection_Item_8" Value="Дата создания" />
     <ChildControl Name="lvModSelection_Item_9" Value="Дата изменения" />
@@ -319,7 +319,7 @@
   <Control Name="cbPostDownloadAction" Value="">
     <ChildControl Name="cbPostDownloadAction_ToolTip" Value="Действие, которое будет выполняться после обновления." />
     <ChildControl Name="cbPostDownloadAction_cbItem_1" Value="Ничего не делать" />
-    <ChildControl Name="cbPostDownloadAction_cbItem_2" Value="Спросить перед автоматической установкой" />
+    <ChildControl Name="cbPostDownloadAction_cbItem_2" Value="Спросить перед установкой" />
     <ChildControl Name="cbPostDownloadAction_cbItem_3" Value="Автоматически устанавливать после загрузки" />
   </Control>
   <Control Name="lblPostDownloadAction" Value="Действие после загрузки:" />
@@ -348,7 +348,7 @@
   <Control Name="lblAuthorModInfoEditor" Value="Автор:" />
   <Control Name="lblProductIDModInfoEditor" Value="ИД:" />
   <Control Name="lblVersionModInfoEditor" Value="Версия:" />
-  <Control Name="lblKSPVersionModInfoEditor" Value="KSP Версия:"/>
+  <Control Name="lblKSPVersionModInfoEditor" Value="Версия KSP:"/>
   <Control Name="lblModNameModInfoEditor" Value="Название мода:" />
   <Control Name="frmDestFolderSelection" Value="Выбор папки установки" />
   <Control Name="lblSelectedSource" Value="Выберите элемент:" />
@@ -479,7 +479,7 @@
   <String Name="MSG_UNCHECK_NO_ZIPARCHIVE_WARNING" Value="Не найден Zip-архив!^Если вы снимете отметку и удалите этот элемент мода, вы не сможете восстановить его!^^Всё равно снять отметку?" />
   <String Name="MSG_CHECK_NO_ZIPARCHIVE_WARNING" Value="Не найден Zip-архив!^Вы не можете отметить элемент мода, у которого нет Zip-архива!" />
   <String Name="MSG_CANT_INSTALL_MODNODE_0_ZIP_MISSING" Value="Не удалось установить &quot;{0}&quot;! Не найден архив мода." />
-  <String Name="MSG_0_HAS_CHILDES_WITHOUT_DESTINATION_WARNING" Value="Для элемент мода &quot;{0}&quot; или одного из дочерних элементов не указан путь установки!^Эти жлементы нельзя отметить!^^ Укажите их путь установки вручную." />
+  <String Name="MSG_0_HAS_CHILDES_WITHOUT_DESTINATION_WARNING" Value="Для элемента мода &quot;{0}&quot; или одного из дочерних элементов не указан путь установки!^Эти элементы нельзя отметить!^^ Укажите их путь установки вручную." />
   <String Name="YES" Value="Да" />
   <String Name="NO" Value="Нет" />
   <String Name="NONE" Value="Нету" />
@@ -586,16 +586,16 @@
   <String Name="MSG_ERROR_PLUGIN_LOADING_TABVIEWS_0" Value="Ошибка при загрузке плагина: Вкладка &quot;{0}&quot; уже существует!"/>
   <String Name="MSG_ERROR_PLUGIN_LOADING_OPTIONVIEWS_0" Value="Ошибка при загрузке плагина: вкладка настроек &quot;{0}&quot; уже существует!"/>
 
-  <Control Name="tsmiCmsRefreshCheckedStateForHighlightedMods" Value="(T)Refresh checked state for highlighted mods"/>
-  <Control Name="tsmiCmsCheckHighlightedModsForUpdates" Value="(T)Check highlighted mods for updates"/>
-  <Control Name="tsmiUpdateHiglightedMods" Value="(T)Update highlighted mods"/>
-  <Control Name="tsmiCmsProceedHighlightedMods" Value="(T)Proceed highlighted mods"/>
-  <Control Name="tsmiCmsRemoveHighlightedMods" Value="(T)Remove highlighted mods"/>
-  <String Name="MSG_NOT_AVAILABLE" Value="(T)Not available"/>
-  <String Name="MSG_NO_DESTINATION" Value="(T)No destination"/>
-  <String Name="MSG_FILE_NOT_FOUND_0" Value="(T)File not found &quot;{0}&quot;."/>
-  <String Name="MSG_ERROR_WHILE_READING_0" Value="(T)Error while reading &quot;{0}&quot;."/>
-
+  <Control Name="tsmiCmsRefreshCheckedStateForHighlightedMods" Value="Обновить отметки для выделенных модов"/>
+  <Control Name="tsmiCmsCheckHighlightedModsForUpdates" Value="ПРоверить обновления для выделенных модов"/>
+  <Control Name="tsmiUpdateHiglightedMods" Value="Обновить выделенные моды"/>
+  <Control Name="tsmiCmsProceedHighlightedMods" Value="Обработать выделенные моды"/>
+  <Control Name="tsmiCmsRemoveHighlightedMods" Value="Удалить выделенные моды"/>
+  <String Name="MSG_NOT_AVAILABLE" Value="Не доступно"/>
+  <String Name="MSG_NO_DESTINATION" Value="Не указан путь"/>
+  <String Name="MSG_FILE_NOT_FOUND_0" Value="Не найден файл &quot;{0}&quot;."/>
+  <String Name="MSG_ERROR_WHILE_READING_0" Value="Ошибка при чтении &quot;{0}&quot;."/>
+  
   <String Name="MSG_AVC_VERSIONFILE_FOUND" Value="(T)AVC Plugin version file found."/>
   <String Name="MSG_NO_AVC_VERSIONFILE_FOUND" Value="(T)No AVC Plugin version file found!"/>
   <String Name="MSG_READING_AVC_VERSIONFILE_INFO" Value="(T)Reading AVC Plugin version file..."/>

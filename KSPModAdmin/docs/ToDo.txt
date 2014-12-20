@@ -1,9 +1,13 @@
 ﻿//// BUGS
 /////////////////////
 - ModName changes after Mod update.
-- KerbalStuff KSP Version is wrong.
 - No question for Download folder if it is not set (atleast during add via url)
 - AVC Plugin - Problem when a mod archive contains multiple version files. (Sample: Mission Controller 2 on KerbalStuff)
+- Mod info right panel updating when the "Edit Mod Info" window closes, instead of waiting to read it when the mod is unselected and selected again.
+- Some mods have additional folders that normally doesn't install. 
+  It can be folders with alternative data, manuals, etc. For examples see Planet Shine or UniversalStorage [TAC PACK]. 
+  Usually Mod Admin can't detect installation path for them and shows warning. When I update this mods, Mod Admin shows warning again for every root node 
+  without installation path. I update in "Copy checked state" mode.
 
 
 //// To Test
@@ -32,6 +36,13 @@
 //// TODO
 /////////////////////
 
+- AVC Plugin version file support
+  - Enhancing of GitHub URL detection so "https://raw.githubusercontent.com/<UserName>/<ProjectName>/master/..." is a vaild url.
+  - Read version file from URL provided from mod archive version file.
+  - Use GitHub infos.
+  - Try to get SiteHandler from ChangeLog_URL as well.
+  - Bug fix see above.
+  
 - ReadMe
 
 - is everything Async ???
@@ -63,6 +74,10 @@
 
 - Try loading old KSPModAdmin.cfg file if no new cfg file is available.
   -> For AppConfig and KSPConfig!
+  
+- Some kind of search or filter and sort in select mod tree would be helpful.
+- Also Versioncheck column is still empty.
+- Overwrite button states are indistinguishable. It's hard to say, what mode it is in. May be checkbox would be more visual?
 
 
 - Implementation of a waffle iron !!! =)
@@ -71,4 +86,9 @@
 //// SUGGESTIONS
 /////////////////////
 
+- option to dummp mods without a destination to gamedata folder.
+- excluding of certain files like readme, txt, licenses ...
+  add option to let the user define which files sould be ignored.
+- Bigger icons or faster tooltips. I spend a lot of time waiting for tool tips to show up because the icons all look pretty much the same to me. I'd prefer text buttons, but bigger or more clear icons would be OK.
+  Faster Tooltip -> option to allow use the delay time.
 - Compress for zipping.
