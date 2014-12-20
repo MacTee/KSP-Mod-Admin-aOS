@@ -449,6 +449,7 @@
     <None Include="Resources\components_package_out.png" />
     <None Include="Resources\KMA2_48.png" />
     <Content Include="Externals\KerbalStuffReadOnly.dll" />
+    <None Include="Resources\gears.png" />
     <Content Include="Utils\Controls\CheckBoxComboBox\_license\license.txt" />
     <Content Include="Utils\Controls\FolderSelectionDialog\_license\license.txt" />
     <Content Include="Utils\Controls\TreeViewAdv\_license\license.txt" />

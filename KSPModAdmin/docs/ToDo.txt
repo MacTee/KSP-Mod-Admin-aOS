@@ -31,17 +31,17 @@
   -> Double click -> Displays the content of the selected file.
 - Simple AVC Plugin version file support implemented. 
   If KSP MA finds a AVC version file in a mod archive it tries to find a compatible SiteHandler for the DOWNLOAD link provided.
-
-
-//// TODO
-/////////////////////
-
 - AVC Plugin version file support
   - Enhancing of GitHub URL detection so "https://raw.githubusercontent.com/<UserName>/<ProjectName>/master/..." is a vaild url.
   - Read version file from URL provided from mod archive version file.
   - Use GitHub infos.
   - Try to get SiteHandler from ChangeLog_URL as well.
-  - Bug fix see above.
+
+//// TODO
+/////////////////////
+
+- AVC Plugin version file support
+  - Bug fix see BUGS above.
   
 - ReadMe
 

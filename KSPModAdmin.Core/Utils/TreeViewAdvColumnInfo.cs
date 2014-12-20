@@ -9,14 +9,14 @@ using KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.NodeControls;
 
 namespace KSPModAdmin.Core.Utils
 {
-    internal enum ColumnItemType
+    public enum ColumnItemType
     {
         NodeCheckBox,
         NodeIcon,
         NodeTextBox
     }
 
-    internal class TreeViewAdvColumnsInfo
+    public class TreeViewAdvColumnsInfo
     {
         public List<ColumnData> Columns { get; set; }
 
@@ -294,7 +294,7 @@ namespace KSPModAdmin.Core.Utils
         }
     }
 
-    internal class ColumnData
+    public class ColumnData
     {
         public string Header { get; set; }
         public SortOrder SortOrder { get; set; }
@@ -312,7 +312,7 @@ namespace KSPModAdmin.Core.Utils
         }
     }
 
-    internal class ColumnItemData
+    public class ColumnItemData
     {
         public ColumnItemType Type { get; set; }
         public string DataPropertyName { get; set; }

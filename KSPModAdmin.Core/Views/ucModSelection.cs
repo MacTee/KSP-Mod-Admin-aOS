@@ -347,6 +347,12 @@ namespace KSPModAdmin.Core.Views
             ModSelectionController.CheckAllMods();
         }
 
+        private void tsmiCmsTreeViewOptions_Click(object sender, EventArgs e)
+        {
+            TreeViewAdvColumnsInfo newInfos = ModSelectionController.OpenTreeViewOptions();
+            newInfos.ToTreeViewAdv(tvModSelection);
+        }
+
         private void tvModSelection_SelectionChanged(object sender, EventArgs e)
         {
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime || DesignMode)

@@ -607,5 +607,7 @@
   <String Name="MSG_COMPATIBLE_SITEHANDLER_0_FOUND_1" Value="(T)Compatible SiteHandler ({0}) found for &quot;{1}&quot;! Mod update support active!"/>
   <String Name="MSG_ERROR_WHILE_READING_AVC_VERION_FILE" Value="(T)Error while reading AVC Plugin version file!"/>
   <String Name="MSG_ERROR_DOWNLOADING_NEW_AVC_VERION_FILE_FAILED" Value="(T)Downloading of new AVC Plugin version file failded!"/>
+  <Control Name="tsmiCmsTreeViewOptions" Value="(T)TreeView options"/>
+  <Control Name="tsmiCmsOneModTreeViewOptions" Value="(T)TreeView options"/>
 
 </Language>

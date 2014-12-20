@@ -1610,5 +1610,16 @@ namespace KSPModAdmin.Core.Controller
 
             return string.Empty;
         }
+
+        /// <summary>
+        /// Opens the TreeView options dialog
+        /// </summary>
+        /// <returns>The new TreeViewAdvColumnsInfo edited with the TreeView option dialog.</returns>
+        public static TreeViewAdvColumnsInfo OpenTreeViewOptions()
+        {
+            // TODO: ...
+            MessageBox.Show(View.ParentForm, "TreeView options not implemented yet!", "");
+            return new TreeViewAdvColumnsInfo();
+        }
     }
 }
