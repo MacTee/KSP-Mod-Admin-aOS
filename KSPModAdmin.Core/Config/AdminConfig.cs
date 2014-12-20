@@ -105,28 +105,9 @@ namespace KSPModAdmin.Core.Config
             }
 
             ModSelectionViewInfo vInfo = new ModSelectionViewInfo();
-            XmlNodeList colWidths = doc.GetElementsByTagName(Constants.MODSELECTIONCOLUMNS);
-            if (colWidths.Count >= 1)
-            {
-                var columns = colWidths[0];
-                foreach (XmlNode col in columns.ChildNodes)
-                {
-                    int id = -1;
-                    int width = 0;
-                    foreach (XmlAttribute att in col.Attributes)
-                    {
-                        if (att.Name == Constants.ID && !string.IsNullOrEmpty(att.Value))
-                            id = int.Parse(att.Value);
-                        else if (att.Name == Constants.WIDTH && !string.IsNullOrEmpty(att.Value))
-                            width = int.Parse(att.Value);
-                    }
+            vInfo.TreeViewAdvColumnsInfo = new TreeViewAdvColumnsInfo(doc);
 
-                    if (width > 0)
-                        vInfo.ModSelectionColumnWidths.Add(width);
-                }
-            }
-            
-            colWidths = doc.GetElementsByTagName(Constants.MODINFOCOLUMNS);
+            XmlNodeList colWidths = doc.GetElementsByTagName(Constants.MODINFOCOLUMNS);
             if (colWidths.Count >= 1)
             {
                 var columns = colWidths[0];
@@ -404,24 +385,12 @@ namespace KSPModAdmin.Core.Config
             generalNode.AppendChild(node);
 
             // ModSelection column widths
-            int i = 0;
-            node = doc.CreateElement(Constants.MODSELECTIONCOLUMNS);
             var vInfo = ModSelectionController.View.GetModSelectionViewInfo();
-            foreach (var colWidth in vInfo.ModSelectionColumnWidths)
-            {
-                XmlNode columnNode = ConfigHelper.CreateConfigNode(doc, Constants.COLUMN, new string[,]
-                {
-                    { Constants.ID, i.ToString() },
-                    { Constants.WIDTH, colWidth.ToString() }
-                });
-                node.AppendChild(columnNode);
-
-                i++;
-            }
-            generalNode.AppendChild(node);
+            if (vInfo.TreeViewAdvColumnsInfo != null)
+                vInfo.TreeViewAdvColumnsInfo.ToXml(generalNode);
 
             // ModInfo column widths
-            i = 0;
+            int i = 0;
             node = doc.CreateElement(Constants.MODINFOCOLUMNS);
             foreach (var colWidth in vInfo.ModInfosColumnWidths)
             {

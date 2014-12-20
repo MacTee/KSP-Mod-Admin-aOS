@@ -24,11 +24,16 @@ namespace KSPModAdmin.Core.Utils
             try
             {
                 WebRequest request = WebRequest.Create(url);
-                WebResponse response = request.GetResponse();
-                Stream dataStream = response.GetResponseStream();
-                StreamReader reader = new StreamReader(dataStream);
-
-                return reader.ReadToEnd();
+                using (WebResponse response = request.GetResponse())
+                {
+                    using (Stream dataStream = response.GetResponseStream())
+                    {
+                        using (StreamReader reader = new StreamReader(dataStream))
+                        {
+                            return reader.ReadToEnd();
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -57,10 +62,13 @@ namespace KSPModAdmin.Core.Utils
             }
 
             string result = null;
-            HttpWebResponse response = (HttpWebResponse)httpWReq.GetResponse();
-            using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+
+            using (HttpWebResponse response = (HttpWebResponse) httpWReq.GetResponse())
             {
-                result = reader.ReadToEnd().Trim();
+                using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+                {
+                    result = reader.ReadToEnd().Trim();
+                }
             }
 
             return result;
@@ -100,76 +108,78 @@ namespace KSPModAdmin.Core.Utils
         /// <param name="downloadProgressHandler"></param>
         public static void DownloadFile(string downloadURL, string downloadPath, DownloadProgressChangedEventHandler downloadProgressHandler = null)
         {
-            WebClient webClient = new WebClient();
-            webClient.Credentials = CredentialCache.DefaultCredentials;
-            if (downloadProgressHandler != null)
-                webClient.DownloadProgressChanged += downloadProgressHandler;
-
-            webClient.DownloadFile(new Uri(downloadURL), downloadPath);
-        }
-
-
-        public static DownloadInfo GetDirectDownloadURLFromHostSite(string hostURL)
-        {
-            DownloadInfo dInfo = new DownloadInfo();
-            if (MediaFire.IsValidURL(hostURL))
+            using (WebClient webClient = new WebClient())
             {
-                dInfo.DownloadURL = MediaFire.GetDownloadURL(hostURL);
-                dInfo.Filename = MediaFire.GetFileName(dInfo.DownloadURL);
-                dInfo.KnownHost = true;
-            }
-            else if (GitHub.IsValidURL(hostURL))
-            {
-                dInfo.DownloadURL = GitHub.GetDownloadURL(hostURL);
-                dInfo.Filename = GitHub.GetFileName(dInfo.DownloadURL);
-                dInfo.KnownHost = true;
-            }
-            else if (DropBox.IsValidURL(hostURL))
-            {
-                dInfo.DownloadURL = DropBox.GetDownloadURL(hostURL);
-                dInfo.Filename = DropBox.GetFileName(dInfo.DownloadURL);
-                dInfo.KnownHost = true;
-            }
-            //else if (Curse.IsValidURL(hostURL))
-            //{
-            //    string filename = string.Empty;
-            //    dInfo.DownloadURL = Curse.GetDownloadURL(hostURL, ref filename);
-            //    dInfo.Filename = filename;
-            //    dInfo.KnownHost = true;
-            //}
-            //else if (CurseForge.IsValidURL(hostURL))
-            //{
-            //    string filename = string.Empty;
-            //    dInfo.DownloadURL = CurseForge.GetDownloadURL(hostURL, ref filename);
-            //    dInfo.Filename = filename;
-            //    dInfo.KnownHost = true;
-            //}
+                webClient.Credentials = CredentialCache.DefaultCredentials;
+                if (downloadProgressHandler != null)
+                    webClient.DownloadProgressChanged += downloadProgressHandler;
 
-            return dInfo;
-        }
-
-
-        public static List<LinkInfo> GetHTMLLinks(string siteContent)
-        {
-            if (string.IsNullOrEmpty(siteContent))
-                return new List<LinkInfo>();
-            else
-            {
-                List<LinkInfo> result = new List<LinkInfo>();
-                var links = (from object a in HTMLLinkRegEx.Matches(siteContent) select a.ToString()).ToList();
-                foreach (var link in links)
-                {
-                    string url = link.Replace("<a href=\"", string.Empty);
-                    int index = url.IndexOf(">") + 1;
-                    string name = RemoveHTMLTags(url.Substring(index, url.IndexOf("</a>") - index).Trim());
-                    url = url.Substring(0, url.IndexOf("\"")).Trim();
-                    if (!name.Contains("<img"))
-                        result.Add(new LinkInfo() { Name = name, URL = url });
-                }
-
-                return result;
+                webClient.DownloadFile(new Uri(downloadURL), downloadPath);
             }
         }
+
+
+        //public static DownloadInfo GetDirectDownloadURLFromHostSite(string hostURL)
+        //{
+        //    DownloadInfo dInfo = new DownloadInfo();
+        //    if (MediaFire.IsValidURL(hostURL))
+        //    {
+        //        dInfo.DownloadURL = MediaFire.GetDownloadURL(hostURL);
+        //        dInfo.Filename = MediaFire.GetFileName(dInfo.DownloadURL);
+        //        dInfo.KnownHost = true;
+        //    }
+        //    else if (GitHub.IsValidURL(hostURL))
+        //    {
+        //        dInfo.DownloadURL = GitHub.GetDownloadURL(hostURL);
+        //        dInfo.Filename = GitHub.GetFileName(dInfo.DownloadURL);
+        //        dInfo.KnownHost = true;
+        //    }
+        //    else if (DropBox.IsValidURL(hostURL))
+        //    {
+        //        dInfo.DownloadURL = DropBox.GetDownloadURL(hostURL);
+        //        dInfo.Filename = DropBox.GetFileName(dInfo.DownloadURL);
+        //        dInfo.KnownHost = true;
+        //    }
+        //    //else if (Curse.IsValidURL(hostURL))
+        //    //{
+        //    //    string filename = string.Empty;
+        //    //    dInfo.DownloadURL = Curse.GetDownloadURL(hostURL, ref filename);
+        //    //    dInfo.Filename = filename;
+        //    //    dInfo.KnownHost = true;
+        //    //}
+        //    //else if (CurseForge.IsValidURL(hostURL))
+        //    //{
+        //    //    string filename = string.Empty;
+        //    //    dInfo.DownloadURL = CurseForge.GetDownloadURL(hostURL, ref filename);
+        //    //    dInfo.Filename = filename;
+        //    //    dInfo.KnownHost = true;
+        //    //}
+
+        //    return dInfo;
+        //}
+
+
+        //public static List<LinkInfo> GetHTMLLinks(string siteContent)
+        //{
+        //    if (string.IsNullOrEmpty(siteContent))
+        //        return new List<LinkInfo>();
+        //    else
+        //    {
+        //        List<LinkInfo> result = new List<LinkInfo>();
+        //        var links = (from object a in HTMLLinkRegEx.Matches(siteContent) select a.ToString()).ToList();
+        //        foreach (var link in links)
+        //        {
+        //            string url = link.Replace("<a href=\"", string.Empty);
+        //            int index = url.IndexOf(">") + 1;
+        //            string name = RemoveHTMLTags(url.Substring(index, url.IndexOf("</a>") - index).Trim());
+        //            url = url.Substring(0, url.IndexOf("\"")).Trim();
+        //            if (!name.Contains("<img"))
+        //                result.Add(new LinkInfo() { Name = name, URL = url });
+        //        }
+
+        //        return result;
+        //    }
+        //}
 
         private static string RemoveHTMLTags(string str)
         {
@@ -193,29 +203,29 @@ namespace KSPModAdmin.Core.Utils
             return sb.ToString();
         }
 
-        public static List<string> GetArchiveDownloadLinks(string siteContent)
-        {
-            if (string.IsNullOrEmpty(siteContent))
-                return new List<string>();
-            else
-                return (from object a in ArchiveRegEx.Matches(siteContent) select a.ToString()).ToList();
-        }
+        //public static List<string> GetArchiveDownloadLinks(string siteContent)
+        //{
+        //    if (string.IsNullOrEmpty(siteContent))
+        //        return new List<string>();
+        //    else
+        //        return (from object a in ArchiveRegEx.Matches(siteContent) select a.ToString()).ToList();
+        //}
 
-        public static bool IsValidArchiveDownloadURL(string url)
-        {
-            return ArchiveRegEx.IsMatch(url);
-        }
+        //public static bool IsValidArchiveDownloadURL(string url)
+        //{
+        //    return ArchiveRegEx.IsMatch(url);
+        //}
 
 
-        public static string GetFileName(string downloadURL)
-        {
-            int index = downloadURL.LastIndexOf("/");
-            string filename = downloadURL.Substring(index + 1);
-            if (filename.Contains("?"))
-                filename = filename.Substring(0, filename.IndexOf("?"));
+        //public static string GetFileName(string downloadURL)
+        //{
+        //    int index = downloadURL.LastIndexOf("/");
+        //    string filename = downloadURL.Substring(index + 1);
+        //    if (filename.Contains("?"))
+        //        filename = filename.Substring(0, filename.IndexOf("?"));
 
-            return filename;
-        }
+        //    return filename;
+        //}
     }
 
     public class DownloadInfo

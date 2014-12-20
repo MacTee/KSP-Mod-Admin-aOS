@@ -133,7 +133,7 @@ namespace KSPModAdmin.Core.Config
                 else if (att.Name == Constants.VERSION)
                     node.Version = att.Value;
                 else if (att.Name == Constants.GAMEVERSION)
-                    node.GameVersion = att.Value;
+                    node.KSPVersion = att.Value;
                 else if (att.Name == Constants.NOTE)
                     node.Note = att.Value;
                 else if (att.Name == Constants.PRODUCTID)
@@ -150,6 +150,8 @@ namespace KSPModAdmin.Core.Config
                     node.Downloads = att.Value;
                 else if (att.Name == Constants.MODURL)
                     node.ModURL = att.Value;
+                else if (att.Name == Constants.AVCURL)
+                    node.AvcURL = att.Value;
                 else if (att.Name == Constants.ADDITIONALURL)
                     node.AdditionalURL = att.Value;
                 else if (att.Name == Constants.CHECKED)
@@ -238,7 +240,7 @@ namespace KSPModAdmin.Core.Config
             root.AppendChild(modsNode);
 
             foreach (ModNode mod in nodeArray)
-                modsNode.AppendChild(CreateXmlNode(Constants.MOD, mod, root));
+                modsNode.AppendChild(CreateXmlNode(Constants.MOD, mod, modsNode));
 
             doc.Save(path);
 
@@ -259,38 +261,41 @@ namespace KSPModAdmin.Core.Config
             modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.NAME, child.Name));
             modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.NODETYPE, ((int)child.NodeType).ToString()));
             modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.CHECKED, child.Checked.ToString()));
-            if (child.AddDate != string.Empty)
-                modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.ADDDATE, child.AddDate));
-            if (child.Version != string.Empty)
-                modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.VERSION, child.Version));
-			if (child.Version != string.Empty)
-                modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.GAMEVERSION, child.GameVersion));
-            if (child.Note != string.Empty)
-                modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.NOTE, child.Note));
-            if (child.ProductID != string.Empty)
-                modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.PRODUCTID, child.ProductID));
-            if (child.CreationDate != string.Empty)
-                modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.CREATIONDATE, child.CreationDate));
-            if (child.ChangeDate != string.Empty)
-                modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.CHANGEDATE, child.ChangeDate));
-            if (child.Author != string.Empty)
-                modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.AUTHOR, child.Author));
-            if (child.Rating != string.Empty)
-                modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.RATING, child.Rating));
-            if (child.Downloads != string.Empty)
-                modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.DOWNLOADS, child.Downloads));
-            if (child.ModURL != string.Empty)
-                modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.MODURL, child.ModURL));
-            if (child.AdditionalURL != string.Empty)
-                modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.ADDITIONALURL, child.AdditionalURL));
-            if (child.SiteHandlerName != string.Empty)
-                modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.VERSIONCONTROLERNAME, child.SiteHandlerName));
-            if (child.Destination != string.Empty)
-                modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.DESTINATION, child.Destination));
-			if (child.Version != string.Empty)
-                modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.VERSION, child.Version));
 
-            parent.AppendChild(modNode);
+            if (nodeName == Constants.MOD)
+            { 
+                if (!string.IsNullOrEmpty(child.AddDate))
+                    modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.ADDDATE, child.AddDate));
+                if (!string.IsNullOrEmpty(child.Version))
+                    modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.VERSION, child.Version));
+                if (!string.IsNullOrEmpty(child.KSPVersion))
+                    modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.GAMEVERSION, child.KSPVersion));
+                if (!string.IsNullOrEmpty(child.Note))
+                    modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.NOTE, child.Note));
+                if (!string.IsNullOrEmpty(child.ProductID))
+                    modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.PRODUCTID, child.ProductID));
+                if (!string.IsNullOrEmpty(child.CreationDate))
+                    modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.CREATIONDATE, child.CreationDate));
+                if (!string.IsNullOrEmpty(child.ChangeDate))
+                    modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.CHANGEDATE, child.ChangeDate));
+                if (!string.IsNullOrEmpty(child.Author))
+                    modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.AUTHOR, child.Author));
+                if (!string.IsNullOrEmpty(child.Rating))
+                    modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.RATING, child.Rating));
+                if (!string.IsNullOrEmpty(child.Downloads))
+                    modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.DOWNLOADS, child.Downloads));
+                if (!string.IsNullOrEmpty(child.ModURL))
+                    modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.MODURL, child.ModURL));
+                if (!string.IsNullOrEmpty(child.AvcURL))
+                    modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.AVCURL, child.AvcURL));
+                if (!string.IsNullOrEmpty(child.AdditionalURL))
+                    modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.ADDITIONALURL, child.AdditionalURL));
+                if (!string.IsNullOrEmpty(child.SiteHandlerName))
+                    modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.VERSIONCONTROLERNAME, child.SiteHandlerName));
+            }
+
+            if (!string.IsNullOrEmpty(child.Destination))
+                modNode.Attributes.Append(ConfigHelper.CreateXMLAttribute(doc, Constants.DESTINATION, child.Destination));
 
             foreach (ModNode childchild in child.Nodes)
                 modNode.AppendChild(CreateXmlNode(Constants.MOD_ENTRY, childchild, modNode));

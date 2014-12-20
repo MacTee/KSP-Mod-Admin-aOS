@@ -119,7 +119,7 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 			//modInfo.ChangeDateAsDateTime = epoch.AddSeconds(Convert.ToDouble(updateNode.Attributes["data-epoch"].Value));
 			//modInfo.Downloads = downloadNode.InnerHtml.Split(" ")[0];
 			//modInfo.Author = authorNode.InnerHtml;
-			//modInfo.GameVersion = gameVersionNode.InnerHtml.Split(" ")[1];
+			//modInfo.KSPVersion = gameVersionNode.InnerHtml.Split(" ")[1];
 			return true;
 
 			// more infos could be parsed here (like: short description, Tab content (overview, installation, ...), comments, ...)
@@ -143,7 +143,17 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
             return File.Exists(modInfo.LocalPath);
         }
 
-        private DateTime GetDateTime(string dateString)
+	    /// <summary>
+	    /// Returns the plain url to the mod, where the ModInfos would be get from.
+	    /// </summary>
+	    /// <param name="url">The url to reduce.</param>
+	    /// <returns>The plain url to the mod, where the ModInfos would be get from.</returns>
+	    public string ReduceToPlainUrl(string url)
+	    {
+	        return url;
+	    }
+
+	    private DateTime GetDateTime(string dateString)
         {
 	        var dateParts = dateString.Split(new string[] {"-"}, StringSplitOptions.None);
 			return new DateTime(Convert.ToInt32(dateParts[0]), Convert.ToInt32(dateParts[2]), Convert.ToInt32(dateParts[1]));

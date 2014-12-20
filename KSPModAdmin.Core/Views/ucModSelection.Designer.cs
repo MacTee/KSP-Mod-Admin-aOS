@@ -1,4 +1,6 @@
-﻿namespace KSPModAdmin.Core.Views
+﻿using KSPModAdmin.Core.Properties;
+
+namespace KSPModAdmin.Core.Views
 {
     partial class ucModSelection
     {
@@ -83,8 +85,6 @@
             System.Windows.Forms.ListViewItem listViewItem17 = new System.Windows.Forms.ListViewItem(new string[] {
             "Installed",
             "Yes"}, -1);
-            this.treeColumn1 = new KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.TreeColumn();
-            this.treeColumn2 = new KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.TreeColumn();
             this.ttModSelection = new System.Windows.Forms.ToolTip(this.components);
             this.btnProceedAll = new System.Windows.Forms.Button();
             this.btnProceedHighlighted = new System.Windows.Forms.Button();
@@ -116,6 +116,8 @@
             this.tsmiCmsRemoveHighlightedMods = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiCmsCreateZip = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiCmsOneModTreeViewOptions = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tvModSelection = new KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.TreeViewAdv();
             this.cmsModSelectionAllMods = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -134,6 +136,8 @@
             this.tsmiCmsRefreshCheckedStateForAllMods = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCmsCheckAllMods = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCmsUncheckAllMods = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiCmsTreeViewOptions = new System.Windows.Forms.ToolStripMenuItem();
             this.tsMod = new System.Windows.Forms.ToolStrip();
             this.tsbProceedMod = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
@@ -192,20 +196,6 @@
             this.tsModSelection.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // treeColumn1
-            // 
-            this.treeColumn1.Header = "Mod";
-            this.treeColumn1.SortOrder = System.Windows.Forms.SortOrder.None;
-            this.treeColumn1.TooltipText = null;
-            this.treeColumn1.Width = 230;
-            // 
-            // treeColumn2
-            // 
-            this.treeColumn2.Header = "VersionCheck";
-            this.treeColumn2.SortOrder = System.Windows.Forms.SortOrder.None;
-            this.treeColumn2.TooltipText = null;
-            this.treeColumn2.Width = 80;
             // 
             // btnProceedAll
             // 
@@ -267,9 +257,11 @@
             this.tsmiCmsRemoveMod,
             this.tsmiCmsRemoveHighlightedMods,
             this.toolStripSeparator20,
-            this.tsmiCmsCreateZip});
+            this.tsmiCmsCreateZip,
+            this.toolStripSeparator14,
+            this.tsmiCmsOneModTreeViewOptions});
             this.cmsModSelectionOneMod.Name = "cmsModSelection";
-            this.cmsModSelectionOneMod.Size = new System.Drawing.Size(304, 414);
+            this.cmsModSelectionOneMod.Size = new System.Drawing.Size(304, 442);
             this.cmsModSelectionOneMod.Opened += new System.EventHandler(this.cmsModSelectionOneMod_Opened);
             // 
             // tsmiCmsDestination
@@ -477,6 +469,19 @@
             this.tsmiCmsCreateZip.Text = "Create zip";
             this.tsmiCmsCreateZip.Click += new System.EventHandler(this.tsbCreateZip_Click);
             // 
+            // toolStripSeparator14
+            // 
+            this.toolStripSeparator14.Name = "toolStripSeparator14";
+            this.toolStripSeparator14.Size = new System.Drawing.Size(300, 6);
+            // 
+            // tsmiCmsOneModTreeViewOptions
+            // 
+            this.tsmiCmsOneModTreeViewOptions.Image = global::KSPModAdmin.Core.Properties.Resources.gears_preferences;
+            this.tsmiCmsOneModTreeViewOptions.Name = "tsmiCmsOneModTreeViewOptions";
+            this.tsmiCmsOneModTreeViewOptions.Size = new System.Drawing.Size(303, 22);
+            this.tsmiCmsOneModTreeViewOptions.Text = "TreeView options";
+            this.tsmiCmsOneModTreeViewOptions.Click += new System.EventHandler(this.tsmiCmsTreeViewOptions_Click);
+            // 
             // splitContainer1
             // 
             this.splitContainer1.BackColor = System.Drawing.SystemColors.ControlDark;
@@ -503,8 +508,6 @@
             this.tvModSelection.AllowDrop = true;
             this.tvModSelection.BackColor = System.Drawing.SystemColors.Window;
             this.tvModSelection.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tvModSelection.Columns.Add(this.treeColumn1);
-            this.tvModSelection.Columns.Add(this.treeColumn2);
             this.tvModSelection.ContextMenuStrip = this.cmsModSelectionAllMods;
             this.tvModSelection.Cursor = System.Windows.Forms.Cursors.Default;
             this.tvModSelection.DefaultToolTipProvider = null;
@@ -545,9 +548,11 @@
             this.toolStripSeparator25,
             this.tsmiCmsRefreshCheckedStateForAllMods,
             this.tsmiCmsCheckAllMods,
-            this.tsmiCmsUncheckAllMods});
+            this.tsmiCmsUncheckAllMods,
+            this.toolStripSeparator15,
+            this.tsmiCmsTreeViewOptions});
             this.cmsModSelectionAllMods.Name = "cmsModSelectionAllMods";
-            this.cmsModSelectionAllMods.Size = new System.Drawing.Size(255, 270);
+            this.cmsModSelectionAllMods.Size = new System.Drawing.Size(255, 298);
             // 
             // tsmiCmsAddMod
             // 
@@ -657,6 +662,19 @@
             this.tsmiCmsUncheckAllMods.Size = new System.Drawing.Size(254, 22);
             this.tsmiCmsUncheckAllMods.Text = "Uncheck all mods";
             this.tsmiCmsUncheckAllMods.Click += new System.EventHandler(this.tsbUncheckAllMods_Click);
+            // 
+            // toolStripSeparator15
+            // 
+            this.toolStripSeparator15.Name = "toolStripSeparator15";
+            this.toolStripSeparator15.Size = new System.Drawing.Size(251, 6);
+            // 
+            // tsmiCmsTreeViewOptions
+            // 
+            this.tsmiCmsTreeViewOptions.Image = global::KSPModAdmin.Core.Properties.Resources.gears_preferences;
+            this.tsmiCmsTreeViewOptions.Name = "tsmiCmsTreeViewOptions";
+            this.tsmiCmsTreeViewOptions.Size = new System.Drawing.Size(254, 22);
+            this.tsmiCmsTreeViewOptions.Text = "TreeView options";
+            this.tsmiCmsTreeViewOptions.Click += new System.EventHandler(this.tsmiCmsTreeViewOptions_Click);
             // 
             // tsMod
             // 
@@ -1025,7 +1043,7 @@
             this.tsbRemoveMod.Size = new System.Drawing.Size(23, 22);
             this.tsbRemoveMod.Text = "toolStripButton2";
             this.tsbRemoveMod.ToolTipText = "Remove mod\r\nRemoves the highlighted mods.";
-            this.tsbRemoveMod.Click += new System.EventHandler(this.tsbRemoveMod_Click);
+            this.tsbRemoveMod.Click += new System.EventHandler(this.tsmiCmsRemoveHighlightedMods_Click);
             // 
             // tsbRemoveAll
             // 
@@ -1259,8 +1277,6 @@
         public System.Windows.Forms.ToolStrip tsModSelection;
         public System.Windows.Forms.ToolStrip tsMod;
         public Utils.Controls.Aga.Controls.Tree.TreeViewAdv tvModSelection;
-        private Utils.Controls.Aga.Controls.Tree.TreeColumn treeColumn1;
-        private Utils.Controls.Aga.Controls.Tree.TreeColumn treeColumn2;
         private System.Windows.Forms.ToolStripSplitButton tssbAddMod;
         private System.Windows.Forms.ToolStripMenuItem tsmiAddMod;
         private System.Windows.Forms.ToolStripMenuItem tsmiAddModArchives;
@@ -1322,5 +1338,9 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiUpdateHiglightedMods;
         private System.Windows.Forms.ToolStripMenuItem tsmiCmsCheckHighlightedModsForUpdates;
         private System.Windows.Forms.ToolStripMenuItem tsmiCmsRefreshCheckedStateForHighlightedMods;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator14;
+        private System.Windows.Forms.ToolStripMenuItem tsmiCmsOneModTreeViewOptions;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
+        private System.Windows.Forms.ToolStripMenuItem tsmiCmsTreeViewOptions;
     }
 }

@@ -5,6 +5,7 @@ using System.Linq;
 using KSPModAdmin.Core.Controller;
 using KSPModAdmin.Core.Model;
 using KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree;
+using KSPModAdmin.Core.Utils.SiteHandler;
 using SharpCompress.Archive;
 
 namespace KSPModAdmin.Core.Utils
@@ -14,6 +15,7 @@ namespace KSPModAdmin.Core.Utils
         #region Constants
 
         const string TYPE = "type = ";
+        const string AVC_VERSION_FILE_EXTENSION = ".version";
 
         #endregion
 
@@ -38,6 +40,15 @@ namespace KSPModAdmin.Core.Utils
         {
             if (File.Exists(modInfo.LocalPath))
             {
+                // Get AVC version file informations.
+                AVCInfo avcInfo = TryReadAVCVersionFile(modInfo.LocalPath);
+                if (avcInfo != null)
+                    ImportAvcInfo(avcInfo, ref modInfo);
+
+                // Still no name? Use filename then
+                if (string.IsNullOrEmpty(modInfo.Name))
+                    modInfo.Name = Path.GetFileNameWithoutExtension(modInfo.LocalPath);
+
                 ModNode node = new ModNode(modInfo);
                 using (IArchive archive = ArchiveFactory.Open(modInfo.LocalPath))
                 {
@@ -49,13 +60,13 @@ namespace KSPModAdmin.Core.Utils
                     // create a TreeNode for every archive entry
                     foreach (IArchiveEntry entry in archive.Entries)
                         CreateModNode(entry.FilePath, node, seperator, entry.IsDirectory, silent);
-
                 }
 
                 // Find installation root node (first folder that contains (Parts or Plugins or ...)
                 if (!FindAndSetDestinationPaths(node) && !silent)
                     Messenger.AddInfo(string.Format(Messages.MSG_ROOT_NOT_FOUND_0, node.Text));
 
+                
                 SetToolTips(node);
                 CheckNodesWithDestination(node);
 
@@ -71,11 +82,126 @@ namespace KSPModAdmin.Core.Utils
         }
 
         /// <summary>
+        /// Searches the mod archive for a AVC Plugin version file and reads it.
+        /// </summary>
+        /// <param name="fullpath">The path to the mod archive.</param>
+        /// <returns>The AVCInfos from the AVC Plugin version file or null if no such file was found.</returns>
+        private static AVCInfo TryReadAVCVersionFile(string fullpath)
+        {
+            string fileContent = string.Empty;
+            try
+            {
+                if (File.Exists(fullpath))
+                {
+                    using (IArchive archiv = ArchiveFactory.Open(fullpath))
+                    {
+                        foreach (IArchiveEntry entry in archiv.Entries)
+                        {
+                            if (entry.IsDirectory)
+                                continue;
+
+                            if (entry.FilePath.EndsWith(AVC_VERSION_FILE_EXTENSION, StringComparison.CurrentCultureIgnoreCase))
+                            {
+                                Messenger.AddDebug(string.Format(Messages.MSG_AVC_VERSIONFILE_FOUND));
+                                using (MemoryStream memStream = new MemoryStream())
+                                {
+                                    entry.WriteTo(memStream);
+                                    memStream.Position = 0;
+                                    StreamReader reader = new StreamReader(memStream);
+                                    fileContent = reader.ReadToEnd();
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (string.IsNullOrEmpty(fileContent))
+                            Messenger.AddDebug(string.Format(Messages.MSG_NO_AVC_VERSIONFILE_FOUND));
+                    }
+                }
+                else
+                    Messenger.AddInfo(string.Format(Messages.MSG_FILE_NOT_FOUND_0, fullpath));
+
+                if (!string.IsNullOrEmpty(fileContent))
+                {
+                    Messenger.AddDebug(string.Format(Messages.MSG_READING_AVC_VERSIONFILE_INFO));
+                    return AVCParser.ReadFromString(fileContent);
+                }
+            }
+            catch (Exception ex)
+            {
+                Messenger.AddError(Messages.MSG_ERROR_WHILE_READING_AVC_VERION_FILE, ex);
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Copies Infos to the ModInfo.
+        /// Try to find a compatible SiteHandler for the provided urls (like Download, URL, ChangeLogUrl, GitHub)
+        /// </summary>
+        /// <param name="avcInfo"></param>
+        /// <param name="modInfo"></param>
+        private static void ImportAvcInfo(AVCInfo avcInfo, ref ModInfo modInfo)
+        {
+            Messenger.AddDebug(string.Format(Messages.MSG_IMPORTING_AVC_VERSIONFILE_INFO_0, modInfo.Name));
+
+            string fileName = Path.GetFileNameWithoutExtension(modInfo.LocalPath);
+            if (!string.IsNullOrEmpty(avcInfo.Name) && (string.IsNullOrEmpty(modInfo.Name) || modInfo.Name == fileName))
+                modInfo.Name = avcInfo.Name;
+            if (!string.IsNullOrEmpty(avcInfo.Version) && (string.IsNullOrEmpty(modInfo.Version)))
+                modInfo.Version = avcInfo.Version;
+            if (!string.IsNullOrEmpty(avcInfo.KspVersion) && (string.IsNullOrEmpty(modInfo.KSPVersion)))
+                modInfo.KSPVersion = avcInfo.KspVersion;
+
+            if (!string.IsNullOrEmpty(avcInfo.Url) && (string.IsNullOrEmpty(modInfo.AvcURL)))
+            {
+                AVCInfo newAvcInfo = null;
+                try { newAvcInfo = AVCParser.ReadFromWeb(avcInfo.Url); }
+                catch (Exception ex) { Messenger.AddError(string.Format(Messages.MSG_ERROR_DOWNLOADING_NEW_AVC_VERION_FILE_FAILED), ex); }
+
+                if (newAvcInfo != null)
+                {
+                    modInfo.AvcURL = avcInfo.Url;
+                    avcInfo.Download = newAvcInfo.Download;
+                    avcInfo.ChangeLog = newAvcInfo.ChangeLog;
+                    avcInfo.ChangeLogUrl = newAvcInfo.ChangeLogUrl;
+                    avcInfo.GitHubUsername = newAvcInfo.GitHubUsername;
+                    avcInfo.GitHubRepository = newAvcInfo.GitHubRepository;
+                    avcInfo.GitHubAllowPreRelease = newAvcInfo.GitHubAllowPreRelease;
+                }
+            }
+
+            if (string.IsNullOrEmpty(modInfo.ModURL) && !modInfo.HasSiteHandler)
+            {
+                ISiteHandler siteHandler = null;
+                string downloadUrl = string.Empty;
+                string[] urls = new[] { GitHubHandler.GetProjectUrl(avcInfo.GitHubUsername, avcInfo.GitHubRepository), avcInfo.Download, avcInfo.Url, avcInfo.ChangeLogUrl };
+                foreach (string url in urls)
+                {
+                    downloadUrl = url;
+                    siteHandler = SiteHandlerManager.GetSiteHandlerByURL(downloadUrl);
+
+                    if (siteHandler != null)
+                        break;
+                }
+
+                if (siteHandler != null)
+                {
+                    modInfo.ModURL = downloadUrl;
+                    modInfo.SiteHandlerName = siteHandler.Name;
+                    Messenger.AddDebug(string.Format(Messages.MSG_COMPATIBLE_SITEHANDLER_0_FOUND_1, siteHandler.Name, modInfo.Name));
+                }
+                else
+                    Messenger.AddDebug(string.Format(Messages.MSG_NO_COMPATIBLE_SITEHANDLER_FOUND_0, modInfo.Name));
+            }
+        }
+
+        /// <summary>
         /// Creates a TreeNode.
         /// </summary>
         /// <param name="filename">Zip-File path</param>
         /// <param name="parent">The parent node where the created node will be attached attach to.</param>
-        /// <param name="pathSeperator">The seperator charater used within the filename.</param>
+        /// <param name="pathSeperator">The separator character used within the filename.</param>
         /// <param name="silent">Determines if info messages should be added.</param>
         private static void CreateModNode(string filename, ModNode parent, char pathSeperator, bool isDirectory, bool silent = false)
         {
@@ -89,7 +215,7 @@ namespace KSPModAdmin.Core.Utils
         /// </summary>
         /// <param name="filename">Zip-File path</param>
         /// <param name="parent">The parent node where the created node will be attached attach to.</param>
-        /// <param name="pathSeperator">The seperator charater used within the filename.</param>
+        /// <param name="pathSeperator">The separator character used within the filename.</param>
         /// <param name="silent">Determines if info messages should be added.</param>
         private static void HandleFileEntry(string filename, ModNode parent, char pathSeperator, bool silent = false)
         {
@@ -110,7 +236,7 @@ namespace KSPModAdmin.Core.Utils
         /// </summary>
         /// <param name="filename">Fullpath within the archive.</param>
         /// <param name="parent">The parent TreeNode.</param>
-        /// <param name="pathSeperator">The path seperator that is used within the archive.</param>
+        /// <param name="pathSeperator">The path separator that is used within the archive.</param>
         /// <returns>The last created node.</returns>
         private static ModNode CreateNeededDirNodes(string filename, ModNode parent, char pathSeperator)
         {

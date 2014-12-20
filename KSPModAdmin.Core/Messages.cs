@@ -1779,5 +1779,87 @@ namespace KSPModAdmin.Core
             }
         }
         private const string DEFAULT_MSG_ERROR_WHILE_READING_0 = "Error while reading \"{0}\".";
+
+        public static string MSG_AVC_VERSIONFILE_FOUND
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_AVC_VERSIONFILE_FOUND"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_AVC_VERSIONFILE_FOUND).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_AVC_VERSIONFILE_FOUND = "AVC Plugin version file found.";
+
+        public static string MSG_NO_AVC_VERSIONFILE_FOUND
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_NO_AVC_VERSIONFILE_FOUND"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_NO_AVC_VERSIONFILE_FOUND).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_NO_AVC_VERSIONFILE_FOUND = "No AVC Plugin version file found!";
+
+        public static string MSG_READING_AVC_VERSIONFILE_INFO
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_READING_AVC_VERSIONFILE_INFO"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_READING_AVC_VERSIONFILE_INFO).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_READING_AVC_VERSIONFILE_INFO = "Reading AVC Plugin version file...";
+
+        public static string MSG_IMPORTING_AVC_VERSIONFILE_INFO_0
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_IMPORTING_AVC_VERSIONFILE_INFO_0"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_IMPORTING_AVC_VERSIONFILE_INFO_0).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_IMPORTING_AVC_VERSIONFILE_INFO_0 = "Importing AVC Plugin version file information for \"{0}\"...";
+
+        public static string MSG_NO_COMPATIBLE_SITEHANDLER_FOUND_0
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_NO_COMPATIBLE_SITEHANDLER_FOUND_0"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_NO_COMPATIBLE_SITEHANDLER_FOUND_0).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_NO_COMPATIBLE_SITEHANDLER_FOUND_0 = "No compatible SiteHandler found for \"{0}\"! Mod update support not available for this mod.";
+
+        public static string MSG_COMPATIBLE_SITEHANDLER_0_FOUND_1
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_COMPATIBLE_SITEHANDLER_0_FOUND_1"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_COMPATIBLE_SITEHANDLER_0_FOUND_1).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_COMPATIBLE_SITEHANDLER_0_FOUND_1 = "Compatible SiteHandler ({0}) found for \"{1}\"! Mod update support active!";
+    
+        public static string MSG_ERROR_WHILE_READING_AVC_VERION_FILE
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_ERROR_WHILE_READING_AVC_VERION_FILE"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_ERROR_WHILE_READING_AVC_VERION_FILE).Replace("^", Environment.NewLine);
+            }
+        }
+
+        private const string DEFAULT_MSG_ERROR_WHILE_READING_AVC_VERION_FILE = "Error while reading AVC Plugin version file!";
+
+        public static string MSG_ERROR_DOWNLOADING_NEW_AVC_VERION_FILE_FAILED
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_ERROR_DOWNLOADING_NEW_AVC_VERION_FILE_FAILED"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_ERROR_DOWNLOADING_NEW_AVC_VERION_FILE_FAILED).Replace("^", Environment.NewLine);
+            }
+        }
+
+        private const string DEFAULT_MSG_ERROR_DOWNLOADING_NEW_AVC_VERION_FILE_FAILED = "Downloading of new AVC Plugin version file failded!";
     }
 }

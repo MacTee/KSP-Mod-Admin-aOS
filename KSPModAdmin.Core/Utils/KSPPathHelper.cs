@@ -61,8 +61,17 @@ namespace KSPModAdmin.Core.Utils
                 //    return false;
                 if (!Directory.Exists(kspPath)) 
                     return false;
-                if (!File.Exists(Path.Combine(kspPath, Constants.KSP_EXE)) && !File.Exists(Path.Combine(kspPath, Constants.KSP_X64_EXE)))
-                    return false;
+                if (Environment.OSVersion.Platform != PlatformID.MacOSX)
+                {
+                    if (!File.Exists(Path.Combine(kspPath, Constants.KSP_EXE)) &&
+                        !File.Exists(Path.Combine(kspPath, Constants.KSP_X64_EXE)))
+                        return false;
+                }
+                else
+                {
+                    if (!Directory.Exists(Path.Combine(kspPath, Constants.MAC_EXE_FOLDER_NAME)))
+                        return false;
+                }
 
                 return true;
             }
@@ -88,7 +97,7 @@ namespace KSPModAdmin.Core.Utils
                 switch (Environment.OSVersion.Platform)
                 {
                     case PlatformID.Unix:
-                        path = Path.Combine(Environment.GetEnvironmentVariable("HOME"), Constants.LINUX_PATH, Constants.APP_CONFIG_FILE);
+                        path = Path.Combine(Environment.GetEnvironmentVariable(Constants.HOME), Constants.LINUX_PATH, Constants.APP_CONFIG_FILE);
                         break;
                     case PlatformID.MacOSX:
                         path = Path.Combine(Assembly.GetExecutingAssembly().Location, Constants.APP_CONFIG_FILE);
@@ -121,10 +130,16 @@ namespace KSPModAdmin.Core.Utils
                         path = installPath;
                         break;
                     case KSPPaths.KSPExe:
-                        path = Path.Combine(installPath, Constants.KSP_EXE);
+                        if (Environment.OSVersion.Platform != PlatformID.MacOSX)
+                            path = Path.Combine(installPath, Constants.KSP_EXE);
+                        else
+                            path = Path.Combine(installPath, Constants.MAC_EXE_PATH, Constants.KSP_EXE);
                         break;
                     case KSPPaths.KSPX64Exe:
-                        path = Path.Combine(installPath, Constants.KSP_X64_EXE);
+                        if (Environment.OSVersion.Platform != PlatformID.MacOSX)
+                            path = Path.Combine(installPath, Constants.KSP_X64_EXE);
+                        else
+                            path = Path.Combine(installPath, Constants.MAC_EXE_PATH, Constants.KSP_X64_EXE);
                         break;
                     case KSPPaths.KSPConfig:
                         path = Path.Combine(installPath, Constants.MODS_CONFIG_FILE);
@@ -204,9 +219,19 @@ namespace KSPModAdmin.Core.Utils
                 else if (pathName.Equals(Constants.KSP_ROOT, StringComparison.CurrentCultureIgnoreCase))
                     path = installPath;
                 else if (pathName.Equals(Constants.KSP_EXE, StringComparison.CurrentCultureIgnoreCase))
-                    path = Path.Combine(installPath, Constants.KSP_EXE);
+                {
+                    if (Environment.OSVersion.Platform != PlatformID.MacOSX)
+                        path = Path.Combine(installPath, Constants.KSP_EXE);
+                    else
+                        path = Path.Combine(installPath, Constants.MAC_EXE_PATH, Constants.KSP_EXE);
+                }
                 else if (pathName.Equals(Constants.KSP_X64_EXE, StringComparison.CurrentCultureIgnoreCase))
-                    path = Path.Combine(installPath, Constants.KSP_X64_EXE);
+                {
+                    if (Environment.OSVersion.Platform != PlatformID.MacOSX)
+                        path = Path.Combine(installPath, Constants.KSP_X64_EXE);
+                    else
+                        path = Path.Combine(installPath, Constants.MAC_EXE_PATH, Constants.KSP_X64_EXE);
+                }
             }
 
             return path;

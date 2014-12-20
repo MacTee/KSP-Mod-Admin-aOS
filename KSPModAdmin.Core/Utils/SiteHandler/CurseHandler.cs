@@ -19,6 +19,7 @@ namespace KSPModAdmin.Core.Utils
             get { return cName; }
         }
 
+
         /// <summary>
         /// Checks if the passed URL is a Curse URL.
         /// </summary>
@@ -80,6 +81,17 @@ namespace KSPModAdmin.Core.Utils
         {
             ISiteHandler curseForge = SiteHandlerManager.GetSiteHandlerByName("CurseForge");
             return curseForge.DownloadMod(ref modInfo, downloadProgressHandler);
+        }
+
+        /// <summary>
+        /// Returns the plain url to the mod, where the ModInfos would be get from.
+        /// </summary>
+        /// <param name="url">The url to reduce.</param>
+        /// <returns>The plain url to the mod, where the ModInfos would be get from.</returns>
+        public string ReduceToPlainUrl(string url)
+        {
+            ISiteHandler curseForge = SiteHandlerManager.GetSiteHandlerByName("CurseForge");
+            return curseForge.ReduceToPlainUrl(GetDownloadURL(url));
         }
 
 

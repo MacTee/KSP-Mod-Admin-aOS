@@ -40,7 +40,7 @@ namespace KSPModAdmin.Core.Utils
         /// <return>The root node of the added mod, or null.</return>
         public ModNode HandleAdd(string url, string modName, bool install, DownloadProgressChangedEventHandler downloadProgressHandler = null)
         {
-            url = ReduceToPlainCurseForgeModURL(url);
+            url = ReduceToPlainUrl(url);
 
             ModInfo modInfo = GetModInfo(url);
             if (modInfo == null)
@@ -66,8 +66,9 @@ namespace KSPModAdmin.Core.Utils
             ModInfo modInfo = new ModInfo
             {
 	            SiteHandlerName = Name, 
-				ModURL = url
+				ModURL = ReduceToPlainUrl(url)
             };
+
 	        if (ParseSite(url, ref modInfo))
                 return modInfo;
 
@@ -105,16 +106,14 @@ namespace KSPModAdmin.Core.Utils
             HtmlNode fileNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='content']/section[2]/div[4]/div[2]/ul/li[1]/div[2]/p/a");
             HtmlNode fileNode2 = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='content']/section[2]/div[4]/div[2]/ul/li/div[2]/p/a/span");
 
-            string filename = string.Empty;
+            if (fileNode == null)
+                return false;
 
+            string filename = string.Empty;
             if (fileNode.InnerHtml.Contains("..."))
-            {
                 filename = fileNode2.Attributes["title"].Value; //Long filename was truncated
-            }
             else
-            {
                 filename = fileNode.InnerHtml;
-            }
 
             string downloadURL = GetDownloadURL(modInfo.ModURL);
 
@@ -125,12 +124,12 @@ namespace KSPModAdmin.Core.Utils
             return File.Exists(modInfo.LocalPath);
         }
 
-		/// <summary>
-		/// Takes a CurseForge url and sets it to the shortest path to the project
-		/// </summary>
-		/// <param name="url">Curse project url</param>
-		/// <returns>Shortest Curse project url</returns>
-		private string ReduceToPlainCurseForgeModURL(string url)
+        /// <summary>
+        /// Returns the plain url to the mod, where the ModInfos would be get from.
+        /// </summary>
+        /// <param name="url">The url to reduce.</param>
+        /// <returns>The plain url to the mod, where the ModInfos would be get from.</returns>
+        public string ReduceToPlainUrl(string url)
         {
 			if (url.EndsWith("/files/latest"))
 				return url.Replace("/files/latest", string.Empty);
@@ -185,7 +184,7 @@ namespace KSPModAdmin.Core.Utils
             modInfo.ChangeDateAsDateTime = epoch.AddSeconds(Convert.ToDouble(updateNode.Attributes["data-epoch"].Value));
 			modInfo.Downloads = downloadNode.InnerHtml.Split(" ")[0];
             modInfo.Author = authorNode.InnerHtml;
-	        modInfo.GameVersion = gameVersionNode.InnerHtml.Split(" ")[1];
+	        modInfo.KSPVersion = gameVersionNode.InnerHtml.Split(" ")[1];
             return true;
             
             // more infos could be parsed here (like: short description, Tab content (overview, installation, ...), comments, ...)

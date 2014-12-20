@@ -38,6 +38,10 @@ namespace KSPModAdmin.Core.Views
             picLoading.Visible = true;
             ModSelectionController.View.ShowBusy = true;
 
+            if (string.IsNullOrEmpty(OptionsController.DownloadPath) && 
+                !Directory.Exists(OptionsController.SelectNewDownloadPath()))
+                    return;
+
             string modPath = tbModPath.Text;
             new AsyncTask<bool>(() =>
                                 {
