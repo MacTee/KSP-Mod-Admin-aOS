@@ -158,8 +158,11 @@ namespace KSPModAdmin.Core
         public const string ISFILE = "IsFile";
         public const string INSTALL = "Install";
         public const string INSTALLDIR = "InstallDir";
+        public const string TOOLTIPOPTIONS = "ToolTipOptions";
         public const string CONFLICTDETECTIONOPTIONS = "ConflictDetectionOptions";
         public const string ONOFF = "OnOff";
+        public const string DELAY = "Delay";
+        public const string DISPLAYTIME = "DisplayTime";
         public const string SHOWCONFLICTSOLVER = "ShowConflictSolver";
         public const string NODECOLORS = "NodeColors";
         public const string COLOR = "Color";

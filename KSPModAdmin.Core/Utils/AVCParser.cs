@@ -44,7 +44,7 @@ namespace KSPModAdmin.Core.Utils
             {
                 avcInfo.GitHubUsername = GetString(jGitHub["USERNAME"]);
                 avcInfo.GitHubRepository = GetString(jGitHub["REPOSITORY"]);
-                avcInfo.GitHubAllowPreRelease = GetString(jGitHub["ALLOW_PRE_RELEASE"]).Equals("true", StringComparison.CurrentCultureIgnoreCase);
+                avcInfo.GitHubAllowPreRelease = GetString(jGitHub["ALLOW_PRE_RELEASE"]).Equals(Constants.TRUE, StringComparison.CurrentCultureIgnoreCase);
             }
             avcInfo.Version = GetVersion(jObject["VERSION"] as JToken);
             avcInfo.KspVersion = GetVersion(jObject["KSP_VERSION"] as JToken, 3);

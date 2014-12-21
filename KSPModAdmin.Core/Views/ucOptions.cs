@@ -119,6 +119,13 @@ namespace KSPModAdmin.Core.Views
         }
 
         /// <summary>
+        /// Gets or sets the a flag that determines if a mod archive should be deleted after an update.
+        /// </summary>
+        [DefaultValue(false), Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
+        public bool DeleteOldArchivesAfterUpdate { get { return cbDeleteOldArchive.Checked; } set { cbDeleteOldArchive.Checked = value; } }
+
+        /// <summary>
         /// Get or sets the up to date image visibility.
         /// </summary>
         [DefaultValue(false), Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
@@ -239,6 +246,31 @@ namespace KSPModAdmin.Core.Views
         #endregion
 
         #region Misc
+
+        #region ToolTip
+
+        /// <summary>
+        /// Gets or sets the flag to determine if the ToolTip should be activated or not.
+        /// </summary>
+        [DefaultValue(true), Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
+        public bool ToolTipOnOff { get { return cbToolTipOnOff.Checked; } set { cbToolTipOnOff.Checked = value; } }
+
+        /// <summary>
+        /// Gets or sets the delay time after a ToolTip should be displayed.
+        /// </summary>
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
+        public decimal ToolTipDelay { get { return tbToolTipDelay.DecimalValue; } set { tbToolTipDelay.Text = value.ToString("0.00"); } }
+
+        /// <summary>
+        /// Gets or sets the display time of the ToolTips.
+        /// </summary>
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
+        public decimal ToolTipDisplayTime { get { return tbToolTipDisplayTime.DecimalValue; } set { tbToolTipDisplayTime.Text = value.ToString("0.00"); } }
+
+        #endregion
 
         /// <summary>
         /// Gets or sets the flag to determine if the Conflict detection should be turned on or off.
@@ -441,6 +473,9 @@ namespace KSPModAdmin.Core.Views
             cbModUpdateInterval.SelectedIndex = 0;
             cbModUpdateBehavior.SelectedIndex = 2;
 
+            ToolTipDelay = 0.5m;
+            ToolTipDisplayTime = 10m;
+
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime || DesignMode)
                 return;
 
@@ -615,6 +650,36 @@ namespace KSPModAdmin.Core.Views
         #endregion
 
         #region Misc Tab events
+
+        /// <summary>
+        /// Handles the CheckedChanged event of the cbToolTipOnOff.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cbToolTipOnOff_CheckedChanged(object sender, EventArgs e)
+        {
+            OptionsController.ToolTipOnOff = cbToolTipOnOff.Checked;
+        }
+
+        /// <summary>
+        /// Handles the TextChanged event of the tbToolTipDelay.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tbToolTipDelay_TextChanged(object sender, EventArgs e)
+        {
+            OptionsController.ToolTipDelay = tbToolTipDelay.DecimalValue;
+        }
+
+        /// <summary>
+        /// Handles the TextChanged event of the tbToolTipDisplayTime.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tbToolTipDisplayTime_TextChanged(object sender, EventArgs e)
+        {
+            OptionsController.ToolTipDisplayTime = tbToolTipDisplayTime.DecimalValue;
+        }
 
         /// <summary>
         /// Handles the CheckedChanged event of the cbConflictDetectionOnOff.

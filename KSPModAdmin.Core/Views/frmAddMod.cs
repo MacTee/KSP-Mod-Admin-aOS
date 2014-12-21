@@ -49,13 +49,17 @@ namespace KSPModAdmin.Core.Views
                     InvokeIfRequired(() =>
                     {
                         if (string.IsNullOrEmpty(OptionsController.DownloadPath))
+                        {
+                            Messenger.AddInfo(Messages.MSG_DOWNLOAD_PATH_MISSING_PLEASE_SELECT_ONE); 
                             OptionsController.SelectNewDownloadPath();
+                        }
                     });
 
                     if (string.IsNullOrEmpty(OptionsController.DownloadPath) &&
                         !Directory.Exists(OptionsController.DownloadPath))
                         return false;
-                    
+
+                    Messenger.AddInfo(Messages.MSG_URL_DETECTED_STARTING_DOWNLOAD);
                     newMod = handler.HandleAdd(modPath, tbModName.Text, cbInstallAfterAdd.Checked);
                 }
                                     

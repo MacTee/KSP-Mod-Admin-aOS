@@ -67,7 +67,7 @@ namespace KSPModAdmin.Core.Config
                 foreach (XmlAttribute att in maxim[0].Attributes)
                 {
                     if (att.Name == Constants.MAXIM && att.Value != null)
-                        MainController.View.WindowState = (att.Value.ToLower() == "true") ? FormWindowState.Maximized : FormWindowState.Normal;
+                        MainController.View.WindowState = (att.Value.Equals(Constants.TRUE, StringComparison.CurrentCultureIgnoreCase) ? FormWindowState.Maximized : FormWindowState.Normal);
                 }
             }
 
@@ -141,15 +141,29 @@ namespace KSPModAdmin.Core.Config
             if (!vInfo.IsEmpty)
                 ModSelectionController.View.SetModSelectionViewInfo(vInfo);
 
+            XmlNodeList ttOptions = doc.GetElementsByTagName(Constants.TOOLTIPOPTIONS);
+            if (ttOptions.Count >= 1)
+            {
+                foreach (XmlAttribute att in ttOptions[0].Attributes)
+                {
+                    if (att.Name == Constants.ONOFF && att.Value != null)
+                        OptionsController.ToolTipOnOff = (att.Value.Equals(Constants.TRUE, StringComparison.CurrentCultureIgnoreCase));
+                    else if (att.Name == Constants.DELAY && att.Value != null)
+                        OptionsController.ToolTipDelay = decimal.Parse(att.Value);
+                    else if (att.Name == Constants.DISPLAYTIME && att.Value != null)
+                        OptionsController.ToolTipDisplayTime = decimal.Parse(att.Value);
+                }
+            }
+
             XmlNodeList conflictDetectionOnnOff = doc.GetElementsByTagName(Constants.CONFLICTDETECTIONOPTIONS);
             if (conflictDetectionOnnOff.Count >= 1)
             {
                 foreach (XmlAttribute att in conflictDetectionOnnOff[0].Attributes)
                 {
                     if (att.Name == Constants.ONOFF && att.Value != null)
-                        OptionsController.ConflictDetectionOnOff = (att.Value.ToLower() == "true");
+                        OptionsController.ConflictDetectionOnOff = (att.Value.Equals(Constants.TRUE, StringComparison.CurrentCultureIgnoreCase));
                     else if (att.Name == Constants.SHOWCONFLICTSOLVER && att.Value != null)
-                        OptionsController.ShowConflictSolver = (att.Value.ToLower() == "true");
+                        OptionsController.ShowConflictSolver = (att.Value.Equals(Constants.TRUE, StringComparison.CurrentCultureIgnoreCase));
                 }
             }
 
@@ -289,7 +303,7 @@ namespace KSPModAdmin.Core.Config
                 foreach (XmlAttribute att in nodes[0].Attributes)
                 {
                     if ((att.Name == Constants.VALUE || att.Name == Constants.CHECKFORUPDATES) && att.Value != null)
-                        OptionsController.VersionCheck = (att.Value.ToLower() == "true");
+                        OptionsController.VersionCheck = (att.Value.Equals(Constants.TRUE, StringComparison.CurrentCultureIgnoreCase));
                 }
             }
 
@@ -407,6 +421,15 @@ namespace KSPModAdmin.Core.Config
 
             // ModSelection splitter position
             node = ConfigHelper.CreateConfigNode(doc, Constants.MODINFOSSPLITTERPOS, Constants.POSITION, vInfo.ModInfosSplitterPos.ToString());
+            generalNode.AppendChild(node);
+
+            // ToolTip options
+            node = ConfigHelper.CreateConfigNode(doc, Constants.TOOLTIPOPTIONS, new string[,]
+            {
+                { Constants.ONOFF, OptionsController.ToolTipOnOff.ToString() },
+                { Constants.DELAY, OptionsController.ToolTipDelay.ToString() },
+                { Constants.DISPLAYTIME, OptionsController.ToolTipDisplayTime.ToString() }
+            });
             generalNode.AppendChild(node);
 
             // Conflict detection options

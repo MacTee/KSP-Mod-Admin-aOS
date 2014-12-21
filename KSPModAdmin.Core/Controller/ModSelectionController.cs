@@ -643,7 +643,8 @@ namespace KSPModAdmin.Core.Controller
             View.InvokeIfRequired(() => Model.RemoveMod(outdatedMod));
 
             Messenger.AddInfo(string.Format(Messages.MSG_ADDING_UPDATED_MOD_0, newMod.Text));
-            Model.AddMod(newMod);
+            if (Model.AddMod(newMod) != null && OptionsController.DeleteOldArchivesAfterUpdate && File.Exists(outdatedMod.LocalPath))
+                File.Delete(outdatedMod.LocalPath);
         }
 
         #endregion

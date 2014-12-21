@@ -142,6 +142,15 @@ namespace KSPModAdmin.Core.Controller
             set { if (View != null) View.ModUpdateBehavior = value; }
         }
 
+        /// <summary>
+        /// Gets or sets the a flag that determines if a mod archive should be deleted after an update.
+        /// </summary>
+        public static bool DeleteOldArchivesAfterUpdate
+        {
+            get { return (View != null) ? View.DeleteOldArchivesAfterUpdate : false; }
+            set { if (View != null) View.DeleteOldArchivesAfterUpdate = value; }
+        }
+
         #endregion
 
         #region Paths
@@ -252,6 +261,64 @@ namespace KSPModAdmin.Core.Controller
         #endregion
 
         #region Misc
+
+        #region ToolTip
+
+        /// <summary>
+        /// Gets or sets the flag to determine if the ToolTip should be activated or not.
+        /// </summary>
+        public static bool ToolTipOnOff
+        {
+            get
+            {
+                return (View != null) ? View.ToolTipOnOff : true;
+            }
+            set
+            {
+                if (View != null && value != View.ToolTipOnOff)
+                    View.ToolTipOnOff = value;
+
+                MainController.SetToolTipValues(ToolTipOnOff, ToolTipDelay, ToolTipDisplayTime);
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the delay time after a ToolTip should be displayed.
+        /// </summary>
+        public static decimal ToolTipDelay
+        {
+            get
+            {
+                return (View != null) ? View.ToolTipDelay : 0.5m;
+            }
+            set
+            {
+                if (View != null && value != View.ToolTipDelay)
+                    View.ToolTipDelay = value;
+
+                MainController.SetToolTipValues(ToolTipOnOff, ToolTipDelay, ToolTipDisplayTime);
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the display time of the ToolTips.
+        /// </summary>
+        public static decimal ToolTipDisplayTime
+        {
+            get
+            {
+                return (View != null) ? View.ToolTipDisplayTime : 10.0m;
+            }
+            set
+            {
+                if (View != null && value != View.ToolTipDisplayTime)
+                    View.ToolTipDisplayTime = value;
+                
+                MainController.SetToolTipValues(ToolTipOnOff, ToolTipDelay, ToolTipDisplayTime);
+            }
+        }
+
+        #endregion
 
         /// <summary>
         /// Gets or sets the flag to determine if the Conflict detection should be turned on or off.

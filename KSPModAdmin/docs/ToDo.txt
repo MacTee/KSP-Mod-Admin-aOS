@@ -1,7 +1,6 @@
 ﻿//// BUGS
 /////////////////////
 - ModName changes after Mod update.
-- No question for Download folder if it is not set (atleast during add via url)
 - AVC Plugin - Problem when a mod archive contains multiple version files. (Sample: Mission Controller 2 on KerbalStuff)
 - Some mods have additional folders that normally doesn't install. 
   It can be folders with alternative data, manuals, etc. For examples see Planet Shine or UniversalStorage [TAC PACK]. 
@@ -36,6 +35,8 @@
   - Use GitHub infos.
   - Try to get SiteHandler from ChangeLog_URL as well.
 - Column selection for ModSelection (Choose the Columns that should be displayed in the ModSelection).
+- Option to "Delete old archive after update"
+- Faster Tooltip -> option to allow use the delay time.
 
 //// TODO
 /////////////////////
@@ -85,9 +86,6 @@
 //// SUGGESTIONS
 /////////////////////
 
-- Option to "Delete old archive after update"
 - Option to dummp mods without a destination to gamedata folder.
 - Option to add files to an exclude list for mod install (like readme, txt, licenses ...)
-- Bigger icons or faster tooltips. I spend a lot of time waiting for tool tips to show up because the icons all look pretty much the same to me. I'd prefer text buttons, but bigger or more clear icons would be OK.
-  Faster Tooltip -> option to allow use the delay time.
 - Compress for zipping.

@@ -626,5 +626,19 @@
   <Control Name="lblColSelectDisplayed" Value="Displayed in ModSelection:"/>
   <Control Name="lblColSelectAvailable" Value="Available columns:"/>
   <Control Name="btnApply" Value="Apply"/>
-
+  
+  <Control Name="gbToolTip" Value="ToolTip:"/>
+  <Control Name="cbToolTipOnOff" Value="On / Off">
+    <ChildControl Name="cbToolTipOnOff_ToolTip" Value="Switches the ToolTip on or off."/>
+  </Control>
+  <Control Name="lblToolTipDelay" Value="Delay:"/>
+  <Control Name="lblSecond1" Value="sec."/>
+  <Control Name="lblToolTipDisplayTime" Value="Display time:"/>
+  <Control Name="lblSecond2" Value="sec."/>
+  <Control Name="cbDeleteOldArchive" Value="Delete old archive after update">
+    <ChildControl Name="cbDeleteOldArchive_ToolTip" Value="Check this option if the old archive of a mod should be deleted after an update."/>
+  </Control>
+  <String Name="MSG_DOWNLOAD_PATH_MISSING_PLEASE_SELECT_ONE" Value="Download path missing. Please select a download folder."/>
+  <String Name="MSG_URL_DETECTED_STARTING_DOWNLOAD" Value="Url detected starting download..."/>
+  
 </Language>
