@@ -38,55 +38,63 @@ namespace KSPModAdmin.Core.Views
             picLoading.Visible = true;
             ModSelectionController.View.ShowBusy = true;
 
-            if (string.IsNullOrEmpty(OptionsController.DownloadPath) && 
-                !Directory.Exists(OptionsController.SelectNewDownloadPath()))
-                    return;
-
             string modPath = tbModPath.Text;
             new AsyncTask<bool>(() =>
-                                {
-                                    ModNode newMod = null;
-                                    ISiteHandler handler = SiteHandlerManager.GetSiteHandlerByURL(modPath);
+            {
+                ModNode newMod = null;
+                ISiteHandler handler = SiteHandlerManager.GetSiteHandlerByURL(modPath);
 
-                                    if (handler != null)
-                                        newMod = handler.HandleAdd(modPath, tbModName.Text, cbInstallAfterAdd.Checked);
+                if (handler != null)
+                {
+                    InvokeIfRequired(() =>
+                    {
+                        if (string.IsNullOrEmpty(OptionsController.DownloadPath))
+                            OptionsController.SelectNewDownloadPath();
+                    });
+
+                    if (string.IsNullOrEmpty(OptionsController.DownloadPath) &&
+                        !Directory.Exists(OptionsController.DownloadPath))
+                        return false;
+                    
+                    newMod = handler.HandleAdd(modPath, tbModName.Text, cbInstallAfterAdd.Checked);
+                }
                                     
-                                    else if (ValidModPath(modPath))
-                                        newMod = ModSelectionController.HandleModAddViaPath(modPath, tbModName.Text, cbInstallAfterAdd.Checked);
+                else if (ValidModPath(modPath))
+                    newMod = ModSelectionController.HandleModAddViaPath(modPath, tbModName.Text, cbInstallAfterAdd.Checked);
 
-                                    else
-                                    {
-                                        Messenger.AddError(string.Format(Messages.MSG_ERROR_MOD_PATH_URL_0_INVALID, modPath));
-                                        InvokeIfRequired(() => MessageBox.Show(this, Messages.MSG_PLS_ENTER_VALID_ARCHIVE_URL, Messages.MSG_TITLE_ATTENTION));
-                                    }
+                else
+                {
+                    Messenger.AddError(string.Format(Messages.MSG_ERROR_MOD_PATH_URL_0_INVALID, modPath));
+                    InvokeIfRequired(() => MessageBox.Show(this, Messages.MSG_PLS_ENTER_VALID_ARCHIVE_URL, Messages.MSG_TITLE_ATTENTION));
+                }
 
-                                    return (newMod != null);
-                                }, (success, ex) =>
-                                {
-                                    if (ex != null)
-                                    {
-                                        Messenger.AddError(ex.Message, ex);
-                                        MessageBox.Show(this, ex.Message, Messages.MSG_TITLE_ERROR);
-                                    }
+                return (newMod != null);
+            }, (success, ex) =>
+            {
+                if (ex != null)
+                {
+                    Messenger.AddError(ex.Message, ex);
+                    MessageBox.Show(this, ex.Message, Messages.MSG_TITLE_ERROR);
+                }
 
-                                    tbModName.Enabled = true;
-                                    tbModPath.Enabled = true;
-                                    btnAdd.Enabled = true;
-                                    btnAddAndClose.Enabled = true;
-                                    btnCancel.Enabled = true;
-                                    btnFolderSearch.Enabled = true;
-                                    cbInstallAfterAdd.Enabled = true;
-                                    picLoading.Visible = false;
-                                    ModSelectionController.View.ShowBusy = false;
+                tbModName.Enabled = true;
+                tbModPath.Enabled = true;
+                btnAdd.Enabled = true;
+                btnAddAndClose.Enabled = true;
+                btnCancel.Enabled = true;
+                btnFolderSearch.Enabled = true;
+                cbInstallAfterAdd.Enabled = true;
+                picLoading.Visible = false;
+                ModSelectionController.View.ShowBusy = false;
 
-                                    if (success && sender == btnAddAndClose)
-                                        Close();
-                                    else
-                                    {
-                                        tbModName.Text = string.Empty;
-                                        tbModPath.Text = string.Empty;
-                                    }
-                                }).Run();
+                if (success && sender == btnAddAndClose)
+                    Close();
+                else
+                {
+                    tbModName.Text = string.Empty;
+                    tbModPath.Text = string.Empty;
+                }
+            }).Run();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
