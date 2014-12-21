@@ -596,16 +596,16 @@
   <String Name="MSG_FILE_NOT_FOUND_0" Value="Не найден файл &quot;{0}&quot;."/>
   <String Name="MSG_ERROR_WHILE_READING_0" Value="Ошибка при чтении &quot;{0}&quot;."/>
   
-  <String Name="MSG_AVC_VERSIONFILE_FOUND" Value="(T)AVC Plugin version file found."/>
-  <String Name="MSG_NO_AVC_VERSIONFILE_FOUND" Value="(T)No AVC Plugin version file found!"/>
-  <String Name="MSG_READING_AVC_VERSIONFILE_INFO" Value="(T)Reading AVC Plugin version file..."/>
-  <String Name="MSG_IMPORTING_AVC_VERSIONFILE_INFO_0" Value="(T)Importing AVC Plugin version file information for &quot;{0}&quot;..."/>
-  <String Name="MSG_NO_COMPATIBLE_SITEHANDLER_FOUND_0" Value="(T)No compatible SiteHandler found for &quot;{0}&quot;! Mod update support not available for this mod."/>
-  <String Name="MSG_COMPATIBLE_SITEHANDLER_0_FOUND_1" Value="(T)Compatible SiteHandler ({0}) found for &quot;{1}&quot;! Mod update support active!"/>
-  <String Name="MSG_ERROR_WHILE_READING_AVC_VERION_FILE" Value="(T)Error while reading AVC Plugin version file!"/>
-  <String Name="MSG_ERROR_DOWNLOADING_NEW_AVC_VERION_FILE_FAILED" Value="(T)Downloading of new AVC Plugin version file failded!"/>
-  <Control Name="tsmiCmsTreeViewOptions" Value="(T)TreeView options"/>
-  <Control Name="tsmiCmsOneModTreeViewOptions" Value="(T)TreeView options"/>
+  <String Name="MSG_AVC_VERSIONFILE_FOUND" Value="Найден файл .version плагина AVC."/>
+  <String Name="MSG_NO_AVC_VERSIONFILE_FOUND" Value="Не найден файл .version плагина AVC!"/>
+  <String Name="MSG_READING_AVC_VERSIONFILE_INFO" Value="Чтение файла .version плагина AVC..."/>
+  <String Name="MSG_IMPORTING_AVC_VERSIONFILE_INFO_0" Value="Импорт информации из файла .version плагина AVC для &quot;{0}&quot;..."/>
+  <String Name="MSG_NO_COMPATIBLE_SITEHANDLER_FOUND_0" Value="Не найден SiteHandler для &quot;{0}&quot;! Для этого мода обновление не поддерживается."/>
+  <String Name="MSG_COMPATIBLE_SITEHANDLER_0_FOUND_1" Value="Найден совместимый SiteHandler ({0}) для &quot;{1}&quot;! Контроль версий для мода включён!"/>
+  <String Name="MSG_ERROR_WHILE_READING_AVC_VERION_FILE" Value="Ошибка при чтении файла .version плагина AVC!"/>
+  <String Name="MSG_ERROR_DOWNLOADING_NEW_AVC_VERION_FILE_FAILED" Value="Не удалось загрузить новый файла .version плагина AVC!"/>
+  <Control Name="tsmiCmsTreeViewOptions" Value="Настройки списка"/>
+  <Control Name="tsmiCmsOneModTreeViewOptions" Value="Настройки списка"/>
 
   <Control Name="lblColSelectDescription" Value="(T)Drag &amp;&amp; Drop to reorder columns^Move columns between lists to show or hide them."/>
   <Control Name="lblColSelectDisplayed" Value="(T)Displayed in ModSelection:"/>
