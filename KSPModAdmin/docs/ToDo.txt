@@ -85,6 +85,7 @@
 //// SUGGESTIONS
 /////////////////////
 
+- Option to "Delete old archive after update"
 - Option to dummp mods without a destination to gamedata folder.
 - Option to add files to an exclude list for mod install (like readme, txt, licenses ...)
 - Bigger icons or faster tooltips. I spend a lot of time waiting for tool tips to show up because the icons all look pretty much the same to me. I'd prefer text buttons, but bigger or more clear icons would be OK.

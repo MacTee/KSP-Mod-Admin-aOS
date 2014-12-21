@@ -611,16 +611,16 @@
   <String Name="MSG_FILE_NOT_FOUND_0" Value="File non trovato &quot;{0}&quot;."/>
   <String Name="MSG_ERROR_WHILE_READING_0" Value="Errore nel leggere &quot;{0}&quot;."/>
 
-  <String Name="MSG_AVC_VERSIONFILE_FOUND" Value="(T)AVC Plugin version file found."/>
-  <String Name="MSG_NO_AVC_VERSIONFILE_FOUND" Value="(T)No AVC Plugin version file found!"/>
-  <String Name="MSG_READING_AVC_VERSIONFILE_INFO" Value="(T)Reading AVC Plugin version file..."/>
-  <String Name="MSG_IMPORTING_AVC_VERSIONFILE_INFO_0" Value="(T)Importing AVC Plugin version file information for &quot;{0}&quot;..."/>
-  <String Name="MSG_NO_COMPATIBLE_SITEHANDLER_FOUND_0" Value="(T)No compatible SiteHandler found for &quot;{0}&quot;! Mod update support not available for this mod."/>
-  <String Name="MSG_COMPATIBLE_SITEHANDLER_0_FOUND_1" Value="(T)Compatible SiteHandler ({0}) found for &quot;{1}&quot;! Mod update support active!"/>
-  <String Name="MSG_ERROR_WHILE_READING_AVC_VERION_FILE" Value="(T)Error while reading AVC Plugin version file!"/>
-  <String Name="MSG_ERROR_DOWNLOADING_NEW_AVC_VERION_FILE_FAILED" Value="(T)Downloading of new AVC Plugin version file failded!"/>
-  <Control Name="tsmiCmsTreeViewOptions" Value="(T)TreeView options"/>
-  <Control Name="tsmiCmsOneModTreeViewOptions" Value="(T)TreeView options"/>
+  <String Name="MSG_AVC_VERSIONFILE_FOUND" Value="File di versione di AVC Plugin trovato."/>
+  <String Name="MSG_NO_AVC_VERSIONFILE_FOUND" Value="Nessun file di versione di AVC Plugin trovato!"/>
+  <String Name="MSG_READING_AVC_VERSIONFILE_INFO" Value="Lettura del file di versione di AVC Plugin..."/>
+  <String Name="MSG_IMPORTING_AVC_VERSIONFILE_INFO_0" Value="Importazione delle informazioni dal file di versione di AVC Plugin per &quot;{0}&quot;..."/>
+  <String Name="MSG_NO_COMPATIBLE_SITEHANDLER_FOUND_0" Value="Nessun sito di gestione trovato per &quot;{0}&quot;! Supporto per aggiornamento non disponibile per questo Mod."/>
+  <String Name="MSG_COMPATIBLE_SITEHANDLER_0_FOUND_1" Value="Sito di gestione compatibile ({0}) trovato per &quot;{1}&quot;! Supporto per aggiornamento del Mod attivo!"/>
+  <String Name="MSG_ERROR_WHILE_READING_AVC_VERION_FILE" Value="Errore nella lettura del file di versione di AVC Plugin!"/>
+  <String Name="MSG_ERROR_DOWNLOADING_NEW_AVC_VERION_FILE_FAILED" Value="Download del nuovo file di versione di AVC Plugin fallito!"/>
+  <Control Name="tsmiCmsTreeViewOptions" Value="Opzioni di TreeView"/>
+  <Control Name="tsmiCmsOneModTreeViewOptions" Value="Opzioni di TreeView"/>
 
   <Control Name="lblColSelectDescription" Value="(T)Drag &amp;&amp; Drop to reorder columns^Move columns between lists to show or hide them."/>
   <Control Name="lblColSelectDisplayed" Value="(T)Displayed in ModSelection:"/>
