@@ -610,4 +610,9 @@
   <Control Name="tsmiCmsTreeViewOptions" Value="TreeView Optionen"/>
   <Control Name="tsmiCmsOneModTreeViewOptions" Value="TreeView Optionen"/>
 
+  <Control Name="lblColSelectDescription" Value="Reihenfolge der Spalten per Drag &amp;&amp; Drop ändern^Spalten anzeigen/verstecken durch verschieben."/>
+  <Control Name="lblColSelectDisplayed" Value="Angezeigt in der ModSelection:"/>
+  <Control Name="lblColSelectAvailable" Value="Verfügbare Spalten:"/>
+  <Control Name="btnApply" Value="Übernehmen"/>
+
 </Language>

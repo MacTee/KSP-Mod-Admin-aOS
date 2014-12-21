@@ -101,6 +101,9 @@
     <Compile Include="Model\ModNode.cs" />
     <Compile Include="Model\NoteNode.cs" />
     <Compile Include="Utils\AVCParser.cs" />
+    <Compile Include="Utils\Controls\ListViewAdv.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Utils\ModPackHandler.cs" />
     <Compile Include="Utils\SiteHandler\CurseForgeHandler.cs" />
     <Compile Include="Utils\SiteHandler\CurseHandler.cs" />
@@ -355,6 +358,12 @@
     <Compile Include="Views\frmBase.Designer.cs">
       <DependentUpon>frmBase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\frmColumnSelection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frmColumnSelection.Designer.cs">
+      <DependentUpon>frmColumnSelection.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\frmCopyModInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -559,6 +568,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\frmAddMod.resx">
       <DependentUpon>frmAddMod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\frmColumnSelection.resx">
+      <DependentUpon>frmColumnSelection.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\frmCopyModInfo.resx">
       <DependentUpon>frmCopyModInfo.cs</DependentUpon>

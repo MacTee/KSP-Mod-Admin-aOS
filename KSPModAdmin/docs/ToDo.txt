@@ -3,7 +3,6 @@
 - ModName changes after Mod update.
 - No question for Download folder if it is not set (atleast during add via url)
 - AVC Plugin - Problem when a mod archive contains multiple version files. (Sample: Mission Controller 2 on KerbalStuff)
-- Mod info right panel updating when the "Edit Mod Info" window closes, instead of waiting to read it when the mod is unselected and selected again.
 - Some mods have additional folders that normally doesn't install. 
   It can be folders with alternative data, manuals, etc. For examples see Planet Shine or UniversalStorage [TAC PACK]. 
   Usually Mod Admin can't detect installation path for them and shows warning. When I update this mods, Mod Admin shows warning again for every root node 
@@ -36,9 +35,12 @@
   - Read version file from URL provided from mod archive version file.
   - Use GitHub infos.
   - Try to get SiteHandler from ChangeLog_URL as well.
+- Column selection for ModSelection (Choose the Columns that should be displayed in the ModSelection).
 
 //// TODO
 /////////////////////
+
+- Translation of ModSelection columns.
 
 - AVC Plugin version file support
   - Bug fix see BUGS above.
@@ -64,8 +66,6 @@
 - Restart destination detection.
 
 - Conflict detection/solving
-
-- Column select for ModSelection from ModInfo fields
 
 - Revise of the English/German text
   - unify URL, link, site, page

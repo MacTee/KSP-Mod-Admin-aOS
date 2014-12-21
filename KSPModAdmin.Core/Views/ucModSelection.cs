@@ -152,6 +152,7 @@ namespace KSPModAdmin.Core.Views
         {
             InvokeIfRequired(() =>
                 {
+                    tvModSelection_SelectionChanged(null, null);
                     Invalidate();
                     tvModSelection.Invalidate();
                     tvModSelection.Update();
@@ -349,8 +350,7 @@ namespace KSPModAdmin.Core.Views
 
         private void tsmiCmsTreeViewOptions_Click(object sender, EventArgs e)
         {
-            TreeViewAdvColumnsInfo newInfos = ModSelectionController.OpenTreeViewOptions();
-            newInfos.ToTreeViewAdv(tvModSelection);
+            ModSelectionController.OpenTreeViewOptions();
         }
 
         private void tvModSelection_SelectionChanged(object sender, EventArgs e)

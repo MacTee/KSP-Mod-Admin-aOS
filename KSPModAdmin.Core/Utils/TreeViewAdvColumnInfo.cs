@@ -96,6 +96,206 @@ namespace KSPModAdmin.Core.Utils
             }
         }
 
+        public static List<ColumnData> AllDefaultColumns
+        {
+            get
+            {
+                List<ColumnData> columns = new List<ColumnData>();
+                columns.AddRange(DefaultColumns);
+                columns.AddRange(new []
+                {
+                    new ColumnData()
+                    {
+                        Header = "KSPVersion",
+                        SortOrder = SortOrder.None,
+                        TooltipText = null,
+                        Width = 80,
+                        Items = new List<ColumnItemData>()
+                        {
+                            new ColumnItemData()
+                            {
+                                Type = ColumnItemType.NodeTextBox,
+                                DataPropertyName = "KSPVersion",
+                                IncrementalSearchEnabled = true,
+                                LeftMargin = 3
+                            }
+                        }
+                    },
+                    new ColumnData()
+                    {
+                        Header = "Author",
+                        SortOrder = SortOrder.None,
+                        TooltipText = null,
+                        Width = 80,
+                        Items = new List<ColumnItemData>()
+                        {
+                            new ColumnItemData()
+                            {
+                                Type = ColumnItemType.NodeTextBox,
+                                DataPropertyName = "Author",
+                                IncrementalSearchEnabled = true,
+                                LeftMargin = 3
+                            }
+                        }
+                    },
+                    new ColumnData()
+                    {
+                        Header = "Outdated",
+                        SortOrder = SortOrder.None,
+                        TooltipText = null,
+                        Width = 80,
+                        Items = new List<ColumnItemData>()
+                        {
+                            new ColumnItemData()
+                            {
+                                Type = ColumnItemType.NodeTextBox,
+                                DataPropertyName = "IsOutdated",
+                                IncrementalSearchEnabled = true,
+                                LeftMargin = 3
+                            }
+                        }
+                    },
+                    new ColumnData()
+                    {
+                        Header = "Rating",
+                        SortOrder = SortOrder.None,
+                        TooltipText = null,
+                        Width = 80,
+                        Items = new List<ColumnItemData>()
+                        {
+                            new ColumnItemData()
+                            {
+                                Type = ColumnItemType.NodeTextBox,
+                                DataPropertyName = "Rating",
+                                IncrementalSearchEnabled = true,
+                                LeftMargin = 3
+                            }
+                        }
+                    },
+                    new ColumnData()
+                    {
+                        Header = "Downloads",
+                        SortOrder = SortOrder.None,
+                        TooltipText = null,
+                        Width = 80,
+                        Items = new List<ColumnItemData>()
+                        {
+                            new ColumnItemData()
+                            {
+                                Type = ColumnItemType.NodeTextBox,
+                                DataPropertyName = "Downloads",
+                                IncrementalSearchEnabled = true,
+                                LeftMargin = 3
+                            }
+                        }
+                    },
+                    new ColumnData()
+                    {
+                        Header = "Note",
+                        SortOrder = SortOrder.None,
+                        TooltipText = null,
+                        Width = 80,
+                        Items = new List<ColumnItemData>()
+                        {
+                            new ColumnItemData()
+                            {
+                                Type = ColumnItemType.NodeTextBox,
+                                DataPropertyName = "Note",
+                                IncrementalSearchEnabled = true,
+                                LeftMargin = 3
+                            }
+                        }
+                    },
+                    new ColumnData()
+                    {
+                        Header = "Conflicts",
+                        SortOrder = SortOrder.None,
+                        TooltipText = null,
+                        Width = 80,
+                        Items = new List<ColumnItemData>()
+                        {
+                            new ColumnItemData()
+                            {
+                                Type = ColumnItemType.NodeTextBox,
+                                DataPropertyName = "HasCollision",
+                                IncrementalSearchEnabled = true,
+                                LeftMargin = 3
+                            }
+                        }
+                    },
+                    new ColumnData()
+                    {
+                        Header = "Installed",
+                        SortOrder = SortOrder.None,
+                        TooltipText = null,
+                        Width = 80,
+                        Items = new List<ColumnItemData>()
+                        {
+                            new ColumnItemData()
+                            {
+                                Type = ColumnItemType.NodeTextBox,
+                                DataPropertyName = "IsInstalled",
+                                IncrementalSearchEnabled = true,
+                                LeftMargin = 3
+                            }
+                        }
+                    },
+                    new ColumnData()
+                    {
+                        Header = "CreationDate",
+                        SortOrder = SortOrder.None,
+                        TooltipText = null,
+                        Width = 80,
+                        Items = new List<ColumnItemData>()
+                        {
+                            new ColumnItemData()
+                            {
+                                Type = ColumnItemType.NodeTextBox,
+                                DataPropertyName = "CreationDate",
+                                IncrementalSearchEnabled = true,
+                                LeftMargin = 3
+                            }
+                        }
+                    },
+                    new ColumnData()
+                    {
+                        Header = "ChangeDate",
+                        SortOrder = SortOrder.None,
+                        TooltipText = null,
+                        Width = 80,
+                        Items = new List<ColumnItemData>()
+                        {
+                            new ColumnItemData()
+                            {
+                                Type = ColumnItemType.NodeTextBox,
+                                DataPropertyName = "ChangeDate",
+                                IncrementalSearchEnabled = true,
+                                LeftMargin = 3
+                            }
+                        }
+                    },
+                    new ColumnData()
+                    {
+                        Header = "Archive path",
+                        SortOrder = SortOrder.None,
+                        TooltipText = null,
+                        Width = 80,
+                        Items = new List<ColumnItemData>()
+                        {
+                            new ColumnItemData()
+                            {
+                                Type = ColumnItemType.NodeTextBox,
+                                DataPropertyName = "ArchivePath",
+                                IncrementalSearchEnabled = true,
+                                LeftMargin = 3
+                            }
+                        }
+                    }
+                });
+                return columns;
+            }
+        }
+
 
         public TreeViewAdvColumnsInfo()
         {

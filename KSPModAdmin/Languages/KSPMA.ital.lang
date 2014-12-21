@@ -622,5 +622,10 @@
   <Control Name="tsmiCmsTreeViewOptions" Value="(T)TreeView options"/>
   <Control Name="tsmiCmsOneModTreeViewOptions" Value="(T)TreeView options"/>
 
+  <Control Name="lblColSelectDescription" Value="(T)Drag &amp;&amp; Drop to reorder columns^Move columns between lists to show or hide them."/>
+  <Control Name="lblColSelectDisplayed" Value="(T)Displayed in ModSelection:"/>
+  <Control Name="lblColSelectAvailable" Value="(T)Available columns:"/>
+  <Control Name="btnApply" Value="(T)Apply"/>
+  
 </Language>
 	

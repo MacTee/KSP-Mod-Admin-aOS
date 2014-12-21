@@ -1565,6 +1565,18 @@ namespace KSPModAdmin.Core.Controller
         }
 
         /// <summary>
+        /// Opens the TreeView options dialog.
+        /// </summary>
+        /// <returns>The new TreeViewAdvColumnsInfo edited with the TreeView option dialog.</returns>
+        public static void OpenTreeViewOptions()
+        {
+            frmColumnSelection dlg = new frmColumnSelection();
+            dlg.ModSelectionColumns = View.GetModSelectionViewInfo().TreeViewAdvColumnsInfo;
+            if (dlg.ShowDialog() == DialogResult.OK)
+                dlg.ModSelectionColumns.ToTreeViewAdv(View.tvModSelection);
+        }
+
+        /// <summary>
         /// Tries to reads the content of the file that is represented by the passen ModNode.
         /// </summary>
         /// <param name="node">The ModNode that contains thie File information.</param>
@@ -1609,17 +1621,6 @@ namespace KSPModAdmin.Core.Controller
             }
 
             return string.Empty;
-        }
-
-        /// <summary>
-        /// Opens the TreeView options dialog
-        /// </summary>
-        /// <returns>The new TreeViewAdvColumnsInfo edited with the TreeView option dialog.</returns>
-        public static TreeViewAdvColumnsInfo OpenTreeViewOptions()
-        {
-            // TODO: ...
-            MessageBox.Show(View.ParentForm, "TreeView options not implemented yet!", "");
-            return new TreeViewAdvColumnsInfo();
         }
     }
 }

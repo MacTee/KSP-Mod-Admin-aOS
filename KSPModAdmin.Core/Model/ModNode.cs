@@ -307,6 +307,11 @@ namespace KSPModAdmin.Core.Model
         public string LocalPath { get { return Key; } }
 
         /// <summary>
+        /// Local path of the mod zip archive.
+        /// </summary>
+        public string ArchivePath { get { return ZipRoot.LocalPath; } }
+
+        /// <summary>
         /// The install destination of the node.
         /// </summary>
         public string Destination
