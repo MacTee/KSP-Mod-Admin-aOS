@@ -141,6 +141,18 @@ namespace KSPModAdmin.Core.Config
             if (!vInfo.IsEmpty)
                 ModSelectionController.View.SetModSelectionViewInfo(vInfo);
 
+            XmlNodeList destinationDetectionNode = doc.GetElementsByTagName(Constants.DESTINATIONDETECTIONOPTIONS);
+            if (destinationDetectionNode.Count >= 1)
+            {
+                foreach (XmlAttribute att in destinationDetectionNode[0].Attributes)
+                {
+                    if (att.Name == Constants.TYPE && att.Value != null)
+                        OptionsController.DestinationDetectionType = (DestinationDetectionType)int.Parse(att.Value);
+                    else if (att.Name == Constants.FALLBACK && att.Value != null)
+                        OptionsController.CopyToGameData = (att.Value.Equals(Constants.TRUE, StringComparison.CurrentCultureIgnoreCase));
+                }
+            }
+
             XmlNodeList ttOptions = doc.GetElementsByTagName(Constants.TOOLTIPOPTIONS);
             if (ttOptions.Count >= 1)
             {
@@ -421,6 +433,14 @@ namespace KSPModAdmin.Core.Config
 
             // ModSelection splitter position
             node = ConfigHelper.CreateConfigNode(doc, Constants.MODINFOSSPLITTERPOS, Constants.POSITION, vInfo.ModInfosSplitterPos.ToString());
+            generalNode.AppendChild(node);
+
+            // Destination detection options
+            node = ConfigHelper.CreateConfigNode(doc, Constants.DESTINATIONDETECTIONOPTIONS, new string[,]
+            {
+                { Constants.TYPE, ((int)OptionsController.DestinationDetectionType).ToString() },
+                { Constants.FALLBACK, OptionsController.CopyToGameData.ToString() }
+            });
             generalNode.AppendChild(node);
 
             // ToolTip options

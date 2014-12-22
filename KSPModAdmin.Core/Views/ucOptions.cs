@@ -246,6 +246,52 @@ namespace KSPModAdmin.Core.Views
         #endregion
 
         #region Misc
+        
+        #region Destination detection
+
+        /// <summary>
+        /// Gets or sets the destination detection type.
+        /// </summary>
+        [DefaultValue(DestinationDetectionType.SmartDetection), Browsable(false),
+         EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
+        public DestinationDetectionType DestinationDetectionType
+        {
+            get
+            {
+                if (rbDDSmartDestDetection.Checked)
+                    return DestinationDetectionType.SmartDetection;
+                else if (rbDDJustDump.Checked)
+                    return DestinationDetectionType.SimpleDump;
+
+                return DestinationDetectionType.SmartDetection;
+
+            }
+            set
+            {
+                switch (value)
+                {
+                    case DestinationDetectionType.SmartDetection:
+                        rbDDSmartDestDetection.Checked = true;
+                        break;
+                    case DestinationDetectionType.SimpleDump:
+                        rbDDJustDump.Checked = true;
+                        break;
+                    default:
+                        rbDDSmartDestDetection.Checked = true;
+                        break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the flag to determine of mod archives should be copied to GameData folder, if no destination was detected..
+        /// </summary>
+        [DefaultValue(false), Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
+        public bool CopyToGameData { get { return cbDDCopyToGameData.Checked; } set { cbDDCopyToGameData.Checked = value; } }
+
+        #endregion
 
         #region ToolTip
 
@@ -650,6 +696,11 @@ namespace KSPModAdmin.Core.Views
         #endregion
 
         #region Misc Tab events
+
+        private void rbDDSmartDestDetection_CheckedChanged(object sender, EventArgs e)
+        {
+            cbDDCopyToGameData.Enabled = rbDDSmartDestDetection.Checked;
+        }
 
         /// <summary>
         /// Handles the CheckedChanged event of the cbToolTipOnOff.

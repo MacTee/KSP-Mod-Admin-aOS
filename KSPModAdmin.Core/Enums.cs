@@ -1,16 +1,19 @@
-﻿using System;
-
-namespace KSPModAdmin.Core
+﻿namespace KSPModAdmin.Core
 {
     /// <summary>
-    /// Enum of possible version control sites.
+    /// Enum of possible destination detection types.
     /// </summary>
-    public enum VersionControlEnum
+    public enum DestinationDetectionType
     {
-        Spaceport,
-        KSPForum,
-        CurseForge,
-        None
+        /// <summary>
+        /// Tries to find KSP similar folder structures in the mod archive and sets the destination accordingly.
+        /// </summary>
+        SmartDetection,
+
+        /// <summary>
+        /// Just creates a folder in GameData (with the mod archive name) and copies the whole archive into it.
+        /// </summary>
+        SimpleDump
     }
 
     /// <summary>

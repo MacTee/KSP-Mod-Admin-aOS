@@ -615,4 +615,29 @@
   <Control Name="lblColSelectAvailable" Value="Verfügbare Spalten:"/>
   <Control Name="btnApply" Value="Übernehmen"/>
 
+  <Control Name="gbToolTip" Value="ToolTip:"/>
+  <Control Name="cbToolTipOnOff" Value="An / Aus">
+    <ChildControl Name="cbToolTipOnOff_ToolTip" Value="Schaltet die ToolTips an oder aus."/>
+  </Control>
+  <Control Name="lblToolTipDelay" Value="Verzögerung:"/>
+  <Control Name="lblSecond1" Value="Sec."/>
+  <Control Name="lblToolTipDisplayTime" Value="Anzeige Dauer:"/>
+  <Control Name="lblSecond2" Value="Sec."/>
+  <Control Name="cbDeleteOldArchive" Value="Altes Mod Archiv nach update löschen">
+    <ChildControl Name="cbDeleteOldArchive_ToolTip" Value="Anhacken, wenn nach dem update das alte mod archive gelöscht werden soll."/>
+  </Control>
+  <String Name="MSG_DOWNLOAD_PATH_MISSING_PLEASE_SELECT_ONE" Value="Download Pfad fehlt. Bitte wähle einen neuen Download Ordner."/>
+  <String Name="MSG_URL_DETECTED_STARTING_DOWNLOAD" Value="Url identifiziert. Starte download..."/>
+  <String Name="MSG_DESTINATION_0_SET_TO_GAMEDATA" Value="Zielpfad von &quot;{0}&quot; wird auf den GameData Ordner gesetzt."/>
+  <Control Name="gbDestinationDetection" Value="Automatische Zielpfaderkennung:"/>
+  <Control Name="rbDDSmartDestDetection" Value="Iniligente Zielpfaderkennung (Empfolen)">
+    <ChildControl Name="rbDDSmartDestDetection_ToolTip" Value="KSP MA versucht ähnliche Ordnersturkturen im Modarchive zu finden^und setzt die Zielpfade entsprechend."/>
+  </Control>
+  <Control Name="rbDDJustDump" Value="Nur nach GameData Ordner kopieren">
+    <ChildControl Name="rbDDJustDump_ToolTip" Value="Zielpfad eine mod wird immer auf den GameData Ordner gesetzt.^NOTIZ: Kann zu Problemen mit der Konflikterkennung führen!"/>
+  </Control>
+  <Control Name="cbDDCopyToGameData" Value="Auf GameData Ordner ausweichen">
+    <ChildControl Name="cbDDCopyToGameData_ToolTip" Value="Falls die automatische Zielpfaderkennung fehlschlägt,^wird auf den GameData Ordner ausgewichen und dieser als Zielpfad der Mod gesetzt.^NOTIZ: Kann zu Problemen mit der Konflikterkennung führen!"/>
+  </Control>
+
 </Language>

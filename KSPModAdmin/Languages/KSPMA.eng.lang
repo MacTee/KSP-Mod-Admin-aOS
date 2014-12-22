@@ -640,5 +640,16 @@
   </Control>
   <String Name="MSG_DOWNLOAD_PATH_MISSING_PLEASE_SELECT_ONE" Value="Download path missing. Please select a download folder."/>
   <String Name="MSG_URL_DETECTED_STARTING_DOWNLOAD" Value="Url detected starting download..."/>
+  <String Name="MSG_DESTINATION_0_SET_TO_GAMEDATA" Value="Destination of &quot;{0}&quot; will be set to GameData folder."/>
+  <Control Name="gbDestinationDetection" Value="Destination detection:"/>
+  <Control Name="rbDDSmartDestDetection" Value="Smart destination detection (recommended)">
+    <ChildControl Name="rbDDSmartDestDetection_ToolTip" Value="KSP MA searches for a similar KSP folder structure in the mod archive^and sets the destination of the mod files accordingly."/>
+  </Control>
+  <Control Name="rbDDJustDump" Value="Just copy mod archive to GameData">
+    <ChildControl Name="rbDDJustDump_ToolTip" Value="The destination of the mod archive node will be set to GameData.^NOTE: May cause problems with conflict detection!"/>
+  </Control>
+  <Control Name="cbDDCopyToGameData" Value="Fallback to GameData folder">
+    <ChildControl Name="cbDDCopyToGameData_ToolTip" Value="If destination detection fails the destination of the mod archive node^will be set to the GameData folder.^NOTE: May cause problems with conflict detection!"/>
+  </Control>
   
 </Language>

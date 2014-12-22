@@ -6,7 +6,7 @@
   It can be folders with alternative data, manuals, etc. For examples see Planet Shine or UniversalStorage [TAC PACK]. 
   Usually Mod Admin can't detect installation path for them and shows warning. When I update this mods, Mod Admin shows warning again for every root node 
   without installation path. I update in "Copy checked state" mode.
-
+- eDestination Detectin Bug -> e.g. Destination selection of file dont works
 
 //// To Test
 /////////////////////
@@ -41,10 +41,16 @@
 //// TODO
 /////////////////////
 
+- Save of Destination Detection opts
+
 - Translation of ModSelection columns.
+
+- Sort in ModSelection (for all columns).
 
 - AVC Plugin version file support
   - Bug fix see BUGS above.
+
+- Option to dummp mods without a destination to GameData folder.
   
 - ReadMe
 
@@ -76,8 +82,9 @@
 - Try loading old KSPModAdmin.cfg file if no new cfg file is available.
   -> For AppConfig and KSPConfig!
   
-- Some kind of search or filter and sort in select mod tree would be helpful.
+- Search in ModSelection.
 - Overwrite button states are indistinguishable. It's hard to say, what mode it is in. May be checkbox would be more visual?
+  - Change ToolTip to display On/Off state?
 
 
 - Implementation of a waffle iron !!! =)
@@ -86,6 +93,5 @@
 //// SUGGESTIONS
 /////////////////////
 
-- Option to dummp mods without a destination to gamedata folder.
 - Option to add files to an exclude list for mod install (like readme, txt, licenses ...)
 - Compress for zipping.

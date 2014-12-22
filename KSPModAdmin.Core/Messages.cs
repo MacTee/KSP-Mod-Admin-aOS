@@ -1883,5 +1883,16 @@ namespace KSPModAdmin.Core
         }
 
         private const string DEFAULT_MSG_URL_DETECTED_STARTING_DOWNLOAD = "Url detected starting download...";
+
+        public static string MSG_DESTINATION_0_SET_TO_GAMEDATA
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_DESTINATION_0_SET_TO_GAMEDATA"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_DESTINATION_0_SET_TO_GAMEDATA).Replace("^", Environment.NewLine);
+            }
+        }
+
+        private const string DEFAULT_MSG_DESTINATION_0_SET_TO_GAMEDATA = "Destination of \"{0}\" will be set to GameData folder.";
     }
 }

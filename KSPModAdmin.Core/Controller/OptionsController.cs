@@ -262,6 +262,42 @@ namespace KSPModAdmin.Core.Controller
 
         #region Misc
 
+        #region Destination detection
+
+        /// <summary>
+        /// Gets or sets the destination detection type.
+        /// </summary>
+        public static DestinationDetectionType DestinationDetectionType
+        {
+            get
+            {
+                return (View != null) ? View.DestinationDetectionType : DestinationDetectionType.SmartDetection;
+            }
+            set
+            {
+                if (View != null && value != View.DestinationDetectionType)
+                    View.DestinationDetectionType = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the flag to determine of mod archives should be copied to GameData folder, if no destination was detected..
+        /// </summary>
+        public static bool CopyToGameData
+        {
+            get
+            {
+                return (View != null) ? View.CopyToGameData : false;
+            }
+            set
+            {
+                if (View != null && value != View.CopyToGameData)
+                    View.CopyToGameData = value;
+            }
+        }
+
+        #endregion
+
         #region ToolTip
 
         /// <summary>

@@ -158,6 +158,9 @@ namespace KSPModAdmin.Core
         public const string ISFILE = "IsFile";
         public const string INSTALL = "Install";
         public const string INSTALLDIR = "InstallDir";
+
+        public const string DESTINATIONDETECTIONOPTIONS = "DestinationDetectionOptions";
+        public const string FALLBACK = "FallBack";
         public const string TOOLTIPOPTIONS = "ToolTipOptions";
         public const string CONFLICTDETECTIONOPTIONS = "ConflictDetectionOptions";
         public const string ONOFF = "OnOff";

@@ -614,5 +614,30 @@
   <Control Name="lblColSelectDisplayed" Value="(T)Displayed in ModSelection:"/>
   <Control Name="lblColSelectAvailable" Value="(T)Available columns:"/>
   <Control Name="btnApply" Value="(T)Apply"/>
+
+  <Control Name="gbToolTip" Value="(T)ToolTip:"/>
+  <Control Name="cbToolTipOnOff" Value="(T)On / Off">
+    <ChildControl Name="cbToolTipOnOff_ToolTip" Value="(T)Switches the ToolTip on or off."/>
+  </Control>
+  <Control Name="lblToolTipDelay" Value="(T)Delay:"/>
+  <Control Name="lblSecond1" Value="(T)sec."/>
+  <Control Name="lblToolTipDisplayTime" Value="(T)Display time:"/>
+  <Control Name="lblSecond2" Value="(T)sec."/>
+  <Control Name="cbDeleteOldArchive" Value="(T)Delete old archive after update">
+    <ChildControl Name="cbDeleteOldArchive_ToolTip" Value="(T)Check this option if the old archive of a mod should be deleted after an update."/>
+  </Control>
+  <String Name="MSG_DOWNLOAD_PATH_MISSING_PLEASE_SELECT_ONE" Value="(T)Download path missing. Please select a download folder."/>
+  <String Name="MSG_URL_DETECTED_STARTING_DOWNLOAD" Value="(T)Url detected starting download..."/>
+  <String Name="MSG_DESTINATION_0_SET_TO_GAMEDATA" Value="(T)Destination of &quot;{0}&quot; will be set to GameData folder."/>
+  <Control Name="gbDestinationDetection" Value="(T)Destination detection:"/>
+  <Control Name="rbDDSmartDestDetection" Value="(T)Smart destination detection (recommended)">
+    <ChildControl Name="rbDDSmartDestDetection_ToolTip" Value="(T)KSP MA searches for a similar KSP folder structure in the mod archive^and sets the destination of the mod files accordingly."/>
+  </Control>
+  <Control Name="rbDDJustDump" Value="(T)Just copy mod archive to GameData">
+    <ChildControl Name="rbDDJustDump_ToolTip" Value="(T)The destination of the mod archive node will be set to GameData.^NOTE: May cause problems with conflict detection!"/>
+  </Control>
+  <Control Name="cbDDCopyToGameData" Value="(T)Fallback to GameData folder">
+    <ChildControl Name="cbDDCopyToGameData_ToolTip" Value="(T)If destination detection fails the destination of the mod archive node^will be set to the GameData folder.^NOTE: May cause problems with conflict detection!"/>
+  </Control>
   
 </Language>

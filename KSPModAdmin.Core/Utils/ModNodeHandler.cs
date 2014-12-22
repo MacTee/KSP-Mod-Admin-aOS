@@ -62,10 +62,29 @@ namespace KSPModAdmin.Core.Utils
                         CreateModNode(entry.FilePath, node, seperator, entry.IsDirectory, silent);
                 }
 
-                // Find installation root node (first folder that contains (Parts or Plugins or ...)
-                if (!FindAndSetDestinationPaths(node) && !silent)
-                    Messenger.AddInfo(string.Format(Messages.MSG_ROOT_NOT_FOUND_0, node.Text));
+                // Destination detection
+                switch (OptionsController.DestinationDetectionType)
+                {
+                    case DestinationDetectionType.SmartDetection:
+                        // Find installation root node (first folder that contains (Parts or Plugins or ...)
+                        if (!FindAndSetDestinationPaths(node) && !silent)
+                            Messenger.AddInfo(string.Format(Messages.MSG_ROOT_NOT_FOUND_0, node.Text));
 
+                        if (OptionsController.CopyToGameData)
+                        {
+                            if (!silent)
+                                Messenger.AddInfo(string.Format(Messages.MSG_DESTINATION_0_SET_TO_GAMEDATA, node.Text));
+                            SetDestinationPaths(node, KSPPathHelper.GetPath(KSPPaths.GameData));
+                        }
+                        break;
+                    case DestinationDetectionType.SimpleDump:
+                        if (!silent)
+                            Messenger.AddInfo(string.Format(Messages.MSG_DESTINATION_0_SET_TO_GAMEDATA, node.Text));
+                        SetDestinationPaths(node, KSPPathHelper.GetPath(KSPPaths.GameData));
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
                 
                 SetToolTips(node);
                 CheckNodesWithDestination(node);
