@@ -37,11 +37,11 @@
 - Column selection for ModSelection (Choose the Columns that should be displayed in the ModSelection).
 - Option to "Delete old archive after update"
 - Faster Tooltip -> option to allow use the delay time.
+- Option to dummp mods without a destination to GameData folder.
+
 
 //// TODO
 /////////////////////
-
-- Save of Destination Detection opts
 
 - Translation of ModSelection columns.
 
@@ -49,8 +49,6 @@
 
 - AVC Plugin version file support
   - Bug fix see BUGS above.
-
-- Option to dummp mods without a destination to GameData folder.
   
 - ReadMe
 
