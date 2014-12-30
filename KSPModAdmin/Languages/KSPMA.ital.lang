@@ -651,6 +651,8 @@
   <Control Name="cbDDCopyToGameData" Value="Ritorna alla cartella GameData">
     <ChildControl Name="cbDDCopyToGameData_ToolTip" Value="Se l'individuazione della destinazione non funziona, la destinazione del nodo^ dell'archivio del Mod sarà impostata alla cartella GameData.^NOTA: Potrebbe causare problemi con l'individuazione dei conflitti!"/>
   </Control>
+
+  <Control Name="frmColumnSelection" Value="(T)Column selection"/>
   
 </Language>
 	

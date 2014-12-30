@@ -637,4 +637,6 @@
     <ChildControl Name="cbDDCopyToGameData_ToolTip" Value="Если не удалось определить путь установки мода,^он будет установлен в папку GameData.^ВНИМАНИЕ: Может вызвать проблемы с обнаружением конфликтов!"/>
   </Control>
 
+  <Control Name="frmColumnSelection" Value="(T)Column selection"/>
+
 </Language>

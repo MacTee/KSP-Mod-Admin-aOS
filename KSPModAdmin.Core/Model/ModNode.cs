@@ -227,6 +227,9 @@ namespace KSPModAdmin.Core.Model
         }
         private string mSiteHandlerName = Messages.NONE;
 
+        /// <summary>
+        /// Gets the SiteHandler name (Used by TreeViewAdv).
+        /// </summary>
         public string SiteHandlerNameUI
         {
             get { return (SiteHandlerName == Messages.NONE) ? string.Empty : SiteHandlerName; }

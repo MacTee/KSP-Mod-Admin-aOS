@@ -651,5 +651,7 @@
   <Control Name="cbDDCopyToGameData" Value="Fallback to GameData folder">
     <ChildControl Name="cbDDCopyToGameData_ToolTip" Value="If destination detection fails the destination of the mod archive node^will be set to the GameData folder.^NOTE: May cause problems with conflict detection!"/>
   </Control>
-  
+
+  <Control Name="frmColumnSelection" Value="Column selection"/>
+
 </Language>

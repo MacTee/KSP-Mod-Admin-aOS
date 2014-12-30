@@ -611,7 +611,7 @@
   <Control Name="tsmiCmsOneModTreeViewOptions" Value="TreeView Optionen"/>
 
   <Control Name="lblColSelectDescription" Value="Reihenfolge der Spalten per Drag &amp;&amp; Drop ändern^Spalten anzeigen/verstecken durch verschieben."/>
-  <Control Name="lblColSelectDisplayed" Value="Angezeigt in der ModSelection:"/>
+  <Control Name="lblColSelectDisplayed" Value="Angezeigt in der ModSelektion:"/>
   <Control Name="lblColSelectAvailable" Value="Verfügbare Spalten:"/>
   <Control Name="btnApply" Value="Übernehmen"/>
 
@@ -639,5 +639,7 @@
   <Control Name="cbDDCopyToGameData" Value="Auf GameData Ordner ausweichen">
     <ChildControl Name="cbDDCopyToGameData_ToolTip" Value="Falls die automatische Zielpfaderkennung fehlschlägt,^wird auf den GameData Ordner ausgewichen und dieser als Zielpfad der Mod gesetzt.^NOTIZ: Kann zu Problemen mit der Konflikterkennung führen!"/>
   </Control>
+
+  <Control Name="frmColumnSelection" Value="Spaltenauswahl"/>
 
 </Language>
