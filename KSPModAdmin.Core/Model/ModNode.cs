@@ -227,6 +227,11 @@ namespace KSPModAdmin.Core.Model
         }
         private string mSiteHandlerName = Messages.NONE;
 
+        public string SiteHandlerNameUI
+        {
+            get { return (SiteHandlerName == Messages.NONE) ? string.Empty : SiteHandlerName; }
+        }
+
         /// <summary>
         /// Gets or sets the SiteHandler of the mod. Can be null!
         /// </summary>

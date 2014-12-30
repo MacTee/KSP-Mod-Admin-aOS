@@ -85,7 +85,7 @@ namespace KSPModAdmin.Core.Utils
                             new ColumnItemData()
                             {
                                 Type = ColumnItemType.NodeTextBox,
-                                DataPropertyName = "SiteHandlerName",
+                                DataPropertyName = "SiteHandlerNameUI",
                                 IncrementalSearchEnabled = true,
                                 LeftMargin = 3
                             }
@@ -394,7 +394,7 @@ namespace KSPModAdmin.Core.Utils
                             if (att.Name == Constants.TYPE && !string.IsNullOrEmpty(att.Value))
                                 columnItem.Type = (ColumnItemType)int.Parse(att.Value);
                             else if (att.Name == Constants.DATAPROPERTYNAME && !string.IsNullOrEmpty(att.Value))
-                                columnItem.DataPropertyName = att.Value;
+                                columnItem.DataPropertyName = (att.Value == "SiteHandlerName") ? "SiteHandlerNameUI" : att.Value;
                             else if (att.Name == Constants.EDITENABLED && !string.IsNullOrEmpty(att.Value))
                                 columnItem.EditEnabled = att.Value.Equals(Constants.TRUE, StringComparison.CurrentCultureIgnoreCase);
                             else if (att.Name == Constants.INCREMENTALSEARCHENABLED && !string.IsNullOrEmpty(att.Value))

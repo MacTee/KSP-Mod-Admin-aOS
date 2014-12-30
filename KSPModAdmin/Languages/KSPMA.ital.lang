@@ -622,34 +622,34 @@
   <Control Name="tsmiCmsTreeViewOptions" Value="Opzioni di TreeView"/>
   <Control Name="tsmiCmsOneModTreeViewOptions" Value="Opzioni di TreeView"/>
 
-  <Control Name="lblColSelectDescription" Value="(T)Drag &amp;&amp; Drop to reorder columns^Move columns between lists to show or hide them."/>
-  <Control Name="lblColSelectDisplayed" Value="(T)Displayed in ModSelection:"/>
-  <Control Name="lblColSelectAvailable" Value="(T)Available columns:"/>
-  <Control Name="btnApply" Value="(T)Apply"/>
+  <Control Name="lblColSelectDescription" Value="Trascina e rilascia per riordinare le colonne^Muovi le colonne tra le liste per mostrarle o nasconderle."/>
+  <Control Name="lblColSelectDisplayed" Value="Mostrato nella selezione dei Mod:"/>
+  <Control Name="lblColSelectAvailable" Value="Colonne disponibili:"/>
+  <Control Name="btnApply" Value="Applica"/>
 
-  <Control Name="gbToolTip" Value="(T)ToolTip:"/>
-  <Control Name="cbToolTipOnOff" Value="(T)On / Off">
-    <ChildControl Name="cbToolTipOnOff_ToolTip" Value="(T)Switches the ToolTip on or off."/>
+  <Control Name="gbToolTip" Value="Suggerimenti:"/>
+  <Control Name="cbToolTipOnOff" Value="Si / No">
+    <ChildControl Name="cbToolTipOnOff_ToolTip" Value="Cambia i suggerimenti tra Si e No."/>
   </Control>
-  <Control Name="lblToolTipDelay" Value="(T)Delay:"/>
-  <Control Name="lblSecond1" Value="(T)sec."/>
-  <Control Name="lblToolTipDisplayTime" Value="(T)Display time:"/>
-  <Control Name="lblSecond2" Value="(T)sec."/>
-  <Control Name="cbDeleteOldArchive" Value="(T)Delete old archive after update">
-    <ChildControl Name="cbDeleteOldArchive_ToolTip" Value="(T)Check this option if the old archive of a mod should be deleted after an update."/>
+  <Control Name="lblToolTipDelay" Value="Ritardo:"/>
+  <Control Name="lblSecond1" Value="sec."/>
+  <Control Name="lblToolTipDisplayTime" Value="Durata suggerimenti:"/>
+  <Control Name="lblSecond2" Value="sec."/>
+  <Control Name="cbDeleteOldArchive" Value="Cancella il vecchio archivio dopo l'aggiornamento">
+    <ChildControl Name="cbDeleteOldArchive_ToolTip" Value="Seleziona questa opzione se il vecchio archivio di un Mod va cancellato dopo un aggiornamento."/>
   </Control>
-  <String Name="MSG_DOWNLOAD_PATH_MISSING_PLEASE_SELECT_ONE" Value="(T)Download path missing. Please select a download folder."/>
-  <String Name="MSG_URL_DETECTED_STARTING_DOWNLOAD" Value="(T)Url detected starting download..."/>
-  <String Name="MSG_DESTINATION_0_SET_TO_GAMEDATA" Value="(T)Destination of &quot;{0}&quot; will be set to GameData folder."/>
-  <Control Name="gbDestinationDetection" Value="(T)Destination detection:"/>
-  <Control Name="rbDDSmartDestDetection" Value="(T)Smart destination detection (recommended)">
-    <ChildControl Name="rbDDSmartDestDetection_ToolTip" Value="(T)KSP MA searches for a similar KSP folder structure in the mod archive^and sets the destination of the mod files accordingly."/>
+  <String Name="MSG_DOWNLOAD_PATH_MISSING_PLEASE_SELECT_ONE" Value="Percorso di download mancante. Selezionare una cartella di download."/>
+  <String Name="MSG_URL_DETECTED_STARTING_DOWNLOAD" Value="URL trovato, avvio download..."/>
+  <String Name="MSG_DESTINATION_0_SET_TO_GAMEDATA" Value="La destinazione di &quot;{0}&quot; sarà impostata alla cartella GameData."/>
+  <Control Name="gbDestinationDetection" Value="Individuazione della destinazione:"/>
+  <Control Name="rbDDSmartDestDetection" Value="individuazione automatica della destinazione (raccomandata)">
+    <ChildControl Name="rbDDSmartDestDetection_ToolTip" Value="KSP MA cerca per una struttura delle cartelle simile a quella di KSP nell'archivio del Mod^e imposta la destinazione dei files del Mod di conseguenza."/>
   </Control>
-  <Control Name="rbDDJustDump" Value="(T)Just copy mod archive to GameData">
-    <ChildControl Name="rbDDJustDump_ToolTip" Value="(T)The destination of the mod archive node will be set to GameData.^NOTE: May cause problems with conflict detection!"/>
+  <Control Name="rbDDJustDump" Value="Solo copia dell'archivio mod in GameData">
+    <ChildControl Name="rbDDJustDump_ToolTip" Value="La destinazione del nodo dell'archivio del Mod sarà impostata a GameData.^NOTA: Potrebbe causare problemi con l'individuazione dei conflitti!"/>
   </Control>
-  <Control Name="cbDDCopyToGameData" Value="(T)Fallback to GameData folder">
-    <ChildControl Name="cbDDCopyToGameData_ToolTip" Value="(T)If destination detection fails the destination of the mod archive node^will be set to the GameData folder.^NOTE: May cause problems with conflict detection!"/>
+  <Control Name="cbDDCopyToGameData" Value="Ritorna alla cartella GameData">
+    <ChildControl Name="cbDDCopyToGameData_ToolTip" Value="Se l'individuazione della destinazione non funziona, la destinazione del nodo^ dell'archivio del Mod sarà impostata alla cartella GameData.^NOTA: Potrebbe causare problemi con l'individuazione dei conflitti!"/>
   </Control>
   
 </Language>
