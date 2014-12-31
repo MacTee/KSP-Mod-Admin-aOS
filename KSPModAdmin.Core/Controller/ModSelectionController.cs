@@ -118,8 +118,7 @@ namespace KSPModAdmin.Core.Controller
         /// </summary>
         protected static void LanguageChanged(object sender)
         {
-            // translates the controls of the view.
-            ControlTranslator.TranslateControls(Localizer.GlobalInstance, View as Control, OptionsController.SelectedLanguage);
+            View.LanguageChanged();
         }
 
         /// <summary>

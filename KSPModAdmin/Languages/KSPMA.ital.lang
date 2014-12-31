@@ -653,6 +653,7 @@
   </Control>
 
   <Control Name="frmColumnSelection" Value="(T)Column selection"/>
+  <Control Name="lvModSelection_Item_00" Value="(T)Mod"/>
   
 </Language>
 	

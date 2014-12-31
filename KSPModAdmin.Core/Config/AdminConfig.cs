@@ -413,7 +413,7 @@ namespace KSPModAdmin.Core.Config
             // ModSelection column widths
             var vInfo = ModSelectionController.View.GetModSelectionViewInfo();
             if (vInfo.TreeViewAdvColumnsInfo != null)
-                vInfo.TreeViewAdvColumnsInfo.ToXml(generalNode);
+                vInfo.TreeViewAdvColumnsInfo.ToXml2(generalNode);
 
             // ModInfo column widths
             int i = 0;

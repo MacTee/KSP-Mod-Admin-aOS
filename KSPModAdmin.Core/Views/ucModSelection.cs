@@ -643,6 +643,21 @@ namespace KSPModAdmin.Core.Views
                     lvModSelection.Columns[i].Width = width;
             }
         }
+
+        internal void LanguageChanged()
+        {
+            // translates the controls of the view.
+            ControlTranslator.TranslateControls(Localizer.GlobalInstance, this as Control, OptionsController.SelectedLanguage);
+
+            // translate columns of ModSelection TreeView
+            List<ModSelectionTreeColumn> columns = new List<ModSelectionTreeColumn>();
+            foreach (ModSelectionTreeColumn column in tvModSelection.Columns)
+            {
+                var newColData = TreeViewAdvColumnsInfo.GetColumn(column.Name);
+                if (newColData != null)
+                    column.Header = newColData.Header;
+            }
+        }
     }
 
     internal class ModSelectionViewInfo

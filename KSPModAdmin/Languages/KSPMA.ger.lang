@@ -641,5 +641,6 @@
   </Control>
 
   <Control Name="frmColumnSelection" Value="Spaltenauswahl"/>
+  <Control Name="lvModSelection_Item_00" Value="Mod"/>
 
 </Language>
