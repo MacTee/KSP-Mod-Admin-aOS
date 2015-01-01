@@ -1518,11 +1518,22 @@ namespace KSPModAdmin.Core.Controller
         /// </summary>
         /// <param name="sortType">Determines the property to use for the sort.</param>
         /// <param name="desc">Determines if the sorting should be descending or ascending.</param>
-        public static void SortModSelection(SortType sortType = SortType.ByName, bool desc = true)
+        public static void SortModSelection()
         {
-            // move or redirect to Model.ModSelectionTreeModel.SortModSelection
+            // TODO: Find a better place for this method.
 
-            // TODO: implementation
+            ModSelectionTreeColumn sortColumn = null;
+            foreach (var column in View.tvModSelection.Columns)
+            {
+                if (column.SortOrder == SortOrder.None)
+                    continue;
+
+                sortColumn = column as ModSelectionTreeColumn;
+                break;
+            }
+
+            View.SortColumn(sortColumn);
+
             InvalidateView();
         }
 
@@ -1571,7 +1582,7 @@ namespace KSPModAdmin.Core.Controller
         public static void OpenTreeViewOptions()
         {
             frmColumnSelection dlg = new frmColumnSelection();
-            dlg.ModSelectionColumns = View.GetModSelectionViewInfo().TreeViewAdvColumnsInfo;
+            dlg.ModSelectionColumns = View.GetModSelectionViewInfo().ModSelectionColumnsInfo;
             if (dlg.ShowDialog() == DialogResult.OK)
                 dlg.ModSelectionColumns.ToTreeViewAdv(View.tvModSelection);
         }

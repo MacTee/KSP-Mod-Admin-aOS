@@ -38,12 +38,11 @@
 - Option to "Delete old archive after update"
 - Faster Tooltip -> option to allow use the delay time.
 - Option to dummp mods without a destination to GameData folder.
+- Sort in ModSelection (for all columns).
 
 
 //// TODO
 /////////////////////
-
-- Sort in ModSelection (for all columns).
 
 - AVC Plugin version file support
   - Bug fix see BUGS above.
@@ -82,6 +81,7 @@
 - Overwrite button states are indistinguishable. It's hard to say, what mode it is in. May be checkbox would be more visual?
   - Change ToolTip to display On/Off state?
 
+- Center CheckBoxes us TreeViewAdv.
 
 - Implementation of a waffle iron !!! =)
 

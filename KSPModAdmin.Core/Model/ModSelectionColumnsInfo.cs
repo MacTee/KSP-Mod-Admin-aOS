@@ -8,17 +8,26 @@ using KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree;
 using KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.NodeControls;
 using KSPModAdmin.Core.Utils.Localization;
 
-namespace KSPModAdmin.Core.Utils
+namespace KSPModAdmin.Core.Model
 {
-    public enum ColumnItemType
+    public class ModSelectionColumnsInfo
     {
-        NodeCheckBox,
-        NodeIcon,
-        NodeTextBox
-    }
+        public const string COLUMNMOD = "Mod";
+        public const string COLUMNVERSION = "Version";
+        public const string COLUMNVERSIONCHECK = "VersionCheck";
+        public const string COLUMNKSPVERSION = "KSPVersion";
+        public const string COLUMNAUTHOR = "Author";
+        public const string COLUMNOUTDATED = "Outdated";
+        public const string COLUMNRATING = "Rating";
+        public const string COLUMNDOWNLOAD = "Downloads";
+        public const string COLUMNNOTE = "Note";
+        public const string COLUMNCONFLICTS = "Conflicts";
+        public const string COLUMNINSTALLED = "Installed";
+        public const string COLUMNCREATIONDATE = "CreationDate";
+        public const string COLUMNCHANGEDATE = "ChangeDate";
+        public const string COLUMNARCHIVEPATH = "ArchivePath";
 
-    public class TreeViewAdvColumnsInfo
-    {
+
         public List<ColumnData> Columns { get; set; }
 
         public static List<ColumnData> DefaultColumns
@@ -29,8 +38,8 @@ namespace KSPModAdmin.Core.Utils
                 {
                     new ColumnData()
                     {
-                        Name = "Mod",
-                        Header = "Mod",
+                        Name = COLUMNMOD,
+                        Header = Localizer.GlobalInstance["lvModSelection_Item_00"], //"Mod",
                         SortOrder = SortOrder.None,
                         TooltipText = null,
                         Width = 230,
@@ -61,7 +70,7 @@ namespace KSPModAdmin.Core.Utils
                     },
                     new ColumnData()
                     {
-                        Name = "Version",
+                        Name = COLUMNVERSION,
                         Header = Localizer.GlobalInstance["lvModSelection_Item_5"], //"Version",
                         SortOrder = SortOrder.None,
                         TooltipText = null,
@@ -79,7 +88,7 @@ namespace KSPModAdmin.Core.Utils
                     },
                     new ColumnData()
                     {
-                        Name = "VersionCheck",
+                        Name = COLUMNVERSIONCHECK,
                         Header = Localizer.GlobalInstance["lvModSelection_Item_3"], //"VersionCheck",
                         SortOrder = SortOrder.None,
                         TooltipText = null,
@@ -110,7 +119,7 @@ namespace KSPModAdmin.Core.Utils
                 {
                     new ColumnData()
                     {
-                        Name = "KSPVersion",
+                        Name = COLUMNKSPVERSION,
                         Header = Localizer.GlobalInstance["lvModSelection_Item_6"], //"KSPVersion",
                         SortOrder = SortOrder.None,
                         TooltipText = null,
@@ -128,7 +137,7 @@ namespace KSPModAdmin.Core.Utils
                     },
                     new ColumnData()
                     {
-                        Name = "Author",
+                        Name = COLUMNAUTHOR,
                         Header = Localizer.GlobalInstance["lvModSelection_Item_7"], //"Author",
                         SortOrder = SortOrder.None,
                         TooltipText = null,
@@ -146,7 +155,7 @@ namespace KSPModAdmin.Core.Utils
                     },
                     new ColumnData()
                     {
-                        Name = "Outdated",
+                        Name = COLUMNOUTDATED,
                         Header = Localizer.GlobalInstance["lvModSelection_Item_10"], //"Outdated",
                         SortOrder = SortOrder.None,
                         TooltipText = null,
@@ -155,16 +164,20 @@ namespace KSPModAdmin.Core.Utils
                         {
                             new ColumnItemData()
                             {
-                                Type = ColumnItemType.NodeTextBox,
+                                Type = ColumnItemType.NodeCheckBox,
                                 DataPropertyName = "IsOutdated",
-                                IncrementalSearchEnabled = true,
+                                EditEnabled = false,
                                 LeftMargin = 3
+                                //Type = ColumnItemType.NodeTextBox,
+                                //DataPropertyName = "IsOutdated",
+                                //IncrementalSearchEnabled = true,
+                                //LeftMargin = 3
                             }
                         }
                     },
                     new ColumnData()
                     {
-                        Name = "Rating",
+                        Name = COLUMNRATING,
                         Header = Localizer.GlobalInstance["lvModSelection_Item_11"], //"Rating",
                         SortOrder = SortOrder.None,
                         TooltipText = null,
@@ -182,7 +195,7 @@ namespace KSPModAdmin.Core.Utils
                     },
                     new ColumnData()
                     {
-                        Name = "Downloads",
+                        Name = COLUMNDOWNLOAD,
                         Header = Localizer.GlobalInstance["lvModSelection_Item_12"], //"Downloads",
                         SortOrder = SortOrder.None,
                         TooltipText = null,
@@ -200,7 +213,7 @@ namespace KSPModAdmin.Core.Utils
                     },
                     new ColumnData()
                     {
-                        Name = "Note",
+                        Name = COLUMNNOTE,
                         Header = Localizer.GlobalInstance["lvModSelection_Item_13"], //"Note",
                         SortOrder = SortOrder.None,
                         TooltipText = null,
@@ -218,7 +231,7 @@ namespace KSPModAdmin.Core.Utils
                     },
                     new ColumnData()
                     {
-                        Name = "Conflicts",
+                        Name = COLUMNCONFLICTS,
                         Header = Localizer.GlobalInstance["lvModSelection_Item_16"], //"Conflicts",
                         SortOrder = SortOrder.None,
                         TooltipText = null,
@@ -227,16 +240,20 @@ namespace KSPModAdmin.Core.Utils
                         {
                             new ColumnItemData()
                             {
-                                Type = ColumnItemType.NodeTextBox,
+                                Type = ColumnItemType.NodeCheckBox,
                                 DataPropertyName = "HasCollision",
-                                IncrementalSearchEnabled = true,
+                                EditEnabled = false,
                                 LeftMargin = 3
+                                //Type = ColumnItemType.NodeTextBox,
+                                //DataPropertyName = "HasCollision",
+                                //IncrementalSearchEnabled = true,
+                                //LeftMargin = 3
                             }
                         }
                     },
                     new ColumnData()
                     {
-                        Name = "Installed",
+                        Name = COLUMNINSTALLED,
                         Header = Localizer.GlobalInstance["lvModSelection_Item_17"], //"Installed",
                         SortOrder = SortOrder.None,
                         TooltipText = null,
@@ -245,16 +262,20 @@ namespace KSPModAdmin.Core.Utils
                         {
                             new ColumnItemData()
                             {
-                                Type = ColumnItemType.NodeTextBox,
+                                Type = ColumnItemType.NodeCheckBox,
                                 DataPropertyName = "IsInstalled",
-                                IncrementalSearchEnabled = true,
+                                EditEnabled = false,
                                 LeftMargin = 3
+                                //Type = ColumnItemType.NodeTextBox,
+                                //DataPropertyName = "IsInstalled",
+                                //IncrementalSearchEnabled = true,
+                                //LeftMargin = 3
                             }
                         }
                     },
                     new ColumnData()
                     {
-                        Name = "CreationDate",
+                        Name = COLUMNCREATIONDATE,
                         Header = Localizer.GlobalInstance["lvModSelection_Item_8"], //"CreationDate",
                         SortOrder = SortOrder.None,
                         TooltipText = null,
@@ -272,7 +293,7 @@ namespace KSPModAdmin.Core.Utils
                     },
                     new ColumnData()
                     {
-                        Name = "ChangeDate",
+                        Name = COLUMNCHANGEDATE,
                         Header = Localizer.GlobalInstance["lvModSelection_Item_9"], //"ChangeDate",
                         SortOrder = SortOrder.None,
                         TooltipText = null,
@@ -290,7 +311,7 @@ namespace KSPModAdmin.Core.Utils
                     },
                     new ColumnData()
                     {
-                        Name = "Archive path",
+                        Name = COLUMNARCHIVEPATH,
                         Header = Localizer.GlobalInstance["lvModSelection_Item_2"], //"Archive path",
                         SortOrder = SortOrder.None,
                         TooltipText = null,
@@ -312,17 +333,17 @@ namespace KSPModAdmin.Core.Utils
         }
 
 
-        public TreeViewAdvColumnsInfo()
+        public ModSelectionColumnsInfo()
         {
             Columns = DefaultColumns;
         }
 
-        public TreeViewAdvColumnsInfo(XmlDocument doc)
+        public ModSelectionColumnsInfo(XmlDocument doc)
         {
             FromXml2(doc);
         }
 
-        public TreeViewAdvColumnsInfo(TreeViewAdv treeViewAdv)
+        public ModSelectionColumnsInfo(TreeViewAdv treeViewAdv)
         {
             FromTreeViewAdv(treeViewAdv);
         }
@@ -573,6 +594,13 @@ namespace KSPModAdmin.Core.Utils
         }
     }
 
+    public enum ColumnItemType
+    {
+        NodeCheckBox,
+        NodeIcon,
+        NodeTextBox
+    }
+
     public class ColumnData
     {
         public string Name { get; set; }
@@ -611,10 +639,5 @@ namespace KSPModAdmin.Core.Utils
             LeftMargin = 0;
             ImageScaleMode = ImageScaleMode.Clip;
         }
-    }
-
-    public class ModSelectionTreeColumn : TreeColumn
-    {
-        public string Name = string.Empty;
     }
 }

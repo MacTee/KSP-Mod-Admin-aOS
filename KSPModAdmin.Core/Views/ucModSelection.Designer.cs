@@ -525,6 +525,7 @@ namespace KSPModAdmin.Core.Views
             this.tvModSelection.TabIndex = 0;
             this.tvModSelection.Text = "treeViewAdv1";
             this.tvModSelection.UseColumns = true;
+            this.tvModSelection.ColumnClicked += new System.EventHandler<KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.TreeColumnEventArgs>(this.tvModSelection_ColumnClicked);
             this.tvModSelection.SelectionChanged += new System.EventHandler(this.tvModSelection_SelectionChanged);
             this.tvModSelection.DrawControl += new System.EventHandler<KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.NodeControls.DrawEventArgs>(this.tvModSelection_DrawControl);
             this.tvModSelection.DragDrop += new System.Windows.Forms.DragEventHandler(this.tvModSelection_DragDrop);

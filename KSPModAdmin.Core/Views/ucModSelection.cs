@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using KSPModAdmin.Core.Model;
@@ -22,7 +23,7 @@ namespace KSPModAdmin.Core.Views
             InitializeComponent();
 
             // Create TreeViewAdv columns
-            new TreeViewAdvColumnsInfo().ToTreeViewAdv(tvModSelection);
+            new ModSelectionColumnsInfo().ToTreeViewAdv(tvModSelection);
 
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime || DesignMode)
                 return;
@@ -178,6 +179,8 @@ namespace KSPModAdmin.Core.Views
             tvModSelection_SelectionChanged(null, null);
         }
 
+        #region Button event handling
+
         private void btnProceedMod_Click(object sender, EventArgs e)
         {
             ModSelectionController.ProcessModsAsync(new[] { SelectedMod });
@@ -196,6 +199,8 @@ namespace KSPModAdmin.Core.Views
             tvModSelection.Focus();
             tvModSelection.Invalidate();
         }
+
+        #region ToolStripMenu & ContextMenu buttons event handling
 
         private void tsbOverride_CheckedChanged(object sender, EventArgs e)
         {
@@ -353,6 +358,12 @@ namespace KSPModAdmin.Core.Views
             ModSelectionController.OpenTreeViewOptions();
         }
 
+        #endregion
+
+        #endregion
+
+        #region TreeViewAdv event handling
+
         private void tvModSelection_SelectionChanged(object sender, EventArgs e)
         {
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime || DesignMode)
@@ -481,6 +492,8 @@ namespace KSPModAdmin.Core.Views
         private void tvModSelection_DrawControl(object sender, DrawEventArgs e)
         {
             var node = (ModNode)e.Node.Tag;
+            e.TextColor = Color.Black;
+
             if (!node.ZipExists)
                 e.TextColor = OptionsController.ColorModArchiveMissing;
 
@@ -500,7 +513,7 @@ namespace KSPModAdmin.Core.Views
                 e.TextColor = OptionsController.ColorModOutdated;
             if (!node.ZipExists)
                 e.TextColor = OptionsController.ColorModArchiveMissing;
-            if (node.HasChildCollision)
+            if (OptionsController.ConflictDetectionOnOff && (node.HasChildCollision || (node.IsFile && node.HasCollision)))
                 e.TextColor = OptionsController.ColorDestinationConflict;
         }
 
@@ -548,6 +561,25 @@ namespace KSPModAdmin.Core.Views
             if (node != null && node.IsFile)
                 ModSelectionController.OpenTextDisplayer(node);
         }
+
+        private void tvModSelection_ColumnClicked(object sender, TreeColumnEventArgs e)
+        {
+            if (e.Column == null)
+                return;
+
+            if (e.Column.SortOrder == SortOrder.None)
+                e.Column.SortOrder = SortOrder.Ascending;
+
+            else if (e.Column.SortOrder == SortOrder.Descending)
+                e.Column.SortOrder = SortOrder.Ascending;
+
+            else if (e.Column.SortOrder == SortOrder.Ascending)
+                e.Column.SortOrder = SortOrder.Descending;
+
+            SortColumn(e.Column as ModSelectionTreeColumn);
+        }
+
+        #endregion
 
         private void cmsModSelectionOneMod_Opened(object sender, EventArgs e)
         {
@@ -617,7 +649,7 @@ namespace KSPModAdmin.Core.Views
                 vInfo.ModInfosSplitterPos = d;
             }
 
-            vInfo.TreeViewAdvColumnsInfo = new TreeViewAdvColumnsInfo(tvModSelection);
+            vInfo.ModSelectionColumnsInfo = new ModSelectionColumnsInfo(tvModSelection);
 
             foreach (ColumnHeader column in lvModSelection.Columns)
                 vInfo.ModInfosColumnWidths.Add(column.Width);
@@ -633,8 +665,8 @@ namespace KSPModAdmin.Core.Views
                 splitContainer1.SplitterDistance = (int)d + 1;
             }
 
-            if (vInfo.TreeViewAdvColumnsInfo != null && vInfo.TreeViewAdvColumnsInfo.Columns.Count > 0)
-                vInfo.TreeViewAdvColumnsInfo.ToTreeViewAdv(tvModSelection);
+            if (vInfo.ModSelectionColumnsInfo != null && vInfo.ModSelectionColumnsInfo.Columns.Count > 0)
+                vInfo.ModSelectionColumnsInfo.ToTreeViewAdv(tvModSelection);
 
             for (int i = 0; i < vInfo.ModInfosColumnWidths.Count; ++i)
             {
@@ -653,21 +685,68 @@ namespace KSPModAdmin.Core.Views
             List<ModSelectionTreeColumn> columns = new List<ModSelectionTreeColumn>();
             foreach (ModSelectionTreeColumn column in tvModSelection.Columns)
             {
-                var newColData = TreeViewAdvColumnsInfo.GetColumn(column.Name);
+                var newColData = ModSelectionColumnsInfo.GetColumn(column.Name);
                 if (newColData != null)
                     column.Header = newColData.Header;
             }
         }
-    }
 
-    internal class ModSelectionViewInfo
-    {
-        public double ModInfosSplitterPos = 0.0d;
+        internal void SortColumn(ModSelectionTreeColumn column)
+        {
+            List<ModNode> nodes = null;
+            switch (column.Name)
+            {
+                case ModSelectionColumnsInfo.COLUMNMOD:
+                    nodes = ((ModSelectionTreeModel) tvModSelection.Model).Nodes.Cast<ModNode>().ToList();
+                    nodes.Sort(delegate(ModNode node1, ModNode node2)
+                        {
+                            if (column.SortOrder == SortOrder.Ascending)
+                                return node1.Text.CompareTo(node2.Text);
+                            else
+                                return node2.Text.CompareTo(node1.Text);
+                        });
 
-        public List<int> ModInfosColumnWidths = new List<int>();
+                    ((ModSelectionTreeModel)tvModSelection.Model).Nodes.Clear();
+                    foreach (ModNode modNode in nodes)
+                        ((ModSelectionTreeModel)tvModSelection.Model).Nodes.Add(modNode);
 
-        public TreeViewAdvColumnsInfo TreeViewAdvColumnsInfo = null;
+                    break;
 
-        public bool IsEmpty { get { return (ModInfosSplitterPos == 0.0d && ModInfosColumnWidths.Count == 0 && TreeViewAdvColumnsInfo == null); } }
+                default:
+                    nodes = ((ModSelectionTreeModel)tvModSelection.Model).Nodes.Cast<ModNode>().ToList();
+                    nodes.Sort(delegate(ModNode node1, ModNode node2)
+                    {
+                        NodeControl nodeControl = null;
+                        foreach (NodeControl control in tvModSelection.NodeControls)
+                        {
+                            if (control.ParentColumn == column)
+                            {
+                                nodeControl = control;
+                                break;
+                            }
+                        }
+
+                        string propName = nodeControl.GetType().GetProperty("DataPropertyName").GetValue(nodeControl, null).ToString();
+
+                        object obj1 = node1.GetType().GetProperty(propName).GetValue(node1, null);
+                        object obj2 = node2.GetType().GetProperty(propName).GetValue(node2, null);
+                        string value1 = (obj1 == null) ? string.Empty : obj1.ToString();
+                        string value2 = (obj2 == null) ? string.Empty : obj2.ToString();
+
+                        if (column.SortOrder == SortOrder.Ascending)
+                            return value1.CompareTo(value2);
+                        else
+                            return value2.CompareTo(value1);
+                    });
+
+                    ((ModSelectionTreeModel)tvModSelection.Model).Nodes.Clear();
+                    foreach (ModNode modNode in nodes)
+                        ((ModSelectionTreeModel)tvModSelection.Model).Nodes.Add(modNode);
+
+                    break;
+            }
+
+            InvalidateView();
+        }
     }
 }

@@ -105,7 +105,7 @@ namespace KSPModAdmin.Core.Config
             }
 
             ModSelectionViewInfo vInfo = new ModSelectionViewInfo();
-            vInfo.TreeViewAdvColumnsInfo = new TreeViewAdvColumnsInfo(doc);
+            vInfo.ModSelectionColumnsInfo = new ModSelectionColumnsInfo(doc);
 
             XmlNodeList colWidths = doc.GetElementsByTagName(Constants.MODINFOCOLUMNS);
             if (colWidths.Count >= 1)
@@ -412,8 +412,8 @@ namespace KSPModAdmin.Core.Config
 
             // ModSelection column widths
             var vInfo = ModSelectionController.View.GetModSelectionViewInfo();
-            if (vInfo.TreeViewAdvColumnsInfo != null)
-                vInfo.TreeViewAdvColumnsInfo.ToXml2(generalNode);
+            if (vInfo.ModSelectionColumnsInfo != null)
+                vInfo.ModSelectionColumnsInfo.ToXml2(generalNode);
 
             // ModInfo column widths
             int i = 0;

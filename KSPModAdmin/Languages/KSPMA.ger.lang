@@ -630,7 +630,7 @@
   <String Name="MSG_URL_DETECTED_STARTING_DOWNLOAD" Value="Url identifiziert. Starte download..."/>
   <String Name="MSG_DESTINATION_0_SET_TO_GAMEDATA" Value="Zielpfad von &quot;{0}&quot; wird auf den GameData Ordner gesetzt."/>
   <Control Name="gbDestinationDetection" Value="Automatische Zielpfaderkennung:"/>
-  <Control Name="rbDDSmartDestDetection" Value="Iniligente Zielpfaderkennung (Empfolen)">
+  <Control Name="rbDDSmartDestDetection" Value="Intelligente Zielpfaderkennung (Empfolen)">
     <ChildControl Name="rbDDSmartDestDetection_ToolTip" Value="KSP MA versucht ähnliche Ordnersturkturen im Modarchive zu finden^und setzt die Zielpfade entsprechend."/>
   </Control>
   <Control Name="rbDDJustDump" Value="Nur nach GameData Ordner kopieren">

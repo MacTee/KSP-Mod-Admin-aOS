@@ -2,8 +2,7 @@
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
-using KSPModAdmin.Core.Utils;
+using KSPModAdmin.Core.Model;
 
 namespace KSPModAdmin.Core.Views
 {
@@ -12,7 +11,7 @@ namespace KSPModAdmin.Core.Views
         private ListView DragStartListView = null;
 
 
-        public TreeViewAdvColumnsInfo ModSelectionColumns
+        public ModSelectionColumnsInfo ModSelectionColumns
         {
             get
             {
@@ -20,7 +19,7 @@ namespace KSPModAdmin.Core.Views
                 foreach (ListViewItem item in lvDisplayedColumns.Items)
                     columns.Add((ColumnData)item.Tag);
 
-                return new TreeViewAdvColumnsInfo() { Columns = columns };
+                return new ModSelectionColumnsInfo() { Columns = columns };
             }
             set
             {
@@ -32,7 +31,7 @@ namespace KSPModAdmin.Core.Views
                     lvDisplayedColumns.Items.Add(new ListViewItem() { Text = column.Header, Tag = column });
 
                 lvAvailableColumns.Items.Clear();
-                foreach (ColumnData column in TreeViewAdvColumnsInfo.AllDefaultColumns)
+                foreach (ColumnData column in ModSelectionColumnsInfo.AllDefaultColumns)
                 {
                     if (!lvDisplayedColumns.Items.Cast<ListViewItem>().Any(item => item.Text == column.Header))
                         lvAvailableColumns.Items.Add(new ListViewItem() { Text = column.Header, Tag = column });

@@ -232,7 +232,7 @@ namespace KSPModAdmin.Core.Model
         /// </summary>
         public string SiteHandlerNameUI
         {
-            get { return (SiteHandlerName == Messages.NONE) ? string.Empty : SiteHandlerName; }
+            get { return (ZipRoot == this) ? SiteHandlerName : string.Empty; }
         }
 
         /// <summary>

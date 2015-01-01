@@ -97,6 +97,10 @@
     <Compile Include="IKSPMAPlugin.cs" />
     <Compile Include="Config\KSPConfig.cs" />
     <Compile Include="Messages.cs" />
+    <Compile Include="Model\ModSelectionColumnsInfo.cs" />
+    <Compile Include="Model\ModSelectionTreeColumn.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Model\ModSelectionTreeModel.cs" />
     <Compile Include="Model\ModNode.cs" />
     <Compile Include="Model\NoteNode.cs" />
@@ -340,7 +344,6 @@
     <Compile Include="Utils\Misc\PluginLoader.cs" />
     <Compile Include="Utils\Misc\ScreenHelper.cs" />
     <Compile Include="Utils\Misc\VersionHelper.cs" />
-    <Compile Include="Utils\TreeViewAdvColumnInfo.cs" />
     <Compile Include="Utils\www\KSPForum.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -419,6 +422,7 @@
       <DependentUpon>frmWelcome.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\IView.cs" />
+    <Compile Include="Model\ModSelectionViewInfo.cs" />
     <Compile Include="Views\ucBase.cs">
       <SubType>UserControl</SubType>
     </Compile>
