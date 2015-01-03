@@ -654,5 +654,6 @@
 
   <Control Name="frmColumnSelection" Value="Column selection"/>
   <Control Name="lvModSelection_Item_00" Value="Mod"/>
+  <Control Name="tsmiCmsResetDestinations" Value="Reset destinations"/>
 
 </Language>

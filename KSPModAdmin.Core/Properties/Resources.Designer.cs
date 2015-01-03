@@ -553,6 +553,16 @@ namespace KSPModAdmin.Core.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap components_folder_reset {
+            get {
+                object obj = ResourceManager.GetObject("components_folder_reset", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap components_gearwheel {
             get {
                 object obj = ResourceManager.GetObject("components_gearwheel", resourceCulture);

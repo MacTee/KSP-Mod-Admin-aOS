@@ -40,7 +40,7 @@ You have to select a install folder for those mod manually by right clicking it 
 [IMG]http://www.services.mactee.de/ksp/pics/KSP_MA_aOS-Select_New_Destination.png[/IMG]
 
 This dialog will pop up to chose a new destination:
-[IMG]http://www.services.mactee.de/ksp/pics/KSP_MA_aOS-Select_New_Destination2.png[/IMG]
+[IMG]http://www.services.mactee.de/ksp/pics/KSP_MA_aOS-Select_Destination_Dialog.png[/IMG]
 
 
 [B][U][SIZE=3]Install a mod:[/SIZE][/U][/B]

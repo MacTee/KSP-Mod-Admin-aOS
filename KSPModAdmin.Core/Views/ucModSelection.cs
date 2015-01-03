@@ -259,13 +259,21 @@ namespace KSPModAdmin.Core.Views
         private void tsbChangeDestination_Click(object sender, EventArgs e)
         {
             if (HasSelectedNode)
-                ModSelectionController.ChangeDestination(SelectedMod);
+                ModSelectionController.ChangeDestination(SelectedNode);
         }
 
         private void tsmiResetDestination_Click(object sender, EventArgs e)
         {
-            if (HasSelectedNode)
-                ModSelectionController.ResetDestination(SelectedNode);
+            //if (HasSelectedNode)
+            //    ModSelectionController.ResetDestination(SelectedNode);
+
+            if (tvModSelection.SelectedNodes.Count > 0)
+            {
+                foreach (var node in tvModSelection.SelectedNodes)
+                {
+                    ModSelectionController.ResetDestination(node.Tag as ModNode);
+                }
+            }
         }
 
         private void tsbCreateZip_Click(object sender, EventArgs e)
@@ -608,6 +616,20 @@ namespace KSPModAdmin.Core.Views
                 tsmiCmsProceedMod.Visible = (selectedModCount == 1);
                 tsmiCmsProceedHighlightedMods.Visible = !tsmiCmsProceedMod.Visible;
                 tsmiCmsCreateZip.Enabled = !selectedNode.ZipExists;
+            }
+
+            if (tvModSelection.SelectedNodes.Count > 1)
+            {
+                tsmiCmsDestinationPath.Text = "<" + Messages.MSG_NOT_AVAILABLE + ">";
+                tsmiCmsSelectNewDestination.Enabled = false;
+                tsmiCmsRedetectDestination.Enabled = false;
+                tsmiCmsResetDestination.Visible = false;
+                tsmiCmsResetDestinations.Visible = true;
+            }
+            else
+            {
+                tsmiCmsResetDestination.Visible = true;
+                tsmiCmsResetDestinations.Visible = false;
             }
         }
 
