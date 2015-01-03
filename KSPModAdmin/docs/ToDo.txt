@@ -1,14 +1,11 @@
 ﻿//// BUGS
 /////////////////////
 - ModName changes after Mod update.
-- No question for Download folder if it is not set (atleast during add via url)
 - AVC Plugin - Problem when a mod archive contains multiple version files. (Sample: Mission Controller 2 on KerbalStuff)
-- Mod info right panel updating when the "Edit Mod Info" window closes, instead of waiting to read it when the mod is unselected and selected again.
 - Some mods have additional folders that normally doesn't install. 
   It can be folders with alternative data, manuals, etc. For examples see Planet Shine or UniversalStorage [TAC PACK]. 
   Usually Mod Admin can't detect installation path for them and shows warning. When I update this mods, Mod Admin shows warning again for every root node 
   without installation path. I update in "Copy checked state" mode.
-
 
 //// To Test
 /////////////////////
@@ -36,6 +33,13 @@
   - Read version file from URL provided from mod archive version file.
   - Use GitHub infos.
   - Try to get SiteHandler from ChangeLog_URL as well.
+- Column selection for ModSelection (Choose the Columns that should be displayed in the ModSelection).
+- Option to "Delete old archive after update"
+- Faster Tooltip -> option to allow use the delay time.
+- Option to dummp mods without a destination to GameData folder.
+- Sort in ModSelection (for all columns).
+- Select new destination works again.
+
 
 //// TODO
 /////////////////////
@@ -65,8 +69,6 @@
 
 - Conflict detection/solving
 
-- Column select for ModSelection from ModInfo fields
-
 - Revise of the English/German text
   - unify URL, link, site, page
   - spelling error
@@ -75,9 +77,11 @@
 - Try loading old KSPModAdmin.cfg file if no new cfg file is available.
   -> For AppConfig and KSPConfig!
   
-- Some kind of search or filter and sort in select mod tree would be helpful.
+- Search in ModSelection.
 - Overwrite button states are indistinguishable. It's hard to say, what mode it is in. May be checkbox would be more visual?
+  - Change ToolTip to display On/Off state?
 
+- Center CheckBoxes us TreeViewAdv.
 
 - Implementation of a waffle iron !!! =)
 
@@ -85,8 +89,5 @@
 //// SUGGESTIONS
 /////////////////////
 
-- Option to dummp mods without a destination to gamedata folder.
 - Option to add files to an exclude list for mod install (like readme, txt, licenses ...)
-- Bigger icons or faster tooltips. I spend a lot of time waiting for tool tips to show up because the icons all look pretty much the same to me. I'd prefer text buttons, but bigger or more clear icons would be OK.
-  Faster Tooltip -> option to allow use the delay time.
 - Compress for zipping.

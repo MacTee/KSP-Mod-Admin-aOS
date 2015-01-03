@@ -622,4 +622,38 @@
   <Control Name="tsmiCmsTreeViewOptions" Value="TreeView options"/>
   <Control Name="tsmiCmsOneModTreeViewOptions" Value="TreeView options"/>
 
+  <Control Name="lblColSelectDescription" Value="Drag &amp;&amp; Drop to reorder columns^Move columns between lists to show or hide them."/>
+  <Control Name="lblColSelectDisplayed" Value="Displayed in ModSelection:"/>
+  <Control Name="lblColSelectAvailable" Value="Available columns:"/>
+  <Control Name="btnApply" Value="Apply"/>
+  
+  <Control Name="gbToolTip" Value="ToolTip:"/>
+  <Control Name="cbToolTipOnOff" Value="On / Off">
+    <ChildControl Name="cbToolTipOnOff_ToolTip" Value="Switches the ToolTip on or off."/>
+  </Control>
+  <Control Name="lblToolTipDelay" Value="Delay:"/>
+  <Control Name="lblSecond1" Value="sec."/>
+  <Control Name="lblToolTipDisplayTime" Value="Display time:"/>
+  <Control Name="lblSecond2" Value="sec."/>
+  <Control Name="cbDeleteOldArchive" Value="Delete old archive after update">
+    <ChildControl Name="cbDeleteOldArchive_ToolTip" Value="Check this option if the old archive of a mod should be deleted after an update."/>
+  </Control>
+  <String Name="MSG_DOWNLOAD_PATH_MISSING_PLEASE_SELECT_ONE" Value="Download path missing. Please select a download folder."/>
+  <String Name="MSG_URL_DETECTED_STARTING_DOWNLOAD" Value="Url detected starting download..."/>
+  <String Name="MSG_DESTINATION_0_SET_TO_GAMEDATA" Value="Destination of &quot;{0}&quot; will be set to GameData folder."/>
+  <Control Name="gbDestinationDetection" Value="Destination detection:"/>
+  <Control Name="rbDDSmartDestDetection" Value="Smart destination detection (recommended)">
+    <ChildControl Name="rbDDSmartDestDetection_ToolTip" Value="KSP MA searches for a similar KSP folder structure in the mod archive^and sets the destination of the mod files accordingly."/>
+  </Control>
+  <Control Name="rbDDJustDump" Value="Just copy mod archive to GameData">
+    <ChildControl Name="rbDDJustDump_ToolTip" Value="The destination of the mod archive node will be set to GameData.^NOTE: May cause problems with conflict detection!"/>
+  </Control>
+  <Control Name="cbDDCopyToGameData" Value="Fallback to GameData folder">
+    <ChildControl Name="cbDDCopyToGameData_ToolTip" Value="If destination detection fails the destination of the mod archive node^will be set to the GameData folder.^NOTE: May cause problems with conflict detection!"/>
+  </Control>
+
+  <Control Name="frmColumnSelection" Value="Column selection"/>
+  <Control Name="lvModSelection_Item_00" Value="Mod"/>
+  <Control Name="tsmiCmsResetDestinations" Value="Reset destinations"/>
+
 </Language>

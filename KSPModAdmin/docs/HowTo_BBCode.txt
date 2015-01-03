@@ -1,0 +1,89 @@
+Don't be afraid of this long "how to", the mod handling is quite easy, just hard to explain =)
+
+
+[B][U][SIZE=3]General info:[/SIZE][/U][/B]
+KSP MA provides for almost all controls a ToolTip, try to hover over a button if its use isn't obvious. 
+
+
+[B][U][SIZE=3]"Short" usage description:[/SIZE][/U][/B]
+After you have started KSP MA aOS the first time and you have selected a KSP install folder and a language, KSP MA is ready to use.
+
+
+[B][U][SIZE=3]Additional KSP paths:[/SIZE][/U][/B]
+You can add additional KSP install folders (if you have more then one) via Option Tab -> Path Tab.
+[IMG]http://www.services.mactee.de/ksp/pics/KSP_MA_aOS-Additional_KSP_Paths.png[/IMG]
+
+
+[B][U][SIZE=3]Add a mod:[/SIZE][/U][/B]
+There are several ways to add a mod to your ModSelection (the TreeView on the Mod Tab).
+1. You can Drag & Drop a mod archive (.zip, .rar, .7zip or .craft) into the ModSelection.
+2. With the "Add mod archive" button. You can chose a mod archive via a file browser dialog.
+[IMG]http://www.services.mactee.de/ksp/pics/KSP_MA_aOS-Add_Mod_Archive_Button.png[/IMG]
+3. With the [IMG]http://www.services.mactee.de/ksp/pics/KSP_MA_aOS-Add_Dialog_Button.png[/IMG] "Add dialog" button.
+The "Add dialog" will pop up:
+(If you add a mod the first time via URL you will be asked for a download folder, where KSP MA should place the downloaded mod).
+[IMG]http://www.services.mactee.de/ksp/pics/KSP_MA_aOS-Add_Dialog.png[/IMG]
+
+After you have (just) added a mod (and not installed already) it will be shown in the ModSelection like this:
+(For this mod a install path was detected automatically)
+[IMG]http://www.services.mactee.de/ksp/pics/KSP_MA_aOS-ModSelection.png[/IMG]
+
+For some mods KSP MA can't detect a install path automatically they will be shown like this:
+[IMG]http://www.services.mactee.de/ksp/pics/KSP_MA_aOS-ModSelection2.png[/IMG]
+You can tell KSP MA to just dump such mods to the GameData folder with the "Fallback to GameData folder" option on the Option Tab -> Misc Tab:
+[IMG]http://www.services.mactee.de/ksp/pics/KSP_MA_aOS-Destination_Detection_Options.png[/IMG]
+But this is not recommended, cause it could lead to problems with the conflict detection.
+
+
+[B][U][SIZE=3]Change mod destination:[/SIZE][/U][/B]
+You have to select a install folder for those mod manually by right clicking it and chose "Destination" -> "Select new destination":
+[IMG]http://www.services.mactee.de/ksp/pics/KSP_MA_aOS-Select_New_Destination.png[/IMG]
+
+This dialog will pop up to chose a new destination:
+[IMG]http://www.services.mactee.de/ksp/pics/KSP_MA_aOS-Select_Destination_Dialog.png[/IMG]
+
+
+[B][U][SIZE=3]Install a mod:[/SIZE][/U][/B]
+After you have added your mods:
+You can chose which parts of a mod should be installed by checking or unchecking the CheckBoxes next to a mod file/folder.
+[IMG]http://www.services.mactee.de/ksp/pics/KSP_MA_aOS-ModSelection3.png[/IMG]
+
+When you are ready with the selection of parts of your mods you have to click the "Process all mods"
+[IMG]http://www.services.mactee.de/ksp/pics/KSP_MA_aOS-Process_Mods_Buttons.png[/IMG]
+This will start the installation or deinstallation of your mods.
+Checked parts of a mod will be installed unchecked ones won't or will be deinstalled.
+
+Now your mods are installed and ready to use in KSP.
+
+You can change the part selection anytime you want, just remember to click the "Process all mods" button after you have changed the checked state of some mods / mod parts.
+
+
+[B][U][SIZE=3]Remove a mod:[/SIZE][/U][/B]
+To remove a mod from KSP just uncheck it and press the precess button and the mod will be deinstalled, but stayes in the ModSelection.
+To erase a mod from the ModSelection click the "Remove Mod" or "Remove all mods" button.
+[IMG]http://www.services.mactee.de/ksp/pics/KSP_MA_aOS-Remove_Mods.png[/IMG]
+KSP MA will uninstall the mod and removes it from the ModSelection.
+
+
+[B][U][SIZE=3]Mod update check support:[/SIZE][/U][/B]
+The "Mod update check" and "Mod update" feature will only be available for mods that where added via URL or mods that provide a AVC version file with the needed informations.
+
+To check for mod updates click the "Update check for all mods" button:
+[IMG]http://www.services.mactee.de/ksp/pics/KSP_MA_aOS-Mod_Update_Check.png[/IMG]
+
+KSP MA will then check for updates for all mods with a VersionControl.
+If a mod is outdated it will be displayed in blue:
+[IMG]http://www.services.mactee.de/ksp/pics/KSP_MA_aOS-Outdated_Mod.png[/IMG]
+
+To update a mod click the "Update all outdated mods" button:
+[IMG]http://www.services.mactee.de/ksp/pics/KSP_MA_aOS-Update_Mod.png[/IMG]
+
+
+[B][U][SIZE=3]Auto mod update check configuration:[/SIZE][/U][/B]
+You can configure KSP MA aOS to automatically check for mod updates by the following settings:
+[IMG]http://www.services.mactee.de/ksp/pics/KSP_MA_aOS-Update_Mod_Options.png[/IMG]
+
+
+[B][U][SIZE=3]KSP Mod Admin update check configuration:[/SIZE][/U][/B]
+You can configure KSP MA aOS to automatically check for KSP Mod Admin aOs updates by the following settings:
+[IMG]http://www.services.mactee.de/ksp/pics/KSP_MA_aOS-KSPMA_Update_Options.png[/IMG]

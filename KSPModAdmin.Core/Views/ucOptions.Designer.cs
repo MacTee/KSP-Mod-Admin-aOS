@@ -36,6 +36,7 @@ namespace KSPModAdmin.Core.Views
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPageUpdate = new System.Windows.Forms.TabPage();
             this.gbModUpdate = new System.Windows.Forms.GroupBox();
+            this.cbDeleteOldArchive = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.lblModUpdateBehavior = new System.Windows.Forms.Label();
             this.cbModUpdateBehavior = new System.Windows.Forms.ComboBox();
@@ -85,6 +86,19 @@ namespace KSPModAdmin.Core.Views
             this.lblKSPPathNote = new System.Windows.Forms.Label();
             this.tbNote = new System.Windows.Forms.TextBox();
             this.tabPageMisc = new System.Windows.Forms.TabPage();
+            this.gbDestinationDetection = new System.Windows.Forms.GroupBox();
+            this.rbDDJustDump = new System.Windows.Forms.RadioButton();
+            this.rbDDSmartDestDetection = new System.Windows.Forms.RadioButton();
+            this.cbDDCopyToGameData = new System.Windows.Forms.CheckBox();
+            this.gbToolTip = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
+            this.lblSecond2 = new System.Windows.Forms.Label();
+            this.cbToolTipOnOff = new System.Windows.Forms.CheckBox();
+            this.tbToolTipDisplayTime = new KSPModAdmin.Core.Utils.Controls.Aga.Controls.NumericTextBox();
+            this.lblToolTipDisplayTime = new System.Windows.Forms.Label();
+            this.lblToolTipDelay = new System.Windows.Forms.Label();
+            this.lblSecond1 = new System.Windows.Forms.Label();
+            this.tbToolTipDelay = new KSPModAdmin.Core.Utils.Controls.Aga.Controls.NumericTextBox();
             this.gbLaguage = new System.Windows.Forms.GroupBox();
             this.cbLanguages = new System.Windows.Forms.ComboBox();
             this.gbNodeColors = new System.Windows.Forms.GroupBox();
@@ -152,6 +166,7 @@ namespace KSPModAdmin.Core.Views
             this.cbConflictDetectionOnOff = new System.Windows.Forms.CheckBox();
             this.cbShowConflictSolver = new System.Windows.Forms.CheckBox();
             this.ttOptions = new System.Windows.Forms.ToolTip(this.components);
+            this.tableLayoutPanel14 = new System.Windows.Forms.TableLayoutPanel();
             this.tabControl2.SuspendLayout();
             this.tabPageUpdate.SuspendLayout();
             this.gbModUpdate.SuspendLayout();
@@ -176,6 +191,9 @@ namespace KSPModAdmin.Core.Views
             this.splitContainer1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tabPageMisc.SuspendLayout();
+            this.gbDestinationDetection.SuspendLayout();
+            this.gbToolTip.SuspendLayout();
+            this.tableLayoutPanel13.SuspendLayout();
             this.gbLaguage.SuspendLayout();
             this.gbNodeColors.SuspendLayout();
             this.tableLayoutPanel11.SuspendLayout();
@@ -185,6 +203,7 @@ namespace KSPModAdmin.Core.Views
             this.tableLayoutPanel7.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
             this.gpModConflictHandling.SuspendLayout();
+            this.tableLayoutPanel14.SuspendLayout();
             this.SuspendLayout();
             // 
             // ilOptions
@@ -205,7 +224,7 @@ namespace KSPModAdmin.Core.Views
             this.tabControl2.Location = new System.Drawing.Point(0, 0);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(650, 470);
+            this.tabControl2.Size = new System.Drawing.Size(675, 507);
             this.tabControl2.TabIndex = 1;
             // 
             // tabPageUpdate
@@ -217,12 +236,13 @@ namespace KSPModAdmin.Core.Views
             this.tabPageUpdate.Location = new System.Drawing.Point(4, 23);
             this.tabPageUpdate.Name = "tabPageUpdate";
             this.tabPageUpdate.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageUpdate.Size = new System.Drawing.Size(642, 443);
+            this.tabPageUpdate.Size = new System.Drawing.Size(667, 480);
             this.tabPageUpdate.TabIndex = 0;
             this.tabPageUpdate.Text = "Update";
             // 
             // gbModUpdate
             // 
+            this.gbModUpdate.Controls.Add(this.cbDeleteOldArchive);
             this.gbModUpdate.Controls.Add(this.tableLayoutPanel5);
             this.gbModUpdate.Controls.Add(this.tableLayoutPanel4);
             this.gbModUpdate.Controls.Add(this.pbCheckModUpdate);
@@ -230,10 +250,21 @@ namespace KSPModAdmin.Core.Views
             this.gbModUpdate.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbModUpdate.Location = new System.Drawing.Point(3, 183);
             this.gbModUpdate.Name = "gbModUpdate";
-            this.gbModUpdate.Size = new System.Drawing.Size(636, 257);
+            this.gbModUpdate.Size = new System.Drawing.Size(661, 294);
             this.gbModUpdate.TabIndex = 7;
             this.gbModUpdate.TabStop = false;
             this.gbModUpdate.Text = "Mod updating:";
+            // 
+            // cbDeleteOldArchive
+            // 
+            this.cbDeleteOldArchive.AutoSize = true;
+            this.cbDeleteOldArchive.Location = new System.Drawing.Point(11, 125);
+            this.cbDeleteOldArchive.Name = "cbDeleteOldArchive";
+            this.cbDeleteOldArchive.Size = new System.Drawing.Size(172, 17);
+            this.cbDeleteOldArchive.TabIndex = 19;
+            this.cbDeleteOldArchive.Text = "Delete old archive after update";
+            this.ttOptions.SetToolTip(this.cbDeleteOldArchive, "Check this option if the old archive of a mod should be deleted after an update.");
+            this.cbDeleteOldArchive.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel5
             // 
@@ -323,7 +354,7 @@ namespace KSPModAdmin.Core.Views
             // 
             this.pbCheckModUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pbCheckModUpdate.Image = ((System.Drawing.Image)(resources.GetObject("pbCheckModUpdate.Image")));
-            this.pbCheckModUpdate.Location = new System.Drawing.Point(605, 27);
+            this.pbCheckModUpdate.Location = new System.Drawing.Point(630, 27);
             this.pbCheckModUpdate.Name = "pbCheckModUpdate";
             this.pbCheckModUpdate.Size = new System.Drawing.Size(20, 20);
             this.pbCheckModUpdate.TabIndex = 16;
@@ -338,7 +369,7 @@ namespace KSPModAdmin.Core.Views
             this.btnCheckModUpdates.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCheckModUpdates.Location = new System.Drawing.Point(6, 19);
             this.btnCheckModUpdates.Name = "btnCheckModUpdates";
-            this.btnCheckModUpdates.Size = new System.Drawing.Size(588, 35);
+            this.btnCheckModUpdates.Size = new System.Drawing.Size(613, 35);
             this.btnCheckModUpdates.TabIndex = 5;
             this.btnCheckModUpdates.Text = "Check for mod updates";
             this.ttOptions.SetToolTip(this.btnCheckModUpdates, "Check for mod updates\r\nStarts the update check for all mods from the ModSelection" +
@@ -359,7 +390,7 @@ namespace KSPModAdmin.Core.Views
             this.gbAdminVersion.Dock = System.Windows.Forms.DockStyle.Top;
             this.gbAdminVersion.Location = new System.Drawing.Point(3, 3);
             this.gbAdminVersion.Name = "gbAdminVersion";
-            this.gbAdminVersion.Size = new System.Drawing.Size(636, 180);
+            this.gbAdminVersion.Size = new System.Drawing.Size(661, 180);
             this.gbAdminVersion.TabIndex = 6;
             this.gbAdminVersion.TabStop = false;
             this.gbAdminVersion.Text = "Update KSP Mod Admin:";
@@ -480,7 +511,7 @@ namespace KSPModAdmin.Core.Views
             // 
             this.pbUpdateLoad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pbUpdateLoad.Image = ((System.Drawing.Image)(resources.GetObject("pbUpdateLoad.Image")));
-            this.pbUpdateLoad.Location = new System.Drawing.Point(605, 56);
+            this.pbUpdateLoad.Location = new System.Drawing.Point(630, 56);
             this.pbUpdateLoad.Name = "pbUpdateLoad";
             this.pbUpdateLoad.Size = new System.Drawing.Size(20, 20);
             this.pbUpdateLoad.TabIndex = 12;
@@ -495,7 +526,7 @@ namespace KSPModAdmin.Core.Views
             this.btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUpdate.Location = new System.Drawing.Point(7, 48);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(587, 35);
+            this.btnUpdate.Size = new System.Drawing.Size(612, 35);
             this.btnUpdate.TabIndex = 0;
             this.btnUpdate.Text = "Check for KSP MA updates";
             this.ttOptions.SetToolTip(this.btnUpdate, "Check for KSP MA updates\r\nStarts the check for KSP Mod Admin updates.");
@@ -520,7 +551,7 @@ namespace KSPModAdmin.Core.Views
             | System.Windows.Forms.AnchorStyles.Right)));
             this.prgBarAdminDownload.Location = new System.Drawing.Point(274, 93);
             this.prgBarAdminDownload.Name = "prgBarAdminDownload";
-            this.prgBarAdminDownload.Size = new System.Drawing.Size(320, 17);
+            this.prgBarAdminDownload.Size = new System.Drawing.Size(345, 17);
             this.prgBarAdminDownload.TabIndex = 4;
             this.prgBarAdminDownload.Visible = false;
             // 
@@ -528,7 +559,7 @@ namespace KSPModAdmin.Core.Views
             // 
             this.btnOpenDownloads.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOpenDownloads.Image = ((System.Drawing.Image)(resources.GetObject("btnOpenDownloads.Image")));
-            this.btnOpenDownloads.Location = new System.Drawing.Point(604, 90);
+            this.btnOpenDownloads.Location = new System.Drawing.Point(629, 90);
             this.btnOpenDownloads.Name = "btnOpenDownloads";
             this.btnOpenDownloads.Size = new System.Drawing.Size(25, 24);
             this.btnOpenDownloads.TabIndex = 2;
@@ -544,7 +575,7 @@ namespace KSPModAdmin.Core.Views
             this.tabPagePath.Location = new System.Drawing.Point(4, 23);
             this.tabPagePath.Name = "tabPagePath";
             this.tabPagePath.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPagePath.Size = new System.Drawing.Size(642, 443);
+            this.tabPagePath.Size = new System.Drawing.Size(667, 480);
             this.tabPagePath.TabIndex = 1;
             this.tabPagePath.Text = "Paths";
             // 
@@ -563,7 +594,7 @@ namespace KSPModAdmin.Core.Views
             this.gbPaths.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbPaths.Location = new System.Drawing.Point(3, 3);
             this.gbPaths.Name = "gbPaths";
-            this.gbPaths.Size = new System.Drawing.Size(636, 437);
+            this.gbPaths.Size = new System.Drawing.Size(661, 474);
             this.gbPaths.TabIndex = 6;
             this.gbPaths.TabStop = false;
             this.gbPaths.Text = "Paths:";
@@ -688,7 +719,7 @@ namespace KSPModAdmin.Core.Views
             this.tlpSearchBG.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpSearchBG.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpSearchBG.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpSearchBG.Size = new System.Drawing.Size(597, 277);
+            this.tlpSearchBG.Size = new System.Drawing.Size(622, 314);
             this.tlpSearchBG.TabIndex = 17;
             this.tlpSearchBG.Visible = false;
             // 
@@ -701,7 +732,7 @@ namespace KSPModAdmin.Core.Views
             this.tlpSearch.Controls.Add(this.lblLoading, 1, 0);
             this.tlpSearch.Controls.Add(this.picLoading, 0, 0);
             this.tlpSearch.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpSearch.Location = new System.Drawing.Point(248, 123);
+            this.tlpSearch.Location = new System.Drawing.Point(260, 141);
             this.tlpSearch.Name = "tlpSearch";
             this.tlpSearch.RowCount = 1;
             this.tlpSearch.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -736,7 +767,7 @@ namespace KSPModAdmin.Core.Views
             this.cbKSPPath.FormattingEnabled = true;
             this.cbKSPPath.Location = new System.Drawing.Point(21, 39);
             this.cbKSPPath.Name = "cbKSPPath";
-            this.cbKSPPath.Size = new System.Drawing.Size(580, 21);
+            this.cbKSPPath.Size = new System.Drawing.Size(605, 21);
             this.cbKSPPath.TabIndex = 0;
             this.ttOptions.SetToolTip(this.cbKSPPath, "Chose the KSP install path to perform actions on.");
             this.cbKSPPath.SelectedIndexChanged += new System.EventHandler(this.cbKSPPath_SelectedIndexChanged);
@@ -745,7 +776,7 @@ namespace KSPModAdmin.Core.Views
             // 
             this.lblModDownloadPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblModDownloadPath.AutoSize = true;
-            this.lblModDownloadPath.Location = new System.Drawing.Point(12, 385);
+            this.lblModDownloadPath.Location = new System.Drawing.Point(12, 422);
             this.lblModDownloadPath.Name = "lblModDownloadPath";
             this.lblModDownloadPath.Size = new System.Drawing.Size(108, 13);
             this.lblModDownloadPath.TabIndex = 2;
@@ -755,10 +786,10 @@ namespace KSPModAdmin.Core.Views
             // 
             this.tbDownloadPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbDownloadPath.Location = new System.Drawing.Point(21, 401);
+            this.tbDownloadPath.Location = new System.Drawing.Point(21, 438);
             this.tbDownloadPath.Name = "tbDownloadPath";
             this.tbDownloadPath.ReadOnly = true;
-            this.tbDownloadPath.Size = new System.Drawing.Size(552, 20);
+            this.tbDownloadPath.Size = new System.Drawing.Size(577, 20);
             this.tbDownloadPath.TabIndex = 1;
             this.tbDownloadPath.TabStop = false;
             // 
@@ -767,7 +798,7 @@ namespace KSPModAdmin.Core.Views
             this.btnDownloadPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDownloadPath.Enabled = false;
             this.btnDownloadPath.Image = ((System.Drawing.Image)(resources.GetObject("btnDownloadPath.Image")));
-            this.btnDownloadPath.Location = new System.Drawing.Point(579, 400);
+            this.btnDownloadPath.Location = new System.Drawing.Point(604, 437);
             this.btnDownloadPath.Name = "btnDownloadPath";
             this.btnDownloadPath.Size = new System.Drawing.Size(25, 23);
             this.btnDownloadPath.TabIndex = 9;
@@ -780,7 +811,7 @@ namespace KSPModAdmin.Core.Views
             // 
             this.btnOpenDownloadFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOpenDownloadFolder.Image = ((System.Drawing.Image)(resources.GetObject("btnOpenDownloadFolder.Image")));
-            this.btnOpenDownloadFolder.Location = new System.Drawing.Point(607, 400);
+            this.btnOpenDownloadFolder.Location = new System.Drawing.Point(632, 437);
             this.btnOpenDownloadFolder.Name = "btnOpenDownloadFolder";
             this.btnOpenDownloadFolder.Size = new System.Drawing.Size(25, 24);
             this.btnOpenDownloadFolder.TabIndex = 10;
@@ -792,7 +823,7 @@ namespace KSPModAdmin.Core.Views
             // 
             this.btnOpenKSPRoot.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOpenKSPRoot.Image = ((System.Drawing.Image)(resources.GetObject("btnOpenKSPRoot.Image")));
-            this.btnOpenKSPRoot.Location = new System.Drawing.Point(607, 38);
+            this.btnOpenKSPRoot.Location = new System.Drawing.Point(632, 38);
             this.btnOpenKSPRoot.Name = "btnOpenKSPRoot";
             this.btnOpenKSPRoot.Size = new System.Drawing.Size(25, 24);
             this.btnOpenKSPRoot.TabIndex = 1;
@@ -825,8 +856,8 @@ namespace KSPModAdmin.Core.Views
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.panel1);
-            this.splitContainer1.Size = new System.Drawing.Size(597, 276);
-            this.splitContainer1.SplitterDistance = 425;
+            this.splitContainer1.Size = new System.Drawing.Size(622, 313);
+            this.splitContainer1.SplitterDistance = 441;
             this.splitContainer1.TabIndex = 23;
             // 
             // tvKnownPaths
@@ -834,7 +865,7 @@ namespace KSPModAdmin.Core.Views
             this.tvKnownPaths.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tvKnownPaths.Location = new System.Drawing.Point(0, 0);
             this.tvKnownPaths.Name = "tvKnownPaths";
-            this.tvKnownPaths.Size = new System.Drawing.Size(425, 276);
+            this.tvKnownPaths.Size = new System.Drawing.Size(441, 313);
             this.tvKnownPaths.TabIndex = 7;
             this.tvKnownPaths.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvKnownPaths_AfterSelect);
             // 
@@ -846,7 +877,7 @@ namespace KSPModAdmin.Core.Views
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(168, 276);
+            this.panel1.Size = new System.Drawing.Size(177, 313);
             this.panel1.TabIndex = 23;
             // 
             // lblKSPPathNote
@@ -866,22 +897,199 @@ namespace KSPModAdmin.Core.Views
             this.tbNote.Location = new System.Drawing.Point(0, 20);
             this.tbNote.Multiline = true;
             this.tbNote.Name = "tbNote";
-            this.tbNote.Size = new System.Drawing.Size(168, 256);
+            this.tbNote.Size = new System.Drawing.Size(177, 293);
             this.tbNote.TabIndex = 8;
             this.tbNote.TextChanged += new System.EventHandler(this.tbNote_TextChanged);
             // 
             // tabPageMisc
             // 
             this.tabPageMisc.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPageMisc.Controls.Add(this.gbDestinationDetection);
+            this.tabPageMisc.Controls.Add(this.gbToolTip);
             this.tabPageMisc.Controls.Add(this.gbLaguage);
             this.tabPageMisc.Controls.Add(this.gbNodeColors);
             this.tabPageMisc.Controls.Add(this.gpModConflictHandling);
             this.tabPageMisc.ImageIndex = 2;
             this.tabPageMisc.Location = new System.Drawing.Point(4, 23);
             this.tabPageMisc.Name = "tabPageMisc";
-            this.tabPageMisc.Size = new System.Drawing.Size(642, 443);
+            this.tabPageMisc.Size = new System.Drawing.Size(667, 480);
             this.tabPageMisc.TabIndex = 2;
             this.tabPageMisc.Text = "Misc";
+            // 
+            // gbDestinationDetection
+            // 
+            this.gbDestinationDetection.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbDestinationDetection.Controls.Add(this.tableLayoutPanel14);
+            this.gbDestinationDetection.Controls.Add(this.cbDDCopyToGameData);
+            this.gbDestinationDetection.Location = new System.Drawing.Point(0, 54);
+            this.gbDestinationDetection.Name = "gbDestinationDetection";
+            this.gbDestinationDetection.Size = new System.Drawing.Size(667, 69);
+            this.gbDestinationDetection.TabIndex = 32;
+            this.gbDestinationDetection.TabStop = false;
+            this.gbDestinationDetection.Text = "Destination detection:";
+            // 
+            // rbDDJustDump
+            // 
+            this.rbDDJustDump.AutoSize = true;
+            this.rbDDJustDump.Location = new System.Drawing.Point(258, 3);
+            this.rbDDJustDump.Name = "rbDDJustDump";
+            this.rbDDJustDump.Size = new System.Drawing.Size(197, 17);
+            this.rbDDJustDump.TabIndex = 1;
+            this.rbDDJustDump.Text = "Just copy mod archive to GameData";
+            this.ttOptions.SetToolTip(this.rbDDJustDump, "The destination of the mod archive node will be set to GameData.\r\nNOTE: May cause" +
+        " problems with conflict detection!");
+            this.rbDDJustDump.UseVisualStyleBackColor = true;
+            // 
+            // rbDDSmartDestDetection
+            // 
+            this.rbDDSmartDestDetection.AutoSize = true;
+            this.rbDDSmartDestDetection.Checked = true;
+            this.rbDDSmartDestDetection.Location = new System.Drawing.Point(3, 3);
+            this.rbDDSmartDestDetection.Name = "rbDDSmartDestDetection";
+            this.rbDDSmartDestDetection.Size = new System.Drawing.Size(229, 17);
+            this.rbDDSmartDestDetection.TabIndex = 1;
+            this.rbDDSmartDestDetection.TabStop = true;
+            this.rbDDSmartDestDetection.Text = "Smart destination detection (recommended)";
+            this.ttOptions.SetToolTip(this.rbDDSmartDestDetection, "KSP MA searches for a similar KSP folder structure in the mod archive\r\nand sets t" +
+        "he destination of the mod files accordingly.");
+            this.rbDDSmartDestDetection.UseVisualStyleBackColor = true;
+            this.rbDDSmartDestDetection.CheckedChanged += new System.EventHandler(this.rbDDSmartDestDetection_CheckedChanged);
+            // 
+            // cbDDCopyToGameData
+            // 
+            this.cbDDCopyToGameData.AutoSize = true;
+            this.cbDDCopyToGameData.Location = new System.Drawing.Point(24, 42);
+            this.cbDDCopyToGameData.Name = "cbDDCopyToGameData";
+            this.cbDDCopyToGameData.Size = new System.Drawing.Size(161, 17);
+            this.cbDDCopyToGameData.TabIndex = 0;
+            this.cbDDCopyToGameData.Text = "Fallback to GameData folder";
+            this.ttOptions.SetToolTip(this.cbDDCopyToGameData, "If destination detection fails the destination of the mod archive node\r\nwill be s" +
+        "et to the GameData folder.\r\nNOTE: May cause problems with conflict detection!");
+            this.cbDDCopyToGameData.UseVisualStyleBackColor = true;
+            // 
+            // gbToolTip
+            // 
+            this.gbToolTip.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbToolTip.Controls.Add(this.tableLayoutPanel13);
+            this.gbToolTip.Location = new System.Drawing.Point(0, 190);
+            this.gbToolTip.Name = "gbToolTip";
+            this.gbToolTip.Size = new System.Drawing.Size(667, 45);
+            this.gbToolTip.TabIndex = 5;
+            this.gbToolTip.TabStop = false;
+            this.gbToolTip.Text = "ToolTip:";
+            // 
+            // tableLayoutPanel13
+            // 
+            this.tableLayoutPanel13.ColumnCount = 10;
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 8F));
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 8F));
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel13.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 315F));
+            this.tableLayoutPanel13.Controls.Add(this.lblSecond2, 8, 0);
+            this.tableLayoutPanel13.Controls.Add(this.cbToolTipOnOff, 0, 0);
+            this.tableLayoutPanel13.Controls.Add(this.tbToolTipDisplayTime, 7, 0);
+            this.tableLayoutPanel13.Controls.Add(this.lblToolTipDisplayTime, 6, 0);
+            this.tableLayoutPanel13.Controls.Add(this.lblToolTipDelay, 2, 0);
+            this.tableLayoutPanel13.Controls.Add(this.lblSecond1, 4, 0);
+            this.tableLayoutPanel13.Controls.Add(this.tbToolTipDelay, 3, 0);
+            this.tableLayoutPanel13.Location = new System.Drawing.Point(6, 14);
+            this.tableLayoutPanel13.Name = "tableLayoutPanel13";
+            this.tableLayoutPanel13.RowCount = 1;
+            this.tableLayoutPanel13.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel13.Size = new System.Drawing.Size(655, 26);
+            this.tableLayoutPanel13.TabIndex = 2;
+            // 
+            // lblSecond2
+            // 
+            this.lblSecond2.AutoSize = true;
+            this.lblSecond2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblSecond2.Location = new System.Drawing.Point(330, 0);
+            this.lblSecond2.Name = "lblSecond2";
+            this.lblSecond2.Size = new System.Drawing.Size(27, 26);
+            this.lblSecond2.TabIndex = 2;
+            this.lblSecond2.Text = "sec.";
+            this.lblSecond2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // cbToolTipOnOff
+            // 
+            this.cbToolTipOnOff.AutoSize = true;
+            this.cbToolTipOnOff.Checked = true;
+            this.cbToolTipOnOff.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbToolTipOnOff.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbToolTipOnOff.Location = new System.Drawing.Point(3, 3);
+            this.cbToolTipOnOff.Name = "cbToolTipOnOff";
+            this.cbToolTipOnOff.Size = new System.Drawing.Size(65, 20);
+            this.cbToolTipOnOff.TabIndex = 0;
+            this.cbToolTipOnOff.Text = "On / Off";
+            this.cbToolTipOnOff.UseVisualStyleBackColor = true;
+            this.cbToolTipOnOff.CheckedChanged += new System.EventHandler(this.cbToolTipOnOff_CheckedChanged);
+            // 
+            // tbToolTipDisplayTime
+            // 
+            this.tbToolTipDisplayTime.AllowDecimalSeparator = false;
+            this.tbToolTipDisplayTime.AllowNegativeSign = false;
+            this.tbToolTipDisplayTime.Location = new System.Drawing.Point(284, 3);
+            this.tbToolTipDisplayTime.MaxLength = 5;
+            this.tbToolTipDisplayTime.Name = "tbToolTipDisplayTime";
+            this.tbToolTipDisplayTime.Size = new System.Drawing.Size(40, 20);
+            this.tbToolTipDisplayTime.TabIndex = 1;
+            this.tbToolTipDisplayTime.Text = "10.00";
+            this.tbToolTipDisplayTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.tbToolTipDisplayTime.TextChanged += new System.EventHandler(this.tbToolTipDisplayTime_TextChanged);
+            // 
+            // lblToolTipDisplayTime
+            // 
+            this.lblToolTipDisplayTime.AutoSize = true;
+            this.lblToolTipDisplayTime.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblToolTipDisplayTime.Location = new System.Drawing.Point(212, 0);
+            this.lblToolTipDisplayTime.Name = "lblToolTipDisplayTime";
+            this.lblToolTipDisplayTime.Size = new System.Drawing.Size(66, 26);
+            this.lblToolTipDisplayTime.TabIndex = 2;
+            this.lblToolTipDisplayTime.Text = "Display time:";
+            this.lblToolTipDisplayTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lblToolTipDelay
+            // 
+            this.lblToolTipDelay.AutoSize = true;
+            this.lblToolTipDelay.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblToolTipDelay.Location = new System.Drawing.Point(82, 0);
+            this.lblToolTipDelay.Name = "lblToolTipDelay";
+            this.lblToolTipDelay.Size = new System.Drawing.Size(37, 26);
+            this.lblToolTipDelay.TabIndex = 2;
+            this.lblToolTipDelay.Text = "Delay:";
+            this.lblToolTipDelay.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lblSecond1
+            // 
+            this.lblSecond1.AutoSize = true;
+            this.lblSecond1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblSecond1.Location = new System.Drawing.Point(171, 0);
+            this.lblSecond1.Name = "lblSecond1";
+            this.lblSecond1.Size = new System.Drawing.Size(27, 26);
+            this.lblSecond1.TabIndex = 2;
+            this.lblSecond1.Text = "sec.";
+            this.lblSecond1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // tbToolTipDelay
+            // 
+            this.tbToolTipDelay.AllowDecimalSeparator = false;
+            this.tbToolTipDelay.AllowNegativeSign = false;
+            this.tbToolTipDelay.Location = new System.Drawing.Point(125, 3);
+            this.tbToolTipDelay.MaxLength = 5;
+            this.tbToolTipDelay.Name = "tbToolTipDelay";
+            this.tbToolTipDelay.Size = new System.Drawing.Size(40, 20);
+            this.tbToolTipDelay.TabIndex = 1;
+            this.tbToolTipDelay.Text = "0.50";
+            this.tbToolTipDelay.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.tbToolTipDelay.TextChanged += new System.EventHandler(this.tbToolTipDelay_TextChanged);
             // 
             // gbLaguage
             // 
@@ -890,7 +1098,7 @@ namespace KSPModAdmin.Core.Views
             this.gbLaguage.Controls.Add(this.cbLanguages);
             this.gbLaguage.Location = new System.Drawing.Point(0, 3);
             this.gbLaguage.Name = "gbLaguage";
-            this.gbLaguage.Size = new System.Drawing.Size(642, 50);
+            this.gbLaguage.Size = new System.Drawing.Size(667, 50);
             this.gbLaguage.TabIndex = 4;
             this.gbLaguage.TabStop = false;
             this.gbLaguage.Text = "Language:";
@@ -917,9 +1125,9 @@ namespace KSPModAdmin.Core.Views
             this.gbNodeColors.Controls.Add(this.tableLayoutPanel8);
             this.gbNodeColors.Controls.Add(this.tableLayoutPanel7);
             this.gbNodeColors.Controls.Add(this.tableLayoutPanel6);
-            this.gbNodeColors.Location = new System.Drawing.Point(0, 124);
+            this.gbNodeColors.Location = new System.Drawing.Point(0, 236);
             this.gbNodeColors.Name = "gbNodeColors";
-            this.gbNodeColors.Size = new System.Drawing.Size(642, 319);
+            this.gbNodeColors.Size = new System.Drawing.Size(667, 244);
             this.gbNodeColors.TabIndex = 3;
             this.gbNodeColors.TabStop = false;
             this.gbNodeColors.Text = "ModSelection node colors:";
@@ -951,7 +1159,7 @@ namespace KSPModAdmin.Core.Views
             this.tableLayoutPanel11.Name = "tableLayoutPanel11";
             this.tableLayoutPanel11.RowCount = 1;
             this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel11.Size = new System.Drawing.Size(627, 29);
+            this.tableLayoutPanel11.Size = new System.Drawing.Size(652, 29);
             this.tableLayoutPanel11.TabIndex = 31;
             // 
             // lblColorDestinationDetection
@@ -1096,7 +1304,7 @@ namespace KSPModAdmin.Core.Views
             this.tableLayoutPanel10.Name = "tableLayoutPanel10";
             this.tableLayoutPanel10.RowCount = 1;
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel10.Size = new System.Drawing.Size(627, 29);
+            this.tableLayoutPanel10.Size = new System.Drawing.Size(652, 29);
             this.tableLayoutPanel10.TabIndex = 30;
             // 
             // lblColorDestinationMissing
@@ -1241,7 +1449,7 @@ namespace KSPModAdmin.Core.Views
             this.tableLayoutPanel9.Name = "tableLayoutPanel9";
             this.tableLayoutPanel9.RowCount = 1;
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel9.Size = new System.Drawing.Size(627, 29);
+            this.tableLayoutPanel9.Size = new System.Drawing.Size(652, 29);
             this.tableLayoutPanel9.TabIndex = 29;
             // 
             // lblColorDestinationConflicts
@@ -1386,7 +1594,7 @@ namespace KSPModAdmin.Core.Views
             this.tableLayoutPanel8.Name = "tableLayoutPanel8";
             this.tableLayoutPanel8.RowCount = 1;
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(627, 29);
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(652, 29);
             this.tableLayoutPanel8.TabIndex = 28;
             // 
             // lblColorModIsInstalled
@@ -1531,7 +1739,7 @@ namespace KSPModAdmin.Core.Views
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             this.tableLayoutPanel7.RowCount = 1;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(627, 29);
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(652, 29);
             this.tableLayoutPanel7.TabIndex = 27;
             // 
             // lblColorModArchiveMissing
@@ -1677,7 +1885,7 @@ namespace KSPModAdmin.Core.Views
             this.tableLayoutPanel6.RowCount = 1;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(627, 29);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(652, 29);
             this.tableLayoutPanel6.TabIndex = 26;
             // 
             // lblColorModOutdated
@@ -1801,9 +2009,9 @@ namespace KSPModAdmin.Core.Views
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gpModConflictHandling.Controls.Add(this.cbConflictDetectionOnOff);
             this.gpModConflictHandling.Controls.Add(this.cbShowConflictSolver);
-            this.gpModConflictHandling.Location = new System.Drawing.Point(0, 56);
+            this.gpModConflictHandling.Location = new System.Drawing.Point(0, 124);
             this.gpModConflictHandling.Name = "gpModConflictHandling";
-            this.gpModConflictHandling.Size = new System.Drawing.Size(642, 65);
+            this.gpModConflictHandling.Size = new System.Drawing.Size(667, 65);
             this.gpModConflictHandling.TabIndex = 2;
             this.gpModConflictHandling.TabStop = false;
             this.gpModConflictHandling.Text = "Mod file conflict handling (Experimantel):";
@@ -1832,16 +2040,35 @@ namespace KSPModAdmin.Core.Views
         "nflict detection.");
             this.cbShowConflictSolver.UseVisualStyleBackColor = true;
             // 
+            // tableLayoutPanel14
+            // 
+            this.tableLayoutPanel14.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel14.ColumnCount = 4;
+            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel14.Controls.Add(this.rbDDSmartDestDetection, 0, 0);
+            this.tableLayoutPanel14.Controls.Add(this.rbDDJustDump, 2, 0);
+            this.tableLayoutPanel14.Location = new System.Drawing.Point(9, 15);
+            this.tableLayoutPanel14.Name = "tableLayoutPanel14";
+            this.tableLayoutPanel14.RowCount = 1;
+            this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel14.Size = new System.Drawing.Size(652, 24);
+            this.tableLayoutPanel14.TabIndex = 2;
+            // 
             // ucOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tabControl2);
             this.Name = "ucOptions";
-            this.Size = new System.Drawing.Size(650, 470);
+            this.Size = new System.Drawing.Size(675, 507);
             this.tabControl2.ResumeLayout(false);
             this.tabPageUpdate.ResumeLayout(false);
             this.gbModUpdate.ResumeLayout(false);
+            this.gbModUpdate.PerformLayout();
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel5.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
@@ -1874,6 +2101,11 @@ namespace KSPModAdmin.Core.Views
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.tabPageMisc.ResumeLayout(false);
+            this.gbDestinationDetection.ResumeLayout(false);
+            this.gbDestinationDetection.PerformLayout();
+            this.gbToolTip.ResumeLayout(false);
+            this.tableLayoutPanel13.ResumeLayout(false);
+            this.tableLayoutPanel13.PerformLayout();
             this.gbLaguage.ResumeLayout(false);
             this.gbNodeColors.ResumeLayout(false);
             this.tableLayoutPanel11.ResumeLayout(false);
@@ -1890,6 +2122,8 @@ namespace KSPModAdmin.Core.Views
             this.tableLayoutPanel6.PerformLayout();
             this.gpModConflictHandling.ResumeLayout(false);
             this.gpModConflictHandling.PerformLayout();
+            this.tableLayoutPanel14.ResumeLayout(false);
+            this.tableLayoutPanel14.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2016,5 +2250,20 @@ namespace KSPModAdmin.Core.Views
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel10;
         private System.Windows.Forms.ToolTip ttOptions;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel12;
+        private System.Windows.Forms.GroupBox gbToolTip;
+        private System.Windows.Forms.Label lblSecond2;
+        private System.Windows.Forms.Label lblToolTipDisplayTime;
+        private System.Windows.Forms.Label lblSecond1;
+        private Utils.Controls.Aga.Controls.NumericTextBox tbToolTipDisplayTime;
+        private System.Windows.Forms.Label lblToolTipDelay;
+        private Utils.Controls.Aga.Controls.NumericTextBox tbToolTipDelay;
+        private System.Windows.Forms.CheckBox cbToolTipOnOff;
+        private System.Windows.Forms.CheckBox cbDeleteOldArchive;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel13;
+        private System.Windows.Forms.GroupBox gbDestinationDetection;
+        private System.Windows.Forms.RadioButton rbDDJustDump;
+        private System.Windows.Forms.RadioButton rbDDSmartDestDetection;
+        private System.Windows.Forms.CheckBox cbDDCopyToGameData;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel14;
     }
 }

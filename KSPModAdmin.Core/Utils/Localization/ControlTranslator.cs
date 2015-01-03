@@ -734,7 +734,7 @@ namespace KSPModAdmin.Core.Utils.Localization
         /// </summary>
         /// <param name="control">The control to search the ToolTip Control in.</param>
         /// <returns>The ToolTip Control from the passed control (via reflection).</returns>
-        private static ToolTip GetToolTipControl(Control control)
+        public static ToolTip GetToolTipControl(Control control)
         {
             ToolTip tt = null;
             FieldInfo[] fields = control.GetType().GetFields(BindingFlags.NonPublic | BindingFlags.Instance);

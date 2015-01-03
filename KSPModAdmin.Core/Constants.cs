@@ -53,10 +53,10 @@ namespace KSPModAdmin.Core
         {
             get
             {
-                return new string[] { Constants.KSP_ROOT, Constants.PARTS, Constants.PLUGINS, 
-                                      Constants.PLUGINDATA, Constants.RESOURCES, Constants.INTERNALS,
-                                      Constants.SHIPS, Constants.KSPDATA, Constants.SAVES, 
-                                      Constants.VAB, Constants.SPH, Constants.GAMEDATA };
+                return new string[] { Constants.KSP_ROOT, Constants.GAMEDATA, Constants.PLUGINS, 
+                                      Constants.PLUGINDATA, Constants.PARTS, Constants.RESOURCES,
+                                      Constants.INTERNALS, Constants.KSPDATA, Constants.SAVES, 
+                                      Constants.SHIPS, Constants.VAB, Constants.SPH };
             }
         }
 
@@ -158,8 +158,14 @@ namespace KSPModAdmin.Core
         public const string ISFILE = "IsFile";
         public const string INSTALL = "Install";
         public const string INSTALLDIR = "InstallDir";
+
+        public const string DESTINATIONDETECTIONOPTIONS = "DestinationDetectionOptions";
+        public const string FALLBACK = "FallBack";
+        public const string TOOLTIPOPTIONS = "ToolTipOptions";
         public const string CONFLICTDETECTIONOPTIONS = "ConflictDetectionOptions";
         public const string ONOFF = "OnOff";
+        public const string DELAY = "Delay";
+        public const string DISPLAYTIME = "DisplayTime";
         public const string SHOWCONFLICTSOLVER = "ShowConflictSolver";
         public const string NODECOLORS = "NodeColors";
         public const string COLOR = "Color";

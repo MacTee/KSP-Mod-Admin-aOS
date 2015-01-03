@@ -228,6 +228,14 @@ namespace KSPModAdmin.Core.Model
         private string mSiteHandlerName = Messages.NONE;
 
         /// <summary>
+        /// Gets the SiteHandler name (Used by TreeViewAdv).
+        /// </summary>
+        public string SiteHandlerNameUI
+        {
+            get { return (ZipRoot == this) ? SiteHandlerName : string.Empty; }
+        }
+
+        /// <summary>
         /// Gets or sets the SiteHandler of the mod. Can be null!
         /// </summary>
         public ISiteHandler SiteHandler
@@ -305,6 +313,11 @@ namespace KSPModAdmin.Core.Model
         /// Local path of the mod zip archive.
         /// </summary>
         public string LocalPath { get { return Key; } }
+
+        /// <summary>
+        /// Local path of the mod zip archive.
+        /// </summary>
+        public string ArchivePath { get { return ZipRoot.LocalPath; } }
 
         /// <summary>
         /// The install destination of the node.

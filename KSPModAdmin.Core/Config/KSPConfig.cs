@@ -73,9 +73,9 @@ namespace KSPModAdmin.Core.Config
                 foreach (XmlAttribute att in nodeList[0].Attributes)
                 {
                     if (att.Name == Constants.USE64BIT)
-                        MainController.LaunchPanel.Use64Bit = att.Value.Equals("true", StringComparison.CurrentCultureIgnoreCase);
+                        MainController.LaunchPanel.Use64Bit = att.Value.Equals(Constants.TRUE, StringComparison.CurrentCultureIgnoreCase);
                     else if (att.Name == Constants.FORCEOPENGL)
-                        MainController.LaunchPanel.ForceOpenGL = att.Value.Equals("true", StringComparison.CurrentCultureIgnoreCase);
+                        MainController.LaunchPanel.ForceOpenGL = att.Value.Equals(Constants.TRUE, StringComparison.CurrentCultureIgnoreCase);
                 }
             }
 
@@ -85,7 +85,7 @@ namespace KSPModAdmin.Core.Config
             //    foreach (XmlAttribute att in nodeList[0].Attributes)
             //    {
             //        if (att.Name == Constants.VALUE)
-            //            mOverride = false; // mOverride = (att.Value.ToLower() == "true");
+            //            mOverride = false; // mOverride = (att.Value.ToLower() == Constants.TRUE);
             //    }
             //}
 
@@ -95,7 +95,7 @@ namespace KSPModAdmin.Core.Config
             //    foreach (XmlAttribute att in nodeList[0].Attributes)
             //    {
             //        if (att.Name == Constants.BORDERLESSWINDOW)
-            //            mStartWithBorderlessWindow = (att.Value.ToLower() == "true");
+            //            mStartWithBorderlessWindow = (att.Value.ToLower() == Constants.TRUE);
             //    }
             //}
 

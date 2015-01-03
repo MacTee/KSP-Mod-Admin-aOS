@@ -611,16 +611,50 @@
   <String Name="MSG_FILE_NOT_FOUND_0" Value="File non trovato &quot;{0}&quot;."/>
   <String Name="MSG_ERROR_WHILE_READING_0" Value="Errore nel leggere &quot;{0}&quot;."/>
 
-  <String Name="MSG_AVC_VERSIONFILE_FOUND" Value="(T)AVC Plugin version file found."/>
-  <String Name="MSG_NO_AVC_VERSIONFILE_FOUND" Value="(T)No AVC Plugin version file found!"/>
-  <String Name="MSG_READING_AVC_VERSIONFILE_INFO" Value="(T)Reading AVC Plugin version file..."/>
-  <String Name="MSG_IMPORTING_AVC_VERSIONFILE_INFO_0" Value="(T)Importing AVC Plugin version file information for &quot;{0}&quot;..."/>
-  <String Name="MSG_NO_COMPATIBLE_SITEHANDLER_FOUND_0" Value="(T)No compatible SiteHandler found for &quot;{0}&quot;! Mod update support not available for this mod."/>
-  <String Name="MSG_COMPATIBLE_SITEHANDLER_0_FOUND_1" Value="(T)Compatible SiteHandler ({0}) found for &quot;{1}&quot;! Mod update support active!"/>
-  <String Name="MSG_ERROR_WHILE_READING_AVC_VERION_FILE" Value="(T)Error while reading AVC Plugin version file!"/>
-  <String Name="MSG_ERROR_DOWNLOADING_NEW_AVC_VERION_FILE_FAILED" Value="(T)Downloading of new AVC Plugin version file failded!"/>
-  <Control Name="tsmiCmsTreeViewOptions" Value="(T)TreeView options"/>
-  <Control Name="tsmiCmsOneModTreeViewOptions" Value="(T)TreeView options"/>
+  <String Name="MSG_AVC_VERSIONFILE_FOUND" Value="File di versione di AVC Plugin trovato."/>
+  <String Name="MSG_NO_AVC_VERSIONFILE_FOUND" Value="Nessun file di versione di AVC Plugin trovato!"/>
+  <String Name="MSG_READING_AVC_VERSIONFILE_INFO" Value="Lettura del file di versione di AVC Plugin..."/>
+  <String Name="MSG_IMPORTING_AVC_VERSIONFILE_INFO_0" Value="Importazione delle informazioni dal file di versione di AVC Plugin per &quot;{0}&quot;..."/>
+  <String Name="MSG_NO_COMPATIBLE_SITEHANDLER_FOUND_0" Value="Nessun sito di gestione trovato per &quot;{0}&quot;! Supporto per aggiornamento non disponibile per questo Mod."/>
+  <String Name="MSG_COMPATIBLE_SITEHANDLER_0_FOUND_1" Value="Sito di gestione compatibile ({0}) trovato per &quot;{1}&quot;! Supporto per aggiornamento del Mod attivo!"/>
+  <String Name="MSG_ERROR_WHILE_READING_AVC_VERION_FILE" Value="Errore nella lettura del file di versione di AVC Plugin!"/>
+  <String Name="MSG_ERROR_DOWNLOADING_NEW_AVC_VERION_FILE_FAILED" Value="Download del nuovo file di versione di AVC Plugin fallito!"/>
+  <Control Name="tsmiCmsTreeViewOptions" Value="Opzioni di TreeView"/>
+  <Control Name="tsmiCmsOneModTreeViewOptions" Value="Opzioni di TreeView"/>
+
+  <Control Name="lblColSelectDescription" Value="Trascina e rilascia per riordinare le colonne^Muovi le colonne tra le liste per mostrarle o nasconderle."/>
+  <Control Name="lblColSelectDisplayed" Value="Mostrato nella selezione dei Mod:"/>
+  <Control Name="lblColSelectAvailable" Value="Colonne disponibili:"/>
+  <Control Name="btnApply" Value="Applica"/>
+
+  <Control Name="gbToolTip" Value="Suggerimenti:"/>
+  <Control Name="cbToolTipOnOff" Value="Si / No">
+    <ChildControl Name="cbToolTipOnOff_ToolTip" Value="Cambia i suggerimenti tra Si e No."/>
+  </Control>
+  <Control Name="lblToolTipDelay" Value="Ritardo:"/>
+  <Control Name="lblSecond1" Value="sec."/>
+  <Control Name="lblToolTipDisplayTime" Value="Durata suggerimenti:"/>
+  <Control Name="lblSecond2" Value="sec."/>
+  <Control Name="cbDeleteOldArchive" Value="Cancella il vecchio archivio dopo l'aggiornamento">
+    <ChildControl Name="cbDeleteOldArchive_ToolTip" Value="Seleziona questa opzione se il vecchio archivio di un Mod va cancellato dopo un aggiornamento."/>
+  </Control>
+  <String Name="MSG_DOWNLOAD_PATH_MISSING_PLEASE_SELECT_ONE" Value="Percorso di download mancante. Selezionare una cartella di download."/>
+  <String Name="MSG_URL_DETECTED_STARTING_DOWNLOAD" Value="URL trovato, avvio download..."/>
+  <String Name="MSG_DESTINATION_0_SET_TO_GAMEDATA" Value="La destinazione di &quot;{0}&quot; sarà impostata alla cartella GameData."/>
+  <Control Name="gbDestinationDetection" Value="Individuazione della destinazione:"/>
+  <Control Name="rbDDSmartDestDetection" Value="individuazione automatica della destinazione (raccomandata)">
+    <ChildControl Name="rbDDSmartDestDetection_ToolTip" Value="KSP MA cerca per una struttura delle cartelle simile a quella di KSP nell'archivio del Mod^e imposta la destinazione dei files del Mod di conseguenza."/>
+  </Control>
+  <Control Name="rbDDJustDump" Value="Solo copia dell'archivio mod in GameData">
+    <ChildControl Name="rbDDJustDump_ToolTip" Value="La destinazione del nodo dell'archivio del Mod sarà impostata a GameData.^NOTA: Potrebbe causare problemi con l'individuazione dei conflitti!"/>
+  </Control>
+  <Control Name="cbDDCopyToGameData" Value="Ritorna alla cartella GameData">
+    <ChildControl Name="cbDDCopyToGameData_ToolTip" Value="Se l'individuazione della destinazione non funziona, la destinazione del nodo^ dell'archivio del Mod sarà impostata alla cartella GameData.^NOTA: Potrebbe causare problemi con l'individuazione dei conflitti!"/>
+  </Control>
+
+  <Control Name="frmColumnSelection" Value="(T)Column selection"/>
+  <Control Name="lvModSelection_Item_00" Value="(T)Mod"/>
+  <Control Name="tsmiCmsResetDestinations" Value="(T)Reset destinations"/>
 
 </Language>
 	

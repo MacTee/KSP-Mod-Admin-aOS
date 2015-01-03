@@ -118,8 +118,7 @@ namespace KSPModAdmin.Core.Controller
         /// </summary>
         protected static void LanguageChanged(object sender)
         {
-            // translates the controls of the view.
-            ControlTranslator.TranslateControls(Localizer.GlobalInstance, View as Control, OptionsController.SelectedLanguage);
+            View.LanguageChanged();
         }
 
         /// <summary>
@@ -643,7 +642,8 @@ namespace KSPModAdmin.Core.Controller
             View.InvokeIfRequired(() => Model.RemoveMod(outdatedMod));
 
             Messenger.AddInfo(string.Format(Messages.MSG_ADDING_UPDATED_MOD_0, newMod.Text));
-            Model.AddMod(newMod);
+            if (Model.AddMod(newMod) != null && OptionsController.DeleteOldArchivesAfterUpdate && File.Exists(outdatedMod.LocalPath))
+                File.Delete(outdatedMod.LocalPath);
         }
 
         #endregion
@@ -1518,11 +1518,22 @@ namespace KSPModAdmin.Core.Controller
         /// </summary>
         /// <param name="sortType">Determines the property to use for the sort.</param>
         /// <param name="desc">Determines if the sorting should be descending or ascending.</param>
-        public static void SortModSelection(SortType sortType = SortType.ByName, bool desc = true)
+        public static void SortModSelection()
         {
-            // move or redirect to Model.ModSelectionTreeModel.SortModSelection
+            // TODO: Find a better place for this method.
 
-            // TODO: implementation
+            ModSelectionTreeColumn sortColumn = null;
+            foreach (var column in View.tvModSelection.Columns)
+            {
+                if (column.SortOrder == SortOrder.None)
+                    continue;
+
+                sortColumn = column as ModSelectionTreeColumn;
+                break;
+            }
+
+            View.SortColumn(sortColumn);
+
             InvalidateView();
         }
 
@@ -1562,6 +1573,18 @@ namespace KSPModAdmin.Core.Controller
                 frm.TextBox.Text = content;
                 frm.ShowDialog(View.ParentForm);
             }
+        }
+
+        /// <summary>
+        /// Opens the TreeView options dialog.
+        /// </summary>
+        /// <returns>The new TreeViewAdvColumnsInfo edited with the TreeView option dialog.</returns>
+        public static void OpenTreeViewOptions()
+        {
+            frmColumnSelection dlg = new frmColumnSelection();
+            dlg.ModSelectionColumns = View.GetModSelectionViewInfo().ModSelectionColumnsInfo;
+            if (dlg.ShowDialog() == DialogResult.OK)
+                dlg.ModSelectionColumns.ToTreeViewAdv(View.tvModSelection);
         }
 
         /// <summary>
@@ -1609,17 +1632,6 @@ namespace KSPModAdmin.Core.Controller
             }
 
             return string.Empty;
-        }
-
-        /// <summary>
-        /// Opens the TreeView options dialog
-        /// </summary>
-        /// <returns>The new TreeViewAdvColumnsInfo edited with the TreeView option dialog.</returns>
-        public static TreeViewAdvColumnsInfo OpenTreeViewOptions()
-        {
-            // TODO: ...
-            MessageBox.Show(View.ParentForm, "TreeView options not implemented yet!", "");
-            return new TreeViewAdvColumnsInfo();
         }
     }
 }
