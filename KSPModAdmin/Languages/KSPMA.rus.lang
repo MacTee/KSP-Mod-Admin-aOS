@@ -607,10 +607,10 @@
   <Control Name="tsmiCmsTreeViewOptions" Value="Настройки списка"/>
   <Control Name="tsmiCmsOneModTreeViewOptions" Value="Настройки списка"/>
 
-  <Control Name="lblColSelectDescription" Value="(T)Drag &amp;&amp; Drop to reorder columns^Move columns between lists to show or hide them."/>
-  <Control Name="lblColSelectDisplayed" Value="(T)Displayed in ModSelection:"/>
-  <Control Name="lblColSelectAvailable" Value="(T)Available columns:"/>
-  <Control Name="btnApply" Value="(T)Apply"/>
+  <Control Name="lblColSelectDescription" Value="Перетаскивайте колонки, что бы изменить порядок^Перетаскивайте колонки между списками, что бы показать или скрыть их."/>
+  <Control Name="lblColSelectDisplayed" Value="Отображаются в списке модов:"/>
+  <Control Name="lblColSelectAvailable" Value="Доступные колонки:"/>
+  <Control Name="btnApply" Value="Применить"/>
 
   <Control Name="gbToolTip" Value="Всплывающие подсказки:"/>
   <Control Name="cbToolTipOnOff" Value="Вкл / Выкл">
@@ -637,8 +637,8 @@
     <ChildControl Name="cbDDCopyToGameData_ToolTip" Value="Если не удалось определить путь установки мода,^он будет установлен в папку GameData.^ВНИМАНИЕ: Может вызвать проблемы с обнаружением конфликтов!"/>
   </Control>
 
-  <Control Name="frmColumnSelection" Value="(T)Column selection"/>
-  <Control Name="lvModSelection_Item_00" Value="(T)Mod"/>
-  <Control Name="tsmiCmsResetDestinations" Value="(T)Reset destinations"/>
+  <Control Name="frmColumnSelection" Value="Выбор колонок"/>
+  <Control Name="lvModSelection_Item_00" Value="Мод"/>
+  <Control Name="tsmiCmsResetDestinations" Value="Сбросить пути"/>
 
 </Language>

@@ -715,6 +715,9 @@ namespace KSPModAdmin.Core.Views
 
         internal void SortColumn(ModSelectionTreeColumn column)
         {
+            if (column == null)
+                return;
+
             List<ModNode> nodes = null;
             switch (column.Name)
             {

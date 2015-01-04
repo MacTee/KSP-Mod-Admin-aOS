@@ -60,10 +60,6 @@
     <Reference Include="HtmlAgilityPack">
       <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\Net40\HtmlAgilityPack.dll</HintPath>
     </Reference>
-    <Reference Include="KerbalStuffReadOnly, Version=0.3.5450.37786, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Externals\KerbalStuffReadOnly.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\net40\Newtonsoft.Json.dll</HintPath>
@@ -461,7 +457,6 @@
     <None Include="Resources\components_package_into.png" />
     <None Include="Resources\components_package_out.png" />
     <None Include="Resources\KMA2_48.png" />
-    <Content Include="Externals\KerbalStuffReadOnly.dll" />
     <None Include="Resources\gears.png" />
     <None Include="Resources\components_folder_reset.png" />
     <Content Include="Utils\Controls\CheckBoxComboBox\_license\license.txt" />
@@ -629,7 +624,6 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

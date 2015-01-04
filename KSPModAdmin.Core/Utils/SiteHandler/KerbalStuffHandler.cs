@@ -2,9 +2,10 @@
 using System.IO;
 using System.Linq;
 using System.Net;
-using KerbalStuff;
+using System.Text;
 using KSPModAdmin.Core.Controller;
 using KSPModAdmin.Core.Model;
+using Newtonsoft.Json.Linq;
 
 namespace KSPModAdmin.Core.Utils.SiteHandler
 {
@@ -12,7 +13,8 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 	{
 		private const string cName = "KerbalStuff";
 		private const string cURL = "http://kerbalstuff.com/";
-		private const string cURL2 = "https://kerbalstuff.com/";
+        private const string cURL2 = "https://kerbalstuff.com/";
+        private const string cModInfoUrl = "https://kerbalstuff.com/api/mod/";
 
 
 		/// <summary>
@@ -63,23 +65,82 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
         /// <param name="url">The URL of the site to parse the ModInfos from.</param>
         /// <returns>The ModInfos parsed from the site of the passed URL.</returns>
         public ModInfo GetModInfo(string url)
-        {
-			var kerbalMod = KerbalStuffReadOnly.ModInfo(
-				Convert.ToInt64((url.Split(new string[] { "/" }, StringSplitOptions.None).ToList())[4]));
+		{
+            string modInfoUrl = cModInfoUrl + (url.Split(new string[] { "/" }, StringSplitOptions.None).ToList())[4];
+
+            if (string.IsNullOrEmpty(modInfoUrl))
+                return null;
+
+            string content = www.Load(modInfoUrl);
+            if (string.IsNullOrEmpty(content))
+                return null;
+
+            JObject jObject = JObject.Parse(content);
+
             var modInfo = new ModInfo
             {
 	            SiteHandlerName = Name,
 	            ModURL = url,
-	            ProductID = kerbalMod.Id.ToString(),
-	            Name = kerbalMod.Name,
-	            Downloads = kerbalMod.Downloads.ToString(),
-	            Author = kerbalMod.Author,
-	            Version = kerbalMod.Versions.First().FriendlyVersion.ToString(),
-				KSPVersion = kerbalMod.Versions.First().KspVersion
+	            ProductID = GetString(jObject["id"]),
+                Name = GetString(jObject["name"]),
+                Downloads = GetString(jObject["downloads"]),
+                Author = GetString(jObject["author"]),
+                Version = GetVersion(jObject["versions"] as JToken),
+                KSPVersion = GetKSPVersion(jObject["versions"] as JToken)
             };
 			//modInfo.CreationDate = kerbalMod.Versions.Last().Date;	// TODO when KS API supports dates from versions
 
 			return modInfo;
+        }
+
+        private static string GetString(JToken jToken)
+        {
+            if (jToken == null)
+                return string.Empty;
+
+            return (string)jToken;
+        }
+
+        private static string GetVersion(JToken jToken)
+        {
+            if (jToken == null)
+                return string.Empty;
+
+            string version = string.Empty;
+            foreach (var child in jToken.Children<JObject>())
+            {
+                if (child["friendly_version"] != null)
+                {
+                    version = child["friendly_version"].ToString();
+                    break;
+                }
+                
+                //just inspect the first child.
+                break;
+            }
+
+            return version;
+        }
+
+        private static string GetKSPVersion(JToken jToken)
+        {
+            if (jToken == null)
+                return string.Empty;
+
+            string version = string.Empty;
+            foreach (var child in jToken.Children<JObject>())
+            {
+                if (child["ksp_version"] != null)
+                {
+                    version = child["ksp_version"].ToString();
+                    break;
+                }
+                
+                //just inspect the first child.
+                break;
+            }
+
+            return version;
         }
 
         /// <summary>
