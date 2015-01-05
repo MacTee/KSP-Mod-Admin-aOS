@@ -53,10 +53,10 @@ namespace KSPModAdmin.Core
         {
             get
             {
-                return new string[] { Constants.KSP_ROOT, Constants.PARTS, Constants.PLUGINS, 
-                                      Constants.PLUGINDATA, Constants.RESOURCES, Constants.INTERNALS,
-                                      Constants.SHIPS, Constants.KSPDATA, Constants.SAVES, 
-                                      Constants.VAB, Constants.SPH, Constants.GAMEDATA };
+                return new string[] { Constants.KSP_ROOT, Constants.GAMEDATA, Constants.PLUGINS, 
+                                      Constants.PLUGINDATA, Constants.PARTS, Constants.RESOURCES,
+                                      Constants.INTERNALS, Constants.KSPDATA, Constants.SAVES, 
+                                      Constants.SHIPS, Constants.VAB, Constants.SPH };
             }
         }
 

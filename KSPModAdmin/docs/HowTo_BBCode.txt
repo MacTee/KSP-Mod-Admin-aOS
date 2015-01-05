@@ -40,7 +40,7 @@ You have to select a install folder for those mod manually by right clicking it 
 [IMG]http://www.services.mactee.de/ksp/pics/KSP_MA_aOS-Select_New_Destination.png[/IMG]
 
 This dialog will pop up to chose a new destination:
-[IMG]http://www.services.mactee.de/ksp/pics/KSP_MA_aOS-Select_New_Destination2.png[/IMG]
+[IMG]http://www.services.mactee.de/ksp/pics/KSP_MA_aOS-Select_Destination_Dialog.png[/IMG]
 
 
 [B][U][SIZE=3]Install a mod:[/SIZE][/U][/B]
@@ -87,3 +87,17 @@ You can configure KSP MA aOS to automatically check for mod updates by the follo
 [B][U][SIZE=3]KSP Mod Admin update check configuration:[/SIZE][/U][/B]
 You can configure KSP MA aOS to automatically check for KSP Mod Admin aOs updates by the following settings:
 [IMG]http://www.services.mactee.de/ksp/pics/KSP_MA_aOS-KSPMA_Update_Options.png[/IMG]
+
+
+
+
+[B][U][SIZE=3]Known issues:[/SIZE][/U][/B]
+After i start KSP MA i get the following error message:
+"Unexpected runtime error: "An attempt was made to load an assembly from a network location which would have caused the assembly to be sandboxed...""
+This happens when windows has flaged the files of KSP MA as a web download.
+You have to allow access to following files HtmlAgilityPack.dll, KerbalStuffReadOnly.dll, KSPModAdmin.Core.dll, Newtonsoft.Json.dll, SharpCompress.dll and plugins/KSPModAdmin.Translation.Plugin.dll manualy by
+1. Right click the dll
+2. Chose properties
+3. Click "Unblock"
+[IMG]http://www.services.mactee.de/ksp/pics/File_Property_Dialog.png[/IMG]
+-> see [URL="http://stackoverflow.com/questions/15238714/net-local-assembly-load-failed-with-cas-policy"]StackOverflow article[/URL].

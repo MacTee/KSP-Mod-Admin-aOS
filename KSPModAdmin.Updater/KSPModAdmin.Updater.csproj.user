@@ -7,6 +7,6 @@
     <ProjectView>ShowAllFiles</ProjectView>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <StartArguments>archive="C:\Users\bheinrich\Desktop\pri\KSP\KSPModAdmin-v1.3.11_%2812%29.zip" dest="C:\Users\bheinrich\Desktop\pri\Projects\KSPModAdmin\KSPModAdmin\branches\v1.3.7-working-copy\KSPModAdmin\bin\Debug"  process="KSPMODAdmin" version="1.3.11"</StartArguments>
+    <StartArguments>"archive=C:\Users\BHeinrich\Desktop\pri\KSP\KSPModAdmin-v2.0.0.10.zip" "dest=C:\Users\BHeinrich\Desktop\pri\Projects\KSP-Mod-Admin-aOS\KSPModAdmin\bin\Debug"  process="KSPModAdmin" version="2.0.0.10"</StartArguments>
   </PropertyGroup>
 </Project>

@@ -64,7 +64,7 @@ namespace KSPModAdmin.Core.Controller
         public const string START = "Start";
         public const string STOP = "Stop";
         public const string KSPMA_UPDATER_EXE = "KSPModAdmin.Updater.exe";
-        public const string KSPMA_UPDATER_PARAMETER_0_1_2_3 = "version={0} process={1} archive={2} dest={3}";
+        public const string KSPMA_UPDATER_PARAMETER_0_1_2_3 = "version={0} \"process={1}\" \"archive={2}\" \"dest={3}\"";
 
         #endregion
 
@@ -682,7 +682,7 @@ namespace KSPModAdmin.Core.Controller
             process.StartInfo.FileName = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), KSPMA_UPDATER_EXE);
             process.StartInfo.Arguments = string.Format(KSPMA_UPDATER_PARAMETER_0_1_2_3,
                                                         GetVersionFromArchive(archivePath),
-                                                        KSPMA,
+                                                        Process.GetCurrentProcess().ProcessName,
                                                         archivePath,
                                                         Path.GetDirectoryName(Application.ExecutablePath));
             process.Start();

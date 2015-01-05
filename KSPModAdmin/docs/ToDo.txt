@@ -6,7 +6,6 @@
   It can be folders with alternative data, manuals, etc. For examples see Planet Shine or UniversalStorage [TAC PACK]. 
   Usually Mod Admin can't detect installation path for them and shows warning. When I update this mods, Mod Admin shows warning again for every root node 
   without installation path. I update in "Copy checked state" mode.
-- Destination detection Bug -> e.g. Destination selection of file doesn't work
 
 //// To Test
 /////////////////////
@@ -39,6 +38,7 @@
 - Faster Tooltip -> option to allow use the delay time.
 - Option to dummp mods without a destination to GameData folder.
 - Sort in ModSelection (for all columns).
+- Select new destination works again.
 
 
 //// TODO
