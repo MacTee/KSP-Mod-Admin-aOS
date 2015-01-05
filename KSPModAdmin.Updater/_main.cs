@@ -46,21 +46,23 @@ namespace KSPModAdmin_Updater
             try
             {
                 if (!Update())
+                {
                     RevertFromBackup();
+                }
                 else
+                {
                     DeleteBackup();
+                    Console.WriteLine("Successful updated.");
+                    RestartKSP();
+                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Error: " + ex.Message);
-                Console.ReadKey();
-            }
-            finally
-            {
-                RestartKSP();
             }
 
             Console.WriteLine();
+            Console.WriteLine("Done. (Press any key to quit)");
             Console.ReadKey();
         }
 
@@ -81,7 +83,7 @@ namespace KSPModAdmin_Updater
             foreach (var argValuePair in args)
             {
                 Console.Write(".");
-                string[] arg = argValuePair.Split('=');
+                string[] arg = argValuePair.Trim(new [] { '\"' }).Split('=');
                 if (arg.Length != 2)
                 {
                     Console.WriteLine();
@@ -323,15 +325,19 @@ namespace KSPModAdmin_Updater
                 var reader = ReaderFactory.Open(stream);
                 while (reader.MoveToNextEntry())
                 {
-                    string versiondir1 = Version + "\\KSPModAdmin\\";
-                    string versiondir2 = Version + "/KSPModAdmin/";
+                    string versiondir1 = "v" + Version + "\\KSPModAdmin\\";
+                    string versiondir2 = "v" + Version + "/KSPModAdmin/";
+                    string versiondir3 = "v" + Version + "\\KSP Mod Admin\\";
+                    string versiondir4 = "v" + Version + "/KSP Mod Admin/";
 
                     if (reader.Entry.IsDirectory)
                         continue;
 
                     if (!revertBackup &&
                         !reader.Entry.FilePath.Contains(versiondir1) &&
-                        !reader.Entry.FilePath.Contains(versiondir2))
+                        !reader.Entry.FilePath.Contains(versiondir2) &&
+                        !reader.Entry.FilePath.Contains(versiondir3) &&
+                        !reader.Entry.FilePath.Contains(versiondir4))
                     {
                         //Console.WriteLine("DEBUG -> {0} skipped 1.", reader.Entry.FilePath);
                         continue;
@@ -345,7 +351,7 @@ namespace KSPModAdmin_Updater
                     }
                         
                     //Console.WriteLine("DEBUG -> FilePath {0}", reader.Entry.FilePath);
-                    string relativePath = reader.Entry.FilePath.Replace(versiondir1, string.Empty).Replace(versiondir2, string.Empty);
+                    string relativePath = reader.Entry.FilePath.Replace(versiondir1, string.Empty).Replace(versiondir2, string.Empty).Replace(versiondir3, string.Empty).Replace(versiondir4, string.Empty);
                     //Console.WriteLine("DEBUG -> relativePath {0}", relativePath);
                     string fullpath = Path.Combine(DestinationPath, relativePath);
                     string pathOnly = Path.GetDirectoryName(fullpath);
@@ -355,30 +361,6 @@ namespace KSPModAdmin_Updater
                     reader.WriteEntryToFile(fullpath, ExtractOptions.ExtractFullPath | ExtractOptions.Overwrite);
                 }
             }
-
-            #region old code
-
-            //using (var zip = ZipArchive.Open(ArchivePath))
-            //{
-            //    foreach (var entry in zip.Entries)
-            //    {
-            //        if (entry.FilePath.ToLower() == Version + "/kspmodadmin/kspmodadmin.exe" ||
-            //            entry.FilePath.ToLower() == Version + "\\kspmodadmin\\kspmodadmin.exe")
-            //        {
-            //            entry.WriteToFile(Path.Combine(DestinationPath, KSPMODADMINFILE));
-            //            Console.WriteLine(KSPMODADMINFILE + " extracted.");
-            //        }
-
-            //        //else if (entry.FilePath.ToLower() == Version + "/kspmodadmin/sharpcompress.dll" ||
-            //        //         entry.FilePath.ToLower() == Version + "\\kspmodaAdmin\\sharpcompress.dll")
-            //        //{
-            //        //    entry.WriteToFile(Path.Combine(DestinationPath, SHARPCOMPRESSFILE));
-            //        //    Console.WriteLine(SHARPCOMPRESSFILE + " extracted.");
-            //        //}
-            //    }
-            //}
-
-            #endregion
         }
 
         static void RevertFromBackup()
