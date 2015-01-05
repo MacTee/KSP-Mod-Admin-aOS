@@ -641,4 +641,6 @@
   <Control Name="lvModSelection_Item_00" Value="Мод"/>
   <Control Name="tsmiCmsResetDestinations" Value="Сбросить пути"/>
 
+  <String Name="MSG_NO_DOWNLOAD_INFOS_FOUND" Value="(T)No download link found!"/>
+
 </Language>

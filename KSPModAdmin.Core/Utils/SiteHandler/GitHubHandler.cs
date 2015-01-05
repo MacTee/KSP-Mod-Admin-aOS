@@ -126,12 +126,17 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 				if (dlg.ShowDialog() == DialogResult.OK)
 				{
 					selected = dlg.SelectedLink;
-					dlg.InvalidateView();
 				}
+			}
+			else if (downloadInfos.Count == 1)
+			{
+				selected = downloadInfos.First();
 			}
 			else
 			{
-				selected = downloadInfos.First();
+                MessageBox.Show(Messages.MSG_NO_DOWNLOAD_INFOS_FOUND, Messages.MSG_TITLE_ERROR);
+                Messenger.AddDebug(Messages.MSG_NO_DOWNLOAD_INFOS_FOUND);
+			    return false;
 			}
 
 	        if (selected != null)
@@ -255,7 +260,16 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 
 			var releases = new List<DownloadInfo>();
 
-			foreach (var s in htmlDoc.DocumentNode.SelectNodes("//*[@id='js-repo-pjax-container']/div[2]/div[1]/div[2]/ul/li/a[@class='button primary']"))
+            var nodes = htmlDoc.DocumentNode.SelectNodes("//*[@id='js-repo-pjax-container']/div[2]/div[1]/div[2]/ul/li/a[@class='button primary']");
+
+            // for https://github.com/blizzy78/ksp_toolbar/releases the following would be needed:
+            //if (nodes == null)
+            //    nodes = htmlDoc.DocumentNode.SelectNodes("//*[@class='tag-info commit js-details-container']/ul/li[2]/a");
+
+            if (nodes == null)
+                return releases;
+
+            foreach (var s in nodes)
 			{
 				var url = "https://github.com" + s.Attributes["href"].Value;
 				var dInfo = new DownloadInfo
