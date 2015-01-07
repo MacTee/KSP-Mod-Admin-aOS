@@ -158,10 +158,12 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 			var htmlDoc = new HtmlWeb().Load(GetPathToReleases(modInfo.ModURL));
 			htmlDoc.OptionFixNestedTags = true;
 
+
 			// To scrape the fields, now using HtmlAgilityPack and XPATH search strings.
 			// Easy way to get XPATH search: use chrome, inspect element, highlight the needed data and right-click and copy XPATH
-			HtmlNode versionNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='js-repo-pjax-container']/div[2]/div[1]/div[1]/ul/li[1]/a/span[2]");
-			HtmlNode updateNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='js-repo-pjax-container']/div[2]/div[1]/div[2]/div[1]/p/time");
+			HtmlNode latestRelease = htmlDoc.DocumentNode.SelectSingleNode("//*[@class='release label-latest']");
+			HtmlNode versionNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@class='release label-latest']/div[1]/ul/li[1]/a/span[2]");
+			HtmlNode updateNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@class='release label-latest']/div[2]/div/p/time");
 
 			if (versionNode == null) return;
 
