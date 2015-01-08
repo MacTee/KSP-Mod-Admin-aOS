@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -328,12 +329,13 @@ namespace KSPModAdmin.Core.Views
 
         private void tssbVisitVersionControlSite_ButtonClick(object sender, EventArgs e)
         {
-            MessageBox.Show(ParentForm, "Not implemented yet!", Messages.MSG_TITLE_ATTENTION, MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+			if (SelectedMod != null &&  !String.IsNullOrEmpty(SelectedMod.ModURL)) Process.Start(SelectedMod.ModURL);
+	        
         }
 
-        private void tsmiVisitAdditionalLink_Click(object sender, EventArgs e)
+	    private void tsmiVisitAdditionalLink_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(ParentForm, "Not implemented yet!", Messages.MSG_TITLE_ATTENTION, MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+			if (SelectedMod != null &&  !String.IsNullOrEmpty(SelectedMod.AdditionalURL)) Process.Start(SelectedMod.AdditionalURL);
         }
 
         private void tsbSolveConflicts_Click(object sender, EventArgs e)
@@ -421,9 +423,9 @@ namespace KSPModAdmin.Core.Views
 
                 tsbModUpdateCheck.Enabled = true;
 
-                //tssbVisitVersionControlSite.Enabled = true;
-                //tsmiVisitCurseForge.Enabled = true;
-                //tsmiVisitKSPForum.Enabled = true;
+				tssbVisitVersionControlSite.Enabled = true;
+				tsmiVisitVersionControlSite.Enabled = true;
+				tsmiVisitAdditionalLink.Enabled = true;
 
                 tsbEditModInfos.Enabled = true;
                 tsbCopyModInfos.Enabled = true;
