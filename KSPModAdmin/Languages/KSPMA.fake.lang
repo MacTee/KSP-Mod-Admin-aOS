@@ -643,5 +643,7 @@
   <Control Name="frmColumnSelection" Value="(T)Column selection"/>
   <Control Name="lvModSelection_Item_00" Value="(T)Mod"/>
   <Control Name="tsmiCmsResetDestinations" Value="(T)Reset destinations"/>
+
+  <String Name="MSG_NO_DOWNLOAD_INFOS_FOUND" Value="(T)No download link found!"/>
   
 </Language>

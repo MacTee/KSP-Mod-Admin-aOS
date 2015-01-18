@@ -99,7 +99,7 @@ namespace KSPModAdmin.Core.Views
         /// <param name="e"></param>
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            MainController.ShutDown();
+            MainController.ShutDown(false);
         }
 
         /// <summary>

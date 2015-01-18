@@ -123,12 +123,15 @@ namespace KSPModAdmin.Core.Controller
             Log.AddInfoS(string.Format("---> KSP MA v{0} closed <---{1}", VersionHelper.GetAssemblyVersion(true), Environment.NewLine));
         }
 
-        public static void ShutDown()
+        public static void ShutDown(bool closeMainView = true)
         {
             IsShutDown = true;
 
             SaveAppConfig();
             SaveKSPConfig();
+
+            if (closeMainView)
+                View.Close();
         }
 
         /// <summary>

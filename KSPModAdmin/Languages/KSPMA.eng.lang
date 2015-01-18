@@ -656,4 +656,6 @@
   <Control Name="lvModSelection_Item_00" Value="Mod"/>
   <Control Name="tsmiCmsResetDestinations" Value="Reset destinations"/>
 
+  <String Name="MSG_NO_DOWNLOAD_INFOS_FOUND" Value="No download link found!"/>
+
 </Language>

@@ -109,9 +109,6 @@
     <Content Include="docs\Licenses\CheckBoxComboBoxLicense.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="docs\Licenses\KerbalStuffWrapperLicense.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="docs\Licenses\FolderSelectionDialogLicense.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

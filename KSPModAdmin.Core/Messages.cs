@@ -1894,5 +1894,16 @@ namespace KSPModAdmin.Core
         }
 
         private const string DEFAULT_MSG_DESTINATION_0_SET_TO_GAMEDATA = "Destination of \"{0}\" will be set to GameData folder.";
+
+        public static string MSG_NO_DOWNLOAD_INFOS_FOUND
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_NO_DOWNLOAD_INFOS_FOUND"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_NO_DOWNLOAD_INFOS_FOUND).Replace("^", Environment.NewLine);
+            }
+        }
+
+        private const string DEFAULT_MSG_NO_DOWNLOAD_INFOS_FOUND = "No download found!";
     }
 }
