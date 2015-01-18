@@ -424,8 +424,9 @@ namespace KSPModAdmin.Core.Views
                 tsbModUpdateCheck.Enabled = true;
 
 				tssbVisitVersionControlSite.Enabled = true;
-				tsmiVisitVersionControlSite.Enabled = true;
-				tsmiVisitAdditionalLink.Enabled = true;
+                tsmiVisitVersionControlSite.Enabled = !string.IsNullOrEmpty(selectedNode.ZipRoot.ModURL);
+                tsmiVisitAdditionalLink.Enabled = !string.IsNullOrEmpty(selectedNode.ZipRoot.AdditionalURL);
+
 
                 tsbEditModInfos.Enabled = true;
                 tsbCopyModInfos.Enabled = true;
@@ -613,6 +614,8 @@ namespace KSPModAdmin.Core.Views
                 tsmiCmsCheckHighlightedModsForUpdates.Visible = !tsmiCmsUpdatecheckMod.Visible;
                 tsmiUpdateMod.Visible = (selectedModCount == 1);
                 tsmiUpdateHiglightedMods.Visible = !tsmiUpdateMod.Visible;
+                tsmiCmsVisitVersionControlSite.Enabled = !string.IsNullOrEmpty(selectedNode.ZipRoot.ModURL);
+                tsmiCmsVisitAdditionalLink.Enabled = !string.IsNullOrEmpty(selectedNode.ZipRoot.AdditionalURL);
                 tsmiCmsRemoveMod.Visible = (selectedModCount == 1);
                 tsmiCmsRemoveHighlightedMods.Visible = !tsmiCmsRemoveMod.Visible;
                 tsmiCmsProceedMod.Visible = (selectedModCount == 1);
