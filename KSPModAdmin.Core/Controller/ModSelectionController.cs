@@ -1642,15 +1642,19 @@ namespace KSPModAdmin.Core.Controller
 			int nameLength = extraPad, urlLength = 0;
 			
 			// Get the longest mod name
-		    foreach (var mod in Mods.Where(mod => mod.Name.Length > nameLength))
+		    foreach (var mod in Mods)
 		    {
-				nameLength = mod.Name.Length + extraPad;
+				if (mod.Name.Length > nameLength)
+					nameLength = mod.Name.Length + extraPad;
 		    }
+			    
 
 		    // Get the longest url
-		    foreach (var mod in Mods.Where(mod => mod.ModURL != null).Where(mod => mod.ModURL.Length > urlLength))
+		    foreach (var mod in Mods)
 		    {
-				urlLength = mod.ModURL.Length + extraPad;
+			    if (mod.ModURL == null) continue;
+			    if (mod.ModURL.Length > urlLength)
+				    urlLength = mod.ModURL.Length + extraPad;
 		    }
 
 

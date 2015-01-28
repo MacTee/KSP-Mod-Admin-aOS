@@ -172,7 +172,7 @@ namespace KSPModAdmin.Core.Views
 			this.tsbRemoveAll = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
 			this.tsbExImport = new System.Windows.Forms.ToolStripSplitButton();
-			this.exportAstxtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.tsmiExportAsText = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
 			this.tsbScan = new System.Windows.Forms.ToolStripButton();
 			this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
@@ -188,6 +188,7 @@ namespace KSPModAdmin.Core.Views
 			this.tslBusy = new System.Windows.Forms.ToolStripLabel();
 			this.tsbOverride = new System.Windows.Forms.ToolStripButton();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+			this.tsmiExImport = new System.Windows.Forms.ToolStripMenuItem();
 			this.cmsModSelectionOneMod.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
@@ -1070,7 +1071,8 @@ namespace KSPModAdmin.Core.Views
 			// 
 			this.tsbExImport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
 			this.tsbExImport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exportAstxtToolStripMenuItem});
+            this.tsmiExImport,
+            this.tsmiExportAsText});
 			this.tsbExImport.Image = ((System.Drawing.Image)(resources.GetObject("tsbExImport.Image")));
 			this.tsbExImport.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.tsbExImport.Name = "tsbExImport";
@@ -1079,13 +1081,13 @@ namespace KSPModAdmin.Core.Views
 			this.tsbExImport.ToolTipText = "ModPack Import/Export\r\nOpens the Import/Export dialog for ModPacks.";
 			this.tsbExImport.ButtonClick += new System.EventHandler(this.tsbExImport_Click);
 			// 
-			// exportAstxtToolStripMenuItem
+			// tsmiExportAsText
 			// 
-			this.exportAstxtToolStripMenuItem.Name = "exportAstxtToolStripMenuItem";
-			this.exportAstxtToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.exportAstxtToolStripMenuItem.Text = "Export as .txt";
-			this.exportAstxtToolStripMenuItem.ToolTipText = "Save the current mod list as a text file";
-			this.exportAstxtToolStripMenuItem.Click += new System.EventHandler(this.tsmiExporText_Click);
+			this.tsmiExportAsText.Name = "tsmiExportAsText";
+			this.tsmiExportAsText.Size = new System.Drawing.Size(201, 22);
+			this.tsmiExportAsText.Text = "Export as .txt";
+			this.tsmiExportAsText.ToolTipText = "Save the current mod list as a text file";
+			this.tsmiExportAsText.Click += new System.EventHandler(this.tsmiExporText_Click);
 			// 
 			// toolStripSeparator11
 			// 
@@ -1227,6 +1229,15 @@ namespace KSPModAdmin.Core.Views
 			this.tableLayoutPanel1.Size = new System.Drawing.Size(650, 50);
 			this.tableLayoutPanel1.TabIndex = 3;
 			// 
+			// tsmiExImport
+			// 
+			this.tsmiExImport.Image = ((System.Drawing.Image)(resources.GetObject("tsmiExImport.Image")));
+			this.tsmiExImport.Name = "tsmiExImport";
+			this.tsmiExImport.Size = new System.Drawing.Size(201, 22);
+			this.tsmiExImport.Text = "ModPack Import/Export";
+			this.tsmiExImport.ToolTipText = "ModPack Import/Export\r\nOpens the Import/Export dialog for ModPacks.";
+			this.tsmiExImport.Click += new System.EventHandler(this.tsbExImport_Click);
+			// 
 			// ucModSelection
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1358,6 +1369,7 @@ namespace KSPModAdmin.Core.Views
         private System.Windows.Forms.ToolStripMenuItem tsmiCmsTreeViewOptions;
         private System.Windows.Forms.ToolStripMenuItem tsmiCmsResetDestinations;
 		private System.Windows.Forms.ToolStripSplitButton tsbExImport;
-		private System.Windows.Forms.ToolStripMenuItem exportAstxtToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem tsmiExportAsText;
+		private System.Windows.Forms.ToolStripMenuItem tsmiExImport;
     }
 }
