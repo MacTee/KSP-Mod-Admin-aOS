@@ -1633,5 +1633,45 @@ namespace KSPModAdmin.Core.Controller
 
             return string.Empty;
         }
+
+	    public static string GetModListAsText()
+	    {
+			const int extraPad = 5;
+
+			var sb = new StringBuilder();
+			int nameLength = extraPad, urlLength = 0;
+			
+			// Get the longest mod name
+		    foreach (var mod in Mods)
+		    {
+				if (mod.Name.Length > nameLength)
+					nameLength = mod.Name.Length + extraPad;
+		    }
+			    
+
+		    // Get the longest url
+		    foreach (var mod in Mods)
+		    {
+			    if (mod.ModURL == null) continue;
+			    if (mod.ModURL.Length > urlLength)
+				    urlLength = mod.ModURL.Length + extraPad;
+		    }
+
+
+		    // Create the column headers
+			sb.Append("    Name".PadRight(nameLength + extraPad - 1) + "URL");
+			sb.Append(Environment.NewLine);
+
+
+		    foreach (var mod in Mods)
+		    {
+			    sb.Append(mod.Checked ? "[+] " : "[ ] ");
+			    sb.Append(mod.Name.PadRight(nameLength));
+			    sb.Append(mod.ModURL);
+			    sb.Append(Environment.NewLine);
+		    }
+
+		    return sb.ToString();
+	    }
     }
 }
