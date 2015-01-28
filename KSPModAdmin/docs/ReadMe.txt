@@ -68,9 +68,6 @@ License:
     - FolderSelectionDialog
 	  Project URL: http://www.lyquidity.com/devblog/?p=136
 	  License: There’s no license as such as you are free to take and do with the code what you will.
-	- KerbalStuffWrapper
-	  Project URL: http://forum.kerbalspaceprogram.com/threads/94891-KerbalStuffWrapper
-	  License: Custom license see KSPModAdmin/Docs/Licenses/KerbalStuffWrapperLicense.txt for details.
     - SharpCompress
 	  Project URL: https://sharpcompress.codeplex.com/
 	  License: Microsoft Public License (Ms-PL) (see http://sharpcompress.codeplex.com/license).

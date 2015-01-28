@@ -433,6 +433,16 @@ namespace KSPModAdmin.Core.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap component_replace_scroll {
+            get {
+                object obj = ResourceManager.GetObject("component_replace_scroll", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap component_scroll {
             get {
                 object obj = ResourceManager.GetObject("component_scroll", resourceCulture);
@@ -603,6 +613,16 @@ namespace KSPModAdmin.Core.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap components_package_replace {
+            get {
+                object obj = ResourceManager.GetObject("components_package_replace", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap components_replace_checkbox_checked {
             get {
                 object obj = ResourceManager.GetObject("components_replace_checkbox_checked", resourceCulture);
@@ -663,9 +683,29 @@ namespace KSPModAdmin.Core.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap components_scroll_out1 {
+            get {
+                object obj = ResourceManager.GetObject("components_scroll_out1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap components_scroll_replace {
             get {
                 object obj = ResourceManager.GetObject("components_scroll_replace", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap components_scroll_reset {
+            get {
+                object obj = ResourceManager.GetObject("components_scroll_reset", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

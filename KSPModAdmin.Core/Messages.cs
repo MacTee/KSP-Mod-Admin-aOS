@@ -15,6 +15,7 @@ namespace KSPModAdmin.Core
         }
         private const string DEFAULT_MSG_CURRENT_VERSION_0 = "Current version: {0}";
 
+
         public static string MSG_PLS_ENTER_VALID_ARCHIVE_URL
         {
             get
@@ -1904,6 +1905,18 @@ namespace KSPModAdmin.Core
             }
         }
 
-        private const string DEFAULT_MSG_NO_DOWNLOAD_INFOS_FOUND = "No download found!";
+        private const string DEFAULT_MSG_NO_DOWNLOAD_INFOS_FOUND = "No download link found!";
+
+        public static string MSG_NO_BINARY_DOWNLOAD_FOUND_AT_0
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_NO_BINARY_DOWNLOAD_FOUND_AT_0"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_NO_BINARY_DOWNLOAD_FOUND_AT_0).Replace("^", Environment.NewLine);
+            }
+        }
+
+        private const string DEFAULT_MSG_NO_BINARY_DOWNLOAD_FOUND_AT_0 = "No binary download found at \"{0}\"!";
+		
     }
 }

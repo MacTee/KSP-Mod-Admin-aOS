@@ -134,8 +134,9 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 			}
 			else
 			{
-                MessageBox.Show(Messages.MSG_NO_DOWNLOAD_INFOS_FOUND, Messages.MSG_TITLE_ERROR);
-                Messenger.AddDebug(Messages.MSG_NO_DOWNLOAD_INFOS_FOUND);
+			    string msg = string.Format(Messages.MSG_NO_BINARY_DOWNLOAD_FOUND_AT_0, modInfo.SiteHandlerName);
+                MessageBox.Show(msg, Messages.MSG_TITLE_ERROR);
+                Messenger.AddDebug(msg);
 			    return false;
 			}
 

@@ -645,5 +645,13 @@
   <Control Name="tsmiCmsResetDestinations" Value="(T)Reset destinations"/>
 
   <String Name="MSG_NO_DOWNLOAD_INFOS_FOUND" Value="(T)No download link found!"/>
+
+  <String Name="MSG_NO_BINARY_DOWNLOAD_FOUND_AT_0" Value="(T)No binary download found at &quot;{0}&quot;!"/>
+  <Control Name="tsmiExImport" Value="(T)ModPack Import/Export">
+    <ChildControl Name="tsmiExImport_ToolTip" Value="(T)ModPack Import/Export^Opens the Import/Export for ModPacks."/>
+  </Control>
+  <Control Name="tsmiExportAsText" Value="(T)Export as .txt">
+    <ChildControl Name="tsmiExportAsText_ToolTip" Value="(T)Export as .txt^Save the current mod list as a text file."/>
+  </Control>
   
 </Language>

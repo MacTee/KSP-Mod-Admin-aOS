@@ -658,4 +658,12 @@
 
   <String Name="MSG_NO_DOWNLOAD_INFOS_FOUND" Value="No download link found!"/>
 
+  <String Name="MSG_NO_BINARY_DOWNLOAD_FOUND_AT_0" Value="No binary download found at &quot;{0}&quot;!"/>
+  <Control Name="tsmiExImport" Value="ModPack Import/Export">
+    <ChildControl Name="tsmiExImport_ToolTip" Value="ModPack Import/Export^Opens the Import/Export for ModPacks."/>
+  </Control>
+  <Control Name="tsmiExportAsText" Value="Export as .txt">
+    <ChildControl Name="tsmiExportAsText_ToolTip" Value="Export as .txt^Save the current mod list as a text file."/>
+  </Control>
+
 </Language>
