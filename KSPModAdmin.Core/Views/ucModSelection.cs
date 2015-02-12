@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using KSPModAdmin.Core.Model;
@@ -287,6 +288,21 @@ namespace KSPModAdmin.Core.Views
         {
             ModSelectionController.OpenExportImportDialog();
         }
+
+		private void tsmiExporText_Click(object sender, EventArgs e)
+		{
+			var dlg = new SaveFileDialog
+			{
+				InitialDirectory = OptionsController.DownloadPath, 
+				FileName = "ModList.txt"
+			};
+			if (dlg.ShowDialog() == DialogResult.OK)
+			{
+				var sw = new StreamWriter(dlg.OpenFile());
+				sw.Write(ModSelectionController.GetModListAsText());
+				sw.Close();
+			}
+		}
 
         private void tsbScan_Click(object sender, EventArgs e)
         {
@@ -650,7 +666,7 @@ namespace KSPModAdmin.Core.Views
                 foreach (ToolStripItem c in tsMod.Items)
                     c.Enabled = enable;
 
-                //tvModSelection.ReadOnly = !enable;
+                //tvMod
                 btnProceedHighlighted.Enabled = enable;
                 btnProceedAll.Enabled = enable;
             });

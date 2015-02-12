@@ -459,6 +459,10 @@
     <None Include="Resources\KMA2_48.png" />
     <None Include="Resources\gears.png" />
     <None Include="Resources\components_folder_reset.png" />
+    <None Include="Resources\component_replace_scroll.png" />
+    <None Include="Resources\components_scroll_reset.png" />
+    <None Include="Resources\components_package_replace.png" />
+    <None Include="Resources\components_scroll_out1.png" />
     <Content Include="Utils\Controls\CheckBoxComboBox\_license\license.txt" />
     <Content Include="Utils\Controls\FolderSelectionDialog\_license\license.txt" />
     <Content Include="Utils\Controls\TreeViewAdv\_license\license.txt" />
