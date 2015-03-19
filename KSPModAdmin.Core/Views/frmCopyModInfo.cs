@@ -69,9 +69,12 @@ namespace KSPModAdmin.Core.Views
             DialogResult = DialogResult.OK;
 
             if (SourceMod != null)
-            { 
+            {
+                // keep version!
+                var tempVersion = DestMod.Version;
                 DestMod.ModInfo = SourceMod.ModInfo;
                 DestMod.Note = SourceMod.Note;
+                DestMod.Version = tempVersion;
             } 
 
             Close();
