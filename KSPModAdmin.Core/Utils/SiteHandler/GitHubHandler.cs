@@ -46,7 +46,7 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 		/// <returns>True if the passed URL is a valid URL, otherwise false.</returns>
 		public bool IsValidURL(string url)
 		{
-			return (!string.IsNullOrEmpty(url) && Host.Equals(new Uri(url).Authority) || Host2.Equals(new Uri(url).Authority));
+			return !string.IsNullOrEmpty(url) && (Host.Equals(new Uri(url).Authority) || Host2.Equals(new Uri(url).Authority));
 		}
 
 		/// <summary>
