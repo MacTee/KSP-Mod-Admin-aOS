@@ -347,6 +347,17 @@ public class AsyncTask<T_RETURN_VALUE>
         {
             m_DownloadFinished(false, e.Error);
         }
+
+        if (m_WebClient != null)
+        {
+            if (m_DownloadFinished != null)
+                m_WebClient.DownloadFileCompleted -= new AsyncCompletedEventHandler(DownloadFinished);
+            if (m_ProgressChangedCall != null)
+                m_WebClient.DownloadProgressChanged -= new DownloadProgressChangedEventHandler(DownloadProgressChanged);
+
+            m_WebClient.Dispose();
+            m_WebClient = null;
+        }
     }
 
     /// <summary>
