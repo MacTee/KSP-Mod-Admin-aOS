@@ -4,6 +4,7 @@ using System.ComponentModel.Design;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using HtmlAgilityPack;
 using KSPModAdmin.Core.Controller;
@@ -15,23 +16,23 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 	public class GitHubHandler : ISiteHandler
 	{
 		private const string cName = "GitHub";
-        private const string Host = "github.com";
-        private const string Url_0_1 = "https://github.com/{0}/{1}";
+		private const string Host = "github.com";
+		private const string Url_0_1 = "https://github.com/{0}/{1}";
 		private const string Host2 = "raw.githubusercontent.com";
 
-        /// <summary>
-        /// Builds the url from the passed user and project name.
-        /// </summary>
-        /// <param name="userName">Name of the user from the GitHub repository.</param>
-        /// <param name="projectName">Name of the project from the GitHub repository.</param>
-        /// <returns>The build GitHub project URL or empty string.</returns>
-        public static string GetProjectUrl(string userName, string projectName)
-        {
-            if (!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(projectName))
-                return string.Format(Url_0_1, userName, projectName);
+		/// <summary>
+		/// Builds the url from the passed user and project name.
+		/// </summary>
+		/// <param name="userName">Name of the user from the GitHub repository.</param>
+		/// <param name="projectName">Name of the project from the GitHub repository.</param>
+		/// <returns>The build GitHub project URL or empty string.</returns>
+		public static string GetProjectUrl(string userName, string projectName)
+		{
+			if (!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(projectName))
+				return string.Format(Url_0_1, userName, projectName);
 
-            return string.Empty;
-        }
+			return string.Empty;
+		}
 
 		/// <summary>
 		/// Gets the Name of the ISiteHandler.
@@ -93,31 +94,31 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 			return newMod;
 		}
 
-        /// <summary>
-        /// Checks if updates are available for the passed mod.
-        /// </summary>
-        /// <param name="modInfo">The ModInfos of the mod to check for updates.</param>
-        /// <param name="newModInfo">A reference to an empty ModInfo to write the updated ModInfos to.</param>
-        /// <returns>True if there is an update, otherwise false.</returns>
-        public bool CheckForUpdates(ModInfo modInfo, ref ModInfo newModInfo)
-        {
-            newModInfo = GetModInfo(modInfo.ModURL);
-	        return !modInfo.Version.Equals(newModInfo.Version);
-        }
+		/// <summary>
+		/// Checks if updates are available for the passed mod.
+		/// </summary>
+		/// <param name="modInfo">The ModInfos of the mod to check for updates.</param>
+		/// <param name="newModInfo">A reference to an empty ModInfo to write the updated ModInfos to.</param>
+		/// <returns>True if there is an update, otherwise false.</returns>
+		public bool CheckForUpdates(ModInfo modInfo, ref ModInfo newModInfo)
+		{
+			newModInfo = GetModInfo(modInfo.ModURL);
+			return !modInfo.Version.Equals(newModInfo.Version);
+		}
 
-        /// <summary>
-        /// Downloads the mod.
-        /// </summary>
-        /// <param name="modInfo">The infos of the mod. Must have at least ModURL and LocalPath</param>
-        /// <param name="downloadProgressHandler">Callback function for download progress.</param>
-        /// <returns>True if the mod was downloaded.</returns>
-        public bool DownloadMod(ref ModInfo modInfo, DownloadProgressChangedEventHandler downloadProgressHandler = null)
-        {
-            if (modInfo == null)
-                return false;
+		/// <summary>
+		/// Downloads the mod.
+		/// </summary>
+		/// <param name="modInfo">The infos of the mod. Must have at least ModURL and LocalPath</param>
+		/// <param name="downloadProgressHandler">Callback function for download progress.</param>
+		/// <returns>True if the mod was downloaded.</returns>
+		public bool DownloadMod(ref ModInfo modInfo, DownloadProgressChangedEventHandler downloadProgressHandler = null)
+		{
+			if (modInfo == null)
+				return false;
 
-	        var downloadInfos = GetDownloadInfo(modInfo);
-	        DownloadInfo selected = null;
+			var downloadInfos = GetDownloadInfo(modInfo);
+			DownloadInfo selected = null;
 
 			if (downloadInfos.Count > 1)
 			{
@@ -134,21 +135,21 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 			}
 			else
 			{
-			    string msg = string.Format(Messages.MSG_NO_BINARY_DOWNLOAD_FOUND_AT_0, modInfo.SiteHandlerName);
-                MessageBox.Show(msg, Messages.MSG_TITLE_ERROR);
-                Messenger.AddDebug(msg);
-			    return false;
+				string msg = string.Format(Messages.MSG_NO_BINARY_DOWNLOAD_FOUND_AT_0, modInfo.SiteHandlerName);
+				MessageBox.Show(msg, Messages.MSG_TITLE_ERROR);
+				Messenger.AddDebug(msg);
+				return false;
 			}
 
-	        if (selected != null)
-	        {
-		        string downloadUrl = selected.DownloadURL;
-		        modInfo.LocalPath = Path.Combine(OptionsController.DownloadPath, selected.Filename);
-		        www.DownloadFile(downloadUrl, modInfo.LocalPath, downloadProgressHandler);
-	        }
+			if (selected != null)
+			{
+				string downloadUrl = selected.DownloadURL;
+				modInfo.LocalPath = Path.Combine(OptionsController.DownloadPath, selected.Filename);
+				www.DownloadFile(downloadUrl, modInfo.LocalPath, downloadProgressHandler);
+			}
 
-	        return File.Exists(modInfo.LocalPath);
-        }
+			return File.Exists(modInfo.LocalPath);
+		}
 
 		/// <summary>
 		/// Takes a site url and parses the site for mod info
@@ -168,7 +169,7 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 
 			if (versionNode == null) return;
 
-			modInfo.Version = versionNode.InnerText;
+			modInfo.Version = Regex.Replace(versionNode.InnerText, @"[A-z]", "");
 			modInfo.ChangeDateAsDateTime = DateTime.Parse(updateNode.Attributes["datetime"].Value);
 		}
 
@@ -177,7 +178,7 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 		/// </summary>
 		/// <param name="url">GitHub project url</param>
 		/// <returns>Shortest GitHub project url</returns>
-        public string ReduceToPlainUrl(string url)
+		public string ReduceToPlainUrl(string url)
 		{
 			var parts = GetUrlParts(url);
 			if (parts[1].Equals(Host2))
@@ -227,17 +228,17 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 		/// </summary>
 		/// <param name="modUrl">The URL to resolve</param>
 		/// <returns>The resolved URL</returns>
-        private static string GetPathToReleases(string modUrl)
-        {
-	        var url = modUrl;
+		private static string GetPathToReleases(string modUrl)
+		{
+			var url = modUrl;
 			if (modUrl.Contains("releases")) return url;
 
 			var parts = GetUrlParts(modUrl);
 			url = parts[0] + "://" + parts[1] + "/" + parts[2] + "/" + parts[3] + "/releases";
 
 			return url;
-        }
-		
+		}
+
 		/// <summary>
 		/// Gets the download path to the latest release in a repository
 		/// </summary>
@@ -247,7 +248,8 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 		{
 			var htmlDoc = new HtmlWeb().Load(modUrl);
 			htmlDoc.OptionFixNestedTags = true;
-			var partial = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='js-repo-pjax-container']/div[2]/div[1]/div[2]/ul/li[1]/a").Attributes["href"].Value;
+			var partial = htmlDoc.DocumentNode.SelectSingleNode("//*[@class='release label-latest']/div[2]/ul/li[1]/a").Attributes["href"].Value;
+			//*[@class='release label-latest']/div[2]/ul/li[1]/a
 			return GetUrlParts(modUrl)[0] + "://" + GetUrlParts(modUrl)[1] + partial;
 		}
 
@@ -263,18 +265,17 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 
 			var releases = new List<DownloadInfo>();
 
-            var nodes = htmlDoc.DocumentNode.SelectNodes("//*[@id='js-repo-pjax-container']/div[2]/div[1]/div[2]/ul/li/a[@class='button primary']");
+			var nodes = htmlDoc.DocumentNode.SelectNodes("//*[@class='release label-latest']/div[2]/ul/li/a");
 
-            // for https://github.com/blizzy78/ksp_toolbar/releases the following would be needed:
-            //if (nodes == null)
-            //    nodes = htmlDoc.DocumentNode.SelectNodes("//*[@class='tag-info commit js-details-container']/ul/li[2]/a");
+			if (nodes == null)
+				return releases;
 
-            if (nodes == null)
-                return releases;
-
-            foreach (var s in nodes)
+			foreach (var s in nodes)
 			{
 				var url = "https://github.com" + s.Attributes["href"].Value;
+
+				if (!url.Contains("releases")) continue;
+
 				var dInfo = new DownloadInfo
 				{
 					DownloadURL = url,
@@ -287,5 +288,5 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 
 			return releases;
 		}
-    }
+	}
 }
