@@ -114,7 +114,7 @@ namespace KSPModAdmin.Core.Model
                     //DownloadDate = value.DownloadDate;
                     Downloads = value.Downloads;
                     //LocalPath = value.LocalPath;
-                    //Key = value.LocalPath;
+                    Key = value.LocalPath;
                     Name = value.Name;
                     ProductID = value.ProductID;
                     Rating = value.Rating;

@@ -72,9 +72,11 @@ namespace KSPModAdmin.Core.Views
             {
                 // keep version!
                 var tempVersion = DestMod.Version;
+                var tempKey = DestMod.Key;
                 DestMod.ModInfo = SourceMod.ModInfo;
                 DestMod.Note = SourceMod.Note;
                 DestMod.Version = tempVersion;
+                DestMod.Version = tempKey;
             } 
 
             Close();
