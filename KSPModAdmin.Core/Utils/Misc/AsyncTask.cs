@@ -7,30 +7,28 @@ using System.Net;
 /// The function of the tasks.
 /// </summary>
 /// <typeparam name="T_RETURN_VALUE">Type of the return value of the run function.</typeparam>
-/// <returns></returns>
+/// <returns>The result of the task function.</returns>
 public delegate T_RETURN_VALUE AsyncHandler<T_RETURN_VALUE>();
 
 /// <summary>
 /// The finish callback function.
 /// </summary>
 /// <typeparam name="T_RETURN_VALUE">Type of the return value of the run function.</typeparam>
-/// <param name="exception">A exception if execution of the task function fails or null.</param>
 /// <param name="result">The return value of the task function.</param>
-/// <remarks></remarks>
+/// <param name="ex">A exception if execution of the task function fails or null.</param>
 public delegate void AsyncResultHandler<T_RETURN_VALUE>(T_RETURN_VALUE result, Exception ex);
 
 /// <summary>
 /// The progress changed callback function.
 /// </summary>
-/// <param name="percentage">The percentage of the execution of the task function. (Remember you have to set the PercentFinished property within your task function to the propper value)</param>
+/// <param name="percentage">The percentage of the execution of the task function. (Remember you have to set the PercentFinished property within your task function to the proper value)</param>
 public delegate void AsyncProgressChangedHandler(int percentage);
 
 
 /// <summary>
-/// The AsyncTask class wraps the System.ComponentModel.BackgroundWorker class to perform asynchronye tasks (Sample on bottom of src).
+/// The AsyncTask class wraps the System.ComponentModel.BackgroundWorker class to perform asynchrony tasks (Sample on bottom of src).
 /// </summary>
 /// <typeparam name="T_RETURN_VALUE">Type of the return value of the run function.</typeparam>
-/// <remarks></remarks>
 public class AsyncTask<T_RETURN_VALUE>
 {
     #region Members
@@ -38,47 +36,47 @@ public class AsyncTask<T_RETURN_VALUE>
     /// <summary>
     /// The function of the tasks.
     /// </summary>
-    private AsyncHandler<T_RETURN_VALUE> m_RunCall;
+    private AsyncHandler<T_RETURN_VALUE> mRunCall;
 
     /// <summary>
     /// The finish callback function.
     /// </summary>
-    private AsyncResultHandler<T_RETURN_VALUE> m_ResultCall;
+    private AsyncResultHandler<T_RETURN_VALUE> mResultCall;
 
     /// <summary>
     /// The progress changed callback function.
     /// </summary>
-    private AsyncProgressChangedHandler m_ProgressChangedCall;
+    private AsyncProgressChangedHandler mProgressChangedCall;
 
     /// <summary>
     ///  The Exception that occurred during execution of the task function.
     /// </summary>
-    private Exception m_Exception = null;
+    private Exception mException = null;
 
     /// <summary>
     /// The workhorse.
     /// </summary>
-    private BackgroundWorker m_Worker = null;
+    private BackgroundWorker mWorker = null;
 
     /// <summary>
     /// The download url.
     /// </summary>
-    private string m_URL = string.Empty;
+    private string mURL = string.Empty;
 
     /// <summary>
     /// The download path.
     /// </summary>
-    private string m_DownloadPath = string.Empty;
+    private string mDownloadPath = string.Empty;
 
     /// <summary>
     /// The finish callback function.
     /// </summary>
-    private AsyncResultHandler<bool> m_DownloadFinished;
+    private AsyncResultHandler<bool> mDownloadFinished;
 
     /// <summary>
     /// The WebClient for downloading tasks.
     /// </summary>
-    private WebClient m_WebClient = null;
+    private WebClient mWebClient = null;
 
     #endregion
 
@@ -91,7 +89,7 @@ public class AsyncTask<T_RETURN_VALUE>
     {
         get
         {
-            return m_Worker;
+            return mWorker;
         }
     }
 
@@ -102,7 +100,7 @@ public class AsyncTask<T_RETURN_VALUE>
     {
         get
         {
-            return m_WebClient;
+            return mWebClient;
         }
     }
 
@@ -113,8 +111,8 @@ public class AsyncTask<T_RETURN_VALUE>
     {
         set
         {
-            if (m_Worker != null)
-                m_Worker.ReportProgress(value);
+            if (mWorker != null)
+                mWorker.ReportProgress(value);
         }
     }
 
@@ -183,7 +181,7 @@ public class AsyncTask<T_RETURN_VALUE>
     }
 
     /// <summary>
-    /// Sets the callback function of the BackgroudWorker.
+    /// Sets the callback function of the BackgroundWorker.
     /// </summary>
     /// <param name="task">The callback function that contains the task that should be performed asynchronously.</param>
     /// <param name="finished">The callback function that should be called with the result of the task function.</param>
@@ -193,28 +191,28 @@ public class AsyncTask<T_RETURN_VALUE>
     {
         if (task == null) throw new ArgumentNullException();
 
-        m_ResultCall = finished;
-        m_RunCall = task;
-        m_ProgressChangedCall = progressChanged;
-        m_Exception = null;
+        mResultCall = finished;
+        mRunCall = task;
+        mProgressChangedCall = progressChanged;
+        mException = null;
 
-        m_Worker = new BackgroundWorker();
-        m_Worker.WorkerSupportsCancellation = supportCancellation;
+        mWorker = new BackgroundWorker();
+        mWorker.WorkerSupportsCancellation = supportCancellation;
 
-        if (m_ResultCall != null)
-            m_Worker.DoWork += new DoWorkEventHandler(Run);
-        if (m_ResultCall != null)
-            m_Worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(Finish);
+        if (mResultCall != null)
+            mWorker.DoWork += new DoWorkEventHandler(Run);
+        if (mResultCall != null)
+            mWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(Finish);
 
         if (progressChanged != null)
         {
-            m_Worker.WorkerReportsProgress = true;
-            m_Worker.ProgressChanged += new ProgressChangedEventHandler(ProgressChanged);
+            mWorker.WorkerReportsProgress = true;
+            mWorker.ProgressChanged += new ProgressChangedEventHandler(ProgressChanged);
         }
     }
 
     /// <summary>
-    /// Sets the download callback function of the BackgroudWorker.
+    /// Sets the download callback function of the BackgroundWorker.
     /// </summary>
     /// <param name="url">Download link</param>
     /// <param name="downloadPath">Path and filename to download to.</param>
@@ -222,20 +220,20 @@ public class AsyncTask<T_RETURN_VALUE>
     /// <param name="progressChanged">The progress change callback function. (A function with the signature "void FunctionName(int percentage)")</param>
     public void SetDownloadCallbackFunctions(string url, string downloadPath, AsyncResultHandler<bool> finished, AsyncProgressChangedHandler progressChanged = null)
     {
-        m_URL = url;
-        m_DownloadPath = downloadPath;
-        m_DownloadFinished = finished;
-        m_ProgressChangedCall = progressChanged;
-        m_Exception = null;
+        mURL = url;
+        mDownloadPath = downloadPath;
+        mDownloadFinished = finished;
+        mProgressChangedCall = progressChanged;
+        mException = null;
 
-        m_WebClient = new WebClient();
-        m_WebClient.Credentials = CredentialCache.DefaultCredentials;
+        mWebClient = new WebClient();
+        mWebClient.Credentials = CredentialCache.DefaultCredentials;
 
         if (finished != null)
-            m_WebClient.DownloadFileCompleted += new AsyncCompletedEventHandler(DownloadFinished);
+            mWebClient.DownloadFileCompleted += new AsyncCompletedEventHandler(DownloadFinished);
 
         if (progressChanged != null)
-            m_WebClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(DownloadProgressChanged);
+            mWebClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(DownloadProgressChanged);
     }
 
     /// <summary>
@@ -243,8 +241,8 @@ public class AsyncTask<T_RETURN_VALUE>
     /// </summary>
     public void Run()
     {
-        if (m_Worker != null)
-            m_Worker.RunWorkerAsync();
+        if (mWorker != null)
+            mWorker.RunWorkerAsync();
     }
 
     /// <summary>
@@ -252,8 +250,8 @@ public class AsyncTask<T_RETURN_VALUE>
     /// </summary>
     public void RunDownload()
     {
-        if (m_WebClient != null)
-            m_WebClient.DownloadFileAsync(new Uri(m_URL), m_DownloadPath);
+        if (mWebClient != null)
+            mWebClient.DownloadFileAsync(new Uri(mURL), mDownloadPath);
     }
 
     /// <summary>
@@ -263,15 +261,15 @@ public class AsyncTask<T_RETURN_VALUE>
     public bool Cancel()
     {
         bool result = false;
-        if (m_Worker != null && m_Worker.WorkerSupportsCancellation)
+        if (mWorker != null && mWorker.WorkerSupportsCancellation)
         {
-            m_Worker.CancelAsync();
+            mWorker.CancelAsync();
             result = true;
         }
 
-        if (m_WebClient != null)
+        if (mWebClient != null)
         {
-            m_WebClient.CancelAsync();
+            mWebClient.CancelAsync();
             result = true;
         }
 
@@ -285,90 +283,77 @@ public class AsyncTask<T_RETURN_VALUE>
     /// <summary>
     /// Run callback for the BackgroundWorker.
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    /// <remarks></remarks>
     private void Run(object sender,  DoWorkEventArgs e)
     {
         try
         {
-            e.Result = m_RunCall();
+            e.Result = mRunCall();
         }
         catch (Exception ex)
         {
-            m_Exception = ex;
+            mException = ex;
         }
     }
 
     /// <summary>
     /// Finish callback for the BackgroundWorker.
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    /// <remarks></remarks>
     private void Finish(object sender,  RunWorkerCompletedEventArgs e)
     {
-        if (m_ResultCall != null)
+        if (mResultCall != null)
         {
             if (e.Result != null)
-                m_ResultCall((T_RETURN_VALUE)e.Result, m_Exception);
+                mResultCall((T_RETURN_VALUE)e.Result, mException);
             else
-                m_ResultCall(default(T_RETURN_VALUE), m_Exception);
+                mResultCall(default(T_RETURN_VALUE), mException);
         }
     }
 
     /// <summary>
     /// Progress changed callback for the BackgroundWorker.
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
     public void ProgressChanged(object sender,  ProgressChangedEventArgs e)
     {
-        if (m_ProgressChangedCall != null)
-            m_ProgressChangedCall(e.ProgressPercentage);
+        if (mProgressChangedCall != null)
+            mProgressChangedCall(e.ProgressPercentage);
     }
 
     /// <summary>
     /// Download finished callback for the WebClient.
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    /// <remarks></remarks>
     private void DownloadFinished(object sender, AsyncCompletedEventArgs e)
     {
         if (e.Error == null)
         {
             if (e.Cancelled)
-                m_DownloadFinished(false, new Exception("Download canceled."));
+                mDownloadFinished(false, new Exception("Download canceled."));
             else
-                m_DownloadFinished(true, null);
+                mDownloadFinished(true, null);
         }
         else
         {
-            m_DownloadFinished(false, e.Error);
+            mDownloadFinished(false, e.Error);
         }
 
-        if (m_WebClient != null)
+        if (mWebClient != null)
         {
-            if (m_DownloadFinished != null)
-                m_WebClient.DownloadFileCompleted -= new AsyncCompletedEventHandler(DownloadFinished);
-            if (m_ProgressChangedCall != null)
-                m_WebClient.DownloadProgressChanged -= new DownloadProgressChangedEventHandler(DownloadProgressChanged);
+            if (mDownloadFinished != null)
+                mWebClient.DownloadFileCompleted -= new AsyncCompletedEventHandler(DownloadFinished);
+            if (mProgressChangedCall != null)
+                mWebClient.DownloadProgressChanged -= new DownloadProgressChangedEventHandler(DownloadProgressChanged);
 
-            m_WebClient.Dispose();
-            m_WebClient = null;
+            mWebClient.Dispose();
+            mWebClient = null;
         }
     }
 
     /// <summary>
     /// Download progress changed callback for the WebClient.
     /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
     public void DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
     {
-        if (m_ProgressChangedCall != null)
-            m_ProgressChangedCall(e.ProgressPercentage);
+        if (mProgressChangedCall != null)
+            mProgressChangedCall(e.ProgressPercentage);
     }
 
     #endregion

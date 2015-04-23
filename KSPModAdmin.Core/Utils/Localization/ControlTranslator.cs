@@ -43,7 +43,7 @@ namespace KSPModAdmin.Core.Utils.Localization
         /// <summary>
         /// Possible XML Node types.
         /// </summary>
-        enum NodeType
+        public enum NodeType
         {
             OpenControl,
             ClosedControl,
@@ -226,11 +226,11 @@ namespace KSPModAdmin.Core.Utils.Localization
                     foreach (ToolStripItem child in tsddb.DropDownItems)
                         TryReadToolStripItems(localizer, language, child);
                 }
-                //else if (tsddb.HasDropDown)
-                //{
-                //    foreach (ToolStripItem child in tsddb.DropDown.Items)
-                //        TryReadToolStripItems(localizer, language, child);
-                //}
+                ////else if (tsddb.HasDropDown)
+                ////{
+                ////    foreach (ToolStripItem child in tsddb.DropDown.Items)
+                ////        TryReadToolStripItems(localizer, language, child);
+                ////}
 
                 return true;
             }
@@ -250,11 +250,11 @@ namespace KSPModAdmin.Core.Utils.Localization
                     foreach (ToolStripItem child in tssb.DropDownItems)
                         TryReadToolStripItems(localizer, language, child);
                 }
-                //else if (tssb.HasDropDown)
-                //{
-                //    foreach (ToolStripItem child in tssb.DropDown.Items)
-                //        TryReadToolStripItems(localizer, language, child);
-                //}
+                ////else if (tssb.HasDropDown)
+                ////{
+                ////    foreach (ToolStripItem child in tssb.DropDown.Items)
+                ////        TryReadToolStripItems(localizer, language, child);
+                ////}
 
                 return true;
             }
@@ -295,11 +295,11 @@ namespace KSPModAdmin.Core.Utils.Localization
                     foreach (ToolStripItem child in tsmi.DropDownItems)
                         TryReadToolStripItems(localizer, language, child);
                 }
-                //else if (tsmi.HasDropDown)
-                //{
-                //    foreach (ToolStripItem child in tsmi.DropDown.Items)
-                //        TryReadToolStripItems(localizer, language, child);
-                //}
+                ////else if (tsmi.HasDropDown)
+                ////{
+                ////    foreach (ToolStripItem child in tsmi.DropDown.Items)
+                ////        TryReadToolStripItems(localizer, language, child);
+                ////}
 
                 return true;
             }
@@ -388,7 +388,7 @@ namespace KSPModAdmin.Core.Utils.Localization
         /// <param name="longName">The long name of the language.</param>
         /// <param name="withIndent">Flag to determine if a indent should be used during creation or not.</param>
         /// <param name="asXml">Flag to determine if the output file should have xml format or not.</param>
-        /// <returns></returns>
+        /// <returns>The created language file as text.</returns>
         public static string CreateTranslateSettingsFileOfControls(Control control, string language = "eng", string longName = "English (default)", bool withIndent = true, bool asXml = true)
         {
             StringBuilder sb = new StringBuilder();
@@ -475,20 +475,20 @@ namespace KSPModAdmin.Core.Utils.Localization
                         stringBuilder.AppendLine(new string(INDENT, depth) + CLOSE_CONTROL_XML_NODE);
                 }
 
-                //ContextMenuStrip cms = control as ContextMenuStrip;
-                //if (cms != null && !string.IsNullOrEmpty(name))
-                //{
-                //    written = true;
+                ////ContextMenuStrip cms = control as ContextMenuStrip;
+                ////if (cms != null && !string.IsNullOrEmpty(name))
+                ////{
+                ////    written = true;
 
-                //    bool hasChilds = (cms.Items.Count > 0);
-                //    WriteControlEntry(ref stringBuilder, tmpControl, tt, depth, withIndent, asXml, hasChilds);
+                ////    bool hasChilds = (cms.Items.Count > 0);
+                ////    WriteControlEntry(ref stringBuilder, tmpControl, tt, depth, withIndent, asXml, hasChilds);
 
-                //    foreach (var item in cms.Items)
-                //        WriteTranslationEntrys(ref stringBuilder, item, tt, depth, withIndent, asXml);
+                ////    foreach (var item in cms.Items)
+                ////        WriteTranslationEntrys(ref stringBuilder, item, tt, depth, withIndent, asXml);
 
-                //    if (asXml && hasChilds)
-                //        stringBuilder.AppendLine(new string(INDENT, depth) + CLOSE_CONTROL_XML_NODE);
-                //}
+                ////    if (asXml && hasChilds)
+                ////        stringBuilder.AppendLine(new string(INDENT, depth) + CLOSE_CONTROL_XML_NODE);
+                ////}
 
                 ComboBox cb = control as ComboBox;
                 if (cb != null && !string.IsNullOrEmpty(name))
@@ -631,9 +631,9 @@ namespace KSPModAdmin.Core.Utils.Localization
                     foreach (ToolStripItem item in tsmi.DropDownItems)
                         WriteToolStripItemEntrys(ref stringBuilder, item, item.Name, depth + 2, withIndent, asXml);
 
-                //else if (tsmi.HasDropDown)
-                //    foreach (ToolStripItem item in tsmi.DropDown.Items)
-                //        WriteToolStripItemEntrys(ref stringBuilder, item, item.Name, depth + 2, withIndent, asXml);
+                ////else if (tsmi.HasDropDown)
+                ////    foreach (ToolStripItem item in tsmi.DropDown.Items)
+                ////        WriteToolStripItemEntrys(ref stringBuilder, item, item.Name, depth + 2, withIndent, asXml);
 
                 if (asXml && hasChilds)
                     stringBuilder.AppendLine(new string(INDENT, depth + 1) + CLOSE_CONTROL_XML_NODE);
@@ -710,6 +710,10 @@ namespace KSPModAdmin.Core.Utils.Localization
             stringBuilder.AppendLine(string.Format(formatString, name, GetXmlEscapedString(value), indent));
         }
 
+        /// <summary>
+        /// Escapes the passed string for xml usage.
+        /// </summary>
+        /// <returns>The escaped xml valid string from the passed string.</returns>
         public static string GetXmlEscapedString(string value)
         {
             XmlDocument doc = new XmlDocument();
@@ -719,11 +723,15 @@ namespace KSPModAdmin.Core.Utils.Localization
             return node.InnerXml;
         }
 
+        /// <summary>
+        /// Unescapes the passed string for xml usage.
+        /// </summary>
+        /// <returns>The unescaped xml valid string from the passed string.</returns>
         public static string GetXmlUnescapedString(string xmlEscapedString)
         {
-            //XmlDocument doc = new XmlDocument();
-            //XmlNode node = doc.CreateElement("root");
-            //node.InnerXml = xmlEscapedString;
+            ////XmlDocument doc = new XmlDocument();
+            ////XmlNode node = doc.CreateElement("root");
+            ////node.InnerXml = xmlEscapedString;
             return xmlEscapedString.Replace("&quot;", "\"").Replace(NEWLINE_REPLACE_CHAR, Environment.NewLine);
         }
 

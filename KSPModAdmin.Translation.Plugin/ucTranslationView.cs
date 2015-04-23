@@ -1,11 +1,12 @@
 ﻿using System;
 using System.ComponentModel;
-using System.IO;
+using System.Diagnostics.CodeAnalysis;
 using KSPModAdmin.Core.Views;
 using KSPModAdmin.Translation.Plugin.Properties;
 
 namespace KSPModAdmin.Translation.Plugin
 {
+    [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Reviewed. Suppression is OK here.")]
     public partial class ucTranslationView : ucBase
     {
         private string mLastSelectedItemName = string.Empty;
@@ -13,6 +14,9 @@ namespace KSPModAdmin.Translation.Plugin
 
         #region Properties
 
+        /// <summary>
+        /// Gets or sets the content of the language file to display/edit.
+        /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public LanguageFileContent LanguageFileContent
@@ -43,6 +47,9 @@ namespace KSPModAdmin.Translation.Plugin
         #endregion
 
 
+        /// <summary>
+        /// Creates a new instance of the ucTranslationView class.
+        /// </summary>
         public ucTranslationView()
         {
             InitializeComponent();
@@ -138,6 +145,9 @@ namespace KSPModAdmin.Translation.Plugin
             return Messages.MSG_TRANSLATION_VIEW_TITLE;
         }
 
+        /// <summary>
+        /// Sets the enabled state of some view controls.
+        /// </summary>
         public void SetEnabledOfAllControls(bool enable)
         {
             gbTransToolLanguageFile.Enabled = enable;

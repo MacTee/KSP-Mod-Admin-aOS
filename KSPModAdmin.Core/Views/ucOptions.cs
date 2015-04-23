@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
 using System.Windows.Forms;
 using KSPModAdmin.Core.Controller;
 using KSPModAdmin.Core.Model;
@@ -12,17 +12,18 @@ using KSPModAdmin.Core.Utils.Localization;
 
 namespace KSPModAdmin.Core.Views
 {
+    [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Reviewed. Suppression is OK here.")]
     public partial class ucOptions : ucBase
     {
         #region Constants
 
-        const string DEST_DETECTED = "DestinationDetected";
-        const string DEST_MISSING = "DestinationMissing";
-        const string DEST_CONFLICT = "DestinationConflict";
-        const string MOD_INSTALLED = "ModInstalled";
-        const string MOD_ARCHIVE_MISSING = "ModArchiveMissing";
-        const string MOD_OUTDATED = "ModOutdated";
-        const string ZERO = "0";
+        private const string DEST_DETECTED = "DestinationDetected";
+        private const string DEST_MISSING = "DestinationMissing";
+        private const string DEST_CONFLICT = "DestinationConflict";
+        private const string MOD_INSTALLED = "ModInstalled";
+        private const string MOD_ARCHIVE_MISSING = "ModArchiveMissing";
+        private const string MOD_OUTDATED = "ModOutdated";
+        private const string ZERO = "0";
 
         #endregion
 
@@ -30,6 +31,9 @@ namespace KSPModAdmin.Core.Views
 
         #region Update Tab
 
+        /// <summary>
+        /// Gets or sets the KSP Mod Admin version.
+        /// </summary>
         [DefaultValue(false), Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public string KSPMAVersion
@@ -225,13 +229,13 @@ namespace KSPModAdmin.Core.Views
                 cbKSPPath.Items.Clear();
                 if (value != null)
                 {
-                    cbKSPPath.SelectedIndexChanged -= cbKSPPath_SelectedIndexChanged;
+                    cbKSPPath.SelectedIndexChanged -= CbKSPPath_SelectedIndexChanged;
                     foreach (NoteNode path in value)
                     {
                         tvKnownPaths.Nodes.Add(path);
                         cbKSPPath.Items.Add(path.Name);
                     }
-                    cbKSPPath.SelectedIndexChanged += cbKSPPath_SelectedIndexChanged;
+                    cbKSPPath.SelectedIndexChanged += CbKSPPath_SelectedIndexChanged;
                 }
             }
         }
@@ -265,7 +269,6 @@ namespace KSPModAdmin.Core.Views
                     return DestinationDetectionType.SimpleDump;
 
                 return DestinationDetectionType.SmartDetection;
-
             }
             set
             {
@@ -458,6 +461,9 @@ namespace KSPModAdmin.Core.Views
 
         #endregion
 
+        /// <summary>
+        /// Gets or sets the list of available languages.
+        /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public List<Language> AvailableLanguages
@@ -535,11 +541,11 @@ namespace KSPModAdmin.Core.Views
         /// <param name="kspPath">The new selected KSP path.</param>
         internal void SilentSetSelectedKSPPath(string kspPath)
         {
-            cbKSPPath.SelectedIndexChanged -= cbKSPPath_SelectedIndexChanged;
+            cbKSPPath.SelectedIndexChanged -= CbKSPPath_SelectedIndexChanged;
             SelectedKSPPath = null;
             SelectedKSPPath = kspPath;
             mSelectedKSPPath = kspPath;
-            cbKSPPath.SelectedIndexChanged += cbKSPPath_SelectedIndexChanged;
+            cbKSPPath.SelectedIndexChanged += CbKSPPath_SelectedIndexChanged;
         }
 
 
@@ -548,8 +554,6 @@ namespace KSPModAdmin.Core.Views
         /// <summary>
         /// Handles the Click event of the btnOpenDownloads.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnOpenDownloads_Click(object sender, EventArgs e)
         {
             OptionsController.OpenDownloadFolder();
@@ -558,8 +562,6 @@ namespace KSPModAdmin.Core.Views
         /// <summary>
         /// Handles the Click event of the btnUpdate.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             OptionsController.Check4AppUpdates();
@@ -568,8 +570,6 @@ namespace KSPModAdmin.Core.Views
         /// <summary>
         /// Handles the Click event of the btnCheckModUpdates.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnCheckModUpdates_Click(object sender, EventArgs e)
         {
             OptionsController.Check4ModUpdates(ModSelectionController.Mods.ToArray());
@@ -582,9 +582,7 @@ namespace KSPModAdmin.Core.Views
         /// <summary>
         /// Handles the SelectedIndexChanged event of the cbKSPPath.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void cbKSPPath_SelectedIndexChanged(object sender, EventArgs e)
+        private void CbKSPPath_SelectedIndexChanged(object sender, EventArgs e)
         {
             OptionsController.SelectedKSPPath = cbKSPPath.SelectedItem.ToString();
         }
@@ -592,9 +590,7 @@ namespace KSPModAdmin.Core.Views
         /// <summary>
         /// Handles the Click event of the btnOpenKSPRoot.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnOpenKSPRoot_Click(object sender, EventArgs e)
+        private void BtnOpenKSPRoot_Click(object sender, EventArgs e)
         {
             OptionsController.OpenKSPRoot();
         }
@@ -602,9 +598,7 @@ namespace KSPModAdmin.Core.Views
         /// <summary>
         /// Handles the Click event of the btnOpenDownloadFolder.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnOpenDownloadFolder_Click(object sender, EventArgs e)
+        private void BtnOpenDownloadFolder_Click(object sender, EventArgs e)
         {
             OptionsController.OpenDownloadFolder();
         }
@@ -612,9 +606,7 @@ namespace KSPModAdmin.Core.Views
         /// <summary>
         /// Handles the Click event of the btnDownloadPath.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnDownloadPath_Click(object sender, EventArgs e)
+        private void BtnDownloadPath_Click(object sender, EventArgs e)
         {
             OptionsController.SelectNewDownloadPath();
         }
@@ -622,9 +614,7 @@ namespace KSPModAdmin.Core.Views
         /// <summary>
         /// Handles the Click event of the btnAddPath.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnAddPath_Click(object sender, EventArgs e)
+        private void BtnAddPath_Click(object sender, EventArgs e)
         {
             OptionsController.AddKSPPath();
         }
@@ -632,9 +622,7 @@ namespace KSPModAdmin.Core.Views
         /// <summary>
         /// Handles the Click event of the btnRemove.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnRemove_Click(object sender, EventArgs e)
+        private void BtnRemove_Click(object sender, EventArgs e)
         {
             OptionsController.RemoveKSPPath();
         }
@@ -642,9 +630,7 @@ namespace KSPModAdmin.Core.Views
         /// <summary>
         /// Handles the Click event of the btnSteamSearch.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnSteamSearch_Click(object sender, EventArgs e)
+        private void BtnSteamSearch_Click(object sender, EventArgs e)
         {
             OptionsController.SteamSearch4KSPPath();
         }
@@ -652,9 +638,7 @@ namespace KSPModAdmin.Core.Views
         /// <summary>
         /// Handles the Click event of the btnFolderSearch.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnFolderSearch_Click(object sender, EventArgs e)
+        private void BtnFolderSearch_Click(object sender, EventArgs e)
         {
             OptionsController.FolderSearch4KSPPath();
         }
@@ -662,9 +646,7 @@ namespace KSPModAdmin.Core.Views
         /// <summary>
         /// Handles the AfterSelect event of the tvKnownPaths.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void tvKnownPaths_AfterSelect(object sender, TreeViewEventArgs e)
+        private void TvKnownPaths_AfterSelect(object sender, TreeViewEventArgs e)
         {
             if (tvKnownPaths.SelectedNode != null)
             {
@@ -682,9 +664,7 @@ namespace KSPModAdmin.Core.Views
         /// <summary>
         /// Handles the TextChanged event of the tbNote.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void tbNote_TextChanged(object sender, EventArgs e)
+        private void TbNote_TextChanged(object sender, EventArgs e)
         {
             if (tvKnownPaths.SelectedNode != null)
             {
@@ -705,8 +685,6 @@ namespace KSPModAdmin.Core.Views
         /// <summary>
         /// Handles the CheckedChanged event of the cbToolTipOnOff.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void cbToolTipOnOff_CheckedChanged(object sender, EventArgs e)
         {
             OptionsController.ToolTipOnOff = cbToolTipOnOff.Checked;
@@ -715,8 +693,6 @@ namespace KSPModAdmin.Core.Views
         /// <summary>
         /// Handles the TextChanged event of the tbToolTipDelay.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void tbToolTipDelay_TextChanged(object sender, EventArgs e)
         {
             OptionsController.ToolTipDelay = tbToolTipDelay.DecimalValue;
@@ -725,8 +701,6 @@ namespace KSPModAdmin.Core.Views
         /// <summary>
         /// Handles the TextChanged event of the tbToolTipDisplayTime.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void tbToolTipDisplayTime_TextChanged(object sender, EventArgs e)
         {
             OptionsController.ToolTipDisplayTime = tbToolTipDisplayTime.DecimalValue;
@@ -735,8 +709,6 @@ namespace KSPModAdmin.Core.Views
         /// <summary>
         /// Handles the CheckedChanged event of the cbConflictDetectionOnOff.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void cbConflictDetectionOnOff_CheckedChanged(object sender, EventArgs e)
         {
             OptionsController.ConflictDetectionOnOff = cbConflictDetectionOnOff.Checked;
@@ -745,8 +717,6 @@ namespace KSPModAdmin.Core.Views
         /// <summary>
         /// Handles the Click event of the color change buttons.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void ColorChangeButton_Click(object sender, EventArgs e)
         {
             ColorDialog dlg = new ColorDialog();

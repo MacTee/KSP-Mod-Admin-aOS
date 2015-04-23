@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree;
 
@@ -20,6 +21,7 @@ namespace KSPModAdmin.Core.Model
     public delegate void AfterCheckedChangeHandler(object sender);
 
 
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class BeforeCheckedChangeEventArgs : EventArgs
     {
         public ModNode Node { get; set; }
@@ -36,6 +38,7 @@ namespace KSPModAdmin.Core.Model
         }
     }
 
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class ModSelectionTreeModel : TreeModel
     {
         public static event EventHandler<BeforeCheckedChangeEventArgs> BeforeCheckedChange = null;
@@ -67,7 +70,7 @@ namespace KSPModAdmin.Core.Model
         /// <returns>The added ModNode.</returns>
         public ModNode AddMod(ModNode modNode)
         {
-            base.Nodes.Add(modNode);
+            Nodes.Add(modNode);
 
             return modNode;
         }
@@ -76,10 +79,9 @@ namespace KSPModAdmin.Core.Model
         /// Removes a ModNode from the ModSelection (model).
         /// </summary>
         /// <param name="modNode">The ModNode to add.</param>
-        /// <returns>The added ModNode.</returns>
         public void RemoveMod(ModNode modNode)
         {
-            base.Nodes.Remove(modNode);
+            Nodes.Remove(modNode);
         }
 
 
@@ -166,7 +168,6 @@ namespace KSPModAdmin.Core.Model
         /// <param name="node">Node to start the search from.</param>
         /// <param name="kspFolders">List of found KSP folders.</param>
         /// <param name="craftFiles">List of found craft files.</param>
-        /// <returns>A list of ksp folders.</returns>
         public static void GetAllKSPFolders(ModNode node, ref List<ModNode> kspFolders, ref List<ModNode> craftFiles)
         {
             if (node.IsKSPFolder && !IsChildOfAny(node, kspFolders))
@@ -246,12 +247,12 @@ namespace KSPModAdmin.Core.Model
             }
 
             return null;
-            //return Nodes.Cast<ModNode>().FirstOrDefault(node => node.LocalPath.Equals(localPath, StringComparison.CurrentCultureIgnoreCase));
+            ////return Nodes.Cast<ModNode>().FirstOrDefault(node => node.LocalPath.Equals(localPath, StringComparison.CurrentCultureIgnoreCase));
         }
 
 
         /// <summary>
-        /// Returns the count of all nodes and subnode and subsub...
+        /// Returns the count of all nodes and sub node and sub sub...
         /// </summary>
         /// <param name="nodeList">The list to count the nodes from.</param>
         /// <returns>The count of nodes.</returns>
@@ -267,7 +268,7 @@ namespace KSPModAdmin.Core.Model
         }
 
         /// <summary>
-        /// Returns the count of all nodes and subnode and subsub...
+        /// Returns the count of all nodes and sub node and sub sub...
         /// </summary>
         /// <param name="nodeArray">The array to count the nodes from.</param>
         /// <returns>The count of nodes.</returns>

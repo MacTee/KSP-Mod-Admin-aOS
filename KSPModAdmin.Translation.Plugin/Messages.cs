@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using KSPModAdmin.Core.Utils.Localization;
 
 namespace KSPModAdmin.Translation.Plugin
 {
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class Messages
     {
         public static string MSG_TRANSLATION_VIEW_TITLE

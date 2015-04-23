@@ -6,7 +6,7 @@ using System.Runtime.InteropServices.ComTypes;
 namespace KSPModAdmin.Core.Utils.Controls
 {
     /// <summary>
-    /// Intercepts downloads of files, to add as PDFs or suppliments
+    /// Intercepts downloads of files, to add as PDFs or supplements
     /// </summary>
     [ComVisible(true)]
     [Guid("bdb9c34c-d0ca-448e-b497-8de62e709744")]
@@ -21,6 +21,7 @@ namespace KSPModAdmin.Core.Utils.Controls
         /// Return S_OK (0) so that IE will stop to download the file itself. 
         /// Else the default download user interface is used.
         /// </summary>
+        /// <returns>Return S_OK (0) or 1.</returns>
         public int Download(IMoniker pmk, IBindCtx pbc, uint dwBindVerb, int grfBINDF, IntPtr pBindInfo,
                             string pszHeaders, string pszRedir, uint uiCP)
         {
@@ -35,7 +36,7 @@ namespace KSPModAdmin.Core.Utils.Controls
                     if (FileDownloading != null)
                     {
                         FileDownloading(this, new FileDownloadEventArgs(url));
-                        //DownloadMod(url.ToString());
+                        ////DownloadMod(url.ToString());
                     }
 
                     return WebBrowserEx.Constants.S_OK;

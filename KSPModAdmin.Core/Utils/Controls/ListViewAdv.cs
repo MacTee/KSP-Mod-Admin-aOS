@@ -11,10 +11,16 @@ namespace KSPModAdmin.Core.Utils.Controls
     /// </summary>
     public class ListViewAdv : ListView
     {
+        /// <summary>
+        /// Flag to determine if reordering is allowed.
+        /// </summary>
         [DefaultValue(false)]
         public bool AllowReorder { get; set; }
 
 
+        /// <summary>
+        /// Handles the ItemDrag event.
+        /// </summary>
         protected override void OnItemDrag(ItemDragEventArgs e)
         {
             base.OnItemDrag(e);
@@ -22,10 +28,13 @@ namespace KSPModAdmin.Core.Utils.Controls
             if (!AllowReorder)
                 return;
 
-            //Begins a drag-and-drop operation in the ListView control.
+            // Begins a drag-and-drop operation in the ListView control.
             this.DoDragDrop(this.SelectedItems, DragDropEffects.Move);
         }
 
+        /// <summary>
+        /// Handles the DragEnter event.
+        /// </summary>
         protected override void OnDragEnter(DragEventArgs drgevent)
         {
             base.OnDragEnter(drgevent);
@@ -38,12 +47,15 @@ namespace KSPModAdmin.Core.Utils.Controls
             {
                 if (drgevent.Data.GetFormats()[i].Equals("System.Windows.Forms.ListView+SelectedListViewItemCollection"))
                 {
-                    //The data from the drag source is moved to the target.	
+                    // The data from the drag source is moved to the target.
                     drgevent.Effect = DragDropEffects.Move;
                 }
             }
         }
 
+        /// <summary>
+        /// Handles the DragDrop event.
+        /// </summary>
         protected override void OnDragDrop(DragEventArgs drgevent)
         {
             base.OnDragDrop(drgevent);

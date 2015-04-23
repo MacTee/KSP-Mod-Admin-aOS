@@ -1,20 +1,22 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Windows.Forms;
 using FolderSelect;
 using KSPModAdmin.Core.Model;
 using KSPModAdmin.Core.Utils;
-using System.IO;
 
 namespace KSPModAdmin.Core.Views
 {
     /// <summary>
     /// Dialog to choose a source and destination folder.
     /// </summary>
+    [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Reviewed. Suppression is OK here.")]
     public partial class frmDestFolderSelection : frmBase
     {
         #region Members
 
-        private ModNode m_SourceNode = null;
+        private ModNode mSourceNode = null;
 
         #endregion
 
@@ -59,12 +61,12 @@ namespace KSPModAdmin.Core.Views
                 {
                     if (value.Length > 0)
                     {
-                        m_SourceNode = value[0];
+                        mSourceNode = value[0];
                         foreach (ModNode child in value)
                             AddSrcFolder(child);
 
-                        cbListFoldersOnly.Checked = !m_SourceNode.IsFile;
-                        SrcFolder = m_SourceNode.Text;
+                        cbListFoldersOnly.Checked = !mSourceNode.IsFile;
+                        SrcFolder = mSourceNode.Text;
                     }
                 }
             }
@@ -123,7 +125,7 @@ namespace KSPModAdmin.Core.Views
         }
 
         /// <summary>
-        /// Gets a value that indicates wether the content of the source should be copied or the selected source itself.
+        /// Gets a value that indicates whether the content of the source should be copied or the selected source itself.
         /// </summary>
         public bool CopyContent { get { return rbCopyContentToDestination.Checked; } }
 
@@ -144,10 +146,8 @@ namespace KSPModAdmin.Core.Views
         #region Eventhandling
 
         /// <summary>
-        /// Handels the Click event of the btnOK.
+        /// Handles the Click event of the btnOK.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnOK_Click(object sender, EventArgs e)
         {
             if (cbDestination.SelectedIndex >= 0 && CB_Source.SelectedIndex >= 0)
@@ -165,10 +165,8 @@ namespace KSPModAdmin.Core.Views
         }
 
         /// <summary>
-        /// Handels the Click event of the btnCancel.
+        /// Handles the Click event of the btnCancel.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnCancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
@@ -176,10 +174,8 @@ namespace KSPModAdmin.Core.Views
         }
 
         /// <summary>
-        /// Handels the SelectedIndexChanged event of the CB_Dest.
+        /// Handles the SelectedIndexChanged event of the CB_Dest.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void CB_Dest_SelectedIndexChanged(object sender, EventArgs e)
         {
             // "Other folder ..." selected?
@@ -200,30 +196,28 @@ namespace KSPModAdmin.Core.Views
                 else
                     cbDestination.SelectedIndex = -1;
 
-                //FolderBrowserDialog dlg = new FolderBrowserDialog();
-                //dlg.Description = "Select a destination folder.";
-                //dlg.SelectedPath = KSPPathHelper.GetPath(KSPPaths.KSPRoot);
-                //if (dlg.ShowDialog() == DialogResult.OK)
-                //{
-                //    string dest = dlg.SelectedPath;
-                //    string destName = dest.Substring(dest.LastIndexOf(Path.DirectorySeparatorChar));
-                //    cbDestination.Items.Add(new DestInfo(destName, dlg.SelectedPath));
-                //    cbDestination.SelectedIndex = cbDestination.Items.Count - 1;
-                //}
-                //else
-                //    cbDestination.SelectedIndex = -1;
+                ////FolderBrowserDialog dlg = new FolderBrowserDialog();
+                ////dlg.Description = "Select a destination folder.";
+                ////dlg.SelectedPath = KSPPathHelper.GetPath(KSPPaths.KSPRoot);
+                ////if (dlg.ShowDialog() == DialogResult.OK)
+                ////{
+                ////    string dest = dlg.SelectedPath;
+                ////    string destName = dest.Substring(dest.LastIndexOf(Path.DirectorySeparatorChar));
+                ////    cbDestination.Items.Add(new DestInfo(destName, dlg.SelectedPath));
+                ////    cbDestination.SelectedIndex = cbDestination.Items.Count - 1;
+                ////}
+                ////else
+                ////    cbDestination.SelectedIndex = -1;
             }
         }
 
         /// <summary>
-        /// Handels the CheckedChanged event of the CB_ListFoldersOnly.
+        /// Handles the CheckedChanged event of the CB_ListFoldersOnly.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void CB_ListFoldersOnly_CheckedChanged(object sender, EventArgs e)
         {
             CB_Source.Items.Clear();
-            SrcFolders = new ModNode[] { m_SourceNode };
+            SrcFolders = new ModNode[] { mSourceNode };
         }
 
         #endregion
@@ -280,7 +274,7 @@ namespace KSPModAdmin.Core.Views
         /// <summary>
         /// Returns the display name of the destination path.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The display name of the destination path.</returns>
         public override string ToString() { return Name; }
     }
 }

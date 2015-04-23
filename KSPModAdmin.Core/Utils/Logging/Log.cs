@@ -76,7 +76,7 @@ namespace KSPModAdmin.Core.Utils.Logging
         /// </summary>
         File = 1
 
-        //SystemLog = 2
+        ////SystemLog = 2
     }
 
     /// <summary>
@@ -162,7 +162,7 @@ namespace KSPModAdmin.Core.Utils.Logging
 
         /// <summary>
         /// Sets the full path of the file to log to.
-        /// If set to a none Empty/Null value a Log file will be created (if nessessary) and the LogDestination will be changed to LogDestination.File.
+        /// If set to a none Empty/Null value a Log file will be created (if necessary) and the LogDestination will be changed to LogDestination.File.
         /// </summary>
         public string FullPath
         {
@@ -242,7 +242,6 @@ namespace KSPModAdmin.Core.Utils.Logging
         /// Adds a simple message to the global memory log.
         /// </summary>
         /// <param name="message">The message to log.</param>
-        /// <param name="callingFileLineNumber">Parameter for the line number of the calling function.</param>
         public static void AddMessageS(string message)
         {
             Log.GlobalInstance.AddMessage(message);
@@ -252,7 +251,6 @@ namespace KSPModAdmin.Core.Utils.Logging
         /// Adds a info message to the global memory log.
         /// </summary>
         /// <param name="infoMessage">The info message to log.</param>
-        /// <param name="callingFileLineNumber">Parameter for the line number of the calling function.</param>
         public static void AddInfoS(string infoMessage)
         {
             Log.GlobalInstance.AddInfo(infoMessage);
@@ -262,7 +260,6 @@ namespace KSPModAdmin.Core.Utils.Logging
         /// Adds a debug message to the global memory log.
         /// </summary>
         /// <param name="debugMessage">The debug message to log.</param>
-        /// <param name="callingFileLineNumber">Parameter for the line number of the calling function.</param>
         public static void AddDebugS(string debugMessage)
         {
             Log.GlobalInstance.AddDebug(debugMessage);
@@ -272,7 +269,6 @@ namespace KSPModAdmin.Core.Utils.Logging
         /// Adds a warning message to the global memory log.
         /// </summary>
         /// <param name="warningMessage">The warning message to log.</param>
-        /// <param name="callingFileLineNumber">Parameter for the line number of the calling function.</param>
         public static void AddWarningS(string warningMessage)
         {
             Log.GlobalInstance.AddWarning(warningMessage);
@@ -282,8 +278,7 @@ namespace KSPModAdmin.Core.Utils.Logging
         /// Adds a error message to the global memory log.
         /// </summary>
         /// <param name="errorMessage">The error message to log.</param>
-        /// <param name="ex">The error message to log.</param>
-        /// <param name="callingFileLineNumber">Parameter for the line number of the calling function.</param>
+        /// <param name="ex">The exception to log.</param>
         public static void AddErrorS(string errorMessage, Exception ex = null)
         {
             Log.GlobalInstance.AddError(errorMessage, ex);
@@ -296,13 +291,13 @@ namespace KSPModAdmin.Core.Utils.Logging
         /// <returns>"[ExceptionType] Message: [ExceptionMessage] StackTrace: [ExceptionStackTrace]"</returns>
         public static string Exception2String(Exception ex)
         {
-            return string.Format("Exception: {0}{3}Message: {1}{3}StackTrace:{3}{2}", ex.GetType(), ex.Message, ex.StackTrace, Environment.NewLine);//.Replace("\r", "").Replace("\n", " "));
+            return string.Format("Exception: {0}{3}Message: {1}{3}StackTrace:{3}{2}", ex.GetType(), ex.Message, ex.StackTrace, Environment.NewLine); ////.Replace("\r", "").Replace("\n", " "));
         }
 
         /// <summary>
         /// Returns the file length in bytes
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The file length in bytes</returns>
         public static long GetLogFileSizeS()
         {
             return Log.GlobalInstance.GetLogFileSize();
@@ -318,27 +313,27 @@ namespace KSPModAdmin.Core.Utils.Logging
             Log.GlobalInstance.DeleteLogFile(ifFileSizeReached);
         }
 
-        ///// <summary>
-        ///// Returns the error message with the format:
-        ///// [{DateTime.Now}] ERROR   : {errorMessage}
-        ///// or
-        ///// [{DateTime.Now}] ERROR   : {errorMessage} Exception: [ex.GetType] Message: [ex.Message] StackTrace: [ex.StackTrace]
-        ///// </summary>
-        ///// <param name="errorMessage">The error message to log.</param>
-        ///// <param name="ex">The exception to log.</param>
-        ///// <returns>
-        ///// Returns the error message with the format:
-        ///// [{DateTime.Now}] ERROR   : {errorMessage}
-        ///// or
-        ///// [{DateTime.Now}] ERROR   : {errorMessage} Exception: [ex.GetType] Message: [ex.Message] StackTrace: [ex.StackTrace]
-        ///// </returns>
-        //private static string GetErrorMessage(string errorMessage, Exception ex = null)
-        //{
-        //    if (ex == null)
-        //        return string.Format("[{0}] ERROR   : {1}", DateTime.Now, errorMessage);
-        //    else
-        //        return string.Format("[{0}] ERROR   : {1} Exception: {2}", DateTime.Now, errorMessage, Exception2String(ex));
-        //}
+        /////// <summary>
+        /////// Returns the error message with the format:
+        /////// [{DateTime.Now}] ERROR   : {errorMessage}
+        /////// or
+        /////// [{DateTime.Now}] ERROR   : {errorMessage} Exception: [ex.GetType] Message: [ex.Message] StackTrace: [ex.StackTrace]
+        /////// </summary>
+        /////// <param name="errorMessage">The error message to log.</param>
+        /////// <param name="ex">The exception to log.</param>
+        /////// <returns>
+        /////// Returns the error message with the format:
+        /////// [{DateTime.Now}] ERROR   : {errorMessage}
+        /////// or
+        /////// [{DateTime.Now}] ERROR   : {errorMessage} Exception: [ex.GetType] Message: [ex.Message] StackTrace: [ex.StackTrace]
+        /////// </returns>
+        ////private static string GetErrorMessage(string errorMessage, Exception ex = null)
+        ////{
+        ////    if (ex == null)
+        ////        return string.Format("[{0}] ERROR   : {1}", DateTime.Now, errorMessage);
+        ////    else
+        ////        return string.Format("[{0}] ERROR   : {1} Exception: {2}", DateTime.Now, errorMessage, Exception2String(ex));
+        ////}
 
         #endregion
 
@@ -445,7 +440,7 @@ namespace KSPModAdmin.Core.Utils.Logging
         /// <summary>
         /// Returns the file length in bytes
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The file length in bytes</returns>
         public long GetLogFileSize()
         {
             try
@@ -454,7 +449,7 @@ namespace KSPModAdmin.Core.Utils.Logging
                     return -1;
 
                 FileInfo f = new FileInfo(mPath);
-	            return f.Length;
+                return f.Length;
             }
             catch (Exception ex)
             {
@@ -514,7 +509,6 @@ namespace KSPModAdmin.Core.Utils.Logging
         /// </summary>
         /// <param name="message">The message to log.</param>
         /// <param name="logLevel">The LogLevel of the message.</param>
-        /// <param name="callingFileLineNumber">Parameter for the line number of the calling function.</param>
         private void AddMessage(string message, LogLevel logLevel)
         {
             string msg = string.Empty;

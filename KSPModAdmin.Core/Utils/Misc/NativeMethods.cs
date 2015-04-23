@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Runtime.InteropServices;
 
@@ -7,6 +8,7 @@ namespace KSPModAdmin.Core.Utils
     /// <summary>
     /// Wraps some Win32 stuff
     /// </summary>
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class NativeMethods
     {
 #if !__MonoCS__
@@ -42,7 +44,7 @@ namespace KSPModAdmin.Core.Utils
             public Size maxTrackSize;
         }
 
-        [Flags()]
+        [Flags]
         public enum DevModeFlags : int
         {
             Orientation = 0x1,
@@ -104,21 +106,21 @@ namespace KSPModAdmin.Core.Utils
             public DevModeFlags dmFields;
 
             [System.Runtime.InteropServices.FieldOffset(44)]
-            Int16 dmOrientation;
+            private Int16 dmOrientation;
             [System.Runtime.InteropServices.FieldOffset(46)]
-            Int16 dmPaperSize;
+            private Int16 dmPaperSize;
             [System.Runtime.InteropServices.FieldOffset(48)]
-            Int16 dmPaperLength;
+            private Int16 dmPaperLength;
             [System.Runtime.InteropServices.FieldOffset(50)]
-            Int16 dmPaperWidth;
+            private Int16 dmPaperWidth;
             [System.Runtime.InteropServices.FieldOffset(52)]
-            Int16 dmScale;
+            private Int16 dmScale;
             [System.Runtime.InteropServices.FieldOffset(54)]
-            Int16 dmCopies;
+            private Int16 dmCopies;
             [System.Runtime.InteropServices.FieldOffset(56)]
-            Int16 dmDefaultSource;
+            private Int16 dmDefaultSource;
             [System.Runtime.InteropServices.FieldOffset(58)]
-            Int16 dmPrintQuality;
+            private Int16 dmPrintQuality;
 
             [System.Runtime.InteropServices.FieldOffset(44)]
             public POINT dmPosition;

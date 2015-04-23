@@ -659,7 +659,7 @@ namespace KSPModAdmin.Core.Views
             this.ttOptions.SetToolTip(this.btnAddPath, "Add KSP install path\r\nOpens a FolderSelectDialog to add a new KSP install folder." +
         "");
             this.btnAddPath.UseVisualStyleBackColor = true;
-            this.btnAddPath.Click += new System.EventHandler(this.btnAddPath_Click);
+            this.btnAddPath.Click += new System.EventHandler(this.BtnAddPath_Click);
             // 
             // btnRemove
             // 
@@ -672,7 +672,7 @@ namespace KSPModAdmin.Core.Views
             this.ttOptions.SetToolTip(this.btnRemove, "Remove KSP install folder\r\nRemoves the selected KSP install folder from the known" +
         " paths.");
             this.btnRemove.UseVisualStyleBackColor = true;
-            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
+            this.btnRemove.Click += new System.EventHandler(this.BtnRemove_Click);
             // 
             // btnSteamSearch
             // 
@@ -685,7 +685,7 @@ namespace KSPModAdmin.Core.Views
             this.btnSteamSearch.Tag = "Start";
             this.ttOptions.SetToolTip(this.btnSteamSearch, "Steam search\r\nSearches the default steam path for KSP install folders.");
             this.btnSteamSearch.UseVisualStyleBackColor = true;
-            this.btnSteamSearch.Click += new System.EventHandler(this.btnSteamSearch_Click);
+            this.btnSteamSearch.Click += new System.EventHandler(this.BtnSteamSearch_Click);
             // 
             // btnKSPFolderSearch
             // 
@@ -700,7 +700,7 @@ namespace KSPModAdmin.Core.Views
         "ders next (up & down) to its install paths.\r\nThe depth is depanding on the numbe" +
         "r on the right of this button.");
             this.btnKSPFolderSearch.UseVisualStyleBackColor = true;
-            this.btnKSPFolderSearch.Click += new System.EventHandler(this.btnFolderSearch_Click);
+            this.btnKSPFolderSearch.Click += new System.EventHandler(this.BtnFolderSearch_Click);
             // 
             // tlpSearchBG
             // 
@@ -770,7 +770,7 @@ namespace KSPModAdmin.Core.Views
             this.cbKSPPath.Size = new System.Drawing.Size(605, 21);
             this.cbKSPPath.TabIndex = 0;
             this.ttOptions.SetToolTip(this.cbKSPPath, "Chose the KSP install path to perform actions on.");
-            this.cbKSPPath.SelectedIndexChanged += new System.EventHandler(this.cbKSPPath_SelectedIndexChanged);
+            this.cbKSPPath.SelectedIndexChanged += new System.EventHandler(this.CbKSPPath_SelectedIndexChanged);
             // 
             // lblModDownloadPath
             // 
@@ -805,7 +805,7 @@ namespace KSPModAdmin.Core.Views
             this.ttOptions.SetToolTip(this.btnDownloadPath, "Select download path\r\nOpens a FolderSelectDialog to select a new download folder." +
         "");
             this.btnDownloadPath.UseVisualStyleBackColor = true;
-            this.btnDownloadPath.Click += new System.EventHandler(this.btnDownloadPath_Click);
+            this.btnDownloadPath.Click += new System.EventHandler(this.BtnDownloadPath_Click);
             // 
             // btnOpenDownloadFolder
             // 
@@ -817,7 +817,7 @@ namespace KSPModAdmin.Core.Views
             this.btnOpenDownloadFolder.TabIndex = 10;
             this.ttOptions.SetToolTip(this.btnOpenDownloadFolder, "Open download folder\r\nOpens the download folder.");
             this.btnOpenDownloadFolder.UseVisualStyleBackColor = true;
-            this.btnOpenDownloadFolder.Click += new System.EventHandler(this.btnOpenDownloadFolder_Click);
+            this.btnOpenDownloadFolder.Click += new System.EventHandler(this.BtnOpenDownloadFolder_Click);
             // 
             // btnOpenKSPRoot
             // 
@@ -829,7 +829,7 @@ namespace KSPModAdmin.Core.Views
             this.btnOpenKSPRoot.TabIndex = 1;
             this.ttOptions.SetToolTip(this.btnOpenKSPRoot, "Open KSP install folder.\r\nOpens the selected KSP install folder.");
             this.btnOpenKSPRoot.UseVisualStyleBackColor = true;
-            this.btnOpenKSPRoot.Click += new System.EventHandler(this.btnOpenKSPRoot_Click);
+            this.btnOpenKSPRoot.Click += new System.EventHandler(this.BtnOpenKSPRoot_Click);
             // 
             // lblSelectedKSPPath
             // 
@@ -867,7 +867,7 @@ namespace KSPModAdmin.Core.Views
             this.tvKnownPaths.Name = "tvKnownPaths";
             this.tvKnownPaths.Size = new System.Drawing.Size(441, 313);
             this.tvKnownPaths.TabIndex = 7;
-            this.tvKnownPaths.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvKnownPaths_AfterSelect);
+            this.tvKnownPaths.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TvKnownPaths_AfterSelect);
             // 
             // panel1
             // 
@@ -899,7 +899,7 @@ namespace KSPModAdmin.Core.Views
             this.tbNote.Name = "tbNote";
             this.tbNote.Size = new System.Drawing.Size(177, 293);
             this.tbNote.TabIndex = 8;
-            this.tbNote.TextChanged += new System.EventHandler(this.tbNote_TextChanged);
+            this.tbNote.TextChanged += new System.EventHandler(this.TbNote_TextChanged);
             // 
             // tabPageMisc
             // 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Windows.Forms;
 using FolderSelect;
 using KSPModAdmin.Core.Controller;
@@ -7,11 +8,18 @@ using KSPModAdmin.Core.Utils.Localization;
 
 namespace KSPModAdmin.Core.Views
 {
+    [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Reviewed. Suppression is OK here.")]
     public partial class frmWelcome : frmBase
     {
+        /// <summary>
+        /// Gets the selected KSP install folder path.
+        /// </summary>
         public string KSPPath { get { return tbKSPPath.Text; } }
 
 
+        /// <summary>
+        /// Creates a new instance of the frmWelcome class.
+        /// </summary>
         public frmWelcome()
         {
             InitializeComponent();

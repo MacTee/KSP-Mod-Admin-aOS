@@ -49,6 +49,12 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="StyleCop">
+      <HintPath>..\packages\StyleCop.4.7.49.0\lib\net35\StyleCop.dll</HintPath>
+    </Reference>
+    <Reference Include="StyleCop.CSharp">
+      <HintPath>..\packages\StyleCop.4.7.49.0\lib\net35\StyleCop.CSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -92,7 +98,9 @@
     <None Include="Languages\KSPMA.TranslationPlugin.eng.lang" />
     <None Include="Languages\KSPMA.TranslationPlugin.fake.lang" />
     <None Include="Languages\KSPMA.TranslationPlugin.ger.lang" />
+    <None Include="packages.config" />
     <None Include="Properties\DataSources\LanguageEntry.datasource" />
+    <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KSPModAdmin.Core\KSPModAdmin.Core.csproj">
@@ -114,6 +122,7 @@
     <None Include="Resources\pencil2_delete.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\StyleCopData\StyleCop.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy /E /Y /R /I "$(ProjectDir)Languages" "$(SolutionDir)KSPModAdmin\$(OutDir)lang"</PostBuildEvent>
   </PropertyGroup>

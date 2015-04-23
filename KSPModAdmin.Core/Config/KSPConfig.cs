@@ -1,10 +1,10 @@
-﻿using KSPModAdmin.Core.Controller;
-using KSPModAdmin.Core.Model;
-using KSPModAdmin.Core.Utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
+using KSPModAdmin.Core.Controller;
+using KSPModAdmin.Core.Model;
+using KSPModAdmin.Core.Utils;
 
 namespace KSPModAdmin.Core.Config
 {
@@ -20,9 +20,6 @@ namespace KSPModAdmin.Core.Config
         /// <summary>
         /// Loads the config.
         /// </summary>
-        /// <param name="path"></param>
-        /// <param name="modNodes"></param>
-        /// <returns></returns>
         public static void Load(string path, ref List<ModNode> modNodes)
         {
             ModNode root = new ModNode() { Key = Constants.ROOT };
@@ -52,8 +49,7 @@ namespace KSPModAdmin.Core.Config
         /// <summary>
         /// v1.0 load function.
         /// </summary>
-        /// <param name="doc"></param>
-        /// <returns></returns>
+        /// <returns>True on success.</returns>
         private static ModNode LoadV1_0(XmlDocument doc)
         {
             ModNode result = new ModNode() { Key = Constants.ROOT };
@@ -79,25 +75,25 @@ namespace KSPModAdmin.Core.Config
                 }
             }
 
-            //nodeList = doc.GetElementsByTagName(Constants.OVERRRIDE);
-            //if (nodeList.Count >= 1 && nodeList[0].Attributes != null)
-            //{
-            //    foreach (XmlAttribute att in nodeList[0].Attributes)
-            //    {
-            //        if (att.Name == Constants.VALUE)
-            //            mOverride = false; // mOverride = (att.Value.ToLower() == Constants.TRUE);
-            //    }
-            //}
+            ////nodeList = doc.GetElementsByTagName(Constants.OVERRRIDE);
+            ////if (nodeList.Count >= 1 && nodeList[0].Attributes != null)
+            ////{
+            ////    foreach (XmlAttribute att in nodeList[0].Attributes)
+            ////    {
+            ////        if (att.Name == Constants.VALUE)
+            ////            mOverride = false; // mOverride = (att.Value.ToLower() == Constants.TRUE);
+            ////    }
+            ////}
 
-            //nodeList = doc.GetElementsByTagName(Constants.KSPSTARTUPOPTIONS);
-            //if (nodeList.Count >= 1 && nodeList[0].Attributes != null)
-            //{
-            //    foreach (XmlAttribute att in nodeList[0].Attributes)
-            //    {
-            //        if (att.Name == Constants.BORDERLESSWINDOW)
-            //            mStartWithBorderlessWindow = (att.Value.ToLower() == Constants.TRUE);
-            //    }
-            //}
+            ////nodeList = doc.GetElementsByTagName(Constants.KSPSTARTUPOPTIONS);
+            ////if (nodeList.Count >= 1 && nodeList[0].Attributes != null)
+            ////{
+            ////    foreach (XmlAttribute att in nodeList[0].Attributes)
+            ////    {
+            ////        if (att.Name == Constants.BORDERLESSWINDOW)
+            ////            mStartWithBorderlessWindow = (att.Value.ToLower() == Constants.TRUE);
+            ////    }
+            ////}
 
             result.Nodes.Clear();
             XmlNodeList mods = doc.GetElementsByTagName(Constants.MOD);
@@ -114,9 +110,6 @@ namespace KSPModAdmin.Core.Config
         /// <summary>
         /// Creates a TreeNode for the XmlNode information.
         /// </summary>
-        /// <param name="mod"></param>
-        /// <param name="node"></param>
-        /// <returns></returns>
         private static void FillModTreeNode(XmlNode mod, ref ModNode node)
         {
             string kspForumURL = string.Empty;
@@ -201,9 +194,7 @@ namespace KSPModAdmin.Core.Config
         /// <summary>
         /// Saves the config.
         /// </summary>
-        /// <param name="path"></param>
-        /// <param name="nodeArray"></param>
-        /// <returns></returns>
+        /// <returns>True on success.</returns>
         public static bool Save(string path, ModNode[] nodeArray)
         {
             XmlDocument doc = new XmlDocument();
@@ -230,11 +221,11 @@ namespace KSPModAdmin.Core.Config
             });
             generalNode.AppendChild(node);
 
-            //node = CreateKSPConfigNode(doc, Constants.OVERRRIDE, Constants.VALUE, mOverride.ToString());
-            //generalNode.AppendChild(node);
+            ////node = CreateKSPConfigNode(doc, Constants.OVERRRIDE, Constants.VALUE, mOverride.ToString());
+            ////generalNode.AppendChild(node);
 
-            //node = CreateKSPConfigNode(doc, Constants.KSPSTARTUPOPTIONS, Constants.BORDERLESSWINDOW, mStartWithBorderlessWindow.ToString());
-            //generalNode.AppendChild(node);
+            ////node = CreateKSPConfigNode(doc, Constants.KSPSTARTUPOPTIONS, Constants.BORDERLESSWINDOW, mStartWithBorderlessWindow.ToString());
+            ////generalNode.AppendChild(node);
 
             XmlNode modsNode = doc.CreateElement(Constants.MODS);
             root.AppendChild(modsNode);
@@ -250,9 +241,10 @@ namespace KSPModAdmin.Core.Config
         /// <summary>
         /// Saves the node and all its child nodes.
         /// </summary>
-        /// <param name="nodeName"></param>
+        /// <param name="nodeName">Name of the node.</param>
         /// <param name="child">The node to create the XmlNode from.</param>
         /// <param name="parent">The parent XmlNode of the new created XmlNode.</param>
+        /// <returns>The new created XmlNode.</returns>
         private static XmlNode CreateXmlNode(string nodeName, ModNode child, XmlNode parent)
         {
             XmlDocument doc = parent.OwnerDocument;

@@ -8,65 +8,54 @@ namespace KSPModAdmin.Core.Utils.Logging
 {
 /// <summary>
 /// This is a simple performance logger.
-/// The class is designed to masure the execution time of functions and its sub functions.
+/// The class is designed to measure the execution time of functions and its sub functions.
 /// NOTE: The PerformanceLogger can't be used with threaded (sub) functions. 
-///       To analyse functions running in another thread, create a new instance of the PerformanceLogger (for each tread).
+///       To analyses functions running in another thread, create a new instance of the PerformanceLogger (for each tread).
 ///       A "How to use" sample is at the bottom of this code.
 /// </summary>
-/// <remarks></remarks>
 public class PerformanceLogger
 {
     #region "Members"
     /// <summary>
     /// Name for the root watch.
     /// </summary>
-    /// <remarks></remarks>
-
     private const string ROOTNAME = "TimeLogger_RootWatch";
+
     /// <summary>
     /// Global instance of the PerformanceLogger.
     /// </summary>
-    /// <remarks></remarks>
+    private static PerformanceLogger mInstance = null;
 
-    private static PerformanceLogger m_Instance = null;
     /// <summary>
     /// The root watch.
     /// </summary>
-    /// <remarks></remarks>
+    private WatchInfo mRootWatch = null;
 
-    private WatchInfo m_RootWatch = null;
     /// <summary>
     /// Stack of the last used (created) watches.
     /// </summary>
-    /// <remarks></remarks>
+    private Stack mStackTable = new Stack();
     #endregion
-    private Stack m_StackTable = new Stack();
 
     #region "Properties"
     /// <summary>
     /// Global instance of the PerformanceLogger.
     /// </summary>
-    /// <value></value>
-    /// <returns></returns>
-    /// <remarks></remarks>
     public static PerformanceLogger Instance
     {
         get
         {
-            if (((m_Instance == null)))
+            if (((mInstance == null)))
             {
-                m_Instance = new PerformanceLogger();
+                mInstance = new PerformanceLogger();
             }
-            return m_Instance;
+            return mInstance;
         }
     }
 
     /// <summary>
     /// Turns off the timekeeping of the PerformanceLogger.
     /// </summary>
-    /// <value></value>
-    /// <returns></returns>
-    /// <remarks></remarks>
     private bool TurnOff { get; set; }
     #endregion
 
@@ -74,9 +63,6 @@ public class PerformanceLogger
     /// <summary>
     /// Turns off the timekeeping of the global instance of the PerformanceLogger.
     /// </summary>
-    /// <value></value>
-    /// <returns></returns>
-    /// <remarks></remarks>
     public static bool TurnOff_Shared
     {
         get { return Instance.TurnOff; }
@@ -90,8 +76,7 @@ public class PerformanceLogger
     /// the current watch will be pushed on a stack and the created watch becomes the current watch.
     /// </summary>
     /// <param name="name">Name of the watch.</param>
-    /// <param name="stopAndResetChilds">Flag for stopping and reseting all child watches of the current watch.</param>
-    /// <remarks></remarks>
+    /// <param name="stopAndResetChilds">Flag for stopping and resetting all child watches of the current watch.</param>
     public static void Start(string name, bool stopAndResetChilds = false)
     {
         Instance.StartWatch(name, stopAndResetChilds);
@@ -101,7 +86,6 @@ public class PerformanceLogger
     /// Stops the current watch and pops it from the stack.
     /// </summary>
     /// <param name="stopChilds">Flag for stopping all child watches of the current watch.</param>
-    /// <remarks></remarks>
     public static void Stop(bool stopChilds = false)
     {
         Instance.StopWatch(stopChilds);
@@ -111,7 +95,6 @@ public class PerformanceLogger
     /// Stops and resets the current watch and pops it from the stack.
     /// </summary>
     /// <param name="resetChilds">Flag for resetting all child watches of the current watch.</param>
-    /// <remarks></remarks>
     public static void Reset(bool resetChilds = false)
     {
         Instance.ResetWatch(resetChilds);
@@ -120,7 +103,6 @@ public class PerformanceLogger
     /// <summary>
     /// Clears all watches.
     /// </summary>
-    /// <remarks></remarks>
     public static void ClearAll()
     {
         Instance.ClearAllWatches();
@@ -129,8 +111,6 @@ public class PerformanceLogger
     /// <summary>
     /// Saves the logged times.
     /// </summary>
-    /// <param name="fileName"></param>
-    /// <remarks></remarks>
     public static void Save(string fileName)
     {
         Instance.SaveToFile(fileName);
@@ -139,8 +119,7 @@ public class PerformanceLogger
     /// <summary>
     /// Creates a string of the tree of watches.
     /// </summary>
-    /// <returns></returns>
-    /// <remarks></remarks>
+    /// <returns>A string of the tree of watches.</returns>
     public static string ToString_Shared()
     {
         return Instance.ToString();
@@ -149,7 +128,6 @@ public class PerformanceLogger
     /// <summary>
     /// Shows the logged times in a message box.
     /// </summary>
-    /// <remarks></remarks>
     public static void Show_MsgBox()
     {
         if ((TurnOff_Shared))
@@ -167,23 +145,22 @@ public class PerformanceLogger
     /// the current watch will be pushed on a stack and the created watch becomes the current watch.
     /// </summary>
     /// <param name="name">Name of the watch.</param>
-    /// <param name="stopAndResetChilds">Flag for stopping and reseting all child watches of the current timer.</param>
-    /// <remarks></remarks>
+    /// <param name="stopAndResetChilds">Flag for stopping and resetting all child watches of the current timer.</param>
     public void StartWatch(string name, bool stopAndResetChilds = false)
     {
         if ((TurnOff))
             return;
 
-        if ((m_StackTable.Count == 0))
+        if ((mStackTable.Count == 0))
         {
-            m_StackTable.Push(new WatchInfo(name, GetRoot()));
+            mStackTable.Push(new WatchInfo(name, GetRoot()));
         }
 
-        dynamic wInfo = (WatchInfo)m_StackTable.Peek();
+        dynamic wInfo = (WatchInfo)mStackTable.Peek();
         if ((wInfo.IsRunning))
         {
             dynamic newWInfo = new WatchInfo(name, wInfo);
-            m_StackTable.Push(newWInfo);
+            mStackTable.Push(newWInfo);
             newWInfo.RestartWatch(stopAndResetChilds);
         }
         else
@@ -196,17 +173,16 @@ public class PerformanceLogger
     /// Stops the current watch and pops it from the stack.
     /// </summary>
     /// <param name="stopChilds">Flag for stopping all child watches of the current watch.</param>
-    /// <remarks></remarks>
     public void StopWatch(bool stopChilds = false)
     {
         if ((TurnOff))
             return;
 
-        if ((m_StackTable.Count > 0))
+        if ((mStackTable.Count > 0))
         {
-            dynamic wInfo = (WatchInfo)m_StackTable.Peek();
+            dynamic wInfo = (WatchInfo)mStackTable.Peek();
             wInfo.StopWatch(stopChilds);
-            m_StackTable.Pop();
+            mStackTable.Pop();
         }
     }
 
@@ -214,38 +190,34 @@ public class PerformanceLogger
     /// Stops and resets the current watch and pops it from the stack.
     /// </summary>
     /// <param name="resetChilds">Flag for resetting all child watches of the current watch.</param>
-    /// <remarks></remarks>
     public void ResetWatch(bool resetChilds = false)
     {
         if ((TurnOff))
             return;
 
-        if ((m_StackTable.Count > 0))
+        if ((mStackTable.Count > 0))
         {
-            dynamic wInfo = (WatchInfo)m_StackTable.Peek();
+            dynamic wInfo = (WatchInfo)mStackTable.Peek();
             wInfo.ResetWatch(resetChilds);
-            m_StackTable.Pop();
+            mStackTable.Pop();
         }
     }
 
     /// <summary>
     /// Clears all watches.
     /// </summary>
-    /// <remarks></remarks>
     public void ClearAllWatches()
     {
         if ((TurnOff))
             return;
 
-        m_RootWatch = null;
-        m_StackTable.Clear();
+        mRootWatch = null;
+        mStackTable.Clear();
     }
 
     /// <summary>
     /// Saves the logged times.
     /// </summary>
-    /// <param name="fileName"></param>
-    /// <remarks></remarks>
     public void SaveToFile(string fileName)
     {
         if ((TurnOff))
@@ -259,16 +231,15 @@ public class PerformanceLogger
     /// <summary>
     /// Creates a string of the tree of watches.
     /// </summary>
-    /// <returns></returns>
-    /// <remarks></remarks>
+    /// <returns>A string of the tree of watches.</returns>
     public new string ToString()
     {
-        if ((m_RootWatch == null) || TurnOff)
+        if ((mRootWatch == null) || TurnOff)
             return string.Empty;
 
         bool first = true;
         StringBuilder sb = new StringBuilder();
-        foreach (object entry in m_RootWatch.Childs)
+        foreach (object entry in mRootWatch.Childs)
         {
             if (first)
             {
@@ -285,94 +256,86 @@ public class PerformanceLogger
     /// <summary>
     /// Gets the root watch.
     /// </summary>
-    /// <returns></returns>
-    /// <remarks></remarks>
+    /// <returns>The root watch.</returns>
     private WatchInfo GetRoot()
     {
-        if (((m_RootWatch == null)))
+        if (((mRootWatch == null)))
         {
-            m_RootWatch = new WatchInfo(ROOTNAME, null);
+            mRootWatch = new WatchInfo(ROOTNAME, null);
         }
 
-        return m_RootWatch;
+        return mRootWatch;
     }
     #endregion
 
     #region "WatchInfo - Class"
+    /// <summary>
+    /// Class that holds watch informations.
+    /// </summary>
     public class WatchInfo
     {
         #region "Members"
         /// <summary>
         /// Name of the WatchInfo.
         /// </summary>
-        /// <remarks></remarks>
+        private string mName = string.Empty;
 
-        private string m_Name = string.Empty;
         /// <summary>
         /// The Stopwatch of the WatchInfo.
         /// </summary>
-        /// <remarks></remarks>
+        private Stopwatch mWatch = null;
 
-        private Stopwatch m_Watch = null;
         /// <summary>
         /// The parent WatchInfo.
         /// </summary>
-        /// <remarks></remarks>
+        private WatchInfo mParent = null;
 
-        private WatchInfo m_Parent = null;
         /// <summary>
-        /// The list of child WatchInfos.
+        /// The list of child WatchInfo's.
         /// </summary>
-        /// <remarks></remarks>
+        private List<WatchInfo> mChilds = new List<WatchInfo>();
+
         #endregion
-        private List<WatchInfo> m_Childs = new List<WatchInfo>();
 
         #region "Properties"
         /// <summary>
         /// Name of the WatchInfo.
         /// </summary>
-        /// <remarks></remarks>
         public string Name
         {
-            get { return m_Name; }
+            get { return mName; }
         }
 
         /// <summary>
         /// The Stopwatch of the WatchInfo.
         /// </summary>
-        /// <remarks></remarks>
         public Stopwatch Watch
         {
-            get { return m_Watch; }
+            get { return mWatch; }
         }
 
         /// <summary>
         /// The parent WatchInfo.
         /// </summary>
-        /// <remarks></remarks>
         public WatchInfo Parent
         {
-            get { return m_Parent; }
+            get { return mParent; }
         }
 
         /// <summary>
         /// Flag that indicates if the StopWatch is running or not.
         /// </summary>
-        /// <value></value>
-        /// <returns></returns>
-        /// <remarks></remarks>
         public bool IsRunning
         {
-            get { return m_Watch.IsRunning; }
+            get { return mWatch.IsRunning; }
         }
 
         /// <summary>
         /// The list of child WatchInfos.
         /// </summary>
-        /// <remarks></remarks>
         public List<WatchInfo> Childs
         {
-            get { return m_Childs; }
+            get { return mChilds; }
         }
         #endregion
 
@@ -380,7 +343,6 @@ public class PerformanceLogger
         /// <summary>
         /// Default constructor.
         /// </summary>
-        /// <remarks></remarks>
         public WatchInfo()
         {
         }
@@ -388,17 +350,14 @@ public class PerformanceLogger
         /// <summary>
         /// Creates a new instance of the WatchInfo class.
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="parent"></param>
-        /// <remarks></remarks>
         public WatchInfo(string name, WatchInfo parent)
         {
-            m_Name = name;
-            m_Watch = new Stopwatch();
-            m_Parent = parent;
+            mName = name;
+            mWatch = new Stopwatch();
+            mParent = parent;
 
             if (((parent != null)))
-                m_Parent.Childs.Add(this);
+                mParent.Childs.Add(this);
         }
         #endregion
 
@@ -406,17 +365,16 @@ public class PerformanceLogger
         /// <summary>
         /// Starts the StopWatch.
         /// </summary>
-        /// <param name="stopAndResetChilds">Flag for stopping and reseting all child watches of the current watch.</param>
-        /// <remarks></remarks>
+        /// <param name="stopAndResetChilds">Flag for stopping and resetting all child watches of the current watch.</param>
         public void RestartWatch(bool stopAndResetChilds = false)
         {
-            if ((m_Watch.IsRunning))
+            if ((mWatch.IsRunning))
                 StopWatch(stopAndResetChilds);
 
-            m_Watch.Restart();
+            mWatch.Restart();
             if ((stopAndResetChilds))
             {
-                foreach (WatchInfo child in m_Childs)
+                foreach (WatchInfo child in mChilds)
                     child.ResetWatch(stopAndResetChilds);
             }
         }
@@ -425,15 +383,14 @@ public class PerformanceLogger
         /// Stops the StopWatch.
         /// </summary>
         /// <param name="stopChilds">Flag for stopping all child watches of the current watch.</param>
-        /// <remarks></remarks>
         public void StopWatch(bool stopChilds = false)
         {
-            if ((m_Watch.IsRunning))
-                m_Watch.Stop();
+            if ((mWatch.IsRunning))
+                mWatch.Stop();
 
             if ((stopChilds))
             {
-                foreach (WatchInfo child in m_Childs)
+                foreach (WatchInfo child in mChilds)
                     child.StopWatch(stopChilds);
             }
         }
@@ -442,16 +399,15 @@ public class PerformanceLogger
         /// Stops and resets the StopWatch.
         /// </summary>
         /// <param name="resetChilds">Flag for resetting all child watches of the current watch.</param>
-        /// <remarks></remarks>
         public void ResetWatch(bool resetChilds = false)
         {
-            if ((m_Watch.IsRunning))
-                m_Watch.Stop();
+            if ((mWatch.IsRunning))
+                mWatch.Stop();
 
-            m_Watch.Reset();
+            mWatch.Reset();
             if ((resetChilds))
             {
-                foreach (WatchInfo child in m_Childs)
+                foreach (WatchInfo child in mChilds)
                     child.ResetWatch(resetChilds);
             }
         }
@@ -459,8 +415,7 @@ public class PerformanceLogger
         /// <summary>
         /// Creates a string of itself and its child watches.
         /// </summary>
-        /// <returns></returns>
-        /// <remarks></remarks>
+        /// <returns>A string of itself and its child watches.</returns>
         public object ToString(bool withChilds = true, long depth = 0)
         {
             StringBuilder sb = new StringBuilder();
@@ -468,22 +423,22 @@ public class PerformanceLogger
             {
                 sb.Append("  ");
             }
-            sb.Append(m_Name);
-            if ((m_Childs.Count > 0 && withChilds))
+            sb.Append(mName);
+            if ((mChilds.Count > 0 && withChilds))
             {
                 sb.AppendLine();
-                foreach (WatchInfo entry in m_Childs)
+                foreach (WatchInfo entry in mChilds)
                     sb.Append(entry.ToString(withChilds, depth + 1));
 
                 for (long i = 1; i <= depth; i++)
                     sb.Append("  ");
 
-                dynamic temp = string.Format("{0} (end) : {1}", m_Name, m_Watch.Elapsed.ToString());
+                dynamic temp = string.Format("{0} (end) : {1}", mName, mWatch.Elapsed.ToString());
                 sb.AppendLine(temp);
             }
             else
             {
-                dynamic temp = string.Format(" : {0}", m_Watch.Elapsed.ToString());
+                dynamic temp = string.Format(" : {0}", mWatch.Elapsed.ToString());
                 sb.AppendLine(temp);
             }
             return sb.ToString();
@@ -494,105 +449,105 @@ public class PerformanceLogger
 }
 
 
-///'''''''''''''''
-///'' SAMPLE '''''
-///'''''''''''''''
-//Sub Main()
-//    PerformanceLogger.Start("FuncCall")
-//    FuncCall()
-//    PerformanceLogger.Stop()
+/// '''''''''''''''
+/// '' SAMPLE '''''
+/// '''''''''''''''
+////Sub Main()
+////    PerformanceLogger.Start("FuncCall")
+////    FuncCall()
+////    PerformanceLogger.Stop()
 
-//    PerformanceLogger.Start("FuncCall")
-//    FuncCall()
-//    PerformanceLogger.Stop()
+////    PerformanceLogger.Start("FuncCall")
+////    FuncCall()
+////    PerformanceLogger.Stop()
 
-//    PerformanceLogger.Start("FuncCall1")
-//    FuncCall1()
-//    PerformanceLogger.Stop()
+////    PerformanceLogger.Start("FuncCall1")
+////    FuncCall1()
+////    PerformanceLogger.Stop()
 
-//    PerformanceLogger.Start("FuncCall2")
-//    FuncCall2()
-//    PerformanceLogger.Stop()
+////    PerformanceLogger.Start("FuncCall2")
+////    FuncCall2()
+////    PerformanceLogger.Stop()
 
-//    PerformanceLogger.Start("FuncCall3")
-//    FuncCall3()
-//    PerformanceLogger.Stop()
+////    PerformanceLogger.Start("FuncCall3")
+////    FuncCall3()
+////    PerformanceLogger.Stop()
 
-//    'TimeLogger.Save(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments))
+////    'TimeLogger.Save(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments))
 
-//    Console.Write(PerformanceLogger.ToString())
-//    Console.WriteLine("-------")
-//    Console.WriteLine("Press any key")
-//    Console.ReadKey()
-//End Sub
+////    Console.Write(PerformanceLogger.ToString())
+////    Console.WriteLine("-------")
+////    Console.WriteLine("Press any key")
+////    Console.ReadKey()
+////End Sub
 
-//#Region "Functions"
-//Sub FuncCall()
-//    PerformanceLogger.Start("For-Schleife")
-//    Dim a As Integer = 0
-//    For i = 0 To 10
-//        a += 1
-//    Next
-//    PerformanceLogger.Stop()
-//End Sub
+////#Region "Functions"
+////Sub FuncCall()
+////    PerformanceLogger.Start("For-Schleife")
+////    Dim a As Integer = 0
+////    For i = 0 To 10
+////        a += 1
+////    Next
+////    PerformanceLogger.Stop()
+////End Sub
 
-//Sub FuncCall1()
-//    PerformanceLogger.Start("FuncCall")
-//    FuncCall()
-//    PerformanceLogger.Stop()
-//End Sub
+////Sub FuncCall1()
+////    PerformanceLogger.Start("FuncCall")
+////    FuncCall()
+////    PerformanceLogger.Stop()
+////End Sub
 
-//Sub FuncCall2()
-//    PerformanceLogger.Start("FuncCall1")
-//    FuncCall1()
-//    PerformanceLogger.Stop()
-//End Sub
+////Sub FuncCall2()
+////    PerformanceLogger.Start("FuncCall1")
+////    FuncCall1()
+////    PerformanceLogger.Stop()
+////End Sub
 
-//Sub FuncCall3()
-//    PerformanceLogger.Start("FuncCall2")
-//    FuncCall2()
-//    PerformanceLogger.Stop()
-//    PerformanceLogger.Start("FuncCall2")
-//    FuncCall2()
-//    PerformanceLogger.Stop()
-//End Sub
-//#End Region
+////Sub FuncCall3()
+////    PerformanceLogger.Start("FuncCall2")
+////    FuncCall2()
+////    PerformanceLogger.Stop()
+////    PerformanceLogger.Start("FuncCall2")
+////    FuncCall2()
+////    PerformanceLogger.Stop()
+////End Sub
+////#End Region
 
-///''''''''''''''''''''''''''''
-///' OUTPUT OF SAMPLE CODE ''''
-///''''''''''''''''''''''''''''
-//FuncCall
-//  For-Schleife : 00:00:00.0007416
-//FuncCall (end) : 00:00:00.0009061
-//FuncCall
-//  For-Schleife : 00:00:00.0000014
-//FuncCall (end) : 00:00:00.0000053
-//FuncCall1
-//  FuncCall
-//    For-Schleife : 00:00:00.0000020
-//  FuncCall (end) : 00:00:00.0000064
-//FuncCall1 (end) : 00:00:00.0001208
-//FuncCall2
-//  FuncCall1
-//    FuncCall
-//      For-Schleife : 00:00:00.0000030
-//    FuncCall (end) : 00:00:00.0000061
-//  FuncCall1 (end) : 00:00:00.0000100
-//FuncCall2 (end) : 00:00:00.0001690
-//FuncCall3
-//  FuncCall2
-//    FuncCall1
-//      FuncCall
-//        For-Schleife : 00:00:00.0000021
-//      FuncCall (end) : 00:00:00.0000067
-//    FuncCall1 (end) : 00:00:00.0000109
-//  FuncCall2 (end) : 00:00:00.0000159
-//  FuncCall2
-//    FuncCall1
-//      FuncCall
-//        For-Schleife : 00:00:00.0000025
-//      FuncCall (end) : 00:00:00.0000071
-//    FuncCall1 (end) : 00:00:00.0000118
-//  FuncCall2 (end) : 00:00:00.0000166
-//FuncCall3 (end) : 00:00:00.0001502
+/// ''''''''''''''''''''''''''''
+/// ' OUTPUT OF SAMPLE CODE ''''
+/// ''''''''''''''''''''''''''''
+////FuncCall
+////  For-Schleife : 00:00:00.0007416
+////FuncCall (end) : 00:00:00.0009061
+////FuncCall
+////  For-Schleife : 00:00:00.0000014
+////FuncCall (end) : 00:00:00.0000053
+////FuncCall1
+////  FuncCall
+////    For-Schleife : 00:00:00.0000020
+////  FuncCall (end) : 00:00:00.0000064
+////FuncCall1 (end) : 00:00:00.0001208
+////FuncCall2
+////  FuncCall1
+////    FuncCall
+////      For-Schleife : 00:00:00.0000030
+////    FuncCall (end) : 00:00:00.0000061
+////  FuncCall1 (end) : 00:00:00.0000100
+////FuncCall2 (end) : 00:00:00.0001690
+////FuncCall3
+////  FuncCall2
+////    FuncCall1
+////      FuncCall
+////        For-Schleife : 00:00:00.0000021
+////      FuncCall (end) : 00:00:00.0000067
+////    FuncCall1 (end) : 00:00:00.0000109
+////  FuncCall2 (end) : 00:00:00.0000159
+////  FuncCall2
+////    FuncCall1
+////      FuncCall
+////        For-Schleife : 00:00:00.0000025
+////      FuncCall (end) : 00:00:00.0000071
+////    FuncCall1 (end) : 00:00:00.0000118
+////  FuncCall2 (end) : 00:00:00.0000166
+////FuncCall3 (end) : 00:00:00.0001502
 }

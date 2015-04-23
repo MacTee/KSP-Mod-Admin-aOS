@@ -1,6 +1,8 @@
-﻿
-namespace KSPModAdmin.Core.Utils
+﻿namespace KSPModAdmin.Core.Utils
 {
+    /// <summary>
+    /// Enumerations for all virtual keys.
+    /// </summary>
     public enum VirtualKey
     {
         VK_LBUTTON = 0x01, // Left mouse button
@@ -15,19 +17,19 @@ namespace KSPModAdmin.Core.Utils
 
         VK_XBUTTON2 = 0x06, // X2 mouse button
 
-        //- = 0x07, //Undefined
+        ////- = 0x07, //Undefined
 
         VK_BACK = 0x08, // BACKSPACE key
 
         VK_TAB = 0x09, // TAB key
 
-        //- = 0x0A-0B, // Reserved
+        ////- = 0x0A-0B, // Reserved
 
         VK_CLEAR = 0x0C, // CLEAR key
 
         VK_RETURN = 0x0D, // ENTER key
 
-        //- = 0x0E-0F, // Undefined
+        ////- = 0x0E-0F, // Undefined
 
         VK_SHIFT = 0x10, // SHIFT key
 
@@ -45,7 +47,7 @@ namespace KSPModAdmin.Core.Utils
 
         VK_HANGUL = 0x15, // IME Hangul mode
 
-        //- = 0x16, // Undefined
+        ////- = 0x16, // Undefined
 
         VK_JUNJA = 0x17, // IME Junja mode
 
@@ -55,7 +57,7 @@ namespace KSPModAdmin.Core.Utils
 
         VK_KANJI = 0x19, // IME Kanji mode
 
-        //- = 0x1A, // Undefined
+        ////- = 0x1A, // Undefined
 
         VK_ESCAPE = 0x1B, // ESC key
 
@@ -119,7 +121,7 @@ namespace KSPModAdmin.Core.Utils
         
         VK_9 = 0x39, // 9 key
 
-        //- = 0x3A-40, // Undefined
+        ////- = 0x3A-40, // Undefined
         
         VK_A = 0x41, // A key
         
@@ -179,7 +181,7 @@ namespace KSPModAdmin.Core.Utils
 
         VK_APPS = 0x5D, // Applications key (Natural keyboard)
 
-        //- = 0x5E, // Reserved
+        ////- = 0x5E, // Reserved
 
         VK_SLEEP = 0x5F, // Computer Sleep key
 
@@ -263,15 +265,15 @@ namespace KSPModAdmin.Core.Utils
 
         VK_F24 = 0x87, // F24 key
 
-        //- = 0x88-8F, // Unassigned
+        ////- = 0x88-8F, // Unassigned
 
         VK_NUMLOCK = 0x90, // NUM LOCK key
 
         VK_SCROLL = 0x91, // SCROLL LOCK key
 
-        //- = 0x92-96, // OEM specific
+        ////- = 0x92-96, // OEM specific
 
-        //- = 0x97-9F, // Unassigned
+        ////- = 0x97-9F, // Unassigned
 
         VK_LSHIFT = 0xA0, // Left SHIFT key
 
@@ -321,7 +323,7 @@ namespace KSPModAdmin.Core.Utils
 
         VK_LAUNCH_APP2 = 0xB7, // Start Application 2 key
 
-        //- = 0xB8-B9, // Reserved
+        ////- = 0xB8-B9, // Reserved
 
         VK_OEM_1 = 0xBA, // Used for miscellaneous characters, it can vary by keyboard. For the US standard keyboard, the ',:' key
 
@@ -337,9 +339,9 @@ namespace KSPModAdmin.Core.Utils
 
         VK_OEM_3 = 0xC0, // Used for miscellaneous characters, it can vary by keyboard. For the US standard keyboard, the '`~' key
 
-        //- = 0xC1-D7, // Reserved
+        ////- = 0xC1-D7, // Reserved
 
-        //- = 0xD8-DA, // Unassigned
+        ////- = 0xD8-DA, // Unassigned
 
         VK_OEM_4 = 0xDB, // Used for miscellaneous characters, it can vary by keyboard. For the US standard keyboard, the '[{' key
 
@@ -351,23 +353,23 @@ namespace KSPModAdmin.Core.Utils
 
         VK_OEM_8 = 0xDF, // Used for miscellaneous characters, it can vary by keyboard.
 
-        //- = 0xE0, // Reserved
+        ////- = 0xE0, // Reserved
 
-        //- = 0xE1, // OEM specific
+        ////- = 0xE1, // OEM specific
 
         VK_OEM_102 = 0xE2, // Either the angle bracket key or the backslash key on the RT 102-key keyboard
 
-        //- = 0xE3-E4, // OEM specific
+        ////- = 0xE3-E4, // OEM specific
 
         VK_PROCESSKEY = 0xE5, // IME PROCESS key
 
-        //- = 0xE6, // OEM specific
+        ////- = 0xE6, // OEM specific
 
         VK_PACKET = 0xE7, // Used to pass Unicode characters as if they were keystrokes. The VK_PACKET key is the low word of a 32-bit Virtual Key value used for non-keyboard input methods. For more information, see Remark in KEYBDINPUT, SendInput, WM_KEYDOWN, and WM_KEYUP
 
-        //- = 0xE8, // Unassigned
+        ////- = 0xE8, // Unassigned
 
-        //- = 0xE9-F5, // OEM specific
+        ////- = 0xE9-F5, // OEM specific
 
         VK_ATTN = 0xF6, // Attn key
 

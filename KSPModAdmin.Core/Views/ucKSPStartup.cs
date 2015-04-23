@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -7,24 +8,25 @@ using KSPModAdmin.Core.Utils;
 
 namespace KSPModAdmin.Core.Views
 {
+    [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Reviewed. Suppression is OK here.")]
     public partial class ucKSPStartup : UserControl
     {
         #region Constants
 
-        const string PARAM_POPUPWINDOW = "-popupwindow";
-        const string PARAM_FORCE_OPENGL = "-force-opengl";
-        const string PARAM_0_EQUALS_1 = "{0} = {1}";
-        const string PARAM_0_X_1 = "{0}x{1}";
-        const string PARAM_SETTINGS_CFG = "settings.cfg";
-        const string EQUALS = "=";
-        const string TRUE = "true";
+        private const string PARAM_POPUPWINDOW = "-popupwindow";
+        private const string PARAM_FORCE_OPENGL = "-force-opengl";
+        private const string PARAM_0_EQUALS_1 = "{0} = {1}";
+        private const string PARAM_0_X_1 = "{0}x{1}";
+        private const string PARAM_SETTINGS_CFG = "settings.cfg";
+        private const string EQUALS = "=";
+        private const string TRUE = "true";
 
         #endregion
 
         #region Properties
 
         /// <summary>
-        /// Flag to determine if the KPS should be started with a BorderLess windows.
+        /// Flag to determine if KPS should be started with a BorderLess windows.
         /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -34,6 +36,9 @@ namespace KSPModAdmin.Core.Views
             set { cbBorderlessWin.Checked = value; }
         }
 
+        /// <summary>
+        /// Gets or sets the list of available screen resolutions.
+        /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public string[] ScreenResolutions
@@ -50,6 +55,9 @@ namespace KSPModAdmin.Core.Views
             }
         }
 
+        /// <summary>
+        /// Gets or sets the selected screen resolution.
+        /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public string ScreenResolution
@@ -64,14 +72,23 @@ namespace KSPModAdmin.Core.Views
             set { cbResolutions.SelectedItem = value; }
         }
 
+        /// <summary>
+        /// Gets or sets the checked state of the full screen flag.
+        /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public bool Fullscreen { get { return rbFullscreen.Checked; } set { rbFullscreen.Checked = value; rbWindowed.Checked = !value; } }
 
+        /// <summary>
+        /// Gets or sets the checked state of the Use64Bit flag.
+        /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public bool Use64Bit { get { return cbUse64Bit.Checked; } set { cbUse64Bit.Checked = value; } }
 
+        /// <summary>
+        /// Gets or sets the checked state of the ForceOpenGL flag.
+        /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public bool ForceOpenGL { get { return cbForceOpenGL.Checked; } set { cbForceOpenGL.Checked = value; } }
@@ -80,6 +97,9 @@ namespace KSPModAdmin.Core.Views
 
         #region Constructors
 
+        /// <summary>
+        /// Creates a new instance of the ucKSPStartup class.
+        /// </summary>
         public ucKSPStartup()
         {
             InitializeComponent();
@@ -186,24 +206,24 @@ namespace KSPModAdmin.Core.Views
                 if (ScreenResolution == null)
                     return;
 
-				int index1 = -1;
-				int index2 = -1;
-				string temp = string.Empty;
+                int index1 = -1;
+                int index2 = -1;
+                string temp = string.Empty;
                 string allText = File.ReadAllText(settingsPath);
                 string[] size = ScreenResolution.Split("x");
-				if (size.Length == 2)
-				{
-					index1 = allText.IndexOf(Constants.SCREEN_WIDTH);
-					index2 = allText.IndexOf(Environment.NewLine, index1);
-					temp = allText.Substring(index1, index2 - index1);
-					allText = allText.Replace(temp, string.Format(PARAM_0_EQUALS_1, Constants.SCREEN_WIDTH, size[0]));
-					
-					index1 = allText.IndexOf(Constants.SCREEN_HEIGHT);
-					index2 = allText.IndexOf(Environment.NewLine, index1);
-					temp = allText.Substring(index1, index2 - index1);
-					allText = allText.Replace(temp, string.Format(PARAM_0_EQUALS_1, Constants.SCREEN_HEIGHT, size[1]));
-				}
-				
+                if (size.Length == 2)
+                {
+                    index1 = allText.IndexOf(Constants.SCREEN_WIDTH);
+                    index2 = allText.IndexOf(Environment.NewLine, index1);
+                    temp = allText.Substring(index1, index2 - index1);
+                    allText = allText.Replace(temp, string.Format(PARAM_0_EQUALS_1, Constants.SCREEN_WIDTH, size[0]));
+                    
+                    index1 = allText.IndexOf(Constants.SCREEN_HEIGHT);
+                    index2 = allText.IndexOf(Environment.NewLine, index1);
+                    temp = allText.Substring(index1, index2 - index1);
+                    allText = allText.Replace(temp, string.Format(PARAM_0_EQUALS_1, Constants.SCREEN_HEIGHT, size[1]));
+                }
+                
                 index1 = allText.IndexOf(Constants.FULLSCREEN);
                 index2 = allText.IndexOf(Environment.NewLine, index1);
                 temp = allText.Substring(index1, index2 - index1);
@@ -227,7 +247,7 @@ namespace KSPModAdmin.Core.Views
                 index1 = fileContent.IndexOf(Constants.SCREEN_HEIGHT) + Constants.SCREEN_HEIGHT.Length;
                 index2 = fileContent.IndexOf(Environment.NewLine, index1);
                 string height = fileContent.Substring(index1, index2 - index1).Replace(EQUALS, string.Empty).Trim();
-                ScreenResolution = String.Format(PARAM_0_X_1, width, height);
+                ScreenResolution = string.Format(PARAM_0_X_1, width, height);
                 index1 = fileContent.IndexOf(Constants.FULLSCREEN) + Constants.FULLSCREEN.Length;
                 index2 = fileContent.IndexOf(Environment.NewLine, index1);
                 Fullscreen = fileContent.Substring(index1, index2 - index1).Replace(EQUALS, string.Empty).Trim().ToLower() == TRUE;

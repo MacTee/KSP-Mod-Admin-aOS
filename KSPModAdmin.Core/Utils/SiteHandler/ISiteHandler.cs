@@ -3,6 +3,9 @@ using KSPModAdmin.Core.Model;
 
 namespace KSPModAdmin.Core.Utils
 {
+    /// <summary>
+    /// Interface for SiteHandlers.
+    /// </summary>
     public interface ISiteHandler
     {
         /// <summary>
@@ -33,7 +36,7 @@ namespace KSPModAdmin.Core.Utils
         /// <param name="modName">The name for the mod.</param>
         /// <param name="install">Flag to determine if the mod should be installed after adding.</param>
         /// <param name="downloadProgressHandler">Callback function for download progress.</param>
-        /// <return>The root node of the added mod, or null.</return>
+        /// <returns>The root node of the added mod, or null.</returns>
         ModNode HandleAdd(string url, string modName, bool install, DownloadProgressChangedEventHandler downloadProgressHandler = null);
 
         /// <summary>

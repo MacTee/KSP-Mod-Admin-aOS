@@ -1,15 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Windows.Forms;
 using KSPModAdmin.Core.Model;
 
 namespace KSPModAdmin.Core.Views
 {
+    [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Reviewed. Suppression is OK here.")]
     public partial class frmCopyModInfo : frmBase
     {
         #region Properties
 
+        /// <summary>
+        /// The source mod.
+        /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public ModNode SourceMod 
         {
@@ -25,6 +29,9 @@ namespace KSPModAdmin.Core.Views
             }
         }
 
+        /// <summary>
+        /// The destination mod.
+        /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public ModNode DestMod 
         {
@@ -34,6 +41,9 @@ namespace KSPModAdmin.Core.Views
             }
         }
 
+        /// <summary>
+        /// Array of all mods that could be copied to.
+        /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public ModNode[] Mods
         {
@@ -56,6 +66,9 @@ namespace KSPModAdmin.Core.Views
         #endregion
 
 
+        /// <summary>
+        /// Creates a new instance of the frmCopyModInfo class.
+        /// </summary>
         public frmCopyModInfo()
         {
             InitializeComponent();

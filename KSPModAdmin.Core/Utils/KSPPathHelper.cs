@@ -1,10 +1,9 @@
-﻿using System.Reflection;
-using KSPModAdmin.Core.Controller;
-using System;
+﻿using System;
 using System.IO;
 using System.Windows.Forms;
+using System.Reflection;
+using KSPModAdmin.Core.Controller;
 using KSPModAdmin.Core.Model;
-using KSPModAdmin.Core.Utils.Logging;
 
 namespace KSPModAdmin.Core.Utils
 {
@@ -44,22 +43,22 @@ namespace KSPModAdmin.Core.Utils
             {
                 if (string.IsNullOrEmpty(kspPath))
                     return false;
-                //if (!Directory.Exists(Path.Combine(kspPath, Constants.PARTS)))
-                //    return false;
-                //if (!Directory.Exists(Path.Combine(kspPath, Constants.KSPDATA)))
-                //    return false;
-                //if (!Directory.Exists(Path.Combine(kspPath, Constants.PLUGINS)))
-                //    return false;
-                //if (!Directory.Exists(Path.Combine(kspPath, Constants.PLUGINDATA)))
-                //    return false;
-                //if (!Directory.Exists(Path.Combine(kspPath, Constants.GAMEDATA)))
-                //    return false;
-                //if (!Directory.Exists(Path.Combine(kspPath, Constants.RESOURCES)))
-                //    return false;
-                //if (!Directory.Exists(Path.Combine(kspPath, Constants.INTERNALS)))
-                //    return false;
-                //if (!Directory.Exists(Path.Combine(kspPath, Constants.SHIPS)))
-                //    return false;
+                ////if (!Directory.Exists(Path.Combine(kspPath, Constants.PARTS)))
+                ////    return false;
+                ////if (!Directory.Exists(Path.Combine(kspPath, Constants.KSPDATA)))
+                ////    return false;
+                ////if (!Directory.Exists(Path.Combine(kspPath, Constants.PLUGINS)))
+                ////    return false;
+                ////if (!Directory.Exists(Path.Combine(kspPath, Constants.PLUGINDATA)))
+                ////    return false;
+                ////if (!Directory.Exists(Path.Combine(kspPath, Constants.GAMEDATA)))
+                ////    return false;
+                ////if (!Directory.Exists(Path.Combine(kspPath, Constants.RESOURCES)))
+                ////    return false;
+                ////if (!Directory.Exists(Path.Combine(kspPath, Constants.INTERNALS)))
+                ////    return false;
+                ////if (!Directory.Exists(Path.Combine(kspPath, Constants.SHIPS)))
+                ////    return false;
                 if (!Directory.Exists(kspPath)) 
                     return false;
                 if (!File.Exists(Path.Combine(kspPath, Constants.KSP_EXE)) &&

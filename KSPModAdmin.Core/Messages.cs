@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using KSPModAdmin.Core.Utils.Localization;
 
 namespace KSPModAdmin.Core
 {
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class Messages
     {
         public static string MSG_CURRENT_VERSION_0
@@ -1917,6 +1919,5 @@ namespace KSPModAdmin.Core
         }
 
         private const string DEFAULT_MSG_NO_BINARY_DOWNLOAD_FOUND_AT_0 = "No binary download found at \"{0}\"!";
-		
     }
 }

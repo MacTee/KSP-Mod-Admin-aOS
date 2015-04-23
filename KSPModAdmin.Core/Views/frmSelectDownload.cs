@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
 using System.Windows.Forms;
-using KSPModAdmin.Core.Controller;
 using KSPModAdmin.Core.Utils;
 
 namespace KSPModAdmin.Core.Views
 {
+    [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Reviewed. Suppression is OK here.")]
     public partial class frmSelectDownload : frmBase
     {
+        /// <summary>
+        /// List of links that could be selected.
+        /// </summary>
         public List<DownloadInfo> Links
         {
             get
@@ -33,6 +36,9 @@ namespace KSPModAdmin.Core.Views
             }
         }
 
+        /// <summary>
+        /// The selected link.
+        /// </summary>
         public DownloadInfo SelectedLink
         {
             get
@@ -56,12 +62,17 @@ namespace KSPModAdmin.Core.Views
             }
         }
 
-
+        /// <summary>
+        /// Creates a new instance of the frmSelectDownload class.
+        /// </summary>
         public frmSelectDownload()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Creates a new instance of the frmSelectDownload class.
+        /// </summary>
         public frmSelectDownload(List<DownloadInfo> links)
         {
             InitializeComponent();
@@ -69,6 +80,9 @@ namespace KSPModAdmin.Core.Views
             Links = links;
         }
 
+        /// <summary>
+        /// Creates a new instance of the frmSelectDownload class.
+        /// </summary>
         public frmSelectDownload(List<DownloadInfo> links, DownloadInfo selectedLink)
         {
             InitializeComponent();
@@ -96,7 +110,10 @@ namespace KSPModAdmin.Core.Views
             Close();
         }
 
-
+        /// <summary>
+        /// Gets the KSPDialogResult.
+        /// </summary>
+        /// <returns>The KSPDialogResult.</returns>
         public override KSPDialogResult GetKSPDialogResults()
         {
             return new KSPDialogResult(DialogResult, SelectedLink);

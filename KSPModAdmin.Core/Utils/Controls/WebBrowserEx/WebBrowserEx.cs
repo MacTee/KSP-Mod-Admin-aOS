@@ -5,6 +5,9 @@ using System.Windows.Forms;
 
 namespace KSPModAdmin.Core.Utils.Controls
 {
+    /// <summary>
+    /// Extended WebBrowser control.
+    /// </summary>
     public class WebBrowserEx : WebBrowser
     {
         /// <summary>
@@ -13,9 +16,9 @@ namespace KSPModAdmin.Core.Utils.Controls
         public event EventHandler<FileDownloadEventArgs> FileDownloading;
 
         /// <summary>
-        /// The manager of action keys that handels our key strokes.
+        /// The manager of action keys that handles our key strokes.
         /// </summary>
-        private ActionKeyManager m_ActionKeyManager = new ActionKeyManager();
+        private ActionKeyManager mActionKeyManager = new ActionKeyManager();
 
         #region Overrides
 
@@ -29,7 +32,7 @@ namespace KSPModAdmin.Core.Utils.Controls
         protected override WebBrowserSiteBase CreateWebBrowserSiteBase()
         {
             DownloadWebBrowserSite downloadWebBrowserSite = new DownloadWebBrowserSite(this);
-            downloadWebBrowserSite.FileDownloading += new EventHandler<FileDownloadEventArgs>(downloadManager_FileDownloading);
+            downloadWebBrowserSite.FileDownloading += new EventHandler<FileDownloadEventArgs>(DownloadManager_FileDownloading);
             return downloadWebBrowserSite;
         }
 
@@ -38,16 +41,14 @@ namespace KSPModAdmin.Core.Utils.Controls
         /// <summary>
         /// Callback of IDownloadManager, is called when browser tries to download a file.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        public void downloadManager_FileDownloading(object sender, FileDownloadEventArgs e)
+        public void DownloadManager_FileDownloading(object sender, FileDownloadEventArgs e)
         {
             if (FileDownloading != null)
                 FileDownloading(sender, e);
         }
 
         /// <summary>
-        /// COnstants
+        /// Constants
         /// </summary>
         public static class Constants
         {
@@ -55,10 +56,12 @@ namespace KSPModAdmin.Core.Utils.Controls
             /// Ok
             /// </summary>
             public const int S_OK = 0;
+
             /// <summary>
             /// No interface
             /// </summary>
             public const int E_NOINTERFACE = unchecked((int)0x80004002);
+
             /// <summary>
             /// Default action
             /// </summary>
@@ -96,7 +99,7 @@ namespace KSPModAdmin.Core.Utils.Controls
             /// </summary>
             public event EventHandler<FileDownloadEventArgs> FileDownloading;
 
-            private readonly DownloadManager m_DownloadManager;
+            private readonly DownloadManager mDownloadManager;
 
             /// <summary>
             /// Constructor
@@ -105,8 +108,8 @@ namespace KSPModAdmin.Core.Utils.Controls
             public DownloadWebBrowserSite(WebBrowser host)
                 : base(host)
             {
-                m_DownloadManager = new DownloadManager();
-                m_DownloadManager.FileDownloading += new EventHandler<FileDownloadEventArgs>(downloadManager_FileDownloading);
+                mDownloadManager = new DownloadManager();
+                mDownloadManager.FileDownloading += new EventHandler<FileDownloadEventArgs>(DownloadManager_FileDownloading);
             }
 
             #region Implementation of IServiceProvider
@@ -115,15 +118,13 @@ namespace KSPModAdmin.Core.Utils.Controls
             /// Queries for a service
             /// </summary>
             /// <param name="guidService">the service GUID</param>
-            /// <param name="riid"></param>
-            /// <param name="ppvObject"></param>
-            /// <returns></returns>
+            /// <returns>unknown</returns>
             public int QueryService(ref Guid guidService, ref Guid riid, out IntPtr ppvObject)
             {
                 Debug.WriteLine("MyBrowser: " + guidService.ToString());
                 if ((guidService == Constants.IID_IDownloadManager && riid == Constants.IID_IDownloadManager))
                 {
-                    ppvObject = Marshal.GetComInterfaceForObject(m_DownloadManager, typeof(IDownloadManager));
+                    ppvObject = Marshal.GetComInterfaceForObject(mDownloadManager, typeof(IDownloadManager));
                     return Constants.S_OK;
                 }
                 ppvObject = IntPtr.Zero;
@@ -132,7 +133,10 @@ namespace KSPModAdmin.Core.Utils.Controls
 
             #endregion
 
-            public void downloadManager_FileDownloading(object sender, FileDownloadEventArgs e)
+            /// <summary>
+            /// Raises the FileDownloading event.
+            /// </summary>
+            public void DownloadManager_FileDownloading(object sender, FileDownloadEventArgs e)
             {
                 if (FileDownloading != null)
                     FileDownloading(sender, e);

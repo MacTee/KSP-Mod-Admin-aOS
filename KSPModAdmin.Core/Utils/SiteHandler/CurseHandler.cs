@@ -3,11 +3,14 @@ using KSPModAdmin.Core.Model;
 
 namespace KSPModAdmin.Core.Utils
 {
+    /// <summary>
+    /// Handles the GetModInfo and Mod download for mods on Cures.
+    /// </summary>
     public class CurseHandler : ISiteHandler
     {
-        private const string cName = "Curse";
-        private const string cURL = "http://www.curse.com/ksp-mods/kerbal/";
-        private const string cURL2 = "http://curse.com/ksp-mods/kerbal/";
+        private const string NAME = "Curse";
+        private const string URL = "http://www.curse.com/ksp-mods/kerbal/";
+        private const string URL2 = "http://curse.com/ksp-mods/kerbal/";
 
 
         /// <summary>
@@ -16,7 +19,7 @@ namespace KSPModAdmin.Core.Utils
         /// <returns>The Name of the ISiteHandler.</returns>
         public string Name
         {
-            get { return cName; }
+            get { return NAME; }
         }
 
 
@@ -27,7 +30,7 @@ namespace KSPModAdmin.Core.Utils
         /// <returns>True if the passed URL is a valid CurseForge URL, otherwise false.</returns>
         public bool IsValidURL(string url)
         {
-            return (url.StartsWith(cURL) || url.StartsWith(cURL2));
+            return (url.StartsWith(URL) || url.StartsWith(URL2));
         }
 
         /// <summary>
@@ -49,12 +52,12 @@ namespace KSPModAdmin.Core.Utils
         /// <param name="modName">The name for the mod.</param>
         /// <param name="install">Flag to determine if the mod should be installed after adding.</param>
         /// <param name="downloadProgressHandler">Callback function for download progress.</param>
-        /// <return>The root node of the added mod, or null.</return>
+        /// <returns>The root node of the added mod, or null.</returns>
         public ModNode HandleAdd(string url, string modName, bool install, DownloadProgressChangedEventHandler downloadProgressHandler = null)
         {
             ISiteHandler curseForge = SiteHandlerManager.GetSiteHandlerByName("CurseForge");
             ModNode modNode = curseForge.HandleAdd(GetDownloadURL(url), modName, install, downloadProgressHandler);
-            //modNode.VersionControllerName = Name;
+            ////modNode.VersionControllerName = Name;
 
             return modNode;
         }
@@ -114,7 +117,7 @@ namespace KSPModAdmin.Core.Utils
         /// <returns>The parsed download URL from site.</returns>
         private string GetDownloadURL(string url, ref string filename)
         {
-            string siteContent = www.Load(url);
+            string siteContent = Www.Load(url);
 
             int index1 = siteContent.IndexOf("<li class=\"newest-file\">Newest File: ") + 37;
             if (index1 < 0)

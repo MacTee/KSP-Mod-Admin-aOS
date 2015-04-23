@@ -3,26 +3,26 @@ using System.Drawing;
 
 namespace KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree
 {
-	public class DropNodeValidatingEventArgs: EventArgs
-	{
-		Point _point;
-		TreeNodeAdv _node;
+    public class DropNodeValidatingEventArgs : EventArgs
+    {
+        Point _point;
+        TreeNodeAdv _node;
 
-		public DropNodeValidatingEventArgs(Point point, TreeNodeAdv node)
-		{
-			_point = point;
-			_node = node;
-		}
+        public DropNodeValidatingEventArgs(Point point, TreeNodeAdv node)
+        {
+            _point = point;
+            _node = node;
+        }
 
-		public Point Point
-		{
-			get { return _point; }
-		}
+        public Point Point
+        {
+            get { return _point; }
+        }
 
-		public TreeNodeAdv Node
-		{
-			get { return _node; }
-			set { _node = value; }
-		}
-	}
+        public TreeNodeAdv Node
+        {
+            get { return _node; }
+            set { _node = value; }
+        }
+    }
 }

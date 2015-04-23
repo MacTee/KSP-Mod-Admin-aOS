@@ -2,15 +2,42 @@
 
 namespace KSPModAdmin.Core
 {
-    public delegate void AsyncTaskStartedHandler(object sender);
-    public delegate void AsyncTaskDoneHandler(object sender);
-    public delegate void StartingKSPHandler(object sender);
-    public delegate void LanguageChangedHandler(object sender);
-    public delegate void KSPPathChangingHandler(string oldKSPPath, string newKSPPath);
-    public delegate void KSPPathChangedHandler(string kspPath);
+    #region Delegates
 
     /// <summary>
-    /// The EventDitributor is the event central of KSP MA.
+    /// Delegate for the AsyncTaskStart event.
+    /// </summary>
+    public delegate void AsyncTaskStartedHandler(object sender);
+
+    /// <summary>
+    /// Delegate for the AsyncTaskDone event.
+    /// </summary>
+    public delegate void AsyncTaskDoneHandler(object sender);
+
+    /// <summary>
+    /// Delegate for the StartingKSP event.
+    /// </summary>
+    public delegate void StartingKSPHandler(object sender);
+
+    /// <summary>
+    /// Delegate for the LanguageChanged event.
+    /// </summary>
+    public delegate void LanguageChangedHandler(object sender);
+
+    /// <summary>
+    /// Delegate for the KSPPathChanging event.
+    /// </summary>
+    public delegate void KSPPathChangingHandler(string oldKSPPath, string newKSPPath);
+
+    /// <summary>
+    /// Delegate for the KSPPathChanged event.
+    /// </summary>
+    public delegate void KSPPathChangedHandler(string kspPath);
+
+    #endregion
+
+    /// <summary>
+    /// The EventDistributor is the event central of KSP MA.
     /// It contains all relevant events that should be distributed app wide.
     /// Like KSPRootChanged or start/finish of critical tasks.
     /// Hook your class to the events your plugin needs.
@@ -69,7 +96,6 @@ namespace KSPModAdmin.Core
         /// Invokes the AsyncTaskStarted event to inform other controller of the start of a critical task.
         /// All other controllers should disable their controls.
         /// </summary>
-        /// <param name="sender"></param>
         public static void InvokeAsyncTaskStarted(object sender)
         {
             if (AsyncTaskStarted != null)
@@ -80,7 +106,6 @@ namespace KSPModAdmin.Core
         /// Invokes the AsyncTaskDone event to inform other controller that the critical task has finished.
         /// The controller could enable their controls again.
         /// </summary>
-        /// <param name="sender"></param>
         public static void InvokeAsyncTaskDone(object sender)
         {
             if (AsyncTaskDone != null)

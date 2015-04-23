@@ -8,13 +8,16 @@ using SharpCompress.Common;
 
 namespace KSPModAdmin.Core.Utils
 {
+    /// <summary>
+    /// Class to create zip archives of mods and crafts.
+    /// </summary>
     public class ModZipCreator
     {
         #region Constants
 
-        const string TYPE = "type = ";
-        const string SHIPSPH = "Ships\\SPH\\";
-        const string SHIPVAB = "Ships\\VAB\\";
+        private const string TYPE = "type = ";
+        private const string SHIPSPH = "Ships\\SPH\\";
+        private const string SHIPVAB = "Ships\\VAB\\";
 
         #endregion
 
@@ -22,6 +25,7 @@ namespace KSPModAdmin.Core.Utils
         /// Creates a zip file of the craft and adds it to the ModSelection.
         /// </summary>
         /// <param name="fullpath">Full path of the craft-file.</param>
+        /// <returns>Path to the created zip archive.</returns>
         public static string CreateZipOfCraftFile(string fullpath)
         {
             string zipPath = string.Empty;
@@ -74,6 +78,7 @@ namespace KSPModAdmin.Core.Utils
         /// </summary>
         /// <param name="nodes">List of root nodes to create zips for.</param>
         /// <param name="filePath">the path (folder) where the new Zip should be saved to.</param>
+        /// <returns>True on success.</returns>
         public static bool CreateZip(List<ModNode> nodes, string filePath)
         {
             // create the zip
