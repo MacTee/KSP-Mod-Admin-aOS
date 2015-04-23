@@ -118,7 +118,6 @@
     <None Include="Settings.StyleCop" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!--<Import Project="$(SolutionDir)\StyleCopData\StyleCop.targets" />-->
   <PropertyGroup>
     <PostBuildEvent>copy /Y "$(TargetPath)" "$(SolutionDir)KSPModAdmin\$(OutDir)$(TargetFileName)"
 </PostBuildEvent>

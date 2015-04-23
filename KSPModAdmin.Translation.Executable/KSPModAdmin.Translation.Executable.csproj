@@ -116,7 +116,6 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!--<Import Project="$(SolutionDir)\StyleCopData\StyleCop.targets" />-->
   <PropertyGroup>
     <PostBuildEvent>xcopy /E /Y /R /I "$(SolutionDir)KSPModAdmin.Translation.Plugin\Languages" "$(ProjectDir)$(OutDir)lang"
 xcopy /E /Y /R /I "$(SolutionDir)KSPModAdmin\Languages" "$(ProjectDir)$(OutDir)lang"</PostBuildEvent>
