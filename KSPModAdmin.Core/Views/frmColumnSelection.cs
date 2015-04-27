@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -6,11 +7,15 @@ using KSPModAdmin.Core.Model;
 
 namespace KSPModAdmin.Core.Views
 {
+    [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Reviewed. Suppression is OK here.")]
     public partial class frmColumnSelection : frmBase
     {
-        private ListView DragStartListView = null;
+        private ListView mDragStartListView = null;
 
 
+        /// <summary>
+        /// Gets or sets the columns of the ModSelection.
+        /// </summary>
         public ModSelectionColumnsInfo ModSelectionColumns
         {
             get
@@ -40,6 +45,9 @@ namespace KSPModAdmin.Core.Views
         }
 
 
+        /// <summary>
+        /// Creates a new instance of the frmColumnSelection class.
+        /// </summary>
         public frmColumnSelection()
         {
             InitializeComponent();
@@ -70,8 +78,8 @@ namespace KSPModAdmin.Core.Views
                 return;
             }
 
-            DragStartListView = listView;
-            DragStartListView.DoDragDrop(listView.SelectedItems, DragDropEffects.Move | DragDropEffects.Copy);
+            mDragStartListView = listView;
+            mDragStartListView.DoDragDrop(listView.SelectedItems, DragDropEffects.Move | DragDropEffects.Copy);
         }
 
         private void listView_DragEnter(object sender, DragEventArgs e)
@@ -81,7 +89,7 @@ namespace KSPModAdmin.Core.Views
             {
                 if (e.Data.GetFormats()[i].Equals("System.Windows.Forms.ListView+SelectedListViewItemCollection"))
                 {
-                    //The data from the drag source is moved to the target.	
+                    // The data from the drag source is moved to the target.
                     e.Effect = DragDropEffects.Move;
                 }
             }
@@ -93,12 +101,12 @@ namespace KSPModAdmin.Core.Views
             if (listView == null)
                 return;
 
-            if (DragStartListView != listView)
+            if (mDragStartListView != listView)
                 InsertDropedItem(listView, e);
             else
                 MoveDropedItem(listView, e);
 
-            DragStartListView = null;
+            mDragStartListView = null;
         }
 
         private void listView_DragOver(object sender, DragEventArgs e)
@@ -110,7 +118,7 @@ namespace KSPModAdmin.Core.Views
 
         private void InsertDropedItem(ListView listView, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(typeof (ListView.SelectedListViewItemCollection)))
+            if (e.Data.GetDataPresent(typeof(ListView.SelectedListViewItemCollection)))
             {
                 if ((e.Effect & DragDropEffects.Copy) == DragDropEffects.Copy)
                 {
@@ -124,28 +132,27 @@ namespace KSPModAdmin.Core.Views
                         return;
                     }
 
-                    var items = (ListView.SelectedListViewItemCollection)e.Data.GetData(typeof (ListView.SelectedListViewItemCollection));
+                    var items = (ListView.SelectedListViewItemCollection)e.Data.GetData(typeof(ListView.SelectedListViewItemCollection));
                     foreach (ListViewItem item in items)
                     {
                         // Obtain the ListViewItem to be dragged to the target location.
                         if (dragIndex == -1)
                         {
                             // Add to bottom.
-                            listView.Items.Add((ListViewItem) item.Clone());
+                            listView.Items.Add((ListViewItem)item.Clone());
                         }
                         else
                         {
                             // Insert the item at the mouse pointer.
-                            listView.Items.Insert(dragIndex, (ListViewItem) item.Clone());
+                            listView.Items.Insert(dragIndex, (ListViewItem)item.Clone());
                             dragIndex++;
                         }
 
-                        //Removes the item from the initial location while the item is moved to the new location.
+                        // Removes the item from the initial location while the item is moved to the new location.
                         if (listView == lvDisplayedColumns)
                             lvAvailableColumns.Items.Remove(item);
                         else
                             lvDisplayedColumns.Items.Remove(item);
-
                     }
                 }
             }
@@ -195,18 +202,18 @@ namespace KSPModAdmin.Core.Views
                 // Insert the item at the mouse pointer.
                 listView.Items.Insert(itemIndex, (ListViewItem)dragItem.Clone());
 
-                //Removes the item from the initial location while the item is moved to the new location.
+                // Removes the item from the initial location while the item is moved to the new location.
                 listView.Items.Remove(dragItem);
             }
         }
 
         private ListViewItem GetListViewItemAt(ListView listView, Point pos)
         {
-            //Returns the location of the mouse pointer in the ListView control.
+            // Returns the location of the mouse pointer in the ListView control.
             Point cp = listView.PointToClient(pos);
 
-            //Obtain the item that is located at the specified location of the mouse pointer.
-            return listView.GetItemAt(cp.X, cp.Y);;
+            // Obtain the item that is located at the specified location of the mouse pointer.
+            return listView.GetItemAt(cp.X, cp.Y);
         }
     }
 }

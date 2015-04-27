@@ -1,13 +1,12 @@
-﻿using KSPModAdmin.Core.Controller;
-using KSPModAdmin.Core.Model;
-using KSPModAdmin.Core.Utils;
-using KSPModAdmin.Core.Utils.Localization;
-using KSPModAdmin.Core.Views;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Xml;
+using KSPModAdmin.Core.Controller;
+using KSPModAdmin.Core.Model;
+using KSPModAdmin.Core.Utils;
+using KSPModAdmin.Core.Utils.Localization;
 
 namespace KSPModAdmin.Core.Config
 {
@@ -23,8 +22,7 @@ namespace KSPModAdmin.Core.Config
         /// <summary>
         /// Loads the config.
         /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
+        /// <returns>True on success.</returns>
         public static bool Load(string path)
         {
             bool result = false;
@@ -54,8 +52,7 @@ namespace KSPModAdmin.Core.Config
         /// <summary>
         /// v1.0 load function.
         /// </summary>
-        /// <param name="doc"></param>
-        /// <returns></returns>
+        /// <returns>True on success.</returns>
         private static bool LoadV1_0(XmlDocument doc)
         {
             XmlNodeList language = doc.GetElementsByTagName(Constants.LANGUAGE);
@@ -254,6 +251,7 @@ namespace KSPModAdmin.Core.Config
                         else if (att.Name == Constants.NOTE)
                             noteValue = att.Value;
                     }
+
                     if (KSPPathHelper.IsKSPInstallFolder(kspPath))
                         knownPaths.Add(new NoteNode(kspPath, kspPath, noteValue));
                 }
@@ -368,8 +366,7 @@ namespace KSPModAdmin.Core.Config
         /// <summary>
         /// Saves the config.
         /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
+        /// <returns>True on success.</returns>
         public static bool Save(string path)
         {
             XmlDocument doc = new XmlDocument();

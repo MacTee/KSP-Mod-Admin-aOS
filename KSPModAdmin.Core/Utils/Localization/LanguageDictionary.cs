@@ -2,10 +2,17 @@ using System.Collections.Generic;
 
 namespace KSPModAdmin.Core.Utils.Localization
 {
+    /// <summary>
+    /// A Dictionary for language key value pairs.
+    /// </summary>
     public class LanguagesDictionary : Dictionary<string, Dictionary<string, string>>
     {
-#region Properties
+        #region Properties
 
+        /// <summary>
+        /// Indexer to get a value of a language for a certain key.
+        /// </summary>
+        /// <returns>The value of a language for a certain key.</returns>
         public string this[string language, string key]
         {
             get
@@ -24,12 +31,13 @@ namespace KSPModAdmin.Core.Utils.Localization
             }
         }
 
-#endregion
+        #endregion
 
         /// <summary>
         /// Checks if the language is loaded by the Localizer.
         /// </summary>
-        /// <param name="language">The language to check.</param>
+        /// <param name="language">The language to check.</param>he tree path
+        /// <returns>True if dictionary contains the passed language.</returns>
         public bool ContainsLaguage(string language)
         {
             return this.ContainsKey(language);
@@ -40,6 +48,7 @@ namespace KSPModAdmin.Core.Utils.Localization
         /// </summary>
         /// <param name="language">The language to check.</param>
         /// <param name="key">The key to search for.</param>
+        /// <returns>True if dictionary contains the passed key for the passed language.</returns>
         public bool ContainsKey(string language, string key)
         {
             return this.ContainsLaguage(language) && this[language].ContainsKey(key);

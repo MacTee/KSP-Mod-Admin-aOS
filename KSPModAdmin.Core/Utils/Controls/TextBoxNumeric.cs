@@ -1,8 +1,13 @@
 ﻿using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Windows.Forms;
 
 namespace KSPModAdmin.Core.Utils.Controls
 {
+    /// <summary>
+    /// TextBox Control that allows only numeric input.
+    /// </summary>
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class TextBoxNumeric : TextBox
     {
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
@@ -28,6 +33,9 @@ namespace KSPModAdmin.Core.Utils.Controls
         }
 
 
+        /// <summary>
+        /// Handles the KeyPress event.
+        /// </summary>
         protected override void OnKeyPress(KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar))

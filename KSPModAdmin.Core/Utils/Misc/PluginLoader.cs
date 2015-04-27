@@ -28,7 +28,7 @@ namespace KSPModAdmin.Core.Utils
             List<Assembly> assemblies = new List<Assembly>(dllFileNames.Length);
             foreach (string dllFile in dllFileNames)
             {
-                //AssemblyName assemblyName = AssemblyName.GetAssemblyName(dllFile);
+                ////AssemblyName assemblyName = AssemblyName.GetAssemblyName(dllFile);
                 Assembly assembly = Assembly.LoadFile(dllFile);
                 assemblies.Add(assembly);
             }
@@ -65,7 +65,7 @@ namespace KSPModAdmin.Core.Utils
 
             List<T_Interface> plugins = new List<T_Interface>(pluginTypes.Count);
             foreach (var type in pluginTypes)
-                plugins.Add((T_Interface) Activator.CreateInstance(type));
+                plugins.Add((T_Interface)Activator.CreateInstance(type));
 
             return plugins;
         }

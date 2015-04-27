@@ -2,15 +2,14 @@
 
 namespace KSPModAdmin.Core.Config
 {
+    /// <summary>
+    /// Helper class to create XmlNodes and -Attributes for KSP- and AppConfig files.
+    /// </summary>
     public static class ConfigHelper
     {
         /// <summary>
         /// Creates a XmlNode with the specified name and one attribute.
         /// </summary>
-        /// <param name="doc"></param>
-        /// <param name="nodeName"></param>
-        /// <param name="attName"></param>
-        /// <param name="attValue"></param>
         /// <returns>A XmlNode with the specified name and one attribute.</returns>
         public static XmlNode CreateConfigNode(XmlDocument doc, string nodeName, string attName, string attValue)
         {
@@ -23,10 +22,7 @@ namespace KSPModAdmin.Core.Config
         /// <summary>
         /// Creates a XmlNode with the specified name and attributes.
         /// </summary>
-        /// <param name="doc"></param>
-        /// <param name="nodeName"></param>
-        /// <param name="attributes"></param>
-        /// <returns></returns>
+        /// <returns>The new created XmlNode.</returns>
         public static XmlNode CreateConfigNode(XmlDocument doc, string nodeName, string[,] attributes)
         {
             XmlNode node = doc.CreateElement(nodeName);
@@ -40,9 +36,6 @@ namespace KSPModAdmin.Core.Config
         /// <summary>
         /// Creates a XmlAttribute with the passed name and value.
         /// </summary>
-        /// <param name="doc"></param>
-        /// <param name="attName"></param>
-        /// <param name="value"></param>
         /// <returns>A XmlAttribute with the passed name and value.</returns>
         public static XmlAttribute CreateXMLAttribute(XmlDocument doc, string attName, string value)
         {

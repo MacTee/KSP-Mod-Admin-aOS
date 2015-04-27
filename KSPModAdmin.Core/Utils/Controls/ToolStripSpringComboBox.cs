@@ -1,9 +1,10 @@
-﻿using System;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Windows.Forms;
 
 namespace KSPModAdmin.Core.Utils.Controls
 {
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class ToolStripSpringComboBox : ToolStripComboBox
     {
         public override Size GetPreferredSize(Size constrainingSize)
@@ -18,7 +19,7 @@ namespace KSPModAdmin.Core.Utils.Controls
             // Declare a variable to store the total available width as 
             // it is calculated, starting with the display width of the 
             // owning ToolStrip.
-            Int32 width = Owner.DisplayRectangle.Width;
+            int width = Owner.DisplayRectangle.Width;
 
             // Subtract the width of the overflow button if it is displayed. 
             if (Owner.OverflowButton.Visible)
@@ -29,7 +30,7 @@ namespace KSPModAdmin.Core.Utils.Controls
 
             // Declare a variable to maintain a count of ToolStripSpringTextBox 
             // items currently displayed in the owning ToolStrip. 
-            Int32 springBoxCount = 0;
+            int springBoxCount = 0;
 
             foreach (ToolStripItem item in Owner.Items)
             {

@@ -9,6 +9,9 @@ using KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree;
 
 namespace KSPModAdmin.Core.Model
 {
+    /// <summary>
+    /// Representation of a Node of a mod from the ModSelection tree.
+    /// </summary>
     public class ModNode : Node
     {
         /// <summary>
@@ -63,20 +66,20 @@ namespace KSPModAdmin.Core.Model
         /// </summary>
         public string Name
         {
-            get { return base.Text; }
+            get { return Text; }
             set
             {
                 if (string.IsNullOrEmpty(value))
                     throw new ArgumentNullException();
 
-                base.Text = value;
+                Text = value;
             }
         }
 
         /// <summary>
         /// The identifier of the Node.
         /// </summary>
-        public string Key { get { return base.Tag as string; } set { base.Tag = value; } }
+        public string Key { get { return Tag as string; } set { Tag = value; } }
 
 
         /// <summary>
@@ -90,7 +93,7 @@ namespace KSPModAdmin.Core.Model
                 modInfo.Author = Author;
                 modInfo.CreationDate = CreationDate;
                 modInfo.ChangeDate = ChangeDate;
-                //modInfo.DownloadDate = DownloadDate;
+                ////modInfo.DownloadDate = DownloadDate;
                 modInfo.Downloads = Downloads;
                 modInfo.LocalPath = LocalPath;
                 modInfo.Name = Name;
@@ -111,9 +114,9 @@ namespace KSPModAdmin.Core.Model
                     Author = value.Author;
                     CreationDate = value.CreationDate;
                     ChangeDate = value.ChangeDate;
-                    //DownloadDate = value.DownloadDate;
+                    ////DownloadDate = value.DownloadDate;
                     Downloads = value.Downloads;
-                    //LocalPath = value.LocalPath;
+                    ////LocalPath = value.LocalPath;
                     Key = value.LocalPath;
                     Name = value.Name;
                     ProductID = value.ProductID;
@@ -138,10 +141,10 @@ namespace KSPModAdmin.Core.Model
         /// </summary>
         public string Version { get; set; }
 
-		/// <summary>
-		/// Version of the game this mod is for
-		/// </summary>
-		public string KSPVersion { get; set; }
+        /// <summary>
+        /// Version of the game this mod is for
+        /// </summary>
+        public string KSPVersion { get; set; }
 
         /// <summary>
         /// The author of the mod.
@@ -300,10 +303,11 @@ namespace KSPModAdmin.Core.Model
                 try
                 {
                     var root = ZipRoot;
-                    if (root != null)
-                        return File.Exists(root.Key);
+                    if (root != null) return File.Exists(root.Key);
                 }
-                catch (Exception) { }
+                catch (Exception)
+                {
+                }
 
                 return false;
             }
@@ -369,6 +373,9 @@ namespace KSPModAdmin.Core.Model
             }
         }
 
+        /// <summary>
+        /// Flag to determine if all child nodes are without a destination.
+        /// </summary>
         public bool HasChildesWithoutDestination
         {
             get
@@ -419,12 +426,17 @@ namespace KSPModAdmin.Core.Model
         /// Flag to determine if the node is installed.
         /// </summary>
         public bool IsInstalled { get; set; }
+
+        /// <summary>
+        /// Checks if the ModNode is installed.
+        /// </summary>
+        /// <returns>True if Mod Node is installed.</returns>
         public bool IsModNodeInstalled()
         {
             if (IsFile)
-                return (!String.IsNullOrEmpty(Destination) && File.Exists(KSPPathHelper.GetAbsolutePath(Destination)));
+                return (!string.IsNullOrEmpty(Destination) && File.Exists(KSPPathHelper.GetAbsolutePath(Destination)));
             else
-                return (!String.IsNullOrEmpty(Destination) && Directory.Exists(KSPPathHelper.GetAbsolutePath(Destination)));
+                return (!string.IsNullOrEmpty(Destination) && Directory.Exists(KSPPathHelper.GetAbsolutePath(Destination)));
         }
         
         /// <summary>
@@ -518,7 +530,7 @@ namespace KSPModAdmin.Core.Model
         private bool mChecked = false;
 
         /// <summary>
-        /// Gets or sets the CheckedState without fireing events.
+        /// Gets or sets the CheckedState without firing events.
         /// </summary>
         internal bool _Checked
         {
@@ -653,16 +665,25 @@ namespace KSPModAdmin.Core.Model
 
         #region Constructors
 
+        /// <summary>
+        /// Creates a new instance of the ModNode class.
+        /// </summary>
         public ModNode()
         {
             SiteHandlerName = Messages.NONE;
         }
 
+        /// <summary>
+        /// Creates a new instance of the ModNode class.
+        /// </summary>
         public ModNode(ModInfo modInfo)
         {
             ModInfo = modInfo;
         }
 
+        /// <summary>
+        /// Creates a new instance of the ModNode class.
+        /// </summary>
         public ModNode(string fileName, string modName, NodeType nodeType)
         {
             Key = fileName;
@@ -671,6 +692,9 @@ namespace KSPModAdmin.Core.Model
             SiteHandlerName = Messages.NONE;
         }
 
+        /// <summary>
+        /// Creates a new instance of the ModNode class.
+        /// </summary>
         public ModNode(string key, string text)
         {
             Key = key;
@@ -753,7 +777,6 @@ namespace KSPModAdmin.Core.Model
         /// Builds and sets the destination path to the passed node and its childes.
         /// </summary>
         /// <param name="destPath">The destination path.</param>
-        /// <param name="copyContent"></param>
         public void SetDestinationPaths(string destPath, bool copyContent = false)
         {
             if (!copyContent)
@@ -774,10 +797,10 @@ namespace KSPModAdmin.Core.Model
         /// </summary>
         private void SetToolTips()
         {
-            //if (Destination != string.Empty)
-            //    ToolTipText = Destination.ToLower().Replace(KSPPathHelper.GetPath(KSPPaths.KSPRoot).ToLower(), "KSP install folder");
-            //else
-            //    ToolTipText = "<No path selected>";
+            ////if (Destination != string.Empty)
+            ////    ToolTipText = Destination.ToLower().Replace(KSPPathHelper.GetPath(KSPPaths.KSPRoot).ToLower(), "KSP install folder");
+            ////else
+            ////    ToolTipText = "<No path selected>";
 
             foreach (ModNode child in Nodes)
                 child.SetToolTips();

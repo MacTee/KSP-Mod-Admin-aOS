@@ -15,6 +15,9 @@ using KSPModAdmin.Core.Utils;
 
 namespace KSPModAdmin.Core.Controller
 {
+    /// <summary>
+    /// Controller for the ucOptions.
+    /// </summary>
     public class OptionsController
     {
         #region Enums
@@ -22,7 +25,7 @@ namespace KSPModAdmin.Core.Controller
         /// <summary>
         /// Enum of possible AsyncTask actions.
         /// </summary>
-        enum TaskAction
+        public enum TaskAction
         {
             None,
             AppUpdateCheck,
@@ -52,19 +55,19 @@ namespace KSPModAdmin.Core.Controller
 
         #region Constants
 
-        public const string KSP_SEARCH_PATTERN = "*K*S*P*";
-        public const string STEAM_PATH = "Steam\\SteamApps\\common";
-        public const string STEAM_PATH_LINUX = "/.steam/steam/SteamApps/common";
-        public const string STEAM_PATH_MAC = "/Library/Application Support/Steam";
-        public const string KSPMA = "KSPModAdmin";
-        public const string KSPINSTALL = "KSP install";
-        public const string DOWNLOAD = "download";
-        public const string DOWNLOADS = "Downloads";
-        public const string RECYCLE_BIN = "recycle.bin";
-        public const string START = "Start";
-        public const string STOP = "Stop";
-        public const string KSPMA_UPDATER_EXE = "KSPModAdmin.Updater.exe";
-        public const string KSPMA_UPDATER_PARAMETER_0_1_2_3 = "version={0} \"process={1}\" \"archive={2}\" \"dest={3}\"";
+        private const string KSP_SEARCH_PATTERN = "*K*S*P*";
+        private const string STEAM_PATH = "Steam\\SteamApps\\common";
+        private const string STEAM_PATH_LINUX = "/.steam/steam/SteamApps/common";
+        private const string STEAM_PATH_MAC = "/Library/Application Support/Steam";
+        private const string KSPMA = "KSPModAdmin";
+        private const string KSPINSTALL = "KSP install";
+        private const string DOWNLOAD = "download";
+        private const string DOWNLOADS = "Downloads";
+        private const string RECYCLE_BIN = "recycle.bin";
+        private const string START = "Start";
+        private const string STOP = "Stop";
+        private const string KSPMA_UPDATER_EXE = "KSPModAdmin.Updater.exe";
+        private const string KSPMA_UPDATER_PARAMETER_0_1_2_3 = "version={0} \"process={1}\" \"archive={2}\" \"dest={3}\"";
 
         #endregion
 
@@ -87,7 +90,7 @@ namespace KSPModAdmin.Core.Controller
         /// Gets the singleton of this class.
         /// </summary>
         protected static OptionsController Instance { get { return mInstance ?? (mInstance = new OptionsController()); } }
-        protected static OptionsController mInstance = null;
+        private static OptionsController mInstance = null;
 
         /// <summary>
         /// Gets or sets the view of the controller.
@@ -442,12 +445,18 @@ namespace KSPModAdmin.Core.Controller
 
         #endregion
 
+        /// <summary>
+        /// Gets or sets the list of available languages.
+        /// </summary>
         public static List<Language> AvailableLanguages
         {
             get { return View.AvailableLanguages; }
             set { View.AvailableLanguages = value; }
         }
 
+        /// <summary>
+        /// Gets or sets the selected language.
+        /// </summary>
         public static string SelectedLanguage 
         {
             get { return (View != null) ? View.SelectedLanguage : string.Empty; }
@@ -513,7 +522,7 @@ namespace KSPModAdmin.Core.Controller
             mTaskAction = TaskAction.AppUpdateCheck;
             EventDistributor.InvokeAsyncTaskStarted(Instance);
             AsyncTask<WebResponse>.DoWork(
-                delegate()
+                delegate
                 {
                     WebResponse response = null;
                     WebRequest request = WebRequest.Create(Constants.SERVICE_ADMIN_VERSION);
@@ -542,7 +551,7 @@ namespace KSPModAdmin.Core.Controller
                         Version newVersion = new Version(parameter[Constants.VERSION]);
                         if (oldVersion < newVersion)
                         {
-                            View.llblAdminDownload.Text = String.Format(Constants.DOWNLOAD_FILENAME_TEMPLATE, parameter[Constants.VERSION]);
+                            View.llblAdminDownload.Text = string.Format(Constants.DOWNLOAD_FILENAME_TEMPLATE, parameter[Constants.VERSION]);
                             frmUpdateDLG updateDLG = new frmUpdateDLG();
                             updateDLG.DownloadPath = DownloadPath;
                             updateDLG.PostDownloadAction = PostDownloadAction;
@@ -589,15 +598,14 @@ namespace KSPModAdmin.Core.Controller
         /// <summary>
         /// Creates the display message for the download / update dialog.
         /// </summary>
-        /// <param name="parameter"></param>
-        /// <returns></returns>
+        /// <returns>The display message for the download / update dialog.</returns>
         private static string GetDownloadMSG(Dictionary<string, string> parameter)
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendFormat(Messages.MSG_NEW_VERSION_0, parameter[Constants.VERSION]);
             sb.AppendLine();
             sb.AppendLine();
-            if (parameter.ContainsKey(Constants.MESSAGE) && parameter[Constants.MESSAGE] != String.Empty)
+            if (parameter.ContainsKey(Constants.MESSAGE) && parameter[Constants.MESSAGE] != string.Empty)
             {
                 string[] lines = parameter[Constants.MESSAGE].Split('#');
                 foreach (string line in lines)
@@ -626,7 +634,7 @@ namespace KSPModAdmin.Core.Controller
             {
                 string filename = View.llblAdminDownload.Text;
                 string url = string.Empty;
-                if(Environment.OSVersion.Platform == PlatformID.MacOSX || Environment.OSVersion.Platform == PlatformID.Unix)
+                if (Environment.OSVersion.Platform == PlatformID.MacOSX || Environment.OSVersion.Platform == PlatformID.Unix)
                     url = Constants.SERVICE_DOWNLOAD_LINK_MONO;
                 else
                     url = Constants.SERVICE_DOWNLOAD_LINK_WIN;
@@ -636,7 +644,7 @@ namespace KSPModAdmin.Core.Controller
                 while (File.Exists(downloadDest))
                 {
                     string temp = Path.GetFileNameWithoutExtension(downloadDest).Replace("_(" + index++ + ")", string.Empty);
-                    string newFilename = String.Format("{0}_({1}){2}", temp, index, Path.GetExtension(downloadDest));
+                    string newFilename = string.Format("{0}_({1}){2}", temp, index, Path.GetExtension(downloadDest));
                     downloadDest = Path.Combine(Path.GetDirectoryName(downloadDest), newFilename);
                 }
 
@@ -691,7 +699,7 @@ namespace KSPModAdmin.Core.Controller
         }
 
         /// <summary>
-        /// Extracts the version from the fullpath of the KSPModAdmin archive.
+        /// Extracts the version from the full path of the KSPModAdmin archive.
         /// </summary>
         /// <param name="archivePath">The path to the KSPModAdmin archive.</param>
         /// <returns>The version of the KSPModAdmin archive.</returns>
@@ -719,7 +727,6 @@ namespace KSPModAdmin.Core.Controller
         /// Check if the auto mod update is active and starts the modInfo update process.
         /// </summary>
         /// <param name="isStartup">Flag to determine if the call of this function is aon app startup.</param>
-        /// <param name="silent"></param>
         public static void Check4ModUpdates(bool isStartup = false, bool silent = false)
         {
             bool doUpdateCheck = false;
@@ -752,105 +759,105 @@ namespace KSPModAdmin.Core.Controller
 
             #region OldCode
 
-            //mTaskAction = TaskAction.ModsUpdateCheck;
-            //EventDistributor.InvokeAsyncTaskStarted(Instance);
-            //AsyncTask<bool>.DoWork(
-            //    delegate()
-            //    {
-            //        bool result = false;
-            //        foreach (ModNode mod in mods)
-            //        {
-            //            Messenger.AddInfo(string.Format("\"{0}\" checking ...", mod.Text));
-            //            ModInfo modInfo = null;
-            //            if (mod.VersionControl == VersionControl.KSPForum && KSPForum.IsValidURL(mod.KSPForumURL))
-            //                modInfo = KSPForum.GetModInfo(mod.KSPForumURL);
-            //            else if (mod.VersionControl == VersionControl.CurseForge && CurseForge.IsValidURL(CurseForge.GetCurseForgeModURL(mod.CurseForgeURL)))
-            //                modInfo = CurseForge.GetModInfo(CurseForge.GetCurseForgeModURL(mod.CurseForgeURL));
+            ////mTaskAction = TaskAction.ModsUpdateCheck;
+            ////EventDistributor.InvokeAsyncTaskStarted(Instance);
+            ////AsyncTask<bool>.DoWork(
+            ////    delegate()
+            ////    {
+            ////        bool result = false;
+            ////        foreach (ModNode mod in mods)
+            ////        {
+            ////            Messenger.AddInfo(string.Format("\"{0}\" checking ...", mod.Text));
+            ////            ModInfo modInfo = null;
+            ////            if (mod.VersionControl == VersionControl.KSPForum && KSPForum.IsValidURL(mod.KSPForumURL))
+            ////                modInfo = KSPForum.GetModInfo(mod.KSPForumURL);
+            ////            else if (mod.VersionControl == VersionControl.CurseForge && CurseForge.IsValidURL(CurseForge.GetCurseForgeModURL(mod.CurseForgeURL)))
+            ////                modInfo = CurseForge.GetModInfo(CurseForge.GetCurseForgeModURL(mod.CurseForgeURL));
 
-            //            if (modInfo != null)
-            //            {
-            //                modInfo.LocalPath = string.Empty;
+            ////            if (modInfo != null)
+            ////            {
+            ////                modInfo.LocalPath = string.Empty;
 
-            //                DateTime oldDate = DateTime.MinValue;
-            //                DateTime newDate = DateTime.MinValue;
-            //                if (!DateTime.TryParse(mod.AddDate, out oldDate))
-            //                    oldDate = DateTime.MinValue;
+            ////                DateTime oldDate = DateTime.MinValue;
+            ////                DateTime newDate = DateTime.MinValue;
+            ////                if (!DateTime.TryParse(mod.AddDate, out oldDate))
+            ////                    oldDate = DateTime.MinValue;
 
-            //                if (!DateTime.TryParse(modInfo.CreationDate, out newDate))
-            //                    newDate = DateTime.MinValue;
+            ////                if (!DateTime.TryParse(modInfo.CreationDate, out newDate))
+            ////                    newDate = DateTime.MinValue;
 
-            //                bool updateAvailable = false;
-            //                if (oldDate < newDate)
-            //                    updateAvailable = true;
-            //                else
-            //                {
-            //                    if (!DateTime.TryParse(mod.CreationDate, out oldDate))
-            //                        continue;
+            ////                bool updateAvailable = false;
+            ////                if (oldDate < newDate)
+            ////                    updateAvailable = true;
+            ////                else
+            ////                {
+            ////                    if (!DateTime.TryParse(mod.CreationDate, out oldDate))
+            ////                        continue;
 
-            //                    if (oldDate < newDate)
-            //                        updateAvailable = true;
-            //                }
+            ////                    if (oldDate < newDate)
+            ////                        updateAvailable = true;
+            ////                }
 
-            //                if (updateAvailable)
-            //                {
-            //                    Messenger.AddInfo(string.Format("\"{0}\" is outdated", mod.Text));
-            //                    result = true;
-            //                }
-            //                else
-            //                {
-            //                    Messenger.AddInfo(string.Format("\"{0}\" is up to date.", mod.Text));
-            //                }
+            ////                if (updateAvailable)
+            ////                {
+            ////                    Messenger.AddInfo(string.Format("\"{0}\" is outdated", mod.Text));
+            ////                    result = true;
+            ////                }
+            ////                else
+            ////                {
+            ////                    Messenger.AddInfo(string.Format("\"{0}\" is up to date.", mod.Text));
+            ////                }
 
-            //                mod.IsOutdated = updateAvailable;
-            //                //mod.CreationDate = modInfo.CreationDate;
-            //                mod.Rating = modInfo.Rating;
-            //                mod.Downloads = modInfo.Downloads;
-            //                mod.SpaceportURL = modInfo.SpaceportURL;
-            //                mod.KSPForumURL = modInfo.ForumURL;
-            //                mod.CurseForgeURL = modInfo.CurseForgeURL;
-            //                mod.Author = modInfo.Author;
-            //            }
-            //            else
-            //                Messenger.AddInfo(string.Format("\"{0}\" has no valid CurseForge or KSP Forum URL", mod.Text));
-            //        }
+            ////                mod.IsOutdated = updateAvailable;
+            ////                //mod.CreationDate = modInfo.CreationDate;
+            ////                mod.Rating = modInfo.Rating;
+            ////                mod.Downloads = modInfo.Downloads;
+            ////                mod.SpaceportURL = modInfo.SpaceportURL;
+            ////                mod.KSPForumURL = modInfo.ForumURL;
+            ////                mod.CurseForgeURL = modInfo.CurseForgeURL;
+            ////                mod.Author = modInfo.Author;
+            ////            }
+            ////            else
+            ////                Messenger.AddInfo(string.Format("\"{0}\" has no valid CurseForge or KSP Forum URL", mod.Text));
+            ////        }
 
-            //    return result;
-            //},
-            //delegate(bool result, Exception ex)
-            //{
-            //    EventDistributor.InvokeAsyncTaskDone(Instance);
+            ////    return result;
+            ////},
+            ////delegate(bool result, Exception ex)
+            ////{
+            ////    EventDistributor.InvokeAsyncTaskDone(Instance);
 
-            //    if (ex != null)
-            //    {
-            //        MessageBox.Show(View.ParentForm, ex.Message);
-            //        Messenger.AddError("Error during update check.", ex);
-            //    }
-            //    else
-            //    {
-            //        if (result && !silent)
-            //        {
-            //            string msg = "One or more mods are outdated.";
-            //            MessageBox.Show(View.ParentForm, msg, "Update Info");
-            //            // TODO: Ask to switch to ModSelection.
-            //            //MessageBoxButtons buttons = MessageBoxButtons.OK;
-            //            //if (MainForm.tabControl1.SelectedTab != MainForm.tabPageMods)
-            //            //{
-            //            //    msg += "\n\rSwitch to ModSelection?";
-            //            //    buttons = MessageBoxButtons.YesNo;
-            //            //}
+            ////    if (ex != null)
+            ////    {
+            ////        MessageBox.Show(View.ParentForm, ex.Message);
+            ////        Messenger.AddError("Error during update check.", ex);
+            ////    }
+            ////    else
+            ////    {
+            ////        if (result && !silent)
+            ////        {
+            ////            string msg = "One or more mods are outdated.";
+            ////            MessageBox.Show(View.ParentForm, msg, "Update Info");
+            ////            // TODO: Ask to switch to ModSelection.
+            ////            //MessageBoxButtons buttons = MessageBoxButtons.OK;
+            ////            //if (MainForm.tabControl1.SelectedTab != MainForm.tabPageMods)
+            ////            //{
+            ////            //    msg += "\n\rSwitch to ModSelection?";
+            ////            //    buttons = MessageBoxButtons.YesNo;
+            ////            //}
 
-            //            //if (MessageBox.Show(View.ParentForm, msg, "Update Info", buttons) == DialogResult.Yes)
-            //            //{
-            //            //    MainForm.tabControl1.SelectedTab = MainForm.tabPageMods;
-            //            //    MainForm.tabControl1.Refresh();
-            //            //}
-            //        }
+            ////            //if (MessageBox.Show(View.ParentForm, msg, "Update Info", buttons) == DialogResult.Yes)
+            ////            //{
+            ////            //    MainForm.tabControl1.SelectedTab = MainForm.tabPageMods;
+            ////            //    MainForm.tabControl1.Refresh();
+            ////            //}
+            ////        }
 
-            //        LastModUpdateTry = DateTime.Now;
-            //    }
+            ////        LastModUpdateTry = DateTime.Now;
+            ////    }
 
-            //    Messenger.AddInfo("Update check done.");
-            //});
+            ////    Messenger.AddInfo("Update check done.");
+            ////});
 
             #endregion
         }
@@ -956,7 +963,7 @@ namespace KSPModAdmin.Core.Controller
         /// <summary>
         /// Asks the user for a KSP Install path with a folder browser dialog .
         /// </summary>
-        /// <returns>The selected KSPpath or String.Empty.</returns>
+        /// <returns>The selected KSP path or String.Empty.</returns>
         public static string AskForKSPInstallFolder()
         {
             string kspPath = string.Empty;
@@ -1126,7 +1133,7 @@ namespace KSPModAdmin.Core.Controller
                         switch (AskUser(path))
                         {
                             case DialogResult.Yes:
-                                TryAddPaths(new[] {path});
+                                TryAddPaths(new[] { path });
                                 break;
                             case DialogResult.Cancel:
                                 stop = true;
@@ -1234,10 +1241,7 @@ namespace KSPModAdmin.Core.Controller
         /// </summary>
         /// <param name="dirName">The directory to check the subdirectories from.</param>
         /// <param name="searchDepth">The current depth of the sub folder.</param>
-        /// <param name="foundKSPDirs"></param>
-        /// <param name="stopOnFirstHit"></param>
-        /// <param name="depth"></param>
-        /// <returns></returns>
+        /// <returns>True on success.</returns>
         private static bool SearchSubDirs(string dirName, int searchDepth, ref List<string> foundKSPDirs, bool stopOnFirstHit = false, int depth = 1)
         {
             if ((searchDepth != 0 && depth + 1 > searchDepth) || mStopSearch)

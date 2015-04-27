@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -16,10 +17,14 @@ using KSPModAdmin.Core.Utils.Localization;
 
 namespace KSPModAdmin.Core.Views
 {
+    [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Reviewed. Suppression is OK here.")]
     public partial class ucModSelection : ucBase
     {
         #region Constructors
 
+        /// <summary>
+        /// Creates a new instance of the ucModSelection class.
+        /// </summary>
         public ucModSelection()
         {
             InitializeComponent();
@@ -80,6 +85,9 @@ namespace KSPModAdmin.Core.Views
 
         #endregion
 
+        /// <summary>
+        /// Flag to determine if a ModNode is selected.
+        /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public bool HasSelectedNode
@@ -87,6 +95,9 @@ namespace KSPModAdmin.Core.Views
             get { return (tvModSelection.SelectedNode != null); }
         }
 
+        /// <summary>
+        /// Gets the selected ModNode.
+        /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public ModNode SelectedNode
@@ -94,6 +105,9 @@ namespace KSPModAdmin.Core.Views
             get { return (tvModSelection.SelectedNode != null) ? tvModSelection.SelectedNode.Tag as ModNode : null; }
         }
 
+        /// <summary>
+        /// Gets the root ModNode of the selected ModNode.
+        /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public ModNode SelectedMod
@@ -101,6 +115,9 @@ namespace KSPModAdmin.Core.Views
             get { return (tvModSelection.SelectedNode != null) ? (tvModSelection.SelectedNode.Tag as ModNode).ZipRoot : null; }
         }
 
+        /// <summary>
+        /// Gets a list of all selected Mods (root ModNodes).
+        /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public List<ModNode> SelectedMods
@@ -122,6 +139,9 @@ namespace KSPModAdmin.Core.Views
             }
         }
 
+        /// <summary>
+        /// Flag to determine if files of a mod should be overridden during the installation of a mod.
+        /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public bool OverrideModFiles
@@ -130,6 +150,9 @@ namespace KSPModAdmin.Core.Views
             set { tsbOverride.Checked = value; }
         }
 
+        /// <summary>
+        /// Gets or sets the visibility of the loading indicator.
+        /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public bool ShowBusy
@@ -222,7 +245,7 @@ namespace KSPModAdmin.Core.Views
         private void tsbRemoveMod_Click(object sender, EventArgs e)
         {
             if (HasSelectedNode)
-                ModSelectionController.RemoveMod(new [] { SelectedMod });
+                ModSelectionController.RemoveMod(new[] { SelectedMod });
         }
 
         private void tsmiCmsRemoveHighlightedMods_Click(object sender, EventArgs e)
@@ -266,8 +289,8 @@ namespace KSPModAdmin.Core.Views
 
         private void tsmiResetDestination_Click(object sender, EventArgs e)
         {
-            //if (HasSelectedNode)
-            //    ModSelectionController.ResetDestination(SelectedNode);
+            ////if (HasSelectedNode)
+            ////    ModSelectionController.ResetDestination(SelectedNode);
 
             if (tvModSelection.SelectedNodes.Count > 0)
             {
@@ -289,20 +312,20 @@ namespace KSPModAdmin.Core.Views
             ModSelectionController.OpenExportImportDialog();
         }
 
-		private void tsmiExporText_Click(object sender, EventArgs e)
-		{
-			var dlg = new SaveFileDialog
-			{
-				InitialDirectory = OptionsController.DownloadPath, 
-				FileName = "ModList.txt"
-			};
-			if (dlg.ShowDialog() == DialogResult.OK)
-			{
-				var sw = new StreamWriter(dlg.OpenFile());
-				sw.Write(ModSelectionController.GetModListAsText());
-				sw.Close();
-			}
-		}
+        private void tsmiExporText_Click(object sender, EventArgs e)
+        {
+            var dlg = new SaveFileDialog
+            {
+                InitialDirectory = OptionsController.DownloadPath, 
+                FileName = "ModList.txt"
+            };
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                var sw = new StreamWriter(dlg.OpenFile());
+                sw.Write(ModSelectionController.GetModListAsText());
+                sw.Close();
+            }
+        }
 
         private void tsbScan_Click(object sender, EventArgs e)
         {
@@ -345,13 +368,14 @@ namespace KSPModAdmin.Core.Views
 
         private void tssbVisitVersionControlSite_ButtonClick(object sender, EventArgs e)
         {
-			if (SelectedMod != null &&  !String.IsNullOrEmpty(SelectedMod.ModURL)) Process.Start(SelectedMod.ModURL);
-	        
+            if (SelectedMod != null &&  !string.IsNullOrEmpty(SelectedMod.ModURL)) 
+                Process.Start(SelectedMod.ModURL);
         }
 
-	    private void tsmiVisitAdditionalLink_Click(object sender, EventArgs e)
+        private void tsmiVisitAdditionalLink_Click(object sender, EventArgs e)
         {
-			if (SelectedMod != null &&  !String.IsNullOrEmpty(SelectedMod.AdditionalURL)) Process.Start(SelectedMod.AdditionalURL);
+            if (SelectedMod != null &&  !string.IsNullOrEmpty(SelectedMod.AdditionalURL)) 
+                Process.Start(SelectedMod.AdditionalURL);
         }
 
         private void tsbSolveConflicts_Click(object sender, EventArgs e)
@@ -430,7 +454,7 @@ namespace KSPModAdmin.Core.Views
                 tsbRemoveMod.Enabled = true;
                 tsbRemoveAll.Enabled = true;
 
-                //tsbExImport.Enabled = true;
+                ////tsbExImport.Enabled = true;
                 tsbScan.Enabled = true;
                 tsbUpdateCheckAllMods.Enabled = true;
                 tsbUpdateMod.Enabled = true;
@@ -439,7 +463,7 @@ namespace KSPModAdmin.Core.Views
 
                 tsbModUpdateCheck.Enabled = true;
 
-				tssbVisitVersionControlSite.Enabled = true;
+                tssbVisitVersionControlSite.Enabled = true;
                 tsmiVisitVersionControlSite.Enabled = !string.IsNullOrEmpty(selectedNode.ZipRoot.ModURL);
                 tsmiVisitAdditionalLink.Enabled = !string.IsNullOrEmpty(selectedNode.ZipRoot.AdditionalURL);
 
@@ -447,7 +471,7 @@ namespace KSPModAdmin.Core.Views
                 tsbEditModInfos.Enabled = true;
                 tsbCopyModInfos.Enabled = true;
 
-                //tsbSolveConflicts.Enabled = true;
+                ////tsbSolveConflicts.Enabled = true;
                 tsbRefreshCheckedState.Enabled = true;
 
                 tssbChangeDestination.Enabled = true;
@@ -479,16 +503,16 @@ namespace KSPModAdmin.Core.Views
                 btnProceedHighlighted.Enabled = false;
                 tsbProceedMod.Enabled = false;
 
-                //tssbAddMod.Enabled = false;
-                //tsmiAddMod.Enabled = false;
-                //tsmiAddModArchives.Enabled = false;
+                ////tssbAddMod.Enabled = false;
+                ////tsmiAddMod.Enabled = false;
+                ////tsmiAddModArchives.Enabled = false;
 
                 tsbRemoveMod.Enabled = false;
-                //tsbRemoveAll.Enabled = false;
+                ////tsbRemoveAll.Enabled = false;
 
-                //tsbExImport.Enabled = false;
-                //tsbScan.Enabled = false;
-                //tsbUpdateCheckAllMods.Enabled = false;
+                ////tsbExImport.Enabled = false;
+                ////tsbScan.Enabled = false;
+                ////tsbUpdateCheckAllMods.Enabled = false;
                 tsbUpdateMod.Enabled = false;
 
                 tsbProceedMod.Enabled = false;
@@ -666,7 +690,6 @@ namespace KSPModAdmin.Core.Views
                 foreach (ToolStripItem c in tsMod.Items)
                     c.Enabled = enable;
 
-                //tvMod
                 btnProceedHighlighted.Enabled = enable;
                 btnProceedAll.Enabled = enable;
             });
@@ -743,7 +766,7 @@ namespace KSPModAdmin.Core.Views
             switch (column.Name)
             {
                 case ModSelectionColumnsInfo.COLUMNMOD:
-                    nodes = ((ModSelectionTreeModel) tvModSelection.Model).Nodes.Cast<ModNode>().ToList();
+                    nodes = ((ModSelectionTreeModel)tvModSelection.Model).Nodes.Cast<ModNode>().ToList();
                     nodes.Sort(delegate(ModNode node1, ModNode node2)
                         {
                             if (column.SortOrder == SortOrder.Ascending)

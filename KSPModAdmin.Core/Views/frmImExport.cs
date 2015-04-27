@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -9,11 +10,18 @@ using KSPModAdmin.Core.Utils;
 
 namespace KSPModAdmin.Core.Views
 {
+    [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Reviewed. Suppression is OK here.")]
     public partial class frmImExport : frmBase
     {
+        /// <summary>
+        /// String constant for the ModPack file name template.
+        /// </summary>
         public const string MODPACK_FILENAME_TEMPLATE = "ModPack_{0}.modpack";
 
 
+        /// <summary>
+        /// Creates a new instance of the frmImExport class.
+        /// </summary>
         public frmImExport()
         {
             InitializeComponent();
@@ -82,7 +90,9 @@ namespace KSPModAdmin.Core.Views
                     AddMessage(string.Format(Messages.MSG_EXPORT_TO_0, dlg.FileName));
                     new AsyncTask<bool>(() =>
                                         {
+                                            ModPackHandler.MessageCallbackFunction = AddMessage;
                                             ModPackHandler.Export(modsToExport, dlg.FileName, cbIncludeMods.Checked);
+                                            ModPackHandler.MessageCallbackFunction = null;
                                             return true;
                                         },
                                         (b, ex) =>
@@ -115,7 +125,7 @@ namespace KSPModAdmin.Core.Views
             if (rbExportAll.Checked)
                 return ModSelectionController.Mods.ToList();
             else if (rbExportSelectedOnly.Checked)
-                return (from e in cbModSelection.CheckBoxItems where e.Checked select (ModNode) e.ComboBoxItem).ToList();
+                return (from e in cbModSelection.CheckBoxItems where e.Checked select (ModNode)e.ComboBoxItem).ToList();
 
             return new List<ModNode>();
         }
@@ -134,42 +144,48 @@ namespace KSPModAdmin.Core.Views
             {
                 pbImport.Visible = true;
                 new AsyncTask<bool>(() =>
-                                    {
-                                        if (cbClearModSelection.Checked)
-                                        {
-                                            AddMessage(Messages.MSG_CLEARING_MODSELECTION);
-                                            InvokeIfRequired(() => ModSelectionController.RemoveAllMods());
-                                        }
-                    //InvokeIfRequired(() => OptionsController.GetValidDownloadPath());
-                                        AddMessage(string.Format(Messages.MSG_IMPORTING_FROM_0, dlg.FileName));
-                                        ModPackHandler.Import(dlg.FileName, OptionsController.DownloadPath, cbExtract.Checked,
-                                                              cbDownloadIfNeeded.Checked, rbCopyDestination.Checked, rbAddOnly.Checked,
-                                                              (o, msg) => { AddMessage(msg); });
-                                        return true;
-                                    },
-                                    (b, ex) =>
-                                    {
-                                        pbImport.Visible = false;
-                                        if (ex != null)
-                                        {
-                                            AddMessage(Messages.MSG_IMPORTING_FAILED); 
-                                            MessageBox.Show(this, ex.Message, Messages.MSG_TITLE_ERROR);
-                                        }
-                                        else
-                                        {
-                                            AddMessage(Messages.MSG_IMPORTING_DONE);
-                                            Close();
-                                        }
-                                    }).Run();
+                    {
+                        if (cbClearModSelection.Checked)
+                        {
+                            AddMessage(Messages.MSG_CLEARING_MODSELECTION);
+                            InvokeIfRequired(() => ModSelectionController.RemoveAllMods());
+                        }
+
+                        //// InvokeIfRequired(() => OptionsController.GetValidDownloadPath());
+
+                        AddMessage(string.Format(Messages.MSG_IMPORTING_FROM_0, dlg.FileName));
+                        ModPackHandler.MessageCallbackFunction = AddMessage;
+                        ModPackHandler.Import(dlg.FileName, OptionsController.DownloadPath, cbExtract.Checked, cbDownloadIfNeeded.Checked, rbCopyDestination.Checked, rbAddOnly.Checked);
+                        ModPackHandler.MessageCallbackFunction = null;
+                        return true;
+                    },
+                    (b, ex) =>
+                    {
+                        pbImport.Visible = false;
+                        if (ex != null)
+                        {
+                            AddMessage(Messages.MSG_IMPORTING_FAILED); 
+                            MessageBox.Show(this, ex.Message, Messages.MSG_TITLE_ERROR);
+                        }
+                        else
+                        {
+                            AddMessage(Messages.MSG_IMPORTING_DONE);
+                            Close();
+                        }
+                    }).Run();
             }
             else
                 AddMessage(Messages.MSG_IMPORTING_ABORTED);
-
         }
 
         #endregion
 
         private void AddMessage(string msg)
+        {
+            AddMessage(null, msg);
+        }
+
+        private void AddMessage(object sender, string msg)
         {
             InvokeIfRequired(() => lblCurrentAction.Text = msg);
             Messenger.AddInfo(msg);

@@ -59,6 +59,8 @@
 
 - is everything Async ???
 
+- new strings in frmInExport.
+
 - KSPForum support.
 
 - Control rearrangement for localization

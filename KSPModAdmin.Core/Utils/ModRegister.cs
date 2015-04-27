@@ -23,7 +23,7 @@ namespace KSPModAdmin.Core.Utils
         /// Dictionary of all registered mod file destinations.
         /// For destination collision detection.
         /// </summary>
-        private static Dictionary<string, List<ModNode>> m_RegisterdModFiles = new Dictionary<string, List<ModNode>>();
+        private static Dictionary<string, List<ModNode>> mRegisterdModFiles = new Dictionary<string, List<ModNode>>();
 
         
         /// <summary>
@@ -32,8 +32,8 @@ namespace KSPModAdmin.Core.Utils
         /// </summary>
         public static Dictionary<string, List<ModNode>> RegisterdModFiles
         {
-            get { return m_RegisterdModFiles; }
-            set { m_RegisterdModFiles = value; }
+            get { return mRegisterdModFiles; }
+            set { mRegisterdModFiles = value; }
         }
 
 
@@ -66,22 +66,22 @@ namespace KSPModAdmin.Core.Utils
             if (string.IsNullOrEmpty(fileNode.Destination))
                 return false;
 
-            if (!m_RegisterdModFiles.ContainsKey(fileNode.Destination.ToLower()))
+            if (!mRegisterdModFiles.ContainsKey(fileNode.Destination.ToLower()))
             {
                 // Add fileNode to register
                 List<ModNode> list = new List<ModNode> { fileNode };
-                m_RegisterdModFiles.Add(fileNode.Destination.ToLower(), list);
+                mRegisterdModFiles.Add(fileNode.Destination.ToLower(), list);
             }
             else
             {
-                if (!m_RegisterdModFiles[fileNode.Destination.ToLower()].Contains(fileNode)) //!AlreadyKnown(fileNode))
+                if (!mRegisterdModFiles[fileNode.Destination.ToLower()].Contains(fileNode)) ////!AlreadyKnown(fileNode))
                 {
-                    m_RegisterdModFiles[fileNode.Destination.ToLower()].Add(fileNode);
+                    mRegisterdModFiles[fileNode.Destination.ToLower()].Add(fileNode);
 
                     // Set collision flag
                     if (fileNode.IsFile || fileNode.HasChildCollision)
                     {
-                        foreach (ModNode node in m_RegisterdModFiles[fileNode.Destination.ToLower()])
+                        foreach (ModNode node in mRegisterdModFiles[fileNode.Destination.ToLower()])
                             node.HasCollision = true;
                     }
                     else
@@ -89,7 +89,7 @@ namespace KSPModAdmin.Core.Utils
                         if (HaveCollisionsSameRoot(fileNode) || fileNode.Text.Trim().Equals(Constants.GAMEDATA, StringComparison.CurrentCultureIgnoreCase))
                             return false;
 
-                        foreach (ModNode node in m_RegisterdModFiles[fileNode.Destination.ToLower()])
+                        foreach (ModNode node in mRegisterdModFiles[fileNode.Destination.ToLower()])
                             node.HasCollision = true;
                     }
 
@@ -106,13 +106,13 @@ namespace KSPModAdmin.Core.Utils
         public static void Clear()
         {
             List<ModNode> toUnregister = new List<ModNode>();
-            foreach (var dest in m_RegisterdModFiles)
+            foreach (var dest in mRegisterdModFiles)
                 toUnregister.AddRange(dest.Value);
 
             foreach (var file in toUnregister)
                 RemoveRegisteredModFile(file);
 
-            m_RegisterdModFiles.Clear();
+            mRegisterdModFiles.Clear();
         }
 
         /// <summary>
@@ -132,20 +132,20 @@ namespace KSPModAdmin.Core.Utils
         /// <param name="fileNode">The file node to unregister.</param>
         public static void RemoveRegisteredModFile(ModNode fileNode)
         {
-            if (!string.IsNullOrEmpty(fileNode.Destination) && m_RegisterdModFiles.ContainsKey(fileNode.Destination.ToLower()) &&
-                m_RegisterdModFiles[fileNode.Destination.ToLower()].Contains(fileNode))
+            if (!string.IsNullOrEmpty(fileNode.Destination) && mRegisterdModFiles.ContainsKey(fileNode.Destination.ToLower()) &&
+                mRegisterdModFiles[fileNode.Destination.ToLower()].Contains(fileNode))
             {
-                m_RegisterdModFiles[fileNode.Destination.ToLower()].Remove(fileNode);
+                mRegisterdModFiles[fileNode.Destination.ToLower()].Remove(fileNode);
                 fileNode.HasCollision = false;
 
-                if  (m_RegisterdModFiles[fileNode.Destination.ToLower()].Count == 0)
-                    m_RegisterdModFiles.Remove(fileNode.Destination.ToLower());
-                else if  (m_RegisterdModFiles[fileNode.Destination.ToLower()].Count == 1)
-                    m_RegisterdModFiles[fileNode.Destination.ToLower()][0].HasCollision = false;
-                else if (m_RegisterdModFiles[fileNode.Destination.ToLower()].Count > 1)
+                if (mRegisterdModFiles[fileNode.Destination.ToLower()].Count == 0)
+                    mRegisterdModFiles.Remove(fileNode.Destination.ToLower());
+                else if (mRegisterdModFiles[fileNode.Destination.ToLower()].Count == 1)
+                    mRegisterdModFiles[fileNode.Destination.ToLower()][0].HasCollision = false;
+                else if (mRegisterdModFiles[fileNode.Destination.ToLower()].Count > 1)
                 {
                     if (HaveCollisionsSameRoot(fileNode))
-                        m_RegisterdModFiles[fileNode.Destination.ToLower()][0].HasCollision = false;
+                        mRegisterdModFiles[fileNode.Destination.ToLower()][0].HasCollision = false;
                 }
             }
         }
@@ -160,19 +160,19 @@ namespace KSPModAdmin.Core.Utils
             var collidingNodes = GetAllCollisionNodes(modRoot);
             foreach (ModNode collidingNode in collidingNodes)
             {
-                if (string.IsNullOrEmpty(collidingNode.Destination) || !m_RegisterdModFiles.ContainsKey(collidingNode.Destination.ToLower()))
+                if (string.IsNullOrEmpty(collidingNode.Destination) || !mRegisterdModFiles.ContainsKey(collidingNode.Destination.ToLower()))
                 {
                     collidingNode.HasCollision = false;
                     continue;
                 }
 
-                List<ModNode> removeDestinationNodes = m_RegisterdModFiles[collidingNode.Destination.ToLower()].Where(node => node != collidingNode).ToList();
+                List<ModNode> removeDestinationNodes = mRegisterdModFiles[collidingNode.Destination.ToLower()].Where(node => node != collidingNode).ToList();
                 foreach (ModNode delNode in removeDestinationNodes)
                 {
                     RemoveRegisteredModFile(delNode);
 
-                    //TODO:
-                    //TreeViewEx.ChangeCheckedState(delNode, false, true, true); 
+                    // TODO:
+                    ////TreeViewEx.ChangeCheckedState(delNode, false, true, true); 
 
                     if (!delNode.IsFile && delNode.IsInstalled)
                         ModSelectionController.ProcessMods(new ModNode[] { delNode }, true);
@@ -185,8 +185,7 @@ namespace KSPModAdmin.Core.Utils
         /// <summary>
         /// Returns a flat list of all colliding modNodes for all fileNodes of the passed node.
         /// </summary>
-        /// <param name="modNode"></param>
-        /// <returns></returns>
+        /// <returns>A flat list of all colliding modNodes for all fileNodes of the passed node.</returns>
         public static List<ModNode> GetCollisionModFiles(ModNode modNode)
         {
             List<ModNode> result = new List<ModNode>();
@@ -195,15 +194,15 @@ namespace KSPModAdmin.Core.Utils
 
             if (modNode.IsFile)
             {
-                if (m_RegisterdModFiles.ContainsKey(modNode.Destination.ToLower()))
-                    result.AddRange(m_RegisterdModFiles[modNode.Destination.ToLower()].Where(node => node != modNode));
+                if (mRegisterdModFiles.ContainsKey(modNode.Destination.ToLower()))
+                    result.AddRange(mRegisterdModFiles[modNode.Destination.ToLower()].Where(node => node != modNode));
             }
             else
             {
                 foreach (var fileNode in modNode.ZipRoot.GetAllFileNodes())
                 {
-                    if (m_RegisterdModFiles.ContainsKey(fileNode.Destination.ToLower()))
-                        result.AddRange(m_RegisterdModFiles[fileNode.Destination.ToLower()].Where(regFileNode => regFileNode != modNode));
+                    if (mRegisterdModFiles.ContainsKey(fileNode.Destination.ToLower()))
+                        result.AddRange(mRegisterdModFiles[fileNode.Destination.ToLower()].Where(regFileNode => regFileNode != modNode));
                 }
             }
             return result;
@@ -222,9 +221,9 @@ namespace KSPModAdmin.Core.Utils
 
             foreach (var fileNode in modNode.ZipRoot.GetAllFileNodes())
             {
-                if (m_RegisterdModFiles.ContainsKey(fileNode.Destination.ToLower()))
+                if (mRegisterdModFiles.ContainsKey(fileNode.Destination.ToLower()))
                 {
-                    foreach (var regFileNode in m_RegisterdModFiles[fileNode.Destination.ToLower()])
+                    foreach (var regFileNode in mRegisterdModFiles[fileNode.Destination.ToLower()])
                     {
                         if (regFileNode != modNode && !result.Contains(regFileNode.ZipRoot))
                             result.Add(regFileNode.ZipRoot);
@@ -268,7 +267,7 @@ namespace KSPModAdmin.Core.Utils
             bool differentRootFound = false;
 
             ModNode zipRoot = fileNode.ZipRoot;
-            foreach (ModNode node in m_RegisterdModFiles[fileNode.Destination.ToLower()])
+            foreach (ModNode node in mRegisterdModFiles[fileNode.Destination.ToLower()])
             {
                 if (node.ZipRoot == zipRoot)
                     continue;
@@ -285,7 +284,7 @@ namespace KSPModAdmin.Core.Utils
         /// </summary>
         /// <param name="modNode">The ModNode to start with.</param>
         /// <param name="list">For recursive calls.</param>
-        /// <returns></returns>
+        /// <returns>A list of all ModNods with a destination.</returns>
         private static List<ModNode> GetAllNodesWithDestination(ModNode modNode, List<ModNode> list = null)
         {
             if (list == null)

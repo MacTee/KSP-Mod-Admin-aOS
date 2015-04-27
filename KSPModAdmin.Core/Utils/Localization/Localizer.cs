@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using System.Linq;
 using System.Xml;
 
 namespace KSPModAdmin.Core.Utils.Localization
@@ -14,8 +14,20 @@ namespace KSPModAdmin.Core.Utils.Localization
         #region Constants
 
         // All used strings in this class.
+
+        /// <summary>
+        /// Default language short name.
+        /// </summary>
         public const string DEFAULT_LANGUAGE = "eng";
+
+        /// <summary>
+        /// The string "LanguageName".
+        /// </summary>
         public const string LANGUAGE_NAME = "LanguageName";
+
+        /// <summary>
+        /// The language file extension.
+        /// </summary>
         public const string LANG_FILE_EXTENSION = "*.lang";
         private const string NEWLINE_REPLACE_CHAR = "^";
         private const string LANGUAGE = "Language";
@@ -38,9 +50,9 @@ namespace KSPModAdmin.Core.Utils.Localization
 
         private static Localizer mInstance = null;
 
-        protected LanguagesDictionary mLanguageDictionary = new LanguagesDictionary();
+        private LanguagesDictionary mLanguageDictionary = new LanguagesDictionary();
 
-        protected List<Language> mLanguages = new List<Language>();
+        private List<Language> mLanguages = new List<Language>();
 
         #endregion
 
@@ -152,12 +164,18 @@ namespace KSPModAdmin.Core.Utils.Localization
 
         #region Constructors
 
+        /// <summary>
+        /// Creates a new instance of the Localizer class.
+        /// </summary>
         public Localizer()
         {
             DefaultLanguage = DEFAULT_LANGUAGE;
             CurrentLanguage = DefaultLanguage;
         }
 
+        /// <summary>
+        /// Creates a new instance of the Localizer class.
+        /// </summary>
         public Localizer(string filename, string defaultLanguage = DEFAULT_LANGUAGE)
         {
             DefaultLanguage = defaultLanguage;
@@ -172,7 +190,6 @@ namespace KSPModAdmin.Core.Utils.Localization
         /// Loads all available languages from the passed directory.
         /// </summary>
         /// <param name="languageFolderPath">Path to the language files.</param>
-        /// <param name="defaultLanguageRequired"></param>
         /// <returns>True, if load was without any errors.</returns>
         public bool LoadLanguages(string languageFolderPath, bool defaultLanguageRequired = false, bool xml = true)
         {
@@ -187,7 +204,6 @@ namespace KSPModAdmin.Core.Utils.Localization
         /// Loads all language files of passed filename array.
         /// </summary>
         /// <param name="langFiles">Array of paths to the language files.</param>
-        /// <param name="defaultLanguageRequired"></param>
         /// <returns>True, if load was without any errors.</returns>
         public bool LoadLanguages(string[] langFiles, bool defaultLanguageRequired = false, bool xml = true)
         {
@@ -360,7 +376,7 @@ namespace KSPModAdmin.Core.Utils.Localization
         /// <summary>
         /// Returns the LongName of the passed language.
         /// </summary>
-        /// <param name="language">The language to get the LongName from.</param>
+        /// <param name="name">The language to get the LongName from.</param>
         /// <returns>The LongName of the passed language.</returns>
         public string GetLanguageLongName(string name)
         {
@@ -508,6 +524,7 @@ namespace KSPModAdmin.Core.Utils.Localization
     }
 
 
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class Language
     {
         public string Name { get; set; }

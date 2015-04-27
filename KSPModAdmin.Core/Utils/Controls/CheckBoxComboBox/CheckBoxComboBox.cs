@@ -421,7 +421,9 @@ namespace KSPModAdmin.Core.Utils.Controls.PresentationControls
                 CheckBoxComboBoxItem Item = _Items[Index];
                 if (!_CheckBoxComboBox.Items.Contains(Item.ComboBoxItem))
                 {
+#pragma warning disable 618
                     _Items.Remove(Item);
+#pragma warning restore 618
                     Item.Dispose();
                 }
             }
@@ -462,7 +464,9 @@ namespace KSPModAdmin.Core.Utils.Controls.PresentationControls
                     Item = new CheckBoxComboBoxItem(_CheckBoxComboBox, Object);
                     Item.ApplyProperties(_CheckBoxComboBox.CheckBoxProperties);
                 }
+#pragma warning disable 618
                 NewList.Add(Item);
+#pragma warning restore 618
                 Item.Dock = DockStyle.Top;
             }
             _Items.Clear();

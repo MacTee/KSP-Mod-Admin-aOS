@@ -3,8 +3,14 @@ using KSPModAdmin.Core;
 
 namespace KSPModAdmin.Translation.Plugin
 {
+    /// <summary>
+    /// Container class for a XmlNode of a language file .
+    /// </summary>
     public class LanguageEntry
     {
+        /// <summary>
+        /// The XmlNode.
+        /// </summary>
         public XmlNode XmlNode 
         {
             get { return mXmlNode; }
@@ -26,6 +32,9 @@ namespace KSPModAdmin.Translation.Plugin
         }
         private XmlNode mXmlNode = null;
 
+        /// <summary>
+        /// Key - Value of the "Name" XmlAttribute of the XmlNode.
+        /// </summary>
         public string Name
         {
             get
@@ -34,12 +43,15 @@ namespace KSPModAdmin.Translation.Plugin
             }
             set
             {
-                if (mNameAttribute != null) 
+                if (mNameAttribute != null)
                     mNameAttribute.Value = value;
             }
         }
         private XmlAttribute mNameAttribute = null;
 
+        /// <summary>
+        /// Value - Value of the "Value" XmlAttribute of the XmlNode.
+        /// </summary>
         public string Value
         {
             get
@@ -55,6 +67,9 @@ namespace KSPModAdmin.Translation.Plugin
         private XmlAttribute mValueAttribute = null;
 
 
+        /// <summary>
+        /// Creates a new instance of a LanguageEntry from a XmlNode.
+        /// </summary>
         public LanguageEntry(XmlNode node)
         {
             XmlNode = node;

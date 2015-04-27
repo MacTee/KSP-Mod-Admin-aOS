@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -7,6 +8,10 @@ using KSPModAdmin.Core.Utils.Localization;
 
 namespace KSPModAdmin.Core.Views
 {
+    /// <summary>
+    /// Base Form class for all KSP Mod Admin forms.
+    /// </summary>
+    [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Reviewed. Suppression is OK here.")]
     public partial class frmBase : Form, IView
     {
         /// <summary>
@@ -53,7 +58,7 @@ namespace KSPModAdmin.Core.Views
                     foreach (FieldInfo fInfo in fields)
                     {
                         string name = fInfo.Name;
-                        if (fInfo.FieldType != typeof (string)) 
+                        if (fInfo.FieldType != typeof(string)) 
                             continue;
                         
                         string value = fInfo.GetValue(obj).ToString();
@@ -87,24 +92,38 @@ namespace KSPModAdmin.Core.Views
         /// </summary>
         public void InvalidateView() { }
 
+        /// <summary>
+        /// Shows the Form.
+        /// </summary>
+        /// <returns>The results of the dialog.</returns>
         public new DialogResult ShowDialog()
         {
             ControlTranslator.TranslateControls(Localizer.GlobalInstance, this);
             return base.ShowDialog();
         }
 
+        /// <summary>
+        /// Shows the Form.
+        /// </summary>
+        /// <returns>The results of the dialog.</returns>
         public new DialogResult ShowDialog(IWin32Window p)
         {
             ControlTranslator.TranslateControls(Localizer.GlobalInstance, this);
             return base.ShowDialog(p);
         }
 
+        /// <summary>
+        /// Shows the Form.
+        /// </summary>
         public new void Show()
         {
             ControlTranslator.TranslateControls(Localizer.GlobalInstance, this);
             base.Show();
         }
 
+        /// <summary>
+        /// Shows the Form.
+        /// </summary>
         public new void Show(IWin32Window p)
         {
             ControlTranslator.TranslateControls(Localizer.GlobalInstance, this);
@@ -112,12 +131,18 @@ namespace KSPModAdmin.Core.Views
         }
 
 
+        /// <summary>
+        /// Gets the KSPDialogResult.
+        /// </summary>
+        /// <returns>The KSPDialogResult.</returns>
         public virtual KSPDialogResult GetKSPDialogResults()
         {
             return new KSPDialogResult(DialogResult);
         }
     }
 
+
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class KSPDialogResult
     {
         public DialogResult DialogResult { get; private set; }
