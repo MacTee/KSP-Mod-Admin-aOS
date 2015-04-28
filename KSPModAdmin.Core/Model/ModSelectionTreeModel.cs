@@ -161,6 +161,49 @@ namespace KSPModAdmin.Core.Model
             return node;
         }
 
+        /// <summary>
+        /// Splits the filename (at '\') and searches the tree for the Node where name and path matches.
+        /// </summary>
+        /// <param name="nodePath">Tree path of the node.</param>
+        /// <param name="startNode">Node to start the search from.</param>
+        /// <param name="pathSeparator">Separator of the path in filename.</param>
+        /// <returns>The matching TreeNodeMod.</returns>
+        public static ModNode SearchNodeByPathNew(string nodePath, ModNode startNode, char pathSeparator)
+        {
+            string[] pathNodeNames = nodePath.Split(new[] { pathSeparator }, StringSplitOptions.RemoveEmptyEntries);
+            var node = SearchNodeByPath(pathNodeNames, startNode);
+            return node != null && node.GetFullTreePath().Contains(nodePath) ? node : null;
+        }
+
+        private static ModNode SearchNodeByPath(string[] pathNodeNames, ModNode startNode, int depth = 0, bool parentMatches = false)
+        {
+            // Are we deeper than we should search?
+            if (depth >= pathNodeNames.Length)
+                return null;
+
+            // Does the node match?
+            bool thisMatches = startNode.Text.Equals(pathNodeNames[depth], StringComparison.CurrentCultureIgnoreCase);
+
+            // if yes and we are at the lowest level of the search, we have found our match!
+            if (thisMatches && depth == pathNodeNames.Length - 1)
+                return startNode;
+
+            // if parent matches to last pathNodeNames entry and this pathNodeNames entry doesn't match with child, all child childes will mismatch too!
+            if (parentMatches && !thisMatches)
+                return null;
+
+            // Move to next search pathNodeName if node matches
+            int newdpeth = thisMatches ? depth += 1 : depth;
+            foreach (ModNode child in startNode.Nodes)
+            {
+                var node = SearchNodeByPath(pathNodeNames, child, newdpeth, thisMatches);
+                if (node != null)
+                    return node;
+            }
+
+            return null;
+        }
+
 
         /// <summary>
         /// Searches the passed node for ksp folder.
