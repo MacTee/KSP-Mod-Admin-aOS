@@ -435,7 +435,7 @@ namespace KSPModAdmin.Core.Utils
             foreach (var importFile in childs)
             {
                 string path = GetTreePathToRootNode(importFile);
-                ModNode matchingNew = ModSelectionTreeModel.SearchNodeByPath(path, newMod, '/');
+                ModNode matchingNew = ModSelectionTreeModel.SearchNodeByPathNew(path, newMod, '/');
                 if (matchingNew != null)
                 {
                     matchFound = true;
@@ -504,7 +504,7 @@ namespace KSPModAdmin.Core.Utils
             foreach (var importFile in childImportInfo)
             {
                 string path = GetTreePathToRootNode(importFile);
-                ModNode matchingNew = ModSelectionTreeModel.SearchNodeByPath(path, newMod, '/');
+                ModNode matchingNew = ModSelectionTreeModel.SearchNodeByPathNew(path, newMod, '/');
                 if (matchingNew != null)
                 {
                     matchFound = true;
