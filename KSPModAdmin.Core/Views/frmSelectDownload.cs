@@ -30,6 +30,7 @@ namespace KSPModAdmin.Core.Views
                     foreach (var e in value)
                         cbLinks.Items.Add(e);
                     cbLinks.SelectedItem = cbLinks.Items[0];
+	                cbLinks.DropDownWidth = DropDownWidth(cbLinks);
                 }
                 else
                     cbLinks.SelectedItem = null;
@@ -118,5 +119,20 @@ namespace KSPModAdmin.Core.Views
         {
             return new KSPDialogResult(DialogResult, SelectedLink);
         }
+
+
+		int DropDownWidth(ComboBox myCombo)
+		{
+			int maxWidth = 0, temp = 0;
+			foreach (var obj in myCombo.Items)
+			{
+				temp = TextRenderer.MeasureText(obj.ToString(), myCombo.Font).Width;
+				if (temp > maxWidth)
+				{
+					maxWidth = temp;
+				}
+			}
+			return maxWidth;
+		}
     }
 }
