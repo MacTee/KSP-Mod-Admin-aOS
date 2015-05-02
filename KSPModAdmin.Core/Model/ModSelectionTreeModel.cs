@@ -199,6 +199,14 @@ namespace KSPModAdmin.Core.Model
                 var node = SearchNodeByPath(pathNodeNames, child, newdpeth, thisMatches);
                 if (node != null)
                     return node;
+                
+                // if childs don't match then search deeper for conplete path.
+                if (thisMatches)
+                {
+                    node = SearchNodeByPath(pathNodeNames, child, newdpeth - 1, false);
+                    if (node != null)
+                        return node;
+                }
             }
 
             return null;
