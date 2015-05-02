@@ -396,10 +396,10 @@ namespace KSPModAdmin.Core.Controller
                                 Messenger.AddInfo(string.Format(Messages.MSG_REPLACING_MOD_0, outdatedMod.Text));
 
                                 newNode = UpdateMod(modInfo, outdatedMod);
-                                //newNode = ModNodeHandler.CreateModNode(modInfo);
-                                //RemoveOutdatedAndAddNewMod(outdatedMod, newNode);
+                                ////newNode = ModNodeHandler.CreateModNode(modInfo);
+                                ////RemoveOutdatedAndAddNewMod(outdatedMod, newNode);
 
-                                //newNode.UncheckAll();
+                                ////newNode.UncheckAll();
 
                                 Messenger.AddInfo(string.Format(Messages.MSG_MOD_0_REPLACED, newNode.Text));
 

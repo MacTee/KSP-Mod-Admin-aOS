@@ -214,7 +214,7 @@ namespace KSPModAdmin.Core.Utils
                         // extract mods from modpack to Option
                     else if (extractMods && (entry.FilePath.Contains(MODS_FOLDER) || entry.FilePath.Contains(MODS_FOLDER_WIN)))
                     {
-                        UpdateMessage(string.Format("Extracting mod \"{0}\"", entry.FilePath));
+                        UpdateMessage(string.Format(Messages.MSG_EXTRACTING_MOD_0, entry.FilePath));
 
                         entry.WriteToDirectory(modExtractDir);
                     }
@@ -239,7 +239,7 @@ namespace KSPModAdmin.Core.Utils
 
                         if (importInfo.SiteHandler == null || !DownloadMod(ref importInfo))
                         {
-                            UpdateMessage(string.Format("Mod Archive \"{0}\" not found!", importInfo.LocalPath));
+                            UpdateMessage(string.Format(Messages.MSG_MODARCHIVE_0_NOT_FOUND, importInfo.LocalPath));
                             continue;
                         }
 
@@ -255,7 +255,7 @@ namespace KSPModAdmin.Core.Utils
                     }
                     else
                     {
-                        UpdateMessage(string.Format("Import skipped! Mod Archive \"{0}\"not found.", importInfo.LocalPath), importInfo);
+                        UpdateMessage(string.Format(Messages.MSG_IMPORT_SKIPPED_MOD_0_NOT_FOUND, importInfo.LocalPath), importInfo);
                     }
                 }
 
@@ -401,14 +401,14 @@ namespace KSPModAdmin.Core.Utils
                     addedMod._Checked = false;
 
                     // copy destination
-                    UpdateMessage(string.Format("Copy destinations of mod \"{0}\"", addedMod.Name));
+                    UpdateMessage(string.Format(Messages.MSG_COPY_MOD_DESTINATION_0, addedMod.Name));
                     TryCopyDestToMatchingNodes(importInfo, addedMod);
                 }
 
                 // install the mod.
                 if (!addOnly)
                 {
-                    UpdateMessage(string.Format("Installing mod \"{0}\"", addedMod.Name));
+                    UpdateMessage(string.Format(Messages.MSG_INSTALLING_MOD_0, addedMod.Name));
                     ModSelectionController.ProcessMods(new ModNode[] { addedMod });
                 }
             }
@@ -422,7 +422,7 @@ namespace KSPModAdmin.Core.Utils
         /// Tries to find notes in the new mod, that matches to the outdated mod.
         /// If a matching node was found the destination and/or the checked state of the node will be copied.
         /// </summary>
-        /// <param name="outdatedMod">The outdated mod.</param>
+        /// <param name="importInfo">The import info of the mod to import.</param>
         /// <param name="newMod">The new (updated) mod.</param>
         /// <returns>True if matching files where found, otherwise false.</returns>
         public static bool TryCopyDestToMatchingNodes(ImportInfo importInfo, ModNode newMod)
@@ -452,7 +452,7 @@ namespace KSPModAdmin.Core.Utils
                 matchingNew.Destination = node.InstallDir;
                 ((ModNode)matchingNew.Parent).Destination = node.Parent.InstallDir;
                 matchingNew.Checked = node.Install;
-                ((ModNode) matchingNew.Parent).Checked = node.Install || node.Parent.Install;
+                ((ModNode)matchingNew.Parent).Checked = node.Install || node.Parent.Install;
 
                 // go up the tree to set destinations for parent folders.
                 ModNode parentNew = matchingNew;
@@ -576,7 +576,7 @@ namespace KSPModAdmin.Core.Utils
             public string InstallDir { get; set; }
 
             /// <summary>
-            /// Flag to ditermine if the ImportInfo has childes that should be installed.
+            /// Flag to determine if the ImportInfo has childes that should be installed.
             /// </summary>
             public bool HasChildesToInstall
             {

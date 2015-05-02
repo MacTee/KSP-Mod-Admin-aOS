@@ -666,4 +666,10 @@
     <ChildControl Name="tsmiExportAsText_ToolTip" Value="Export as .txt^Save the current mod list as a text file."/>
   </Control>
 
+  <String Name="MSG_EXTRACTING_MOD_0" Value="Extracting mod &quot;{0}&quot;..."/>
+  <String Name="MSG_MODARCHIVE_0_NOT_FOUND" Value="Mod Archive &quot;{0}&quot; not found!"/>
+  <String Name="MSG_IMPORT_SKIPPED_MOD_0_NOT_FOUND" Value="Import skipped! Mod Archive &quot;{0}&quot; not found."/>
+  <String Name="MSG_COPY_MOD_DESTINATION_0" Value="Copy destinations of mod &quot;{0}&quot;"/>
+  <String Name="MSG_INSTALLING_MOD_0" Value="Installing mod &quot;{0}&quot;..."/>
+
 </Language>

@@ -30,7 +30,7 @@ namespace KSPModAdmin.Core.Views
                     foreach (var e in value)
                         cbLinks.Items.Add(e);
                     cbLinks.SelectedItem = cbLinks.Items[0];
-	                cbLinks.DropDownWidth = DropDownWidth(cbLinks);
+                    cbLinks.DropDownWidth = DropDownWidth(cbLinks);
                 }
                 else
                     cbLinks.SelectedItem = null;
@@ -121,18 +121,22 @@ namespace KSPModAdmin.Core.Views
         }
 
 
-		int DropDownWidth(ComboBox myCombo)
-		{
-			int maxWidth = 0, temp = 0;
-			foreach (var obj in myCombo.Items)
-			{
-				temp = TextRenderer.MeasureText(obj.ToString(), myCombo.Font).Width;
-				if (temp > maxWidth)
-				{
-					maxWidth = temp;
-				}
-			}
-			return maxWidth;
-		}
+        /// <summary>
+        /// Calculates the needed width for the ComboBox DropDown to fit entry lengths.
+        /// </summary>
+        /// <param name="myCombo">The comboBox to calculate the new width for.</param>
+        /// <returns>The new calculated ComboBox DropDown width.</returns>
+        private int DropDownWidth(ComboBox myCombo)
+        {
+            int maxWidth = 0, temp = 0;
+            foreach (var obj in myCombo.Items)
+            {
+                temp = TextRenderer.MeasureText(obj.ToString(), myCombo.Font).Width;
+                if (temp > maxWidth)
+                    maxWidth = temp;
+            }
+
+            return maxWidth;
+        }
     }
 }

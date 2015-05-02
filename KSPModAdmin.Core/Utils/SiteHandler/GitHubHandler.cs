@@ -123,14 +123,14 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
             var downloadInfos = GetDownloadInfo(modInfo);
             DownloadInfo selected = null;
 
-			// If any of the nodes came back as a prerelease, notify the user that there are pre-release nodes
-	        foreach (var d in downloadInfos)
-	        {
-		        if (!d.Name.Contains("Pre-release")) continue;
+            // If any of the nodes came back as a prerelease, notify the user that there are pre-release nodes
+            foreach (var d in downloadInfos)
+            {
+                if (!d.Name.Contains("Pre-release")) continue;
 
-		        var dlg = MessageBox.Show("This download contains a pre-release version. This version might not be stable.", Messages.MSG_TITLE_ATTENTION, MessageBoxButtons.OK);
-		        break;
-	        }
+                var dlg = MessageBox.Show("This download contains a pre-release version. This version might not be stable.", Messages.MSG_TITLE_ATTENTION, MessageBoxButtons.OK);
+                break;
+            }
 
             if (downloadInfos.Count > 1)
             {
@@ -279,47 +279,47 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 
             var nodesrel = htmlDoc.DocumentNode.SelectNodes("//*[@class='release label-latest']/div[2]/ul/li/a");
 
-			var nodespre = htmlDoc.DocumentNode.SelectNodes("//*[@class='release label-prerelease'][1]/div[2]/ul/li/a");
+            var nodespre = htmlDoc.DocumentNode.SelectNodes("//*[@class='release label-prerelease'][1]/div[2]/ul/li/a");
 
-	        if (nodesrel != null)
-			{
-				foreach (var s in nodesrel)
-				{
-					var url = "https://github.com" + s.Attributes["href"].Value;
+            if (nodesrel != null)
+            {
+                foreach (var s in nodesrel)
+                {
+                    var url = "https://github.com" + s.Attributes["href"].Value;
 
-					if (!url.Contains("releases")) continue;
+                    if (!url.Contains("releases")) continue;
 
-					var dInfo = new DownloadInfo
-					{
-						DownloadURL = url,
-						Filename = GetUrlParts(url).Last(),
-						Name = Path.GetFileNameWithoutExtension(GetUrlParts(url).Last())
-					};
+                    var dInfo = new DownloadInfo
+                    {
+                        DownloadURL = url,
+                        Filename = GetUrlParts(url).Last(),
+                        Name = Path.GetFileNameWithoutExtension(GetUrlParts(url).Last())
+                    };
 
-					releases.Add(dInfo);
-				}
-	        }
+                    releases.Add(dInfo);
+                }
+            }
 
-	        if (nodespre != null)
-			{
-				foreach (var s in nodespre)
-				{
-					var url = "https://github.com" + s.Attributes["href"].Value;
+            if (nodespre != null)
+            {
+                foreach (var s in nodespre)
+                {
+                    var url = "https://github.com" + s.Attributes["href"].Value;
 
-					if (!url.Contains("releases")) continue;
+                    if (!url.Contains("releases")) continue;
 
-					var versionNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@class='release label-prerelease']/div[1]/ul/li[1]/a/span[2]").InnerText;
+                    var versionNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@class='release label-prerelease']/div[1]/ul/li[1]/a/span[2]").InnerText;
 
-					var dInfo = new DownloadInfo
-					{
-						DownloadURL = url,
-						Filename = GetUrlParts(url).Last(),
-						Name = "Pre-release: " + versionNode + ": " + Path.GetFileNameWithoutExtension(GetUrlParts(url).Last())
-					};
+                    var dInfo = new DownloadInfo
+                    {
+                        DownloadURL = url,
+                        Filename = GetUrlParts(url).Last(),
+                        Name = "Pre-release: " + versionNode + ": " + Path.GetFileNameWithoutExtension(GetUrlParts(url).Last())
+                    };
 
-					releases.Add(dInfo);
-				}
-	        }
+                    releases.Add(dInfo);
+                }
+            }
 
             return releases;
         }
