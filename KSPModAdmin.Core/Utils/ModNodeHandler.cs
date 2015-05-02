@@ -10,12 +10,15 @@ using SharpCompress.Archive;
 
 namespace KSPModAdmin.Core.Utils
 {
+    /// <summary>
+    /// Wrapper class for ModNode related logic.
+    /// </summary>
     public static class ModNodeHandler
     {
         #region Constants
 
-        const string TYPE = "type = ";
-        const string AVC_VERSION_FILE_EXTENSION = ".version";
+        private const string TYPE = "type = ";
+        private const string AVC_VERSION_FILE_EXTENSION = ".version";
 
         #endregion
 
@@ -158,8 +161,6 @@ namespace KSPModAdmin.Core.Utils
         /// Copies Infos to the ModInfo.
         /// Try to find a compatible SiteHandler for the provided urls (like Download, URL, ChangeLogUrl, GitHub)
         /// </summary>
-        /// <param name="avcInfo"></param>
-        /// <param name="modInfo"></param>
         private static void ImportAvcInfo(AVCInfo avcInfo, ref ModInfo modInfo)
         {
             Messenger.AddDebug(string.Format(Messages.MSG_IMPORTING_AVC_VERSIONFILE_INFO_0, modInfo.Name));
@@ -175,8 +176,14 @@ namespace KSPModAdmin.Core.Utils
             if (!string.IsNullOrEmpty(avcInfo.Url) && (string.IsNullOrEmpty(modInfo.AvcURL)))
             {
                 AVCInfo newAvcInfo = null;
-                try { newAvcInfo = AVCParser.ReadFromWeb(avcInfo.Url); }
-                catch (Exception ex) { Messenger.AddError(string.Format(Messages.MSG_ERROR_DOWNLOADING_NEW_AVC_VERION_FILE_FAILED), ex); }
+                try
+                {
+                    newAvcInfo = AVCParser.ReadFromWeb(avcInfo.Url);
+                }
+                catch (Exception ex)
+                {
+                    Messenger.AddError(string.Format(Messages.MSG_ERROR_DOWNLOADING_NEW_AVC_VERION_FILE_FAILED), ex);
+                }
 
                 if (newAvcInfo != null)
                 {
@@ -221,6 +228,7 @@ namespace KSPModAdmin.Core.Utils
         /// <param name="filename">Zip-File path</param>
         /// <param name="parent">The parent node where the created node will be attached attach to.</param>
         /// <param name="pathSeperator">The separator character used within the filename.</param>
+        /// <param name="isDirectory">Flag that indicates if entry is a directory entry or not.</param>
         /// <param name="silent">Determines if info messages should be added.</param>
         private static void CreateModNode(string filename, ModNode parent, char pathSeperator, bool isDirectory, bool silent = false)
         {
@@ -251,9 +259,9 @@ namespace KSPModAdmin.Core.Utils
         }
 
         /// <summary>
-        /// Splits the filename at the pathSeperator and creates a dir node for each split part.
+        /// Splits the filename at the pathSeparator and creates a dir node for each split part.
         /// </summary>
-        /// <param name="filename">Fullpath within the archive.</param>
+        /// <param name="filename">Full path within the archive.</param>
         /// <param name="parent">The parent TreeNode.</param>
         /// <param name="pathSeperator">The path separator that is used within the archive.</param>
         /// <returns>The last created node.</returns>
@@ -282,7 +290,7 @@ namespace KSPModAdmin.Core.Utils
         {
             ModNode node = new ModNode(fileName, Path.GetFileName(fileName), NodeType.UnknownFile);
             // TODO:!!!
-            //node.ToolTipText = "<No path selected>";
+            ////node.ToolTipText = "<No path selected>";
             parent.Nodes.Add(node);
 
             if (!silent)
@@ -294,6 +302,7 @@ namespace KSPModAdmin.Core.Utils
         /// </summary>
         /// <param name="dirName">Name of the directory.</param>
         /// <param name="parent">The parent node where the created node will be attached attach to.</param>
+        /// <returns>The new created ModNode.</returns>
         private static ModNode CreateDirListEntry(string dirName, ModNode parent)
         {
             // dir already created?
@@ -302,7 +311,7 @@ namespace KSPModAdmin.Core.Utils
             {
                 dirNode = new ModNode(dirName, dirName);
                 // TODO:!!!
-                //dirNode.ToolTipText = "<No path selected>";
+                ////dirNode.ToolTipText = "<No path selected>";
                 dirNode.NodeType = (KSPPathHelper.IsKSPDir(dirName.ToLower())) ? NodeType.KSPFolder : NodeType.UnknownFolder;
                 parent.Nodes.Add(dirNode);
 
@@ -325,16 +334,16 @@ namespace KSPModAdmin.Core.Utils
         /// <returns>True if matching files where found, otherwise false.</returns>
         public static bool TryCopyDestToMatchingNodes(ModNode outdatedMod, ModNode newMod)
         {
-            //if (outdatedMod.Name == newMod.Name)
-            //    return true;
+            ////if (outdatedMod.Name == newMod.Name)
+            ////    return true;
 
             bool matchFound = false;
             List<ModNode> outdatedFileNodes = outdatedMod.GetAllFileNodes();
             if (outdatedFileNodes.Count == 0)
                 return matchFound;
 
-            //List<Tuple<TreeNodeMod, Tuple<TreeNodeMod, TreeNodeMod>>> newMatchingFileNodes1 = 
-            //    new List<Tuple<TreeNodeMod, Tuple<TreeNodeMod, TreeNodeMod>>>();
+            ////List<Tuple<TreeNodeMod, Tuple<TreeNodeMod, TreeNodeMod>>> newMatchingFileNodes1 = 
+            ////    new List<Tuple<TreeNodeMod, Tuple<TreeNodeMod, TreeNodeMod>>>();
             foreach (var node in outdatedFileNodes)
             {
                 ModNode parentOld = node.Parent as ModNode;
@@ -342,7 +351,7 @@ namespace KSPModAdmin.Core.Utils
                     continue;
 
                 string path = parentOld.Text + '/' + node.Text;
-                ModNode matchingNew = ModSelectionTreeModel.SearchNodeByPath(path, newMod, '/');
+                ModNode matchingNew = ModSelectionTreeModel.SearchNodeByPathNew(path, newMod, '/');
                 if (matchingNew == null)
                     continue;
 
@@ -362,7 +371,7 @@ namespace KSPModAdmin.Core.Utils
                         break;
 
                     path = parentOld.Parent.Text + '/' + path;
-                    if (ModSelectionTreeModel.SearchNodeByPath(path, newMod, '/') == null)
+                    if (ModSelectionTreeModel.SearchNodeByPathNew(path, newMod, '/') == null)
                         break;
 
                     parentNew = parentNew.Parent as ModNode;
@@ -375,8 +384,8 @@ namespace KSPModAdmin.Core.Utils
                     parentOld = parentOld.Parent as ModNode;
                 }
 
-                //newMatchingFileNodes1.Add(new Tuple<TreeNodeMod, Tuple<TreeNodeMod, TreeNodeMod>>(parentOld,
-                //    new Tuple<TreeNodeMod, TreeNodeMod>(matchingNew, node)));
+                ////newMatchingFileNodes1.Add(new Tuple<TreeNodeMod, Tuple<TreeNodeMod, TreeNodeMod>>(parentOld,
+                ////    new Tuple<TreeNodeMod, TreeNodeMod>(matchingNew, node)));
             }
 
             return matchFound;
@@ -525,14 +534,13 @@ namespace KSPModAdmin.Core.Utils
         /// </summary>
         /// <param name="srcNode">Node to set the destination path.</param>
         /// <param name="destPath">The destination path.</param>
-        /// <param name="copyContent"></param>
         public static void SetDestinationPaths(ModNode srcNode, string destPath, bool copyContent = false)
         {
             if (!copyContent)
             {
-                //if (srcNode.Text.ToLower() == Constants.GAMEDATA)
-                //    srcNode.Destination = destPath;
-                //else
+                ////if (srcNode.Text.ToLower() == Constants.GAMEDATA)
+                ////    srcNode.Destination = destPath;
+                ////else
                 srcNode.Destination = (!string.IsNullOrEmpty(destPath)) ? Path.Combine(destPath, srcNode.Text) : string.Empty;
 
                 destPath = (!string.IsNullOrEmpty(srcNode.Destination)) ? srcNode.Destination : string.Empty;
@@ -551,7 +559,6 @@ namespace KSPModAdmin.Core.Utils
         /// Returns the destination path of the craft.
         /// </summary>
         /// <param name="craftNode">The craft to get the destination for.</param>
-        /// <returns>The destination path of the craft.</returns>
         public static void SetCraftDestination(ModNode craftNode)
         {
             string zipPath = craftNode.ZipRoot.Key;
@@ -607,13 +614,13 @@ namespace KSPModAdmin.Core.Utils
         public static void SetToolTips(ModNode node)
         {
             // TODO:!!!
-            //if (node.Destination != string.Empty)
-            //    node.ToolTipText = node.Destination.ToLower().Replace(MainForm.GetPath(KSP_Paths.KSP_Root).ToLower(), "KSP install folder");
-            //else
-            //    node.ToolTipText = "<No path selected>";
+            ////if (node.Destination != string.Empty)
+            ////    node.ToolTipText = node.Destination.ToLower().Replace(MainForm.GetPath(KSP_Paths.KSP_Root).ToLower(), "KSP install folder");
+            ////else
+            ////    node.ToolTipText = "<No path selected>";
 
-            //foreach (TreeNodeMod child in node.Nodes)
-            //    SetToolTips(child);
+            ////foreach (TreeNodeMod child in node.Nodes)
+            ////    SetToolTips(child);
         }
 
         #endregion
@@ -627,6 +634,7 @@ namespace KSPModAdmin.Core.Utils
         /// <param name="silent">Determines if info messages should be added displayed.</param>
         /// <param name="overrideOn">Flag to set override of files on.</param>
         /// <param name="progressChanged">Callback function when the progress of the processing changed.</param>
+        /// <returns>Count of processed nodes.</returns>
         public static int ProcessMod(ModNode mod, bool silent = false, bool overrideOn = false, AsyncProgressChangedHandler progressChanged = null, int processedNodeCount = 0)
         {
             if (!silent)
@@ -658,10 +666,11 @@ namespace KSPModAdmin.Core.Utils
         /// Processes all passed nodes. (Adds/Removes the MOD to/from the KSP install folders).
         /// </summary>
         /// <param name="modArray">The NodeArray to process.</param>
+        /// <param name="processedNodeCount">For internal use only!</param>
         /// <param name="silent">Determines if info messages should be added displayed.</param>
         /// <param name="overrideOn">Flag to set override of files on.</param>
         /// <param name="progressChanged">Callback function when the progress of the processing changed.</param>
-        /// <param name="processedNodeCount">For internal use only!</param>
+        /// <returns>Count of processed nodes.</returns>
         private static int ProcessNodes(ModNode[] modArray, ref int processedNodeCount, bool silent = false, bool overrideOn = false, AsyncProgressChangedHandler progressChanged = null)
         {
             foreach (ModNode node in modArray)
@@ -693,10 +702,10 @@ namespace KSPModAdmin.Core.Utils
         /// Processes the passed node. (Adds/Removes the MOD to/from the KSP install folders).
         /// </summary>
         /// <param name="node">The node to process.</param>
+        /// <param name="processedNodeCount">For internal use only!</param>
         /// <param name="silent">Determines if info messages should be added displayed.</param>
         /// <param name="overrideOn">Flag to set override of files on.</param>
         /// <param name="progressChanged">Callback function when the progress of the processing changed.</param>
-        /// <param name="processedNodeCount">For internal use only!</param>
         private static void ProcessNode(ModNode node, ref int processedNodeCount, bool silent = false, bool overrideOn = false, AsyncProgressChangedHandler progressChanged = null)
         {
             if (node.Checked)
@@ -928,8 +937,9 @@ namespace KSPModAdmin.Core.Utils
         /// <summary>
         /// Try to delete all not processed directories.
         /// </summary>
-        /// <param name="dir">The dir to delete.</param>
+        /// <param name="node">The dir node to delete.</param>
         /// <param name="silent">Determines if info messages should be added displayed.</param>
+        /// <returns>True on success.</returns>
         private static bool DeleteDirectory(ModNode node, bool silent = false)
         {
             string destination = node.Destination;

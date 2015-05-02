@@ -44,6 +44,14 @@
 //// TODO
 /////////////////////
 
+- ModInfos are automatically added about add-ons where a valid version control site is detected. 
+  That is great, however some information fields are not automatically filled (Author, Creation date, Change date). 
+  I currently have add-ons checking with many different Version Control sites (GitHub, CurseForge, KerbalStuff, KSP Forum) 
+  but with none those fields are filled.
+
+- Overwrite button states are indistinguishable. It's hard to say, what mode it is in. May be checkbox would be more visual?
+  - Change ToolTip to display On/Off state?
+
 - AVC Plugin version file support
   - Bug fix see BUGS above.
   
@@ -51,16 +59,11 @@
 
 - is everything Async ???
 
+- new strings in frmInExport.
+
 - KSPForum support.
 
 - Control rearrangement for localization
-
-- Don't load all languages into memory! 
-
-- Tab to enable/disable plugins
-  - Don't enable unknown plugins during loading.
-  - Save known plugins (+ enable state) to AppConfig.
-  - Remove known but not found plugins (or ask the user).
 
 - ModSelection
   -> key action binding -> del = remove mod ...
@@ -74,12 +77,17 @@
   - spelling error
   - wording
 
+- Don't load all languages into memory! 
+
+- Tab to enable/disable plugins
+  - Don't enable unknown plugins during loading.
+  - Save known plugins (+ enable state) to AppConfig.
+  - Remove known but not found plugins (or ask the user).
+
 - Try loading old KSPModAdmin.cfg file if no new cfg file is available.
   -> For AppConfig and KSPConfig!
   
 - Search in ModSelection.
-- Overwrite button states are indistinguishable. It's hard to say, what mode it is in. May be checkbox would be more visual?
-  - Change ToolTip to display On/Off state?
 
 - Center CheckBoxes us TreeViewAdv.
 
@@ -91,3 +99,5 @@
 
 - Option to add files to an exclude list for mod install (like readme, txt, licenses ...)
 - Compress for zipping.
+- Add/Show Cancel button during Archive extraction 
+  (think about what happens to the already extract or deleted files --> transaction?!)

@@ -3,6 +3,9 @@ using KSPModAdmin.Core.Views;
 
 namespace KSPModAdmin.Core
 {
+    /// <summary>
+    /// Interface for a KSP Mod Admin plugin.
+    /// </summary>
     public interface IKSPMAPlugin
     {
         /// <summary>
@@ -26,6 +29,9 @@ namespace KSPModAdmin.Core
         TabView[] OptionTabViews { get; }
     }
 
+    /// <summary>
+    /// Class that holds the view for a Tab of the frmMain of a KSPMA plugin.
+    /// </summary>
     public class TabView
     {
         /// <summary>
@@ -39,6 +45,9 @@ namespace KSPModAdmin.Core
         public Image TabIcon { get; private set; }
 
 
+        /// <summary>
+        /// Creates a new instance of the TabView class.
+        /// </summary>
         public TabView(ucBase tabUserControl, Image tabIcon = null)
         {
             TabUserControl = tabUserControl;

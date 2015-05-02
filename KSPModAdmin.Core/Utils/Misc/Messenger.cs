@@ -11,17 +11,8 @@ namespace KSPModAdmin.Core.Utils
         /// <summary>
         /// List of all listeners.
         /// </summary>
-        static List<IMessageReceiver> mListeners = new List<IMessageReceiver>(); 
-
-
-        /// <summary>
-        /// Static constructor.
-        /// </summary>
-        static Messenger()
-        {
-            
-        }
-
+        private static List<IMessageReceiver> mListeners = new List<IMessageReceiver>(); 
+        
 
         /// <summary>
         /// Adds a new listener to the receiver list.

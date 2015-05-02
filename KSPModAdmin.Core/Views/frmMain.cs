@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Windows.Forms;
 using KSPModAdmin.Core.Controller;
 using KSPModAdmin.Core.Model;
-using KSPModAdmin.Core.Utils;
-using KSPModAdmin.Core.Utils.Localization;
 
 namespace KSPModAdmin.Core.Views
 {
+    [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Reviewed. Suppression is OK here.")]
     public partial class frmMain : frmBase
     {
         /// <summary>
@@ -86,8 +86,6 @@ namespace KSPModAdmin.Core.Views
         /// <summary>
         /// Handles the Load event of the form.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void frmMain_Load(object sender, EventArgs e)
         {
         }
@@ -95,8 +93,6 @@ namespace KSPModAdmin.Core.Views
         /// <summary>
         /// Event handler for the FormClosing from frmMain.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             MainController.ShutDown(false);
@@ -105,8 +101,6 @@ namespace KSPModAdmin.Core.Views
         /// <summary>
         /// Event handler for the SelectedIndexChanged from cbKSPPath.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void cbKSPPath_SelectedIndexChanged(object sender, EventArgs e)
         {
             OptionsController.SelectedKSPPath = cbKSPPath.SelectedItem.ToString();

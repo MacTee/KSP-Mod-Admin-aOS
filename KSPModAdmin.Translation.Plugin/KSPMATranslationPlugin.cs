@@ -5,14 +5,23 @@ using KSPModAdmin.Translation.Plugin.Properties;
 
 namespace KSPModAdmin.Translation.Plugin
 {
+    /// <summary>
+    /// KSP MA plugin container class.
+    /// </summary>
     public class KSPMATranslationPlugin : IKSPMAPlugin
     {
         private TabView[] mMainTabViews = null;
         private TabView[] mOptionTabViews = new List<TabView>().ToArray();
 
 
+        /// <summary>
+        /// Name of the plugin.
+        /// </summary>
         public string Name { get { return "Translation Plugin"; } }
 
+        /// <summary>
+        /// Description of the plugin.
+        /// </summary>
         public string Description
         {
             get
@@ -21,6 +30,9 @@ namespace KSPModAdmin.Translation.Plugin
             }
         }
 
+        /// <summary>
+        /// Array of TabViews that the mod imports.
+        /// </summary>
         public TabView[] MainTabViews
         {
             get
@@ -32,6 +44,9 @@ namespace KSPModAdmin.Translation.Plugin
             }
         }
 
+        /// <summary>
+        /// Array of OptionTabViews that the mod imports.
+        /// </summary>
         public TabView[] OptionTabViews
         {
             get

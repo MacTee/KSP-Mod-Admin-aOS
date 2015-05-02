@@ -13,6 +13,9 @@ using KSPModAdmin.Core.Views;
 
 namespace KSPModAdmin.Core.Controller
 {
+    /// <summary>
+    /// Controller for the frmMain.
+    /// </summary>
     public class MainController : IMessageReceiver
     {
         private const string KSPMA_LOG_FILENAME = "KSPMA.log";
@@ -23,7 +26,7 @@ namespace KSPModAdmin.Core.Controller
         /// Gets the singleton of this class.
         /// </summary>
         protected static MainController Instance { get { return mInstance ?? (mInstance = new MainController()); } }
-        protected static MainController mInstance = null;
+        private static MainController mInstance = null;
 
         /// <summary>
         /// Flag to determine if the shut down process is running.
@@ -73,6 +76,9 @@ namespace KSPModAdmin.Core.Controller
             }
         }
 
+        /// <summary>
+        /// Gets the KSP LaunchPanel (ucKSPStartup).
+        /// </summary>
         public static ucKSPStartup LaunchPanel { get { return View.ucKSPStartup1; } }
 
         #endregion
@@ -97,6 +103,9 @@ namespace KSPModAdmin.Core.Controller
 
         #endregion
 
+        /// <summary>
+        /// Shows the KSP MA frmMain.
+        /// </summary>
         public static void ShowMainForm()
         {
             try
@@ -123,6 +132,9 @@ namespace KSPModAdmin.Core.Controller
             Log.AddInfoS(string.Format("---> KSP MA v{0} closed <---{1}", VersionHelper.GetAssemblyVersion(true), Environment.NewLine));
         }
 
+        /// <summary>
+        /// Shuts KSP MA down.
+        /// </summary>
         public static void ShutDown(bool closeMainView = true)
         {
             IsShutDown = true;
@@ -231,9 +243,6 @@ namespace KSPModAdmin.Core.Controller
         /// <summary>
         /// Sets the ToolTip values to all controls of the view.
         /// </summary>
-        /// <param name="ttOnOff"></param>
-        /// <param name="ttDelay"></param>
-        /// <param name="ttDisplayTime"></param>
         internal static void SetToolTipValues(bool ttOnOff, decimal ttDelay, decimal ttDisplayTime)
         {
             SetToolTipValues(ttOnOff, ttDelay, ttDisplayTime, View);
@@ -242,10 +251,6 @@ namespace KSPModAdmin.Core.Controller
         /// <summary>
         /// Sets the ToolTip values to all controls of the view.
         /// </summary>
-        /// <param name="ttOnOff"></param>
-        /// <param name="ttDelay"></param>
-        /// <param name="ttDisplayTime"></param>
-        /// <param name="control"></param>
         protected static void SetToolTipValues(bool ttOnOff, decimal ttDelay, decimal ttDisplayTime, Control control)
         {
             if (control == null)
@@ -337,11 +342,11 @@ namespace KSPModAdmin.Core.Controller
         /// </summary>
         protected static void SetupLogFile()
         {
-            //#if DEBUG
+            ////#if DEBUG
             Log.GlobalInstance.LogMode = LogMode.All;
-            //#else
-            //            Log.GlobalInstance.LogMode = LogMode.WarningsAndErrors;
-            //#endif
+            ////#else
+            ////            Log.GlobalInstance.LogMode = LogMode.WarningsAndErrors;
+            ////#endif
             try
             {
                 string logPath = Path.Combine(Application.StartupPath, KSPMA_LOG_FILENAME);
@@ -370,7 +375,7 @@ namespace KSPModAdmin.Core.Controller
         {
             string path = KSPPathHelper.GetPath(KSPPaths.AppConfig);
             path = Directory.GetParent(path).ToString();
-            if(!Directory.Exists(path))
+            if (!Directory.Exists(path))
             {
                 Messenger.AddDebug("Creating config directory: " + path);
                 Directory.CreateDirectory(path);
@@ -378,7 +383,7 @@ namespace KSPModAdmin.Core.Controller
         }
         
         /// <summary>
-        /// Loads the AppConfig & KSPConfig.
+        /// Loads the AppConfig and KSPConfig.
         /// </summary>
         protected static void LoadConfigs()
         {
@@ -391,8 +396,8 @@ namespace KSPModAdmin.Core.Controller
                     Messenger.AddInfo(Messages.MSG_DONE);
 
                     // LoadKSPConfig will be started by KSPPathChange event.
-                    //if (KSPPathHelper.IsKSPInstallFolder(OptionsController.SelectedKSPPath))
-                    //    LoadKSPConfig();
+                    ////if (KSPPathHelper.IsKSPInstallFolder(OptionsController.SelectedKSPPath))
+                    ////    LoadKSPConfig();
                 }
                 else
                 {
@@ -498,7 +503,7 @@ namespace KSPModAdmin.Core.Controller
         }
 
         /// <summary>
-        /// Shows a MessageBox with the info, that KSP MA needs admin rights if KSP is installed to c:\Programme
+        /// Shows a MessageBox with the info, that KSP MA needs admin rights if KSP is installed to c:\{ProgramFiles}\...
         /// </summary>
         /// <param name="ex">The message of the Exception will be displayed too.</param>
         protected static void ShowAdminRightsDlg(Exception ex)
@@ -515,12 +520,12 @@ namespace KSPModAdmin.Core.Controller
         /// </summary>
         protected static void LoadSiteHandler()
         {
-            //Add default SiteHandler
-            var siteHandlers = PluginLoader.GetPlugins<ISiteHandler>(new[] {Assembly.GetExecutingAssembly()});
+            // Add default SiteHandler
+            var siteHandlers = PluginLoader.GetPlugins<ISiteHandler>(new[] { Assembly.GetExecutingAssembly() });
             foreach (ISiteHandler handler in siteHandlers)
                 SiteHandlerManager.RegisterSiteHandler(handler);
 
-            //Add additional SiteHandlers
+            // Add additional SiteHandlers
             siteHandlers = PluginLoader.LoadPlugins<ISiteHandler>(KSPPathHelper.GetPath(KSPPaths.KSPMA_Plugins));
             foreach (ISiteHandler handler in siteHandlers)
                 SiteHandlerManager.RegisterSiteHandler(handler);
@@ -575,7 +580,7 @@ namespace KSPModAdmin.Core.Controller
                             TabPage tabPage = new TabPage();
                             tabPage.Text = tabView.TabUserControl.GetTabCaption();
                             tabPage.Controls.Add(tabView.TabUserControl);
-                            tabView.TabUserControl.Dock = DockStyle.Fill; ;
+                            tabView.TabUserControl.Dock = DockStyle.Fill;
                             OptionsController.View.TabControl.TabPages.Add(tabPage);
 
                             mAddedTabViews.Add(tabView.TabUserControl.GetTabCaption(), tabView);
@@ -592,7 +597,7 @@ namespace KSPModAdmin.Core.Controller
                 Messenger.AddError(string.Format("Plugin loading error: \"{0}\"", ex.Message), ex);
             }
         }
-        protected static Dictionary<string, TabView> mAddedTabViews = new Dictionary<string, TabView>();
+        private static Dictionary<string, TabView> mAddedTabViews = new Dictionary<string, TabView>();
 
         #region EventDistributor callback functions.
 
@@ -660,39 +665,39 @@ namespace KSPModAdmin.Core.Controller
 
 
 
-        //internal static void ShowFormTest()
-        //{
-        //    AsyncTask<KSPDialogResult>.DoWork(() =>
-        //        {
-        //            //return MainController.ShowForm<frmSelectDownload>();
-        //            List<DownloadInfo> links = new List<DownloadInfo>();
-        //            links.Add(new DownloadInfo() { Name = "Test 1", DownloadURL = "www.test1.de/mod.zip", Filename = "mod.zip", KnownHost = true });
-        //            links.Add(new DownloadInfo() { Name = "Test 2", DownloadURL = "www.test2.de/anothermod.zip", Filename = "anothermod.zip", KnownHost = true });
-        //            //return MainController.ShowForm<frmSelectDownload>(new object[] { links });
-        //            return MainController.ShowForm<frmSelectDownload>(new object[] { links, links[1] });
+        ////internal static void ShowFormTest()
+        ////{
+        ////    AsyncTask<KSPDialogResult>.DoWork(() =>
+        ////        {
+        ////            //return MainController.ShowForm<frmSelectDownload>();
+        ////            List<DownloadInfo> links = new List<DownloadInfo>();
+        ////            links.Add(new DownloadInfo() { Name = "Test 1", DownloadURL = "www.test1.de/mod.zip", Filename = "mod.zip", KnownHost = true });
+        ////            links.Add(new DownloadInfo() { Name = "Test 2", DownloadURL = "www.test2.de/anothermod.zip", Filename = "anothermod.zip", KnownHost = true });
+        ////            //return MainController.ShowForm<frmSelectDownload>(new object[] { links });
+        ////            return MainController.ShowForm<frmSelectDownload>(new object[] { links, links[1] });
 
-        //            // Why the hell does this code below work???
-        //            // Shouldn't this throw an exception cause of displaying a Form in a worker thread... =(
-        //            // NO, ONLY IF THE FORM CHANGES SOMETHING ON THE MAIN GUI ...
-        //            // If the displayed Form doesn't change any thing on the main GUI you can safely use the code below.
-        //            //frmSelectDownload frm = new frmSelectDownload(links, links[1]);
-        //            //frm.ShowDialog();
-        //            //return frm.GetKSPDialogResults();
-        //        },
-        //        (result, ex) =>
-        //        {
-        //            if (ex != null)
-        //                // Show errors
-        //                MessageBox.Show(View,
-        //                    string.Format("Error: {0}{1}StackTrace:{1}{2}", ex.Message, Environment.NewLine,
-        //                        ex.StackTrace), "Error");
-        //            else
-        //                // Show results
-        //                MessageBox.Show(View,
-        //                    string.Format("DialogResult: {0}{1}AdditionalResult: {2}{1}Exception: {3}",
-        //                        result.DialogResult, Environment.NewLine, result.AdditionalResult, result.Exception),
-        //                    "KSPDialogResults");
-        //        });
-        //}
+        ////            // Why the hell does this code below work???
+        ////            // Shouldn't this throw an exception cause of displaying a Form in a worker thread... =(
+        ////            // NO, ONLY IF THE FORM CHANGES SOMETHING ON THE MAIN GUI ...
+        ////            // If the displayed Form doesn't change any thing on the main GUI you can safely use the code below.
+        ////            //frmSelectDownload frm = new frmSelectDownload(links, links[1]);
+        ////            //frm.ShowDialog();
+        ////            //return frm.GetKSPDialogResults();
+        ////        },
+        ////        (result, ex) =>
+        ////        {
+        ////            if (ex != null)
+        ////                // Show errors
+        ////                MessageBox.Show(View,
+        ////                    string.Format("Error: {0}{1}StackTrace:{1}{2}", ex.Message, Environment.NewLine,
+        ////                        ex.StackTrace), "Error");
+        ////            else
+        ////                // Show results
+        ////                MessageBox.Show(View,
+        ////                    string.Format("DialogResult: {0}{1}AdditionalResult: {2}{1}Exception: {3}",
+        ////                        result.DialogResult, Environment.NewLine, result.AdditionalResult, result.Exception),
+        ////                    "KSPDialogResults");
+        ////        });
+        ////}
     }
 }

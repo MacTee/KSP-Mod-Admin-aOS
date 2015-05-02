@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Text;
 using Newtonsoft.Json.Linq;
@@ -10,18 +11,26 @@ namespace KSPModAdmin.Core.Utils
     /// </summary>
     public class AVCParser
     {
+        /// <summary>
+        /// Loads the AVC file from the web url, parses the json response and creates a AVCInfo object.
+        /// </summary>
+        /// <returns>The new created AVCInfo object or null.</returns>
         public static AVCInfo ReadFromWeb(string url)
         {
             if (string.IsNullOrEmpty(url))
                 return null;
 
-            string content = www.Load(url);
+            string content = Www.Load(url);
             if (string.IsNullOrEmpty(content))
                 return null;
 
             return ReadFromString(content);
         }
 
+        /// <summary>
+        /// Loads the AVC file, parses the json object and creates a AVCInfo object.
+        /// </summary>
+        /// <returns>The new created AVCInfo object or null.</returns>
         public static AVCInfo ReadFromFile(string path)
         {
             if (!File.Exists(path))
@@ -30,6 +39,10 @@ namespace KSPModAdmin.Core.Utils
             return ReadFromString(File.ReadAllText(path));
         }
 
+        /// <summary>
+        /// Creates a AVC file from a json string.
+        /// </summary>
+        /// <returns>The new created AVCInfo object or null.</returns>
         public static AVCInfo ReadFromString(string jsonString)
         {
             AVCInfo avcInfo = new AVCInfo();
@@ -91,6 +104,7 @@ namespace KSPModAdmin.Core.Utils
         }
     }
 
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class AVCInfo
     {
         public string Name { get; set; }
@@ -176,7 +190,7 @@ namespace KSPModAdmin.Core.Utils
                 sb.Append("KspVersionMin = {11}, ");
 
             string temp = sb.ToString();
-            temp = temp.Substring(0, temp.Length-2) + ")";
+            temp = temp.Substring(0, temp.Length - 2) + ")";
             return string.Format(temp, Name, Url, Download, ChangeLog, ChangeLogUrl, GitHubUsername, GitHubRepository, GitHubAllowPreRelease, 
                 Version, KspVersion, KspVersionMin, KspVersionMax);
         }

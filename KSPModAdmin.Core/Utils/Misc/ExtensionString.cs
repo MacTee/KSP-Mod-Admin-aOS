@@ -2,6 +2,9 @@
 
 namespace KSPModAdmin.Core.Utils
 {
+    /// <summary>
+    /// String extension class.
+    /// </summary>
     public static class ExtensionsString
     {
         /// <summary>

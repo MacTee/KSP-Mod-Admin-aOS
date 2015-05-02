@@ -11,6 +11,9 @@ using SharpCompress.Common;
 
 namespace KSPModAdmin.Core.Utils
 {
+    /// <summary>
+    /// Delegate for the Message callback function.
+    /// </summary>
     public delegate void MessageCallbackHandler(object sender, string message);
 
     /// <summary>
@@ -21,14 +24,23 @@ namespace KSPModAdmin.Core.Utils
     {
         #region Constants
 
-        public const string KSPTEMPDIR = "KSPTemp";
-        public const string MODPACKXML = "ModPack.xml";
-        public const string ZERO = "0";
-        public const string ONE = "1";
-        public const string XMLVERSION = "1.0";
-        public const string XMLUTF8 = "UTF-8";
-        public const string MODS_FOLDER = "/Mods/";
-        public const string MODS_FOLDER_WIN = "\\Mods\\";
+        private const string KSPTEMPDIR = "KSPTemp";
+        private const string MODPACKXML = "ModPack.xml";
+        private const string ZERO = "0";
+        private const string ONE = "1";
+        private const string XMLVERSION = "1.0";
+        private const string XMLUTF8 = "UTF-8";
+        private const string MODS_FOLDER = "/Mods/";
+        private const string MODS_FOLDER_WIN = "\\Mods\\";
+
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Callback function for messages during the import export process.
+        /// </summary>
+        public static MessageCallbackHandler MessageCallbackFunction { get; set; }
 
         #endregion
 
@@ -40,7 +52,7 @@ namespace KSPModAdmin.Core.Utils
         /// <param name="modsToExport">List of mods to export.</param>
         /// <param name="fileName">Filename for the new created ModPack.</param>
         /// <param name="includeMods">Flag to determine if the mod archives should be included to.</param>
-        public static void Export(List<ModNode> modsToExport, string fileName, bool includeMods = false, MessageCallbackHandler messageCallback = null)
+        public static void Export(List<ModNode> modsToExport, string fileName, bool includeMods = false)
         {
             XmlNode modsNode = CreateXmlDocument();
             XmlDocument doc = modsNode.OwnerDocument;
@@ -50,8 +62,7 @@ namespace KSPModAdmin.Core.Utils
             {
                 foreach (var mod in modsToExport)
                 {
-                    if (messageCallback != null)
-                        messageCallback(null, string.Format(Messages.MSG_ADD_MOD_0_TO_MODPACK, mod.Text));
+                    UpdateMessage(string.Format(Messages.MSG_ADD_MOD_0_TO_MODPACK, mod.Text));
 
                     if (includeMods && mod.ZipExists)
                         archive.AddEntry(Path.Combine(Constants.MODS, Path.GetFileName(mod.Name)), mod.Name);
@@ -181,8 +192,7 @@ namespace KSPModAdmin.Core.Utils
         /// <param name="downloadMods">Flag to determine if the missing mods should be downloaded.</param>
         /// <param name="copyDest">Flag to determine if the destination should be copied or if the auto destination detection should be used.</param>
         /// <param name="addOnly">Flag to determine if the mod should be installed or only added to the ModSelection.</param>
-        /// <param name="messageCallback">Callback function for messages during the import process.</param>
-        public static void Import(string fileName, string modExtractDir, bool extractMods, bool downloadMods, bool copyDest, bool addOnly, MessageCallbackHandler messageCallback = null)
+        public static void Import(string fileName, string modExtractDir, bool extractMods, bool downloadMods, bool copyDest, bool addOnly)
         {
             string tempDocPath = Path.Combine(Path.GetTempPath(), KSPTEMPDIR);
             Directory.CreateDirectory(tempDocPath);
@@ -192,6 +202,7 @@ namespace KSPModAdmin.Core.Utils
             {
                 foreach (var entry in archive.Entries)
                 {
+                    // extract ModPackxml
                     if (entry.FilePath == MODPACKXML)
                     {
                         entry.WriteToDirectory(tempDocPath);
@@ -199,10 +210,11 @@ namespace KSPModAdmin.Core.Utils
                         if (!extractMods)
                             break;
                     }
+
+                        // extract mods from modpack to Option
                     else if (extractMods && (entry.FilePath.Contains(MODS_FOLDER) || entry.FilePath.Contains(MODS_FOLDER_WIN)))
                     {
-                        if (messageCallback != null)
-                            messageCallback(null, string.Format("Extracting mod \"{0}\"", entry.FilePath));
+                        UpdateMessage(string.Format(Messages.MSG_EXTRACTING_MOD_0, entry.FilePath));
 
                         entry.WriteToDirectory(modExtractDir);
                     }
@@ -213,6 +225,7 @@ namespace KSPModAdmin.Core.Utils
             {
                 List<ImportInfo> importQueue = new List<ImportInfo>();
 
+                // Get Mod-XmlNodes from ModPack.xml
                 XmlDocument doc = new XmlDocument();
                 doc.Load(Path.Combine(tempDocPath, MODPACKXML));
                 XmlNodeList nodeList = doc.GetElementsByTagName(Constants.MOD);
@@ -222,18 +235,19 @@ namespace KSPModAdmin.Core.Utils
                     importInfo.LocalPath = Path.Combine(modExtractDir, importInfo.LocalPath);
                     if (downloadMods && !File.Exists(importInfo.LocalPath))
                     {
-                        if (messageCallback != null)
-                            messageCallback(importInfo, string.Format(Messages.MSG_DOWNLOADING_MOD_0, importInfo.Name));
+                        UpdateMessage(string.Format(Messages.MSG_DOWNLOADING_MOD_0, importInfo.Name), importInfo);
 
                         if (importInfo.SiteHandler == null || !DownloadMod(ref importInfo))
+                        {
+                            UpdateMessage(string.Format(Messages.MSG_MODARCHIVE_0_NOT_FOUND, importInfo.LocalPath));
                             continue;
+                        }
 
                         importQueue.Add(importInfo);
                     }
                     else if (File.Exists(importInfo.LocalPath))
                     {
-                        if (messageCallback != null)
-                            messageCallback(importInfo, string.Format(Messages.MSG_DOWNLOADING_MOD_0, importInfo.Name));
+                        UpdateMessage(string.Format(Messages.MSG_DOWNLOADING_MOD_0, importInfo.Name), importInfo);
 
                         importInfo.ModInfo = GetModInfo(importInfo);
                         importInfo.DownloadSuccessfull = true;
@@ -241,18 +255,16 @@ namespace KSPModAdmin.Core.Utils
                     }
                     else
                     {
-                        if (messageCallback != null)
-                            messageCallback(importInfo, string.Format("Import skipped! Mod Archive \"{0}\"not found.", importInfo.LocalPath));
+                        UpdateMessage(string.Format(Messages.MSG_IMPORT_SKIPPED_MOD_0_NOT_FOUND, importInfo.LocalPath), importInfo);
                     }
                 }
 
                 if (importQueue.Count > 0)
-                    ImportMods(importQueue, copyDest, addOnly, messageCallback);
+                    ImportMods(importQueue, copyDest, addOnly);
             }
             else
             {
-                if (messageCallback != null)
-                    messageCallback(null, Messages.MSG_MODPACK_INFOFILE_NOT_FOUND);
+                UpdateMessage(Messages.MSG_MODPACK_INFOFILE_NOT_FOUND);
             }
 
             if (Directory.Exists(tempDocPath))
@@ -345,30 +357,26 @@ namespace KSPModAdmin.Core.Utils
         /// <param name="importQueue">A list of ImportInfos of the mods to import.</param>
         /// <param name="copyDest">Flag to determine if the destination should be copied or if the auto destination detection should be used.</param>
         /// <param name="addOnly">Flag to determine if the mod should be installed or only added to the ModSelection.</param>
-        /// <param name="messageCallback">Callback function for messages during the import process.</param>
-        private static void ImportMods(List<ImportInfo> importQueue, bool copyDest, bool addOnly, MessageCallbackHandler messageCallback = null)
+        private static void ImportMods(List<ImportInfo> importQueue, bool copyDest, bool addOnly)
         {
             foreach (ImportInfo importInfo in importQueue)
             {
                 if (!importInfo.DownloadSuccessfull)
                     continue;
 
-                if (messageCallback != null)
-                    messageCallback(importInfo, string.Format(Messages.MSG_IMPORT_0_STARTED, importInfo.Name));
+                UpdateMessage(string.Format(Messages.MSG_IMPORT_0_STARTED, importInfo.Name), importInfo);
 
                 try
                 {
                     if (importInfo.DownloadSuccessfull)
-                        ImportMod(importInfo, copyDest, addOnly, messageCallback);
+                        ImportMod(importInfo, copyDest, addOnly);
 
-                    if (messageCallback != null)
-                        messageCallback(importInfo, string.Format(Messages.MSG_IMPORT_0_DONE, importInfo.Name));
+                    UpdateMessage(string.Format(Messages.MSG_IMPORT_0_DONE, importInfo.Name), importInfo);
                 }
                 catch (Exception ex)
                 {
                     string errMsg = ex.Message;
-                    if (messageCallback != null)
-                        messageCallback(importInfo, string.Format(Messages.MSG_IMPORT_0_FAILED_ERROR_1, importInfo.Name, ex.Message));
+                    UpdateMessage(string.Format(Messages.MSG_IMPORT_0_FAILED_ERROR_1, importInfo.Name, ex.Message), importInfo);
                 }
             }
         }
@@ -379,8 +387,7 @@ namespace KSPModAdmin.Core.Utils
         /// <param name="importInfo">The ImportInfo </param>
         /// <param name="copyDest">Flag to determine if the destination should be copied or if the auto destination detection should be used.</param>
         /// <param name="addOnly">Flag to determine if the mod should be installed or only added to the ModSelection.</param>
-        /// <param name="messageCallback">Callback function for messages during the import process.</param>
-        private static void ImportMod(ImportInfo importInfo, bool copyDest, bool addOnly, MessageCallbackHandler messageCallback = null)
+        private static void ImportMod(ImportInfo importInfo, bool copyDest, bool addOnly)
         {
             ModInfo modInfo = importInfo.ModInfo;
             ModNode addedMod = ModSelectionController.AddMods(new ModInfo[] { modInfo }, false).FirstOrDefault();
@@ -394,25 +401,20 @@ namespace KSPModAdmin.Core.Utils
                     addedMod._Checked = false;
 
                     // copy destination
-                    if (messageCallback != null)
-                        messageCallback(null, string.Format("Copy desitnations of mod \"{0}\"", addedMod.Name));
-
+                    UpdateMessage(string.Format(Messages.MSG_COPY_MOD_DESTINATION_0, addedMod.Name));
                     TryCopyDestToMatchingNodes(importInfo, addedMod);
                 }
 
                 // install the mod.
                 if (!addOnly)
                 {
-                    if (messageCallback != null)
-                        messageCallback(null, string.Format("Installing mod \"{0}\"", addedMod.Name));
-
+                    UpdateMessage(string.Format(Messages.MSG_INSTALLING_MOD_0, addedMod.Name));
                     ModSelectionController.ProcessMods(new ModNode[] { addedMod });
                 }
             }
             else
             {
-                if (messageCallback != null)
-                    messageCallback(importInfo, string.Format(Messages.MSG_IMPORT_0_FAILED, importInfo.Name));
+                UpdateMessage(string.Format(Messages.MSG_IMPORT_0_FAILED, importInfo.Name), importInfo);
             }
         }
 
@@ -420,131 +422,64 @@ namespace KSPModAdmin.Core.Utils
         /// Tries to find notes in the new mod, that matches to the outdated mod.
         /// If a matching node was found the destination and/or the checked state of the node will be copied.
         /// </summary>
-        /// <param name="importInfo">The outdated mod.</param>
+        /// <param name="importInfo">The import info of the mod to import.</param>
         /// <param name="newMod">The new (updated) mod.</param>
         /// <returns>True if matching files where found, otherwise false.</returns>
-        private static bool TryCopyDestToMatchingNodes(ImportInfo importInfo, ModNode newMod)
+        public static bool TryCopyDestToMatchingNodes(ImportInfo importInfo, ModNode newMod)
         {
+            // Get all files with destination.
             bool matchFound = false;
-            List<ImportInfo> childs = importInfo.GetChildes();
-            if (childs.Count == 0)
+            List<ImportInfo> outdatedFileNodes = importInfo.GetAllFileImportInfo().Where(x => !string.IsNullOrEmpty(x.InstallDir)).ToList();
+            if (outdatedFileNodes.Count == 0)
                 return matchFound;
 
-            foreach (var importFile in childs)
+            // copy destination and checked state for each file.
+            foreach (var node in outdatedFileNodes)
             {
-                string path = GetTreePathToRootNode(importFile);
-                ModNode matchingNew = ModSelectionTreeModel.SearchNodeByPath(path, newMod, '/');
-                if (matchingNew != null)
+                // files must have at least one parent (folder)!
+                ImportInfo parentOld = node.Parent;
+                if (parentOld == null)
+                    continue;
+
+                // Find matching node in modarchive.
+                string path = parentOld.Name + '/' + node.Name;
+                ModNode matchingNew = ModSelectionTreeModel.SearchNodeByPathNew(path, newMod, '/');
+                if (matchingNew == null)
+                    continue;
+
+                // copy destination and checked state
+                matchFound = true;
+                matchingNew.Destination = node.InstallDir;
+                ((ModNode)matchingNew.Parent).Destination = node.Parent.InstallDir;
+                matchingNew.Checked = node.Install;
+                ((ModNode)matchingNew.Parent).Checked = node.Install || node.Parent.Install;
+
+                // go up the tree to set destinations for parent folders.
+                ModNode parentNew = matchingNew;
+                while (parentOld != null)
                 {
-                    matchFound = true;
-                    matchingNew.Destination = GetDestination(importFile);
-                    matchingNew._Checked = importFile.Install;
+                    if (parentOld.Parent == null)
+                        break;
+
+                    // Find matching parent node in modarchive.
+                    path = parentOld.Parent.Name + '/' + path;
+                    if (ModSelectionTreeModel.SearchNodeByPathNew(path, newMod, '/') == null)
+                        break;
+
+                    parentNew = parentNew.Parent as ModNode;
+                    if (parentNew == null)
+                        break;
+
+                    // copy destination and checked state
+                    parentNew.Destination = parentOld.InstallDir;
+                    parentNew.Checked = parentOld.Install || parentOld.HasChildesToInstall;
+
+                    // repeat all with parent of parent node.
+                    parentOld = parentOld.Parent;
                 }
-
-                if (TryCopyDestToMatchingChildNodes(importFile.GetChildes(), newMod))
-                    matchFound = true;
-            }
-
-            #region old code
-
-            //foreach (var importFile in childs)
-            //{
-            //    ImportInfo parentImport = importFile.Parent;
-            //    if (parentImport == null)
-            //        continue;
-
-            //    string path = parentImport.Name + '\\' + importFile.Name;
-            //    ModNode matchingNew = MainForm.Instance.ModSelection.SearchNodeByPath(path, newMod, '\\');
-            //    if (matchingNew == null)
-            //        continue;
-
-            //    matchFound = true;
-            //    matchingNew.Destination = GetDestination(importFile);
-            //    ((ModNode)matchingNew.Parent).Destination = GetDestination(importFile.Parent);
-            //    MainForm.Instance.ModSelection.tvModSelection.ChangeCheckedState(matchingNew, importFile.Install, true, true);
-
-            //    ModNode parentNew = matchingNew;
-            //    while (parentImport != null)
-            //    {
-            //        if (parentImport.Parent == null)
-            //            break;
-
-            //        path = parentImport.Parent.Name + '\\' + path;
-            //        if (MainForm.Instance.ModSelection.SearchNodeByPath(path, newMod, '\\') == null)
-            //            break;
-
-            //        parentNew = (ModNode)parentNew.Parent;
-            //        if (parentNew == null)
-            //            break;
-
-            //        if (MainForm.Instance.Options.ModUpdateBehavior == ModUpdateBehavior.CopyDestination)
-            //            parentNew.Destination = GetDestination(parentImport);
-            //        parentNew.Checked = parentImport.Install;
-            //        parentImport = parentImport.Parent;
-            //    }
-            //}
-
-            #endregion
-
-            return matchFound;
-        }
-
-        private static bool TryCopyDestToMatchingChildNodes(List<ImportInfo> childImportInfo, ModNode newMod)
-        {
-            bool matchFound = false;
-            foreach (var importFile in childImportInfo)
-            {
-                string path = GetTreePathToRootNode(importFile);
-                ModNode matchingNew = ModSelectionTreeModel.SearchNodeByPath(path, newMod, '/');
-                if (matchingNew != null)
-                {
-                    matchFound = true;
-                    matchingNew.Destination = GetDestination(importFile);
-                    matchingNew._Checked = importFile.Install;
-                }
-
-                if (TryCopyDestToMatchingChildNodes(importFile.GetChildes(), newMod))
-                    matchFound = true;
             }
 
             return matchFound;
-        }
-
-        /// <summary>
-        /// Gets the tree path up from the passed node up to its root node (last node with destination).
-        /// </summary>
-        /// <param name="importInfo"></param>
-        /// <returns></returns>
-        private static string GetTreePathToRootNode(ImportInfo importInfo)
-        {
-            string path = string.Empty;
-
-            path = "/" + importInfo.Name;
-            ImportInfo parent = importInfo.Parent;
-            while (parent != null)
-            {
-                if (string.IsNullOrEmpty(parent.InstallDir))
-                    break;
-
-                path = "/" + parent.Name + path;
-
-                parent = parent.Parent;
-            }
-
-            return path;
-        }
-
-        /// <summary>
-        /// Builds the destination path from the relative ImportInfo.Installdir.
-        /// </summary>
-        /// <param name="importInfo">The ImportInfo to build the destination path from.</param>
-        /// <returns>The new destination path.</returns>
-        private static string GetDestination(ImportInfo importInfo)
-        {
-            if (string.IsNullOrEmpty(importInfo.InstallDir))
-                return string.Empty;
-
-            return importInfo.InstallDir;
         }
 
         #region internal classes
@@ -556,32 +491,104 @@ namespace KSPModAdmin.Core.Utils
         {
             #region Properties
 
+            /// <summary>
+            /// Local path of the mod to import.
+            /// </summary>
             public string LocalPath { get; set; }
 
+            /// <summary>
+            /// Name of the mod to import.
+            /// </summary>
             public string Name { get; set; }
 
+            /// <summary>
+            /// The SiteHandler of the mod.
+            /// </summary>
             public ISiteHandler SiteHandler { get { return SiteHandlerManager.GetSiteHandlerByName(SiteHandlerName); } }
 
+            /// <summary>
+            /// The Name of the SiteHandler for the mod.
+            /// </summary>
             public string SiteHandlerName { get; set; }
 
+            /// <summary>
+            /// The product id of the mod.
+            /// </summary>
             public string ProductID { get; set; }
 
+            /// <summary>
+            /// The URL to the mod.
+            /// </summary>
             public string ModURL { get; set; }
 
+            /// <summary>
+            /// A user defined URL.
+            /// </summary>
             public string AdditionalURL { get; set; }
 
+            /// <summary>
+            /// Parent of this ImportInfos.
+            /// </summary>
             public ImportInfo Parent { get; set; }
 
+            /// <summary>
+            /// Root ImportInfo of this ImportInfos.
+            /// </summary>
+            public ImportInfo Root
+            {
+                get
+                {
+                    var parent = Parent;
+
+                    if (parent == null)
+                        return this;
+
+                    while (parent.Parent != null)
+                        parent = parent.Parent;
+
+                    return parent;
+                }
+            }
+
+            /// <summary>
+            /// Childs of this ImportInfos.
+            /// </summary>
             private List<ImportInfo> Childs { get; set; }
 
+            /// <summary>
+            /// The ModInfos of the mod.
+            /// </summary>
             public ModInfo ModInfo { get; set; }
 
+            /// <summary>
+            /// Flag to determine if this ImportInfos representing a file.
+            /// </summary>
             public bool IsFile { get; set; }
 
+            /// <summary>
+            /// Flag to determine if this mod should be installed.
+            /// </summary>
             public bool Install { get; set; }
 
+            /// <summary>
+            /// Install dir for this ImportInfo.
+            /// </summary>
             public string InstallDir { get; set; }
 
+            /// <summary>
+            /// Flag to determine if the ImportInfo has childes that should be installed.
+            /// </summary>
+            public bool HasChildesToInstall
+            {
+                get
+                {
+                    return GetChildes().Where(x => x.Install || x.HasChildesToInstall).ToList().Count > 0;
+                }
+            }
+
+            /// <summary>
+            /// Flag to determine if the download of the mod was successful.
+            /// </summary>
             public bool DownloadSuccessfull { get; set; }
 
             #endregion
@@ -612,7 +619,7 @@ namespace KSPModAdmin.Core.Utils
             /// Adds a child ImportInfo to this ImportInfo.
             /// </summary>
             /// <param name="importInfo">The child ImportInfo to add.</param>
-            /// <returns></returns>
+            /// <returns>The added and updated ImportInfo.</returns>
             public ImportInfo AddChild(ImportInfo importInfo)
             {
                 Childs.Add(importInfo);
@@ -629,10 +636,40 @@ namespace KSPModAdmin.Core.Utils
             {
                 return Childs;
             }
+
+            /// <summary>
+            /// Returns a list of TreeNodeMod that represents a file entry.
+            /// </summary>
+            /// <param name="fileNodes">For recursive calls! List of already found file nodes.</param>
+            /// <returns>A list of TreeNodeMod that represents a file entry.</returns>
+            public List<ImportInfo> GetAllFileImportInfo(List<ImportInfo> fileNodes = null)
+            {
+                if (fileNodes == null)
+                    fileNodes = new List<ImportInfo>();
+
+                if (IsFile)
+                    fileNodes.Add(this);
+
+                foreach (ImportInfo childNode in GetChildes())
+                    childNode.GetAllFileImportInfo(fileNodes);
+
+                return fileNodes;
+            }
         }
 
         #endregion
 
         #endregion
+
+        /// <summary>
+        /// Calls the MessageCallbackFunction if existing.
+        /// </summary>
+        /// <param name="msg">The message to post.</param>
+        /// <param name="obj">Any user data.</param>
+        private static void UpdateMessage(string msg, object obj = null)
+        {
+            if (MessageCallbackFunction != null)
+                MessageCallbackFunction(obj, msg);
+        }
     }
 }

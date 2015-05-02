@@ -658,4 +658,18 @@
 
   <String Name="MSG_NO_DOWNLOAD_INFOS_FOUND" Value="No download link found!"/>
 
+  <String Name="MSG_NO_BINARY_DOWNLOAD_FOUND_AT_0" Value="No binary download found at &quot;{0}&quot;!"/>
+  <Control Name="tsmiExImport" Value="ModPack Import/Export">
+    <ChildControl Name="tsmiExImport_ToolTip" Value="ModPack Import/Export^Opens the Import/Export for ModPacks."/>
+  </Control>
+  <Control Name="tsmiExportAsText" Value="Export as .txt">
+    <ChildControl Name="tsmiExportAsText_ToolTip" Value="Export as .txt^Save the current mod list as a text file."/>
+  </Control>
+
+  <String Name="MSG_EXTRACTING_MOD_0" Value="Extracting mod &quot;{0}&quot;..."/>
+  <String Name="MSG_MODARCHIVE_0_NOT_FOUND" Value="Mod Archive &quot;{0}&quot; not found!"/>
+  <String Name="MSG_IMPORT_SKIPPED_MOD_0_NOT_FOUND" Value="Import skipped! Mod Archive &quot;{0}&quot; not found."/>
+  <String Name="MSG_COPY_MOD_DESTINATION_0" Value="Copy destinations of mod &quot;{0}&quot;"/>
+  <String Name="MSG_INSTALLING_MOD_0" Value="Installing mod &quot;{0}&quot;..."/>
+
 </Language>

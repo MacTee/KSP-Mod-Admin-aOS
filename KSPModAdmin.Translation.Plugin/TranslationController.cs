@@ -10,6 +10,9 @@ using KSPModAdmin.Core.Utils.Localization;
 
 namespace KSPModAdmin.Translation.Plugin
 {
+    /// <summary>
+    /// Controller class for the Translation view.
+    /// </summary>
     public class TranslationController
     {
         /// <summary>
@@ -72,7 +75,7 @@ namespace KSPModAdmin.Translation.Plugin
                     return result.ToArray();
 
                 foreach (var file in Directory.GetFiles(filePath))
-                    result.Add(new LanguageSelectInfo() { Name = Path.GetFileName(file), Path = file});
+                    result.Add(new LanguageSelectInfo() { Name = Path.GetFileName(file), Path = file });
             }
             catch (Exception ex)
             {
@@ -113,7 +116,7 @@ namespace KSPModAdmin.Translation.Plugin
             return result;
         }
 
-        protected static void CreateChildEntries(XmlNode node, ref LanguageFileContent content)
+        private static void CreateChildEntries(XmlNode node, ref LanguageFileContent content)
         {
             foreach (XmlNode childNode in node.ChildNodes)
             {

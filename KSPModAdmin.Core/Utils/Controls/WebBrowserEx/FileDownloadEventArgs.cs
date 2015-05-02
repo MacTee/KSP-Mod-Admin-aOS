@@ -5,7 +5,7 @@ namespace KSPModAdmin.Core.Utils.Controls
     /// <summary>
     /// A file download event arg
     /// </summary>
-    public class FileDownloadEventArgs :EventArgs
+    public class FileDownloadEventArgs : EventArgs
     {
         /// <summary>
         /// Constructor

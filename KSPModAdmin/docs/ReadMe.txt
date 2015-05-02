@@ -32,10 +32,19 @@ Requirements:
 
 
 Installation:
-- Win: Install the .Net4.0 framework from Microsoft (Win7 or lower).
-- Mac/Linux: Install the Mono framework.
-- Just extract/copy the KSP Mod Admin folder from the zip to any location you want.
-- Start KSP Mod Admin ...
+ Windows:
+   - Install the .Net4.0 framework from Microsoft (Win7 or lower).
+   - Just extract/copy the KSP Mod Admin folder from the zip to any location you want.
+   - Start KSP Mod Admin ...
+ Mac:
+   - Install the Mono framework.
+   - Just extract/copy the KSP Mod Admin folder from the zip to any location you want.
+   - Start KSP Mod Admin via mono ...
+ Linux:
+   - Install the Mono framework. (by type "sudo apt-get install mono-complete" in your terminal)
+   - Install mozilla certificats. (by type "mozroots --sync --import" in your terminal)
+   - Just extract/copy the KSP Mod Admin folder from the zip to any location you want.
+   - Start KSP Mod Admin via mono ...
 
 
 Special thanks to:
@@ -59,9 +68,6 @@ License:
     - FolderSelectionDialog
 	  Project URL: http://www.lyquidity.com/devblog/?p=136
 	  License: There’s no license as such as you are free to take and do with the code what you will.
-	- KerbalStuffWrapper
-	  Project URL: http://forum.kerbalspaceprogram.com/threads/94891-KerbalStuffWrapper
-	  License: Custom license see KSPModAdmin/Docs/Licenses/KerbalStuffWrapperLicense.txt for details.
     - SharpCompress
 	  Project URL: https://sharpcompress.codeplex.com/
 	  License: Microsoft Public License (Ms-PL) (see http://sharpcompress.codeplex.com/license).

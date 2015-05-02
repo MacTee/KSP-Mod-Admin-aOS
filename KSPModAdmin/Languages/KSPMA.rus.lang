@@ -641,6 +641,19 @@
   <Control Name="lvModSelection_Item_00" Value="Мод"/>
   <Control Name="tsmiCmsResetDestinations" Value="Сбросить пути"/>
 
-  <String Name="MSG_NO_DOWNLOAD_INFOS_FOUND" Value="(T)No download link found!"/>
+  <String Name="MSG_NO_DOWNLOAD_INFOS_FOUND" Value="Не найдена ссылка для загрузки!"/>
 
+  <String Name="MSG_NO_BINARY_DOWNLOAD_FOUND_AT_0" Value="(T)No binary download found at &quot;{0}&quot;!"/>
+  <Control Name="tsmiExImport" Value="Импорт/экспорт пакетов с модами">
+    <ChildControl Name="tsmiExImport_ToolTip" Value="Импорт/экспорт пакетов с модами^Открывает Импорт/экспорт пакетов." />
+  </Control>
+  <Control Name="tsmiExportAsText" Value="(T)Export as .txt">
+    <ChildControl Name="tsmiExportAsText_ToolTip" Value="(T)Export as .txt^Save the current mod list as a text file."/>
+  </Control>
+
+  <String Name="MSG_EXTRACTING_MOD_0" Value="(T)Extracting mod &quot;{0}&quot;..."/>
+  <String Name="MSG_MODARCHIVE_0_NOT_FOUND" Value="(T)Mod Archive &quot;{0}&quot; not found!"/>
+  <String Name="MSG_IMPORT_SKIPPED_MOD_0_NOT_FOUND" Value="(T)Import skipped! Mod Archive &quot;{0}&quot; not found."/>
+  <String Name="MSG_COPY_MOD_DESTINATION_0" Value="(T)Copy destinations of mod &quot;{0}&quot;"/>
+  <String Name="MSG_INSTALLING_MOD_0" Value="(T)Installing mod &quot;{0}&quot;..."/>
 </Language>

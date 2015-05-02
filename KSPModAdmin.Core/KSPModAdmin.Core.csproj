@@ -68,6 +68,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Externals\SharpCompress.dll</HintPath>
     </Reference>
+    <Reference Include="StyleCop">
+      <HintPath>..\packages\StyleCop.4.7.49.0\lib\net35\StyleCop.dll</HintPath>
+    </Reference>
+    <Reference Include="StyleCop.CSharp">
+      <HintPath>..\packages\StyleCop.4.7.49.0\lib\net35\StyleCop.CSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
@@ -104,6 +110,9 @@
     <Compile Include="Utils\Controls\ListViewAdv.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Utils\Controls\TextBoxNumeric2.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Utils\ModPackHandler.cs" />
     <Compile Include="Utils\SiteHandler\CurseForgeHandler.cs" />
     <Compile Include="Utils\SiteHandler\CurseHandler.cs" />
@@ -114,169 +123,285 @@
     <Compile Include="Utils\SiteHandler\SiteHandlerManager.cs" />
     <Compile Include="Utils\SiteHandler\ISiteHandler.cs" />
     <Compile Include="Utils\ScanInfo.cs" />
-    <Compile Include="Utils\Controls\FolderSelectionDialog\FolderSelectDialog.cs" />
-    <Compile Include="Utils\Controls\FolderSelectionDialog\Reflector.cs" />
-    <Compile Include="Utils\Controls\TreeViewAdv\AutoRowHeightLayout.cs" />
+    <Compile Include="Utils\Controls\FolderSelectionDialog\FolderSelectDialog.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Utils\Controls\FolderSelectionDialog\Reflector.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Utils\Controls\TreeViewAdv\AutoRowHeightLayout.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Utils\Controls\TreeViewAdv\ColumnCollection.cs">
       <SubType>Code</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Utils\Controls\TreeViewAdv\DrawContext.cs">
       <SubType>Code</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="Utils\Controls\TreeViewAdv\DropNodeValidatingEventArgs.cs" />
+    <Compile Include="Utils\Controls\TreeViewAdv\DropNodeValidatingEventArgs.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Utils\Controls\TreeViewAdv\DropPosition.cs">
       <SubType>Code</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Utils\Controls\TreeViewAdv\EditorContext.cs">
       <SubType>Code</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Utils\Controls\TreeViewAdv\enums.cs">
       <SubType>Code</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="Utils\Controls\TreeViewAdv\FixedRowHeightLayout.cs" />
-    <Compile Include="Utils\Controls\TreeViewAdv\GifDecoder\BitmapHelper.cs" />
-    <Compile Include="Utils\Controls\TreeViewAdv\GifDecoder\GifDecoder.cs" />
+    <Compile Include="Utils\Controls\TreeViewAdv\FixedRowHeightLayout.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Utils\Controls\TreeViewAdv\GifDecoder\BitmapHelper.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Utils\Controls\TreeViewAdv\GifDecoder\GifDecoder.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Utils\Controls\TreeViewAdv\GifDecoder\NumericTextBox.cs">
       <SubType>Component</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="Utils\Controls\TreeViewAdv\GifDecoder\PerformanceAnalyzer.cs" />
-    <Compile Include="Utils\Controls\TreeViewAdv\GifDecoder\ResourceHelper.cs" />
-    <Compile Include="Utils\Controls\TreeViewAdv\GifDecoder\StringCollectionEditor.cs" />
-    <Compile Include="Utils\Controls\TreeViewAdv\GifDecoder\TextHelper.cs" />
-    <Compile Include="Utils\Controls\TreeViewAdv\GifDecoder\TimeCounter.cs" />
-    <Compile Include="Utils\Controls\TreeViewAdv\IncrementalSearch.cs" />
-    <Compile Include="Utils\Controls\TreeViewAdv\Input\ClickColumnState.cs" />
-    <Compile Include="Utils\Controls\TreeViewAdv\Input\ColumnState.cs" />
-    <Compile Include="Utils\Controls\TreeViewAdv\Input\InputState.cs" />
-    <Compile Include="Utils\Controls\TreeViewAdv\Input\InputWithControl.cs" />
-    <Compile Include="Utils\Controls\TreeViewAdv\Input\InputWithShift.cs" />
-    <Compile Include="Utils\Controls\TreeViewAdv\Input\NormalInputState.cs" />
-    <Compile Include="Utils\Controls\TreeViewAdv\Input\ReorderColumnState.cs" />
-    <Compile Include="Utils\Controls\TreeViewAdv\Input\ResizeColumnState.cs" />
-    <Compile Include="Utils\Controls\TreeViewAdv\IRowLayout.cs" />
+    <Compile Include="Utils\Controls\TreeViewAdv\GifDecoder\PerformanceAnalyzer.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Utils\Controls\TreeViewAdv\GifDecoder\ResourceHelper.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Utils\Controls\TreeViewAdv\GifDecoder\StringCollectionEditor.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Utils\Controls\TreeViewAdv\GifDecoder\TextHelper.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Utils\Controls\TreeViewAdv\GifDecoder\TimeCounter.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Utils\Controls\TreeViewAdv\IncrementalSearch.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Utils\Controls\TreeViewAdv\Input\ClickColumnState.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Utils\Controls\TreeViewAdv\Input\ColumnState.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Utils\Controls\TreeViewAdv\Input\InputState.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Utils\Controls\TreeViewAdv\Input\InputWithControl.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Utils\Controls\TreeViewAdv\Input\InputWithShift.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Utils\Controls\TreeViewAdv\Input\NormalInputState.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Utils\Controls\TreeViewAdv\Input\ReorderColumnState.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Utils\Controls\TreeViewAdv\Input\ResizeColumnState.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Utils\Controls\TreeViewAdv\IRowLayout.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Utils\Controls\TreeViewAdv\IToolTipProvider.cs">
       <SubType>Code</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Utils\Controls\TreeViewAdv\ITreeModel.cs">
       <SubType>Code</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="Utils\Controls\TreeViewAdv\ListModel.cs" />
-    <Compile Include="Utils\Controls\TreeViewAdv\NativeMethods.cs" />
+    <Compile Include="Utils\Controls\TreeViewAdv\ListModel.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Utils\Controls\TreeViewAdv\NativeMethods.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Utils\Controls\TreeViewAdv\Node.cs">
       <SubType>Code</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="Utils\Controls\TreeViewAdv\NodeControlInfo.cs" />
+    <Compile Include="Utils\Controls\TreeViewAdv\NodeControlInfo.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Utils\Controls\TreeViewAdv\NodeControls\BaseTextControl.cs">
       <SubType>Component</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Utils\Controls\TreeViewAdv\NodeControls\BindableControl.cs">
       <SubType>Component</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="Utils\Controls\TreeViewAdv\NodeControls\DrawEventArgs.cs" />
+    <Compile Include="Utils\Controls\TreeViewAdv\NodeControls\DrawEventArgs.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Utils\Controls\TreeViewAdv\NodeControls\EditableControl.cs">
       <SubType>Component</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="Utils\Controls\TreeViewAdv\NodeControls\EditEventArgs.cs" />
+    <Compile Include="Utils\Controls\TreeViewAdv\NodeControls\EditEventArgs.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Utils\Controls\TreeViewAdv\NodeControls\ExpandingIcon.cs">
       <SubType>Component</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Utils\Controls\TreeViewAdv\NodeControls\InteractiveControl.cs">
       <SubType>Component</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="Utils\Controls\TreeViewAdv\NodeControls\LabelEventArgs.cs" />
+    <Compile Include="Utils\Controls\TreeViewAdv\NodeControls\LabelEventArgs.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Utils\Controls\TreeViewAdv\NodeControls\NodeCheckBox.cs">
       <SubType>Component</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Utils\Controls\TreeViewAdv\NodeControls\NodeComboBox.cs">
       <SubType>Component</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Utils\Controls\TreeViewAdv\NodeControls\NodeControl.cs">
       <SubType>Component</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Utils\Controls\TreeViewAdv\NodeControls\NodeControlsCollection.cs">
       <SubType>Code</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="Utils\Controls\TreeViewAdv\NodeControls\NodeControlValueEventArgs.cs" />
+    <Compile Include="Utils\Controls\TreeViewAdv\NodeControls\NodeControlValueEventArgs.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Utils\Controls\TreeViewAdv\NodeControls\NodeDecimalTextBox.cs">
       <SubType>Component</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="Utils\Controls\TreeViewAdv\NodeControls\NodeEventArgs.cs" />
+    <Compile Include="Utils\Controls\TreeViewAdv\NodeControls\NodeEventArgs.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Utils\Controls\TreeViewAdv\NodeControls\NodeIcon.cs">
       <SubType>Component</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Utils\Controls\TreeViewAdv\NodeControls\NodeIntegerTextBox.cs">
       <SubType>Component</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Utils\Controls\TreeViewAdv\NodeControls\NodeNumericUpDown.cs">
       <SubType>Component</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Utils\Controls\TreeViewAdv\NodeControls\NodePlusMinus.cs">
       <SubType>Component</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Utils\Controls\TreeViewAdv\NodeControls\NodeStateIcon.cs">
       <SubType>Component</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Utils\Controls\TreeViewAdv\NodeControls\NodeTextBox.cs">
       <SubType>Component</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="Utils\Controls\TreeViewAdv\SortedTreeModel.cs" />
-    <Compile Include="Utils\Controls\TreeViewAdv\Threading\AbortableThreadPool.cs" />
-    <Compile Include="Utils\Controls\TreeViewAdv\Threading\WorkItem.cs" />
-    <Compile Include="Utils\Controls\TreeViewAdv\Threading\WorkItemStatus.cs" />
+    <Compile Include="Utils\Controls\TreeViewAdv\SortedTreeModel.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Utils\Controls\TreeViewAdv\Threading\AbortableThreadPool.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Utils\Controls\TreeViewAdv\Threading\WorkItem.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Utils\Controls\TreeViewAdv\Threading\WorkItemStatus.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Utils\Controls\TreeViewAdv\TreeColumn.cs">
       <SubType>Component</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Utils\Controls\TreeViewAdv\TreeColumnCollection.cs">
       <SubType>Code</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Utils\Controls\TreeViewAdv\TreeColumnEventArgs.cs">
       <SubType>Code</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="Utils\Controls\TreeViewAdv\TreeListAdapter.cs" />
+    <Compile Include="Utils\Controls\TreeViewAdv\TreeListAdapter.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Utils\Controls\TreeViewAdv\TreeModel.cs">
       <SubType>Code</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="Utils\Controls\TreeViewAdv\TreeModelBase.cs" />
+    <Compile Include="Utils\Controls\TreeViewAdv\TreeModelBase.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Utils\Controls\TreeViewAdv\TreeModelEventArgs.cs">
       <SubType>Code</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Utils\Controls\TreeViewAdv\TreeNodeAdv.cs">
       <SubType>Code</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Utils\Controls\TreeViewAdv\TreeNodeAdvMouseEventArgs.cs">
       <SubType>Code</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Utils\Controls\TreeViewAdv\TreePath.cs">
       <SubType>Code</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Utils\Controls\TreeViewAdv\TreePathEventArgs.cs">
       <SubType>Code</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Utils\Controls\TreeViewAdv\TreeViewAdv.cs">
       <SubType>Component</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Utils\Controls\TreeViewAdv\TreeViewAdv.Designer.cs">
       <DependentUpon>TreeViewAdv.cs</DependentUpon>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Utils\Controls\TreeViewAdv\TreeViewAdv.Draw.cs">
       <SubType>Component</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Utils\Controls\TreeViewAdv\TreeViewAdv.Editor.cs">
       <SubType>Component</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Utils\Controls\TreeViewAdv\TreeViewAdv.Input.cs">
       <SubType>Component</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Utils\Controls\TreeViewAdv\TreeViewAdv.Properties.cs">
       <SubType>Component</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Utils\Controls\TreeViewAdv\TreeViewAdvCancelEventArgs.cs">
       <SubType>Code</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Utils\Controls\TreeViewAdv\TreeViewAdvEventArgs.cs">
       <SubType>Code</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="Utils\Controls\TreeViewAdv\TreeViewRowDrawEventArgs.cs" />
+    <Compile Include="Utils\Controls\TreeViewAdv\TreeViewRowDrawEventArgs.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Utils\Localization\ControlTranslator.cs" />
     <Compile Include="Utils\Localization\LanguageDictionary.cs" />
     <Compile Include="Utils\Localization\Localizer.cs" />
@@ -294,25 +419,36 @@
     <Compile Include="Utils\Misc\AsyncTask.cs" />
     <Compile Include="Utils\Controls\CheckBoxComboBox\CheckBoxComboBox.cs">
       <SubType>Component</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Utils\Controls\CheckBoxComboBox\CheckBoxComboBox.Designer.cs">
       <DependentUpon>CheckBoxComboBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Utils\Controls\CheckBoxComboBox\GripBounds.cs" />
+    <Compile Include="Utils\Controls\CheckBoxComboBox\GripBounds.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Utils\Controls\CheckBoxComboBox\Popup.cs">
       <SubType>Component</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Utils\Controls\CheckBoxComboBox\Popup.Designer.cs">
       <DependentUpon>Popup.cs</DependentUpon>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Utils\Controls\CheckBoxComboBox\PopupComboBox.cs">
       <SubType>Component</SubType>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Utils\Controls\CheckBoxComboBox\PopupComboBox.Designer.cs">
       <DependentUpon>PopupComboBox.cs</DependentUpon>
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="Utils\Controls\CheckBoxComboBox\Selection Wrappers\ListSelectionWrapper.cs" />
-    <Compile Include="Utils\Controls\CheckBoxComboBox\Selection Wrappers\ObjectSelectionWrapper.cs" />
+    <Compile Include="Utils\Controls\CheckBoxComboBox\Selection Wrappers\ListSelectionWrapper.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Utils\Controls\CheckBoxComboBox\Selection Wrappers\ObjectSelectionWrapper.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Utils\Controls\TextBoxNumeric.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -459,6 +595,10 @@
     <None Include="Resources\KMA2_48.png" />
     <None Include="Resources\gears.png" />
     <None Include="Resources\components_folder_reset.png" />
+    <None Include="Resources\component_replace_scroll.png" />
+    <None Include="Resources\components_scroll_reset.png" />
+    <None Include="Resources\components_package_replace.png" />
+    <None Include="Resources\components_scroll_out1.png" />
     <Content Include="Utils\Controls\CheckBoxComboBox\_license\license.txt" />
     <Content Include="Utils\Controls\FolderSelectionDialog\_license\license.txt" />
     <Content Include="Utils\Controls\TreeViewAdv\_license\license.txt" />
@@ -556,6 +696,7 @@
     <None Include="Resources\page.png" />
     <None Include="Resources\page_add.png" />
     <Content Include="Externals\SharpCompress.dll" />
+    <None Include="Settings.StyleCop" />
     <None Include="Utils\Controls\TreeViewAdv\NodeControls\ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
@@ -625,6 +766,7 @@
     </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\StyleCop.MSBuild.4.7.49.1\build\StyleCop.MSBuild.Targets" Condition="Exists('..\packages\StyleCop.MSBuild.4.7.49.1\build\StyleCop.MSBuild.Targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

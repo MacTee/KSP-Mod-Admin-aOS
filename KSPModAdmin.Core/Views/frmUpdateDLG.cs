@@ -1,12 +1,17 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Windows.Forms;
 using FolderSelect;
 using KSPModAdmin.Core.Utils;
 
 namespace KSPModAdmin.Core.Views
 {
+    [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Reviewed. Suppression is OK here.")]
     public partial class frmUpdateDLG : frmBase
     {
+        /// <summary>
+        /// The selected post download action.
+        /// </summary>
         public PostDownloadAction PostDownloadAction
         {
             get
@@ -19,6 +24,9 @@ namespace KSPModAdmin.Core.Views
             }
         }
 
+        /// <summary>
+        /// The path to download to.
+        /// </summary>
         public string DownloadPath
         {
             get
@@ -31,6 +39,9 @@ namespace KSPModAdmin.Core.Views
             }
         }
 
+        /// <summary>
+        /// The text of the last message.
+        /// </summary>
         public string Message 
         {
             get
@@ -44,6 +55,9 @@ namespace KSPModAdmin.Core.Views
         }
 
 
+        /// <summary>
+        /// Creates a new instance of the frmUpdateDLG class.
+        /// </summary>
         public frmUpdateDLG()
         {
             InitializeComponent();
@@ -79,13 +93,13 @@ namespace KSPModAdmin.Core.Views
                 Messenger.AddInfo(string.Format(Messages.MSG_DOWNLOAD_PATH_CHANGED_0, dlg.FileName));
             }
 
-            //FolderBrowserDialog dlg = new FolderBrowserDialog();
-            //dlg.SelectedPath = DownloadPath;
-            //if (dlg.ShowDialog(this) == DialogResult.OK)
-            //{
-            //    DownloadPath = dlg.SelectedPath;
-            //    Messenger.AddInfo(string.Format(Messages.MSG_DOWNLOAD_PATH_CHANGED_0, dlg.SelectedPath));
-            //}
+            ////FolderBrowserDialog dlg = new FolderBrowserDialog();
+            ////dlg.SelectedPath = DownloadPath;
+            ////if (dlg.ShowDialog(this) == DialogResult.OK)
+            ////{
+            ////    DownloadPath = dlg.SelectedPath;
+            ////    Messenger.AddInfo(string.Format(Messages.MSG_DOWNLOAD_PATH_CHANGED_0, dlg.SelectedPath));
+            ////}
         }
     }
 }

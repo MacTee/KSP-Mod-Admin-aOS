@@ -2,13 +2,16 @@
 
 namespace KSPModAdmin.Core
 {
+    using System.Diagnostics.CodeAnalysis;
+
     /// <summary>
     /// All constants used for the KSP Mod Admin.
     /// </summary>
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class Constants
     {
         // General
-		// ReSharper disable InconsistentNaming
+        // ReSharper disable InconsistentNaming
         public const string DOWNLOAD_FILENAME_TEMPLATE = "KSPModAdmin-v{0}.zip";
 
         public const string SERVICE_DOWNLOAD_LINK_WIN = "http://www.services.mactee.de/KSP/getKSP_MA_Zip2.php5?build=win";
@@ -34,7 +37,7 @@ namespace KSPModAdmin.Core
 
         // KSP MA folders
         public const string PLUGIN_FOLDER = "Plugins";
-        public const string LANGUAGE_FOLDER = "lang"; //"Languages";
+        public const string LANGUAGE_FOLDER = "lang"; // "Languages";
 
         // KSP folders
         public const string KSP_ROOT = "KSP_Root";
@@ -53,10 +56,13 @@ namespace KSPModAdmin.Core
         {
             get
             {
-                return new string[] { Constants.KSP_ROOT, Constants.GAMEDATA, Constants.PLUGINS, 
-                                      Constants.PLUGINDATA, Constants.PARTS, Constants.RESOURCES,
-                                      Constants.INTERNALS, Constants.KSPDATA, Constants.SAVES, 
-                                      Constants.SHIPS, Constants.VAB, Constants.SPH };
+                return new string[] 
+                { 
+                    Constants.KSP_ROOT, Constants.GAMEDATA, Constants.PLUGINS, 
+                    Constants.PLUGINDATA, Constants.PARTS, Constants.RESOURCES,
+                    Constants.INTERNALS, Constants.KSPDATA, Constants.SAVES, 
+                    Constants.SHIPS, Constants.VAB, Constants.SPH
+                };
             }
         }
 
@@ -107,7 +113,7 @@ namespace KSPModAdmin.Core
         public const string ROOTNODE = "ModAdminConfig";
         public const string ROOT = "Root";
         public const string VERSION = "Version";
-	    public const string GAMEVERSION = "Game_Version";
+        public const string GAMEVERSION = "Game_Version";
         public const string MESSAGE = "Message";
         public const string GENERAL = "General";
         public const string LANGUAGE = "Language";

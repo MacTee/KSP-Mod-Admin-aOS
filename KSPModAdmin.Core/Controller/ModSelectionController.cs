@@ -7,12 +7,14 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using KSPModAdmin.Core.Model;
 using KSPModAdmin.Core.Utils;
-using KSPModAdmin.Core.Utils.Localization;
 using KSPModAdmin.Core.Views;
 using SharpCompress.Archive;
 
 namespace KSPModAdmin.Core.Controller
 {
+    /// <summary>
+    /// Controller for the ucModSelection.
+    /// </summary>
     public class ModSelectionController
     {
         #region Member variables
@@ -30,7 +32,7 @@ namespace KSPModAdmin.Core.Controller
         /// Gets the singleton of this class.
         /// </summary>
         protected static ModSelectionController Instance { get { return mInstance ?? (mInstance = new ModSelectionController()); } }
-        protected static ModSelectionController mInstance = null;
+        private static ModSelectionController mInstance = null;
 
         /// <summary>
         /// Gets or sets the view of the controller.
@@ -128,17 +130,16 @@ namespace KSPModAdmin.Core.Controller
         protected static void KSPRootChanged(string kspPath)
         {
             // MainController loads the new KSPMAMod.cfg and populates the TreeView.
-            //View.tvModSelection.SelectedNode = null;
+            ////View.tvModSelection.SelectedNode = null;
         }
 
         #endregion
 
         /// <summary>
-        /// Callback of the ModSelectionTreeModle when a checked state of a ModNode is changing.
+        /// Callback of the ModSelectionTreeModel when a checked state of a ModNode is changing.
         /// </summary>
         /// <param name="sender">Invoker of the BeforeCheckedChange event.</param>
         /// <param name="args">The BeforeCheckedChangeEventArgs.</param>
-        /// <returns>True if the change should be continued, otherwise false.</returns>
         protected static void BeforeCheckedChange(object sender, BeforeCheckedChangeEventArgs args)
         {
             if (args.Node == null)
@@ -229,7 +230,7 @@ namespace KSPModAdmin.Core.Controller
         /// <summary>
         /// Adds a mod from HD.
         /// </summary>
-        /// <param name="modPath">PAth to the mod.</param>
+        /// <param name="modPath">Path to the mod.</param>
         /// <param name="modName">Name of the mod (leave blank for auto fill).</param>
         /// <param name="installAfterAdd">Flag that determines if the mod should be installed after adding to the ModSelection.</param>
         /// <returns>The new added mod (maybe null).</returns>
@@ -242,7 +243,7 @@ namespace KSPModAdmin.Core.Controller
         /// Adds the ModNodes to the mod selection tree.
         /// </summary>
         /// <param name="modNode">The nodes to add.</param>
-        /// <param name="showCollisionDialog"></param>
+        /// <returns>List of added mods.</returns>
         internal static List<ModNode> AddMods(ModNode[] modNode, bool showCollisionDialog = true)
         {
             List<ModNode> addedMods = new List<ModNode>();
@@ -253,9 +254,8 @@ namespace KSPModAdmin.Core.Controller
                 {
                     Model.AddMod(node);
                     ModNodeHandler.SetToolTips(node);
-                    //ModNodeHandler.CheckNodesWithDestination(node);
+                    ////ModNodeHandler.CheckNodesWithDestination(node);
                     addedMods.Add(node);
-
                 }
                 catch (Exception ex)
                 {
@@ -294,7 +294,6 @@ namespace KSPModAdmin.Core.Controller
         /// Creates nodes from the ModInfos and adds the nodes to the ModSelection.
         /// </summary>
         /// <param name="modInfos">The nodes to add.</param>
-        /// <param name="showCollisionDialog"></param>
         internal static void AddModsAsync(ModInfo[] modInfos, bool showCollisionDialog = true)
         {
             if (modInfos.Length <= 0)
@@ -329,7 +328,7 @@ namespace KSPModAdmin.Core.Controller
         /// Creates nodes from the ModInfos and adds the nodes to the ModSelection.
         /// </summary>
         /// <param name="modInfos">The nodes to add.</param>
-        /// <param name="showCollisionDialog"></param>
+        /// <returns>List of added mods.</returns>
         internal static List<ModNode> AddMods(ModInfo[] modInfos, bool showCollisionDialog, AsyncTask<List<ModNode>> asyncJob = null)
         {
             int doneCount = 0;
@@ -371,9 +370,9 @@ namespace KSPModAdmin.Core.Controller
                                 newNode.HasChildCollision)
                             {
                                 MessageBox.Show(View, "ConflictSolver not Implemented yet!");
-                                // TODO :
-                                //frmCollisionSolving dlg = new frmCollisionSolving { CollisionMod = newNode };
-                                //dlg.ShowDialog();
+                                //// TODO :
+                                ////frmCollisionSolving dlg = new frmCollisionSolving { CollisionMod = newNode };
+                                ////dlg.ShowDialog();
                             }
                         });
                     }
@@ -396,10 +395,11 @@ namespace KSPModAdmin.Core.Controller
                                 ModNode outdatedMod = Model[modInfo.LocalPath];
                                 Messenger.AddInfo(string.Format(Messages.MSG_REPLACING_MOD_0, outdatedMod.Text));
 
-                                newNode = ModNodeHandler.CreateModNode(modInfo);
-                                RemoveOutdatedAndAddNewMod(outdatedMod, newNode);
+                                newNode = UpdateMod(modInfo, outdatedMod);
+                                ////newNode = ModNodeHandler.CreateModNode(modInfo);
+                                ////RemoveOutdatedAndAddNewMod(outdatedMod, newNode);
 
-                                newNode.UncheckAll();
+                                ////newNode.UncheckAll();
 
                                 Messenger.AddInfo(string.Format(Messages.MSG_MOD_0_REPLACED, newNode.Text));
 
@@ -407,8 +407,8 @@ namespace KSPModAdmin.Core.Controller
                                     newNode.HasChildCollision)
                                 {
                                     MessageBox.Show(View, "ConflictSolver not Implemented yet!");
-                                    //frmCollisionSolving dlg = new frmCollisionSolving { CollisionMod = newNode };
-                                    //dlg.ShowDialog();
+                                    ////frmCollisionSolving dlg = new frmCollisionSolving { CollisionMod = newNode };
+                                    ////dlg.ShowDialog();
                                 }
                             }
                         });
@@ -674,7 +674,7 @@ namespace KSPModAdmin.Core.Controller
                 root.ModURL = dlg.ModURL;
                 root.AdditionalURL = dlg.AdditionalURL;
                 root.Version = dlg.Version;
-	            root.KSPVersion = dlg.KSPVersion;
+                root.KSPVersion = dlg.KSPVersion;
 
                 InvalidateView();
             }
@@ -683,7 +683,6 @@ namespace KSPModAdmin.Core.Controller
         /// <summary>
         /// Opens the copy ModInfo dialog.
         /// </summary>
-        /// <param name="modNode"></param>
         public static void CopyModInfos(ModNode modNode)
         {
             frmCopyModInfo dlg = new frmCopyModInfo();
@@ -774,10 +773,10 @@ namespace KSPModAdmin.Core.Controller
 
                     if (OptionsController.ShowConflictSolver && node.HasChildCollision)
                     {
-                        //TODO
-                        //frmCollisionSolving csDlg = new frmCollisionSolving { CollisionMod = node };
-                        //if (csDlg.ShowDialog() == DialogResult.OK && csDlg.SelectedMod != node.ZipRoot)
-                        //    return false;
+                        ////TODO
+                        ////frmCollisionSolving csDlg = new frmCollisionSolving { CollisionMod = node };
+                        ////if (csDlg.ShowDialog() == DialogResult.OK && csDlg.SelectedMod != node.ZipRoot)
+                        ////    return false;
                     }
 
                     return true;
@@ -809,7 +808,7 @@ namespace KSPModAdmin.Core.Controller
         #region Scan GameData
 
         /// <summary>
-        /// Scanns the KSP GameData directory for installed mods and adds them to the ModSelection.
+        /// Scans the KSP GameData directory for installed mods and adds them to the ModSelection.
         /// </summary>
         internal static void ScanGameData()
         {
@@ -874,7 +873,7 @@ namespace KSPModAdmin.Core.Controller
         }
 
         /// <summary>
-        /// Scanns the passed dir for files and directories and creates a tree of ScannInfos from it.
+        /// Scans the passed dir for files and directories and creates a tree of ScanInfos from it.
         /// </summary>
         /// <param name="scanDir">The ScanInfo of the start directory.</param>
         private static void ScanDir(ScanInfo scanDir)
@@ -899,7 +898,7 @@ namespace KSPModAdmin.Core.Controller
         }
 
         /// <summary>
-        /// Searches the list of ScanInfo trees for unknowen nodes.
+        /// Searches the list of ScanInfo trees for unknown nodes.
         /// Searches the complete ModSelection for a matching node.
         /// </summary>
         /// <param name="scanInfos">A list of ScanInfos trees to search.</param>
@@ -931,7 +930,7 @@ namespace KSPModAdmin.Core.Controller
         /// Compares the ScanInfo to all known nodes (from parent).
         /// </summary>
         /// <param name="scanInfo">The ScanInfo to compare.</param>
-        /// <param name="parent">The start node of the comparision.</param>
+        /// <param name="parent">The start node of the comparison.</param>
         /// <returns>True if a match was found, otherwise false.</returns>
         private static bool CompareNodes(ScanInfo scanInfo, ModNode parent)
         {
@@ -954,7 +953,7 @@ namespace KSPModAdmin.Core.Controller
         /// Creates a TreeNodeMod from the passed ScanInfo.
         /// </summary>
         /// <param name="unknown">The ScanInfo of the unknown node.</param>
-        /// <returns>The new created TeeeNodeMod.</returns>
+        /// <returns>The new created TreeNodeMod.</returns>
         private static ModNode ScanInfoToKSPMA_TreeNode(ScanInfo unknown)
         {
             ModNode node = new ModNode();
@@ -1078,12 +1077,12 @@ namespace KSPModAdmin.Core.Controller
 
                     if (mod.IsFile)
                     {
-                        //value = File.Exists(KSPPathHelper.GetDestinationPath(mod));
+                        ////value = File.Exists(KSPPathHelper.GetDestinationPath(mod));
                         nodeType = (isInstalled) ? NodeType.UnknownFileInstalled : NodeType.UnknownFile;
                     }
                     else
                     {
-                        //bool isInstalled = Directory.Exists(KSPPathHelper.GetDestinationPath(mod));
+                        ////bool isInstalled = Directory.Exists(KSPPathHelper.GetDestinationPath(mod));
                         bool hasInstalledChilds = mod.HasInstalledChilds;
 
                         bool isKSPDir = false;
@@ -1361,7 +1360,7 @@ namespace KSPModAdmin.Core.Controller
         {
             _CheckForModUpdates(mods);
 
-            var outdatedMods = from e in mods where e.IsOutdated select e;
+            var outdatedMods = from e in mods where e.IsOutdated || !e.ZipExists select e;
             foreach (ModNode mod in outdatedMods)
             {
                 try
@@ -1388,6 +1387,7 @@ namespace KSPModAdmin.Core.Controller
         /// </summary>
         /// <param name="newModInfo">The ModeInfo of the new mod.</param>
         /// <param name="outdatedMod">The root ModNode of the outdated mod.</param>
+        /// <returns>The updated mod.</returns>
         public static ModNode UpdateMod(ModInfo newModInfo, ModNode outdatedMod)
         {
             ModNode newMod = null;
@@ -1423,10 +1423,10 @@ namespace KSPModAdmin.Core.Controller
                         if (OptionsController.ShowConflictSolver && newMod != null && newMod.HasChildCollision)
                         {
                             MessageBox.Show(View, "ConflictSolver not Implemented yet!");
-                            // TODO :
-                            //frmCollisionSolving dlg = new frmCollisionSolving();
-                            //dlg.CollisionMod = newMod;
-                            //dlg.ShowDialog();
+                            //// TODO :
+                            ////frmCollisionSolving dlg = new frmCollisionSolving();
+                            ////dlg.CollisionMod = newMod;
+                            ////dlg.ShowDialog();
                         }
                     });
                 }
@@ -1441,10 +1441,10 @@ namespace KSPModAdmin.Core.Controller
             return newMod;
 
 
-            //MessageBox.Show(View, string.Format("Mod \"{0}\" is outdated.{1}BUT: Auto update is not implemented yet!", mod.Name, Environment.NewLine),
-            //    Messages.MSG_TITLE_ATTENTION, MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            ////MessageBox.Show(View, string.Format("Mod \"{0}\" is outdated.{1}BUT: Auto update is not implemented yet!", mod.Name, Environment.NewLine),
+            ////    Messages.MSG_TITLE_ATTENTION, MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 
-            //return null;
+            ////return null;
         }
 
         #endregion
@@ -1516,12 +1516,9 @@ namespace KSPModAdmin.Core.Controller
         /// <summary>
         /// Sorts the nodes of the ModSelection depending on the passed SortType.
         /// </summary>
-        /// <param name="sortType">Determines the property to use for the sort.</param>
-        /// <param name="desc">Determines if the sorting should be descending or ascending.</param>
         public static void SortModSelection()
         {
             // TODO: Find a better place for this method.
-
             ModSelectionTreeColumn sortColumn = null;
             foreach (var column in View.tvModSelection.Columns)
             {
@@ -1538,7 +1535,7 @@ namespace KSPModAdmin.Core.Controller
         }
 
         /// <summary>
-        /// Opens the ConflictSolver dilaog.
+        /// Opens the ConflictSolver dialog.
         /// </summary>
         public static void OpenConflictSolver()
         {
@@ -1578,7 +1575,6 @@ namespace KSPModAdmin.Core.Controller
         /// <summary>
         /// Opens the TreeView options dialog.
         /// </summary>
-        /// <returns>The new TreeViewAdvColumnsInfo edited with the TreeView option dialog.</returns>
         public static void OpenTreeViewOptions()
         {
             frmColumnSelection dlg = new frmColumnSelection();
@@ -1588,9 +1584,9 @@ namespace KSPModAdmin.Core.Controller
         }
 
         /// <summary>
-        /// Tries to reads the content of the file that is represented by the passen ModNode.
+        /// Tries to reads the content of the file that is represented by the passed ModNode.
         /// </summary>
-        /// <param name="node">The ModNode that contains thie File information.</param>
+        /// <param name="node">The ModNode that contains the File information.</param>
         /// <returns>The content of the file.</returns>
         private static string TryReadFile(ModNode node)
         {
@@ -1632,6 +1628,51 @@ namespace KSPModAdmin.Core.Controller
             }
 
             return string.Empty;
+        }
+
+        /// <summary>
+        /// Gets the ModSelection list as a string.
+        /// </summary>
+        /// <returns>The ModSelection list as a string.</returns>
+        public static string GetModListAsText()
+        {
+            const int EXTRA_PAD = 5;
+
+            var sb = new StringBuilder();
+            int nameLength = EXTRA_PAD;
+            int urlLength = 0;
+
+            // Get the longest mod name
+            foreach (var mod in Mods)
+            {
+                if (mod.Name.Length > nameLength)
+                    nameLength = mod.Name.Length + EXTRA_PAD;
+            }
+
+
+            // Get the longest url
+            foreach (var mod in Mods)
+            {
+                if (mod.ModURL == null) continue;
+                if (mod.ModURL.Length > urlLength)
+                    urlLength = mod.ModURL.Length + EXTRA_PAD;
+            }
+
+
+            // Create the column headers
+            sb.Append("    Name".PadRight(nameLength + EXTRA_PAD - 1) + "URL");
+            sb.Append(Environment.NewLine);
+
+
+            foreach (var mod in Mods)
+            {
+                sb.Append(mod.Checked ? "[+] " : "[ ] ");
+                sb.Append(mod.Name.PadRight(nameLength));
+                sb.Append(mod.ModURL);
+                sb.Append(Environment.NewLine);
+            }
+
+            return sb.ToString();
         }
     }
 }

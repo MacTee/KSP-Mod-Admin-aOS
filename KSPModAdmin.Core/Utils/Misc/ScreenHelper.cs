@@ -51,6 +51,10 @@ namespace KSPModAdmin.Core.Utils
             #endregion
 
 
+            /// <summary>
+            /// Creates a string of the format "bpp:{0};w:{1};h:{2};f:{3};freq:{4}".
+            /// </summary>
+            /// <returns>The "bpp:{0};w:{1};h:{2};f:{3};freq:{4}" formated string.</returns>
             public override string ToString()
             {
                 return string.Format("bpp:{0};w:{1};h:{2};f:{3};freq:{4}", BitsPerPixel, Width, Height, Flags, Frequency);
@@ -161,7 +165,8 @@ namespace KSPModAdmin.Core.Utils
                     }
                 }
             }
-            catch (Exception ex) { }
+            catch (Exception) 
+            { }
 
             return resolutions;
         }

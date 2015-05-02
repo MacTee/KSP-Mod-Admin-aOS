@@ -1,5 +1,4 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace KSPModAdmin.Core.Utils
 {
@@ -11,27 +10,30 @@ namespace KSPModAdmin.Core.Utils
         /// <summary>
         /// Parent scan info of this instance.
         /// </summary>
-        public ScanInfo Parent = null;
+        public ScanInfo Parent { get; set; }
 
         /// <summary>
         /// Child scan infos of this instance.
         /// </summary>
-        public List<ScanInfo> Childs = new List<ScanInfo>();
+        public List<ScanInfo> Childs { get { return mChilds; } set { mChilds = value; } }
+        private List<ScanInfo> mChilds = new List<ScanInfo>();
 
         /// <summary>
         /// File or directory name.
         /// </summary>
-        public string Name = string.Empty;
+        public string Name { get { return mName; } set { mName = value; } }
+        private string mName = string.Empty;
 
         /// <summary>
         /// Full path of the file/directory.
         /// </summary>
-        public string Path = string.Empty;
+        public string Path { get { return mPath; } set { mPath = value; } }
+        private string mPath = string.Empty;
 
         /// <summary>
         /// Flag that indicates whether this scan info is for a file or not.
         /// </summary>
-        public bool IsFile = false;
+        public bool IsFile { get; set; }
 
 
         /// <summary>

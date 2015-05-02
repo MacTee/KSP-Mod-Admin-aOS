@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Windows.Forms;
 using System.Xml;
@@ -10,6 +11,7 @@ using KSPModAdmin.Core.Utils.Localization;
 
 namespace KSPModAdmin.Core.Model
 {
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class ModSelectionColumnsInfo
     {
         public const string COLUMNMOD = "Mod";
@@ -39,7 +41,7 @@ namespace KSPModAdmin.Core.Model
                     new ColumnData()
                     {
                         Name = COLUMNMOD,
-                        Header = Localizer.GlobalInstance["lvModSelection_Item_00"], //"Mod",
+                        Header = Localizer.GlobalInstance["lvModSelection_Item_00"], // "Mod",
                         SortOrder = SortOrder.None,
                         TooltipText = null,
                         Width = 230,
@@ -71,7 +73,7 @@ namespace KSPModAdmin.Core.Model
                     new ColumnData()
                     {
                         Name = COLUMNVERSION,
-                        Header = Localizer.GlobalInstance["lvModSelection_Item_5"], //"Version",
+                        Header = Localizer.GlobalInstance["lvModSelection_Item_5"], // "Version",
                         SortOrder = SortOrder.None,
                         TooltipText = null,
                         Width = 80,
@@ -89,7 +91,7 @@ namespace KSPModAdmin.Core.Model
                     new ColumnData()
                     {
                         Name = COLUMNVERSIONCHECK,
-                        Header = Localizer.GlobalInstance["lvModSelection_Item_3"], //"VersionCheck",
+                        Header = Localizer.GlobalInstance["lvModSelection_Item_3"], // "VersionCheck",
                         SortOrder = SortOrder.None,
                         TooltipText = null,
                         Width = 80,
@@ -115,12 +117,12 @@ namespace KSPModAdmin.Core.Model
             {
                 List<ColumnData> columns = new List<ColumnData>();
                 columns.AddRange(DefaultColumns);
-                columns.AddRange(new []
+                columns.AddRange(new[]
                 {
                     new ColumnData()
                     {
                         Name = COLUMNKSPVERSION,
-                        Header = Localizer.GlobalInstance["lvModSelection_Item_6"], //"KSPVersion",
+                        Header = Localizer.GlobalInstance["lvModSelection_Item_6"], // "KSPVersion",
                         SortOrder = SortOrder.None,
                         TooltipText = null,
                         Width = 80,
@@ -138,7 +140,7 @@ namespace KSPModAdmin.Core.Model
                     new ColumnData()
                     {
                         Name = COLUMNAUTHOR,
-                        Header = Localizer.GlobalInstance["lvModSelection_Item_7"], //"Author",
+                        Header = Localizer.GlobalInstance["lvModSelection_Item_7"], // "Author",
                         SortOrder = SortOrder.None,
                         TooltipText = null,
                         Width = 80,
@@ -156,7 +158,7 @@ namespace KSPModAdmin.Core.Model
                     new ColumnData()
                     {
                         Name = COLUMNOUTDATED,
-                        Header = Localizer.GlobalInstance["lvModSelection_Item_10"], //"Outdated",
+                        Header = Localizer.GlobalInstance["lvModSelection_Item_10"], // "Outdated",
                         SortOrder = SortOrder.None,
                         TooltipText = null,
                         Width = 80,
@@ -168,17 +170,17 @@ namespace KSPModAdmin.Core.Model
                                 DataPropertyName = "IsOutdated",
                                 EditEnabled = false,
                                 LeftMargin = 3
-                                //Type = ColumnItemType.NodeTextBox,
-                                //DataPropertyName = "IsOutdated",
-                                //IncrementalSearchEnabled = true,
-                                //LeftMargin = 3
+                                ////Type = ColumnItemType.NodeTextBox,
+                                ////DataPropertyName = "IsOutdated",
+                                ////IncrementalSearchEnabled = true,
+                                ////LeftMargin = 3
                             }
                         }
                     },
                     new ColumnData()
                     {
                         Name = COLUMNRATING,
-                        Header = Localizer.GlobalInstance["lvModSelection_Item_11"], //"Rating",
+                        Header = Localizer.GlobalInstance["lvModSelection_Item_11"], // "Rating",
                         SortOrder = SortOrder.None,
                         TooltipText = null,
                         Width = 80,
@@ -196,7 +198,7 @@ namespace KSPModAdmin.Core.Model
                     new ColumnData()
                     {
                         Name = COLUMNDOWNLOAD,
-                        Header = Localizer.GlobalInstance["lvModSelection_Item_12"], //"Downloads",
+                        Header = Localizer.GlobalInstance["lvModSelection_Item_12"], // "Downloads",
                         SortOrder = SortOrder.None,
                         TooltipText = null,
                         Width = 80,
@@ -214,7 +216,7 @@ namespace KSPModAdmin.Core.Model
                     new ColumnData()
                     {
                         Name = COLUMNNOTE,
-                        Header = Localizer.GlobalInstance["lvModSelection_Item_13"], //"Note",
+                        Header = Localizer.GlobalInstance["lvModSelection_Item_13"], // "Note",
                         SortOrder = SortOrder.None,
                         TooltipText = null,
                         Width = 80,
@@ -232,7 +234,7 @@ namespace KSPModAdmin.Core.Model
                     new ColumnData()
                     {
                         Name = COLUMNCONFLICTS,
-                        Header = Localizer.GlobalInstance["lvModSelection_Item_16"], //"Conflicts",
+                        Header = Localizer.GlobalInstance["lvModSelection_Item_16"], // "Conflicts",
                         SortOrder = SortOrder.None,
                         TooltipText = null,
                         Width = 80,
@@ -244,17 +246,17 @@ namespace KSPModAdmin.Core.Model
                                 DataPropertyName = "HasCollision",
                                 EditEnabled = false,
                                 LeftMargin = 3
-                                //Type = ColumnItemType.NodeTextBox,
-                                //DataPropertyName = "HasCollision",
-                                //IncrementalSearchEnabled = true,
-                                //LeftMargin = 3
+                                ////Type = ColumnItemType.NodeTextBox,
+                                ////DataPropertyName = "HasCollision",
+                                ////IncrementalSearchEnabled = true,
+                                ////LeftMargin = 3
                             }
                         }
                     },
                     new ColumnData()
                     {
                         Name = COLUMNINSTALLED,
-                        Header = Localizer.GlobalInstance["lvModSelection_Item_17"], //"Installed",
+                        Header = Localizer.GlobalInstance["lvModSelection_Item_17"], // "Installed",
                         SortOrder = SortOrder.None,
                         TooltipText = null,
                         Width = 80,
@@ -266,17 +268,17 @@ namespace KSPModAdmin.Core.Model
                                 DataPropertyName = "IsInstalled",
                                 EditEnabled = false,
                                 LeftMargin = 3
-                                //Type = ColumnItemType.NodeTextBox,
-                                //DataPropertyName = "IsInstalled",
-                                //IncrementalSearchEnabled = true,
-                                //LeftMargin = 3
+                                ////Type = ColumnItemType.NodeTextBox,
+                                ////DataPropertyName = "IsInstalled",
+                                ////IncrementalSearchEnabled = true,
+                                ////LeftMargin = 3
                             }
                         }
                     },
                     new ColumnData()
                     {
                         Name = COLUMNCREATIONDATE,
-                        Header = Localizer.GlobalInstance["lvModSelection_Item_8"], //"CreationDate",
+                        Header = Localizer.GlobalInstance["lvModSelection_Item_8"], // "CreationDate",
                         SortOrder = SortOrder.None,
                         TooltipText = null,
                         Width = 80,
@@ -294,7 +296,7 @@ namespace KSPModAdmin.Core.Model
                     new ColumnData()
                     {
                         Name = COLUMNCHANGEDATE,
-                        Header = Localizer.GlobalInstance["lvModSelection_Item_9"], //"ChangeDate",
+                        Header = Localizer.GlobalInstance["lvModSelection_Item_9"], // "ChangeDate",
                         SortOrder = SortOrder.None,
                         TooltipText = null,
                         Width = 80,
@@ -312,7 +314,7 @@ namespace KSPModAdmin.Core.Model
                     new ColumnData()
                     {
                         Name = COLUMNARCHIVEPATH,
-                        Header = Localizer.GlobalInstance["lvModSelection_Item_2"], //"Archive path",
+                        Header = Localizer.GlobalInstance["lvModSelection_Item_2"], // "Archive path",
                         SortOrder = SortOrder.None,
                         TooltipText = null,
                         Width = 80,
@@ -594,6 +596,7 @@ namespace KSPModAdmin.Core.Model
         }
     }
 
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public enum ColumnItemType
     {
         NodeCheckBox,
@@ -601,6 +604,7 @@ namespace KSPModAdmin.Core.Model
         NodeTextBox
     }
 
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class ColumnData
     {
         public string Name { get; set; }
@@ -621,6 +625,7 @@ namespace KSPModAdmin.Core.Model
         }
     }
 
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class ColumnItemData
     {
         public ColumnItemType Type { get; set; }

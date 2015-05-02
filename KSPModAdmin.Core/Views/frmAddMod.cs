@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Windows.Forms;
 using KSPModAdmin.Core.Controller;
@@ -7,13 +8,16 @@ using KSPModAdmin.Core.Utils;
 
 namespace KSPModAdmin.Core.Views
 {
+    [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Reviewed. Suppression is OK here.")]
     public partial class frmAddMod : frmBase
     {
+        /// <summary>
+        /// Creates a new instance of the frmAddMod class.
+        /// </summary>
         public frmAddMod()
         {
             InitializeComponent();
         }
-
 
         private void frmAddMod_Load(object sender, EventArgs e)
         {

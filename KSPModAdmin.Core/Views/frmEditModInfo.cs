@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Windows.Forms;
 using KSPModAdmin.Core.Model;
 using KSPModAdmin.Core.Utils;
@@ -7,10 +8,14 @@ using KSPModAdmin.Core.Utils.Logging;
 
 namespace KSPModAdmin.Core.Views
 {
+    [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Reviewed. Suppression is OK here.")]
     public partial class frmEditModInfo : frmBase
     {
         #region Properties
 
+        /// <summary>
+        /// Sets the root node of a mod.
+        /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public ModNode ModZipRoot 
         { 
@@ -28,7 +33,7 @@ namespace KSPModAdmin.Core.Views
 
                     ProductID = value.ProductID;
                     Version = value.Version;
-	                KSPVersion = value.KSPVersion;
+                    KSPVersion = value.KSPVersion;
                     Author = value.Author;
                     DownloadDate = value.AddDate;
                     ChangeDate = value.ChangeDate;
@@ -40,6 +45,9 @@ namespace KSPModAdmin.Core.Views
             }
         }
 
+        /// <summary>
+        /// Gets or sets the ModInfos of the mod..
+        /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public ModInfo ModInfo
         {
@@ -77,7 +85,7 @@ namespace KSPModAdmin.Core.Views
                     ModURL = value.ModURL;
                     AdditionalURL = value.AdditionalURL;
                     KSPVersion = value.KSPVersion;
-	                Version = value.Version;
+                    Version = value.Version;
                 }
                 else
                 {
@@ -97,6 +105,9 @@ namespace KSPModAdmin.Core.Views
             }
         }
 
+        /// <summary>
+        /// The author of the mod.
+        /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public string Author
         {
@@ -110,6 +121,9 @@ namespace KSPModAdmin.Core.Views
             }
         }
 
+        /// <summary>
+        /// The download count of the mod.
+        /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public string Downloads
         {
@@ -123,6 +137,9 @@ namespace KSPModAdmin.Core.Views
             }
         }
 
+        /// <summary>
+        /// The name of the mod.
+        /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public string ModName
         {
@@ -136,6 +153,9 @@ namespace KSPModAdmin.Core.Views
             }
         }
 
+        /// <summary>
+        /// The note for the mod.
+        /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public string Note
         {
@@ -149,6 +169,9 @@ namespace KSPModAdmin.Core.Views
             }
         }
 
+        /// <summary>
+        /// The product id of the mod.
+        /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public string ProductID
         {
@@ -162,6 +185,9 @@ namespace KSPModAdmin.Core.Views
             }
         }
 
+        /// <summary>
+        /// The rating of the mod.
+        /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public string Rating
         {
@@ -175,6 +201,9 @@ namespace KSPModAdmin.Core.Views
             }
         }
 
+        /// <summary>
+        /// The version of the mod.
+        /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public string Version
         {
@@ -188,6 +217,9 @@ namespace KSPModAdmin.Core.Views
             }
         }
 
+        /// <summary>
+        /// The creation date of the mod.
+        /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public string CreationDate
         {
@@ -211,6 +243,9 @@ namespace KSPModAdmin.Core.Views
             }
         }
 
+        /// <summary>
+        /// The change date of the mod.
+        /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public string ChangeDate
         {
@@ -230,6 +265,9 @@ namespace KSPModAdmin.Core.Views
             }
         }
 
+        /// <summary>
+        /// The download date of the mod.
+        /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public string DownloadDate
         {
@@ -249,6 +287,9 @@ namespace KSPModAdmin.Core.Views
             }
         }
 
+        /// <summary>
+        /// The name of the SiteHandler for the mod.
+        /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public string SiteHandlerName
         {
@@ -274,6 +315,9 @@ namespace KSPModAdmin.Core.Views
             }
         }
 
+        /// <summary>
+        /// The URL to the mod.
+        /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public string ModURL
         {
@@ -287,6 +331,9 @@ namespace KSPModAdmin.Core.Views
             }
         }
 
+        /// <summary>
+        /// A user defined URL.
+        /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public string AdditionalURL
         {
@@ -300,6 +347,9 @@ namespace KSPModAdmin.Core.Views
             }
         }
 
+        /// <summary>
+        /// The minimum KSP version for the mod.
+        /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public string KSPVersion
         {
@@ -316,6 +366,9 @@ namespace KSPModAdmin.Core.Views
         #endregion
 
 
+        /// <summary>
+        /// Creates a new instance of the frmEditModInfo class.
+        /// </summary>
         public frmEditModInfo()
         {
             InitializeComponent();

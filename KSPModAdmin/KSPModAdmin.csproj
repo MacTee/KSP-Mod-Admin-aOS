@@ -58,6 +58,12 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="StyleCop">
+      <HintPath>..\packages\StyleCop.4.7.49.0\lib\net35\StyleCop.dll</HintPath>
+    </Reference>
+    <Reference Include="StyleCop.CSharp">
+      <HintPath>..\packages\StyleCop.4.7.49.0\lib\net35\StyleCop.CSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http">
@@ -87,6 +93,7 @@
     <None Include="Languages\KSPMA.ger.lang" />
     <None Include="Languages\KSPMA.ital.lang" />
     <None Include="Languages\KSPMA.rus.lang" />
+    <None Include="packages.config" />
     <None Include="Pics\KSPMA Icon\KMA_and_KMA2_icon.psd" />
     <None Include="Pics\KSPMA Icon\KMA_Vectors.ai" />
     <None Include="Properties\Settings.settings">
@@ -98,6 +105,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -151,6 +159,7 @@
 md "$(ProjectDir)$(OutDir)Plugins"
 xcopy /E /Y /R /I "$(SolutionDir)KSPModAdmin.Translation.Plugin\$(OutDir)KSPModAdmin.Translation.Plugin.dll" "$(ProjectDir)$(OutDir)Plugins"</PostBuildEvent>
   </PropertyGroup>
+  <Import Project="..\packages\StyleCop.MSBuild.4.7.49.1\build\StyleCop.MSBuild.Targets" Condition="Exists('..\packages\StyleCop.MSBuild.4.7.49.1\build\StyleCop.MSBuild.Targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -6,8 +6,14 @@ using KSPModAdmin.Core;
 
 namespace KSPModAdmin.Translation.Plugin
 {
+    /// <summary>
+    /// Class that holds all entries of a language.
+    /// </summary>
     public class LanguageFileContent
     {
+        /// <summary>
+        /// Root XmlNode of the language file.
+        /// </summary>
         public XmlNode XmlNode
         {
             get { return mXmlNode; }
@@ -29,6 +35,9 @@ namespace KSPModAdmin.Translation.Plugin
         }
         private XmlNode mXmlNode = null;
 
+        /// <summary>
+        /// The name of the language.
+        /// </summary>
         public string Name
         {
             get
@@ -41,8 +50,11 @@ namespace KSPModAdmin.Translation.Plugin
                     mNameAttribute.Value = value;
             }
         }
-        public XmlAttribute mNameAttribute = null;
+        private XmlAttribute mNameAttribute = null;
 
+        /// <summary>
+        /// The short name of the language.
+        /// </summary>
         public string ShortName
         {
             get
@@ -55,17 +67,32 @@ namespace KSPModAdmin.Translation.Plugin
                     mShortNameAttribute.Value = value;
             }
         }
-        public XmlAttribute mShortNameAttribute = null;
+        private XmlAttribute mShortNameAttribute = null;
 
+        /// <summary>
+        /// The file name of the language file.
+        /// </summary>
         public string FileName { get; set; }
 
+        /// <summary>
+        /// The path to the language file.
+        /// </summary>
         public string FilePath { get; set; }
 
+        /// <summary>
+        /// Full path (Path + file name) of the language file.
+        /// </summary>
         public string FullPath { get { return Path.Combine(FilePath, FileName); } }
 
+        /// <summary>
+        /// All language file entries.
+        /// </summary>
         public List<LanguageEntry> Entries { get; set; }
 
 
+        /// <summary>
+        /// Creates a new instance of a LanguageFileContent class.
+        /// </summary>
         public LanguageFileContent(string fullPath, XmlNode node)
         {
             FileName = Path.GetFileName(fullPath);
@@ -76,6 +103,9 @@ namespace KSPModAdmin.Translation.Plugin
         }
 
 
+        /// <summary>
+        /// Saves the LanguageFileContent to a file (FullPath will be used).
+        /// </summary>
         public void Save()
         {
             if (XmlNode != null && XmlNode.OwnerDocument != null)
