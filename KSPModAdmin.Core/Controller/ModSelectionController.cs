@@ -395,10 +395,11 @@ namespace KSPModAdmin.Core.Controller
                                 ModNode outdatedMod = Model[modInfo.LocalPath];
                                 Messenger.AddInfo(string.Format(Messages.MSG_REPLACING_MOD_0, outdatedMod.Text));
 
-                                newNode = ModNodeHandler.CreateModNode(modInfo);
-                                RemoveOutdatedAndAddNewMod(outdatedMod, newNode);
+                                newNode = UpdateMod(modInfo, outdatedMod);
+                                //newNode = ModNodeHandler.CreateModNode(modInfo);
+                                //RemoveOutdatedAndAddNewMod(outdatedMod, newNode);
 
-                                newNode.UncheckAll();
+                                //newNode.UncheckAll();
 
                                 Messenger.AddInfo(string.Format(Messages.MSG_MOD_0_REPLACED, newNode.Text));
 
@@ -1640,14 +1641,14 @@ namespace KSPModAdmin.Core.Controller
             var sb = new StringBuilder();
             int nameLength = EXTRA_PAD;
             int urlLength = 0;
-            
+
             // Get the longest mod name
             foreach (var mod in Mods)
             {
                 if (mod.Name.Length > nameLength)
                     nameLength = mod.Name.Length + EXTRA_PAD;
             }
-                
+
 
             // Get the longest url
             foreach (var mod in Mods)
