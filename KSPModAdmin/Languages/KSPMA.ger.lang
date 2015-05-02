@@ -654,9 +654,15 @@
     <ChildControl Name="tsmiExportAsText_ToolTip" Value="Export als .txt^Save the current mod list as a text file."/>
   </Control>
 
-  <String Name="MSG_EXTRACTING_MOD_0" Value="(T)Extrahiere mod &quot;{0}&quot;..."/>
-  <String Name="MSG_MODARCHIVE_0_NOT_FOUND" Value="(T)Mod Archive &quot;{0}&quot; nicht gefunden!"/>
-  <String Name="MSG_IMPORT_SKIPPED_MOD_0_NOT_FOUND" Value="(T)Import übersrungen! Mod Archive &quot;{0}&quot; nicht gefunden."/>
-  <String Name="MSG_COPY_MOD_DESTINATION_0" Value="(T)Kopiere Zielfpfad der mod &quot;{0}&quot;"/>
-  <String Name="MSG_INSTALLING_MOD_0" Value="(T)Installiere mod &quot;{0}&quot;..."/>
+  <String Name="MSG_EXTRACTING_MOD_0" Value="Extrahiere mod &quot;{0}&quot;..."/>
+  <String Name="MSG_MODARCHIVE_0_NOT_FOUND" Value="Mod Archive &quot;{0}&quot; nicht gefunden!"/>
+  <String Name="MSG_IMPORT_SKIPPED_MOD_0_NOT_FOUND" Value="Import übersrungen! Mod Archive &quot;{0}&quot; nicht gefunden."/>
+  <String Name="MSG_COPY_MOD_DESTINATION_0" Value="Kopiere Zielfpfad der mod &quot;{0}&quot;"/>
+  <String Name="MSG_INSTALLING_MOD_0" Value="Installiere mod &quot;{0}&quot;..."/>
+
+  <Control Name="tsbTreeViewOption" Value="Öffne TreeView Optionen">
+    <ChildControl Name="tsbTreeViewOption_ToolTip" Value="Öffne TreeView Optionen^Öffnet die TreeView Optionen."/>
+  </Control>
+  <Control Name="tsmiCmsOneModOpenFolder" Value="Öffne Ordner"/>
+  <Control Name="tsmiCmsOneModOpenFile" Value="Öffne Datei"/>
 </Language>

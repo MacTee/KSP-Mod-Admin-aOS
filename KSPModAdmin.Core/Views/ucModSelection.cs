@@ -408,6 +408,16 @@ namespace KSPModAdmin.Core.Views
             ModSelectionController.OpenTreeViewOptions();
         }
 
+        private void tsmiCmsOneModOpenFolder_Click(object sender, EventArgs e)
+        {
+            OpenFolder(SelectedNode);
+        }
+
+        private void tsmiCmsOneModOpenFile_Click(object sender, EventArgs e)
+        {
+            OpenFile(SelectedNode);
+        }
+
         #endregion
 
         #endregion
@@ -608,9 +618,7 @@ namespace KSPModAdmin.Core.Views
 
         private void tvModSelection_DoubleClick(object sender, EventArgs e)
         {
-            ModNode node = SelectedNode as ModNode;
-            if (node != null && node.IsFile)
-                ModSelectionController.OpenTextDisplayer(node);
+            OpenFile(SelectedNode);
         }
 
         private void tvModSelection_ColumnClicked(object sender, TreeColumnEventArgs e)
@@ -661,6 +669,8 @@ namespace KSPModAdmin.Core.Views
                 tsmiCmsProceedMod.Visible = (selectedModCount == 1);
                 tsmiCmsProceedHighlightedMods.Visible = !tsmiCmsProceedMod.Visible;
                 tsmiCmsCreateZip.Enabled = !selectedNode.ZipExists;
+                tsmiCmsOneModOpenFile.Visible = selectedNode.IsFile;
+                tsmiCmsOneModOpenFolder.Visible = !selectedNode.IsFile && selectedNode.IsInstalled;
             }
 
             if (tvModSelection.SelectedNodes.Count > 1)
@@ -670,6 +680,8 @@ namespace KSPModAdmin.Core.Views
                 tsmiCmsRedetectDestination.Enabled = false;
                 tsmiCmsResetDestination.Visible = false;
                 tsmiCmsResetDestinations.Visible = true;
+                tsmiCmsOneModOpenFile.Visible = false;
+                tsmiCmsOneModOpenFolder.Visible = false;
             }
             else
             {
@@ -816,6 +828,18 @@ namespace KSPModAdmin.Core.Views
             }
 
             InvalidateView();
+        }
+
+        private void OpenFile(ModNode node)
+        {
+            if (node != null && node.IsFile)
+                ModSelectionController.OpenTextDisplayer(node);
+        }
+
+        private void OpenFolder(ModNode node)
+        {
+            if (node != null && !node.IsFile && node.IsInstalled)
+                OptionsController.OpenFolder(KSPPathHelper.GetAbsolutePath(SelectedNode.Destination));
         }
     }
 }

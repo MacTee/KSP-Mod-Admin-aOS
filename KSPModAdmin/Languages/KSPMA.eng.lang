@@ -672,4 +672,9 @@
   <String Name="MSG_COPY_MOD_DESTINATION_0" Value="Copy destinations of mod &quot;{0}&quot;"/>
   <String Name="MSG_INSTALLING_MOD_0" Value="Installing mod &quot;{0}&quot;..."/>
 
+  <Control Name="tsbTreeViewOption" Value="Open TreeView options">
+    <ChildControl Name="tsbTreeViewOption_ToolTip" Value="Open TreeView options^Opens the TreeView options."/>
+  </Control>
+  <Control Name="tsmiCmsOneModOpenFolder" Value="Open folder"/>
+  <Control Name="tsmiCmsOneModOpenFile" Value="Open file"/>
 </Language>

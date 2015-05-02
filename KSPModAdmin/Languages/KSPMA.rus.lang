@@ -656,4 +656,10 @@
   <String Name="MSG_IMPORT_SKIPPED_MOD_0_NOT_FOUND" Value="(T)Import skipped! Mod Archive &quot;{0}&quot; not found."/>
   <String Name="MSG_COPY_MOD_DESTINATION_0" Value="(T)Copy destinations of mod &quot;{0}&quot;"/>
   <String Name="MSG_INSTALLING_MOD_0" Value="(T)Installing mod &quot;{0}&quot;..."/>
+
+  <Control Name="tsbTreeViewOption" Value="(T)Open TreeView options">
+    <ChildControl Name="tsbTreeViewOption_ToolTip" Value="(T)Open TreeView options^Opens the TreeView options."/>
+  </Control>
+  <Control Name="tsmiCmsOneModOpenFolder" Value="(T)Open folder"/>
+  <Control Name="tsmiCmsOneModOpenFile" Value="(T)Open file"/>
 </Language>

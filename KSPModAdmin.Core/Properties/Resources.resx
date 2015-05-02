@@ -121,6 +121,9 @@
   <data name="DVSplit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DVSplit.cur;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="folder_add1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\folder_add1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="colors" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\colors.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -133,17 +136,26 @@
   <data name="components_replace_checkbox_unchecked" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\components_replace_checkbox_unchecked.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="components_scroll_out1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\components_scroll_out1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="stop" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\stop.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="data_warning_options" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\data_warning_options.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="gears_preferences" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\gears_preferences.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="house" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\house.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="components_gearwheel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\components_gearwheel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="KMA2_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\KMA2_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="component_edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\component_edit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -154,8 +166,8 @@
   <data name="refresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\refresh.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="gears_preferences" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\gears_preferences.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="delete2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\delete2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="checkbox_unknown" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\checkbox_unknown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -172,8 +184,8 @@
   <data name="checkbox_checked" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\checkbox_checked.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="folder1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\folder1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="airplane_checkbox_checked" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\airplane_checkbox_checked.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="components_package_into" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\components_package_into.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -193,14 +205,14 @@
   <data name="anvil" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\anvil.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="component_scroll_edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\component_scroll_edit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="data_options" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\data_options.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="data_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\data_add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="airplane_delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\airplane_delete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="components_package_replace" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\components_package_replace.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="component_replace_clock" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\component_replace_clock.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -214,8 +226,8 @@
   <data name="component_replace_checkbox_checked" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\component_replace_checkbox_checked.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="component_edit_info" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\component_edit_info.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="data_floppy_disk" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\data_floppy_disk.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="component_into" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\component_into.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -229,9 +241,6 @@
   <data name="components_replace_clock" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\components_replace_clock.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="component_replace_scroll" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\component_replace_scroll.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="arrow_right_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\arrow_right_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -244,11 +253,14 @@
   <data name="component_folder_gearwheel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\component_folder_gearwheel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="note_edit1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\note_edit1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="plus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\plus.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="component_replace_earth" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\component_replace_earth.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="folder1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\folder1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="component_gearwheel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\component_gearwheel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="airplane_scroll" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\airplane_scroll.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -256,29 +268,23 @@
   <data name="component_options" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\component_options.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="flag_scotland_delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\flag_scotland_delete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="folder_delete1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\folder_delete1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="compress" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\compress.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="component_scroll_edit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\component_scroll_edit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="loader" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\loader.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="folder_tool" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\folder_tool.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="help" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\help.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="component_scroll_next" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\component_scroll_next.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="component_replace" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\component_replace.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="data_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\data_add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="cc_license" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cc_license.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -295,8 +301,8 @@
   <data name="minus" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\minus.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="delete2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\delete2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="data_floppy_disk_into" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\data_floppy_disk_into.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="flag_scotland_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\flag_scotland_add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -322,11 +328,11 @@
   <data name="components_delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\components_delete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="data_floppy_disk_into" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\data_floppy_disk_into.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="component_replace_scroll" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\component_replace_scroll.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="component_gearwheel" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\component_gearwheel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="folder_tool" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\folder_tool.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="folder" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\folder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -334,23 +340,26 @@
   <data name="components_folder_reset" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\components_folder_reset.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="note_edit1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\note_edit1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="data_gearwheel_options" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\data_gearwheel_options.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="airplane_checkbox_checked" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\airplane_checkbox_checked.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="data_options" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\data_options.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="component_scroll_next" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\component_scroll_next.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="components_scroll_replace" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\components_scroll_replace.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="component_replace_earth" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\component_replace_earth.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="components_package_replace" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\components_package_replace.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="data_delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\data_delete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="component" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\component.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="component_folder_reset" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\component_folder_reset.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -388,14 +397,11 @@
   <data name="checkbox_unchecked" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\checkbox_unchecked.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="data_floppy_disk" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\data_floppy_disk.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="flag_scotland_delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\flag_scotland_delete.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="components_replace_earth" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\components_replace_earth.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="KMA2_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\KMA2_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="loading_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\loading_icon;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -415,14 +421,14 @@
   <data name="earth_replace" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\earth_replace.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="folder_add1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\folder_add1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="component_edit_info" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\component_edit_info.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="download" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\download.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="plus" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\plus.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="component" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\component.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="components_into" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\components_into.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -430,16 +436,13 @@
   <data name="bug_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bug_red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="folder_delete1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\folder_delete1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="star" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\star.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="earth_checkbox_checked" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\earth_checkbox_checked.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="components_scroll_out1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\components_scroll_out1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="folder_up" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\folder_up.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

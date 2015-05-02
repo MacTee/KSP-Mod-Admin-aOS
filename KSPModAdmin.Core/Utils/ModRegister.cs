@@ -60,9 +60,6 @@ namespace KSPModAdmin.Core.Utils
         /// <returns>True if a collision with another mod was detected.</returns>
         public static bool RegisterModFile(ModNode fileNode)
         {
-            if (!ConflictDetectionOnOff)
-                return false;
-
             if (string.IsNullOrEmpty(fileNode.Destination))
                 return false;
 
@@ -84,16 +81,18 @@ namespace KSPModAdmin.Core.Utils
                         foreach (ModNode node in mRegisterdModFiles[fileNode.Destination.ToLower()])
                             node.HasCollision = true;
                     }
-                    else
-                    {
-                        if (HaveCollisionsSameRoot(fileNode) || fileNode.Text.Trim().Equals(Constants.GAMEDATA, StringComparison.CurrentCultureIgnoreCase))
-                            return false;
+                    // Ignore folders for now ...
+                    ////else
+                    ////{
+                    ////    if (HaveCollisionsSameRoot(fileNode) || fileNode.Text.Trim().Equals(Constants.GAMEDATA, StringComparison.CurrentCultureIgnoreCase))
+                    ////        return false;
 
-                        foreach (ModNode node in mRegisterdModFiles[fileNode.Destination.ToLower()])
-                            node.HasCollision = true;
-                    }
+                    ////    foreach (ModNode node in mRegisterdModFiles[fileNode.Destination.ToLower()])
+                    ////        node.HasCollision = true;
+                    ////}
 
-                    return true;
+                    // Only true wenn collision detection is on
+                    return ConflictDetectionOnOff;
                 }
             }
 
