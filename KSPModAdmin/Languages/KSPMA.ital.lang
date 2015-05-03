@@ -102,9 +102,9 @@
   </Control>
   <Control Name="tsModSelection" Value="(T)toolStrip1">
     <Control Name="tssbAddMod" Value="(T)toolStripButton1">
-      <ChildControl Name="tssbAddMod_ToolTip" Value="Aggiungi finestra^Apre la &amp;quot;Finestra di aggiunta mod&amp;quot;." />
+      <ChildControl Name="tssbAddMod_ToolTip" Value="Finestra di aggiunta^Apre la &amp;quot;Finestra di aggiunta mod&amp;quot;." />
       <Control Name="tsmiAddMod" Value="(T)Add dialog">
-        <ChildControl Name="tsmiAddMod_ToolTip" Value="Aggiungi finestra^Apre la &amp;quot;Finestra di aggiunta mod&amp;quot;." />
+        <ChildControl Name="tsmiAddMod_ToolTip" Value="Finestra di aggiunta^Apre la &amp;quot;Finestra di aggiunta mod&amp;quot;." />
       </Control>
       <Control Name="tsmiAddModArchives" Value="Aggiungi archivi mod">
         <ChildControl Name="tsmiAddModArchives_ToolTip" Value="Aggiungi archivio mod^Apre la &amp;quot;Finestra di selezione mod&amp;quot; to add a mod archive." />
@@ -658,19 +658,19 @@
 
   <String Name="MSG_NO_DOWNLOAD_INFOS_FOUND" Value="Nessun link di download trovato!"/>
 
-  <String Name="MSG_NO_BINARY_DOWNLOAD_FOUND_AT_0" Value="(T)No binary download found at &quot;{0}&quot;!"/>
+  <String Name="MSG_NO_BINARY_DOWNLOAD_FOUND_AT_0" Value="Nessun download eseguibile trovato a &quot;{0}&quot;!"/>
   <Control Name="tsmiExImport" Value="Importa/Esporta modpack">
-    <ChildControl Name="tsmiExImport_ToolTip" Value="Importa/Esporta modpack^Apre l'Importazione/Esportazione per i modpack." />  
+    <ChildControl Name="tsmiExImport_ToolTip" Value="Importa/Esporta modpack^Apre l'Importazione/Esportazione per i modpack." />
   </Control>
-  <Control Name="tsmiExportAsText" Value="(T)Export as .txt">
-    <ChildControl Name="tsmiExportAsText_ToolTip" Value="(T)Export as .txt^Save the current mod list as a text file."/>
+  <Control Name="tsmiExportAsText" Value="Esporta come .txt">
+    <ChildControl Name="tsmiExportAsText_ToolTip" Value="Esporta come .txt^Salva la lista di mods scelta come textfile."/>
   </Control>
 
-  <String Name="MSG_EXTRACTING_MOD_0" Value="(T)Extracting mod &quot;{0}&quot;..."/>
-  <String Name="MSG_MODARCHIVE_0_NOT_FOUND" Value="(T)Mod Archive &quot;{0}&quot; not found!"/>
-  <String Name="MSG_IMPORT_SKIPPED_MOD_0_NOT_FOUND" Value="(T)Import skipped! Mod Archive &quot;{0}&quot; not found."/>
-  <String Name="MSG_COPY_MOD_DESTINATION_0" Value="(T)Copy destinations of mod &quot;{0}&quot;"/>
-  <String Name="MSG_INSTALLING_MOD_0" Value="(T)Installing mod &quot;{0}&quot;..."/>
+  <String Name="MSG_EXTRACTING_MOD_0" Value="Estrazione mod &quot;{0}&quot;..."/>
+  <String Name="MSG_MODARCHIVE_0_NOT_FOUND" Value="Archivio mod &quot;{0}&quot; non trovato!"/>
+  <String Name="MSG_IMPORT_SKIPPED_MOD_0_NOT_FOUND" Value="Importazione annullata! Archivio dei mod &quot;{0}&quot; non trovato."/>
+  <String Name="MSG_COPY_MOD_DESTINATION_0" Value="Copia la destinazione del mod &quot;{0}&quot;"/>
+  <String Name="MSG_INSTALLING_MOD_0" Value="Installazione mod &quot;{0}&quot;..."/>
 
   <Control Name="tsbTreeViewOption" Value="(T)Open TreeView options">
     <ChildControl Name="tsbTreeViewOption_ToolTip" Value="(T)Open TreeView options^Opens the TreeView options."/>
