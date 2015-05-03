@@ -269,7 +269,7 @@ namespace KSPModAdmin.Core.Views
             this.toolStripSeparator14,
             this.tsmiCmsOneModTreeViewOptions});
             this.cmsModSelectionOneMod.Name = "cmsModSelection";
-            this.cmsModSelectionOneMod.Size = new System.Drawing.Size(304, 486);
+            this.cmsModSelectionOneMod.Size = new System.Drawing.Size(304, 508);
             this.cmsModSelectionOneMod.Opened += new System.EventHandler(this.cmsModSelectionOneMod_Opened);
             // 
             // tsmiCmsDestination
@@ -435,7 +435,6 @@ namespace KSPModAdmin.Core.Views
             // 
             // tsmiCmsSolveConflicts
             // 
-            this.tsmiCmsSolveConflicts.Enabled = false;
             this.tsmiCmsSolveConflicts.Image = global::KSPModAdmin.Core.Properties.Resources.component_warning;
             this.tsmiCmsSolveConflicts.Name = "tsmiCmsSolveConflicts";
             this.tsmiCmsSolveConflicts.Size = new System.Drawing.Size(303, 22);
@@ -838,7 +837,6 @@ namespace KSPModAdmin.Core.Views
             // tsbSolveConflicts
             // 
             this.tsbSolveConflicts.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbSolveConflicts.Enabled = false;
             this.tsbSolveConflicts.Image = ((System.Drawing.Image)(resources.GetObject("tsbSolveConflicts.Image")));
             this.tsbSolveConflicts.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbSolveConflicts.Name = "tsbSolveConflicts";

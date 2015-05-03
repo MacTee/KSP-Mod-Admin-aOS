@@ -9,6 +9,7 @@ using System.Linq;
 using System.Windows.Forms;
 using KSPModAdmin.Core.Model;
 using KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree;
+using KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.Helper;
 using KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.NodeControls;
 using KSPModAdmin.Core.Controller;
 using KSPModAdmin.Core.Properties;
@@ -481,7 +482,7 @@ namespace KSPModAdmin.Core.Views
                 tsbEditModInfos.Enabled = true;
                 tsbCopyModInfos.Enabled = true;
 
-                ////tsbSolveConflicts.Enabled = true;
+                tsbSolveConflicts.Enabled = selectedNode.HasCollision || selectedNode.HasChildCollision;
                 tsbRefreshCheckedState.Enabled = true;
 
                 tssbChangeDestination.Enabled = true;
@@ -500,10 +501,10 @@ namespace KSPModAdmin.Core.Views
                 KSPVersion = "0.21";
                 ModAuthor = "BHeinrich";
                 ModCreationDate = "27.05.2014";
-                ModChangeDate = "12.12.2014";
+                ModChangeDate = "03.05.2015";
                 ModOutdated = false;
                 ModRating = string.Empty;
-                ModDownloads = "75k+";
+                ModDownloads = "85k+";
                 ModNote = "KSP MA aOS is the mod managing tool for KSP on any OS. ;)";
                 FileName = "KSPModAdmin.exe";
                 FileDestination = string.Empty;
@@ -635,7 +636,7 @@ namespace KSPModAdmin.Core.Views
             else if (e.Column.SortOrder == SortOrder.Ascending)
                 e.Column.SortOrder = SortOrder.Descending;
 
-            SortColumn(e.Column as ModSelectionTreeColumn);
+            SortColumn(e.Column as NamedTreeColumn);
         }
 
         #endregion
@@ -671,6 +672,7 @@ namespace KSPModAdmin.Core.Views
                 tsmiCmsCreateZip.Enabled = !selectedNode.ZipExists;
                 tsmiCmsOneModOpenFile.Visible = selectedNode.IsFile;
                 tsmiCmsOneModOpenFolder.Visible = !selectedNode.IsFile && selectedNode.IsInstalled;
+                tsmiCmsSolveConflicts.Enabled = selectedNode.HasCollision || selectedNode.HasChildCollision;
             }
 
             if (tvModSelection.SelectedNodes.Count > 1)
@@ -760,8 +762,8 @@ namespace KSPModAdmin.Core.Views
             ControlTranslator.TranslateControls(Localizer.GlobalInstance, this as Control, OptionsController.SelectedLanguage);
 
             // translate columns of ModSelection TreeView
-            List<ModSelectionTreeColumn> columns = new List<ModSelectionTreeColumn>();
-            foreach (ModSelectionTreeColumn column in tvModSelection.Columns)
+            List<NamedTreeColumn> columns = new List<NamedTreeColumn>();
+            foreach (NamedTreeColumn column in tvModSelection.Columns)
             {
                 var newColData = ModSelectionColumnsInfo.GetColumn(column.Name);
                 if (newColData != null)
@@ -769,7 +771,7 @@ namespace KSPModAdmin.Core.Views
             }
         }
 
-        internal void SortColumn(ModSelectionTreeColumn column)
+        internal void SortColumn(NamedTreeColumn column)
         {
             if (column == null)
                 return;

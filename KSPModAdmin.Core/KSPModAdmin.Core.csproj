@@ -99,13 +99,17 @@
     <Compile Include="IKSPMAPlugin.cs" />
     <Compile Include="Config\KSPConfig.cs" />
     <Compile Include="Messages.cs" />
+    <Compile Include="Utils\Controls\TreeViewAdv\Helper\ColumnData.cs" />
+    <Compile Include="Model\ConflicDataTreeModel.cs" />
+    <Compile Include="Model\ConflictInfoNode.cs" />
     <Compile Include="Model\ModSelectionColumnsInfo.cs" />
-    <Compile Include="Model\ModSelectionTreeColumn.cs">
+    <Compile Include="Utils\Controls\TreeViewAdv\Helper\NamedTreeColumn.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Model\ModSelectionTreeModel.cs" />
     <Compile Include="Model\ModNode.cs" />
     <Compile Include="Model\NoteNode.cs" />
+    <Compile Include="Utils\Controls\TreeViewAdv\Helper\TreeViewAdvColumnHelper.cs" />
     <Compile Include="Utils\AVCParser.cs" />
     <Compile Include="Utils\Controls\ListViewAdv.cs">
       <SubType>Component</SubType>
@@ -499,6 +503,12 @@
     <Compile Include="Views\frmColumnSelection.Designer.cs">
       <DependentUpon>frmColumnSelection.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\frmConflictSolver.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frmConflictSolver.Designer.cs">
+      <DependentUpon>frmConflictSolver.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\frmCopyModInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -713,6 +723,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\frmColumnSelection.resx">
       <DependentUpon>frmColumnSelection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\frmConflictSolver.resx">
+      <DependentUpon>frmConflictSolver.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\frmCopyModInfo.resx">
       <DependentUpon>frmCopyModInfo.cs</DependentUpon>

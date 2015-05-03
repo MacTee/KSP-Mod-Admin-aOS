@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using KSPModAdmin.Core.Model;
+using KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.Helper;
 
 namespace KSPModAdmin.Core.Views
 {

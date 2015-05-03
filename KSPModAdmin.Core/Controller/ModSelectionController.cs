@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using KSPModAdmin.Core.Model;
 using KSPModAdmin.Core.Utils;
+using KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.Helper;
 using KSPModAdmin.Core.Views;
 using SharpCompress.Archive;
 
@@ -142,16 +143,17 @@ namespace KSPModAdmin.Core.Controller
         /// <param name="args">The BeforeCheckedChangeEventArgs.</param>
         protected static void BeforeCheckedChange(object sender, BeforeCheckedChangeEventArgs args)
         {
-            if (args.Node == null)
+            var argNode = args.Node as ModNode;
+            if (argNode == null)
                 return;
 
-            if (!args.Node.ZipExists)
+            if (!argNode.ZipExists)
             {
                 if (!args.NewValue)
                     args.Cancel = (DialogResult.Yes != MessageBox.Show(View.ParentForm, Messages.MSG_UNCHECK_NO_ZIPARCHIVE_WARNING, Messages.MSG_TITLE_ATTENTION, MessageBoxButtons.YesNo));
                 else
                 {
-                    if (args.Node.IsInstalled)
+                    if (argNode.IsInstalled)
                         return;
 
                     MessageBox.Show(View.ParentForm, Messages.MSG_CHECK_NO_ZIPARCHIVE_WARNING, Messages.MSG_TITLE_ATTENTION);
@@ -160,11 +162,11 @@ namespace KSPModAdmin.Core.Controller
             }
             else if (args.NewValue)
             {
-                if (!args.Node.HasDestination || args.Node.HasChildesWithoutDestination)
+                if (!argNode.HasDestination || argNode.HasChildesWithoutDestination)
                 {
-                    string msg = string.Format(Messages.MSG_0_HAS_CHILDES_WITHOUT_DESTINATION_WARNING, args.Node.Name);
+                    string msg = string.Format(Messages.MSG_0_HAS_CHILDES_WITHOUT_DESTINATION_WARNING, argNode.Name);
                     MessageBox.Show(View.ParentForm, msg, Messages.MSG_TITLE_ATTENTION);
-                    if (args.Node.IsFile || (!args.Node.IsFile && !args.Node.HasDestinationForChilds))
+                    if (argNode.IsFile || (!argNode.IsFile && !argNode.HasDestinationForChilds))
                         args.NewValue = false;
                 }
             }
@@ -1519,13 +1521,13 @@ namespace KSPModAdmin.Core.Controller
         public static void SortModSelection()
         {
             // TODO: Find a better place for this method.
-            ModSelectionTreeColumn sortColumn = null;
+            NamedTreeColumn sortColumn = null;
             foreach (var column in View.tvModSelection.Columns)
             {
                 if (column.SortOrder == SortOrder.None)
                     continue;
 
-                sortColumn = column as ModSelectionTreeColumn;
+                sortColumn = column as NamedTreeColumn;
                 break;
             }
 
@@ -1539,7 +1541,9 @@ namespace KSPModAdmin.Core.Controller
         /// </summary>
         public static void OpenConflictSolver()
         {
-            MessageBox.Show(View.ParentForm, "Not implemented yet!", Messages.MSG_TITLE_ATTENTION, MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            frmConflictSolver frm = new frmConflictSolver();
+            frm.ConflictData = ModRegister.GetConflictInfos();
+            frm.ShowDialog();
         }
 
         /// <summary>

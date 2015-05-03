@@ -257,6 +257,24 @@ namespace KSPModAdmin.Core.Utils
         }
 
         /// <summary>
+        /// Gets the conflicting mod files as a list of ConflictInfoNode.
+        /// </summary>
+        /// <returns>A list of ConflictInfoNode</returns>
+        public static List<ConflictInfoNode> GetConflictInfos()
+        {
+            List<ConflictInfoNode> result = new List<ConflictInfoNode>();
+
+            foreach (var registerdModFile in mRegisterdModFiles)
+            {
+                var files = registerdModFile.Value.Where(x => x.IsFile).ToList();
+                if (files.Count > 1)
+                    result.Add(new ConflictInfoNode(files));
+            }
+
+            return result;
+        }
+
+        /// <summary>
         /// Checks if one of the registered ModNodes with the fileNode destination have the same ZipRoot as the passed fileNode.
         /// </summary>
         /// <param name="fileNode">The ModNode to check.</param>
