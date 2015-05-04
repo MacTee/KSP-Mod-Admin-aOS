@@ -7,18 +7,27 @@ using System.Windows.Forms;
 using KSPModAdmin.Core.Model;
 using KSPModAdmin.Core.Utils;
 using KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.Helper;
+using KSPModAdmin.Core.Utils.Localization;
 
 namespace KSPModAdmin.Core.Views
 {
-    using KSPModAdmin.Core.Utils.Localization;
-
+    /// <summary>
+    /// This view handles the solving of conflicts between ModNode files.
+    /// </summary>
     [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Reviewed. Suppression is OK here.")]
     public partial class frmConflictSolver : frmBase
     {
         private ConflicDataTreeModel model = new ConflicDataTreeModel();
 
+        /// <summary>
+        /// Gets or sets the conflict data this view operates on.
+        /// </summary>
         public List<ConflictInfoNode> ConflictData { get; set; }
 
+        /// <summary>
+        /// Creates a new instance of the frmConflictSolver class.
+        /// This view handles the solving of conflicts between ModNode files.
+        /// </summary>
         public frmConflictSolver()
         {
             InitializeComponent();
