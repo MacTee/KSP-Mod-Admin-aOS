@@ -21,6 +21,7 @@ Features:
   - for KSP Mod Admin.
   - for Mods (includes auto check for updates and auto install/update of outdated mods).
 - Conflict detection and easy conflict solving for files that are referenced by more than one mod.
+- Plugin support for "3rd party" extensions (See KSPModAdmin.Translation.Plugin as a sample).
 - Project code included! (VS2013 Solution - Language: C#)
 
 
