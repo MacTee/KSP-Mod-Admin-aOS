@@ -87,8 +87,9 @@ namespace KSPModAdmin.Core.Views
             this.tbNote = new System.Windows.Forms.TextBox();
             this.tabPageMisc = new System.Windows.Forms.TabPage();
             this.gbDestinationDetection = new System.Windows.Forms.GroupBox();
-            this.rbDDJustDump = new System.Windows.Forms.RadioButton();
+            this.tableLayoutPanel14 = new System.Windows.Forms.TableLayoutPanel();
             this.rbDDSmartDestDetection = new System.Windows.Forms.RadioButton();
+            this.rbDDJustDump = new System.Windows.Forms.RadioButton();
             this.cbDDCopyToGameData = new System.Windows.Forms.CheckBox();
             this.gbToolTip = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
@@ -164,9 +165,7 @@ namespace KSPModAdmin.Core.Views
             this.tbModOutdatedBlue = new KSPModAdmin.Core.Utils.Controls.TextBoxNumeric();
             this.gpModConflictHandling = new System.Windows.Forms.GroupBox();
             this.cbConflictDetectionOnOff = new System.Windows.Forms.CheckBox();
-            this.cbShowConflictSolver = new System.Windows.Forms.CheckBox();
             this.ttOptions = new System.Windows.Forms.ToolTip(this.components);
-            this.tableLayoutPanel14 = new System.Windows.Forms.TableLayoutPanel();
             this.tabControl2.SuspendLayout();
             this.tabPageUpdate.SuspendLayout();
             this.gbModUpdate.SuspendLayout();
@@ -192,6 +191,7 @@ namespace KSPModAdmin.Core.Views
             this.panel1.SuspendLayout();
             this.tabPageMisc.SuspendLayout();
             this.gbDestinationDetection.SuspendLayout();
+            this.tableLayoutPanel14.SuspendLayout();
             this.gbToolTip.SuspendLayout();
             this.tableLayoutPanel13.SuspendLayout();
             this.gbLaguage.SuspendLayout();
@@ -203,7 +203,6 @@ namespace KSPModAdmin.Core.Views
             this.tableLayoutPanel7.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
             this.gpModConflictHandling.SuspendLayout();
-            this.tableLayoutPanel14.SuspendLayout();
             this.SuspendLayout();
             // 
             // ilOptions
@@ -929,17 +928,23 @@ namespace KSPModAdmin.Core.Views
             this.gbDestinationDetection.TabStop = false;
             this.gbDestinationDetection.Text = "Destination detection:";
             // 
-            // rbDDJustDump
+            // tableLayoutPanel14
             // 
-            this.rbDDJustDump.AutoSize = true;
-            this.rbDDJustDump.Location = new System.Drawing.Point(258, 3);
-            this.rbDDJustDump.Name = "rbDDJustDump";
-            this.rbDDJustDump.Size = new System.Drawing.Size(197, 17);
-            this.rbDDJustDump.TabIndex = 1;
-            this.rbDDJustDump.Text = "Just copy mod archive to GameData";
-            this.ttOptions.SetToolTip(this.rbDDJustDump, "The destination of the mod archive node will be set to GameData.\r\nNOTE: May cause" +
-        " problems with conflict detection!");
-            this.rbDDJustDump.UseVisualStyleBackColor = true;
+            this.tableLayoutPanel14.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel14.ColumnCount = 4;
+            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel14.Controls.Add(this.rbDDSmartDestDetection, 0, 0);
+            this.tableLayoutPanel14.Controls.Add(this.rbDDJustDump, 2, 0);
+            this.tableLayoutPanel14.Location = new System.Drawing.Point(9, 15);
+            this.tableLayoutPanel14.Name = "tableLayoutPanel14";
+            this.tableLayoutPanel14.RowCount = 1;
+            this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel14.Size = new System.Drawing.Size(652, 24);
+            this.tableLayoutPanel14.TabIndex = 2;
             // 
             // rbDDSmartDestDetection
             // 
@@ -955,6 +960,18 @@ namespace KSPModAdmin.Core.Views
         "he destination of the mod files accordingly.");
             this.rbDDSmartDestDetection.UseVisualStyleBackColor = true;
             this.rbDDSmartDestDetection.CheckedChanged += new System.EventHandler(this.rbDDSmartDestDetection_CheckedChanged);
+            // 
+            // rbDDJustDump
+            // 
+            this.rbDDJustDump.AutoSize = true;
+            this.rbDDJustDump.Location = new System.Drawing.Point(258, 3);
+            this.rbDDJustDump.Name = "rbDDJustDump";
+            this.rbDDJustDump.Size = new System.Drawing.Size(197, 17);
+            this.rbDDJustDump.TabIndex = 1;
+            this.rbDDJustDump.Text = "Just copy mod archive to GameData";
+            this.ttOptions.SetToolTip(this.rbDDJustDump, "The destination of the mod archive node will be set to GameData.\r\nNOTE: May cause" +
+        " problems with conflict detection!");
+            this.rbDDJustDump.UseVisualStyleBackColor = true;
             // 
             // cbDDCopyToGameData
             // 
@@ -973,7 +990,7 @@ namespace KSPModAdmin.Core.Views
             this.gbToolTip.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gbToolTip.Controls.Add(this.tableLayoutPanel13);
-            this.gbToolTip.Location = new System.Drawing.Point(0, 190);
+            this.gbToolTip.Location = new System.Drawing.Point(0, 166);
             this.gbToolTip.Name = "gbToolTip";
             this.gbToolTip.Size = new System.Drawing.Size(667, 45);
             this.gbToolTip.TabIndex = 5;
@@ -1125,9 +1142,9 @@ namespace KSPModAdmin.Core.Views
             this.gbNodeColors.Controls.Add(this.tableLayoutPanel8);
             this.gbNodeColors.Controls.Add(this.tableLayoutPanel7);
             this.gbNodeColors.Controls.Add(this.tableLayoutPanel6);
-            this.gbNodeColors.Location = new System.Drawing.Point(0, 236);
+            this.gbNodeColors.Location = new System.Drawing.Point(0, 212);
             this.gbNodeColors.Name = "gbNodeColors";
-            this.gbNodeColors.Size = new System.Drawing.Size(667, 244);
+            this.gbNodeColors.Size = new System.Drawing.Size(667, 268);
             this.gbNodeColors.TabIndex = 3;
             this.gbNodeColors.TabStop = false;
             this.gbNodeColors.Text = "ModSelection node colors:";
@@ -2008,17 +2025,18 @@ namespace KSPModAdmin.Core.Views
             this.gpModConflictHandling.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gpModConflictHandling.Controls.Add(this.cbConflictDetectionOnOff);
-            this.gpModConflictHandling.Controls.Add(this.cbShowConflictSolver);
             this.gpModConflictHandling.Location = new System.Drawing.Point(0, 124);
             this.gpModConflictHandling.Name = "gpModConflictHandling";
-            this.gpModConflictHandling.Size = new System.Drawing.Size(667, 65);
+            this.gpModConflictHandling.Size = new System.Drawing.Size(667, 40);
             this.gpModConflictHandling.TabIndex = 2;
             this.gpModConflictHandling.TabStop = false;
-            this.gpModConflictHandling.Text = "Mod file conflict handling (Experimantel):";
+            this.gpModConflictHandling.Text = "Mod file conflict handling:";
             // 
             // cbConflictDetectionOnOff
             // 
             this.cbConflictDetectionOnOff.AutoSize = true;
+            this.cbConflictDetectionOnOff.Checked = true;
+            this.cbConflictDetectionOnOff.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbConflictDetectionOnOff.Location = new System.Drawing.Point(9, 19);
             this.cbConflictDetectionOnOff.Name = "cbConflictDetectionOnOff";
             this.cbConflictDetectionOnOff.Size = new System.Drawing.Size(150, 17);
@@ -2027,36 +2045,6 @@ namespace KSPModAdmin.Core.Views
             this.ttOptions.SetToolTip(this.cbConflictDetectionOnOff, "Conflict detection On / Off\r\nTurns the conflict detection on or off.");
             this.cbConflictDetectionOnOff.UseVisualStyleBackColor = true;
             this.cbConflictDetectionOnOff.CheckedChanged += new System.EventHandler(this.cbConflictDetectionOnOff_CheckedChanged);
-            // 
-            // cbShowConflictSolver
-            // 
-            this.cbShowConflictSolver.AutoSize = true;
-            this.cbShowConflictSolver.Location = new System.Drawing.Point(9, 42);
-            this.cbShowConflictSolver.Name = "cbShowConflictSolver";
-            this.cbShowConflictSolver.Size = new System.Drawing.Size(157, 17);
-            this.cbShowConflictSolver.TabIndex = 1;
-            this.cbShowConflictSolver.Text = "Show conflict sovling dialog";
-            this.ttOptions.SetToolTip(this.cbShowConflictSolver, "Show conflict detection dialog\r\nShow/hides the conflict detection doalog after co" +
-        "nflict detection.");
-            this.cbShowConflictSolver.UseVisualStyleBackColor = true;
-            // 
-            // tableLayoutPanel14
-            // 
-            this.tableLayoutPanel14.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel14.ColumnCount = 4;
-            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel14.Controls.Add(this.rbDDSmartDestDetection, 0, 0);
-            this.tableLayoutPanel14.Controls.Add(this.rbDDJustDump, 2, 0);
-            this.tableLayoutPanel14.Location = new System.Drawing.Point(9, 15);
-            this.tableLayoutPanel14.Name = "tableLayoutPanel14";
-            this.tableLayoutPanel14.RowCount = 1;
-            this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel14.Size = new System.Drawing.Size(652, 24);
-            this.tableLayoutPanel14.TabIndex = 2;
             // 
             // ucOptions
             // 
@@ -2103,6 +2091,8 @@ namespace KSPModAdmin.Core.Views
             this.tabPageMisc.ResumeLayout(false);
             this.gbDestinationDetection.ResumeLayout(false);
             this.gbDestinationDetection.PerformLayout();
+            this.tableLayoutPanel14.ResumeLayout(false);
+            this.tableLayoutPanel14.PerformLayout();
             this.gbToolTip.ResumeLayout(false);
             this.tableLayoutPanel13.ResumeLayout(false);
             this.tableLayoutPanel13.PerformLayout();
@@ -2122,8 +2112,6 @@ namespace KSPModAdmin.Core.Views
             this.tableLayoutPanel6.PerformLayout();
             this.gpModConflictHandling.ResumeLayout(false);
             this.gpModConflictHandling.PerformLayout();
-            this.tableLayoutPanel14.ResumeLayout(false);
-            this.tableLayoutPanel14.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2227,7 +2215,6 @@ namespace KSPModAdmin.Core.Views
         internal System.Windows.Forms.Label lblColorDestinationDetection;
         internal System.Windows.Forms.GroupBox gpModConflictHandling;
         internal System.Windows.Forms.CheckBox cbConflictDetectionOnOff;
-        internal System.Windows.Forms.CheckBox cbShowConflictSolver;
         internal System.Windows.Forms.Label lblKSPPathNote;
         internal System.Windows.Forms.TextBox tbNote;
         internal System.Windows.Forms.TreeView tvKnownPaths;

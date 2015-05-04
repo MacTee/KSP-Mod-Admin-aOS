@@ -18,6 +18,17 @@ namespace KSPModAdmin.Core.Utils
         /// </summary>
         public static bool ConflictDetectionOnOff { get; set; }
 
+        /// <summary>
+        /// Gets the flag if there are any known conflicts.
+        /// </summary>
+        public static bool HasConflicts
+        {
+            get
+            {
+                return mRegisterdModFiles.Values.Any(x => x.Count > 1) && OptionsController.ConflictDetectionOnOff;
+            }
+        }
+
 
         /// <summary>
         /// Dictionary of all registered mod file destinations.
@@ -60,9 +71,6 @@ namespace KSPModAdmin.Core.Utils
         /// <returns>True if a collision with another mod was detected.</returns>
         public static bool RegisterModFile(ModNode fileNode)
         {
-            if (!ConflictDetectionOnOff)
-                return false;
-
             if (string.IsNullOrEmpty(fileNode.Destination))
                 return false;
 
@@ -84,16 +92,18 @@ namespace KSPModAdmin.Core.Utils
                         foreach (ModNode node in mRegisterdModFiles[fileNode.Destination.ToLower()])
                             node.HasCollision = true;
                     }
-                    else
-                    {
-                        if (HaveCollisionsSameRoot(fileNode) || fileNode.Text.Trim().Equals(Constants.GAMEDATA, StringComparison.CurrentCultureIgnoreCase))
-                            return false;
+                    // Ignore folders for now ...
+                    ////else
+                    ////{
+                    ////    if (HaveCollisionsSameRoot(fileNode) || fileNode.Text.Trim().Equals(Constants.GAMEDATA, StringComparison.CurrentCultureIgnoreCase))
+                    ////        return false;
 
-                        foreach (ModNode node in mRegisterdModFiles[fileNode.Destination.ToLower()])
-                            node.HasCollision = true;
-                    }
+                    ////    foreach (ModNode node in mRegisterdModFiles[fileNode.Destination.ToLower()])
+                    ////        node.HasCollision = true;
+                    ////}
 
-                    return true;
+                    // Only true wenn collision detection is on
+                    return ConflictDetectionOnOff;
                 }
             }
 
@@ -255,6 +265,24 @@ namespace KSPModAdmin.Core.Utils
                 GetAllCollisionNodes(childNode, fileNodes);
 
             return fileNodes;
+        }
+
+        /// <summary>
+        /// Gets the conflicting mod files as a list of ConflictInfoNode.
+        /// </summary>
+        /// <returns>A list of ConflictInfoNode</returns>
+        public static List<ConflictInfoNode> GetConflictInfos()
+        {
+            List<ConflictInfoNode> result = new List<ConflictInfoNode>();
+
+            foreach (var registerdModFile in mRegisterdModFiles)
+            {
+                var files = registerdModFile.Value.Where(x => x.IsFile).ToList();
+                if (files.Count > 1)
+                    result.Add(new ConflictInfoNode(files));
+            }
+
+            return result;
         }
 
         /// <summary>

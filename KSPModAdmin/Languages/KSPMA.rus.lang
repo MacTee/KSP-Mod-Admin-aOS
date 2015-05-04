@@ -32,14 +32,14 @@
     <Control Name="tsmiCmsRemoveMod" Value="Удалить мод" />
     <Control Name="tsmiCmsCreateZip" Value="Создать Zip-архив" />
   </Control>
-  <Control Name="tsMod" Value="(T)toolStrip2">
-    <Control Name="tsbProceedMod" Value="(T)toolStripButton9">
+  <Control Name="tsMod" Value="toolStrip2">
+    <Control Name="tsbProceedMod" Value="toolStripButton9">
       <ChildControl Name="tsbProceedMod_ToolTip" Value="Обработать мод^Устанавливает отмеченные и удаляет неотмеченные части выбранного мода." />
     </Control>
-    <Control Name="tsbModUpdateCheck" Value="(T)toolStripButton6">
+    <Control Name="tsbModUpdateCheck" Value="toolStripButton6">
       <ChildControl Name="tsbModUpdateCheck_ToolTip" Value="Проверить обновления модов^Проверяет наличие обновлений для модов, если включено управление версиями." />
     </Control>
-    <Control Name="tssbVisitVersionControlSite" Value="(T)toolStripDropDownButton3">
+    <Control Name="tssbVisitVersionControlSite" Value="toolStripDropDownButton3">
       <ChildControl Name="tssbVisitVersionControlSite_ToolTip" Value="Посетить страницу проверки версии^Открывает обозреватель и переходит на страницу проверки версии мода." />
       <Control Name="tsmiVisitVersionControlSite" Value="Посетить сайт проверки версии">
         <ChildControl Name="tsmiVisitVersionControlSite_ToolTip" Value="Посетить сайт проверки версии^Открывает обозреватель и переходит на сайт проверки версии мода." />
@@ -48,19 +48,19 @@
         <ChildControl Name="tsmiVisitAdditionalLink_ToolTip" Value="Перейти на страницу по дополнительной ссылке^Открывает обозреватель и переходит по дополнительной ссылке мода мода." />
       </Control>
     </Control>
-    <Control Name="tsbEditModInfos" Value="(T)toolStripButton7">
+    <Control Name="tsbEditModInfos" Value="toolStripButton7">
       <ChildControl Name="tsbEditModInfos_ToolTip" Value="Изменить информацию о моде^Открывает редактор информации о моде." />
     </Control>
-    <Control Name="tsbCopyModInfos" Value="(T)toolStripButton8">
+    <Control Name="tsbCopyModInfos" Value="toolStripButton8">
       <ChildControl Name="tsbCopyModInfos_ToolTip" Value="Копировать информацию о моде^Копирует информацию этого моду в другой мод." />
     </Control>
-    <Control Name="tsbSolveConflicts" Value="(T)toolStripButton11">
+    <Control Name="tsbSolveConflicts" Value="toolStripButton11">
       <ChildControl Name="tsbSolveConflicts_ToolTip" Value="Разрешение конфликтов^Открывает диалог разрешения конфликтов модов." />
     </Control>
-    <Control Name="tsbRefreshCheckedState" Value="(T)toolStripButton10">
+    <Control Name="tsbRefreshCheckedState" Value="toolStripButton10">
       <ChildControl Name="tsbRefreshCheckedState_ToolTip" Value="Обновить отметки^Обновляет состояние отметок-галочек для частей модов" />
     </Control>
-    <Control Name="tssbChangeDestination" Value="(T)toolStripButton12">
+    <Control Name="tssbChangeDestination" Value="toolStripButton12">
       <ChildControl Name="tssbChangeDestination_ToolTip" Value="Выбрать путь^Указывает путь установки для выбранной папки или файла мода." />
       <Control Name="tsmiChangeDestination" Value="Выбрать новый путь установки">
         <ChildControl Name="tsmiChangeDestination_ToolTip" Value="Выбрать путь^Указывает путь установки для выбранной папки или файла мода." />
@@ -72,7 +72,7 @@
         <ChildControl Name="tsmiRedetectDestination_ToolTip" Value="Автоопределение пути для мода^Удаляет все пути для мода и^автоматически определяет их заново." />
       </Control>
     </Control>
-    <Control Name="tsbCreateZip" Value="(T)toolStripButton14">
+    <Control Name="tsbCreateZip" Value="toolStripButton14">
       <ChildControl Name="tsbCreateZip_ToolTip" Value="Создать Zip-архив^Создаёт новый zip-архив с модом." />
     </Control>
   </Control>
@@ -99,8 +99,8 @@
     <ChildControl Name="lvModSelection_Item_16" Value="Конфликты" />
     <ChildControl Name="lvModSelection_Item_17" Value="Установлен" />
   </Control>
-  <Control Name="tsModSelection" Value="(T)toolStrip1">
-    <Control Name="tssbAddMod" Value="(T)toolStripButton1">
+  <Control Name="tsModSelection" Value="toolStrip1">
+    <Control Name="tssbAddMod" Value="toolStripButton1">
       <ChildControl Name="tssbAddMod_ToolTip" Value="Добавить^Открывает диалог &quot;Добавить мод&quot;." />
       <Control Name="tsmiAddMod" Value="Добавить">
         <ChildControl Name="tsmiAddMod_ToolTip" Value="Добавить^Открывает диалог &quot;Добавить мод&quot;." />
@@ -109,28 +109,28 @@
         <ChildControl Name="tsmiAddModArchives_ToolTip" Value="Добавить архив^Открывает &quot;Проводник&quot; для выбора архивов с модами." />
       </Control>
     </Control>
-    <Control Name="tsbRemoveMod" Value="(T)toolStripButton2">
+    <Control Name="tsbRemoveMod" Value="toolStripButton2">
       <ChildControl Name="tsbRemoveMod_ToolTip" Value="Удалить мод^Удаляет выбранный мод." />
     </Control>
-    <Control Name="tsbRemoveAll" Value="(T)toolStripButton3">
+    <Control Name="tsbRemoveAll" Value="toolStripButton3">
       <ChildControl Name="tsbRemoveAll_ToolTip" Value="Удалить все моды^Удаляет все моды из списка." />
     </Control>
-    <Control Name="tsbExImport" Value="(T)toolStripButton4">
+    <Control Name="tsbExImport" Value="toolStripButton4">
       <ChildControl Name="tsbExImport_ToolTip" Value="Импорт/экспорт пакетов с модами^Открывает Импорт/экспорт пакетов." />
     </Control>
-    <Control Name="tsbScan" Value="(T)toolStripButton5">
+    <Control Name="tsbScan" Value="toolStripButton5">
       <ChildControl Name="tsbScan_ToolTip" Value="Сканировать папку GameData^Ищет в папке KSP GameData установленные моды и^ добавляет их в список модов, если их там нет." />
     </Control>
-    <Control Name="tsbUpdateCheckAllMods" Value="(T)toolStripButton1">
+    <Control Name="tsbUpdateCheckAllMods" Value="toolStripButton1">
       <ChildControl Name="tsbUpdateCheckAllMods_ToolTip" Value="Поиск обновлений для всех модов^Запускает поиск обновлений для всех модов в списке." />
     </Control>
-    <Control Name="tsbRefreshCheckedstateForAllMods" Value="(T)toolStripButton1">
+    <Control Name="tsbRefreshCheckedstateForAllMods" Value="toolStripButton1">
       <ChildControl Name="tsbRefreshCheckedstateForAllMods_ToolTip" Value="Обновить отметки у всех модов.^Проверяет установку всех элементов модов по указанным путям." />
     </Control>
-    <Control Name="tsbCheckAllMods" Value="(T)toolStripButton1">
+    <Control Name="tsbCheckAllMods" Value="toolStripButton1">
       <ChildControl Name="tsbCheckAllMods_ToolTip" Value="Отметить все моды^Отмечает все моды." />
     </Control>
-    <Control Name="tsbUncheckAllMods" Value="(T)toolStripButton1">
+    <Control Name="tsbUncheckAllMods" Value="toolStripButton1">
       <ChildControl Name="tsbUncheckAllMods_ToolTip" Value="Снять отметку у всех модов^Снимает отметку у всех модов." />
     </Control>
     <Control Name="toolStripLabel1" Value="" />
@@ -517,7 +517,7 @@
   <Control Name="cbForceOpenGL" Value="Принудительный OpenGL">
     <ChildControl Name="cbForceOpenGL_ToolTip" Value="Запускает KSP в режиме OpenGL." />
   </Control>
-  <Control Name="tsbUpdateAllOutdatedMods" Value="(T)tsbUpdateAllOutdatedMods">
+  <Control Name="tsbUpdateAllOutdatedMods" Value="tsbUpdateAllOutdatedMods">
     <Control Name="tsbUpdateAllOutdatedMods_ToolTip" Value="Обновить все устаревшие моды^Запускает проверку обновлений и обновляет все устаревшие моды." />
   </Control>
   <Control Name="tsmiUpdateAllOutdatedMods" Value="Обновить мод">
@@ -526,7 +526,7 @@
   <Control Name="tsmiUpdateMod" Value="Обновить все устаревшие моды">
     <Control Name="tsmiUpdateMod_ToolTip" Value="" />
   </Control>
-  <Control Name="tsbUpdateMod" Value="(T)tsbUpdateMod">
+  <Control Name="tsbUpdateMod" Value="tsbUpdateMod">
     <Control Name="tsbUpdateMod_ToolTip" Value="Обновить мод^Запускает проверку обновлений и обновляет мод, если он устарел." />
   </Control>
   <Control Name="frmImExport" Value="Импорт/экспорт пакетов модов" />
@@ -643,17 +643,42 @@
 
   <String Name="MSG_NO_DOWNLOAD_INFOS_FOUND" Value="Не найдена ссылка для загрузки!"/>
 
-  <String Name="MSG_NO_BINARY_DOWNLOAD_FOUND_AT_0" Value="(T)No binary download found at &quot;{0}&quot;!"/>
+  <String Name="MSG_NO_BINARY_DOWNLOAD_FOUND_AT_0" Value="No binary download found at &quot;{0}&quot;!"/>
   <Control Name="tsmiExImport" Value="Импорт/экспорт пакетов с модами">
     <ChildControl Name="tsmiExImport_ToolTip" Value="Импорт/экспорт пакетов с модами^Открывает Импорт/экспорт пакетов." />
   </Control>
-  <Control Name="tsmiExportAsText" Value="(T)Export as .txt">
-    <ChildControl Name="tsmiExportAsText_ToolTip" Value="(T)Export as .txt^Save the current mod list as a text file."/>
+  <Control Name="tsmiExportAsText" Value="Export as .txt">
+    <ChildControl Name="tsmiExportAsText_ToolTip" Value="Export as .txt^Save the current mod list as a text file."/>
   </Control>
 
-  <String Name="MSG_EXTRACTING_MOD_0" Value="(T)Extracting mod &quot;{0}&quot;..."/>
-  <String Name="MSG_MODARCHIVE_0_NOT_FOUND" Value="(T)Mod Archive &quot;{0}&quot; not found!"/>
-  <String Name="MSG_IMPORT_SKIPPED_MOD_0_NOT_FOUND" Value="(T)Import skipped! Mod Archive &quot;{0}&quot; not found."/>
-  <String Name="MSG_COPY_MOD_DESTINATION_0" Value="(T)Copy destinations of mod &quot;{0}&quot;"/>
-  <String Name="MSG_INSTALLING_MOD_0" Value="(T)Installing mod &quot;{0}&quot;..."/>
+  <String Name="MSG_EXTRACTING_MOD_0" Value="Extracting mod &quot;{0}&quot;..."/>
+  <String Name="MSG_MODARCHIVE_0_NOT_FOUND" Value="Mod Archive &quot;{0}&quot; not found!"/>
+  <String Name="MSG_IMPORT_SKIPPED_MOD_0_NOT_FOUND" Value="Import skipped! Mod Archive &quot;{0}&quot; not found."/>
+  <String Name="MSG_COPY_MOD_DESTINATION_0" Value="Copy destinations of mod &quot;{0}&quot;"/>
+  <String Name="MSG_INSTALLING_MOD_0" Value="Installing mod &quot;{0}&quot;..."/>
+
+  <Control Name="tsbTreeViewOption" Value="Open TreeView options">
+    <ChildControl Name="tsbTreeViewOption_ToolTip" Value="Open TreeView options^Opens the TreeView options."/>
+  </Control>
+  <Control Name="tsmiCmsOneModOpenFolder" Value="Open folder"/>
+  <Control Name="tsmiCmsOneModOpenFile" Value="Open file"/>
+  <Control Name="frmConflictSolver" Value="Conflict Solver"/>
+  <Control Name="lblConflictSolverDesc" Value="To solve a conflict, check one of the mods of a conflicting file.^After selecting a mod for each conflicting file click the &amp;quot;Solve conflicts&amp;quot; button.^KSP Mod Admin will then reset all destinations of the conflicting files from the not selected mods."/>
+  <Control Name="btnCancel" Value="Cancel"/>
+  <Control Name="btnSolve" Value="Solve conflicts"/>
+  <Control Name="frmConflictSolver_Item_00" Value="Filename"/>
+  <Control Name="frmConflictSolver_Item_01" Value="Destination"/>
+  <Control Name="frmConflictSolver_Item_02" Value="Conflicting Mods"/>
+  <Control Name="frmConflictSolver_Item_03" Value="TreePath"/>
+  <String Name="MSG_TITLE_VALIDATION" Value="Validation"/>
+  <String Name="MSG_PLEASE_SELECT_SOLVING_MODS" Value="Please select a solving mod for this conflict files:"/>
+  <String Name="MSG_PROCESSING_ABORDED_CONFLICTS_DETECTED" Value="Processing of mods aborded!^There are still conflicts.^^Please resolve all conflicts and try again."/>
+  <String Name="MSG_TITLE_CONFLICTS_DETECTED" Value="Conflicts detected!"/>
+  <String Name="MSG_CONFLICT_SOLVER_REMOVE_CONFLICT_FILE_0" Value="ConflictSolver - Removing installed conflict file &quot;{0}&quot;."/>
+  <String Name="MSG_CONFLICT_SOLVER_RESET_DESTINATION_CONFLICT_FILE_0" Value="ConflictSolver - Reset destination of conflict file &quot;{0}&quot;."/>
+  <String Name="MSG_CONFLICT_SOLVER_INSTALL_SELECTED_FILE_0" Value="ConflictSolver - Install previously removed conflict file &quot;{0}&quot; from selected source."/>
+  <String Name="MSG_CONFLICT_SOLVER_UNINSTALL_PARENT_FOLDER_0_1" Value="ConflictSolver - Uninstall no longer needed parent folder &quot;{0}&quot; of &quot;{1}&quot;."/>
+  <String Name="MSG_CONFLICT_SOLVER_INSTALL_PARENT_FOLDER_0_1" Value="ConflictSolver - Install needed parent folder &quot;{0}&quot; of &quot;{1}&quot;."/>
+  <String Name="MSG_CONFLICT_SOLVER_RESET_DESTINATION_PARENT_FOLDER_0_1" Value="ConflictSolver - Reset destination for conflicting parent folder &quot;{0}&quot; of &quot;{1}&quot;."/>
+  <Control Name="tsmiOpenConflictSolver" Value="Solve conflicts"/>
 </Language>

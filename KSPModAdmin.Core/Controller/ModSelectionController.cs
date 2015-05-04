@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using KSPModAdmin.Core.Model;
 using KSPModAdmin.Core.Utils;
+using KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.Helper;
 using KSPModAdmin.Core.Views;
 using SharpCompress.Archive;
 
@@ -142,16 +143,17 @@ namespace KSPModAdmin.Core.Controller
         /// <param name="args">The BeforeCheckedChangeEventArgs.</param>
         protected static void BeforeCheckedChange(object sender, BeforeCheckedChangeEventArgs args)
         {
-            if (args.Node == null)
+            var argNode = args.Node as ModNode;
+            if (argNode == null)
                 return;
 
-            if (!args.Node.ZipExists)
+            if (!argNode.ZipExists)
             {
                 if (!args.NewValue)
                     args.Cancel = (DialogResult.Yes != MessageBox.Show(View.ParentForm, Messages.MSG_UNCHECK_NO_ZIPARCHIVE_WARNING, Messages.MSG_TITLE_ATTENTION, MessageBoxButtons.YesNo));
                 else
                 {
-                    if (args.Node.IsInstalled)
+                    if (argNode.IsInstalled)
                         return;
 
                     MessageBox.Show(View.ParentForm, Messages.MSG_CHECK_NO_ZIPARCHIVE_WARNING, Messages.MSG_TITLE_ATTENTION);
@@ -160,11 +162,11 @@ namespace KSPModAdmin.Core.Controller
             }
             else if (args.NewValue)
             {
-                if (!args.Node.HasDestination || args.Node.HasChildesWithoutDestination)
+                if (!argNode.HasDestination || argNode.HasChildesWithoutDestination)
                 {
-                    string msg = string.Format(Messages.MSG_0_HAS_CHILDES_WITHOUT_DESTINATION_WARNING, args.Node.Name);
+                    string msg = string.Format(Messages.MSG_0_HAS_CHILDES_WITHOUT_DESTINATION_WARNING, argNode.Name);
                     MessageBox.Show(View.ParentForm, msg, Messages.MSG_TITLE_ATTENTION);
-                    if (args.Node.IsFile || (!args.Node.IsFile && !args.Node.HasDestinationForChilds))
+                    if (argNode.IsFile || (!argNode.IsFile && !argNode.HasDestinationForChilds))
                         args.NewValue = false;
                 }
             }
@@ -363,18 +365,6 @@ namespace KSPModAdmin.Core.Controller
                         {
                             Messenger.AddError(string.Format(Messages.MSG_MOD_ERROR_WHILE_READ_ZIP_0_ERROR_MSG_1, string.Empty, ex.Message), ex);
                         }
-
-                        View.InvokeIfRequired(() =>
-                        {
-                            if (OptionsController.ShowConflictSolver && showCollisionDialog && newNode != null &&
-                                newNode.HasChildCollision)
-                            {
-                                MessageBox.Show(View, "ConflictSolver not Implemented yet!");
-                                //// TODO :
-                                ////frmCollisionSolving dlg = new frmCollisionSolving { CollisionMod = newNode };
-                                ////dlg.ShowDialog();
-                            }
-                        });
                     }
                     else if (mod != null && (mod.IsOutdated || modInfo.CreationDateAsDateTime > mod.CreationDateAsDateTime) &&
                              OptionsController.ModUpdateBehavior != ModUpdateBehavior.Manualy)
@@ -396,20 +386,7 @@ namespace KSPModAdmin.Core.Controller
                                 Messenger.AddInfo(string.Format(Messages.MSG_REPLACING_MOD_0, outdatedMod.Text));
 
                                 newNode = UpdateMod(modInfo, outdatedMod);
-                                ////newNode = ModNodeHandler.CreateModNode(modInfo);
-                                ////RemoveOutdatedAndAddNewMod(outdatedMod, newNode);
-
-                                ////newNode.UncheckAll();
-
                                 Messenger.AddInfo(string.Format(Messages.MSG_MOD_0_REPLACED, newNode.Text));
-
-                                if (OptionsController.ShowConflictSolver && showCollisionDialog && newNode != null &&
-                                    newNode.HasChildCollision)
-                                {
-                                    MessageBox.Show(View, "ConflictSolver not Implemented yet!");
-                                    ////frmCollisionSolving dlg = new frmCollisionSolving { CollisionMod = newNode };
-                                    ////dlg.ShowDialog();
-                                }
                             }
                         });
                     }
@@ -478,11 +455,22 @@ namespace KSPModAdmin.Core.Controller
 
         /// <summary>
         /// Processes all passed nodes. (Adds/Removes the MOD to/from the KSP install folders).
+        /// Calls SolveConflicts if there are any conflicts.
         /// </summary>
         /// <param name="nodeArray">The NodeArray to process.</param>
         /// <param name="silent">Determines if info messages should be added displayed.</param>
         public static void ProcessModsAsync(ModNode[] nodeArray, bool silent = false)
         {
+            if (ModRegister.HasConflicts)
+            {
+                if (!OpenConflictSolver())
+                {
+                    MessageBox.Show(View.ParentForm, Messages.MSG_PROCESSING_ABORDED_CONFLICTS_DETECTED, Messages.MSG_TITLE_CONFLICTS_DETECTED);
+                    Messenger.AddInfo(Messages.MSG_PROCESSING_ABORDED_CONFLICTS_DETECTED);
+                    return;
+                }
+            }
+
             EventDistributor.InvokeAsyncTaskStarted(Instance);
             View.SetEnabledOfAllControls(false);
             View.SetProgressBarStates(true, 1, 0);
@@ -770,14 +758,6 @@ namespace KSPModAdmin.Core.Controller
                 {
                     ModNodeHandler.SetDestinationPaths(srcNode, dlg.DestFolder, dlg.CopyContent);
                     InvalidateView();
-
-                    if (OptionsController.ShowConflictSolver && node.HasChildCollision)
-                    {
-                        ////TODO
-                        ////frmCollisionSolving csDlg = new frmCollisionSolving { CollisionMod = node };
-                        ////if (csDlg.ShowDialog() == DialogResult.OK && csDlg.SelectedMod != node.ZipRoot)
-                        ////    return false;
-                    }
 
                     return true;
                 }
@@ -1417,18 +1397,6 @@ namespace KSPModAdmin.Core.Controller
                         // No match found -> user must handle update.
                         View.InvokeIfRequired(() => MessageBox.Show(View.ParentForm, string.Format(Messages.MSG_ERROR_UPDATING_MOD_0_FAILED, outdatedMod.Text)));
                     }
-
-                    View.InvokeIfRequired(() =>
-                    {
-                        if (OptionsController.ShowConflictSolver && newMod != null && newMod.HasChildCollision)
-                        {
-                            MessageBox.Show(View, "ConflictSolver not Implemented yet!");
-                            //// TODO :
-                            ////frmCollisionSolving dlg = new frmCollisionSolving();
-                            ////dlg.CollisionMod = newMod;
-                            ////dlg.ShowDialog();
-                        }
-                    });
                 }
 
                 Messenger.AddInfo(string.Format(Messages.MSG_MOD_0_UPDATED, newMod.Text));
@@ -1439,12 +1407,6 @@ namespace KSPModAdmin.Core.Controller
             }
 
             return newMod;
-
-
-            ////MessageBox.Show(View, string.Format("Mod \"{0}\" is outdated.{1}BUT: Auto update is not implemented yet!", mod.Name, Environment.NewLine),
-            ////    Messages.MSG_TITLE_ATTENTION, MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-
-            ////return null;
         }
 
         #endregion
@@ -1519,13 +1481,13 @@ namespace KSPModAdmin.Core.Controller
         public static void SortModSelection()
         {
             // TODO: Find a better place for this method.
-            ModSelectionTreeColumn sortColumn = null;
+            NamedTreeColumn sortColumn = null;
             foreach (var column in View.tvModSelection.Columns)
             {
                 if (column.SortOrder == SortOrder.None)
                     continue;
 
-                sortColumn = column as ModSelectionTreeColumn;
+                sortColumn = column as NamedTreeColumn;
                 break;
             }
 
@@ -1537,9 +1499,15 @@ namespace KSPModAdmin.Core.Controller
         /// <summary>
         /// Opens the ConflictSolver dialog.
         /// </summary>
-        public static void OpenConflictSolver()
+        /// <returns>True if all conflicts are resolved.</returns>
+        public static bool OpenConflictSolver()
         {
-            MessageBox.Show(View.ParentForm, "Not implemented yet!", Messages.MSG_TITLE_ATTENTION, MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            if (!ModRegister.HasConflicts)
+                return true;
+
+            frmConflictSolver frm = new frmConflictSolver();
+            frm.ConflictData = ModRegister.GetConflictInfos();
+            return frm.ShowDialog() == DialogResult.OK;
         }
 
         /// <summary>
