@@ -6,20 +6,21 @@ It also let you choose what parts of the mod should be installed.
 
 Features:
 - KSP Version independent! (Until they changes mod loading again.)
-- Localized: English, German, Rusian, Italian, more are coming ... (contact me if you want to help)
+- Localized: English, German, Russian, Italian, more are coming ... (contact me if you want to help)
 - Multi OS support: Win, Linux and Mac (via Mono-Project (see http://www.mono-project.com/))
-- Supports multible installations of KSP. Change between different KSP installations with one click.
+- Supports multiple installations of KSP. Change between different KSP installations with one click.
 - Support of ZIP-, RAR- and 7ZIP- mod archives.
-- Add mods or crafts with drag & drop, file selection or url (Support of KSP Forum, Curse, CurseForge, KerbalStuff, GitHub and BitBucket urls).
+- Add mods or crafts with drag & drop, file selection or URL (Support of KSP Forum, Curse, CurseForge, KerbalStuff, GitHub and BitBucket urls).
 - AVC Plugin version file detection.
 - Auto detects install folder for the mod (if possible the mod will be installed to the GameData folder).
 - Easy install destination control (for those cases the destination can't be auto detected).
 - Choose what to include, just by hook or unhook parts of a mod.
 - GameData scan for installed mods (they will be added to the mod selection if they aren't listed already).
-- Read text files of a mod by doubleclick the files.
+- Read text files of a mod by double click the files.
 - Update support:
   - for KSP Mod Admin.
   - for Mods (includes auto check for updates and auto install/update of outdated mods).
+- Conflict detection and easy conflict solving for files that are referenced by more than one mod.
 - Project code included! (VS2013 Solution - Language: C#)
 
 
@@ -42,7 +43,7 @@ Installation:
    - Start KSP Mod Admin via mono ...
  Linux:
    - Install the Mono framework. (by type "sudo apt-get install mono-complete" in your terminal)
-   - Install mozilla certificats. (by type "mozroots --sync --import" in your terminal)
+   - Install Mozilla certificates. (by type "mozroots --sync --import" in your terminal)
    - Just extract/copy the KSP Mod Admin folder from the zip to any location you want.
    - Start KSP Mod Admin via mono ...
 
