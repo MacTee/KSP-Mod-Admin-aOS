@@ -32,7 +32,7 @@
             this.treeViewAdv = new KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.TreeViewAdv();
             this.btnSolve = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblConflictSolverDesc = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // treeViewAdv
@@ -76,21 +76,21 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // label1
+            // lblConflictSolverDesc
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(21, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(458, 39);
-            this.label1.TabIndex = 2;
-            this.label1.Text = resources.GetString("label1.Text");
+            this.lblConflictSolverDesc.AutoSize = true;
+            this.lblConflictSolverDesc.Location = new System.Drawing.Point(21, 9);
+            this.lblConflictSolverDesc.Name = "lblConflictSolverDesc";
+            this.lblConflictSolverDesc.Size = new System.Drawing.Size(458, 39);
+            this.lblConflictSolverDesc.TabIndex = 2;
+            this.lblConflictSolverDesc.Text = resources.GetString("lblConflictSolverDesc.Text");
             // 
             // frmConflictSolver
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(934, 436);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblConflictSolverDesc);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSolve);
             this.Controls.Add(this.treeViewAdv);
@@ -110,6 +110,6 @@
         private Utils.Controls.Aga.Controls.Tree.TreeViewAdv treeViewAdv;
         private System.Windows.Forms.Button btnSolve;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblConflictSolverDesc;
     }
 }

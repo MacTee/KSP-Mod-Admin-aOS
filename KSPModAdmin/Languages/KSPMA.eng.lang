@@ -677,4 +677,14 @@
   </Control>
   <Control Name="tsmiCmsOneModOpenFolder" Value="Open folder"/>
   <Control Name="tsmiCmsOneModOpenFile" Value="Open file"/>
+  <Control Name="frmConflictSolver" Value="Conflict Solver"/>
+  <Control Name="lblConflictSolverDesc" Value="To solve a conflict, check one of the mods of a conflicting file.^After selecting a mod for each conflicting file click the &amp;quot;Solve conflicts&amp;quot; button.^KSP Mod Admin will then reset all destinations of the conflicting files from the not selected mods."/>
+  <Control Name="btnCancel" Value="Cancel"/>
+  <Control Name="btnSolve" Value="Solve conflicts"/>
+  <Control Name="frmConflictSolver_Item_00" Value="Filename"/>
+  <Control Name="frmConflictSolver_Item_01" Value="Destination"/>
+  <Control Name="frmConflictSolver_Item_02" Value="Conflicting Mods"/>
+  <Control Name="frmConflictSolver_Item_03" Value="TreePath"/>
+  <String Name="MSG_TITLE_VALIDATION" Value="Validation"/>
+  <String Name="MSG_PLEASE_SELECT_SOLVING_MODS" Value="Please select a solving mod for this conflict files:"/>
 </Language>

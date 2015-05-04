@@ -1976,5 +1976,28 @@ namespace KSPModAdmin.Core
         }
 
         private const string DEFAULT_MSG_INSTALLING_MOD_0 = "Installing mod \"{0}\"...";
+
+        public static string MSG_TITLE_VALIDATION
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_TITLE_VALIDATION"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_TITLE_VALIDATION).Replace("^", Environment.NewLine);
+            }
+        }
+
+        private const string DEFAULT_MSG_TITLE_VALIDATION = "Validation";
+
+
+        public static string MSG_PLEASE_SELECT_SOLVING_MODS
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_PLEASE_SELECT_SOLVING_MODS"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_PLEASE_SELECT_SOLVING_MODS).Replace("^", Environment.NewLine);
+            }
+        }
+
+        private const string DEFAULT_MSG_PLEASE_SELECT_SOLVING_MODS = "Please select a solving mod for this conflict files:";
     }
 }

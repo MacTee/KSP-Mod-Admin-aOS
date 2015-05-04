@@ -10,6 +10,8 @@ using KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.Helper;
 
 namespace KSPModAdmin.Core.Views
 {
+    using KSPModAdmin.Core.Utils.Localization;
+
     [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Reviewed. Suppression is OK here.")]
     public partial class frmConflictSolver : frmBase
     {
@@ -56,87 +58,88 @@ namespace KSPModAdmin.Core.Views
         private List<ColumnData> GetColumns()
         {
             List<ColumnData> columns = new List<ColumnData>()
+            {
+                new ColumnData()
                 {
-                    new ColumnData()
+                    Name = "FileName",
+                    Header = Localizer.GlobalInstance["frmConflictSolver_Item_00"], // "Filename", ////
+                    SortOrder = SortOrder.None,
+                    TooltipText = null,
+                    Width = 150,
+                    Items = new List<ColumnItemData>()
                     {
-                        Name = "FileName",
-                        Header = "FileName", ////Localizer.GlobalInstance["frmConflictSolver_Item_00"], // "FileName",
-                        SortOrder = SortOrder.None,
-                        TooltipText = null,
-                        Width = 150,
-                        Items = new List<ColumnItemData>()
+                        new ColumnItemData()
                         {
-                            new ColumnItemData()
-                            {
-                                Type = ColumnItemType.NodeTextBox,
-                                DataPropertyName = "FileName",
-                                IncrementalSearchEnabled = true,
-                                LeftMargin = 3,
-                            }
-                        }
-                    },
-                    new ColumnData()
-                    {
-                        Name = "Destination",
-                        Header = "Destination", ////Localizer.GlobalInstance["frmConflictSolver_Item_01"], // "Destination",
-                        SortOrder = SortOrder.None,
-                        TooltipText = null,
-                        Width = 250,
-                        Items = new List<ColumnItemData>()
-                        {
-                            new ColumnItemData()
-                            {
-                                Type = ColumnItemType.NodeTextBox,
-                                DataPropertyName = "Destination",
-                                IncrementalSearchEnabled = true,
-                                LeftMargin = 3
-                            }
-                        }
-                    },
-                    new ColumnData()
-                    {
-                        Name = "ConflictingMods",
-                        Header = "ConflictingMods", ////Localizer.GlobalInstance["frmConflictSolver_Item_01"], // "Destination",
-                        SortOrder = SortOrder.None,
-                        TooltipText = null,
-                        Width = 250,
-                        Items = new List<ColumnItemData>()
-                        {
-                            new ColumnItemData()
-                            {
-                                Type = ColumnItemType.NodeCheckBox,
-                                DataPropertyName = "Checked",
-                                EditEnabled = true,
-                                LeftMargin = 3
-                            },
-                            new ColumnItemData()
-                            {
-                                Type = ColumnItemType.NodeTextBox,
-                                DataPropertyName = "ModName",
-                                IncrementalSearchEnabled = true,
-                                LeftMargin = 3
-                            }
-                        }
-                    },
-                    new ColumnData()
-                    {
-                        Name = "TreePath",
-                        Header = "TreePath", ////Localizer.GlobalInstance["frmConflictSolver_Item_01"], // "Destination",
-                        SortOrder = SortOrder.None,
-                        TooltipText = null,
-                        Width = 250,
-                        Items = new List<ColumnItemData>()
-                        {
-                            new ColumnItemData()
-                            {
-                                Type = ColumnItemType.NodeTextBox,
-                                DataPropertyName = "TreePath",
-                                IncrementalSearchEnabled = true,
-                                LeftMargin = 3
-                            }
+                            Type = ColumnItemType.NodeTextBox,
+                            DataPropertyName = "FileName",
+                            IncrementalSearchEnabled = true,
+                            LeftMargin = 3,
                         }
                     }
-                };
+                },
+                new ColumnData()
+                {
+                    Name = "Destination",
+                    Header = Localizer.GlobalInstance["frmConflictSolver_Item_01"], // "Destination", ////
+                    SortOrder = SortOrder.None,
+                    TooltipText = null,
+                    Width = 250,
+                    Items = new List<ColumnItemData>()
+                    {
+                        new ColumnItemData()
+                        {
+                            Type = ColumnItemType.NodeTextBox,
+                            DataPropertyName = "Destination",
+                            IncrementalSearchEnabled = true,
+                            LeftMargin = 3
+                        }
+                    }
+                },
+                new ColumnData()
+                {
+                    Name = "ConflictingMods",
+                    Header = Localizer.GlobalInstance["frmConflictSolver_Item_02"], // "Conflicting Mods", ////
+                    SortOrder = SortOrder.None,
+                    TooltipText = null,
+                    Width = 250,
+                    Items = new List<ColumnItemData>()
+                    {
+                        new ColumnItemData()
+                        {
+                            Type = ColumnItemType.NodeCheckBox,
+                            DataPropertyName = "Checked",
+                            EditEnabled = true,
+                            LeftMargin = 3
+                        },
+                        new ColumnItemData()
+                        {
+                            Type = ColumnItemType.NodeTextBox,
+                            DataPropertyName = "ModName",
+                            IncrementalSearchEnabled = true,
+                            LeftMargin = 3
+                        }
+                    }
+                },
+                new ColumnData()
+                {
+                    Name = "TreePath",
+                    Header = Localizer.GlobalInstance["frmConflictSolver_Item_03"], // "TreePath", ////
+                    SortOrder = SortOrder.None,
+                    TooltipText = null,
+                    Width = 250,
+                    Items = new List<ColumnItemData>()
+                    {
+                        new ColumnItemData()
+                        {
+                            Type = ColumnItemType.NodeTextBox,
+                            DataPropertyName = "TreePath",
+                            IncrementalSearchEnabled = true,
+                            LeftMargin = 3
+                        }
+                    }
+                }
+            };
+
             return columns;
         }
 
@@ -157,7 +160,7 @@ namespace KSPModAdmin.Core.Views
             }
 
             if (missingSelection.Count > 0)
-                MessageBox.Show(this, GetValidationMsg(missingSelection), "Validation");
+                MessageBox.Show(this, GetValidationMsg(missingSelection), Messages.MSG_TITLE_VALIDATION);
 
             return missingSelection.Count == 0;
         }
@@ -175,7 +178,7 @@ namespace KSPModAdmin.Core.Views
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("Please select a solving mod for this conflict files:");
+            sb.AppendLine(Messages.MSG_PLEASE_SELECT_SOLVING_MODS);
             foreach (var node in missingSelection)
                 sb.AppendLine(string.Format("- {0}", node.FileName));
 
