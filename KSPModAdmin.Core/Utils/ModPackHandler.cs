@@ -214,7 +214,7 @@ namespace KSPModAdmin.Core.Utils
                         // extract mods from modpack to Option
                     else if (extractMods && (entry.FilePath.Contains(MODS_FOLDER) || entry.FilePath.Contains(MODS_FOLDER_WIN)))
                     {
-                        UpdateMessage(string.Format("Extracting mod \"{0}\"", entry.FilePath));
+                        UpdateMessage(string.Format(Messages.MSG_EXTRACTING_MOD_0, entry.FilePath));
 
                         entry.WriteToDirectory(modExtractDir);
                     }
@@ -239,7 +239,7 @@ namespace KSPModAdmin.Core.Utils
 
                         if (importInfo.SiteHandler == null || !DownloadMod(ref importInfo))
                         {
-                            UpdateMessage(string.Format("Mod Archive \"{0}\" not found!", importInfo.LocalPath));
+                            UpdateMessage(string.Format(Messages.MSG_MODARCHIVE_0_NOT_FOUND, importInfo.LocalPath));
                             continue;
                         }
 
@@ -255,7 +255,7 @@ namespace KSPModAdmin.Core.Utils
                     }
                     else
                     {
-                        UpdateMessage(string.Format("Import skipped! Mod Archive \"{0}\"not found.", importInfo.LocalPath), importInfo);
+                        UpdateMessage(string.Format(Messages.MSG_IMPORT_SKIPPED_MOD_0_NOT_FOUND, importInfo.LocalPath), importInfo);
                     }
                 }
 
@@ -401,14 +401,14 @@ namespace KSPModAdmin.Core.Utils
                     addedMod._Checked = false;
 
                     // copy destination
-                    UpdateMessage(string.Format("Copy destinations of mod \"{0}\"", addedMod.Name));
+                    UpdateMessage(string.Format(Messages.MSG_COPY_MOD_DESTINATION_0, addedMod.Name));
                     TryCopyDestToMatchingNodes(importInfo, addedMod);
                 }
 
                 // install the mod.
                 if (!addOnly)
                 {
-                    UpdateMessage(string.Format("Installing mod \"{0}\"", addedMod.Name));
+                    UpdateMessage(string.Format(Messages.MSG_INSTALLING_MOD_0, addedMod.Name));
                     ModSelectionController.ProcessMods(new ModNode[] { addedMod });
                 }
             }
@@ -422,137 +422,64 @@ namespace KSPModAdmin.Core.Utils
         /// Tries to find notes in the new mod, that matches to the outdated mod.
         /// If a matching node was found the destination and/or the checked state of the node will be copied.
         /// </summary>
-        /// <param name="importInfo">The outdated mod.</param>
+        /// <param name="importInfo">The import info of the mod to import.</param>
         /// <param name="newMod">The new (updated) mod.</param>
         /// <returns>True if matching files where found, otherwise false.</returns>
-        private static bool TryCopyDestToMatchingNodes(ImportInfo importInfo, ModNode newMod)
+        public static bool TryCopyDestToMatchingNodes(ImportInfo importInfo, ModNode newMod)
         {
+            // Get all files with destination.
             bool matchFound = false;
-            List<ImportInfo> childs = importInfo.GetChildes();
-            if (childs.Count == 0)
+            List<ImportInfo> outdatedFileNodes = importInfo.GetAllFileImportInfo().Where(x => !string.IsNullOrEmpty(x.InstallDir)).ToList();
+            if (outdatedFileNodes.Count == 0)
                 return matchFound;
 
-            foreach (var importFile in childs)
+            // copy destination and checked state for each file.
+            foreach (var node in outdatedFileNodes)
             {
-                string path = GetTreePathToRootNode(importFile);
-                ModNode matchingNew = ModSelectionTreeModel.SearchNodeByPath(path, newMod, '/');
-                if (matchingNew != null)
+                // files must have at least one parent (folder)!
+                ImportInfo parentOld = node.Parent;
+                if (parentOld == null)
+                    continue;
+
+                // Find matching node in modarchive.
+                string path = parentOld.Name + '/' + node.Name;
+                ModNode matchingNew = ModSelectionTreeModel.SearchNodeByPathNew(path, newMod, '/');
+                if (matchingNew == null)
+                    continue;
+
+                // copy destination and checked state
+                matchFound = true;
+                matchingNew.Destination = node.InstallDir;
+                ((ModNode)matchingNew.Parent).Destination = node.Parent.InstallDir;
+                matchingNew.Checked = node.Install;
+                ((ModNode)matchingNew.Parent).Checked = node.Install || node.Parent.Install;
+
+                // go up the tree to set destinations for parent folders.
+                ModNode parentNew = matchingNew;
+                while (parentOld != null)
                 {
-                    matchFound = true;
-                    matchingNew.Destination = GetDestination(importFile);
-                    matchingNew._Checked = importFile.Install;
+                    if (parentOld.Parent == null)
+                        break;
+
+                    // Find matching parent node in modarchive.
+                    path = parentOld.Parent.Name + '/' + path;
+                    if (ModSelectionTreeModel.SearchNodeByPathNew(path, newMod, '/') == null)
+                        break;
+
+                    parentNew = parentNew.Parent as ModNode;
+                    if (parentNew == null)
+                        break;
+
+                    // copy destination and checked state
+                    parentNew.Destination = parentOld.InstallDir;
+                    parentNew.Checked = parentOld.Install || parentOld.HasChildesToInstall;
+
+                    // repeat all with parent of parent node.
+                    parentOld = parentOld.Parent;
                 }
-
-                if (TryCopyDestToMatchingChildNodes(importFile.GetChildes(), newMod))
-                    matchFound = true;
-            }
-
-            #region old code
-
-            ////foreach (var importFile in childs)
-            ////{
-            ////    ImportInfo parentImport = importFile.Parent;
-            ////    if (parentImport == null)
-            ////        continue;
-
-            ////    string path = parentImport.Name + '\\' + importFile.Name;
-            ////    ModNode matchingNew = MainForm.Instance.ModSelection.SearchNodeByPath(path, newMod, '\\');
-            ////    if (matchingNew == null)
-            ////        continue;
-
-            ////    matchFound = true;
-            ////    matchingNew.Destination = GetDestination(importFile);
-            ////    ((ModNode)matchingNew.Parent).Destination = GetDestination(importFile.Parent);
-            ////    MainForm.Instance.ModSelection.tvModSelection.ChangeCheckedState(matchingNew, importFile.Install, true, true);
-
-            ////    ModNode parentNew = matchingNew;
-            ////    while (parentImport != null)
-            ////    {
-            ////        if (parentImport.Parent == null)
-            ////            break;
-
-            ////        path = parentImport.Parent.Name + '\\' + path;
-            ////        if (MainForm.Instance.ModSelection.SearchNodeByPath(path, newMod, '\\') == null)
-            ////            break;
-
-            ////        parentNew = (ModNode)parentNew.Parent;
-            ////        if (parentNew == null)
-            ////            break;
-
-            ////        if (MainForm.Instance.Options.ModUpdateBehavior == ModUpdateBehavior.CopyDestination)
-            ////            parentNew.Destination = GetDestination(parentImport);
-            ////        parentNew.Checked = parentImport.Install;
-            ////        parentImport = parentImport.Parent;
-            ////    }
-            ////}
-
-            #endregion
-
-            return matchFound;
-        }
-
-        /// <summary>
-        /// Tries to find nodes in the new mod, that matches to the outdated mod.
-        /// If a matching node was found the destination and/or the checked state of the node will be copied.
-        /// </summary>
-        /// <param name="childImportInfo">The importInfo.</param>
-        /// <param name="newMod">The new (updated) mod.</param>
-        /// <returns>True if matching files where found, otherwise false.</returns>
-        private static bool TryCopyDestToMatchingChildNodes(List<ImportInfo> childImportInfo, ModNode newMod)
-        {
-            bool matchFound = false;
-            foreach (var importFile in childImportInfo)
-            {
-                string path = GetTreePathToRootNode(importFile);
-                ModNode matchingNew = ModSelectionTreeModel.SearchNodeByPath(path, newMod, '/');
-                if (matchingNew != null)
-                {
-                    matchFound = true;
-                    matchingNew.Destination = GetDestination(importFile);
-                    matchingNew._Checked = importFile.Install;
-                }
-
-                if (TryCopyDestToMatchingChildNodes(importFile.GetChildes(), newMod))
-                    matchFound = true;
             }
 
             return matchFound;
-        }
-
-        /// <summary>
-        /// Gets the tree path up from the passed node up to its root node (last node with destination).
-        /// </summary>
-        /// <returns>The tree path.</returns>
-        private static string GetTreePathToRootNode(ImportInfo importInfo)
-        {
-            string path = string.Empty;
-
-            path = "/" + importInfo.Name;
-            ImportInfo parent = importInfo.Parent;
-            while (parent != null)
-            {
-                if (string.IsNullOrEmpty(parent.InstallDir))
-                    break;
-
-                path = "/" + parent.Name + path;
-
-                parent = parent.Parent;
-            }
-
-            return path;
-        }
-
-        /// <summary>
-        /// Builds the destination path from the relative ImportInfo.Installdir.
-        /// </summary>
-        /// <param name="importInfo">The ImportInfo to build the destination path from.</param>
-        /// <returns>The new destination path.</returns>
-        private static string GetDestination(ImportInfo importInfo)
-        {
-            if (string.IsNullOrEmpty(importInfo.InstallDir))
-                return string.Empty;
-
-            return importInfo.InstallDir;
         }
 
         #region internal classes
@@ -617,7 +544,7 @@ namespace KSPModAdmin.Core.Utils
                         return this;
 
                     while (parent.Parent != null)
-                        parent = Parent.Parent;
+                        parent = parent.Parent;
 
                     return parent;
                 }
@@ -647,6 +574,17 @@ namespace KSPModAdmin.Core.Utils
             /// Install dir for this ImportInfo.
             /// </summary>
             public string InstallDir { get; set; }
+
+            /// <summary>
+            /// Flag to determine if the ImportInfo has childes that should be installed.
+            /// </summary>
+            public bool HasChildesToInstall
+            {
+                get
+                {
+                    return GetChildes().Where(x => x.Install || x.HasChildesToInstall).ToList().Count > 0;
+                }
+            }
 
             /// <summary>
             /// Flag to determine if the download of the mod was successful.
@@ -697,6 +635,25 @@ namespace KSPModAdmin.Core.Utils
             public List<ImportInfo> GetChildes()
             {
                 return Childs;
+            }
+
+            /// <summary>
+            /// Returns a list of TreeNodeMod that represents a file entry.
+            /// </summary>
+            /// <param name="fileNodes">For recursive calls! List of already found file nodes.</param>
+            /// <returns>A list of TreeNodeMod that represents a file entry.</returns>
+            public List<ImportInfo> GetAllFileImportInfo(List<ImportInfo> fileNodes = null)
+            {
+                if (fileNodes == null)
+                    fileNodes = new List<ImportInfo>();
+
+                if (IsFile)
+                    fileNodes.Add(this);
+
+                foreach (ImportInfo childNode in GetChildes())
+                    childNode.GetAllFileImportInfo(fileNodes);
+
+                return fileNodes;
             }
         }
 

@@ -351,7 +351,7 @@ namespace KSPModAdmin.Core.Utils
                     continue;
 
                 string path = parentOld.Text + '/' + node.Text;
-                ModNode matchingNew = ModSelectionTreeModel.SearchNodeByPath(path, newMod, '/');
+                ModNode matchingNew = ModSelectionTreeModel.SearchNodeByPathNew(path, newMod, '/');
                 if (matchingNew == null)
                     continue;
 
@@ -371,7 +371,7 @@ namespace KSPModAdmin.Core.Utils
                         break;
 
                     path = parentOld.Parent.Text + '/' + path;
-                    if (ModSelectionTreeModel.SearchNodeByPath(path, newMod, '/') == null)
+                    if (ModSelectionTreeModel.SearchNodeByPathNew(path, newMod, '/') == null)
                         break;
 
                     parentNew = parentNew.Parent as ModNode;

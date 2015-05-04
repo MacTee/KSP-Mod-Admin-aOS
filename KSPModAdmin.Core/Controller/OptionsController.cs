@@ -879,21 +879,7 @@ namespace KSPModAdmin.Core.Controller
                 return;
             }
 
-            string fullpath = SelectedKSPPath;
-            try
-            {
-                if (Directory.Exists(fullpath))
-                {
-                    Messenger.AddInfo(string.Format(Messages.MSG_OPENING_0_FOLDER, KSPINSTALL));
-                    System.Diagnostics.Process process = new System.Diagnostics.Process();
-                    process.StartInfo.FileName = fullpath;
-                    process.Start();
-                }
-            }
-            catch (Exception ex)
-            {
-                Messenger.AddError(string.Format(Messages.MSG_OPEN_0_FOLDER_FAILD, KSPINSTALL), ex);
-            }
+            OpenFolder(SelectedKSPPath);
         }
 
         /// <summary>
@@ -907,12 +893,19 @@ namespace KSPModAdmin.Core.Controller
                 return;
             }
 
-            string fullpath = DownloadPath;
+            OpenFolder(DownloadPath);
+        }
+
+        /// <summary>
+        /// Opens the path in a explorer window.
+        /// </summary>
+        public static void OpenFolder(string fullpath)
+        {
             try
             {
                 if (Directory.Exists(fullpath))
                 {
-                    Messenger.AddInfo(string.Format(Messages.MSG_OPENING_0_FOLDER, DOWNLOAD));
+                    Messenger.AddInfo(string.Format(Messages.MSG_OPENING_0_FOLDER, KSPINSTALL));
                     System.Diagnostics.Process process = new System.Diagnostics.Process();
                     process.StartInfo.FileName = fullpath;
                     process.Start();
@@ -920,7 +913,7 @@ namespace KSPModAdmin.Core.Controller
             }
             catch (Exception ex)
             {
-                Messenger.AddError(string.Format(Messages.MSG_OPEN_0_FOLDER_FAILD, DOWNLOAD), ex);
+                Messenger.AddError(string.Format(Messages.MSG_OPEN_0_FOLDER_FAILD, KSPINSTALL), ex);
             }
         }
 
