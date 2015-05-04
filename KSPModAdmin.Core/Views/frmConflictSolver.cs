@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 using KSPModAdmin.Core.Model;
+using KSPModAdmin.Core.Utils;
 using KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.Helper;
 
 namespace KSPModAdmin.Core.Views
@@ -34,7 +37,7 @@ namespace KSPModAdmin.Core.Views
             if (!ValidateSelection())
                 return;
 
-            if (Solve())
+            if (!Solve())
                 return;
 
             Close();
@@ -139,16 +142,122 @@ namespace KSPModAdmin.Core.Views
 
         private bool ValidateSelection()
         {
-            // TODO:
-            MessageBox.Show(this, "Not implemented yet!", "");
-            return false;
+            List<ConflictInfoNode> missingSelection = new List<ConflictInfoNode>();
+            foreach (var node in model.Nodes.Cast<ConflictInfoNode>())
+            {
+                bool noSelection = true;
+                foreach (var child in node.Nodes.Cast<ConflictInfoNode>())
+                {
+                    if (child.Checked) 
+                        noSelection = false;
+                }
+
+                if (noSelection)
+                    missingSelection.Add(node);
+            }
+
+            if (missingSelection.Count > 0)
+                MessageBox.Show(this, GetValidationMsg(missingSelection), "Validation");
+
+            return missingSelection.Count == 0;
         }
 
         private bool Solve()
         {
-            // TODO:
-            MessageBox.Show(this, "Not implemented yet!", "");
-            return false;
+            var conflictingFiles = model.Nodes.Cast<ConflictInfoNode>();
+            foreach (var conflictingFile in conflictingFiles)
+                SolveConflicts(conflictingFile);
+
+            return true;
+        }
+
+        private string GetValidationMsg(List<ConflictInfoNode> missingSelection)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("Please select a solving mod for this conflict files:");
+            foreach (var node in missingSelection)
+                sb.AppendLine(string.Format("- {0}", node.FileName));
+
+            return sb.ToString();
+        }
+
+        private void SolveConflicts(ConflictInfoNode conflictingFile)
+        {
+            bool install = false;
+            ModNode selectedNode = null;
+            foreach (var fileNode in conflictingFile.Nodes.Cast<ConflictInfoNode>())
+            {
+                // remember selected node for later use.
+                if (fileNode.Checked)
+                {
+                    selectedNode = fileNode.ConflictingNode;
+                    continue;
+                }
+
+                // uninstall not selected files if installed.
+                if (fileNode.ConflictingNode.IsInstalled)
+                {
+                    fileNode.ConflictingNode._Checked = false;
+                    ModNodeHandler.ProcessMod(fileNode.ConflictingNode, true);
+                    UninstallParentIfNecessary(fileNode.ConflictingNode);
+                    install = true;
+                }
+
+                // reset destination of not selected files.
+                fileNode.ConflictingNode._Checked = false;
+                ModNodeHandler.SetDestinationPaths(fileNode.ConflictingNode, string.Empty);
+                ResetPatentDestinationIfNecessary(fileNode.ConflictingNode);
+            }
+
+            // install selected file if one of the not selected was installed.
+            if (install && selectedNode != null)
+            {
+                selectedNode._Checked = true;
+                ModNodeHandler.ProcessMod(selectedNode, true);
+                InstallParentIfNecessary(selectedNode);
+            }
+        }
+
+        private void UninstallParentIfNecessary(ModNode modNode)
+        {
+            var parent = modNode.Parent as ModNode;
+            if (parent == null)
+                return;
+
+            if (!parent.Checked && parent.IsInstalled)
+            {
+                parent._Checked = false;
+                ModNodeHandler.ProcessMod(parent, true);
+                UninstallParentIfNecessary(parent);
+            }
+        }
+
+        private void InstallParentIfNecessary(ModNode modNode)
+        {
+            var parent = modNode.Parent as ModNode;
+            if (parent == null)
+                return;
+
+            if (parent.Checked && !parent.IsInstalled)
+            {
+                parent._Checked = true;
+                ModNodeHandler.ProcessMod(parent, true);
+                InstallParentIfNecessary(parent);
+            }
+        }
+
+        private void ResetPatentDestinationIfNecessary(ModNode modNode)
+        {
+            var parent = modNode.Parent as ModNode;
+            if (parent == null)
+                return;
+
+            if (!parent.HasDestinationForChilds)
+            {
+                parent._Checked = false;
+                ModNodeHandler.SetDestinationPaths(parent, string.Empty);
+            }
         }
     }
 }

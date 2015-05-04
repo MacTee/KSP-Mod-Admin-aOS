@@ -8,7 +8,8 @@ namespace KSPModAdmin.Core.Model
     {
         private const string LINE = "----------------------------------------------------------------------------------------------------------------------------------";
         private List<ModNode> conflictingNodes = null;
-        private ModNode conflictingNode = null;
+
+        public ModNode ConflictingNode { get; private set; }
 
         public string FileName { get; private set; }
         public string Destination { get; private set; }
@@ -66,14 +67,14 @@ namespace KSPModAdmin.Core.Model
                 Nodes.Add(new ConflictInfoNode(cNode));
         }
 
-        private ConflictInfoNode(ModNode cNode)
+        private ConflictInfoNode(ModNode conflictingNode)
         {
             FileName = LINE;
             Destination = LINE;
 
-            conflictingNode = cNode;
-            ModName = conflictingNode.ZipRoot.Name;
-            TreePath = conflictingNode.GetFullTreePath();
+            ConflictingNode = conflictingNode;
+            ModName = ConflictingNode.ZipRoot.Name;
+            TreePath = ConflictingNode.GetFullTreePath();
         }
 
 

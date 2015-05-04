@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmConflictSolver));
             this.treeViewAdv = new KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.TreeViewAdv();
             this.btnSolve = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -43,11 +44,11 @@
             this.treeViewAdv.DefaultToolTipProvider = null;
             this.treeViewAdv.DragDropMarkColor = System.Drawing.Color.Black;
             this.treeViewAdv.LineColor = System.Drawing.SystemColors.ControlDark;
-            this.treeViewAdv.Location = new System.Drawing.Point(12, 37);
+            this.treeViewAdv.Location = new System.Drawing.Point(12, 56);
             this.treeViewAdv.Model = null;
             this.treeViewAdv.Name = "treeViewAdv";
             this.treeViewAdv.SelectedNode = null;
-            this.treeViewAdv.Size = new System.Drawing.Size(910, 358);
+            this.treeViewAdv.Size = new System.Drawing.Size(910, 339);
             this.treeViewAdv.TabIndex = 0;
             this.treeViewAdv.Text = "treeViewAdv1";
             this.treeViewAdv.UseColumns = true;
@@ -55,7 +56,6 @@
             // btnSolve
             // 
             this.btnSolve.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSolve.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnSolve.Location = new System.Drawing.Point(736, 401);
             this.btnSolve.Name = "btnSolve";
             this.btnSolve.Size = new System.Drawing.Size(105, 23);
@@ -81,9 +81,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(21, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(259, 13);
+            this.label1.Size = new System.Drawing.Size(458, 39);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Check the mod which should keep the conflicting file.";
+            this.label1.Text = resources.GetString("label1.Text");
             // 
             // frmConflictSolver
             // 

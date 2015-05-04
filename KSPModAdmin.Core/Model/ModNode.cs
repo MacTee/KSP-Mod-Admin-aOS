@@ -363,10 +363,8 @@ namespace KSPModAdmin.Core.Model
         {
             get
             {
-                if (HasDestination) return true;
-
                 foreach (ModNode child in this.Nodes)
-                    if (child.HasDestinationForChilds)
+                    if (child.HasDestination || child.HasDestinationForChilds)
                         return true;
 
                 return false;
