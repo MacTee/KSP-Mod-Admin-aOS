@@ -29,16 +29,17 @@
 - Simple AVC Plugin version file support implemented. 
   If KSP MA finds a AVC version file in a mod archive it tries to find a compatible SiteHandler for the DOWNLOAD link provided.
 - AVC Plugin version file support
-  - Enhancing of GitHub URL detection so "https://raw.githubusercontent.com/<UserName>/<ProjectName>/master/..." is a vaild url.
+  - Enhancing of GitHub URL detection so "https://raw.githubusercontent.com/<UserName>/<ProjectName>/master/..." is a valid URL.
   - Read version file from URL provided from mod archive version file.
   - Use GitHub infos.
   - Try to get SiteHandler from ChangeLog_URL as well.
 - Column selection for ModSelection (Choose the Columns that should be displayed in the ModSelection).
 - Option to "Delete old archive after update"
-- Faster Tooltip -> option to allow use the delay time.
-- Option to dummp mods without a destination to GameData folder.
+- Faster ToolTip -> option to allow use the delay time.
+- Option to dump mods without a destination to GameData folder.
 - Sort in ModSelection (for all columns).
 - Select new destination works again.
+- Conflict detection/solving
 
 
 //// TODO
@@ -49,7 +50,7 @@
   I currently have add-ons checking with many different Version Control sites (GitHub, CurseForge, KerbalStuff, KSP Forum) 
   but with none those fields are filled.
 
-- Overwrite button states are indistinguishable. It's hard to say, what mode it is in. May be checkbox would be more visual?
+- Overwrite button states are indistinguishable. It's hard to say, what mode it is in. May be CheckBox would be more visual?
   - Change ToolTip to display On/Off state?
 
 - AVC Plugin version file support
@@ -68,8 +69,6 @@
 
 - Restart destination detection.
 
-- Conflict detection/solving
-
 - Revise of the English/German text
   - unify URL, link, site, page
   - spelling error
@@ -87,7 +86,7 @@
   
 - Search in ModSelection.
 
-- Center CheckBoxes us TreeViewAdv.
+- Center CheckBoxes in TreeViewAdv.
 
 - Implementation of a waffle iron !!! =)
 

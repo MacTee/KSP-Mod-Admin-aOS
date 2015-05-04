@@ -1999,5 +1999,93 @@ namespace KSPModAdmin.Core
         }
 
         private const string DEFAULT_MSG_PLEASE_SELECT_SOLVING_MODS = "Please select a solving mod for this conflict files:";
+
+        public static string MSG_PROCESSING_ABORDED_CONFLICTS_DETECTED
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_PROCESSING_ABORDED_CONFLICTS_DETECTED"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_PROCESSING_ABORDED_CONFLICTS_DETECTED).Replace("^", Environment.NewLine);
+            }
+        }
+
+        private const string DEFAULT_MSG_PROCESSING_ABORDED_CONFLICTS_DETECTED = "Processing of mods aborded!^There are still conflicts.^^Please resolve all conflicts and try again.";
+
+        public static string MSG_TITLE_CONFLICTS_DETECTED
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_TITLE_CONFLICTS_DETECTED"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_TITLE_CONFLICTS_DETECTED).Replace("^", Environment.NewLine);
+            }
+        }
+
+        private const string DEFAULT_MSG_TITLE_CONFLICTS_DETECTED = "Conflicts detected!";
+
+        public static string MSG_CONFLICT_SOLVER_REMOVE_CONFLICT_FILE_0
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_CONFLICT_SOLVER_REMOVE_CONFLICT_FILE_0"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_CONFLICT_SOLVER_REMOVE_CONFLICT_FILE_0).Replace("^", Environment.NewLine);
+            }
+        }
+
+        private const string DEFAULT_MSG_CONFLICT_SOLVER_REMOVE_CONFLICT_FILE_0 = "ConflictSolver - Removing installed conflict file \"{0}\".";
+
+        public static string MSG_CONFLICT_SOLVER_RESET_DESTINATION_CONFLICT_FILE_0
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_CONFLICT_SOLVER_RESET_DESTINATION_CONFLICT_FILE_0"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_CONFLICT_SOLVER_RESET_DESTINATION_CONFLICT_FILE_0).Replace("^", Environment.NewLine);
+            }
+        }
+
+        private const string DEFAULT_MSG_CONFLICT_SOLVER_RESET_DESTINATION_CONFLICT_FILE_0 = "ConflictSolver - Reset destination of conflict file \"{0}\".";
+
+        public static string MSG_CONFLICT_SOLVER_INSTALL_SELECTED_FILE_0
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_CONFLICT_SOLVER_INSTALL_SELECTED_FILE_0"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_CONFLICT_SOLVER_INSTALL_SELECTED_FILE_0).Replace("^", Environment.NewLine);
+            }
+        }
+
+        private const string DEFAULT_MSG_CONFLICT_SOLVER_INSTALL_SELECTED_FILE_0 = "ConflictSolver - Install previously removed conflict file \"{0}\" from selected source.";
+
+        public static string MSG_CONFLICT_SOLVER_UNINSTALL_PARENT_FOLDER_0_1
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_CONFLICT_SOLVER_UNINSTALL_PARENT_FOLDER_0_1"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_CONFLICT_SOLVER_UNINSTALL_PARENT_FOLDER_0_1).Replace("^", Environment.NewLine);
+            }
+        }
+
+        private const string DEFAULT_MSG_CONFLICT_SOLVER_UNINSTALL_PARENT_FOLDER_0_1 = "ConflictSolver - Uninstall no longer needed parent folder \"{0}\" of \"{1}\".";
+
+        public static string MSG_CONFLICT_SOLVER_INSTALL_PARENT_FOLDER_0_1
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_CONFLICT_SOLVER_INSTALL_PARENT_FOLDER_0_1"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_CONFLICT_SOLVER_INSTALL_PARENT_FOLDER_0_1).Replace("^", Environment.NewLine);
+            }
+        }
+
+        private const string DEFAULT_MSG_CONFLICT_SOLVER_INSTALL_PARENT_FOLDER_0_1 = "ConflictSolver - Install needed parent folder \"{0}\" of \"{1}\".";
+
+        public static string MSG_CONFLICT_SOLVER_RESET_DESTINATION_PARENT_FOLDER_0_1
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_CONFLICT_SOLVER_RESET_DESTINATION_PARENT_FOLDER_0_1"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_CONFLICT_SOLVER_RESET_DESTINATION_PARENT_FOLDER_0_1).Replace("^", Environment.NewLine);
+            }
+        }
+
+        private const string DEFAULT_MSG_CONFLICT_SOLVER_RESET_DESTINATION_PARENT_FOLDER_0_1 = "ConflictSolver - Reset destination for conflicting parent folder \"{0}\" of \"{1}\".";
     }
 }

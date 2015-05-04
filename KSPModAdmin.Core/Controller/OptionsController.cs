@@ -378,15 +378,6 @@ namespace KSPModAdmin.Core.Controller
             }
         }
 
-        /// <summary>
-        /// Gets or sets the flag to determine if the ConflictSolver dialog should be shown or not.
-        /// </summary>
-        public static bool ShowConflictSolver
-        {
-            get { return (View != null) && View.ShowConflictSolver; }
-            set { if (View != null) View.ShowConflictSolver = value; }
-        }
-
         #region Colors
 
         /// <summary>

@@ -675,4 +675,13 @@
   <Control Name="frmConflictSolver_Item_03" Value="ModSelektionspfad"/>
   <String Name="MSG_TITLE_VALIDATION" Value="Validation"/>
   <String Name="MSG_PLEASE_SELECT_SOLVING_MODS" Value="Bitte wähle erst für alle Konfliktdateien eine mod aus, die als einzige den Zielpfad behalten soll:"/>
+  <String Name="MSG_PROCESSING_ABORDED_CONFLICTS_DETECTED" Value="Berabeiten der Mods abgebrochen!^Es gibt nochimmer Konflikte.^^Bitte behebe erst alle Konflikte und versuche es dann erneut."/>
+  <String Name="MSG_TITLE_CONFLICTS_DETECTED" Value="Konflikte gefunden!"/>
+  <String Name="MSG_CONFLICT_SOLVER_REMOVE_CONFLICT_FILE_0" Value="Konfliktlöser - Deinstalliere Konfliktdatei &quot;{0}&quot;."/>
+  <String Name="MSG_CONFLICT_SOLVER_RESET_DESTINATION_CONFLICT_FILE_0" Value="Konfliktlöser - Zielpfad der Konflikdatei &quot;{0}&quot; wird zurückgesetzt."/>
+  <String Name="MSG_CONFLICT_SOLVER_INSTALL_SELECTED_FILE_0" Value="Konfliktlöser - Installation der zuvor entfernten Konfliktdatei &quot;{0}&quot; aus neuer Quelle."/>
+  <String Name="MSG_CONFLICT_SOLVER_UNINSTALL_PARENT_FOLDER_0_1" Value="Konfliktlöser - Deinstallation nicht länger benötigter übergeordneter Ordner &quot;{0}&quot; der mod &quot;{1}&quot;."/>
+  <String Name="MSG_CONFLICT_SOLVER_INSTALL_PARENT_FOLDER_0_1" Value="Konfliktlöser - Installation benötigter übergeordneter Ordner &quot;{0}&quot; der mod &quot;{1}&quot;."/>
+  <String Name="MSG_CONFLICT_SOLVER_RESET_DESTINATION_PARENT_FOLDER_0_1" Value="Konfliktlöser - Zielpfad des übergeordneten Ornders &quot;{0}&quot; der mod &quot;{1}&quot; wird zurückgesetzt."/>
+  <Control Name="tsmiOpenConflictSolver" Value="Konflikte beheben"/>
 </Language>

@@ -482,7 +482,7 @@ namespace KSPModAdmin.Core.Views
                 tsbEditModInfos.Enabled = true;
                 tsbCopyModInfos.Enabled = true;
 
-                tsbSolveConflicts.Enabled = selectedNode.HasCollision || selectedNode.HasChildCollision;
+                tsbSolveConflicts.Enabled = ModRegister.HasConflicts;
                 tsbRefreshCheckedState.Enabled = true;
 
                 tssbChangeDestination.Enabled = true;
@@ -537,7 +537,7 @@ namespace KSPModAdmin.Core.Views
                 tsbEditModInfos.Enabled = false;
                 tsbCopyModInfos.Enabled = false;
 
-                tsbSolveConflicts.Enabled = false;
+                tsbSolveConflicts.Enabled = ModRegister.HasConflicts;
                 tsbRefreshCheckedState.Enabled = false;
 
                 tssbChangeDestination.Enabled = false;
@@ -672,7 +672,7 @@ namespace KSPModAdmin.Core.Views
                 tsmiCmsCreateZip.Enabled = !selectedNode.ZipExists;
                 tsmiCmsOneModOpenFile.Visible = selectedNode.IsFile;
                 tsmiCmsOneModOpenFolder.Visible = !selectedNode.IsFile && selectedNode.IsInstalled;
-                tsmiCmsSolveConflicts.Enabled = selectedNode.HasCollision || selectedNode.HasChildCollision;
+                tsmiCmsSolveConflicts.Enabled = ModRegister.HasConflicts;
             }
 
             if (tvModSelection.SelectedNodes.Count > 1)
@@ -690,6 +690,11 @@ namespace KSPModAdmin.Core.Views
                 tsmiCmsResetDestination.Visible = true;
                 tsmiCmsResetDestinations.Visible = false;
             }
+        }
+
+        private void cmsModSelectionAllMods_Opened(object sender, EventArgs e)
+        {
+            tsmiOpenConflictSolver.Enabled = ModRegister.HasConflicts;
         }
 
         #endregion

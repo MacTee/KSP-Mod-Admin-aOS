@@ -18,6 +18,17 @@ namespace KSPModAdmin.Core.Utils
         /// </summary>
         public static bool ConflictDetectionOnOff { get; set; }
 
+        /// <summary>
+        /// Gets the flag if there are any known conflicts.
+        /// </summary>
+        public static bool HasConflicts
+        {
+            get
+            {
+                return mRegisterdModFiles.Values.Any(x => x.Count > 1) && OptionsController.ConflictDetectionOnOff;
+            }
+        }
+
 
         /// <summary>
         /// Dictionary of all registered mod file destinations.

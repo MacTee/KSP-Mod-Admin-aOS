@@ -171,8 +171,6 @@ namespace KSPModAdmin.Core.Config
                 {
                     if (att.Name == Constants.ONOFF && att.Value != null)
                         OptionsController.ConflictDetectionOnOff = (att.Value.Equals(Constants.TRUE, StringComparison.CurrentCultureIgnoreCase));
-                    else if (att.Name == Constants.SHOWCONFLICTSOLVER && att.Value != null)
-                        OptionsController.ShowConflictSolver = (att.Value.Equals(Constants.TRUE, StringComparison.CurrentCultureIgnoreCase));
                 }
             }
 
@@ -452,8 +450,7 @@ namespace KSPModAdmin.Core.Config
             // Conflict detection options
             node = ConfigHelper.CreateConfigNode(doc, Constants.CONFLICTDETECTIONOPTIONS, new string[,]
             {
-                { Constants.ONOFF, OptionsController.ConflictDetectionOnOff.ToString() },
-                { Constants.SHOWCONFLICTSOLVER, OptionsController.ShowConflictSolver.ToString() }
+                { Constants.ONOFF, OptionsController.ConflictDetectionOnOff.ToString() }
             });
             generalNode.AppendChild(node);
 

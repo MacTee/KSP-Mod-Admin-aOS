@@ -210,13 +210,16 @@ namespace KSPModAdmin.Core.Views
                 // uninstall not selected files if installed.
                 if (fileNode.ConflictingNode.IsInstalled)
                 {
+                    Messenger.AddInfo(string.Format(Messages.MSG_CONFLICT_SOLVER_REMOVE_CONFLICT_FILE_0, fileNode.ConflictingNode.Name));
                     fileNode.ConflictingNode._Checked = false;
                     ModNodeHandler.ProcessMod(fileNode.ConflictingNode, true);
+
                     UninstallParentIfNecessary(fileNode.ConflictingNode);
                     install = true;
                 }
 
                 // reset destination of not selected files.
+                Messenger.AddInfo(string.Format(Messages.MSG_CONFLICT_SOLVER_RESET_DESTINATION_CONFLICT_FILE_0, fileNode.ConflictingNode.Name));
                 fileNode.ConflictingNode._Checked = false;
                 ModNodeHandler.SetDestinationPaths(fileNode.ConflictingNode, string.Empty);
                 ResetPatentDestinationIfNecessary(fileNode.ConflictingNode);
@@ -225,6 +228,7 @@ namespace KSPModAdmin.Core.Views
             // install selected file if one of the not selected was installed.
             if (install && selectedNode != null)
             {
+                Messenger.AddInfo(string.Format(Messages.MSG_CONFLICT_SOLVER_INSTALL_SELECTED_FILE_0, selectedNode.Name));
                 selectedNode._Checked = true;
                 ModNodeHandler.ProcessMod(selectedNode, true);
                 InstallParentIfNecessary(selectedNode);
@@ -239,6 +243,7 @@ namespace KSPModAdmin.Core.Views
 
             if (!parent.Checked && parent.IsInstalled)
             {
+                Messenger.AddInfo(string.Format(Messages.MSG_CONFLICT_SOLVER_UNINSTALL_PARENT_FOLDER_0_1, modNode.Name, modNode.ZipRoot.Name));
                 parent._Checked = false;
                 ModNodeHandler.ProcessMod(parent, true);
                 UninstallParentIfNecessary(parent);
@@ -253,6 +258,7 @@ namespace KSPModAdmin.Core.Views
 
             if (parent.Checked && !parent.IsInstalled)
             {
+                Messenger.AddInfo(string.Format(Messages.MSG_CONFLICT_SOLVER_INSTALL_PARENT_FOLDER_0_1, modNode.Name, modNode.ZipRoot.Name));
                 parent._Checked = true;
                 ModNodeHandler.ProcessMod(parent, true);
                 InstallParentIfNecessary(parent);
@@ -267,6 +273,7 @@ namespace KSPModAdmin.Core.Views
 
             if (!parent.HasDestinationForChilds)
             {
+                Messenger.AddInfo(string.Format(Messages.MSG_CONFLICT_SOLVER_RESET_DESTINATION_PARENT_FOLDER_0_1, modNode.Name, modNode.ZipRoot.Name));
                 parent._Checked = false;
                 ModNodeHandler.SetDestinationPaths(parent, string.Empty);
             }
