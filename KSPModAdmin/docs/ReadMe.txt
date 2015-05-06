@@ -5,7 +5,7 @@ It also let you choose what parts of the mod should be installed.
 
 
 Features:
-- KSP Version independent! (Until they changes mod loading again.)
+- KSP Version independent!
 - Localized: English, German, Russian, Italian, more are coming ... (contact me if you want to help)
 - Multi OS support: Win, Linux and Mac (via Mono-Project (see http://www.mono-project.com/))
 - Supports multiple installations of KSP. Change between different KSP installations with one click.

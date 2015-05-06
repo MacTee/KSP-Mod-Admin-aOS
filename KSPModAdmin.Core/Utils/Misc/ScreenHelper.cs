@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Management;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace KSPModAdmin.Core.Utils
@@ -188,7 +189,23 @@ namespace KSPModAdmin.Core.Utils
             return resolutions;
         }
         
-        private static List<string> GetResolutionsOnUbuntu()
+        public static List<string> GetResolutionsOnUbuntu()
+        {
+            var output = GetXrandrOutput();
+            var matches = Regex.Matches(output, @"   (\d+)x(\d+)  ");
+
+            List<string> resolutions = new List<string>();
+            foreach (Match match in matches)
+            {
+                string newResolution = GetResolutionString(int.Parse(match.Groups[1].Value), int.Parse(match.Groups[2].Value));
+                if (!resolutions.Contains(newResolution))
+                    resolutions.Add(newResolution);
+            }
+                    
+            return resolutions;
+        }
+
+        private static string GetXrandrOutput()
         {
             // Use xrandr to get size of screen located at offset (0,0).
             System.Diagnostics.Process p = new System.Diagnostics.Process();
@@ -198,21 +215,18 @@ namespace KSPModAdmin.Core.Utils
             p.Start();
             string output = p.StandardOutput.ReadToEnd();
             p.WaitForExit();
-            var match = System.Text.RegularExpressions.Regex.Match(output, @"(\d+)x(\d+)\+0\+0");
-            var w = match.Groups[1].Value;
-            var h = match.Groups[2].Value;
-            Rectangle r;
-            r.Width = int.Parse(w);
-            r.Height = int.Parse(h);
-            Console.WriteLine ("Display Size is {0} x {1}", w, h);
+            return output;
             
-            string newResolution = GetResolutionString(r.Width, r.Height);
-            
-            List<string> resolutions = new List<string>();
-            if (!resolutions.Contains(newResolution))
-                resolutions.Add(newResolution);
-                    
-            return resolutions;
+////            return @"
+////Screen 0: minimum 640 x 400, current 1600 x 1200, maximum 1600 x 1200
+////default connected 1600x1200+0+0 0mm x 0mm
+////   1600x1200       0.0* 
+////   1280x1024       0.0  
+////   1152x864        0.0  
+////   1024x768        0.0  
+////   800x600         0.0  
+////   640x480         0.0  
+////   720x400         0.0";
         }
     }
 }

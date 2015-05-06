@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using KSPModAdmin.Core;
+using KSPModAdmin.Core.Utils;
 using KSPModAdmin.Translation.Plugin.Properties;
 
 namespace KSPModAdmin.Translation.Plugin
@@ -12,6 +13,7 @@ namespace KSPModAdmin.Translation.Plugin
     {
         private TabView[] mMainTabViews = null;
         private TabView[] mOptionTabViews = new List<TabView>().ToArray();
+        private ISiteHandler[] mSiteHandlers = new List<ISiteHandler>().ToArray();
 
 
         /// <summary>
@@ -53,6 +55,14 @@ namespace KSPModAdmin.Translation.Plugin
             {
                 return mOptionTabViews;
             }
+        }
+
+        /// <summary>
+        /// Array of SiteHandlers that the mod imports.
+        /// </summary>
+        public ISiteHandler[] SiteHandler
+        {
+            get { return mSiteHandlers; }
         }
     }
 }
