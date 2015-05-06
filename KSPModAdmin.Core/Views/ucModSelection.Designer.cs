@@ -129,6 +129,8 @@ namespace KSPModAdmin.Core.Views
             this.tsmiCmsImportExportModPack = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCmsScanForAlreadyInstalledMods = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator22 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiOpenConflictSolver = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiCmsRemoveAllMods = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator23 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiCmsProceedAllMods = new System.Windows.Forms.ToolStripMenuItem();
@@ -153,7 +155,6 @@ namespace KSPModAdmin.Core.Views
             this.tsbEditModInfos = new System.Windows.Forms.ToolStripButton();
             this.tsbCopyModInfos = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbSolveConflicts = new System.Windows.Forms.ToolStripButton();
             this.tsbRefreshCheckedState = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.tssbChangeDestination = new System.Windows.Forms.ToolStripSplitButton();
@@ -182,6 +183,7 @@ namespace KSPModAdmin.Core.Views
             this.tsbUpdateCheckAllMods = new System.Windows.Forms.ToolStripButton();
             this.tsbUpdateAllOutdatedMods = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbSolveConflicts = new System.Windows.Forms.ToolStripButton();
             this.tsbRefreshCheckedstateForAllMods = new System.Windows.Forms.ToolStripButton();
             this.tsbCheckAllMods = new System.Windows.Forms.ToolStripButton();
             this.tsbUncheckAllMods = new System.Windows.Forms.ToolStripButton();
@@ -269,7 +271,7 @@ namespace KSPModAdmin.Core.Views
             this.toolStripSeparator14,
             this.tsmiCmsOneModTreeViewOptions});
             this.cmsModSelectionOneMod.Name = "cmsModSelection";
-            this.cmsModSelectionOneMod.Size = new System.Drawing.Size(304, 508);
+            this.cmsModSelectionOneMod.Size = new System.Drawing.Size(304, 486);
             this.cmsModSelectionOneMod.Opened += new System.EventHandler(this.cmsModSelectionOneMod_Opened);
             // 
             // tsmiCmsDestination
@@ -567,6 +569,8 @@ namespace KSPModAdmin.Core.Views
             this.tsmiCmsImportExportModPack,
             this.tsmiCmsScanForAlreadyInstalledMods,
             this.toolStripSeparator22,
+            this.tsmiOpenConflictSolver,
+            this.toolStripSeparator16,
             this.tsmiCmsRemoveAllMods,
             this.toolStripSeparator23,
             this.tsmiCmsProceedAllMods,
@@ -580,7 +584,8 @@ namespace KSPModAdmin.Core.Views
             this.toolStripSeparator15,
             this.tsmiCmsTreeViewOptions});
             this.cmsModSelectionAllMods.Name = "cmsModSelectionAllMods";
-            this.cmsModSelectionAllMods.Size = new System.Drawing.Size(255, 298);
+            this.cmsModSelectionAllMods.Size = new System.Drawing.Size(255, 348);
+            this.cmsModSelectionAllMods.Opened += new System.EventHandler(this.cmsModSelectionAllMods_Opened);
             // 
             // tsmiCmsAddMod
             // 
@@ -618,6 +623,19 @@ namespace KSPModAdmin.Core.Views
             // 
             this.toolStripSeparator22.Name = "toolStripSeparator22";
             this.toolStripSeparator22.Size = new System.Drawing.Size(251, 6);
+            // 
+            // tsmiOpenConflictSolver
+            // 
+            this.tsmiOpenConflictSolver.Image = global::KSPModAdmin.Core.Properties.Resources.component_warning;
+            this.tsmiOpenConflictSolver.Name = "tsmiOpenConflictSolver";
+            this.tsmiOpenConflictSolver.Size = new System.Drawing.Size(254, 22);
+            this.tsmiOpenConflictSolver.Text = "Solve conflicts";
+            this.tsmiOpenConflictSolver.Click += new System.EventHandler(this.tsbSolveConflicts_Click);
+            // 
+            // toolStripSeparator16
+            // 
+            this.toolStripSeparator16.Name = "toolStripSeparator16";
+            this.toolStripSeparator16.Size = new System.Drawing.Size(251, 6);
             // 
             // tsmiCmsRemoveAllMods
             // 
@@ -716,7 +734,6 @@ namespace KSPModAdmin.Core.Views
             this.tsbEditModInfos,
             this.tsbCopyModInfos,
             this.toolStripSeparator6,
-            this.tsbSolveConflicts,
             this.tsbRefreshCheckedState,
             this.toolStripSeparator8,
             this.tssbChangeDestination,
@@ -833,17 +850,6 @@ namespace KSPModAdmin.Core.Views
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
             this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
-            // 
-            // tsbSolveConflicts
-            // 
-            this.tsbSolveConflicts.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbSolveConflicts.Image = ((System.Drawing.Image)(resources.GetObject("tsbSolveConflicts.Image")));
-            this.tsbSolveConflicts.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbSolveConflicts.Name = "tsbSolveConflicts";
-            this.tsbSolveConflicts.Size = new System.Drawing.Size(23, 22);
-            this.tsbSolveConflicts.Text = "toolStripButton11";
-            this.tsbSolveConflicts.ToolTipText = "Solve mod conflicts\r\nOpens the mod conflict solver dialog.";
-            this.tsbSolveConflicts.Click += new System.EventHandler(this.tsbSolveConflicts_Click);
             // 
             // tsbRefreshCheckedState
             // 
@@ -1008,6 +1014,7 @@ namespace KSPModAdmin.Core.Views
             this.tsbUpdateCheckAllMods,
             this.tsbUpdateAllOutdatedMods,
             this.toolStripSeparator12,
+            this.tsbSolveConflicts,
             this.tsbRefreshCheckedstateForAllMods,
             this.tsbCheckAllMods,
             this.tsbUncheckAllMods,
@@ -1169,6 +1176,17 @@ namespace KSPModAdmin.Core.Views
             this.toolStripSeparator12.Name = "toolStripSeparator12";
             this.toolStripSeparator12.Size = new System.Drawing.Size(6, 25);
             // 
+            // tsbSolveConflicts
+            // 
+            this.tsbSolveConflicts.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbSolveConflicts.Image = global::KSPModAdmin.Core.Properties.Resources.component_warning;
+            this.tsbSolveConflicts.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbSolveConflicts.Name = "tsbSolveConflicts";
+            this.tsbSolveConflicts.Size = new System.Drawing.Size(23, 22);
+            this.tsbSolveConflicts.Text = "toolStripButton1";
+            this.tsbSolveConflicts.ToolTipText = "Open conflic solver.\r\nOpens the conflict solver dialog.";
+            this.tsbSolveConflicts.Click += new System.EventHandler(this.tsbSolveConflicts_Click);
+            // 
             // tsbRefreshCheckedstateForAllMods
             // 
             this.tsbRefreshCheckedstateForAllMods.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -1318,7 +1336,6 @@ namespace KSPModAdmin.Core.Views
         private System.Windows.Forms.ToolStripButton tsbProceedMod;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripButton tsbRefreshCheckedState;
-        private System.Windows.Forms.ToolStripButton tsbSolveConflicts;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.ToolStripButton tsbCreateZip;
@@ -1406,5 +1423,8 @@ namespace KSPModAdmin.Core.Views
         private System.Windows.Forms.ToolStripMenuItem tsmiCmsOneModOpenFolder;
         private System.Windows.Forms.ToolStripMenuItem tsmiCmsOneModOpenFile;
         private System.Windows.Forms.ToolStripButton tsbTreeViewOption;
+        private System.Windows.Forms.ToolStripMenuItem tsmiOpenConflictSolver;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator16;
+        private System.Windows.Forms.ToolStripButton tsbSolveConflicts;
     }
 }

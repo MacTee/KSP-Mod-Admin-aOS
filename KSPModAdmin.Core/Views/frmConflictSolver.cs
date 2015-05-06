@@ -1,19 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 using KSPModAdmin.Core.Model;
+using KSPModAdmin.Core.Utils;
 using KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.Helper;
+using KSPModAdmin.Core.Utils.Localization;
 
 namespace KSPModAdmin.Core.Views
 {
+    /// <summary>
+    /// This view handles the solving of conflicts between ModNode files.
+    /// </summary>
     [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Reviewed. Suppression is OK here.")]
     public partial class frmConflictSolver : frmBase
     {
         private ConflicDataTreeModel model = new ConflicDataTreeModel();
 
+        /// <summary>
+        /// Gets or sets the conflict data this view operates on.
+        /// </summary>
         public List<ConflictInfoNode> ConflictData { get; set; }
 
+        /// <summary>
+        /// Creates a new instance of the frmConflictSolver class.
+        /// This view handles the solving of conflicts between ModNode files.
+        /// </summary>
         public frmConflictSolver()
         {
             InitializeComponent();
@@ -34,7 +48,7 @@ namespace KSPModAdmin.Core.Views
             if (!ValidateSelection())
                 return;
 
-            if (Solve())
+            if (!Solve())
                 return;
 
             Close();
@@ -53,102 +67,216 @@ namespace KSPModAdmin.Core.Views
         private List<ColumnData> GetColumns()
         {
             List<ColumnData> columns = new List<ColumnData>()
+            {
+                new ColumnData()
                 {
-                    new ColumnData()
+                    Name = "FileName",
+                    Header = Localizer.GlobalInstance["frmConflictSolver_Item_00"], // "Filename", ////
+                    SortOrder = SortOrder.None,
+                    TooltipText = null,
+                    Width = 150,
+                    Items = new List<ColumnItemData>()
                     {
-                        Name = "FileName",
-                        Header = "FileName", ////Localizer.GlobalInstance["frmConflictSolver_Item_00"], // "FileName",
-                        SortOrder = SortOrder.None,
-                        TooltipText = null,
-                        Width = 150,
-                        Items = new List<ColumnItemData>()
+                        new ColumnItemData()
                         {
-                            new ColumnItemData()
-                            {
-                                Type = ColumnItemType.NodeTextBox,
-                                DataPropertyName = "FileName",
-                                IncrementalSearchEnabled = true,
-                                LeftMargin = 3,
-                            }
-                        }
-                    },
-                    new ColumnData()
-                    {
-                        Name = "Destination",
-                        Header = "Destination", ////Localizer.GlobalInstance["frmConflictSolver_Item_01"], // "Destination",
-                        SortOrder = SortOrder.None,
-                        TooltipText = null,
-                        Width = 250,
-                        Items = new List<ColumnItemData>()
-                        {
-                            new ColumnItemData()
-                            {
-                                Type = ColumnItemType.NodeTextBox,
-                                DataPropertyName = "Destination",
-                                IncrementalSearchEnabled = true,
-                                LeftMargin = 3
-                            }
-                        }
-                    },
-                    new ColumnData()
-                    {
-                        Name = "ConflictingMods",
-                        Header = "ConflictingMods", ////Localizer.GlobalInstance["frmConflictSolver_Item_01"], // "Destination",
-                        SortOrder = SortOrder.None,
-                        TooltipText = null,
-                        Width = 250,
-                        Items = new List<ColumnItemData>()
-                        {
-                            new ColumnItemData()
-                            {
-                                Type = ColumnItemType.NodeCheckBox,
-                                DataPropertyName = "Checked",
-                                EditEnabled = true,
-                                LeftMargin = 3
-                            },
-                            new ColumnItemData()
-                            {
-                                Type = ColumnItemType.NodeTextBox,
-                                DataPropertyName = "ModName",
-                                IncrementalSearchEnabled = true,
-                                LeftMargin = 3
-                            }
-                        }
-                    },
-                    new ColumnData()
-                    {
-                        Name = "TreePath",
-                        Header = "TreePath", ////Localizer.GlobalInstance["frmConflictSolver_Item_01"], // "Destination",
-                        SortOrder = SortOrder.None,
-                        TooltipText = null,
-                        Width = 250,
-                        Items = new List<ColumnItemData>()
-                        {
-                            new ColumnItemData()
-                            {
-                                Type = ColumnItemType.NodeTextBox,
-                                DataPropertyName = "TreePath",
-                                IncrementalSearchEnabled = true,
-                                LeftMargin = 3
-                            }
+                            Type = ColumnItemType.NodeTextBox,
+                            DataPropertyName = "FileName",
+                            IncrementalSearchEnabled = true,
+                            LeftMargin = 3,
                         }
                     }
-                };
+                },
+                new ColumnData()
+                {
+                    Name = "Destination",
+                    Header = Localizer.GlobalInstance["frmConflictSolver_Item_01"], // "Destination", ////
+                    SortOrder = SortOrder.None,
+                    TooltipText = null,
+                    Width = 250,
+                    Items = new List<ColumnItemData>()
+                    {
+                        new ColumnItemData()
+                        {
+                            Type = ColumnItemType.NodeTextBox,
+                            DataPropertyName = "Destination",
+                            IncrementalSearchEnabled = true,
+                            LeftMargin = 3
+                        }
+                    }
+                },
+                new ColumnData()
+                {
+                    Name = "ConflictingMods",
+                    Header = Localizer.GlobalInstance["frmConflictSolver_Item_02"], // "Conflicting Mods", ////
+                    SortOrder = SortOrder.None,
+                    TooltipText = null,
+                    Width = 250,
+                    Items = new List<ColumnItemData>()
+                    {
+                        new ColumnItemData()
+                        {
+                            Type = ColumnItemType.NodeCheckBox,
+                            DataPropertyName = "Checked",
+                            EditEnabled = true,
+                            LeftMargin = 3
+                        },
+                        new ColumnItemData()
+                        {
+                            Type = ColumnItemType.NodeTextBox,
+                            DataPropertyName = "ModName",
+                            IncrementalSearchEnabled = true,
+                            LeftMargin = 3
+                        }
+                    }
+                },
+                new ColumnData()
+                {
+                    Name = "TreePath",
+                    Header = Localizer.GlobalInstance["frmConflictSolver_Item_03"], // "TreePath", ////
+                    SortOrder = SortOrder.None,
+                    TooltipText = null,
+                    Width = 250,
+                    Items = new List<ColumnItemData>()
+                    {
+                        new ColumnItemData()
+                        {
+                            Type = ColumnItemType.NodeTextBox,
+                            DataPropertyName = "TreePath",
+                            IncrementalSearchEnabled = true,
+                            LeftMargin = 3
+                        }
+                    }
+                }
+            };
+
             return columns;
         }
 
         private bool ValidateSelection()
         {
-            // TODO:
-            MessageBox.Show(this, "Not implemented yet!", "");
-            return false;
+            List<ConflictInfoNode> missingSelection = new List<ConflictInfoNode>();
+            foreach (var node in model.Nodes.Cast<ConflictInfoNode>())
+            {
+                bool noSelection = true;
+                foreach (var child in node.Nodes.Cast<ConflictInfoNode>())
+                {
+                    if (child.Checked) 
+                        noSelection = false;
+                }
+
+                if (noSelection)
+                    missingSelection.Add(node);
+            }
+
+            if (missingSelection.Count > 0)
+                MessageBox.Show(this, GetValidationMsg(missingSelection), Messages.MSG_TITLE_VALIDATION);
+
+            return missingSelection.Count == 0;
         }
 
         private bool Solve()
         {
-            // TODO:
-            MessageBox.Show(this, "Not implemented yet!", "");
-            return false;
+            var conflictingFiles = model.Nodes.Cast<ConflictInfoNode>();
+            foreach (var conflictingFile in conflictingFiles)
+                SolveConflicts(conflictingFile);
+
+            return true;
+        }
+
+        private string GetValidationMsg(List<ConflictInfoNode> missingSelection)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine(Messages.MSG_PLEASE_SELECT_SOLVING_MODS);
+            foreach (var node in missingSelection)
+                sb.AppendLine(string.Format("- {0}", node.FileName));
+
+            return sb.ToString();
+        }
+
+        private void SolveConflicts(ConflictInfoNode conflictingFile)
+        {
+            bool install = false;
+            ModNode selectedNode = null;
+            foreach (var fileNode in conflictingFile.Nodes.Cast<ConflictInfoNode>())
+            {
+                // remember selected node for later use.
+                if (fileNode.Checked)
+                {
+                    selectedNode = fileNode.ConflictingNode;
+                    continue;
+                }
+
+                // uninstall not selected files if installed.
+                if (fileNode.ConflictingNode.IsInstalled)
+                {
+                    Messenger.AddInfo(string.Format(Messages.MSG_CONFLICT_SOLVER_REMOVE_CONFLICT_FILE_0, fileNode.ConflictingNode.Name));
+                    fileNode.ConflictingNode._Checked = false;
+                    ModNodeHandler.ProcessMod(fileNode.ConflictingNode, true);
+
+                    UninstallParentIfNecessary(fileNode.ConflictingNode);
+                    install = true;
+                }
+
+                // reset destination of not selected files.
+                Messenger.AddInfo(string.Format(Messages.MSG_CONFLICT_SOLVER_RESET_DESTINATION_CONFLICT_FILE_0, fileNode.ConflictingNode.Name));
+                fileNode.ConflictingNode._Checked = false;
+                ModNodeHandler.SetDestinationPaths(fileNode.ConflictingNode, string.Empty);
+                ResetPatentDestinationIfNecessary(fileNode.ConflictingNode);
+            }
+
+            // install selected file if one of the not selected was installed.
+            if (install && selectedNode != null)
+            {
+                Messenger.AddInfo(string.Format(Messages.MSG_CONFLICT_SOLVER_INSTALL_SELECTED_FILE_0, selectedNode.Name));
+                selectedNode._Checked = true;
+                ModNodeHandler.ProcessMod(selectedNode, true);
+                InstallParentIfNecessary(selectedNode);
+            }
+        }
+
+        private void UninstallParentIfNecessary(ModNode modNode)
+        {
+            var parent = modNode.Parent as ModNode;
+            if (parent == null)
+                return;
+
+            if (!parent.Checked && parent.IsInstalled)
+            {
+                Messenger.AddInfo(string.Format(Messages.MSG_CONFLICT_SOLVER_UNINSTALL_PARENT_FOLDER_0_1, modNode.Name, modNode.ZipRoot.Name));
+                parent._Checked = false;
+                ModNodeHandler.ProcessMod(parent, true);
+                UninstallParentIfNecessary(parent);
+            }
+        }
+
+        private void InstallParentIfNecessary(ModNode modNode)
+        {
+            var parent = modNode.Parent as ModNode;
+            if (parent == null)
+                return;
+
+            if (parent.Checked && !parent.IsInstalled)
+            {
+                Messenger.AddInfo(string.Format(Messages.MSG_CONFLICT_SOLVER_INSTALL_PARENT_FOLDER_0_1, modNode.Name, modNode.ZipRoot.Name));
+                parent._Checked = true;
+                ModNodeHandler.ProcessMod(parent, true);
+                InstallParentIfNecessary(parent);
+            }
+        }
+
+        private void ResetPatentDestinationIfNecessary(ModNode modNode)
+        {
+            var parent = modNode.Parent as ModNode;
+            if (parent == null)
+                return;
+
+            if (!parent.HasDestinationForChilds)
+            {
+                Messenger.AddInfo(string.Format(Messages.MSG_CONFLICT_SOLVER_RESET_DESTINATION_PARENT_FOLDER_0_1, modNode.Name, modNode.ZipRoot.Name));
+                parent._Checked = false;
+                ModNodeHandler.SetDestinationPaths(parent, string.Empty);
+            }
         }
     }
 }

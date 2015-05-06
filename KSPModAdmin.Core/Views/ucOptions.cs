@@ -328,13 +328,6 @@ namespace KSPModAdmin.Core.Views
         [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
         public bool ConflictDetectionOnOff { get { return cbConflictDetectionOnOff.Checked; } set { cbConflictDetectionOnOff.Checked = value; } }
 
-        /// <summary>
-        /// Gets or sets the flag to determine if the ConflictSolver dialog should be shown or not.
-        /// </summary>
-        [DefaultValue(false), Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
-        public bool ShowConflictSolver { get { return cbShowConflictSolver.Checked; } set { cbShowConflictSolver.Checked = value; } }
-
         #region Colors
 
         /// <summary>

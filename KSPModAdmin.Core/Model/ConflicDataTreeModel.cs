@@ -4,13 +4,27 @@ using KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree;
 
 namespace KSPModAdmin.Core.Model
 {
+    /// <summary>
+    /// Model for frmConflictSolver TreeViewAdv.
+    /// </summary>
     public class ConflicDataTreeModel : TreeModel
     {
+        /// <summary>
+        /// Event fires before a Node.Checked will be changed.
+        /// </summary>
         public static event EventHandler<BeforeCheckedChangeEventArgs> BeforeCheckedChange = null;
 
+        /// <summary>
+        /// Event fires after a Node.Checked has been changed.
+        /// </summary>
         public static event AfterCheckedChangeHandler AfterCheckedChange = null;
 
 
+        /// <summary>
+        /// Adds a ConflictInfoNode range to the Model.
+        /// </summary>
+        /// <param name="nodes">The nodes to add.</param>
+        /// <returns>A list of the added nodes.</returns>
         public List<ConflictInfoNode> AddRange(List<ConflictInfoNode> nodes)
         {
             List<ConflictInfoNode> addedNodes = new List<ConflictInfoNode>();
