@@ -98,7 +98,10 @@ namespace KSPModAdmin.Core.Utils
         public static string[] GetScreenResolutions()
         {
             List<string> resolutions = new List<string>();
-            resolutions = GetResolutionsViaWMI();
+            if (Environment.OSVersion.Platform == PlatformID.Unix)
+                resolutions = GetResolutionsOnLinux();
+            else
+                resolutions = GetResolutionsViaWMI();
 
             if (resolutions.Count == 0)
                 resolutions = GetResolutionsViaNativeMethods();
@@ -188,8 +191,8 @@ namespace KSPModAdmin.Core.Utils
 #endif
             return resolutions;
         }
-        
-        public static List<string> GetResolutionsOnUbuntu()
+
+        private static List<string> GetResolutionsOnLinux()
         {
             var output = GetXrandrOutput();
             var matches = Regex.Matches(output, @"   (\d+)x(\d+)  ");
