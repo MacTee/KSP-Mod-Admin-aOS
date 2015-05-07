@@ -553,7 +553,7 @@ namespace KSPModAdmin.Core.Controller
 
         private static void HandleAdminVersionWebResponse(WebResponse response)
         {
-            string status = ((HttpWebResponse) response).StatusDescription;
+            string status = ((HttpWebResponse)response).StatusDescription;
             Stream dataStream = response.GetResponseStream();
             StreamReader reader = new StreamReader(dataStream);
             string responseFromServer = reader.ReadToEnd();
@@ -760,7 +760,6 @@ namespace KSPModAdmin.Core.Controller
                 default:
                     doUpdateCheck = false;
                     break;
-
             }
 
             if (doUpdateCheck)

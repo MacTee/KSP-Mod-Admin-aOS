@@ -547,21 +547,21 @@ namespace KSPModAdmin.Core.Controller
                 {
                     Log.AddDebugS(string.Format("Try add plugin \"{0}\" ...", plugin.Name));
 
-                    //// Load SiteHandler from Plugin.
-                    //if (plugin.SiteHandler != null && plugin.SiteHandler.Length > 0)
-                    //{
-                    //    foreach (var newSiteHandler in plugin.SiteHandler)
-                    //    { 
-                    //        try
-                    //        {
-                    //            SiteHandlerManager.RegisterSiteHandler(newSiteHandler);
-                    //        }
-                    //        catch (Exception ex)
-                    //        {
-                    //            Log.AddErrorS(string.Format("Error during add new SiteHandler \"{0}\"from Plugin \"{1}\"", newSiteHandler.Name, plugin.Name), ex);
-                    //        }
-                    //    }
-                    //}
+                    ////// Load SiteHandler from Plugin.
+                    ////if (plugin.SiteHandler != null && plugin.SiteHandler.Length > 0)
+                    ////{
+                    ////    foreach (var newSiteHandler in plugin.SiteHandler)
+                    ////    { 
+                    ////        try
+                    ////        {
+                    ////            SiteHandlerManager.RegisterSiteHandler(newSiteHandler);
+                    ////        }
+                    ////        catch (Exception ex)
+                    ////        {
+                    ////            Log.AddErrorS(string.Format("Error during add new SiteHandler \"{0}\"from Plugin \"{1}\"", newSiteHandler.Name, plugin.Name), ex);
+                    ////        }
+                    ////    }
+                    ////}
 
                     TabView[] tabViews = plugin.MainTabViews;
                     foreach (TabView tabView in tabViews)

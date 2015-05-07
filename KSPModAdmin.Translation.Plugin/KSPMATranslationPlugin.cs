@@ -13,7 +13,7 @@ namespace KSPModAdmin.Translation.Plugin
     {
         private TabView[] mMainTabViews = null;
         private TabView[] mOptionTabViews = new List<TabView>().ToArray();
-        private ISiteHandler[] mSiteHandlers = new List<ISiteHandler>().ToArray();
+        ////private ISiteHandler[] mSiteHandlers = new List<ISiteHandler>().ToArray();
 
 
         /// <summary>
@@ -57,12 +57,12 @@ namespace KSPModAdmin.Translation.Plugin
             }
         }
 
-        /// <summary>
-        /// Array of SiteHandlers that the mod imports.
-        /// </summary>
-        public ISiteHandler[] SiteHandler
-        {
-            get { return mSiteHandlers; }
-        }
+        /////// <summary>
+        /////// Array of SiteHandlers that the mod imports.
+        /////// </summary>
+        ////public ISiteHandler[] SiteHandler
+        ////{
+        ////    get { return mSiteHandlers; }
+        ////}
     }
 }

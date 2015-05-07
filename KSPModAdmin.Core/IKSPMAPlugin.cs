@@ -30,10 +30,10 @@ namespace KSPModAdmin.Core
         /// </summary>
         TabView[] OptionTabViews { get; }
 
-        /// <summary>
-        /// Array of new SiteHandler classes to import.
-        /// </summary>
-        ISiteHandler[] SiteHandler { get; }
+        /////// <summary>
+        /////// Array of new SiteHandler classes to import.
+        /////// </summary>
+        ////ISiteHandler[] SiteHandler { get; }
     }
 
     /// <summary>
