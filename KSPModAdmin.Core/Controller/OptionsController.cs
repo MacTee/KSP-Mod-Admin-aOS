@@ -503,65 +503,87 @@ namespace KSPModAdmin.Core.Controller
         #region Update App
 
         /// <summary>
+        /// Gets the current version from "www.services.mactee.de/..."
+        /// and asks to start a download if new version is available.
+        /// </summary>
+        public static void Check4AppUpdates(bool forceUpdateCheck = false)
+        {
+            try
+            {
+                if (forceUpdateCheck || VersionCheck)
+                    HandleAdminVersionWebResponse(GetAdminVersionFromWeb());
+            }
+            catch (Exception ex)
+            {
+                Messenger.AddError("Error during KSP MA update check.", ex);
+            }
+        }
+
+        /// <summary>
         /// Starts an async Job.
         /// Gets the current version from "www.services.mactee.de/..."
         /// and asks to start a download if new version is available.
         /// </summary>
-        public static void Check4AppUpdates()
+        public static void Check4AppUpdatesAsync()
         {
             Messenger.AddInfo(Messages.MSG_KSPMA_UPDATE_CHECK_STARTED);
             mTaskAction = TaskAction.AppUpdateCheck;
             EventDistributor.InvokeAsyncTaskStarted(Instance);
             AsyncTask<WebResponse>.DoWork(
-                delegate
-                {
-                    WebResponse response = null;
-                    WebRequest request = WebRequest.Create(Constants.SERVICE_ADMIN_VERSION);
-                    request.Credentials = CredentialCache.DefaultCredentials;
-                    response = request.GetResponse();
-                    return response; 
-                },
-                delegate(WebResponse response, Exception ex)
+                () => GetAdminVersionFromWeb(),
+                (WebResponse response, Exception ex) =>
                 {
                     EventDistributor.InvokeAsyncTaskDone(Instance);
 
                     if (ex != null)
-                        MessageBox.Show(View.ParentForm, ex.Message);
+                        Messenger.AddError(Messages.MSG_KSPMA_UPDATE_ERROR, ex);
                     else
-                    {
-                        string status = ((HttpWebResponse)response).StatusDescription;
-                        Stream dataStream = response.GetResponseStream();
-                        StreamReader reader = new StreamReader(dataStream);
-                        string responseFromServer = reader.ReadToEnd();
-                        Dictionary<string, string> parameter = ToParameterDic(responseFromServer);
-
-                        if (!parameter.ContainsKey(Constants.VERSION))
-                            return;
-
-                        Version oldVersion = new Version(VersionHelper.GetAssemblyVersion());
-                        Version newVersion = new Version(parameter[Constants.VERSION]);
-                        if (oldVersion < newVersion)
-                        {
-                            View.llblAdminDownload.Text = string.Format(Constants.DOWNLOAD_FILENAME_TEMPLATE, parameter[Constants.VERSION]);
-                            frmUpdateDLG updateDLG = new frmUpdateDLG();
-                            updateDLG.DownloadPath = DownloadPath;
-                            updateDLG.PostDownloadAction = PostDownloadAction;
-                            updateDLG.Message = GetDownloadMSG(parameter);
-
-                            if (updateDLG.ShowDialog(View.ParentForm) != DialogResult.OK)
-                                return;
-
-                            DownloadPath = updateDLG.DownloadPath;
-                            PostDownloadAction = updateDLG.PostDownloadAction;
-                            DownloadNewAdminVersion();
-                        }
-                        else
-                        { 
-                            View.Up2Date = true;
-                            Messenger.AddInfo(Messages.MSG_KSP_UPTODATE);
-                        }
-                    }
+                        HandleAdminVersionWebResponse(response);
                 });
+        }
+
+        private static WebResponse GetAdminVersionFromWeb()
+        {
+            WebResponse response = null;
+            WebRequest request = WebRequest.Create(Constants.SERVICE_ADMIN_VERSION);
+            request.Credentials = CredentialCache.DefaultCredentials;
+            response = request.GetResponse();
+            return response;
+        }
+
+        private static void HandleAdminVersionWebResponse(WebResponse response)
+        {
+            string status = ((HttpWebResponse)response).StatusDescription;
+            Stream dataStream = response.GetResponseStream();
+            StreamReader reader = new StreamReader(dataStream);
+            string responseFromServer = reader.ReadToEnd();
+            Dictionary<string, string> parameter = ToParameterDic(responseFromServer);
+
+            if (!parameter.ContainsKey(Constants.VERSION))
+                return;
+
+            Version oldVersion = new Version(VersionHelper.GetAssemblyVersion());
+            Version newVersion = new Version(parameter[Constants.VERSION]);
+            if (oldVersion < newVersion)
+            {
+                View.llblAdminDownload.Text = string.Format(Constants.DOWNLOAD_FILENAME_TEMPLATE, parameter[Constants.VERSION]);
+                frmUpdateDLG updateDLG = new frmUpdateDLG();
+                updateDLG.DownloadPath = DownloadPath;
+                updateDLG.PostDownloadAction = PostDownloadAction;
+                updateDLG.Message = GetDownloadMSG(parameter);
+
+                if (updateDLG.ShowDialog(View.ParentForm) != DialogResult.OK)
+                    return;
+
+                DownloadPath = updateDLG.DownloadPath;
+                PostDownloadAction = updateDLG.PostDownloadAction;
+                DownloadNewAdminVersion();
+            }
+            else
+            {
+                View.Up2Date = true;
+                Messenger.AddInfo(Messages.MSG_KSP_UPTODATE);
+            }
         }
 
         /// <summary>
@@ -734,6 +756,9 @@ namespace KSPModAdmin.Core.Controller
                     break;
                 case ModUpdateInterval.OnceAWeek:
                     doUpdateCheck = (LastModUpdateTry.AddDays(7) < DateTime.Now);
+                    break;
+                default:
+                    doUpdateCheck = false;
                     break;
             }
 

@@ -3,6 +3,8 @@ using KSPModAdmin.Core.Views;
 
 namespace KSPModAdmin.Core
 {
+    using KSPModAdmin.Core.Utils;
+
     /// <summary>
     /// Interface for a KSP Mod Admin plugin.
     /// </summary>
@@ -27,6 +29,11 @@ namespace KSPModAdmin.Core
         /// Array of TabViews which should be added to the Options TabControl.
         /// </summary>
         TabView[] OptionTabViews { get; }
+
+        /////// <summary>
+        /////// Array of new SiteHandler classes to import.
+        /////// </summary>
+        ////ISiteHandler[] SiteHandler { get; }
     }
 
     /// <summary>

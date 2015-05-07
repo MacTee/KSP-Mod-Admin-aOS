@@ -5,7 +5,7 @@ It also let you choose what parts of the mod should be installed.
 
 
 Features:
-- KSP Version independent! (Until they changes mod loading again.)
+- KSP Version independent!
 - Localized: English, German, Russian, Italian, more are coming ... (contact me if you want to help)
 - Multi OS support: Win, Linux and Mac (via Mono-Project (see http://www.mono-project.com/))
 - Supports multiple installations of KSP. Change between different KSP installations with one click.
@@ -21,7 +21,8 @@ Features:
   - for KSP Mod Admin.
   - for Mods (includes auto check for updates and auto install/update of outdated mods).
 - Conflict detection and easy conflict solving for files that are referenced by more than one mod.
-- Project code included! (VS2013 Solution - Language: C#)
+- Plugin support for "3rd party" extensions (See KSPModAdmin.Translation.Plugin as a sample).
+- Project code included or on GitHub https://github.com/MacTee/KSP-Mod-Admin-aOS (VS2013 Solution - Language: C#).
 
 
 Requirements:
@@ -46,6 +47,18 @@ Installation:
    - Install Mozilla certificates. (by type "mozroots --sync --import" in your terminal)
    - Just extract/copy the KSP Mod Admin folder from the zip to any location you want.
    - Start KSP Mod Admin via mono ...
+
+
+Known issues:
+https://github.com/MacTee/KSP-Mod-Admin-aOS/wiki/Known-issues
+
+
+How to guid:
+https://github.com/MacTee/KSP-Mod-Admin-aOS/wiki
+
+
+Issue tracker:
+https://github.com/MacTee/KSP-Mod-Admin-aOS/issues
 
 
 Special thanks to:

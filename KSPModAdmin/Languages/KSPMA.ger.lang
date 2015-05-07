@@ -684,4 +684,5 @@
   <String Name="MSG_CONFLICT_SOLVER_INSTALL_PARENT_FOLDER_0_1" Value="Konfliktlöser - Installation benötigter übergeordneter Ordner &quot;{0}&quot; der mod &quot;{1}&quot;."/>
   <String Name="MSG_CONFLICT_SOLVER_RESET_DESTINATION_PARENT_FOLDER_0_1" Value="Konfliktlöser - Zielpfad des übergeordneten Ornders &quot;{0}&quot; der mod &quot;{1}&quot; wird zurückgesetzt."/>
   <Control Name="tsmiOpenConflictSolver" Value="Konflikte beheben"/>
+  <String Name="MSG_KSPMA_UPDATE_ERROR" Value="Fehler während des KSP MA Updatechecks!"/>
 </Language>

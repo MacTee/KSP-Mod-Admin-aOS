@@ -333,6 +333,9 @@ namespace KSPModAdmin.Core.Controller
                 OptionsController.SelectedKSPPath = dlg.KSPPath;
             }
 
+            // auto KSP MA update check.
+            OptionsController.Check4AppUpdates();
+
             // auto mod update check.
             OptionsController.Check4ModUpdates(true);
         }
@@ -544,6 +547,22 @@ namespace KSPModAdmin.Core.Controller
                 {
                     Log.AddDebugS(string.Format("Try add plugin \"{0}\" ...", plugin.Name));
 
+                    ////// Load SiteHandler from Plugin.
+                    ////if (plugin.SiteHandler != null && plugin.SiteHandler.Length > 0)
+                    ////{
+                    ////    foreach (var newSiteHandler in plugin.SiteHandler)
+                    ////    { 
+                    ////        try
+                    ////        {
+                    ////            SiteHandlerManager.RegisterSiteHandler(newSiteHandler);
+                    ////        }
+                    ////        catch (Exception ex)
+                    ////        {
+                    ////            Log.AddErrorS(string.Format("Error during add new SiteHandler \"{0}\"from Plugin \"{1}\"", newSiteHandler.Name, plugin.Name), ex);
+                    ////        }
+                    ////    }
+                    ////}
+
                     TabView[] tabViews = plugin.MainTabViews;
                     foreach (TabView tabView in tabViews)
                     {
@@ -660,44 +679,5 @@ namespace KSPModAdmin.Core.Controller
         }
 
         #endregion
-
-
-
-
-
-        ////internal static void ShowFormTest()
-        ////{
-        ////    AsyncTask<KSPDialogResult>.DoWork(() =>
-        ////        {
-        ////            //return MainController.ShowForm<frmSelectDownload>();
-        ////            List<DownloadInfo> links = new List<DownloadInfo>();
-        ////            links.Add(new DownloadInfo() { Name = "Test 1", DownloadURL = "www.test1.de/mod.zip", Filename = "mod.zip", KnownHost = true });
-        ////            links.Add(new DownloadInfo() { Name = "Test 2", DownloadURL = "www.test2.de/anothermod.zip", Filename = "anothermod.zip", KnownHost = true });
-        ////            //return MainController.ShowForm<frmSelectDownload>(new object[] { links });
-        ////            return MainController.ShowForm<frmSelectDownload>(new object[] { links, links[1] });
-
-        ////            // Why the hell does this code below work???
-        ////            // Shouldn't this throw an exception cause of displaying a Form in a worker thread... =(
-        ////            // NO, ONLY IF THE FORM CHANGES SOMETHING ON THE MAIN GUI ...
-        ////            // If the displayed Form doesn't change any thing on the main GUI you can safely use the code below.
-        ////            //frmSelectDownload frm = new frmSelectDownload(links, links[1]);
-        ////            //frm.ShowDialog();
-        ////            //return frm.GetKSPDialogResults();
-        ////        },
-        ////        (result, ex) =>
-        ////        {
-        ////            if (ex != null)
-        ////                // Show errors
-        ////                MessageBox.Show(View,
-        ////                    string.Format("Error: {0}{1}StackTrace:{1}{2}", ex.Message, Environment.NewLine,
-        ////                        ex.StackTrace), "Error");
-        ////            else
-        ////                // Show results
-        ////                MessageBox.Show(View,
-        ////                    string.Format("DialogResult: {0}{1}AdditionalResult: {2}{1}Exception: {3}",
-        ////                        result.DialogResult, Environment.NewLine, result.AdditionalResult, result.Exception),
-        ////                    "KSPDialogResults");
-        ////        });
-        ////}
     }
 }

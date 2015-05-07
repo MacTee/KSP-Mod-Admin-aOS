@@ -25,7 +25,13 @@ namespace KSPModAdmin.Core.Utils
         {
             get
             {
-                return mRegisterdModFiles.Values.Any(x => x.Count > 1) && OptionsController.ConflictDetectionOnOff;
+                foreach (var entry in mRegisterdModFiles.Values)
+                {
+                    if (OptionsController.ConflictDetectionOnOff && entry.Count > 1 && entry.Any(node => node.IsFile))
+                        return true;
+                }
+
+                return false;
             }
         }
 

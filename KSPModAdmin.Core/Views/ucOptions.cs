@@ -557,7 +557,7 @@ namespace KSPModAdmin.Core.Views
         /// </summary>
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            OptionsController.Check4AppUpdates();
+            OptionsController.Check4AppUpdatesAsync();
         }
 
         /// <summary>
