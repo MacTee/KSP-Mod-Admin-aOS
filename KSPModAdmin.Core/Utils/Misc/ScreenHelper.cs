@@ -194,17 +194,26 @@ namespace KSPModAdmin.Core.Utils
 
         private static List<string> GetResolutionsOnLinux()
         {
+            List<string> resolutions = new List<string>();
+
             var output = GetXrandrOutput();
             var matches = Regex.Matches(output, @"   (\d+)x(\d+)  ");
-
-            List<string> resolutions = new List<string>();
-            foreach (Match match in matches)
-            {
-                string newResolution = GetResolutionString(int.Parse(match.Groups[1].Value), int.Parse(match.Groups[2].Value));
-                if (!resolutions.Contains(newResolution))
-                    resolutions.Add(newResolution);
+            if (matches.Count > 0)
+            { 
+                foreach (Match match in matches)
+                {
+                    string newResolution = GetResolutionString(int.Parse(match.Groups[1].Value), int.Parse(match.Groups[2].Value));
+                    if (!resolutions.Contains(newResolution))
+                        resolutions.Add(newResolution);
+                }
             }
-                    
+            else
+            {
+                var match = Regex.Match(output, @"(\d+)x(\d+)\+0\+0");
+                if (match.Success)
+                    resolutions.Add(GetResolutionString(int.Parse(match.Groups[1].Value), int.Parse(match.Groups[2].Value)));
+            }
+      
             return resolutions;
         }
 
