@@ -234,7 +234,13 @@ namespace KSPModAdmin.Core.Utils
         {
             // ignore directory entries.
             if (!isDirectory)
+            {
                 HandleFileEntry(filename, parent, pathSeperator, silent);
+            }
+            else
+            {
+                ModNode node = CreateNeededDirNodes(filename + "fake.file", parent, pathSeperator);
+            }
         }
 
         /// <summary>
