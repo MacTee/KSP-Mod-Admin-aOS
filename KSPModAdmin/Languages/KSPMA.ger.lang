@@ -685,4 +685,8 @@
   <String Name="MSG_CONFLICT_SOLVER_RESET_DESTINATION_PARENT_FOLDER_0_1" Value="Konfliktlöser - Zielpfad des übergeordneten Ornders &quot;{0}&quot; der mod &quot;{1}&quot; wird zurückgesetzt."/>
   <Control Name="tsmiOpenConflictSolver" Value="Konflikte beheben"/>
   <String Name="MSG_KSPMA_UPDATE_ERROR" Value="Fehler während des KSP MA Updatechecks!"/>
+
+  <Control Name="frmConflictSolver_Item_04" Value="Version"/>
+  <Control Name="frmConflictSolver_Item_05" Value="Archivpfad"/>
+  <Control Name="lblConflictSolverDesc" Value="Um einen Konflikt zu bereinigen, einfach eine der mods einer Konfliktdatei ausw&#228;hlen.^Nach dem selektieren der mods für jede Konfliktdatei den Knopf &quot;Konflikte beheben&quot; klicken.^KSP Mod Admin wird dann die Zielpfade der Konfliktdateien, der nicht ausgew&#228;hlten mods, zur&#252;cksetzten.^Rechtsklicke eine mod um alle Konflikte zu Gunsten der angeklickten mod zu bereinigen."/>
 </Language>

@@ -663,7 +663,6 @@
   <Control Name="tsmiCmsOneModOpenFolder" Value="Open folder"/>
   <Control Name="tsmiCmsOneModOpenFile" Value="Open file"/>
   <Control Name="frmConflictSolver" Value="Conflict Solver"/>
-  <Control Name="lblConflictSolverDesc" Value="To solve a conflict, check one of the mods of a conflicting file.^After selecting a mod for each conflicting file click the &amp;quot;Solve conflicts&amp;quot; button.^KSP Mod Admin will then reset all destinations of the conflicting files from the not selected mods."/>
   <Control Name="btnCancel" Value="Cancel"/>
   <Control Name="btnSolve" Value="Solve conflicts"/>
   <Control Name="frmConflictSolver_Item_00" Value="Filename"/>
@@ -682,4 +681,8 @@
   <String Name="MSG_CONFLICT_SOLVER_RESET_DESTINATION_PARENT_FOLDER_0_1" Value="ConflictSolver - Reset destination for conflicting parent folder &quot;{0}&quot; of &quot;{1}&quot;."/>
   <Control Name="tsmiOpenConflictSolver" Value="Solve conflicts"/>
   <String Name="MSG_KSPMA_UPDATE_ERROR" Value="Error during KSP MA update check."/>
+
+  <Control Name="frmConflictSolver_Item_04" Value="Version"/>
+  <Control Name="frmConflictSolver_Item_05" Value="ArchivePath"/>
+  <Control Name="lblConflictSolverDesc" Value="To solve a conflict, check one of the mods of a conflicting file.^After selecting a mod for each conflicting file click the &quot;Solve conflicts&quot; button.^KSP Mod Admin will then reset all destinations of the conflicting files from the not selected mods.^Right click a mod to solve all conflicts in favor of the selected mod."/>
 </Language>

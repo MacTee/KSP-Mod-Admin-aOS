@@ -678,7 +678,6 @@
   <Control Name="tsmiCmsOneModOpenFolder" Value="Apri cartella"/>
   <Control Name="tsmiCmsOneModOpenFile" Value="Apri file"/>
   <Control Name="frmConflictSolver" Value="Risolutore Conflitti"/>
-  <Control Name="lblConflictSolverDesc" Value="Per risolvere un conflitto, scegli uno dei mod di un file in conflitto. ^Dopo aver scelto un mod per ciascun file in conflitto, clicca il bottone "Risolvi conflitti". ^KSP Mod Admin allora resetterà tutte le destinazioni dei file in conflitto per i mod non selezionati."/>
   <Control Name="btnCancel" Value="Cancella"/>
   <Control Name="btnSolve" Value="Risolvi i conflitti"/>
   <Control Name="frmConflictSolver_Item_00" Value="Nome del File"/>
@@ -697,4 +696,8 @@
   <String Name="MSG_CONFLICT_SOLVER_RESET_DESTINATION_PARENT_FOLDER_0_1" Value="Risolutore conflitti - Annullamento della destinazione per la cartella superiore in conflitto &quot;{0}&quot; di &quot;{1}&quot;."/>
   <Control Name="tsmiOpenConflictSolver" Value="Risolvi i conflitti"/>
   <String Name="MSG_KSPMA_UPDATE_ERROR" Value="Errore durante il controllo di aggiornamento di KSP Mod Admin."/>
+
+  <Control Name="frmConflictSolver_Item_04" Value="Version"/>
+  <Control Name="frmConflictSolver_Item_05" Value="ArchivePath"/>
+  <Control Name="lblConflictSolverDesc" Value="Per risolvere un conflitto, scegli uno dei mod di un file in conflitto. ^Dopo aver scelto un mod per ciascun file in conflitto, clicca il bottone &quot;Risolvi conflitti&quot;. ^KSP Mod Admin allora resetterà tutte le destinazioni dei file in conflitto per i mod non selezionati.^Right click a mod to solve all conflicts in favor of the selected mod."/>
 </Language>
