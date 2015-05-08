@@ -45,8 +45,6 @@
 //// TODO
 /////////////////////
 
-- localization of messages during Plugin loading.
-
 - ModInfos are automatically added about add-ons where a valid version control site is detected. 
   That is great, however some information fields are not automatically filled (Author, Creation date, Change date). 
   I currently have add-ons checking with many different Version Control sites (GitHub, CurseForge, KerbalStuff, KSP Forum) 

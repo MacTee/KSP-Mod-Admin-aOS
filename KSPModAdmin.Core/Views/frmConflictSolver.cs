@@ -51,6 +51,7 @@ namespace KSPModAdmin.Core.Views
             if (!Solve())
                 return;
 
+            DialogResult = DialogResult.OK;
             Close();
         }
 
@@ -180,7 +181,7 @@ namespace KSPModAdmin.Core.Views
             foreach (var conflictingFile in conflictingFiles)
                 SolveConflicts(conflictingFile);
 
-            return true;
+            return !ModRegister.HasConflicts;
         }
 
         private string GetValidationMsg(List<ConflictInfoNode> missingSelection)

@@ -2087,5 +2087,15 @@ namespace KSPModAdmin.Core
         }
 
         private const string DEFAULT_MSG_CONFLICT_SOLVER_RESET_DESTINATION_PARENT_FOLDER_0_1 = "ConflictSolver - Reset destination for conflicting parent folder \"{0}\" of \"{1}\".";
+
+        public static string MSG_KSPMA_UPDATE_ERROR
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_KSPMA_UPDATE_ERROR"];
+                return !string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_KSPMA_UPDATE_ERROR;
+            }
+        }
+        private const string DEFAULT_MSG_KSPMA_UPDATE_ERROR = "Error during KSP MA update check.";
     }
 }

@@ -681,4 +681,5 @@
   <String Name="MSG_CONFLICT_SOLVER_INSTALL_PARENT_FOLDER_0_1" Value="ConflictSolver - Install needed parent folder &quot;{0}&quot; of &quot;{1}&quot;."/>
   <String Name="MSG_CONFLICT_SOLVER_RESET_DESTINATION_PARENT_FOLDER_0_1" Value="ConflictSolver - Reset destination for conflicting parent folder &quot;{0}&quot; of &quot;{1}&quot;."/>
   <Control Name="tsmiOpenConflictSolver" Value="Solve conflicts"/>
+  <String Name="MSG_KSPMA_UPDATE_ERROR" Value="Error during KSP MA update check."/>
 </Language>
