@@ -498,10 +498,10 @@ namespace KSPModAdmin.Core.Views
                 ModVersionControl = (OptionsController.VersionCheck) ? Messages.ON : Messages.OFF;
                 ModID = string.Empty;
                 ModVersion = VersionHelper.GetAssemblyVersion(false);
-                KSPVersion = "0.21";
-                ModAuthor = "BHeinrich";
-                ModCreationDate = "27.05.2014";
-                ModChangeDate = "03.05.2015";
+                KSPVersion = "0.21 or higher";
+                ModAuthor = "BHeinrich (MacKerbal@mactee.de)";
+                ModCreationDate = "25.04.2013";
+                ModChangeDate = "08.05.2015";
                 ModOutdated = false;
                 ModRating = string.Empty;
                 ModDownloads = "85k+";
@@ -571,7 +571,7 @@ namespace KSPModAdmin.Core.Views
             }
             else if (!node.HasDestination && !node.HasDestinationForChilds)
                 e.TextColor = OptionsController.ColorDestinationMissing;
-            if (node.IsOutdated)
+            if (OptionsController.Color4OutdatedMods && node.IsOutdated)
                 e.TextColor = OptionsController.ColorModOutdated;
             if (!node.ZipExists)
                 e.TextColor = OptionsController.ColorModArchiveMissing;

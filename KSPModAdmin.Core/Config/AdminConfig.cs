@@ -348,6 +348,26 @@ namespace KSPModAdmin.Core.Config
                 }
             }
 
+            nodes = doc.GetElementsByTagName(Constants.DELETEOLDARCHIVES);
+            if (nodes.Count >= 1)
+            {
+                foreach (XmlAttribute att in nodes[0].Attributes)
+                {
+                    if (att.Name == Constants.VALUE && att.Value != null)
+                        OptionsController.DeleteOldArchivesAfterUpdate = (att.Value.Equals(Constants.TRUE, StringComparison.CurrentCultureIgnoreCase));
+                }
+            }
+
+            nodes = doc.GetElementsByTagName(Constants.COLOR4OUTDATEDMODS);
+            if (nodes.Count >= 1)
+            {
+                foreach (XmlAttribute att in nodes[0].Attributes)
+                {
+                    if (att.Name == Constants.VALUE && att.Value != null)
+                        OptionsController.Color4OutdatedMods = (att.Value.Equals(Constants.TRUE, StringComparison.CurrentCultureIgnoreCase));
+                }
+            }
+
             return true;
         }
 
@@ -523,6 +543,14 @@ namespace KSPModAdmin.Core.Config
 
             // Mod update behavior
             node = ConfigHelper.CreateConfigNode(doc, Constants.MODUPDATEBEHAVIOR, Constants.VALUE, ((int)OptionsController.ModUpdateBehavior).ToString());
+            generalNode.AppendChild(node);
+
+            // Delete Old Archives After Update
+            node = ConfigHelper.CreateConfigNode(doc, Constants.DELETEOLDARCHIVES, Constants.VALUE, OptionsController.DeleteOldArchivesAfterUpdate.ToString());
+            generalNode.AppendChild(node);
+
+            // No Color 4 Outdated Mods
+            node = ConfigHelper.CreateConfigNode(doc, Constants.COLOR4OUTDATEDMODS, Constants.VALUE, OptionsController.Color4OutdatedMods.ToString());
             generalNode.AppendChild(node);
 
             doc.Save(path);

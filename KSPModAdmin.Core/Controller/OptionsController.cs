@@ -154,6 +154,15 @@ namespace KSPModAdmin.Core.Controller
             set { if (View != null) View.DeleteOldArchivesAfterUpdate = value; }
         }
 
+        /// <summary>
+        /// Gets or sets the a flag that determines if outdated mod should be colorized or not.
+        /// </summary>
+        public static bool Color4OutdatedMods
+        {
+            get { return (View != null) ? View.Color4OutdatedMods : false; }
+            set { if (View != null) View.Color4OutdatedMods = value; }
+        }
+
         #endregion
 
         #region Paths

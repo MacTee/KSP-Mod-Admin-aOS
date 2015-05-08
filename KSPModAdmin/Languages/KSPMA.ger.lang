@@ -689,4 +689,7 @@
   <Control Name="frmConflictSolver_Item_04" Value="Version"/>
   <Control Name="frmConflictSolver_Item_05" Value="Archivpfad"/>
   <Control Name="lblConflictSolverDesc" Value="Um einen Konflikt zu bereinigen, einfach eine der mods einer Konfliktdatei ausw&#228;hlen.^Nach dem selektieren der mods für jede Konfliktdatei den Knopf &quot;Konflikte beheben&quot; klicken.^KSP Mod Admin wird dann die Zielpfade der Konfliktdateien, der nicht ausgew&#228;hlten mods, zur&#252;cksetzten.^Rechtsklicke eine mod um alle Konflikte zu Gunsten der angeklickten mod zu bereinigen."/>
+  <Control Name="cbNodColoringUpdatableMods" Value="Färbung für veraltete Mods ein/ausschalten">
+    <ChildControl Name="cbNodColoringUpdatableMods_ToolTip" Value="Färbung für veraltete Mods ein/ausschalten^Schaltet das Einfärben für veraltete Mods ein oder aus."/>
+  </Control>
 </Language>

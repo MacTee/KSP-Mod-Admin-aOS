@@ -130,6 +130,13 @@ namespace KSPModAdmin.Core.Views
         public bool DeleteOldArchivesAfterUpdate { get { return cbDeleteOldArchive.Checked; } set { cbDeleteOldArchive.Checked = value; } }
 
         /// <summary>
+        /// Gets or sets the a flag that determines if outdated mod should be colorized or not.
+        /// </summary>
+        [DefaultValue(true), Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
+        public bool Color4OutdatedMods { get { return cbNodColoringUpdatableMods.Checked; } set { cbNodColoringUpdatableMods.Checked = value; } }
+
+        /// <summary>
         /// Get or sets the up to date image visibility.
         /// </summary>
         [DefaultValue(false), Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]

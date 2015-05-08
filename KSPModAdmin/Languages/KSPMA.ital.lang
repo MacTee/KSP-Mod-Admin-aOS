@@ -700,4 +700,7 @@
   <Control Name="frmConflictSolver_Item_04" Value="Version"/>
   <Control Name="frmConflictSolver_Item_05" Value="ArchivePath"/>
   <Control Name="lblConflictSolverDesc" Value="Per risolvere un conflitto, scegli uno dei mod di un file in conflitto. ^Dopo aver scelto un mod per ciascun file in conflitto, clicca il bottone &quot;Risolvi conflitti&quot;. ^KSP Mod Admin allora resetterà tutte le destinazioni dei file in conflitto per i mod non selezionati.^Right click a mod to solve all conflicts in favor of the selected mod."/>
+  <Control Name="cbNodColoringUpdatableMods" Value="Node coloring on/off">
+    <ChildControl Name="cbNodColoringUpdatableMods_ToolTip" Value="Node coloring on/off^Turns the colorization of mod nodes which are outdated on or off."/>
+  </Control>
 </Language>
