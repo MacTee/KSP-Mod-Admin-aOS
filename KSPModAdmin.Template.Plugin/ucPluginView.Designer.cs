@@ -37,6 +37,7 @@
             this.MinimumSize = new System.Drawing.Size(450, 400);
             this.Name = "ucPluginView";
             this.Size = new System.Drawing.Size(514, 400);
+            this.Load += new System.EventHandler(this.ucPluginView_Load);
             this.ResumeLayout(false);
 
         }

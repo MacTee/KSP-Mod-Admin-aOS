@@ -17,5 +17,9 @@ namespace KSPModAdmin.Template.Plugin
         }
         private const string DEFAULT_MSG_TRANSLATION_VIEW_TITLE = "Template";
 
+
+        // Add more messages here and use them in your code to support localization.
+        // When you add new messages here you have to also add new line to all language files (here: KSPMA.TemplatePlugin.eng.lang and KSPMA.TemplatePlugin.fake.lang)
+        // See the MSG_PLUGIN_VIEW_TITLE for a sample.
     }
 }

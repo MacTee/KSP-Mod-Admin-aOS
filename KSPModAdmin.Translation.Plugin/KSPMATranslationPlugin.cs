@@ -12,8 +12,7 @@ namespace KSPModAdmin.Translation.Plugin
     public class KSPMATranslationPlugin : IKSPMAPlugin
     {
         private TabView[] mMainTabViews = null;
-        private TabView[] mOptionTabViews = new List<TabView>().ToArray();
-        ////private ISiteHandler[] mSiteHandlers = new List<ISiteHandler>().ToArray();
+        private TabView[] mOptionTabViews = new List<TabView>().ToArray(); // Initialize it with an empty array if not needed.
 
 
         /// <summary>
@@ -56,13 +55,5 @@ namespace KSPModAdmin.Translation.Plugin
                 return mOptionTabViews;
             }
         }
-
-        /////// <summary>
-        /////// Array of SiteHandlers that the mod imports.
-        /////// </summary>
-        ////public ISiteHandler[] SiteHandler
-        ////{
-        ////    get { return mSiteHandlers; }
-        ////}
     }
 }

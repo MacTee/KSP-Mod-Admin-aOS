@@ -12,8 +12,7 @@ namespace KSPModAdmin.Template.Plugin
     public class KSPMAPlugin : IKSPMAPlugin
     {
         private TabView[] mMainTabViews = null;
-        private TabView[] mOptionTabViews = new List<TabView>().ToArray();
-        ////private ISiteHandler[] mSiteHandlers = new List<ISiteHandler>().ToArray();
+        private TabView[] mOptionTabViews = new List<TabView>().ToArray(); // Initialize with an empty array if not needed.
 
 
         /// <summary>
@@ -56,13 +55,5 @@ namespace KSPModAdmin.Template.Plugin
                 return mOptionTabViews;
             }
         }
-
-        /////// <summary>
-        /////// Array of SiteHandlers that the mod imports.
-        /////// </summary>
-        ////public ISiteHandler[] SiteHandler
-        ////{
-        ////    get { return mSiteHandlers; }
-        ////}
     }
 }

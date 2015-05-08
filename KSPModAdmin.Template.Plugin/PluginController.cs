@@ -20,13 +20,14 @@ namespace KSPModAdmin.Template.Plugin
         /// </summary>
         public static ucPluginView View { get; protected set; }
 
-
         internal static void Initialize(ucPluginView view)
         {
             View = view;
 
             EventDistributor.AsyncTaskStarted += AsyncTaskStarted;
             EventDistributor.AsyncTaskDone += AsyncTaskDone;
+
+            // Add your stuff to initialize here.
         }
 
         #region EventDistributor callback functions.
@@ -50,6 +51,5 @@ namespace KSPModAdmin.Template.Plugin
         }
 
         #endregion
-
     }
 }

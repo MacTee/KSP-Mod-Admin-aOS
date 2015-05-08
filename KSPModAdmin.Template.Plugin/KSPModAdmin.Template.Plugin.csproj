@@ -92,6 +92,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Languages\KSPMA.TemplatePlugin.eng.lang" />
+    <None Include="Languages\KSPMA.TemplatePlugin.fake.lang" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\LanguageEntry.datasource" />
     <None Include="Settings.StyleCop" />
@@ -117,8 +119,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>xcopy /E /Y /R /I "$(ProjectDir)Languages" "$(SolutionDir)KSPModAdmin\$(OutDir)lang"</PostBuildEvent>
   </PropertyGroup>
   <Import Project="..\packages\StyleCop.MSBuild.4.7.49.1\build\StyleCop.MSBuild.Targets" Condition="Exists('..\packages\StyleCop.MSBuild.4.7.49.1\build\StyleCop.MSBuild.Targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

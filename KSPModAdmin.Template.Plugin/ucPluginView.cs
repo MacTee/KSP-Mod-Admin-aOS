@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
+using System.Windows.Forms;
 using KSPModAdmin.Core.Views;
 using KSPModAdmin.Template.Plugin.Properties;
 
@@ -9,12 +10,6 @@ namespace KSPModAdmin.Template.Plugin
     [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Reviewed. Suppression is OK here.")]
     public partial class ucPluginView : ucBase
     {
-        private string mLastSelectedItemName = string.Empty;
-
-
-
-
-
         /// <summary>
         /// Creates a new instance of the ucTranslationView class.
         /// </summary>
@@ -28,16 +23,14 @@ namespace KSPModAdmin.Template.Plugin
             PluginController.Initialize(this);
         }
 
-
         #region Event handling
 
         private void ucPluginView_Load(object sender, EventArgs e)
         {
-
+            // do View related init here or in the PluginController.Initialize(...) methode.
         }
 
         #endregion
-
 
         /// <summary>
         /// Forces the view to redraw.
@@ -63,8 +56,8 @@ namespace KSPModAdmin.Template.Plugin
         /// </summary>
         public void SetEnabledOfAllControls(bool enable)
         {
-
+            // Enable/Disable your View Controls here.
+            // Normally when KSP MA calls this methode with enable = false, all controls should be disabled.
         }
-
     }
 }
