@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("KSP Mod Admin AnyOS")]
-[assembly: AssemblyDescription("KSP Mod Admin AnyOS - A tool to manage the install and deinstall of mods for Kerbal Space Program.")]
+[assembly: AssemblyTitle("KSPModAdmin aOS - Template Plugin")]
+[assembly: AssemblyDescription("A Template Plugin for KSP Mod Admin aOS.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("KSPModAdmin")]
-[assembly: AssemblyCopyright("Copyright © Bastian Heinrich 2014")]
+[assembly: AssemblyProduct("KSPModAdmin Template Plugin")]
+[assembly: AssemblyCopyright("Copyright © Bastian Heinrich 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("270cff5c-0225-4c8d-997e-217c5a918605")]
+[assembly: Guid("41714B95-4F4E-426A-8D17-C2328ACAF05B")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("2.0.0.15")]
-[assembly: AssemblyFileVersion("2.0.0.15")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]

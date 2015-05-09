@@ -213,7 +213,7 @@
   <Control Name="gbPaths" Value="Percorsi:" />
   <Control Name="lblLoading" Value="sto cercando..." />
   <Control Name="cbKSPPath" Value="">
-    <ChildControl Name="cbKSPPath_ToolTip" Value="Scegli il percorso di installazine di KSP in cui eseguire azioni." />
+    <ChildControl Name="cbKSPPath_ToolTip" Value="Scegli il percorso di installazione di KSP in cui eseguire azioni." />
   </Control>
   <Control Name="lblModDownloadPath" Value="Percorso Download/Mod:" />
   <Control Name="btnDownloadPath" Value="">
@@ -672,29 +672,35 @@
   <String Name="MSG_COPY_MOD_DESTINATION_0" Value="Copia la destinazione del mod &quot;{0}&quot;"/>
   <String Name="MSG_INSTALLING_MOD_0" Value="Installazione mod &quot;{0}&quot;..."/>
 
-  <Control Name="tsbTreeViewOption" Value="Open TreeView options">
-    <ChildControl Name="tsbTreeViewOption_ToolTip" Value="Open TreeView options^Opens the TreeView options."/>
+  <Control Name="tsbTreeViewOption" Value="Apri le opzioni di TreeView">
+    <ChildControl Name="tsbTreeViewOption_ToolTip" Value="Apri le opzioni di TreeView^Visualizza le opzioni di TreeView."/>
   </Control>
-  <Control Name="tsmiCmsOneModOpenFolder" Value="Open folder"/>
-  <Control Name="tsmiCmsOneModOpenFile" Value="Open file"/>
-  <Control Name="frmConflictSolver" Value="Conflict Solver"/>
-  <Control Name="lblConflictSolverDesc" Value="To solve a conflict, check one of the mods of a conflicting file.^After selecting a mod for each conflicting file click the &amp;quot;Solve conflicts&amp;quot; button.^KSP Mod Admin will then reset all destinations of the conflicting files from the not selected mods."/>
-  <Control Name="btnCancel" Value="Cancel"/>
-  <Control Name="btnSolve" Value="Solve conflicts"/>
-  <Control Name="frmConflictSolver_Item_00" Value="Filename"/>
-  <Control Name="frmConflictSolver_Item_01" Value="Destination"/>
-  <Control Name="frmConflictSolver_Item_02" Value="Conflicting Mods"/>
-  <Control Name="frmConflictSolver_Item_03" Value="TreePath"/>
-  <String Name="MSG_TITLE_VALIDATION" Value="Validation"/>
-  <String Name="MSG_PLEASE_SELECT_SOLVING_MODS" Value="Please select a solving mod for this conflict files:"/>
-  <String Name="MSG_PROCESSING_ABORDED_CONFLICTS_DETECTED" Value="Processing of mods aborded!^There are still conflicts.^^Please resolve all conflicts and try again."/>
-  <String Name="MSG_TITLE_CONFLICTS_DETECTED" Value="Conflicts detected!"/>
-  <String Name="MSG_CONFLICT_SOLVER_REMOVE_CONFLICT_FILE_0" Value="ConflictSolver - Removing installed conflict file &quot;{0}&quot;."/>
-  <String Name="MSG_CONFLICT_SOLVER_RESET_DESTINATION_CONFLICT_FILE_0" Value="ConflictSolver - Reset destination of conflict file &quot;{0}&quot;."/>
-  <String Name="MSG_CONFLICT_SOLVER_INSTALL_SELECTED_FILE_0" Value="ConflictSolver - Install previously removed conflict file &quot;{0}&quot; from selected source."/>
-  <String Name="MSG_CONFLICT_SOLVER_UNINSTALL_PARENT_FOLDER_0_1" Value="ConflictSolver - Uninstall no longer needed parent folder &quot;{0}&quot; of &quot;{1}&quot;."/>
-  <String Name="MSG_CONFLICT_SOLVER_INSTALL_PARENT_FOLDER_0_1" Value="ConflictSolver - Install needed parent folder &quot;{0}&quot; of &quot;{1}&quot;."/>
-  <String Name="MSG_CONFLICT_SOLVER_RESET_DESTINATION_PARENT_FOLDER_0_1" Value="ConflictSolver - Reset destination for conflicting parent folder &quot;{0}&quot; of &quot;{1}&quot;."/>
-  <Control Name="tsmiOpenConflictSolver" Value="Solve conflicts"/>
-  <String Name="MSG_KSPMA_UPDATE_ERROR" Value="Error during KSP MA update check."/>
+  <Control Name="tsmiCmsOneModOpenFolder" Value="Apri cartella"/>
+  <Control Name="tsmiCmsOneModOpenFile" Value="Apri file"/>
+  <Control Name="frmConflictSolver" Value="Risolutore Conflitti"/>
+  <Control Name="btnCancel" Value="Cancella"/>
+  <Control Name="btnSolve" Value="Risolvi i conflitti"/>
+  <Control Name="frmConflictSolver_Item_00" Value="Nome del File"/>
+  <Control Name="frmConflictSolver_Item_01" Value="Destinazione"/>
+  <Control Name="frmConflictSolver_Item_02" Value="Mod in conflitto"/>
+  <Control Name="frmConflictSolver_Item_03" Value="Percorso"/>
+  <String Name="MSG_TITLE_VALIDATION" Value="Validazione"/>
+  <String Name="MSG_PLEASE_SELECT_SOLVING_MODS" Value="Seleziona un mod valido per i file in questo conflitto:"/>
+  <String Name="MSG_PROCESSING_ABORDED_CONFLICTS_DETECTED" Value="Processazione dei mod abortita!^Ci sono ancora conflitti.^^Risolvete tutti i conflitti e riprovate."/>
+  <String Name="MSG_TITLE_CONFLICTS_DETECTED" Value="Conflitti individuati!"/>
+  <String Name="MSG_CONFLICT_SOLVER_REMOVE_CONFLICT_FILE_0" Value="Risolutore conflitti - Rimozione del file installato in conflitto &quot;{0}&quot;."/>
+  <String Name="MSG_CONFLICT_SOLVER_RESET_DESTINATION_CONFLICT_FILE_0" Value="Risolutore conflitti - Annullamento della destinazione del file in conflitto &quot;{0}&quot;."/>
+  <String Name="MSG_CONFLICT_SOLVER_INSTALL_SELECTED_FILE_0" Value="Risolutore conflitti - Installazione del file in conflitto precedentemente rimosso &quot;{0}&quot; dalla origine selezionata."/>
+  <String Name="MSG_CONFLICT_SOLVER_UNINSTALL_PARENT_FOLDER_0_1" Value="Risolutore conflitti - Disinstallazione della cartella superiore non più necessaria &quot;{0}&quot; di &quot;{1}&quot;."/>
+  <String Name="MSG_CONFLICT_SOLVER_INSTALL_PARENT_FOLDER_0_1" Value="Risolutore conflitti - Installazione della cartella superiore necessaria &quot;{0}&quot; di &quot;{1}&quot;."/>
+  <String Name="MSG_CONFLICT_SOLVER_RESET_DESTINATION_PARENT_FOLDER_0_1" Value="Risolutore conflitti - Annullamento della destinazione per la cartella superiore in conflitto &quot;{0}&quot; di &quot;{1}&quot;."/>
+  <Control Name="tsmiOpenConflictSolver" Value="Risolvi i conflitti"/>
+  <String Name="MSG_KSPMA_UPDATE_ERROR" Value="Errore durante il controllo di aggiornamento di KSP Mod Admin."/>
+
+  <Control Name="frmConflictSolver_Item_04" Value="Version"/>
+  <Control Name="frmConflictSolver_Item_05" Value="ArchivePath"/>
+  <Control Name="lblConflictSolverDesc" Value="Per risolvere un conflitto, scegli uno dei mod di un file in conflitto. ^Dopo aver scelto un mod per ciascun file in conflitto, clicca il bottone &quot;Risolvi conflitti&quot;. ^KSP Mod Admin allora resetterà tutte le destinazioni dei file in conflitto per i mod non selezionati.^Right click a mod to solve all conflicts in favor of the selected mod."/>
+  <Control Name="cbNodColoringUpdatableMods" Value="Node coloring on/off">
+    <ChildControl Name="cbNodColoringUpdatableMods_ToolTip" Value="Node coloring on/off^Turns the colorization of mod nodes which are outdated on or off."/>
+  </Control>
 </Language>

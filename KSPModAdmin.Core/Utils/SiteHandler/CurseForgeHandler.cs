@@ -109,16 +109,18 @@ namespace KSPModAdmin.Core.Utils
             HtmlNode fileNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='content']/section[2]/div[4]/div[2]/ul/li[1]/div[2]/p/a");
             HtmlNode fileNode2 = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='content']/section[2]/div[4]/div[2]/ul/li/div[2]/p/a/span");
 
-            if (fileNode == null)
-                return false;
+            string downloadURL = GetDownloadURL(modInfo.ModURL);
+            if (fileNode == null || (fileNode.InnerHtml.Contains("...") && fileNode2 == null))
+            {
+                modInfo.LocalPath = Www.DownloadFile2(downloadURL, OptionsController.DownloadPath);
+                return !string.IsNullOrEmpty(modInfo.LocalPath) && File.Exists(modInfo.LocalPath);
+            }
 
             string filename = string.Empty;
             if (fileNode.InnerHtml.Contains("..."))
                 filename = fileNode2.Attributes["title"].Value; // Long filename was truncated
             else
                 filename = fileNode.InnerHtml;
-
-            string downloadURL = GetDownloadURL(modInfo.ModURL);
 
             modInfo.LocalPath = Path.Combine(OptionsController.DownloadPath, filename);
 

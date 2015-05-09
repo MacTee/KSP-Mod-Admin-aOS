@@ -77,9 +77,19 @@ namespace KSPModAdmin.Core.Model
         public string ModName { get; private set; }
 
         /// <summary>
+        /// The version of the mod.
+        /// </summary>
+        public string ModVersion { get; private set; }
+
+        /// <summary>
         /// The complete path within the tree.
         /// </summary>
         public string TreePath { get; private set; }
+
+        /// <summary>
+        /// The complete path to the mod archive.
+        /// </summary>
+        public string ArchivePath { get; private set; }
 
         /// <summary>
         /// Gets the flag if this ConflictInfoNode has a Parent.
@@ -125,7 +135,9 @@ namespace KSPModAdmin.Core.Model
 
             ConflictingNode = conflictingNode;
             ModName = ConflictingNode.ZipRoot.Name;
+            ModVersion = ConflictingNode.ZipRoot.Version;
             TreePath = ConflictingNode.GetFullTreePath();
+            ArchivePath = ConflictingNode.ZipRoot.ArchivePath;
         }
 
 

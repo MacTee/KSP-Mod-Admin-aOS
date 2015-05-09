@@ -17,6 +17,7 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
         private const string NAME = "KerbalStuff";
         private const string URL = "http://kerbalstuff.com/";
         private const string URL2 = "https://kerbalstuff.com/";
+        private const string URL3 = "http://beta.kerbalstuff.com/"; // some mods still have this as the link
         private const string MODINFO_URL = "https://kerbalstuff.com/api/mod/";
 
 
@@ -34,7 +35,8 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
         /// <returns>True if the passed URL is a valid KerbalStuff URL, otherwise false.</returns>
         public bool IsValidURL(string url)
         {
-            return (!string.IsNullOrEmpty(url) && (url.ToLower().StartsWith(URL) || url.ToLower().StartsWith(URL2)));
+            // Should we perhaps put valid hostnames into an array? Would keep the next line growing out of control 
+            return (!string.IsNullOrEmpty(url) && (url.ToLower().StartsWith(URL) || url.ToLower().StartsWith(URL2) || url.ToLower().StartsWith(URL3)));
         }
 
         /// <summary>

@@ -8,6 +8,8 @@ using System.Text.RegularExpressions;
 
 namespace KSPModAdmin.Core.Utils
 {
+    public delegate void DownloadProgressCallback(long bytesRecaived, long fileSize);
+
     /// <summary>
     /// Wrapper class for www (internet) related logic.
     /// </summary>
@@ -118,6 +120,85 @@ namespace KSPModAdmin.Core.Utils
 
                 webClient.DownloadFile(new Uri(downloadURL), downloadPath);
             }
+        }
+
+        /// <summary>
+        /// Downloads a file.
+        /// Filename will be taken from WebResponse.ResponseUri.AbsolutePath
+        /// </summary>
+        /// <param name="downloadURL">Url to the file to download.</param>
+        /// <param name="downloadPath">Path to save the file to without filename!</param>
+        /// <param name="downloadProgressCallback">Callback function which will recaive download progress information.</param>
+        /// <returns>The full path to the downloaded file (path and filename).</returns>
+        public static string DownloadFile2(string downloadURL, string downloadPath, DownloadProgressCallback downloadProgressCallback = null)
+        {
+            string fullpath = string.Empty;
+            using (WebClient wcDownload = new WebClient())
+            {
+                Stream strResponse = null;
+                Stream strLocal = null;
+                try
+                {
+                    // Create a request to the file we are downloading
+                    HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(downloadURL);
+                    // Set default authentication for retrieving the file
+                    webRequest.Credentials = CredentialCache.DefaultCredentials;
+                    // Retrieve the response from the server
+                    HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse();
+                    // Ask the server for the file size and store it
+                    long fileSize = webResponse.ContentLength;
+                    string filename = Path.GetFileName(webResponse.ResponseUri.AbsolutePath);
+                    fullpath = Path.Combine(downloadPath, filename);
+                    fullpath = GetNewFilenameWhenDestinationExists(fullpath);
+
+                    // Open the URL for download 
+                    strResponse = wcDownload.OpenRead(downloadURL);
+                    // Create a new file stream where we will be saving the data (local drive)
+                    strLocal = new FileStream(fullpath, FileMode.Create, FileAccess.Write, FileShare.None);
+
+                    // It will store the current number of bytes we retrieved from the server
+                    int bytesSize = 0;
+                    // A buffer for storing and writing the data retrieved from the server
+                    byte[] downBuffer = new byte[2048];
+
+                    // Loop through the buffer until the buffer is empty
+                    while ((bytesSize = strResponse.Read(downBuffer, 0, downBuffer.Length)) > 0)
+                    {
+                        // Write the data from the buffer to the local hard drive
+                        strLocal.Write(downBuffer, 0, bytesSize);
+
+                        // Invoke the method that propagates the progress.
+                        if (downloadProgressCallback != null)
+                            downloadProgressCallback(strLocal.Length, fileSize);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Messenger.AddError(string.Format("Error while downloading \"{0}\"!", downloadURL), ex);
+                }
+                finally
+                {
+                    // When the above code has ended, close the streams
+                    strResponse.Close();
+                    strLocal.Close();
+                }
+
+                return fullpath;
+            }
+        }
+
+        private static string GetNewFilenameWhenDestinationExists(string fullpath)
+        {
+            int count = 1;
+            string newFullpath = fullpath;
+            while (File.Exists(fullpath))
+            {
+                string newFilename = string.Format("{0}_({1}){2}", Path.GetFileNameWithoutExtension(fullpath), count, Path.GetExtension(fullpath));
+                newFullpath = Path.Combine(Path.GetDirectoryName(fullpath), newFilename);
+                count++;
+            }
+
+            return newFullpath;
         }
 
 

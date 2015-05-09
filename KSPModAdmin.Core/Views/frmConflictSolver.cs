@@ -65,6 +65,45 @@ namespace KSPModAdmin.Core.Views
             e.Cancel = (e.Node.Parent as ConflictInfoNode == null);
         }
 
+        private void CmsConflictSolver_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            var selNode = treeViewAdv.SelectedNode;
+            e.Cancel = (selNode == null);
+            if (e.Cancel)
+                return;
+
+            var row = selNode.Tag as ConflictInfoNode;
+            e.Cancel = (row == null);
+            if (e.Cancel)
+                return;
+
+            e.Cancel = row.Nodes.Count > 0;
+        }
+
+        private void tsmiSolveAllConflictsWithThisMod_Click(object sender, EventArgs e)
+        {
+            var i = Cursor.Position;
+            var row = treeViewAdv.SelectedNode.Tag as ConflictInfoNode;
+
+            foreach (var conflictFile in model.Nodes)
+            {
+                var oneIsAlreadyChecked = conflictFile.Nodes.Cast<ConflictInfoNode>().Any(x => x.Checked);
+                if (oneIsAlreadyChecked)
+                    continue;
+
+                foreach (ConflictInfoNode mod in conflictFile.Nodes)
+                {
+                    if (mod.ArchivePath == row.ArchivePath)
+                    {
+                        mod._Checked = true;
+                        break;
+                    }
+                }
+            }
+
+            treeViewAdv.Refresh();
+        }
+
         private List<ColumnData> GetColumns()
         {
             List<ColumnData> columns = new List<ColumnData>()
@@ -132,6 +171,24 @@ namespace KSPModAdmin.Core.Views
                 },
                 new ColumnData()
                 {
+                    Name = "Version",
+                    Header = Localizer.GlobalInstance["frmConflictSolver_Item_04"], // "Version", ////
+                    SortOrder = SortOrder.None,
+                    TooltipText = null,
+                    Width = 60,
+                    Items = new List<ColumnItemData>()
+                    {
+                        new ColumnItemData()
+                        {
+                            Type = ColumnItemType.NodeTextBox,
+                            DataPropertyName = "ModVersion",
+                            IncrementalSearchEnabled = true,
+                            LeftMargin = 3
+                        }
+                    }
+                },
+                new ColumnData()
+                {
                     Name = "TreePath",
                     Header = Localizer.GlobalInstance["frmConflictSolver_Item_03"], // "TreePath", ////
                     SortOrder = SortOrder.None,
@@ -143,6 +200,24 @@ namespace KSPModAdmin.Core.Views
                         {
                             Type = ColumnItemType.NodeTextBox,
                             DataPropertyName = "TreePath",
+                            IncrementalSearchEnabled = true,
+                            LeftMargin = 3
+                        }
+                    }
+                },
+                new ColumnData()
+                {
+                    Name = "ArchivePath",
+                    Header = Localizer.GlobalInstance["frmConflictSolver_Item_05"], // "ArchivePath", ////
+                    SortOrder = SortOrder.None,
+                    TooltipText = null,
+                    Width = 250,
+                    Items = new List<ColumnItemData>()
+                    {
+                        new ColumnItemData()
+                        {
+                            Type = ColumnItemType.NodeTextBox,
+                            DataPropertyName = "ArchivePath",
                             IncrementalSearchEnabled = true,
                             LeftMargin = 3
                         }
@@ -169,8 +244,10 @@ namespace KSPModAdmin.Core.Views
                     missingSelection.Add(node);
             }
 
-            if (missingSelection.Count > 0)
+            if (missingSelection.Count > 0 && missingSelection.Count < 16)
                 MessageBox.Show(this, GetValidationMsg(missingSelection), Messages.MSG_TITLE_VALIDATION);
+            else if (missingSelection.Count < 15)
+                MessageBox.Show(this, GetValidationMsg(missingSelection, true), Messages.MSG_TITLE_VALIDATION);
 
             return missingSelection.Count == 0;
         }
@@ -184,13 +261,25 @@ namespace KSPModAdmin.Core.Views
             return !ModRegister.HasConflicts;
         }
 
-        private string GetValidationMsg(List<ConflictInfoNode> missingSelection)
+        private string GetValidationMsg(List<ConflictInfoNode> missingSelection, bool shortMsg = false)
         {
             StringBuilder sb = new StringBuilder();
 
             sb.AppendLine(Messages.MSG_PLEASE_SELECT_SOLVING_MODS);
+
+            int count = 0;
             foreach (var node in missingSelection)
+            {
+                if (shortMsg && count > 15)
+                {
+                    sb.AppendLine("- ...");
+                    break;
+                }
+
                 sb.AppendLine(string.Format("- {0}", node.FileName));
+
+                count++;
+            }
 
             return sb.ToString();
         }

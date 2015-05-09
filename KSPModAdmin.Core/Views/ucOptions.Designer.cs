@@ -36,6 +36,7 @@ namespace KSPModAdmin.Core.Views
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPageUpdate = new System.Windows.Forms.TabPage();
             this.gbModUpdate = new System.Windows.Forms.GroupBox();
+            this.cbNodColoringUpdatableMods = new System.Windows.Forms.CheckBox();
             this.cbDeleteOldArchive = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.lblModUpdateBehavior = new System.Windows.Forms.Label();
@@ -241,6 +242,7 @@ namespace KSPModAdmin.Core.Views
             // 
             // gbModUpdate
             // 
+            this.gbModUpdate.Controls.Add(this.cbNodColoringUpdatableMods);
             this.gbModUpdate.Controls.Add(this.cbDeleteOldArchive);
             this.gbModUpdate.Controls.Add(this.tableLayoutPanel5);
             this.gbModUpdate.Controls.Add(this.tableLayoutPanel4);
@@ -253,6 +255,20 @@ namespace KSPModAdmin.Core.Views
             this.gbModUpdate.TabIndex = 7;
             this.gbModUpdate.TabStop = false;
             this.gbModUpdate.Text = "Mod updating:";
+            // 
+            // cbNodColoringUpdatableMods
+            // 
+            this.cbNodColoringUpdatableMods.AutoSize = true;
+            this.cbNodColoringUpdatableMods.Checked = true;
+            this.cbNodColoringUpdatableMods.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbNodColoringUpdatableMods.Location = new System.Drawing.Point(11, 148);
+            this.cbNodColoringUpdatableMods.Name = "cbNodColoringUpdatableMods";
+            this.cbNodColoringUpdatableMods.Size = new System.Drawing.Size(124, 17);
+            this.cbNodColoringUpdatableMods.TabIndex = 19;
+            this.cbNodColoringUpdatableMods.Text = "Node coloring on/off";
+            this.ttOptions.SetToolTip(this.cbNodColoringUpdatableMods, "Node coloring on/off\r\nTurns the colorization of mod nodes which are outdated on o" +
+        "r off.");
+            this.cbNodColoringUpdatableMods.UseVisualStyleBackColor = true;
             // 
             // cbDeleteOldArchive
             // 
@@ -2252,5 +2268,6 @@ namespace KSPModAdmin.Core.Views
         private System.Windows.Forms.RadioButton rbDDSmartDestDetection;
         private System.Windows.Forms.CheckBox cbDDCopyToGameData;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel14;
+        private System.Windows.Forms.CheckBox cbNodColoringUpdatableMods;
     }
 }

@@ -124,6 +124,8 @@ namespace KSPModAdmin.Core
         public const string LASTMODUPDATETRY = "LastModUpdateTry";
         public const string MODUPDATEINTERVAL = "ModUpdateInterval";
         public const string MODUPDATEBEHAVIOR = "ModUpdateBehavior";
+        public const string DELETEOLDARCHIVES = "DeleteOldArchivesAfterUpdate";
+        public const string COLOR4OUTDATEDMODS = "Color4OudatedMods";
         public const string DOWNLOAD_PATH = "DownloadPath";
         public const string NAME = "Name";
         public const string LONGNAME = "LongName";

@@ -70,6 +70,13 @@ namespace KSPModAdmin.Core.Views
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public TabControl TabControl { get { return tabControl1; } }
 
+        /// <summary>
+        /// Gets the KSPStartup user control.
+        /// </summary>
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public ucKSPStartup UcKSPStartup { get { return ucKSPStartup1; } }
+
 
         /// <summary>
         /// Creates a new instance of the frmMain class.
