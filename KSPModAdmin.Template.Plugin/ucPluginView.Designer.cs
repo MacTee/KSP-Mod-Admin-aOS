@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.ttPlugin = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // ucPluginView
