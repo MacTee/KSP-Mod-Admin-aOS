@@ -109,8 +109,11 @@ namespace KSPModAdmin.Core.Utils
             HtmlNode fileNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='content']/section[2]/div[4]/div[2]/ul/li[1]/div[2]/p/a");
             HtmlNode fileNode2 = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='content']/section[2]/div[4]/div[2]/ul/li/div[2]/p/a/span");
 
-            if (fileNode == null)
+            if (fileNode == null || fileNode2 == null)
+            {
+                Messenger.AddError("CurseForge SiteHandler Error - No filename found! Download skipped!");
                 return false;
+            }
 
             string filename = string.Empty;
             if (fileNode.InnerHtml.Contains("..."))
