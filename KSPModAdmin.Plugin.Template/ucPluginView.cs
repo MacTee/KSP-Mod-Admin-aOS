@@ -48,7 +48,7 @@ namespace KSPModAdmin.Plugin.Template
         /// <returns>The Name for the parent TabPage.</returns>
         public override string GetTabCaption()
         {
-            return Messages.MSG_PLUGIN_VIEW_TITLE;
+            return Messages.MSG_TEMPLATE_VIEW_TITLE;
         }
 
         /// <summary>
