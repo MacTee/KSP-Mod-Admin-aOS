@@ -191,7 +191,7 @@ namespace KSPModAdmin.Core.Utils
         {
             int count = 1;
             string newFullpath = fullpath;
-            while (File.Exists(fullpath))
+            while (File.Exists(newFullpath))
             {
                 string newFilename = string.Format("{0}_({1}){2}", Path.GetFileNameWithoutExtension(fullpath), count, Path.GetExtension(fullpath));
                 newFullpath = Path.Combine(Path.GetDirectoryName(fullpath), newFilename);
