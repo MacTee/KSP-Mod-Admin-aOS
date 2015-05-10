@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30110.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KSPModAdmin", "KSPModAdmin\KSPModAdmin.csproj", "{9A60FE53-6B33-4F67-BDF3-FC2F3ABA2B82}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -12,11 +12,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KSPModAdmin.Core", "KSPModA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KSPModAdmin.Updater", "KSPModAdmin.Updater\KSPModAdmin.Updater.csproj", "{CCCA4BE5-05A2-47D0-B549-A7C8D09A18C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KSPModAdmin.Translation.Plugin", "KSPModAdmin.Translation.Plugin\KSPModAdmin.Translation.Plugin.csproj", "{EF04C65E-BFCE-43B6-8C28-6B1793E1B2B5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KSPModAdmin.Plugin.Translation", "KSPModAdmin.Plugin.Translation\KSPModAdmin.Plugin.Translation.csproj", "{EF04C65E-BFCE-43B6-8C28-6B1793E1B2B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KSPModAdmin.Translation.Executable", "KSPModAdmin.Translation.Executable\KSPModAdmin.Translation.Executable.csproj", "{6588DDBF-28A3-49ED-B5C4-E897E05C0349}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KSPModAdmin.Plugin.Translation.Executable", "KSPModAdmin.Plugin.Translation.Executable\KSPModAdmin.Plugin.Translation.Executable.csproj", "{6588DDBF-28A3-49ED-B5C4-E897E05C0349}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KSPModAdmin.Template.Plugin", "KSPModAdmin.Template.Plugin\KSPModAdmin.Template.Plugin.csproj", "{3013F199-703C-4A4C-895E-FEC686094118}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KSPModAdmin.Plugin.Template", "KSPModAdmin.Plugin.Template\KSPModAdmin.Plugin.Template.csproj", "{3013F199-703C-4A4C-895E-FEC686094118}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{D5B2A420-6DCA-4F04-AF5E-4DB783342122}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -157,5 +159,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3013F199-703C-4A4C-895E-FEC686094118} = {D5B2A420-6DCA-4F04-AF5E-4DB783342122}
+		{EF04C65E-BFCE-43B6-8C28-6B1793E1B2B5} = {D5B2A420-6DCA-4F04-AF5E-4DB783342122}
+		{6588DDBF-28A3-49ED-B5C4-E897E05C0349} = {D5B2A420-6DCA-4F04-AF5E-4DB783342122}
 	EndGlobalSection
 EndGlobal
