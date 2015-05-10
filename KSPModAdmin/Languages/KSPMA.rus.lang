@@ -284,7 +284,7 @@
   <Control Name="btnModOutdated" Value="">
     <ChildControl Name="btnModOutdated_ToolTip" Value="Выберите цвет для устаревших элементов модов." />
   </Control>
-  <Control Name="gpModConflictHandling" Value="Разрешение конфликтов модов (Экспериментальная функция):" />
+  <Control Name="gpModConflictHandling" Value="Разрешение конфликтов модов:" />
   <Control Name="cbConflictDetectionOnOff" Value="Обнаружение конфликтов">
     <ChildControl Name="cbConflictDetectionOnOff_ToolTip" Value="Обнаружение конфликтов^Включает/выключает обнаружение конфликтов элементов модов." />
   </Control>
