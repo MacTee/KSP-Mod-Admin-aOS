@@ -108,6 +108,33 @@
   <ItemGroup>
     <None Include="Resources\help2.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\loader.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\disk_black_data_into.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\data_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\data_copy_delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\data_delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\data_floppy_disk.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folder_view.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folder1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\data.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy /E /Y /R /I "$(ProjectDir)Languages" "$(SolutionDir)KSPModAdmin\$(OutDir)lang"</PostBuildEvent>

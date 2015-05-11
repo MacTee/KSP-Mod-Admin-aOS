@@ -1,14 +1,71 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
+using System.Windows.Forms;
+using KSPModAdmin.Core.Model;
+using KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree;
+using KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.Helper;
+using KSPModAdmin.Core.Utils.Localization;
 using KSPModAdmin.Core.Views;
-using KSPModAdmin.Plugin.Template;
 
 namespace KSPModAdmin.Plugin.BackupTab
 {
     [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Reviewed. Suppression is OK here.")]
     public partial class UcBackupView : ucBase
     {
+        private BackupTreeModel model = new BackupTreeModel();
+
+        public List<BackupDataNode> BackupData { get; set; }
+
+        private List<ColumnData> Columns
+        {
+            get
+            {
+                List<ColumnData> columns = new List<ColumnData>()
+                {
+                    new ColumnData()
+                    {
+                        Name = "FileName",
+                        Header = Localizer.GlobalInstance["UcBackupView_Item_00"], // "Filename",
+                        SortOrder = SortOrder.None,
+                        TooltipText = null,
+                        Width = 250,
+                        Items = new List<ColumnItemData>()
+                        {
+                            new ColumnItemData()
+                            {
+                                Type = ColumnItemType.NodeTextBox,
+                                DataPropertyName = "Name",
+                                IncrementalSearchEnabled = true,
+                                LeftMargin = 3,
+                            }
+                        }
+                    },
+                    new ColumnData()
+                    {
+                        Name = "Note",
+                        Header = Localizer.GlobalInstance["UcBackupView_Item_01"], // "Note",
+                        SortOrder = SortOrder.None,
+                        TooltipText = null,
+                        Width = 350,
+                        Items = new List<ColumnItemData>()
+                        {
+                            new ColumnItemData()
+                            {
+                                Type = ColumnItemType.NodeTextBox,
+                                DataPropertyName = "Note",
+                                IncrementalSearchEnabled = true,
+                                LeftMargin = 3
+                            }
+                        }
+                    }
+                };
+
+                return columns;
+            }
+        }
+
         /// <summary>
         /// Creates a new instance of the ucTranslationView class.
         /// </summary>
@@ -27,6 +84,13 @@ namespace KSPModAdmin.Plugin.BackupTab
         private void ucPluginView_Load(object sender, EventArgs e)
         {
             // do View related init here or in the PluginController.Initialize(...) methode.
+
+            TreeViewAdvColumnHelper.ColumnsToTreeViewAdv(tvBackups, Columns);
+            if (BackupData == null)
+                BackupData = new List<BackupDataNode>();
+
+            model.AddRange(BackupData);
+            tvBackups.Model = model;
         }
 
         #endregion
@@ -58,5 +122,74 @@ namespace KSPModAdmin.Plugin.BackupTab
             // Enable/Disable your View Controls here.
             // Normally when KSP MA calls this methode with enable = false, all controls should be disabled.
         }
+    }
+
+
+    /// <summary>
+    /// Model for UcBackupView TreeViewAdv.
+    /// </summary>
+    public class BackupTreeModel : TreeModel
+    {
+        /// <summary>
+        /// Event fires before a Node.Checked will be changed.
+        /// </summary>
+        public static event EventHandler<BeforeCheckedChangeEventArgs> BeforeCheckedChange = null;
+
+        /// <summary>
+        /// Event fires after a Node.Checked has been changed.
+        /// </summary>
+        public static event AfterCheckedChangeHandler AfterCheckedChange = null;
+
+
+        /// <summary>
+        /// Adds a BackupDataNode range to the Model.
+        /// </summary>
+        /// <param name="nodes">The nodes to add.</param>
+        /// <returns>A list of the added nodes.</returns>
+        public List<BackupDataNode> AddRange(List<BackupDataNode> nodes)
+        {
+            List<BackupDataNode> addedNodes = new List<BackupDataNode>();
+            foreach (var node in nodes)
+            {
+                Nodes.Add(node);
+                addedNodes.Add(node);
+            }
+
+            return addedNodes;
+        }
+
+
+        /// <summary>
+        /// Invokes the BeforeCheckedChange event.
+        /// </summary>
+        /// <param name="invokingModNode">The invoking ModNode that will be passed as sender.</param>
+        /// <param name="newCheckedState">The new checked state that should be applied.</param>
+        /// <returns>True if continue with the change.</returns>
+        internal static BeforeCheckedChangeEventArgs InvokeBeforeCheckedChange(BackupDataNode invokingModNode, bool newCheckedState)
+        {
+            var args = new BeforeCheckedChangeEventArgs(invokingModNode, newCheckedState);
+
+            if (BeforeCheckedChange != null)
+                BeforeCheckedChange(invokingModNode, args);
+
+            return args;
+        }
+
+        /// <summary>
+        /// Invokes the AfterCheckedChange event.
+        /// </summary>
+        /// <param name="obj">The object that will be passed as sender.</param>
+        internal static void InvokeAfterCheckedChange(object obj)
+        {
+            if (AfterCheckedChange != null)
+                AfterCheckedChange(obj);
+        }
+    }
+
+    public class BackupDataNode : Node
+    {
+        public string Name { get; private set; }
+
+        public string Note { get; private set; }
     }
 }

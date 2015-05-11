@@ -1,5 +1,7 @@
 <Language Name="eng" LongName="English">
   <String Name="MSG_BACKUPTAB_VIEW_TITLE" Value="Backup"/>
+  <String Name="UcBackupView_Item_00" Value="FileName"/>
+  <String Name="UcBackupView_Item_01" Value="Note"/>
 </Language>
   
   

@@ -2,7 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using KSPModAdmin.Core.Utils.Localization;
 
-namespace KSPModAdmin.Plugin.Template
+namespace KSPModAdmin.Plugin.BackupTab
 {
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class Messages

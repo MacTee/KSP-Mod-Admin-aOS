@@ -37,7 +37,7 @@ namespace KSPModAdmin.Plugin.BackupTab
             get
             {
                 if (mMainTabViews == null)
-                    mMainTabViews = new[] { new TabView(new UcBackupView(), Resources.Unknown) };
+                    mMainTabViews = new[] { new TabView(new UcBackupView(), Resources.data) };
 
                 return mMainTabViews;
             }
