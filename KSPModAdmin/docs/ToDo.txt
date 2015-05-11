@@ -6,10 +6,12 @@
   It can be folders with alternative data, manuals, etc. For examples see Planet Shine or UniversalStorage [TAC PACK]. 
   Usually Mod Admin can't detect installation path for them and shows warning. When I update this mods, Mod Admin shows warning again for every root node 
   without installation path. I update in "Copy checked state" mode.
-  
+- When using the "Get ModInfos" button with a "KSP Forum" version control, the ProductID get wrong data (I got this issue with KMA 1.4 too)
 
 //// TODO
 /////////////////////
+
+- Progressbar for frmAddMod during download. 
 
 - MONO:
   - TreeListView improvement -> Column Header draw and row offset ...
