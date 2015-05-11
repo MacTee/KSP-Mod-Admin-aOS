@@ -690,5 +690,6 @@
   <Control Name="lblConflictSolverDesc" Value="(T)To solve a conflict, check one of the mods of a conflicting file.^After selecting a mod for each conflicting file click the &quot;Solve conflicts&quot; button.^KSP Mod Admin will then reset all destinations of the conflicting files from the not selected mods.^Right click a mod to solve all conflicts in favor of the selected mod."/>
   <Control Name="cbNodColoringUpdatableMods" Value="(T)Node coloring on/off">
     <ChildControl Name="cbNodColoringUpdatableMods_ToolTip" Value="(T)Node coloring on/off^Turns the colorization of mod nodes which are outdated on or off."/>
+    <String Name="MSG_NO_SITEHANDLER_FOUND_FOR_URL_0" Value="(T)No SiteHandler for URL &quot;{0}&quot; found!^Mod Info Update aborded!"/>
   </Control>
 </Language>

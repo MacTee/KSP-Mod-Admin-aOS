@@ -703,4 +703,5 @@
   <Control Name="cbNodColoringUpdatableMods" Value="Node coloring on/off">
     <ChildControl Name="cbNodColoringUpdatableMods_ToolTip" Value="Node coloring on/off^Turns the colorization of mod nodes which are outdated on or off."/>
   </Control>
+  <String Name="MSG_NO_SITEHANDLER_FOUND_FOR_URL_0" Value="No SiteHandler for URL &quot;{0}&quot; found!^Mod Info Update aborded!"/>
 </Language>

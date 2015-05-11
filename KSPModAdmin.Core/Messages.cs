@@ -2097,5 +2097,15 @@ namespace KSPModAdmin.Core
             }
         }
         private const string DEFAULT_MSG_KSPMA_UPDATE_ERROR = "Error during KSP MA update check.";
+
+        public static string MSG_NO_SITEHANDLER_FOUND_FOR_URL_0
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_NO_SITEHANDLER_FOUND_FOR_URL_0"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_NO_SITEHANDLER_FOUND_FOR_URL_0).Replace("^", Environment.NewLine); ;
+            }
+        }
+        private const string DEFAULT_MSG_NO_SITEHANDLER_FOUND_FOR_URL_0 = "No SiteHandler for URL \"{0}\" found!^Mod Info Update aborded!";
     }
 }
