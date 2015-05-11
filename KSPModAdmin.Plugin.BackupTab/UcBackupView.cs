@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Windows.Forms;
+using KSPModAdmin.Core.Controller;
 using KSPModAdmin.Core.Model;
 using KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree;
 using KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.Helper;
@@ -14,53 +16,80 @@ namespace KSPModAdmin.Plugin.BackupTab
     [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Reviewed. Suppression is OK here.")]
     public partial class UcBackupView : ucBase
     {
-        private BackupTreeModel model = new BackupTreeModel();
+        private List<ColumnData> columns = null;
 
-        public List<BackupDataNode> BackupData { get; set; }
+        public BackupTreeModel Model
+        {
+            get { return tvBackups.Model as BackupTreeModel; }
+            set { tvBackups.Model = value; }
+        }
+
+        public string BackupPath
+        {
+            get { return tbBackupPath.Text; }
+            set
+            {
+                if (tbBackupPath.Text != value)
+                {
+                    tbBackupPath.Text = value;
+                    BackupPathChanged();
+                }
+            }
+        }
+
+        public BackupDataNode SelectedBackup
+        {
+            get { return tvBackups.SelectedNode != null ? tvBackups.SelectedNode.Tag as BackupDataNode : null; }
+        }
+
+        private bool HasValidBackupPath { get; set; }
 
         private List<ColumnData> Columns
         {
             get
             {
-                List<ColumnData> columns = new List<ColumnData>()
+                if (columns == null)
                 {
-                    new ColumnData()
+                    columns = new List<ColumnData>()
                     {
-                        Name = "FileName",
-                        Header = Localizer.GlobalInstance["UcBackupView_Item_00"], // "Filename",
-                        SortOrder = SortOrder.None,
-                        TooltipText = null,
-                        Width = 250,
-                        Items = new List<ColumnItemData>()
+                        new ColumnData()
                         {
-                            new ColumnItemData()
+                            Name = "FileName",
+                            Header = Localizer.GlobalInstance["UcBackupView_Item_00"], // "Filename",
+                            SortOrder = SortOrder.None,
+                            TooltipText = null,
+                            Width = 250,
+                            Items = new List<ColumnItemData>()
                             {
-                                Type = ColumnItemType.NodeTextBox,
-                                DataPropertyName = "Name",
-                                IncrementalSearchEnabled = true,
-                                LeftMargin = 3,
+                                new ColumnItemData()
+                                {
+                                    Type = ColumnItemType.NodeTextBox,
+                                    DataPropertyName = "Name",
+                                    IncrementalSearchEnabled = true,
+                                    LeftMargin = 3,
+                                }
+                            }
+                        },
+                        new ColumnData()
+                        {
+                            Name = "Note",
+                            Header = Localizer.GlobalInstance["UcBackupView_Item_01"], // "Note",
+                            SortOrder = SortOrder.None,
+                            TooltipText = null,
+                            Width = 350,
+                            Items = new List<ColumnItemData>()
+                            {
+                                new ColumnItemData()
+                                {
+                                    Type = ColumnItemType.NodeTextBox,
+                                    DataPropertyName = "Note",
+                                    IncrementalSearchEnabled = true,
+                                    LeftMargin = 3
+                                }
                             }
                         }
-                    },
-                    new ColumnData()
-                    {
-                        Name = "Note",
-                        Header = Localizer.GlobalInstance["UcBackupView_Item_01"], // "Note",
-                        SortOrder = SortOrder.None,
-                        TooltipText = null,
-                        Width = 350,
-                        Items = new List<ColumnItemData>()
-                        {
-                            new ColumnItemData()
-                            {
-                                Type = ColumnItemType.NodeTextBox,
-                                DataPropertyName = "Note",
-                                IncrementalSearchEnabled = true,
-                                LeftMargin = 3
-                            }
-                        }
-                    }
-                };
+                    };
+                }
 
                 return columns;
             }
@@ -76,21 +105,58 @@ namespace KSPModAdmin.Plugin.BackupTab
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime || DesignMode)
                 return;
 
-            PluginController.Initialize(this);
+            UcBackupViewController.Initialize(this);
         }
 
         #region Event handling
 
         private void ucPluginView_Load(object sender, EventArgs e)
         {
-            // do View related init here or in the PluginController.Initialize(...) methode.
-
+            // do View related init here or in the UcBackupViewController.Initialize(...) methode.
             TreeViewAdvColumnHelper.ColumnsToTreeViewAdv(tvBackups, Columns);
-            if (BackupData == null)
-                BackupData = new List<BackupDataNode>();
 
-            model.AddRange(BackupData);
-            tvBackups.Model = model;
+            BackupPathChanged();
+            SelectedBackupChanged();
+        }
+
+        private void btnBackupPath_Click(object sender, EventArgs e)
+        {
+            UcBackupViewController.SelectNewBackupPath();
+        }
+
+        private void btnOpenBackupDir_Click(object sender, EventArgs e)
+        {
+            UcBackupViewController.OpenBackupPath();
+        }
+
+        private void tsbNewBackup_Click(object sender, EventArgs e)
+        {
+            UcBackupViewController.NewBackup();
+        }
+
+        private void tsbBackupSaves_Click(object sender, EventArgs e)
+        {
+            UcBackupViewController.BackupSaves();
+        }
+
+        private void tsbRemoveBackup_Click(object sender, EventArgs e)
+        {
+            UcBackupViewController.RemoveBackup();
+        }
+
+        private void tsbRemoveAllBackups_Click(object sender, EventArgs e)
+        {
+            UcBackupViewController.RemoveAllBackups();
+        }
+
+        private void btnRecoverBackup_Click(object sender, EventArgs e)
+        {
+            UcBackupViewController.RecoverBackup();
+        }
+
+        private void tvBackups_SelectionChanged(object sender, EventArgs e)
+        {
+            SelectedBackupChanged();
         }
 
         #endregion
@@ -121,6 +187,40 @@ namespace KSPModAdmin.Plugin.BackupTab
         {
             // Enable/Disable your View Controls here.
             // Normally when KSP MA calls this methode with enable = false, all controls should be disabled.
+        }
+
+        internal void LanguageChanged()
+        {
+            // translates the controls of the view.
+            ControlTranslator.TranslateControls(Localizer.GlobalInstance, this as Control, OptionsController.SelectedLanguage);
+
+            // translate columns of ModSelection TreeView
+            foreach (NamedTreeColumn column in tvBackups.Columns)
+            {
+                var newColData = TreeViewAdvColumnHelper.GetColumn(Columns, column.Name);
+                if (newColData != null)
+                    column.Header = newColData.Header;
+            }
+        }
+
+        private void BackupPathChanged()
+        {
+            HasValidBackupPath = false;
+            try { HasValidBackupPath = !string.IsNullOrEmpty(BackupPath) && Directory.Exists(BackupPath); }
+            catch { }
+
+            btnOpenBackupDir.Enabled = HasValidBackupPath;
+            tsbNewBackup.Enabled = HasValidBackupPath;
+            tsbBackupSaves.Enabled = HasValidBackupPath;
+            SelectedBackupChanged();
+        }
+
+        private void SelectedBackupChanged()
+        {
+            var selBackup = SelectedBackup;
+            btnRecoverBackup.Enabled = (selBackup != null) && HasValidBackupPath;
+            tsbRemoveBackup.Enabled = (selBackup != null) && HasValidBackupPath;
+            tsbRemoveAllBackups.Enabled = (selBackup != null) && HasValidBackupPath;
         }
     }
 
