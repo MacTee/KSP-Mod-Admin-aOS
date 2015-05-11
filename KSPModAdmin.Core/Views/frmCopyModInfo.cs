@@ -89,7 +89,7 @@ namespace KSPModAdmin.Core.Views
                 DestMod.ModInfo = SourceMod.ModInfo;
                 DestMod.Note = SourceMod.Note;
                 DestMod.Version = tempVersion;
-                DestMod.Version = tempKey;
+                DestMod.Key = tempKey;
             } 
 
             Close();
