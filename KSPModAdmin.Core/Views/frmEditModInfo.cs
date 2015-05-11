@@ -404,7 +404,10 @@ namespace KSPModAdmin.Core.Views
                         newModInfo = siteHandler.GetModInfo(ModURL);
 
                     if (newModInfo != null)
+                    {
+                        newModInfo.AdditionalURL = ModInfo.AdditionalURL;
                         ModInfo = newModInfo;
+                    }
                 }
                 catch (Exception ex)
                 {
