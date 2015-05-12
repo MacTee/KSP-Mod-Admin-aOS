@@ -100,8 +100,9 @@ namespace KSPModAdmin.Core.Views
                                             pbExport.Visible = false;
                                             if (ex != null) 
                                                 MessageBox.Show(this, ex.Message, Messages.MSG_TITLE_ERROR);
+                                            else
+                                                AddMessage(Messages.MSG_EXPORT_DONE);
                                         }).Run();
-                    AddMessage(Messages.MSG_EXPORT_DONE);
                     Close();
                 }
                 else
