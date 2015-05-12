@@ -10,6 +10,10 @@
 - When using the "Get ModInfos" button with a "KSP Forum" version control, the ProductID get wrong data (I got this issue with KMA 1.4 too)
 - Checkbox 'borderless' would not save after closing MA.
 
+- A mod turns blue when it's outated, but doesn't turn back to it's normal color when its infos are modified (like in KMA 1.4)
+  Well, in KMA 1.4, changing any ModInfo would revert the mod to its normal color.
+  Here, even making a new check with an "Up to date" result let the mod blue colored.
+
 //// TODO
 /////////////////////
 
