@@ -692,4 +692,5 @@
   <Control Name="cbNodColoringUpdatableMods" Value="Färbung für veraltete Mods ein/ausschalten">
     <ChildControl Name="cbNodColoringUpdatableMods_ToolTip" Value="Färbung für veraltete Mods ein/ausschalten^Schaltet das Einfärben für veraltete Mods ein oder aus."/>
   </Control>
+  <String Name="MSG_NO_SITEHANDLER_FOUND_FOR_URL_0" Value="Keinen SiteHandler für die URL &quot;{0}&quot; gefunden!^Mod Info Update wird abgebrochen!"/>
 </Language>

@@ -7,43 +7,19 @@
   Usually Mod Admin can't detect installation path for them and shows warning. When I update this mods, Mod Admin shows warning again for every root node 
   without installation path. I update in "Copy checked state" mode.
 
-//// To Test
-/////////////////////
-
-- Force openGL on KSP launch (-force-opengl).
-- 64Bit option on KSP launch.
-- Options 
-  -> KSP MA Update implementation.
-- VersionControl implementation.
-  - AutoUpdate of mods
-- ModPack Import/Export implementation.
-- Fix of "KSP Mod Admin can't install files without extensions".
-  Sample to reproduce: https://kerbalstuff.com/mod/211/Kronal%20Vessel%20Viewer%20(KVV)%20-%20Exploded%20(Orthographic)%20ship%20view
-- KSPModAdmin.Updater works again!
-- Curse, CurseForge, KerbalStuff, GitHub & BitBucket support
-- is HtmlAgilityPack mono compatible?
-- ModSelection
-  -> MultiSelect 
-     -> Do all "highlighted mods" buttons work.
-  -> Double click -> Displays the content of the selected file.
-- Simple AVC Plugin version file support implemented. 
-  If KSP MA finds a AVC version file in a mod archive it tries to find a compatible SiteHandler for the DOWNLOAD link provided.
-- AVC Plugin version file support
-  - Enhancing of GitHub URL detection so "https://raw.githubusercontent.com/<UserName>/<ProjectName>/master/..." is a valid URL.
-  - Read version file from URL provided from mod archive version file.
-  - Use GitHub infos.
-  - Try to get SiteHandler from ChangeLog_URL as well.
-- Column selection for ModSelection (Choose the Columns that should be displayed in the ModSelection).
-- Option to "Delete old archive after update"
-- Faster ToolTip -> option to allow use the delay time.
-- Option to dump mods without a destination to GameData folder.
-- Sort in ModSelection (for all columns).
-- Select new destination works again.
-- Conflict detection/solving
-
+- When using the "Get ModInfos" button with a "KSP Forum" version control, the ProductID get wrong data (I got this issue with KMA 1.4 too)
 
 //// TODO
 /////////////////////
+
+- Disable 64-Bit vor windows.
+
+- Set default button on remove mods to "No" ...
+
+- LINUX - Steam installs KSP to a hidden folder...
+  Workaround: Create a link to the install directory and use that instead
+
+- Progressbar for frmAddMod during download. 
 
 - MONO:
   - TreeListView improvement -> Column Header draw and row offset ...

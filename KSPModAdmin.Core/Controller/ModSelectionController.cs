@@ -663,6 +663,7 @@ namespace KSPModAdmin.Core.Controller
                 root.AdditionalURL = dlg.AdditionalURL;
                 root.Version = dlg.Version;
                 root.KSPVersion = dlg.KSPVersion;
+                root.IsOutdated = false;
 
                 InvalidateView();
             }
@@ -1264,7 +1265,10 @@ namespace KSPModAdmin.Core.Controller
                         ModInfo newModinfo = null;
                         Messenger.AddInfo(string.Format(Messages.MSG_UPDATECHECK_FOR_MOD_0_VIA_1, mod.Name, mod.SiteHandlerName));
                         if (!siteHandler.CheckForUpdates(mod.ModInfo, ref newModinfo))
+                        {
                             Messenger.AddInfo(string.Format(Messages.MSG_MOD_0_IS_UPTODATE, mod.Name));
+                            mod.IsOutdated = false;
+                        }
                         else
                         {
                             Messenger.AddInfo(string.Format(Messages.MSG_MOD_0_IS_OUTDATED, mod.Name));

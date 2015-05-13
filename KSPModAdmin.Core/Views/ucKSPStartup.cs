@@ -11,6 +11,8 @@ namespace KSPModAdmin.Core.Views
     [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Reviewed. Suppression is OK here.")]
     public partial class ucKSPStartup : UserControl
     {
+        public bool settingsFileFound = false;
+
         #region Constants
 
         private const string PARAM_POPUPWINDOW = "-popupwindow";
@@ -116,9 +118,9 @@ namespace KSPModAdmin.Core.Views
             EventDistributor.AsyncTaskDone += TaskDone;
 
             bool validPath = File.Exists(KSPPathHelper.GetPath(KSPPaths.KSPExe));
-            SetEnableStates(true);
             if (validPath) 
                 ReadKSPSettings();
+            SetEnableStates(validPath);
         }
 
         private void btnLunchKSP_Click(object sender, EventArgs e)
@@ -217,22 +219,27 @@ namespace KSPModAdmin.Core.Views
                     index2 = allText.IndexOf(Environment.NewLine, index1);
                     temp = allText.Substring(index1, index2 - index1);
                     allText = allText.Replace(temp, string.Format(PARAM_0_EQUALS_1, Constants.SCREEN_WIDTH, size[0]));
-                    
+
                     index1 = allText.IndexOf(Constants.SCREEN_HEIGHT);
                     index2 = allText.IndexOf(Environment.NewLine, index1);
                     temp = allText.Substring(index1, index2 - index1);
                     allText = allText.Replace(temp, string.Format(PARAM_0_EQUALS_1, Constants.SCREEN_HEIGHT, size[1]));
                 }
-                
+
                 index1 = allText.IndexOf(Constants.FULLSCREEN);
                 index2 = allText.IndexOf(Environment.NewLine, index1);
                 temp = allText.Substring(index1, index2 - index1);
                 allText = allText.Replace(temp, string.Format(PARAM_0_EQUALS_1, Constants.FULLSCREEN, rbFullscreen.Checked));
                 File.WriteAllText(settingsPath, allText);
                 Messenger.AddInfo(Messages.MSG_UPDATE_KSP_SETTINGS);
+
+                settingsFileFound = true;
             }
             else
+            {
                 Messenger.AddInfo(Messages.MSG_CANT_FIND_KSP_SETTINGS);
+                settingsFileFound = false;
+            }
         }
 
         private void ReadKSPSettings()
@@ -251,11 +258,19 @@ namespace KSPModAdmin.Core.Views
                 index1 = fileContent.IndexOf(Constants.FULLSCREEN) + Constants.FULLSCREEN.Length;
                 index2 = fileContent.IndexOf(Environment.NewLine, index1);
                 Fullscreen = fileContent.Substring(index1, index2 - index1).Replace(EQUALS, string.Empty).Trim().ToLower() == TRUE;
+
+                settingsFileFound = true;
+            }
+            else
+            {
+                Messenger.AddInfo(Messages.MSG_CANT_FIND_KSP_SETTINGS);
+                settingsFileFound = false;
             }
         }
 
         private void SetEnableStates(bool enable)
         {
+            tableLayoutPanel2.Enabled = enable && settingsFileFound;
             btnLaunchKSP.Enabled = enable;
             rbFullscreen.Enabled = enable;
             rbWindowed.Enabled = enable;

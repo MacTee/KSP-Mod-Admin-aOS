@@ -289,7 +289,7 @@
   <Control Name="btnModOutdated" Value="">
     <ChildControl Name="btnModOutdated_ToolTip" Value="Scegli il colore di nodi per Mod obsoleti." />
   </Control>
-  <Control Name="gpModConflictHandling" Value="Gestione dei conflitti tra file dei Mod (sperimentale)" />
+  <Control Name="gpModConflictHandling" Value="Gestione dei conflitti tra file dei Mod:" />
   <Control Name="cbConflictDetectionOnOff" Value="Individuazione dei conflitti On / Off">
     <ChildControl Name="cbConflictDetectionOnOff_ToolTip" Value="Individuazione dei conflitti On / Off^Cambia l'individuazione dei conflitti tra on e off." />
   </Control>
@@ -703,4 +703,5 @@
   <Control Name="cbNodColoringUpdatableMods" Value="Node coloring on/off">
     <ChildControl Name="cbNodColoringUpdatableMods_ToolTip" Value="Node coloring on/off^Turns the colorization of mod nodes which are outdated on or off."/>
   </Control>
+  <String Name="MSG_NO_SITEHANDLER_FOUND_FOR_URL_0" Value="No SiteHandler for URL &quot;{0}&quot; found!^Mod Info Update aborded!"/>
 </Language>

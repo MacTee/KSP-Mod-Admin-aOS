@@ -1,6 +1,9 @@
-﻿KSP Mod Admin aOS by Bastian Heinrich - A tool to manage the installation, update and removal of mods.
+﻿KSP Mod Admin aOS by Bastian Heinrich
 
-OK, no rocket science but it speed up the installation, updating or deinstallation of mods and so you will have more time to do rocket science :D.
+KSP Mod Admin is a mod managing tool for KSP on any OS.
+It provides simple and fast mod managing and keeps your mod collection up to date.
+
+OK, no rocket science but it speed up the installation, updating or removal of mods and so you will have more time to do rocket science :D.
 It also let you choose what parts of the mod should be installed.
 
 

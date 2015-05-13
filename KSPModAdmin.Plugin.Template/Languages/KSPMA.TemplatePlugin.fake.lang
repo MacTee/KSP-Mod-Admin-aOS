@@ -1,0 +1,5 @@
+<Language Name="fake" LongName="Fake language">
+  <String Name="MSG_TEMPLATE_VIEW_TITLE" Value="(T)Template"/>
+</Language>
+  
+  

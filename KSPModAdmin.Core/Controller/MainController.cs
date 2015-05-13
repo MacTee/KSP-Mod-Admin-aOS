@@ -539,29 +539,25 @@ namespace KSPModAdmin.Core.Controller
         /// </summary>
         protected static void LoadPlugins()
         {
-            Log.AddDebugS("Loading plugins ...");
+            Messenger.AddDebug("Loading plugins ...");
+            List<IKSPMAPlugin> plugins = null;
             try
             {
-                var plugins = PluginLoader.LoadPlugins<IKSPMAPlugin>(KSPPathHelper.GetPath(KSPPaths.KSPMA_Plugins));
-                foreach (IKSPMAPlugin plugin in plugins)
-                {
-                    Log.AddDebugS(string.Format("Try add plugin \"{0}\" ...", plugin.Name));
+                plugins = PluginLoader.LoadPlugins<IKSPMAPlugin>(KSPPathHelper.GetPath(KSPPaths.KSPMA_Plugins));
+            }
+            catch (Exception ex)
+            {
+                Messenger.AddError("Error during plugin loading! Plugin loading aborded!", ex);
+            }
 
-                    ////// Load SiteHandler from Plugin.
-                    ////if (plugin.SiteHandler != null && plugin.SiteHandler.Length > 0)
-                    ////{
-                    ////    foreach (var newSiteHandler in plugin.SiteHandler)
-                    ////    { 
-                    ////        try
-                    ////        {
-                    ////            SiteHandlerManager.RegisterSiteHandler(newSiteHandler);
-                    ////        }
-                    ////        catch (Exception ex)
-                    ////        {
-                    ////            Log.AddErrorS(string.Format("Error during add new SiteHandler \"{0}\"from Plugin \"{1}\"", newSiteHandler.Name, plugin.Name), ex);
-                    ////        }
-                    ////    }
-                    ////}
+            if (plugins == null)
+                return;
+
+            foreach (IKSPMAPlugin plugin in plugins)
+            {
+                try
+                {
+                    Messenger.AddDebug(string.Format("Try add plugin \"{0}\" ...", plugin.Name));
 
                     TabView[] tabViews = plugin.MainTabViews;
                     foreach (TabView tabView in tabViews)
@@ -585,11 +581,15 @@ namespace KSPModAdmin.Core.Controller
                         }
                         else
                         {
-                            Messenger.AddError(string.Format(Messages.MSG_ERROR_PLUGIN_LOADING_TABVIEWS_0, tabView.TabUserControl.GetTabCaption()));
+                            Messenger.AddError(string.Format(Messages.MSG_ERROR_PLUGIN_LOADING_TABVIEWS_0,
+                                tabView.TabUserControl.GetTabCaption()));
                         }
                     }
 
                     tabViews = plugin.OptionTabViews;
+                    if (tabViews == null)
+                        continue;
+
                     foreach (TabView tabView in tabViews)
                     {
                         if (!mAddedTabViews.ContainsKey(tabView.TabUserControl.GetTabCaption()))
@@ -606,14 +606,15 @@ namespace KSPModAdmin.Core.Controller
                         }
                         else
                         {
-                            Messenger.AddError(string.Format(Messages.MSG_ERROR_PLUGIN_LOADING_OPTIONVIEWS_0, tabView.TabUserControl.GetTabCaption()));
+                            Messenger.AddError(string.Format(Messages.MSG_ERROR_PLUGIN_LOADING_OPTIONVIEWS_0,
+                                tabView.TabUserControl.GetTabCaption()));
                         }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                Messenger.AddError(string.Format("Plugin loading error: \"{0}\"", ex.Message), ex);
+                catch (Exception ex)
+                {
+                    Messenger.AddError(string.Format("Error during loading of plugin \"{0}\"", plugin.Name), ex);
+                }
             }
         }
         private static Dictionary<string, TabView> mAddedTabViews = new Dictionary<string, TabView>();
