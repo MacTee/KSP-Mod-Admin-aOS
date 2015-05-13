@@ -12,10 +12,77 @@ namespace KSPModAdmin.Core.Config
 {
     /// <summary>
     /// The config for all needed infos of the KSP MOD Admin.
+    /// 
+    /// Currently, settings are saved and laoded as a single batch operation. In the
+    /// event of a crash, all changes to all settings are lost. The goal of the revamp
+    /// region is to allow the reading and writing of individual settings on-the-fly.
+    /// Once application settings are rewritten in this manner, I plan to do the same for
+    /// the mod list. If the user enables or disables a node, the setting should update
+    /// right then, not on program close.
+    /// 
+    /// To this end, I am considering a generic function that saves the state of a control.
+    /// Each control will have a call to this function trigged by  .onchanged.
+    /// The function will either save the setting, using the name of the calling control
+    /// or a "dictionary" to match control names to the existing settings.
+    /// 
+    /// For loading settings, it may be possible to do a <pseducode>for each control in this
+    /// view, do getSetting(control)</pseducode> the getSetting func would need to apply the
+    /// setting if it existed to each control, and ignore the controls that have no saved setting.
+    /// 
+    /// The mod list just needs to call the existing function, but call it on every change.
+    /// optimization needs to be done, so that it can detect changes, and not write it from
+    /// scratch each time. (would work as is, but very ugly.)
+    /// 
     /// </summary>
     public static class AdminConfig
     {
         private static string mVersion = "v1.0";
+
+
+        #region Revamp
+        /// <summary>
+        /// Retreive and apply the setting for the passed control name (or named setting)
+        /// </summary>
+        /// <param name="control">Name of the setting</param>
+        /// <param name="type">Is this a control, or named setting?</param>
+        /// <returns></returns>
+        public static bool getSetting(string setting, string type)
+        {
+            bool result = false;
+            
+            try
+            {
+
+            }
+
+            catch
+            {
+
+            }
+
+            return result;
+        }
+
+        public static bool getSetting(string setting, string type)
+        {
+            bool result = false;
+
+            try
+            {
+
+            }
+
+            catch
+            {
+
+            }
+
+            return result;
+        }
+
+
+        #endregion
+
 
         #region Load
 
