@@ -223,6 +223,16 @@ namespace KSPModAdmin.Core.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap component_add_24x24 {
+            get {
+                object obj = ResourceManager.GetObject("component_add_24x24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap component_data_delete {
             get {
                 object obj = ResourceManager.GetObject("component_data_delete", resourceCulture);
@@ -246,6 +256,26 @@ namespace KSPModAdmin.Core.Properties {
         internal static System.Drawing.Bitmap component_delete {
             get {
                 object obj = ResourceManager.GetObject("component_delete", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap component_delete_24x24 {
+            get {
+                object obj = ResourceManager.GetObject("component_delete_24x24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap component_delete_data_24x24 {
+            get {
+                object obj = ResourceManager.GetObject("component_delete_data_24x24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -293,6 +323,16 @@ namespace KSPModAdmin.Core.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap component_edit_scroll_24x24 {
+            get {
+                object obj = ResourceManager.GetObject("component_edit_scroll_24x24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap component_folder_add {
             get {
                 object obj = ResourceManager.GetObject("component_folder_add", resourceCulture);
@@ -306,6 +346,16 @@ namespace KSPModAdmin.Core.Properties {
         internal static System.Drawing.Bitmap component_folder_gearwheel {
             get {
                 object obj = ResourceManager.GetObject("component_folder_gearwheel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap component_folder_gearwheel_24x24 {
+            get {
+                object obj = ResourceManager.GetObject("component_folder_gearwheel_24x24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -333,6 +383,16 @@ namespace KSPModAdmin.Core.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap component_gearwheel_24x24 {
+            get {
+                object obj = ResourceManager.GetObject("component_gearwheel_24x24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap component_into {
             get {
                 object obj = ResourceManager.GetObject("component_into", resourceCulture);
@@ -353,9 +413,29 @@ namespace KSPModAdmin.Core.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap component_next_data_24x24 {
+            get {
+                object obj = ResourceManager.GetObject("component_next_data_24x24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap component_next_earth {
             get {
                 object obj = ResourceManager.GetObject("component_next_earth", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap component_next_earth_24x24 {
+            get {
+                object obj = ResourceManager.GetObject("component_next_earth_24x24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -403,6 +483,16 @@ namespace KSPModAdmin.Core.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap component_replace_checkbox_checked_24x24 {
+            get {
+                object obj = ResourceManager.GetObject("component_replace_checkbox_checked_24x24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap component_replace_clock {
             get {
                 object obj = ResourceManager.GetObject("component_replace_clock", resourceCulture);
@@ -413,9 +503,29 @@ namespace KSPModAdmin.Core.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap component_replace_clock_24x24 {
+            get {
+                object obj = ResourceManager.GetObject("component_replace_clock_24x24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap component_replace_earth {
             get {
                 object obj = ResourceManager.GetObject("component_replace_earth", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap component_replace_earth_24x24 {
+            get {
+                object obj = ResourceManager.GetObject("component_replace_earth_24x24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -493,6 +603,16 @@ namespace KSPModAdmin.Core.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap component_scroll_scroll_24x24 {
+            get {
+                object obj = ResourceManager.GetObject("component_scroll_scroll_24x24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap component_view {
             get {
                 object obj = ResourceManager.GetObject("component_view", resourceCulture);
@@ -506,6 +626,16 @@ namespace KSPModAdmin.Core.Properties {
         internal static System.Drawing.Bitmap component_warning {
             get {
                 object obj = ResourceManager.GetObject("component_warning", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap component_warning_24x24 {
+            get {
+                object obj = ResourceManager.GetObject("component_warning_24x24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -533,6 +663,16 @@ namespace KSPModAdmin.Core.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap components_checkbox_checked_24x24 {
+            get {
+                object obj = ResourceManager.GetObject("components_checkbox_checked_24x24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap components_checkbox_unchecked {
             get {
                 object obj = ResourceManager.GetObject("components_checkbox_unchecked", resourceCulture);
@@ -543,9 +683,29 @@ namespace KSPModAdmin.Core.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap components_checkbox_unchecked_24x24 {
+            get {
+                object obj = ResourceManager.GetObject("components_checkbox_unchecked_24x24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap components_delete {
             get {
                 object obj = ResourceManager.GetObject("components_delete", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap components_delete_24x24 {
+            get {
+                object obj = ResourceManager.GetObject("components_delete_24x24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -573,9 +733,29 @@ namespace KSPModAdmin.Core.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap components_folder_view_24x24 {
+            get {
+                object obj = ResourceManager.GetObject("components_folder_view_24x24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap components_gearwheel {
             get {
                 object obj = ResourceManager.GetObject("components_gearwheel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap components_gearwheel_24x24 {
+            get {
+                object obj = ResourceManager.GetObject("components_gearwheel_24x24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -623,9 +803,29 @@ namespace KSPModAdmin.Core.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap components_package_replace_24x24 {
+            get {
+                object obj = ResourceManager.GetObject("components_package_replace_24x24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap components_replace_checkbox_checked {
             get {
                 object obj = ResourceManager.GetObject("components_replace_checkbox_checked", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap components_replace_checkbox_checked_24x24 {
+            get {
+                object obj = ResourceManager.GetObject("components_replace_checkbox_checked_24x24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -653,9 +853,29 @@ namespace KSPModAdmin.Core.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap components_replace_clock_24x24 {
+            get {
+                object obj = ResourceManager.GetObject("components_replace_clock_24x24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap components_replace_earth {
             get {
                 object obj = ResourceManager.GetObject("components_replace_earth", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap components_replace_earth_24x24 {
+            get {
+                object obj = ResourceManager.GetObject("components_replace_earth_24x24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -716,6 +936,16 @@ namespace KSPModAdmin.Core.Properties {
         internal static System.Drawing.Bitmap compress {
             get {
                 object obj = ResourceManager.GetObject("compress", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap compress_24x24 {
+            get {
+                object obj = ResourceManager.GetObject("compress_24x24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -986,6 +1216,16 @@ namespace KSPModAdmin.Core.Properties {
         internal static System.Drawing.Bitmap gears_preferences {
             get {
                 object obj = ResourceManager.GetObject("gears_preferences", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap gears_preferences_24x24 {
+            get {
+                object obj = ResourceManager.GetObject("gears_preferences_24x24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
