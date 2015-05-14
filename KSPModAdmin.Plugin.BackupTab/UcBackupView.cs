@@ -49,6 +49,12 @@ namespace KSPModAdmin.Plugin.BackupTab
             set { pnlSelectBackupPath.Visible = value; }
         }
 
+        public bool ShowProcessing
+        {
+            get { return tslProcessing.Visible; }
+            set { tslProcessing.Visible = value; }
+        }
+
         private List<ColumnData> Columns
         {
             get
@@ -152,6 +158,12 @@ namespace KSPModAdmin.Plugin.BackupTab
             UcBackupViewController.RemoveAllBackups();
         }
 
+        private void tsbRefresh_Click(object sender, EventArgs e)
+        {
+            UcBackupViewController.LoadBackupSettings();
+            UcBackupViewController.ScanBackupDirectory();
+        }
+
         private void btnRecoverBackup_Click(object sender, EventArgs e)
         {
             UcBackupViewController.RecoverSelectedBackup();
@@ -230,7 +242,6 @@ namespace KSPModAdmin.Plugin.BackupTab
             tsbRemoveBackup.Enabled = (selBackup != null) && HasValidBackupPath;
             tsbRemoveAllBackups.Enabled = HasValidBackupPath;
         }
-
     }
 
 

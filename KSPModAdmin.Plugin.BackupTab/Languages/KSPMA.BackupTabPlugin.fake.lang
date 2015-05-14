@@ -1,7 +1,53 @@
 <Language Name="fake" LongName="Fake language">
-  <String Name="MSG_BACKUPTAB_VIEW_TITLE" Value="(T)Backup"/>
+  <String Name="MSG_BACKUPTAB_VIEW_TITLE" Value="(T)Backups"/>
+  
+  <Control Name="tsbRefreshBackupview" Value="(T)tsbRefreshBackupview">
+    <ChildControl Name="tsbRefreshBackupview_ToolTip" Value="(T)Refresh^Scans the backup directory again."/>
+  </Control>
+  <Control Name="tsbNewBackup" Value="(T)tsbNewBackup">
+    <ChildControl Name="tsbNewBackup_ToolTip" Value="(T)New backup^Opens the Folder Select dialog and creates a backup of the selected folder."/>
+  </Control>
+  <Control Name="tsbBackupSaves" Value="(T)tsbBackupSaves">
+    <ChildControl Name="tsbBackupSaves_ToolTip" Value="(T)Backup save folder^Creates a backup of the KSP saves folder."/>
+  </Control>
+  <Control Name="tsbRemoveBackup" Value="(T)tsbRemoveBackup">
+    <ChildControl Name="tsbRemoveBackup_ToolTip" Value="(T)Remove selected backup^Deletes and removes the selected backup."/>
+  </Control>
+  <Control Name="tsbRemoveAllBackups" Value="(T)tsbRemoveAllBackups">
+    <ChildControl Name="tsbRemoveAllBackups_ToolTip" Value="(T)Remove all backup^Deletes and removes the all backups in the backup directory."/>
+  </Control>
+  <Control Name="btnOpenBackupDir" Value="(T)btnOpenBackupDir">
+    <ChildControl Name="btnOpenBackupDir_ToolTip" Value="(T)Open backup directory^Opens the backup direcktory in a explorer window."/>
+  </Control>
+  <Control Name="btnBackupPath" Value="(T)btnBackupPath">
+    <ChildControl Name="btnBackupPath_ToolTip" Value="(T)Select new backup directory^Opens the Select Folder dialog to select a new backup directory."/>
+  </Control>
+  <Control Name="lblSelectBackupPathFirst" Value="(T)Please select a backup path first (Button in top right corner)."/>
+  <Control Name="btnRecoverBackup" Value="(T)Recover selected Backup">
+    <ChildControl Name="btnRecoverBackup_ToolTip" Value="(T)Recover selected backup^Extracts the selected backup back to its destination."/>
+  </Control>
+  <Control Name="grbBackups" Value="(T)Backups"/>
+
   <String Name="UcBackupView_Item_00" Value="(T)FileName"/>
   <String Name="UcBackupView_Item_01" Value="(T)Note"/>
+  <String Name="MSG_BACKUPTAB_VIEW_TITLE" Value="(T)Backup"/>
+  <String Name="MSG_BACKUP_LOAD_CFG" Value="(T)Loading backup configuration file &quot;{0}&quot; ..."/>;
+  <String Name="MSG_CREATE_NEW_BACKUP_CFG" Value="(T)Create new Backup configuration file &quot;{0}&quot;."/>;
+  <String Name="MSG_BACKUP_SRC_MISSING" Value="(T)Select a Backup first!"/>;
+  <String Name="MSG_FOLDER_NOT_FOUND" Value="(T)Folder not found &quot;{0}&quot;."/>;
+  <String Name="MSG_BACKUP_REINSTALLED" Value="(T)Backup reinstalled! &quot;{0}&quot;"/>;
+  <String Name="MSG_BACKUP_DELETE_ALL_QUESTION" Value="(T)Are you sure to delete all backups?"/>;
+  <String Name="MSG_BACKUP_NOT_FOUND" Value="(T)Backup file not found! &quot;{0}&quot;"/>;
+  <String Name="MSG_BACKUP_DELETED_ERROR" Value="(T)Can not delete backup &quot;{0}&quot;."/>;
+  <String Name="MSG_BACKUP_DELETED" Value="(T)Backup deleted: &quot;{0}&quot;"/>;
+  <String Name="MSG_BACKUP_DELETE_QUESTION" Value="(T)Are you sure to delete the backup &quot;{0}&quot;?"/>;
+  <String Name="MSG_BACKUP_COMPLETE" Value="(T)Backup of &quot;{0}&quot; complete."/>;
+  <String Name="MSG_BACKUP_CREATION_ERROR" Value="(T)Error during backup creation."/>;
+  <String Name="MSG_BACKUP_ERROR" Value="(T)Error during backup creation: &quot;{0}&quot;"/>;
+  <String Name="MSG_BACKUP_SRC_FOLDER_NOT_FOUND" Value="(T)Folder to backup not found! &quot;{0}&quot;"/>;
+  <String Name="MSG_BACKUP_SELECT_FOLDER" Value="(T)Please select a backup folder."/>;
+  <String Name="MSG_BACKUP_LOAD_ERROR_0" Value="(T)Error during backup loading: &quot;{0}&quot;"/>;
+  <String Name="MSG_BACKUP_FOLDER_NOT_FOUND_0" Value="(T)Backup folder not found! &quot;{0}&quot;"/>;
 </Language>
   
   

@@ -98,6 +98,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Languages\KSPMA.BackupTabPlugin.ger.lang" />
     <None Include="Languages\KSPMA.BackupTabPlugin.eng.lang" />
     <None Include="Languages\KSPMA.BackupTabPlugin.fake.lang" />
     <None Include="packages.config" />
@@ -158,6 +159,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\disk_blue_out_data_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

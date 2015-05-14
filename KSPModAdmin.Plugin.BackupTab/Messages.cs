@@ -161,7 +161,7 @@ namespace KSPModAdmin.Plugin.BackupTab
                 return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_FOLDER_NOT_FOUND).Replace("^", Environment.NewLine);
             }
         }
-        private const string DEFAULT_MSG_FOLDER_NOT_FOUND = "Folder not found. \"{0}\"";
+        private const string DEFAULT_MSG_FOLDER_NOT_FOUND = "Folder not found \"{0}\".";
 
         public static string MSG_BACKUP_SRC_MISSING
         {

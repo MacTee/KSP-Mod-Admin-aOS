@@ -751,6 +751,7 @@ namespace KSPModAdmin.Plugin.BackupTab
                 if (Directory.Exists(dir))
                 {
                     EventDistributor.InvokeAsyncTaskStarted(Instance);
+                    View.ShowProcessing = true;
                     Messenger.AddInfo("Backup started.");
                     AsyncTask<string>.DoWork(() => BackupDir(dir, name, backupPath), BackupDirFinished);
                 }
@@ -794,6 +795,7 @@ namespace KSPModAdmin.Plugin.BackupTab
         private static void BackupDirFinished(string name, Exception ex)
         {
             EventDistributor.InvokeAsyncTaskDone(Instance);
+            View.ShowProcessing = false;
 
             if (ex != null)
             {
