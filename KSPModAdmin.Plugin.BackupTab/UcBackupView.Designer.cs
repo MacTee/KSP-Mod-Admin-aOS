@@ -40,12 +40,15 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tslProcessing = new System.Windows.Forms.ToolStripLabel();
             this.grbBackups = new System.Windows.Forms.GroupBox();
+            this.pnlSelectBackupPath = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.tvBackups = new KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.TreeViewAdv();
             this.btnRecoverBackup = new System.Windows.Forms.Button();
             this.btnOpenBackupDir = new System.Windows.Forms.Button();
             this.btnBackupPath = new System.Windows.Forms.Button();
             this.tsBackups.SuspendLayout();
             this.grbBackups.SuspendLayout();
+            this.pnlSelectBackupPath.SuspendLayout();
             this.SuspendLayout();
             // 
             // tbBackupPath
@@ -139,6 +142,7 @@
             this.grbBackups.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.grbBackups.Controls.Add(this.pnlSelectBackupPath);
             this.grbBackups.Controls.Add(this.tvBackups);
             this.grbBackups.Controls.Add(this.btnRecoverBackup);
             this.grbBackups.Controls.Add(this.tsBackups);
@@ -148,6 +152,31 @@
             this.grbBackups.TabIndex = 38;
             this.grbBackups.TabStop = false;
             this.grbBackups.Text = "Backups:";
+            // 
+            // pnlSelectBackupPath
+            // 
+            this.pnlSelectBackupPath.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlSelectBackupPath.BackColor = System.Drawing.Color.Transparent;
+            this.pnlSelectBackupPath.Controls.Add(this.label1);
+            this.pnlSelectBackupPath.Location = new System.Drawing.Point(82, 176);
+            this.pnlSelectBackupPath.Name = "pnlSelectBackupPath";
+            this.pnlSelectBackupPath.Size = new System.Drawing.Size(517, 80);
+            this.pnlSelectBackupPath.TabIndex = 39;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(3, 29);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(511, 23);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Please select a backup path first (Button in top right corner).";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tvBackups
             // 
@@ -222,6 +251,7 @@
             this.tsBackups.ResumeLayout(false);
             this.tsBackups.PerformLayout();
             this.grbBackups.ResumeLayout(false);
+            this.pnlSelectBackupPath.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -244,5 +274,7 @@
         private System.Windows.Forms.ToolStripLabel tslProcessing;
         private System.Windows.Forms.GroupBox grbBackups;
         private Core.Utils.Controls.Aga.Controls.Tree.TreeViewAdv tvBackups;
+        private System.Windows.Forms.Panel pnlSelectBackupPath;
+        private System.Windows.Forms.Label label1;
     }
 }

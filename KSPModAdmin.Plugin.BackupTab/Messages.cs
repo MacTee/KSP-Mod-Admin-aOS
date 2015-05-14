@@ -92,5 +92,105 @@ namespace KSPModAdmin.Plugin.BackupTab
         }
         private const string DEFAULT_MSG_BACKUP_COMPLETE = "Backup of \"{0}\" complete.";
 
+        public static string MSG_BACKUP_DELETE_QUESTION
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_BACKUP_DELETE_QUESTION"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_BACKUP_DELETE_QUESTION).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_BACKUP_DELETE_QUESTION = "Are you sure to delete the backup \"{0}\"?";
+
+        public static string MSG_BACKUP_DELETED
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_BACKUP_DELETED"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_BACKUP_DELETED).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_BACKUP_DELETED = "Backup deleted: \"{0}\"";
+
+        public static string MSG_BACKUP_DELETED_ERROR
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_BACKUP_DELETED_ERROR"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_BACKUP_DELETED_ERROR).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_BACKUP_DELETED_ERROR = "Can not delete backup \"{0}\".";
+
+        public static string MSG_BACKUP_NOT_FOUND
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_BACKUP_NOT_FOUND"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_BACKUP_NOT_FOUND).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_BACKUP_NOT_FOUND = "Backup file not found! \"{0}\"";
+
+        public static string MSG_BACKUP_DELETE_ALL_QUESTION
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_BACKUP_DELETE_ALL_QUESTION"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_BACKUP_DELETE_ALL_QUESTION).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_BACKUP_DELETE_ALL_QUESTION = "Are you sure to delete all backups?";
+
+
+        public static string MSG_BACKUP_REINSTALLED
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_BACKUP_REINSTALLED"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_BACKUP_REINSTALLED).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_BACKUP_REINSTALLED = "Backup reinstalled! \"{0}\"";
+
+        public static string MSG_FOLDER_NOT_FOUND
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_FOLDER_NOT_FOUND"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_FOLDER_NOT_FOUND).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_FOLDER_NOT_FOUND = "Folder not found. \"{0}\"";
+
+        public static string MSG_BACKUP_SRC_MISSING
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_BACKUP_SRC_MISSING"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_BACKUP_SRC_MISSING).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_BACKUP_SRC_MISSING = "Select a Backup first!";
+
+        public static string MSG_CREATE_NEW_BACKUP_CFG
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_CREATE_NEW_BACKUP_CFG"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_CREATE_NEW_BACKUP_CFG).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_CREATE_NEW_BACKUP_CFG = "Create new Backup configuration file \"{0}\".";
+
+        public static string MSG_BACKUP_LOAD_CFG
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_BACKUP_LOAD_CFG"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_BACKUP_LOAD_CFG).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_BACKUP_LOAD_CFG = "Loading backup configuration file \"{0}\" ...";
     }
 }
