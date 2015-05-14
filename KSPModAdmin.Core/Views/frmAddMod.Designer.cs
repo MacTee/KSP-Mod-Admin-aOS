@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAddMod));
             this.btnAddAndClose = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
             this.lblModName = new System.Windows.Forms.Label();
             this.tbModName = new System.Windows.Forms.TextBox();
             this.lblModPath = new System.Windows.Forms.Label();
@@ -61,20 +61,20 @@
             this.btnAddAndClose.UseVisualStyleBackColor = true;
             this.btnAddAndClose.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // btnCancel
+            // btnClose
             // 
-            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.Image = global::KSPModAdmin.Core.Properties.Resources.delete2;
-            this.btnCancel.Location = new System.Drawing.Point(401, 203);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(110, 25);
-            this.btnCancel.TabIndex = 5;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.ttAddMod.SetToolTip(this.btnCancel, "Close dialog without adding a mod.");
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClose.Image = global::KSPModAdmin.Core.Properties.Resources.delete2;
+            this.btnClose.Location = new System.Drawing.Point(401, 203);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(110, 25);
+            this.btnClose.TabIndex = 5;
+            this.btnClose.Text = "Close";
+            this.btnClose.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnClose.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.ttAddMod.SetToolTip(this.btnClose, "Closes the dialog.");
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // lblModName
             // 
@@ -191,7 +191,7 @@
             this.Controls.Add(this.lblNote);
             this.Controls.Add(this.lblModPath);
             this.Controls.Add(this.lblModName);
-            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.btnAddAndClose);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -214,7 +214,7 @@
         #endregion
 
         private System.Windows.Forms.Button btnAddAndClose;
-        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Label lblModName;
         private System.Windows.Forms.TextBox tbModName;
         private System.Windows.Forms.Label lblModPath;

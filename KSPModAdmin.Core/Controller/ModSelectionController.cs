@@ -516,7 +516,7 @@ namespace KSPModAdmin.Core.Controller
         /// </summary>
         /// <param name="modsToRemove">The mods to remove.</param>
         /// <param name="silent">Flag to avoid pop up messages.</param>
-        public static void RemoveMod(ModNode[] modsToRemove, bool silent = false)
+        public static void RemoveMod(ModNode[] modsToRemove)
         {
             if (modsToRemove == null || modsToRemove.Length == 0)
                 return;
@@ -535,18 +535,46 @@ namespace KSPModAdmin.Core.Controller
             else
                 msg = string.Format(Messages.MSG_DELETE_MODS_0_QUESTION, Environment.NewLine + string.Join<ModNode>(Environment.NewLine, mods));
 
-            if (silent || DialogResult.Yes == MessageBox.Show(View.ParentForm, msg, Messages.MSG_TITLE_ATTENTION, MessageBoxButtons.YesNo))
-                RemoveModsAsync(mods.ToArray(), silent);
+            if (DialogResult.Yes == MessageBox.Show(View.ParentForm, msg, Messages.MSG_TITLE_ATTENTION, MessageBoxButtons.YesNo))
+                RemoveModsAsync(mods.ToArray(), false);
+        }
+
+        /// <summary>
+        /// Uninstalls and removes the mods from the ModSelection in silent mode.
+        /// </summary>
+        /// <param name="modsToRemove">The mods to remove.</param>
+        public static void RemoveModSilent(ModNode[] modsToRemove)
+        {
+            if (modsToRemove == null || modsToRemove.Length == 0)
+                return;
+
+            List<ModNode> mods = new List<ModNode>();
+            foreach (var mod in modsToRemove)
+            {
+                ModNode root = mod.ZipRoot;
+                if (!mods.Contains(root))
+                    mods.Add(root);
+            }
+
+            RemoveModsAsync(mods.ToArray(), true);
         }
 
         /// <summary>
         /// Uninstalls and removes all mods in the ModSelection.
         /// </summary>
         /// <param name="silent">Flag to avoid pop up messages.</param>
-        public static void RemoveAllMods(bool silent = false)
+        public static void RemoveAllMods()
         {
-            if (silent || DialogResult.Yes == MessageBox.Show(View.ParentForm, Messages.MSG_DELETE_ALL_MODS_QUESTION, Messages.MSG_TITLE_ATTENTION, MessageBoxButtons.YesNo))
-                RemoveModsAsync(Mods, silent);
+            if (DialogResult.Yes == MessageBox.Show(View.ParentForm, Messages.MSG_DELETE_ALL_MODS_QUESTION, Messages.MSG_TITLE_ATTENTION, MessageBoxButtons.YesNo, MessageBoxIcon.None, MessageBoxDefaultButton.Button2))
+                RemoveModsAsync(Mods, false);
+        }
+
+        /// <summary>
+        /// Uninstalls and removes all mods in the ModSelection in silent mode.
+        /// </summary>
+        public static void RemoveAllModsSilent()
+        {
+            RemoveModsAsync(Mods, true);
         }
 
         /// <summary>
