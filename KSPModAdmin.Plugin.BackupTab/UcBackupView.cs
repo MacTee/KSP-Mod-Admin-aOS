@@ -9,6 +9,7 @@ using KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree;
 using KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.Helper;
 using KSPModAdmin.Core.Utils.Localization;
 using KSPModAdmin.Core.Views;
+using KSPModAdmin.Plugin.BackupTab.Properties;
 
 namespace KSPModAdmin.Plugin.BackupTab
 {
@@ -63,6 +64,16 @@ namespace KSPModAdmin.Plugin.BackupTab
         {
             get { return pnlSelectBackupPath.Visible; } 
             set { pnlSelectBackupPath.Visible = value; }
+        }
+
+        private bool ShowOptions
+        {
+            get { return pnlOptions.Visible; }
+            set
+            {
+                pnlOptions.Visible = value;
+                UpdateEnabldeState();
+            }
         }
 
         private bool HasValidBackupPath { get; set; }
@@ -150,6 +161,11 @@ namespace KSPModAdmin.Plugin.BackupTab
             UcBackupViewController.OpenBackupPath();
         }
 
+        private void btnRecoverBackup_Click(object sender, EventArgs e)
+        {
+            UcBackupViewController.RecoverSelectedBackup();
+        }
+
         private void tsbNewBackup_Click(object sender, EventArgs e)
         {
             UcBackupViewController.NewBackup();
@@ -176,9 +192,10 @@ namespace KSPModAdmin.Plugin.BackupTab
             UcBackupViewController.ScanBackupDirectory();
         }
 
-        private void btnRecoverBackup_Click(object sender, EventArgs e)
+        private void tsbBackupOptions_CheckStateChanged(object sender, EventArgs e)
         {
-            UcBackupViewController.RecoverSelectedBackup();
+            tsbBackupOptions.Image = tsbBackupOptions.CheckState == CheckState.Checked ? Resources.gear_new : Resources.gear;
+            ShowOptions = tsbBackupOptions.CheckState == CheckState.Checked;
         }
 
         private void tvBackups_SelectionChanged(object sender, EventArgs e)
@@ -247,12 +264,49 @@ namespace KSPModAdmin.Plugin.BackupTab
         private void UpdateEnabldeState()
         {
             var selBackup = SelectedBackup;
-            btnOpenBackupDir.Enabled = HasValidBackupPath;
-            tsbNewBackup.Enabled = HasValidBackupPath;
-            tsbBackupSaves.Enabled = HasValidBackupPath;
-            btnRecoverBackup.Enabled = (selBackup != null) && HasValidBackupPath;
-            tsbRemoveBackup.Enabled = (selBackup != null) && HasValidBackupPath;
-            tsbRemoveAllBackups.Enabled = HasValidBackupPath;
+            btnOpenBackupDir.Enabled = HasValidBackupPath && !ShowOptions;
+            tsbNewBackup.Enabled = HasValidBackupPath && !ShowOptions;
+            tsbBackupSaves.Enabled = HasValidBackupPath && !ShowOptions;
+            btnRecoverBackup.Enabled = (selBackup != null) && HasValidBackupPath && !ShowOptions;
+            tsbRemoveBackup.Enabled = (selBackup != null) && HasValidBackupPath && !ShowOptions;
+            tsbRemoveAllBackups.Enabled = HasValidBackupPath && !ShowOptions;
+            tsbRefreshBackupview.Enabled = HasValidBackupPath && !ShowOptions;
+        }
+
+        private void cbAutoBackup_CheckedChanged(object sender, EventArgs e)
+        {
+            if (tsbAutoBackup.Checked != cbAutoBackup.Checked)
+                tsbAutoBackup.Checked = cbAutoBackup.Checked;
+        }
+
+        private void cbBackupOnStartup_CheckedChanged(object sender, EventArgs e)
+        {
+            if (tsbBackupOnStartup.Checked != cbBackupOnStartup.Checked)
+                tsbBackupOnStartup.Checked = cbBackupOnStartup.Checked;
+        }
+
+        private void cbBackupOnKSPLaunch_CheckedChanged(object sender, EventArgs e)
+        {
+            if (tsbBackupOnKSPLaunch.Checked != cbBackupOnKSPLaunch.Checked)
+                tsbBackupOnKSPLaunch.Checked = cbBackupOnKSPLaunch.Checked;
+        }
+
+        private void tsbAutoBackup_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbAutoBackup.Checked != tsbAutoBackup.Checked)
+                cbAutoBackup.Checked = tsbAutoBackup.Checked;
+        }
+
+        private void tsbBackupOnStartup_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbBackupOnStartup.Checked != tsbBackupOnStartup.Checked)
+                cbBackupOnStartup.Checked = tsbBackupOnStartup.Checked;
+        }
+
+        private void tsbBackupOnKSPLaunch_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbBackupOnKSPLaunch.Checked != tsbBackupOnKSPLaunch.Checked)
+                cbBackupOnKSPLaunch.Checked = tsbBackupOnKSPLaunch.Checked;
         }
     }
 }

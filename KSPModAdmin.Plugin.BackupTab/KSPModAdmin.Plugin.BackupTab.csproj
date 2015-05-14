@@ -163,6 +163,12 @@
   <ItemGroup>
     <None Include="Resources\refresh.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gear_new.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy /E /Y /R /I "$(ProjectDir)Languages" "$(SolutionDir)KSPModAdmin\$(OutDir)lang"</PostBuildEvent>

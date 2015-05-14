@@ -112,6 +112,28 @@ namespace KSPModAdmin.Plugin.BackupTab
         /// </summary>
         public static bool BackupOnKSPMALaunch { get; set; }
 
+        /// <summary>
+        /// Toggles the on off state of the auto backup function.
+        /// </summary>
+        public static bool AutoBackupOnOff
+        {
+            get { return autoBackupTimer.Tag != null && (bool)autoBackupTimer.Tag; }
+            set
+            {
+                autoBackupTimer.Tag = value;
+                if (value)
+                {
+                    autoBackupTimer.Stop();
+                    autoBackupTimer.Interval = (int)(BackupInterval * 60 * 1000); // minutes to milisecs.
+                    autoBackupTimer.Start();
+                }
+                else
+                {
+                    autoBackupTimer.Stop();
+                }
+            }
+        }
+
         #endregion
 
         /// <summary>
@@ -134,6 +156,7 @@ namespace KSPModAdmin.Plugin.BackupTab
 
             autoBackupTimer = new Timer();
             autoBackupTimer.Tick += new EventHandler(AutoBackupTimer_Tick);
+            autoBackupTimer.Tag = false;
         }
 
         #region EventDistributor callback functions.
@@ -553,23 +576,6 @@ namespace KSPModAdmin.Plugin.BackupTab
             }
 
             View.InvalidateView();
-        }
-
-        /// <summary>
-        /// Toggles the on off state of the auto backup function.
-        /// </summary>
-        public static void ToggleAutoBackupOnOff(bool on)
-        {
-            if (on)
-            {
-                autoBackupTimer.Stop();
-                autoBackupTimer.Interval = (int)(BackupInterval * 60 * 1000); // minutes to milisecs.
-                autoBackupTimer.Start();
-            }
-            else
-            {
-                autoBackupTimer.Stop();
-            }
         }
 
         /// <summary>
