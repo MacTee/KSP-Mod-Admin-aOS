@@ -41,5 +41,56 @@ namespace KSPModAdmin.Plugin.BackupTab
             }
         }
         private const string DEFAULT_MSG_BACKUP_LOAD_ERROR_0 = "Error during backup loading: \"{0}\"";
+
+        public static string MSG_BACKUP_SELECT_FOLDER
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_BACKUP_SELECT_FOLDER"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_BACKUP_SELECT_FOLDER).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_BACKUP_SELECT_FOLDER = "Please select a backup folder.";
+
+        public static string MSG_BACKUP_SRC_FOLDER_NOT_FOUND
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_BACKUP_SRC_FOLDER_NOT_FOUND"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_BACKUP_SRC_FOLDER_NOT_FOUND).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_BACKUP_SRC_FOLDER_NOT_FOUND = "Folder to backup not found! \"{0}\"";
+
+        public static string MSG_BACKUP_ERROR
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_BACKUP_ERROR"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_BACKUP_ERROR).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_BACKUP_ERROR = "Error during backup creation: \"{0}\"";
+
+        public static string MSG_BACKUP_CREATION_ERROR
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_BACKUP_CREATION_ERROR"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_BACKUP_CREATION_ERROR).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_BACKUP_CREATION_ERROR = "Error during backup creation.";
+
+        public static string MSG_BACKUP_COMPLETE
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_BACKUP_COMPLETE"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_BACKUP_COMPLETE).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_BACKUP_COMPLETE = "Backup of \"{0}\" complete.";
+
     }
 }

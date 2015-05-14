@@ -114,9 +114,8 @@ namespace KSPModAdmin.Plugin.BackupTab
         {
             // do View related init here or in the UcBackupViewController.Initialize(...) methode.
             TreeViewAdvColumnHelper.ColumnsToTreeViewAdv(tvBackups, Columns);
-
-            BackupPathChanged();
-            SelectedBackupChanged();
+            UcBackupViewController.LoadBackupSettings();
+            UcBackupViewController.ScanBackupDirectory();
         }
 
         private void btnBackupPath_Click(object sender, EventArgs e)
@@ -213,6 +212,8 @@ namespace KSPModAdmin.Plugin.BackupTab
             tsbNewBackup.Enabled = HasValidBackupPath;
             tsbBackupSaves.Enabled = HasValidBackupPath;
             SelectedBackupChanged();
+
+            UcBackupViewController.SaveBackupSettings();
         }
 
         private void SelectedBackupChanged()
