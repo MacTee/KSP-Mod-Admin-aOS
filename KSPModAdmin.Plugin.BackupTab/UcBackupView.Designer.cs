@@ -32,18 +32,18 @@
             this.ttPlugin = new System.Windows.Forms.ToolTip(this.components);
             this.tbBackupPath = new System.Windows.Forms.TextBox();
             this.tsBackups = new System.Windows.Forms.ToolStrip();
-            this.tsbNewBackup = new System.Windows.Forms.ToolStripButton();
-            this.tsbBackupSaves = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbRemoveBackup = new System.Windows.Forms.ToolStripButton();
-            this.tsbRemoveAllBackups = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.tslProcessing = new System.Windows.Forms.ToolStripLabel();
             this.grbBackups = new System.Windows.Forms.GroupBox();
             this.pnlSelectBackupPath = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.tvBackups = new KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.TreeViewAdv();
             this.btnRecoverBackup = new System.Windows.Forms.Button();
+            this.tsbNewBackup = new System.Windows.Forms.ToolStripButton();
+            this.tsbBackupSaves = new System.Windows.Forms.ToolStripButton();
+            this.tsbRemoveBackup = new System.Windows.Forms.ToolStripButton();
+            this.tsbRemoveAllBackups = new System.Windows.Forms.ToolStripButton();
+            this.tslProcessing = new System.Windows.Forms.ToolStripLabel();
             this.btnOpenBackupDir = new System.Windows.Forms.Button();
             this.btnBackupPath = new System.Windows.Forms.Button();
             this.tsBackups.SuspendLayout();
@@ -64,7 +64,6 @@
             // 
             // tsBackups
             // 
-            this.tsBackups.AutoSize = false;
             this.tsBackups.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbNewBackup,
             this.tsbBackupSaves,
@@ -75,67 +74,19 @@
             this.tslProcessing});
             this.tsBackups.Location = new System.Drawing.Point(3, 16);
             this.tsBackups.Name = "tsBackups";
-            this.tsBackups.Size = new System.Drawing.Size(669, 25);
+            this.tsBackups.Size = new System.Drawing.Size(669, 31);
             this.tsBackups.TabIndex = 37;
             this.tsBackups.Text = "toolStrip2";
-            // 
-            // tsbNewBackup
-            // 
-            this.tsbNewBackup.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbNewBackup.Image = global::KSPModAdmin.Plugin.BackupTab.Properties.Resources.data_add;
-            this.tsbNewBackup.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbNewBackup.Name = "tsbNewBackup";
-            this.tsbNewBackup.Size = new System.Drawing.Size(23, 22);
-            this.tsbNewBackup.Text = "toolStripButton3";
-            this.tsbNewBackup.Click += new System.EventHandler(this.tsbNewBackup_Click);
-            // 
-            // tsbBackupSaves
-            // 
-            this.tsbBackupSaves.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbBackupSaves.Image = global::KSPModAdmin.Plugin.BackupTab.Properties.Resources.data_floppy_disk;
-            this.tsbBackupSaves.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbBackupSaves.Name = "tsbBackupSaves";
-            this.tsbBackupSaves.Size = new System.Drawing.Size(23, 22);
-            this.tsbBackupSaves.Text = "toolStripButton4";
-            this.tsbBackupSaves.Click += new System.EventHandler(this.tsbBackupSaves_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // tsbRemoveBackup
-            // 
-            this.tsbRemoveBackup.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbRemoveBackup.Image = global::KSPModAdmin.Plugin.BackupTab.Properties.Resources.data_delete;
-            this.tsbRemoveBackup.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbRemoveBackup.Name = "tsbRemoveBackup";
-            this.tsbRemoveBackup.Size = new System.Drawing.Size(23, 22);
-            this.tsbRemoveBackup.Text = "toolStripButton5";
-            this.tsbRemoveBackup.Click += new System.EventHandler(this.tsbRemoveBackup_Click);
-            // 
-            // tsbRemoveAllBackups
-            // 
-            this.tsbRemoveAllBackups.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbRemoveAllBackups.Image = global::KSPModAdmin.Plugin.BackupTab.Properties.Resources.data_copy_delete;
-            this.tsbRemoveAllBackups.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbRemoveAllBackups.Name = "tsbRemoveAllBackups";
-            this.tsbRemoveAllBackups.Size = new System.Drawing.Size(23, 22);
-            this.tsbRemoveAllBackups.Text = "toolStripButton6";
-            this.tsbRemoveAllBackups.Click += new System.EventHandler(this.tsbRemoveAllBackups_Click);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 31);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // tslProcessing
-            // 
-            this.tslProcessing.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.tslProcessing.Image = global::KSPModAdmin.Plugin.BackupTab.Properties.Resources.loader;
-            this.tslProcessing.Name = "tslProcessing";
-            this.tslProcessing.Size = new System.Drawing.Size(16, 22);
-            this.tslProcessing.Visible = false;
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 31);
             // 
             // grbBackups
             // 
@@ -185,13 +136,13 @@
             this.tvBackups.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tvBackups.DragDropMarkColor = System.Drawing.Color.Black;
             this.tvBackups.LineColor = System.Drawing.SystemColors.ControlDark;
-            this.tvBackups.Location = new System.Drawing.Point(3, 41);
+            this.tvBackups.Location = new System.Drawing.Point(3, 47);
             this.tvBackups.Model = null;
             this.tvBackups.Name = "tvBackups";
             this.tvBackups.SelectedNode = null;
             this.tvBackups.ShowLines = false;
             this.tvBackups.ShowPlusMinus = false;
-            this.tvBackups.Size = new System.Drawing.Size(669, 384);
+            this.tvBackups.Size = new System.Drawing.Size(669, 378);
             this.tvBackups.TabIndex = 38;
             this.tvBackups.Text = "treeViewAdv1";
             this.tvBackups.UseColumns = true;
@@ -202,7 +153,7 @@
             this.btnRecoverBackup.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.btnRecoverBackup.Enabled = false;
             this.btnRecoverBackup.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRecoverBackup.Image = global::KSPModAdmin.Plugin.BackupTab.Properties.Resources.disk_black_data_into;
+            this.btnRecoverBackup.Image = global::KSPModAdmin.Plugin.BackupTab.Properties.Resources.data_into_floppy_disk_24x24;
             this.btnRecoverBackup.Location = new System.Drawing.Point(3, 425);
             this.btnRecoverBackup.Name = "btnRecoverBackup";
             this.btnRecoverBackup.Size = new System.Drawing.Size(669, 40);
@@ -212,6 +163,58 @@
             this.btnRecoverBackup.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRecoverBackup.UseVisualStyleBackColor = true;
             this.btnRecoverBackup.Click += new System.EventHandler(this.btnRecoverBackup_Click);
+            // 
+            // tsbNewBackup
+            // 
+            this.tsbNewBackup.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbNewBackup.Image = global::KSPModAdmin.Plugin.BackupTab.Properties.Resources.data_add_24x24;
+            this.tsbNewBackup.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsbNewBackup.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbNewBackup.Name = "tsbNewBackup";
+            this.tsbNewBackup.Size = new System.Drawing.Size(28, 28);
+            this.tsbNewBackup.Text = "toolStripButton3";
+            this.tsbNewBackup.Click += new System.EventHandler(this.tsbNewBackup_Click);
+            // 
+            // tsbBackupSaves
+            // 
+            this.tsbBackupSaves.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbBackupSaves.Image = global::KSPModAdmin.Plugin.BackupTab.Properties.Resources.data_floppy_disk_24x24;
+            this.tsbBackupSaves.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsbBackupSaves.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbBackupSaves.Name = "tsbBackupSaves";
+            this.tsbBackupSaves.Size = new System.Drawing.Size(28, 28);
+            this.tsbBackupSaves.Text = "toolStripButton4";
+            this.tsbBackupSaves.Click += new System.EventHandler(this.tsbBackupSaves_Click);
+            // 
+            // tsbRemoveBackup
+            // 
+            this.tsbRemoveBackup.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbRemoveBackup.Image = global::KSPModAdmin.Plugin.BackupTab.Properties.Resources.data_delete_24x24;
+            this.tsbRemoveBackup.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsbRemoveBackup.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbRemoveBackup.Name = "tsbRemoveBackup";
+            this.tsbRemoveBackup.Size = new System.Drawing.Size(28, 28);
+            this.tsbRemoveBackup.Text = "toolStripButton5";
+            this.tsbRemoveBackup.Click += new System.EventHandler(this.tsbRemoveBackup_Click);
+            // 
+            // tsbRemoveAllBackups
+            // 
+            this.tsbRemoveAllBackups.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbRemoveAllBackups.Image = global::KSPModAdmin.Plugin.BackupTab.Properties.Resources.data2_delete24x24;
+            this.tsbRemoveAllBackups.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsbRemoveAllBackups.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbRemoveAllBackups.Name = "tsbRemoveAllBackups";
+            this.tsbRemoveAllBackups.Size = new System.Drawing.Size(28, 28);
+            this.tsbRemoveAllBackups.Text = "toolStripButton6";
+            this.tsbRemoveAllBackups.Click += new System.EventHandler(this.tsbRemoveAllBackups_Click);
+            // 
+            // tslProcessing
+            // 
+            this.tslProcessing.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tslProcessing.Image = global::KSPModAdmin.Plugin.BackupTab.Properties.Resources.loader;
+            this.tslProcessing.Name = "tslProcessing";
+            this.tslProcessing.Size = new System.Drawing.Size(16, 28);
+            this.tslProcessing.Visible = false;
             // 
             // btnOpenBackupDir
             // 
@@ -251,6 +254,7 @@
             this.tsBackups.ResumeLayout(false);
             this.tsBackups.PerformLayout();
             this.grbBackups.ResumeLayout(false);
+            this.grbBackups.PerformLayout();
             this.pnlSelectBackupPath.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

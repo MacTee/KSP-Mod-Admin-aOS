@@ -83,6 +83,16 @@ namespace KSPModAdmin.Plugin.BackupTab.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap data_add_24x24 {
+            get {
+                object obj = ResourceManager.GetObject("data_add_24x24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap data_copy_delete {
             get {
                 object obj = ResourceManager.GetObject("data_copy_delete", resourceCulture);
@@ -103,6 +113,16 @@ namespace KSPModAdmin.Plugin.BackupTab.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap data_delete_24x24 {
+            get {
+                object obj = ResourceManager.GetObject("data_delete_24x24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap data_floppy_disk {
             get {
                 object obj = ResourceManager.GetObject("data_floppy_disk", resourceCulture);
@@ -113,9 +133,49 @@ namespace KSPModAdmin.Plugin.BackupTab.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap data_floppy_disk_24x24 {
+            get {
+                object obj = ResourceManager.GetObject("data_floppy_disk_24x24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap data_into_floppy_disk_24x24 {
+            get {
+                object obj = ResourceManager.GetObject("data_into_floppy_disk_24x24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap data2_delete24x24 {
+            get {
+                object obj = ResourceManager.GetObject("data2_delete24x24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap disk_black_data_into {
             get {
                 object obj = ResourceManager.GetObject("disk_black_data_into", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap disk_blue_out_data_24x24 {
+            get {
+                object obj = ResourceManager.GetObject("disk_blue_out_data_24x24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
