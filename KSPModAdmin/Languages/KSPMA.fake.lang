@@ -666,7 +666,6 @@
   <Control Name="tsmiCmsOneModOpenFolder" Value="(T)Open folder"/>
   <Control Name="tsmiCmsOneModOpenFile" Value="(T)Open file"/>
   <Control Name="frmConflictSolver" Value="(T)Conflict Solver"/>
-  <Control Name="btnCancel" Value="(T)Cancel"/>
   <Control Name="btnSolve" Value="(T)Solve conflicts"/>
   <Control Name="frmConflictSolver_Item_00" Value="(T)Filename"/>
   <Control Name="frmConflictSolver_Item_01" Value="(T)Destination"/>
@@ -692,4 +691,8 @@
     <ChildControl Name="cbNodColoringUpdatableMods_ToolTip" Value="(T)Node coloring on/off^Turns the colorization of mod nodes which are outdated on or off."/>
   </Control>
   <String Name="MSG_NO_SITEHANDLER_FOUND_FOR_URL_0" Value="(T)No SiteHandler for URL &quot;{0}&quot; found!^Mod Info Update aborded!"/>
+
+  <Control Name="btnClose" Value="(T)Close">
+    <ChildControl Name="btnClose_ToolTip" Value="(T)Closes the dialog."/>
+  </Control>
 </Language>

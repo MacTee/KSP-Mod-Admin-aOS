@@ -6,14 +6,31 @@
   It can be folders with alternative data, manuals, etc. For examples see Planet Shine or UniversalStorage [TAC PACK]. 
   Usually Mod Admin can't detect installation path for them and shows warning. When I update this mods, Mod Admin shows warning again for every root node 
   without installation path. I update in "Copy checked state" mode.
-
-- I dunno if it's a KSMPA-problem or KSP, but trying to do Borderless Window (fullscreen resolution) with OpenGL forced throws a KSP-error :/
 - When using the "Get ModInfos" button with a "KSP Forum" version control, the ProductID get wrong data (I got this issue with KMA 1.4 too)
+
+
+//// Known Issues
+/////////////////////
+- I dunno if it's a KSMPA-problem or KSP, but trying to do Borderless Window (fullscreen resolution) with OpenGL forced throws a KSP-error :/
+  Is it an error like "Couldn't switch to requested monitor resolution" ?
+  If yes, this problem exists since KSP 1.0, especially with a multiple monitors environment. The work around is to add "-adapter 1" in the launch options, where "1" is the screen number. Maybe MacTee could add this option to KMA ?
+- After i start KSP MA i get the following error message:
+  "Unexpected runtime error: "An attempt was made to load an assembly from a network location which would have caused the assembly to be sandboxed...""
+  This happens when windows has flaged the files of KSP MA as a web download.
+  You have to allow access to following files HtmlAgilityPack.dll, KerbalStuffReadOnly.dll, KSPModAdmin.Core.dll, Newtonsoft.Json.dll, SharpCompress.dll and plugins/KSPModAdmin.Translation.Plugin.dll manualy by
+  1. Right click the dll
+  2. Chose properties
+  3. Click "Unblock"
+  [IMG]http://www.services.mactee.de/ksp/pics/File_Property_Dialog.png[/IMG]
+  -> see [URL="http://stackoverflow.com/questions/15238714/net-local-assembly-load-failed-with-cas-policy"]StackOverflow article[/URL].
 
 
 //// TODO
 /////////////////////
 
+- relative ksp path search (options/path) create a new dialog for this option.
+
+- cutdown of uckspstartup
 - Disable 64-Bit vor windows.
 
 - Set default button on remove mods to "No" ...
@@ -75,6 +92,7 @@
 //// SUGGESTIONS
 /////////////////////
 
+- Perhaps you could add a launch option to start the game through Steam. Just using "steam://rungameid/220200" should work.
 - Option to add files to an exclude list for mod install (like readme, txt, licenses ...)
 - Compress for zipping.
 - Add/Show Cancel button during Archive extraction 
