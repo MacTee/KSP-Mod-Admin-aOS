@@ -88,7 +88,7 @@ namespace KSPModAdmin.Core
 
         /// <summary>
         /// Event for KspMAStarted.
-        /// Occurs when KSP Mod Admin is comletly loaded and ready.
+        /// Occurs when KSP Mod Admin is completely loaded and ready.
         /// </summary>
         public static event KSPMAStartedHandler KSPMAStarted = null;
 

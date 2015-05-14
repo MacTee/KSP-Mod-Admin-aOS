@@ -51,7 +51,7 @@ namespace KSPModAdmin.Plugin.BackupTab
         protected static UcBackupViewController Instance { get { return instance ?? (instance = new UcBackupViewController()); } }
 
         /// <summary>
-        /// Gets the full path to the backup cofniguration file.
+        /// Gets the full path to the backup configuration file.
         /// </summary>
         public static string FullBackupConfigPath
         {
@@ -97,7 +97,7 @@ namespace KSPModAdmin.Plugin.BackupTab
 
         /// <summary>
         /// Maximum of auto backup files.
-        /// If maximum is reached oldes auto backup will be replaced.
+        /// If maximum is reached older auto backup will be replaced.
         /// </summary>
         [DefaultValue(5)]
         public static int MaxBackupFiles { get; set; }
@@ -173,13 +173,13 @@ namespace KSPModAdmin.Plugin.BackupTab
         {
             View.BackupPath = string.Empty;
             LoadBackupSettings();
+            ScanBackupDirectory();
         }
 
         /// <summary>
         /// Callback function for the StartingKSP event.
         /// This is the place to handle anything when KSP is launching.
         /// </summary>
-        /// <param name="sender"></param>
         private static void StartingKSP(object sender)
         {
             if (BackupOnKSPLaunch)
@@ -188,9 +188,8 @@ namespace KSPModAdmin.Plugin.BackupTab
 
         /// <summary>
         /// Callback function for the KSPMAStarted event.
-        /// This is the place to handle anything like additional initializing if init is depanded on fully loded ModSelection.
+        /// This is the place to handle anything like additional initializing if init is depended on fully loaded ModSelection.
         /// </summary>
-        /// <param name="sender"></param>
         private static void KSPMAStarted(object sender)
         {
             if (BackupOnKSPMALaunch)
@@ -198,10 +197,8 @@ namespace KSPModAdmin.Plugin.BackupTab
         }
 
         /// <summary>
-        /// Handels the Tick event of the mAutoBackupTimer timer.
+        /// Handles the Tick event of the mAutoBackupTimer timer.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private static void AutoBackupTimer_Tick(object sender, EventArgs e)
         {
             DoAutoBackup();
@@ -231,7 +228,7 @@ namespace KSPModAdmin.Plugin.BackupTab
             XmlDocument doc = new XmlDocument();
             doc.Load(fullpath);
 
-            BackupNode root = new BackupNode(ROOT, ROOT, "");
+            BackupNode root = new BackupNode(ROOT, ROOT, string.Empty);
             XmlNodeList nodeList = doc.GetElementsByTagName(BACKUPPATH);
             if (nodeList.Count >= 1 && nodeList[0].Attributes != null)
             {
@@ -309,7 +306,6 @@ namespace KSPModAdmin.Plugin.BackupTab
         /// <summary>
         /// Saves the backup settings to a xml file.
         /// </summary>
-        /// <param name="backupFileNodes">The backupfiles from the backup folder (to save the note).</param>
         public static void SaveBackupSettings()
         {
             XmlDocument doc = new XmlDocument();
@@ -337,7 +333,7 @@ namespace KSPModAdmin.Plugin.BackupTab
             node = doc.CreateElement(BACKUPFILES);
             root.AppendChild(node);
 
-            foreach (BackupDataNode backupFile in model.Nodes)
+            foreach (BackupNode backupFile in model.Nodes)
             {
                 XmlNode columnNode = ConfigHelper.CreateConfigNode(doc, BACKUPFILE, new string[,]
                 {
@@ -357,7 +353,7 @@ namespace KSPModAdmin.Plugin.BackupTab
         {
             var dlg = new FolderSelectDialog();
             dlg.Title = "Please select a new Backup path.";
-            dlg.InitialDirectory = "";
+            dlg.InitialDirectory = string.Empty;
 
             if (dlg.ShowDialog(View.ParentForm.Handle))
                 View.BackupPath = dlg.FileName;
@@ -373,7 +369,7 @@ namespace KSPModAdmin.Plugin.BackupTab
         }
 
         /// <summary>
-        /// Opens the SelectFolderDialog to selet a folder to backup
+        /// Opens the SelectFolderDialog to select a folder to backup
         /// and Starts the backup process async.
         /// </summary>
         public static void NewBackup()
@@ -401,11 +397,11 @@ namespace KSPModAdmin.Plugin.BackupTab
         /// Starts the backup of a directory.
         /// </summary>
         /// <param name="dir">The directory to backup.</param>
-        /// <param name="name"></param>
-        /// <param name="backupPath"></param>
+        /// <param name="name">The name of the backup file.</param>
+        /// <param name="backupPath">The path to write the backup to.</param>
+        /// <returns>The new name of the backup file.</returns>
         public static string BackupDir(string dir, string name, string backupPath)
         {
-            int i = 0;
             using (var archive = ZipArchive.Create())
             {
                 if (name != string.Empty && backupPath != string.Empty)
@@ -417,7 +413,7 @@ namespace KSPModAdmin.Plugin.BackupTab
                         if (directoryName != null)
                         {
                             string temp =
-                                Path.Combine(directoryName.Replace(KSPPathHelper.GetPath(KSPPaths.KSPRoot) + "\\", ""),
+                                Path.Combine(directoryName.Replace(KSPPathHelper.GetPath(KSPPaths.KSPRoot) + "\\", string.Empty),
                                     Path.GetFileName(file));
                             archive.AddEntry(temp, file);
                         }
@@ -441,7 +437,7 @@ namespace KSPModAdmin.Plugin.BackupTab
         {
             if (ValidBackupDirectory(BackupPath))
             {
-                if (DialogResult.Yes != MessageBox.Show(View.ParentForm, Messages.MSG_BACKUP_DELETE_ALL_QUESTION, "", MessageBoxButtons.YesNo))
+                if (DialogResult.Yes != MessageBox.Show(View.ParentForm, Messages.MSG_BACKUP_DELETE_ALL_QUESTION, string.Empty, MessageBoxButtons.YesNo))
                     return;
 
                 if (Directory.Exists(BackupPath))
@@ -459,10 +455,9 @@ namespace KSPModAdmin.Plugin.BackupTab
         /// </summary>
         public static void RemoveSelectedBackup()
         {
-
             if (ValidBackupDirectory(BackupPath))
             {
-                if (DialogResult.Yes != MessageBox.Show(View.ParentForm, string.Format(Messages.MSG_BACKUP_DELETE_QUESTION, SelectedBackup.Name), "", MessageBoxButtons.YesNo))
+                if (DialogResult.Yes != MessageBox.Show(View.ParentForm, string.Format(Messages.MSG_BACKUP_DELETE_QUESTION, SelectedBackup.Name), string.Empty, MessageBoxButtons.YesNo))
                     return;
 
                 if (Directory.Exists(BackupPath))
@@ -476,7 +471,7 @@ namespace KSPModAdmin.Plugin.BackupTab
         /// <summary>
         /// Deletes the backup file.
         /// </summary>
-        /// <param name="file">The fiel to delete.</param>
+        /// <param name="file">The file to delete.</param>
         public static void RemoveBackup(string file)
         {
             if (File.Exists(file))
@@ -584,7 +579,7 @@ namespace KSPModAdmin.Plugin.BackupTab
         {
             Messenger.AddInfo("Backup on startup started.");
             string dir = KSPPathHelper.GetPath(KSPPaths.Saves);
-            string zipPath = dir.ToLower().Replace(KSPPathHelper.GetPath(KSPPaths.KSPRoot) + "\\", "");
+            string zipPath = dir.Replace(KSPPathHelper.GetPath(KSPPaths.KSPRoot) + "\\", string.Empty);
             string name = String.Format("StartupBackup_{0}{1}", DateTime.Now.ToString("yyyyMMdd_HHmm"), Constants.EXT_ZIP);
             BackupDirectoryAsync(dir, name, Path.Combine(BackupPath, name), zipPath);
         }
@@ -596,7 +591,7 @@ namespace KSPModAdmin.Plugin.BackupTab
         {
             Messenger.AddInfo("Backup on KSP launch started.");
             string dir = KSPPathHelper.GetPath(KSPPaths.Saves);
-            string zipPath = dir.ToLower().Replace(KSPPathHelper.GetPath(KSPPaths.KSPRoot) + "\\", "");
+            string zipPath = dir.Replace(KSPPathHelper.GetPath(KSPPaths.KSPRoot) + "\\", string.Empty);
             string name = String.Format("KSPLaunchBackup_{0}{1}", DateTime.Now.ToString("yyyyMMdd_HHmm"), Constants.EXT_ZIP);
             BackupDirectoryAsync(dir, name, Path.Combine(BackupPath, name), zipPath);
         }
@@ -680,7 +675,7 @@ namespace KSPModAdmin.Plugin.BackupTab
             }
             catch (Exception ex)
             {
-                string NoWaringPLS = ex.Message;
+                string noWaringPLS = ex.Message;
             }
 
             return fi;
@@ -699,8 +694,8 @@ namespace KSPModAdmin.Plugin.BackupTab
         /// <summary>
         /// Validates the backup directory.
         /// </summary>
-        /// <param name="dir">The directory to check for existance</param>
-        /// <returns>True if hte passed path exists.</returns>
+        /// <param name="dir">The directory to check for existence</param>
+        /// <returns>True if the passed path exists.</returns>
         private static bool ValidBackupDirectory(string dir)
         {
             bool result = false;
@@ -709,10 +704,7 @@ namespace KSPModAdmin.Plugin.BackupTab
                 if (dir != string.Empty && Directory.Exists(dir))
                     result = true;
             }
-            catch (Exception ex)
-            {
-                string NoWarningPLS = ex.Message;
-            }
+            catch (Exception) { }
 
             if (!result)
                 MessageBox.Show(View.ParentForm, Messages.MSG_BACKUP_SELECT_FOLDER);
@@ -724,9 +716,9 @@ namespace KSPModAdmin.Plugin.BackupTab
         /// Starts the backup of a directory.
         /// </summary>
         /// <param name="dir">The directory to backup.</param>
-        /// <param name="name"></param>
-        /// <param name="backupPath"></param>
-        /// <param name="zipPath"></param>
+        /// <param name="name">Name of the backup file.</param>
+        /// <param name="backupPath">The path to write the backup file to.</param>
+        /// <param name="zipPath">Base path within the zip archive.</param>
         private static void BackupDirectoryAsync(string dir, string name = "", string backupPath = "", string zipPath = "")
         {
             try
@@ -769,8 +761,8 @@ namespace KSPModAdmin.Plugin.BackupTab
         /// </summary>
         /// <param name="dir">The path to backup to.</param>
         /// <param name="fullpath">Full path of the created backup file.</param>
-        /// <param name="zipPath"></param>
-        /// <returns>The created name of the Backupfile.</returns>
+        /// <param name="zipPath">Path within the zip archive.</param>
+        /// <returns>The created name of the backup file.</returns>
         private static string CreateBackupFilename(string dir, out string fullpath, out string zipPath)
         {
             // create the name of the backupfile from the backup directory
@@ -779,12 +771,12 @@ namespace KSPModAdmin.Plugin.BackupTab
             fullpath = Path.Combine(BackupPath, filename);
 
             // get zip intern dir
-            zipPath = dir.Replace(KSPPathHelper.GetPath(KSPPaths.KSPRoot) + "\\", "");
+            zipPath = dir.Replace(KSPPathHelper.GetPath(KSPPaths.KSPRoot) + "\\", string.Empty);
 
             // add _(x) to the filename if the file already exists.
             int i = 1;
             while (File.Exists(fullpath))
-                fullpath = Path.GetDirectoryName(fullpath) + Constants.PATHSEPERATOR + Path.GetFileNameWithoutExtension(fullpath) + "_" + i++.ToString("00") + Path.GetExtension(fullpath);
+                fullpath = Path.GetDirectoryName(fullpath) + Constants.PATHSEPERATOR + Path.GetFileNameWithoutExtension(fullpath) + "_" + (i++).ToString("00") + Path.GetExtension(fullpath);
 
             return name;
         }
@@ -812,8 +804,8 @@ namespace KSPModAdmin.Plugin.BackupTab
         /// <summary>
         /// Adds the sub directory to the Archive.
         /// </summary>
-        /// <param name="parentDir">Parent directory to scenn for sub dirs & files.</param>
-        /// <param name="archive">The Archive to add the dirs & files to.</param>
+        /// <param name="parentDir">Parent directory to scan for sub directories and files.</param>
+        /// <param name="archive">The Archive to add the directories and files to.</param>
         private static void AddSubDirs(string parentDir, ZipArchive archive)
         {
             foreach (string subDir in Directory.GetDirectories(parentDir))
@@ -823,7 +815,7 @@ namespace KSPModAdmin.Plugin.BackupTab
                     string directoryName = Path.GetDirectoryName(file);
                     if (directoryName != null)
                     {
-                        string temp = Path.Combine(directoryName.Replace(KSPPathHelper.GetPath(KSPPaths.KSPRoot) + "\\", ""), Path.GetFileName(file));
+                        string temp = Path.Combine(directoryName.Replace(KSPPathHelper.GetPath(KSPPaths.KSPRoot) + "\\", string.Empty), Path.GetFileName(file));
                         archive.AddEntry(temp, file);
                     }
                 }
@@ -852,10 +844,7 @@ namespace KSPModAdmin.Plugin.BackupTab
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                string NowarningPLS = ex.Message;
-            }
+            catch (Exception) { }
         }
 
         /// <summary>
@@ -866,7 +855,7 @@ namespace KSPModAdmin.Plugin.BackupTab
             int count = 1;
             string name = string.Format("AutoBackup_{0}_{1}{2}", count, DateTime.Now.ToString("yyyyMMdd_HHmm"), Constants.EXT_ZIP);
             string dir = KSPPathHelper.GetPath(KSPPaths.Saves);
-            string zipPath = dir.ToLower().Replace(KSPPathHelper.GetPath(KSPPaths.KSPRoot) + "\\", "");
+            string zipPath = dir.Replace(KSPPathHelper.GetPath(KSPPaths.KSPRoot) + "\\", string.Empty);
 
             if (Directory.Exists(BackupPath))
             {
@@ -974,7 +963,7 @@ namespace KSPModAdmin.Plugin.BackupTab
 
         #region Inner classes
 
-        class FileInfo
+        private class FileInfo
         {
             private string mFullPath = string.Empty;
             private DateTime mDateTime = DateTime.MinValue;

@@ -26,9 +26,9 @@ namespace KSPModAdmin.Plugin.BackupTab
         /// </summary>
         /// <param name="nodes">The nodes to add.</param>
         /// <returns>A list of the added nodes.</returns>
-        public List<BackupDataNode> AddRange(List<BackupDataNode> nodes)
+        public List<BackupNode> AddRange(List<BackupNode> nodes)
         {
-            List<BackupDataNode> addedNodes = new List<BackupDataNode>();
+            List<BackupNode> addedNodes = new List<BackupNode>();
             foreach (var node in nodes)
             {
                 Nodes.Add(node);
@@ -45,7 +45,7 @@ namespace KSPModAdmin.Plugin.BackupTab
         /// <param name="invokingModNode">The invoking ModNode that will be passed as sender.</param>
         /// <param name="newCheckedState">The new checked state that should be applied.</param>
         /// <returns>True if continue with the change.</returns>
-        internal static BeforeCheckedChangeEventArgs InvokeBeforeCheckedChange(BackupDataNode invokingModNode, bool newCheckedState)
+        internal static BeforeCheckedChangeEventArgs InvokeBeforeCheckedChange(BackupNode invokingModNode, bool newCheckedState)
         {
             var args = new BeforeCheckedChangeEventArgs(invokingModNode, newCheckedState);
 

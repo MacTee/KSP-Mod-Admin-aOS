@@ -3,6 +3,9 @@ using KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree;
 
 namespace KSPModAdmin.Plugin.BackupTab
 {
+    /// <summary>
+    /// The TreeNode for the backup TreeViewAdv of the UcBackupView.
+    /// </summary>
     public class BackupNode : Node
     {
         /// <summary>

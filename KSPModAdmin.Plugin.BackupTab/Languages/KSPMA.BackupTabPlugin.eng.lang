@@ -16,10 +16,10 @@
   <Control Name="tsbRemoveAllBackups" Value="tsbRemoveAllBackups">
     <ChildControl Name="tsbRemoveAllBackups_ToolTip" Value="Remove all backup^Deletes and removes the all backups in the backup directory."/>
   </Control>
-  <Control Name="btnOpenBackupDir" Value="btnOpenBackupDir">
+  <Control Name="btnOpenBackupDir" Value="">
     <ChildControl Name="btnOpenBackupDir_ToolTip" Value="Open backup directory^Opens the backup direcktory in a explorer window."/>
   </Control>
-  <Control Name="btnBackupPath" Value="btnBackupPath">
+  <Control Name="btnBackupPath" Value="">
     <ChildControl Name="btnBackupPath_ToolTip" Value="Select new backup directory^Opens the Select Folder dialog to select a new backup directory."/>
   </Control>
   <Control Name="lblSelectBackupPathFirst" Value="Please select a backup path first (Button in top right corner)."/>

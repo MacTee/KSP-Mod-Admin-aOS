@@ -17,12 +17,18 @@ namespace KSPModAdmin.Plugin.BackupTab
     {
         #region Properties
 
+        /// <summary>
+        /// The Model of the TreeViewAdv for the Backups.
+        /// </summary>
         public BackupTreeModel Model
         {
             get { return tvBackups.Model as BackupTreeModel; }
             set { tvBackups.Model = value; }
         }
 
+        /// <summary>
+        /// The path to save the backups in.
+        /// </summary>
         public string BackupPath
         {
             get { return tbBackupPath.Text; }
@@ -36,12 +42,22 @@ namespace KSPModAdmin.Plugin.BackupTab
             }
         }
 
+        /// <summary>
+        /// The selected backup of the TreeViewAdv.
+        /// </summary>
         public BackupNode SelectedBackup
         {
             get { return tvBackups.SelectedNode != null ? tvBackups.SelectedNode.Tag as BackupNode : null; }
         }
 
-        private bool HasValidBackupPath { get; set; }
+        /// <summary>
+        /// Flag to determine if the processing icon should be shown or not.
+        /// </summary>
+        public bool ShowProcessing
+        {
+            get { return tslProcessing.Visible; }
+            set { tslProcessing.Visible = value; }
+        }
 
         private bool ShowSelectPathLabel
         {
@@ -49,11 +65,7 @@ namespace KSPModAdmin.Plugin.BackupTab
             set { pnlSelectBackupPath.Visible = value; }
         }
 
-        public bool ShowProcessing
-        {
-            get { return tslProcessing.Visible; }
-            set { tslProcessing.Visible = value; }
-        }
+        private bool HasValidBackupPath { get; set; }
 
         private List<ColumnData> Columns
         {
@@ -242,13 +254,5 @@ namespace KSPModAdmin.Plugin.BackupTab
             tsbRemoveBackup.Enabled = (selBackup != null) && HasValidBackupPath;
             tsbRemoveAllBackups.Enabled = HasValidBackupPath;
         }
-    }
-
-
-    public class BackupDataNode : Node
-    {
-        public string Name { get; private set; }
-
-        public string Note { get; private set; }
     }
 }
