@@ -65,7 +65,7 @@ namespace KSPModAdmin.Core.Utils
                     UpdateMessage(string.Format(Messages.MSG_ADD_MOD_0_TO_MODPACK, mod.Text));
 
                     if (includeMods && mod.ZipExists)
-                        archive.AddEntry(Path.Combine(Constants.MODS, Path.GetFileName(mod.Name)), mod.Name);
+                        archive.AddEntry(Path.Combine(Constants.MODS, Path.GetFileName(mod.Key)), mod.Key);
 
                     modsNode.AppendChild(CreateModXmlNode(doc, mod));
                 }

@@ -291,7 +291,7 @@
   <Control Name="cbShowConflictSolver" Value="(T)Show conflict solving dialog">
     <ChildControl Name="cbShowConflictSolver_ToolTip" Value="(T)Show conflict detection dialog^Show/hides the conflict detection doalog after conflict detection." />
   </Control>
-  <Control Name="frmAddMod" Value="(T)Adding mod" />
+  <Control Name="frmAddMod" Value="(T)Add mod" />
   <Control Name="cbInstallAfterAdd" Value="(T)Install after add.">
     <ChildControl Name="cbInstallAfterAdd_ToolTip" Value="(T)Check to let KSP MA install the new mod right after adding." />
   </Control>
@@ -666,7 +666,6 @@
   <Control Name="tsmiCmsOneModOpenFolder" Value="(T)Open folder"/>
   <Control Name="tsmiCmsOneModOpenFile" Value="(T)Open file"/>
   <Control Name="frmConflictSolver" Value="(T)Conflict Solver"/>
-  <Control Name="btnCancel" Value="(T)Cancel"/>
   <Control Name="btnSolve" Value="(T)Solve conflicts"/>
   <Control Name="frmConflictSolver_Item_00" Value="(T)Filename"/>
   <Control Name="frmConflictSolver_Item_01" Value="(T)Destination"/>
@@ -690,5 +689,10 @@
   <Control Name="lblConflictSolverDesc" Value="(T)To solve a conflict, check one of the mods of a conflicting file.^After selecting a mod for each conflicting file click the &quot;Solve conflicts&quot; button.^KSP Mod Admin will then reset all destinations of the conflicting files from the not selected mods.^Right click a mod to solve all conflicts in favor of the selected mod."/>
   <Control Name="cbNodColoringUpdatableMods" Value="(T)Node coloring on/off">
     <ChildControl Name="cbNodColoringUpdatableMods_ToolTip" Value="(T)Node coloring on/off^Turns the colorization of mod nodes which are outdated on or off."/>
+  </Control>
+  <String Name="MSG_NO_SITEHANDLER_FOUND_FOR_URL_0" Value="(T)No SiteHandler for URL &quot;{0}&quot; found!^Mod Info Update aborded!"/>
+
+  <Control Name="btnClose" Value="(T)Close">
+    <ChildControl Name="btnClose_ToolTip" Value="(T)Closes the dialog."/>
   </Control>
 </Language>

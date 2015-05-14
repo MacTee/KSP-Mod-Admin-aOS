@@ -230,7 +230,7 @@ namespace KSPModAdmin.Core.Views
 
         private void tsbOverride_CheckedChanged(object sender, EventArgs e)
         {
-            tsbOverride.Image = tsbOverride.Checked ? Resources.component_data_next : Resources.component_data_delete;
+            tsbOverride.Image = tsbOverride.Checked ? Resources.component_next_data_24x24 : Resources.component_delete_data_24x24;
         }
 
         private void tsbAddMod_Click(object sender, EventArgs e)

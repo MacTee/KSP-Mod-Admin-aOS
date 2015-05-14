@@ -389,16 +389,25 @@ namespace KSPModAdmin.Core.Views
             {
                 try
                 {
-                    ISiteHandler siteHandler = SiteHandlerManager.GetSiteHandlerByName(cbVersionControl.SelectedItem as string);
+                    ISiteHandler siteHandler = SiteHandlerManager.GetSiteHandlerByURL(ModURL); ////ByName(cbVersionControl.SelectedItem as string);
                     if (siteHandler == null)
+                    {
+                        // set selected sitehandler to none.
+                        cbVersionControl.SelectedItem = cbVersionControl.Items[0];
+                        string msg = string.Format(Messages.MSG_NO_SITEHANDLER_FOUND_FOR_URL_0, ModURL);
+                        MessageBox.Show(this, msg, Messages.MSG_TITLE_ERROR, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
+                    }
 
                     ModInfo newModInfo = null;
                     if (siteHandler.IsValidURL(ModURL))
                         newModInfo = siteHandler.GetModInfo(ModURL);
 
                     if (newModInfo != null)
+                    {
+                        newModInfo.AdditionalURL = ModInfo.AdditionalURL;
                         ModInfo = newModInfo;
+                    }
                 }
                 catch (Exception ex)
                 {

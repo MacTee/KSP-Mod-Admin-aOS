@@ -36,7 +36,7 @@ namespace KSPModAdmin.Core.Views
             tbModPath.Enabled = false;
             btnAdd.Enabled = false;
             btnAddAndClose.Enabled = false;
-            btnCancel.Enabled = false;
+            btnClose.Enabled = false;
             btnFolderSearch.Enabled = false;
             cbInstallAfterAdd.Enabled = false;
             picLoading.Visible = true;
@@ -89,7 +89,7 @@ namespace KSPModAdmin.Core.Views
                 tbModPath.Enabled = true;
                 btnAdd.Enabled = true;
                 btnAddAndClose.Enabled = true;
-                btnCancel.Enabled = true;
+                btnClose.Enabled = true;
                 btnFolderSearch.Enabled = true;
                 cbInstallAfterAdd.Enabled = true;
                 picLoading.Visible = false;
