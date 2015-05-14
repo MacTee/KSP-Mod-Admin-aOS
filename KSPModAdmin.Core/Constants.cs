@@ -18,8 +18,6 @@ namespace KSPModAdmin.Core
         public const string SERVICE_DOWNLOAD_LINK_MONO = "http://www.services.mactee.de/KSP/getKSP_MA_Zip2.php5?build=mono";
         public const string SERVICE_ADMIN_VERSION = "http://www.services.mactee.de/KSP/getKSP_MA_Version2.php5";
 
-        public const string PATHSEPERATOR = "\\";
-
         public const string TRUE = "true";
         public const string FALSE = "false";
 

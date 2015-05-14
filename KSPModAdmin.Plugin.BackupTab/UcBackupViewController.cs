@@ -436,7 +436,7 @@ namespace KSPModAdmin.Plugin.BackupTab
                         if (directoryName != null)
                         {
                             string temp =
-                                Path.Combine(directoryName.Replace(KSPPathHelper.GetPath(KSPPaths.KSPRoot) + "\\", string.Empty),
+                                Path.Combine(directoryName.Replace(KSPPathHelper.GetPath(KSPPaths.KSPRoot) + Path.DirectorySeparatorChar, string.Empty),
                                     Path.GetFileName(file));
                             archive.AddEntry(temp, file);
                         }
@@ -585,7 +585,7 @@ namespace KSPModAdmin.Plugin.BackupTab
         {
             Messenger.AddInfo("Backup on startup started.");
             string dir = KSPPathHelper.GetPath(KSPPaths.Saves);
-            string zipPath = dir.Replace(KSPPathHelper.GetPath(KSPPaths.KSPRoot) + "\\", string.Empty);
+            string zipPath = dir.Replace(KSPPathHelper.GetPath(KSPPaths.KSPRoot) + Path.DirectorySeparatorChar, string.Empty);
             string name = String.Format("StartupBackup_{0}{1}", DateTime.Now.ToString("yyyyMMdd_HHmm"), Constants.EXT_ZIP);
             BackupDirectoryAsync(dir, name, Path.Combine(BackupPath, name), zipPath);
         }
@@ -597,7 +597,7 @@ namespace KSPModAdmin.Plugin.BackupTab
         {
             Messenger.AddInfo("Backup on KSP launch started.");
             string dir = KSPPathHelper.GetPath(KSPPaths.Saves);
-            string zipPath = dir.Replace(KSPPathHelper.GetPath(KSPPaths.KSPRoot) + "\\", string.Empty);
+            string zipPath = dir.Replace(KSPPathHelper.GetPath(KSPPaths.KSPRoot) + Path.DirectorySeparatorChar, string.Empty);
             string name = String.Format("KSPLaunchBackup_{0}{1}", DateTime.Now.ToString("yyyyMMdd_HHmm"), Constants.EXT_ZIP);
             BackupDirectoryAsync(dir, name, Path.Combine(BackupPath, name), zipPath);
         }
@@ -772,17 +772,17 @@ namespace KSPModAdmin.Plugin.BackupTab
         private static string CreateBackupFilename(string dir, out string fullpath, out string zipPath)
         {
             // create the name of the backupfile from the backup directory
-            string name = dir.Substring(dir.LastIndexOf(Constants.PATHSEPERATOR) + 1, dir.Length - (dir.LastIndexOf(Constants.PATHSEPERATOR) + 1));
+            string name = dir.Substring(dir.LastIndexOf(Path.DirectorySeparatorChar) + 1, dir.Length - (dir.LastIndexOf(Path.DirectorySeparatorChar) + 1));
             string filename = String.Format("{0}_{1}{2}", name, DateTime.Now.ToString("yyyyMMdd_HHmm"), Constants.EXT_ZIP);
             fullpath = Path.Combine(BackupPath, filename);
 
             // get zip intern dir
-            zipPath = dir.Replace(KSPPathHelper.GetPath(KSPPaths.KSPRoot) + "\\", string.Empty);
+            zipPath = dir.Replace(KSPPathHelper.GetPath(KSPPaths.KSPRoot) + Path.DirectorySeparatorChar, string.Empty);
 
             // add _(x) to the filename if the file already exists.
             int i = 1;
             while (File.Exists(fullpath))
-                fullpath = Path.GetDirectoryName(fullpath) + Constants.PATHSEPERATOR + Path.GetFileNameWithoutExtension(fullpath) + "_" + (i++).ToString("00") + Path.GetExtension(fullpath);
+                fullpath = Path.GetDirectoryName(fullpath) + Path.DirectorySeparatorChar + Path.GetFileNameWithoutExtension(fullpath) + "_" + (i++).ToString("00") + Path.GetExtension(fullpath);
 
             return name;
         }
@@ -821,7 +821,7 @@ namespace KSPModAdmin.Plugin.BackupTab
                     string directoryName = Path.GetDirectoryName(file);
                     if (directoryName != null)
                     {
-                        string temp = Path.Combine(directoryName.Replace(KSPPathHelper.GetPath(KSPPaths.KSPRoot) + "\\", string.Empty), Path.GetFileName(file));
+                        string temp = Path.Combine(directoryName.Replace(KSPPathHelper.GetPath(KSPPaths.KSPRoot) + Path.DirectorySeparatorChar, string.Empty), Path.GetFileName(file));
                         archive.AddEntry(temp, file);
                     }
                 }
@@ -861,7 +861,7 @@ namespace KSPModAdmin.Plugin.BackupTab
             int count = 1;
             string name = string.Format("AutoBackup_{0}_{1}{2}", count, DateTime.Now.ToString("yyyyMMdd_HHmm"), Constants.EXT_ZIP);
             string dir = KSPPathHelper.GetPath(KSPPaths.Saves);
-            string zipPath = dir.Replace(KSPPathHelper.GetPath(KSPPaths.KSPRoot) + "\\", string.Empty);
+            string zipPath = dir.Replace(KSPPathHelper.GetPath(KSPPaths.KSPRoot) + Path.DirectorySeparatorChar, string.Empty);
 
             if (Directory.Exists(BackupPath))
             {
