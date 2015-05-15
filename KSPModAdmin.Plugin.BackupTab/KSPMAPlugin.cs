@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using KSPModAdmin.Core;
 using KSPModAdmin.Plugin.BackupTab.Properties;
+using KSPModAdmin.Plugin.BackupTab.Views;
 
 namespace KSPModAdmin.Plugin.BackupTab
 {
@@ -25,7 +26,7 @@ namespace KSPModAdmin.Plugin.BackupTab
         {
             get
             {
-                return "This Plugin adds a tab to [insert purpose here].";
+                return "This Plugin adds a tab to add a easy way to handle backups of KSP related data.";
             }
         }
 

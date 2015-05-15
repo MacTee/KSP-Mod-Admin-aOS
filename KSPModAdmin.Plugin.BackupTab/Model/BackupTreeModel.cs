@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using KSPModAdmin.Core.Model;
 using KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree;
 
-namespace KSPModAdmin.Plugin.BackupTab
+namespace KSPModAdmin.Plugin.BackupTab.Model
 {
     /// <summary>
     /// Model for UcBackupView TreeViewAdv.

@@ -16,6 +16,9 @@
   <Control Name="tsbRemoveAllBackups" Value="(T)tsbRemoveAllBackups">
     <ChildControl Name="tsbRemoveAllBackups_ToolTip" Value="(T)Remove all backup^Deletes and removes the all backups in the backup directory."/>
   </Control>
+  <Control Name="tsbRefreshBackupview" Value="tsbRefreshBackupview">
+    <ChildControl Name="tsbRefreshBackupview_ToolTip" Value="(T)Refresh^Scans the backup folder and repopulate the table again."/>
+  </Control>
   <Control Name="btnOpenBackupDir" Value="">
     <ChildControl Name="btnOpenBackupDir_ToolTip" Value="(T)Open backup directory^Opens the backup direcktory in a explorer window."/>
   </Control>
@@ -28,6 +31,37 @@
   </Control>
   <Control Name="grbBackups" Value="(T)Backups"/>
 
+  <Control Name="grpBackupOptions" Value="(T)Backup options:"/>
+  <Control Name="cbAutoBackup" Value="(T)Auto backup">
+    <ChildControl Name="cbAutoBackup_ToolTip" Value="(T)AutoBackup on/off^If on, KSP Mod Admin will create a backup of the KSP saves folder of the selected KSP path.^Default interval is every 60 minutes. Settings can be changed via the backup options."/>
+  </Control>
+  <Control Name="lblBackupInterval" Value="(T)Backup interval:"/>
+  <Control Name="lblBackupTime" Value="(T)minutes"/>
+  <Control Name="lblMaxBackupFiles" Value="(T)Max. backup files:"/>
+  <Control Name="cbBackupOnStartup" Value="(T)Backup on KSP Mod Admin start">
+    <ChildControl Name="cbBackupOnStartup_ToolTip" Value="(T)Backup on KSP Mod Admin Start^If on, KSP Mod Admin will create a backup of the KSP saves folder of the selected KSP path, when KSP Mod Admin is started."/>
+  </Control>
+  <Control Name="cbBackupOnKSPLaunch" Value="(T)Backup on KSP launch">
+    <ChildControl Name="cbBackupOnKSPLaunch_ToolTip" Value="(T)Backup on KSP launch^If on, KSP Mod Admin will create a backup of the KSP saves folder of the selected KSP path, when KSP will be launched."/>
+  </Control>
+  <Control Name="tsbAutoBackup" Value="(T)Auto backup">
+    <ChildControl Name="tsbAutoBackup_ToolTip" Value="(T)AutoBackup on/off^If on, KSP Mod Admin will create a backup of the KSP saves folder of the selected KSP path.^Default interval is every 60 minutes. Settings can be changed via the backup options."/>
+  </Control>
+  <Control Name="tsbBackupOnStartup" Value="(T)Backup on KSP Mod Admin start">
+    <ChildControl Name="tsbBackupOnStartup_ToolTip" Value="(T)Backup on KSP Mod Admin Start^If on, KSP Mod Admin will create a backup of the KSP saves folder of the selected KSP path, when KSP Mod Admin is started."/>
+  </Control>
+  <Control Name="tsbBackupOnKSPLaunch" Value="(T)Backup on KSP launch">
+    <ChildControl Name="tsbBackupOnKSPLaunch_ToolTip" Value="(T)Backup on KSP launch^If on, KSP Mod Admin will create a backup of the KSP saves folder of the selected KSP path, when KSP will be launched."/>
+  </Control>
+  <Control Name="tsbBackupOptions" Value="(T)Backup on KSP launch">
+    <ChildControl Name="tsbBackupOptions_ToolTip" Value="(T)Open/Close backup options^Opens or closes the backup options panel."/>
+  </Control>
+
+  <Control Name="frmEditNote" Value="(T)Edit note"/>
+  <Control Name="lblBackupName" Value="(T)Backup name:"/>
+  <Control Name="lblBackupNote" Value="(T)Note:"/>
+  <Control Name="btnChangeBackupNote" Value="(T)Save"/>
+  
   <String Name="UcBackupView_Item_00" Value="(T)FileName"/>
   <String Name="UcBackupView_Item_01" Value="(T)Note"/>
   <String Name="MSG_BACKUPTAB_VIEW_TITLE" Value="(T)Backup"/>

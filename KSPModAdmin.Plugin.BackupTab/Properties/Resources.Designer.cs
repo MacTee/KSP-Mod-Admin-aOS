@@ -143,6 +143,26 @@ namespace KSPModAdmin.Plugin.BackupTab.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap data_gearwheel {
+            get {
+                object obj = ResourceManager.GetObject("data_gearwheel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap data_gearwheel_new {
+            get {
+                object obj = ResourceManager.GetObject("data_gearwheel_new", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap data_into_floppy_disk_24x24 {
             get {
                 object obj = ResourceManager.GetObject("data_into_floppy_disk_24x24", resourceCulture);
@@ -156,6 +176,16 @@ namespace KSPModAdmin.Plugin.BackupTab.Properties {
         internal static System.Drawing.Bitmap data2_delete24x24 {
             get {
                 object obj = ResourceManager.GetObject("data2_delete24x24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap delete2 {
+            get {
+                object obj = ResourceManager.GetObject("delete2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -223,9 +253,79 @@ namespace KSPModAdmin.Plugin.BackupTab.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap kerbal_24x24 {
+            get {
+                object obj = ResourceManager.GetObject("kerbal_24x24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap kerbal_new_24x24 {
+            get {
+                object obj = ResourceManager.GetObject("kerbal_new_24x24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap KMA2_24 {
+            get {
+                object obj = ResourceManager.GetObject("KMA2_24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap KMA2_new_24x24 {
+            get {
+                object obj = ResourceManager.GetObject("KMA2_new_24x24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap loader {
             get {
                 object obj = ResourceManager.GetObject("loader", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap note_edit {
+            get {
+                object obj = ResourceManager.GetObject("note_edit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap note_floppy_disk {
+            get {
+                object obj = ResourceManager.GetObject("note_floppy_disk", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap note_floppy_disk_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("note_floppy_disk_16x16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

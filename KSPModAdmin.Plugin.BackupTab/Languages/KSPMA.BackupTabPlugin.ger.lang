@@ -16,17 +16,51 @@
   <Control Name="tsbRemoveAllBackups" Value="tsbRemoveAllBackups">
     <ChildControl Name="tsbRemoveAllBackups_ToolTip" Value="Alle Backups entfernen^Löscht und entfernt alle backups des Backup Ordners."/>
   </Control>
+  <Control Name="tsbRefreshBackupview" Value="tsbRefreshBackupview">
+    <ChildControl Name="tsbRefreshBackupview_ToolTip" Value="Aktualisieren^Scant den Backup Ordner und füllte die Tabelle erneut."/>
+  </Control>
   <Control Name="btnOpenBackupDir" Value="">
     <ChildControl Name="btnOpenBackupDir_ToolTip" Value="Öffne Backup Ordner^Öffnet den Backup Ordner in einem Explorer Fenster."/>
   </Control>
   <Control Name="btnBackupPath" Value="">
     <ChildControl Name="btnBackupPath_ToolTip" Value="Neuen Backup Ordner auswählen^Öffnet den Ordner Auswahldialog um einen neuen Backup Ordner zu wählen."/>
   </Control>
-  <Control Name="lblSelectBackupPathFirst" Value="Bitte einen Backup Ornder wählen (Knopf rechts oben in der Ecke)."/>
+  <Control Name="lblSelectBackupPathFirst" Value="Bitte einen Backup Ordner wählen (Knopf rechts oben in der Ecke)."/>
   <Control Name="btnRecoverBackup" Value="Backup wieder herstellen">
     <ChildControl Name="btnRecoverBackup_ToolTip" Value="Backup wieder herstellen^Extrahiert das backup zurück in Ursprungspfad."/>
   </Control>
   <Control Name="grbBackups" Value="Backups"/>
+
+  <Control Name="grpBackupOptions" Value="Backup Optionen:"/>
+  <Control Name="cbAutoBackup" Value="Auto backup">
+    <ChildControl Name="cbAutoBackup_ToolTip" Value="AutoBackup an/aus^Wenn an, dann macht der KSP Mod Admin ein Backup des saves Ordners der aktuell ausgewählten KSP installation.^Default Intervall ist alle 60 Minuten. Einstellungen können über die Backup Optionen verändert werden."/>
+  </Control>
+  <Control Name="lblBackupInterval" Value="Backup Intervall:"/>
+  <Control Name="lblBackupTime" Value="Minuten"/>
+  <Control Name="lblMaxBackupFiles" Value="Max. Backupdateien:"/>
+  <Control Name="cbBackupOnStartup" Value="Backup beim start von KSP Mod Admin">
+    <ChildControl Name="cbBackupOnStartup_ToolTip" Value="Backup beim start von KSP Mod Admin^Wenn an, dann macht der KSP Mod Admin bei jedem start von KSP Mod Admin ein Backup des saves Ordners der aktuell ausgewählten KSP installation."/>
+  </Control>
+  <Control Name="cbBackupOnKSPLaunch" Value="Backup beim start von KSP">
+    <ChildControl Name="cbBackupOnKSPLaunch_ToolTip" Value="Backup beim start von KSP^Wenn an, dann macht der KSP Mod Admin bei jedem start von KSP ein Backup des saves Ordners der aktuell ausgewählten KSP installation."/>
+  </Control>
+  <Control Name="tsbAutoBackup" Value="Auto backup">
+    <ChildControl Name="tsbAutoBackup_ToolTip" Value="AutoBackup an/aus^Wenn an, dann macht der KSP Mod Admin ein Backup des saves Ordners der aktuell ausgewählten KSP installation.^Default Intervall ist alle 60 Minuten. Einstellungen können über die Backup Optionen verändert werden."/>
+  </Control>
+  <Control Name="tsbBackupOnStartup" Value="Backup beim start von KSP Mod Admin">
+    <ChildControl Name="tsbBackupOnStartup_ToolTip" Value="Backup beim start von KSP Mod Admin^Wenn an, dann macht der KSP Mod Admin bei jedem start von KSP Mod Admin ein Backup des saves Ordners der aktuell ausgewählten KSP installation."/>
+  </Control>
+  <Control Name="tsbBackupOnKSPLaunch" Value="Backup beim start von KSP">
+    <ChildControl Name="tsbBackupOnKSPLaunch_ToolTip" Value="Backup beim start von KSP^Wenn an, dann macht der KSP Mod Admin bei jedem start von KSP ein Backup des saves Ordners der aktuell ausgewählten KSP installation."/>
+  </Control>
+  <Control Name="tsbBackupOptions" Value="Öffnen/Schließen der Backup Optionen">
+    <ChildControl Name="tsbBackupOptions_ToolTip" Value="Öffnen/Schließen der Backup Optionen^Öffnet oder schließt die Backup Optionen."/>
+  </Control>
+  
+  <Control Name="frmEditNote" Value="Notiz bearbeiten"/>
+  <Control Name="lblBackupName" Value="Backup Name:"/>
+  <Control Name="lblBackupNote" Value="Notiz:"/>
+  <Control Name="btnChangeBackupNote" Value="Speichern"/>
   
   <String Name="UcBackupView_Item_00" Value="Dateiname"/>
   <String Name="UcBackupView_Item_01" Value="Notiz"/>

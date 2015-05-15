@@ -1,7 +1,7 @@
 ﻿using System;
 using KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree;
 
-namespace KSPModAdmin.Plugin.BackupTab
+namespace KSPModAdmin.Plugin.BackupTab.Model
 {
     /// <summary>
     /// The TreeNode for the backup TreeViewAdv of the UcBackupView.

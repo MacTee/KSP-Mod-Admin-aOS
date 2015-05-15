@@ -10,11 +10,13 @@ using KSPModAdmin.Core;
 using KSPModAdmin.Core.Config;
 using KSPModAdmin.Core.Controller;
 using KSPModAdmin.Core.Utils;
+using KSPModAdmin.Plugin.BackupTab.Model;
+using KSPModAdmin.Plugin.BackupTab.Views;
 using SharpCompress.Archive;
 using SharpCompress.Archive.Zip;
 using SharpCompress.Common;
 
-namespace KSPModAdmin.Plugin.BackupTab
+namespace KSPModAdmin.Plugin.BackupTab.Controller
 {
     /// <summary>
     /// Controller class for the Translation view.
@@ -29,6 +31,7 @@ namespace KSPModAdmin.Plugin.BackupTab
         private const string VALUE = "Value";
         private const string NOTE = "Note";
         private const string BACKUPPATH = "BackupPath";
+        private const string AUTOBACKUP = "AutoBackup";
         private const string BACKUPINTERVAL = "BackupInterval";
         private const string MAXBACKUPFILES = "MaxBackupFiles";
         private const string BACKUPONKSPLAUNCH = "BackupOnKSPLaunch";
@@ -90,29 +93,6 @@ namespace KSPModAdmin.Plugin.BackupTab
         }
 
         /// <summary>
-        /// The interval to do a backup of the save folder (in minutes).
-        /// </summary>
-        [DefaultValue(60)]
-        public static int BackupInterval { get; set; }
-
-        /// <summary>
-        /// Maximum of auto backup files.
-        /// If maximum is reached older auto backup will be replaced.
-        /// </summary>
-        [DefaultValue(5)]
-        public static int MaxBackupFiles { get; set; }
-
-        /// <summary>
-        /// Gets or sets the flag to determine if we should make a backup on a launch of KSP.
-        /// </summary>
-        public static bool BackupOnKSPLaunch { get; set; }
-
-        /// <summary>
-        /// Gets or sets the flag to determine if we should make a backup on a launch of KSP Mod Admin.
-        /// </summary>
-        public static bool BackupOnKSPMALaunch { get; set; }
-
-        /// <summary>
         /// Toggles the on off state of the auto backup function.
         /// </summary>
         public static bool AutoBackupOnOff
@@ -121,7 +101,11 @@ namespace KSPModAdmin.Plugin.BackupTab
             set
             {
                 autoBackupTimer.Tag = value;
-                if (value)
+
+                if (View.AutoBackup != value)
+                    View.AutoBackup = value;
+
+                if (View.AutoBackup)
                 {
                     autoBackupTimer.Stop();
                     autoBackupTimer.Interval = (int)(BackupInterval * 60 * 1000); // minutes to milisecs.
@@ -131,6 +115,61 @@ namespace KSPModAdmin.Plugin.BackupTab
                 {
                     autoBackupTimer.Stop();
                 }
+            }
+        }
+
+        /// <summary>
+        /// The interval to do a backup of the save folder (in minutes).
+        /// </summary>
+        [DefaultValue(60)]
+        public static int BackupInterval
+        {
+            get { return View.BackupInterval; }
+            set
+            {
+                if (View.BackupInterval != value)
+                    View.BackupInterval = value;
+            }
+        }
+
+        /// <summary>
+        /// Maximum of auto backup files.
+        /// If maximum is reached older auto backup will be replaced.
+        /// </summary>
+        [DefaultValue(5)]
+        public static int MaxBackupFiles
+        {
+            get { return View.MaxBackupFiles; }
+            set
+            {
+                if (View.MaxBackupFiles != value)
+                    View.MaxBackupFiles = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the flag to determine if we should make a backup on a launch of KSP.
+        /// </summary>
+        public static bool BackupOnKSPLaunch
+        {
+            get { return View.BackupOnKSPLaunch; }
+            set
+            {
+                if (View.BackupOnKSPLaunch != value)
+                    View.BackupOnKSPLaunch = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the flag to determine if we should make a backup on a launch of KSP Mod Admin.
+        /// </summary>
+        public static bool BackupOnKSPMALaunch
+        {
+            get { return View.BackupOnKSPMALaunch; }
+            set
+            {
+                if (View.BackupOnKSPMALaunch != value)
+                    View.BackupOnKSPMALaunch = value;
             }
         }
 
@@ -194,6 +233,7 @@ namespace KSPModAdmin.Plugin.BackupTab
         /// </summary>
         private static void KSPRootChanged(string kspPath)
         {
+            View.StartUpdate();
             View.BackupPath = string.Empty;
             LoadBackupSettings();
             ScanBackupDirectory();
@@ -205,6 +245,8 @@ namespace KSPModAdmin.Plugin.BackupTab
         /// </summary>
         private static void StartingKSP(object sender)
         {
+            LoadBackupSettings();
+            ScanBackupDirectory();
             if (BackupOnKSPLaunch)
                 KSPLaunchBackup();
         }
@@ -215,6 +257,8 @@ namespace KSPModAdmin.Plugin.BackupTab
         /// </summary>
         private static void KSPMAStarted(object sender)
         {
+            LoadBackupSettings();
+            ScanBackupDirectory();
             if (BackupOnKSPMALaunch)
                 StartupBackup();
         }
@@ -237,7 +281,8 @@ namespace KSPModAdmin.Plugin.BackupTab
         /// <returns>A dictionary with the format Filename, Note.</returns>
         public static Dictionary<string, string> LoadBackupSettings()
         {
-            var result = new Dictionary<string, string>();
+            backupNotes = new Dictionary<string, string>();
+            View.StartUpdate();
 
             var fullpath = FullBackupConfigPath;
             if (!File.Exists(fullpath))
@@ -251,7 +296,6 @@ namespace KSPModAdmin.Plugin.BackupTab
             XmlDocument doc = new XmlDocument();
             doc.Load(fullpath);
 
-            BackupNode root = new BackupNode(ROOT, ROOT, string.Empty);
             XmlNodeList nodeList = doc.GetElementsByTagName(BACKUPPATH);
             if (nodeList.Count >= 1 && nodeList[0].Attributes != null)
             {
@@ -259,6 +303,16 @@ namespace KSPModAdmin.Plugin.BackupTab
                 {
                     if (att.Name == NAME)
                         BackupPath = att.Value;
+                }
+            }
+
+            nodeList = doc.GetElementsByTagName(AUTOBACKUP);
+            if (nodeList.Count >= 1 && nodeList[0].Attributes != null)
+            {
+                foreach (XmlAttribute att in nodeList[0].Attributes)
+                {
+                    if (att.Name == VALUE)
+                        AutoBackupOnOff = att.Value.Equals("true", StringComparison.CurrentCultureIgnoreCase);
                 }
             }
 
@@ -320,10 +374,12 @@ namespace KSPModAdmin.Plugin.BackupTab
                 if (string.IsNullOrEmpty(name))
                     continue;
 
-                result.Add(name, note);
+                backupNotes.Add(name, note);
             }
 
-            return result;
+            View.EndUpdate();
+
+            return backupNotes;
         }
 
         /// <summary>
@@ -335,10 +391,13 @@ namespace KSPModAdmin.Plugin.BackupTab
             XmlNode docNode = doc.CreateXmlDeclaration("1.0", "UTF-8", null);
             doc.AppendChild(docNode);
 
-            XmlNode root = doc.CreateElement(Constants.ROOT);
+            XmlNode root = doc.CreateElement(ROOT);
             doc.AppendChild(root);
 
             XmlNode node = ConfigHelper.CreateConfigNode(doc, BACKUPPATH, NAME, BackupPath);
+            root.AppendChild(node);
+
+            node = ConfigHelper.CreateConfigNode(doc, AUTOBACKUP, VALUE, AutoBackupOnOff.ToString());
             root.AppendChild(node);
 
             node = ConfigHelper.CreateConfigNode(doc, BACKUPINTERVAL, VALUE, BackupInterval.ToString());
@@ -563,6 +622,8 @@ namespace KSPModAdmin.Plugin.BackupTab
                         string note = GetNote(dispTxt);
                         model.Nodes.Add(new BackupNode(file, dispTxt, note));
                     }
+
+                    SaveBackupSettings();
                 }
                 else
                 {

@@ -28,7 +28,7 @@
 //// TODO
 /////////////////////
 
-- relative ksp path search (options/path) create a new dialog for this option.
+- Known KSP Path: Relative ksp path search (options/path) create a new dialog for this option.
 
 - cutdown of uckspstartup
 - Disable 64-Bit vor windows.

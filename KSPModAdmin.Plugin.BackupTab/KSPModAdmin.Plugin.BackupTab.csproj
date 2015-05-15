@@ -70,8 +70,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BackupNode.cs" />
-    <Compile Include="BackupTreeModel.cs" />
+    <Compile Include="Model\BackupNode.cs" />
+    <Compile Include="Model\BackupTreeModel.cs" />
+    <Compile Include="Views\frmEditNote.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frmEditNote.Designer.cs">
+      <DependentUpon>frmEditNote.cs</DependentUpon>
+    </Compile>
     <Compile Include="KSPMAPlugin.cs" />
     <Compile Include="Messages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -80,20 +86,23 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="UcBackupViewController.cs" />
-    <Compile Include="UcBackupView.cs">
+    <Compile Include="Controller\UcBackupViewController.cs" />
+    <Compile Include="Views\UcBackupView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UcBackupView.Designer.cs">
+    <Compile Include="Views\UcBackupView.Designer.cs">
       <DependentUpon>UcBackupView.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Views\frmEditNote.resx">
+      <DependentUpon>frmEditNote.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="UcBackupView.resx">
+    <EmbeddedResource Include="Views\UcBackupView.resx">
       <DependentUpon>UcBackupView.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
@@ -168,6 +177,36 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\gear_new.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kerbal_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kerbal_new_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KMA2_24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KMA2_new_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\data_gearwheel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\data_gearwheel_new.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\note_edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\note_floppy_disk.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\note_floppy_disk_16x16.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

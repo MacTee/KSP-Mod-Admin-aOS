@@ -5,17 +5,20 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Windows.Forms;
 using KSPModAdmin.Core.Controller;
-using KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree;
 using KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.Helper;
 using KSPModAdmin.Core.Utils.Localization;
 using KSPModAdmin.Core.Views;
+using KSPModAdmin.Plugin.BackupTab.Controller;
+using KSPModAdmin.Plugin.BackupTab.Model;
 using KSPModAdmin.Plugin.BackupTab.Properties;
 
-namespace KSPModAdmin.Plugin.BackupTab
+namespace KSPModAdmin.Plugin.BackupTab.Views
 {
     [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Reviewed. Suppression is OK here.")]
     public partial class UcBackupView : ucBase
     {
+        private bool updating = false;
+
         #region Properties
 
         /// <summary>
@@ -58,6 +61,54 @@ namespace KSPModAdmin.Plugin.BackupTab
         {
             get { return tslProcessing.Visible; }
             set { tslProcessing.Visible = value; }
+        }
+
+        /// <summary>
+        /// Toggles the on off state of the auto backup function.
+        /// </summary>
+        public bool AutoBackup 
+        { 
+            get { return tsbAutoBackup.Checked; }
+            set { tsbAutoBackup.Checked = value; }
+        }
+
+        /// <summary>
+        /// The interval to do a backup of the save folder (in minutes).
+        /// </summary>
+        [DefaultValue(60)]
+        public int BackupInterval
+        {
+            get { return tbBackupIterval.IntValue; }
+            set { tbBackupIterval.Text = value.ToString(); }
+        }
+
+        /// <summary>
+        /// Maximum of auto backup files.
+        /// If maximum is reached older auto backup will be replaced.
+        /// </summary>
+        [DefaultValue(5)]
+        public int MaxBackupFiles
+        {
+            get { return tbMaxBackupFiles.IntValue; }
+            set { tbMaxBackupFiles.Text = value.ToString(); }
+        }
+
+        /// <summary>
+        /// Gets or sets the flag to determine if we should make a backup on a launch of KSP.
+        /// </summary>
+        public bool BackupOnKSPLaunch
+        {
+            get { return tsbBackupOnKSPLaunch.Checked; }
+            set { tsbBackupOnKSPLaunch.Checked = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets the flag to determine if we should make a backup on a launch of KSP Mod Admin.
+        /// </summary>
+        public bool BackupOnKSPMALaunch
+        {
+            get { return tsbBackupOnStartup.Checked; }
+            set { tsbBackupOnStartup.Checked = value; }
         }
 
         private bool ShowSelectPathLabel
@@ -188,8 +239,14 @@ namespace KSPModAdmin.Plugin.BackupTab
 
         private void tsbRefresh_Click(object sender, EventArgs e)
         {
+            UcBackupViewController.SaveBackupSettings();
             UcBackupViewController.LoadBackupSettings();
             UcBackupViewController.ScanBackupDirectory();
+        }
+
+        private void tsbEditBackupNote_Click(object sender, EventArgs e)
+        {
+            EditSelectedBackupNote();
         }
 
         private void tsbBackupOptions_CheckStateChanged(object sender, EventArgs e)
@@ -198,9 +255,50 @@ namespace KSPModAdmin.Plugin.BackupTab
             ShowOptions = tsbBackupOptions.CheckState == CheckState.Checked;
         }
 
+        private void tvBackups_DoubleClick(object sender, EventArgs e)
+        {
+            EditSelectedBackupNote();
+        }
+
         private void tvBackups_SelectionChanged(object sender, EventArgs e)
         {
             UpdateEnabldeState();
+        }
+
+        private void AutoBackup_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateCheckedState(sender, tsbAutoBackup, cbAutoBackup);
+
+            tsbAutoBackup.Image = tsbAutoBackup.Checked ? Resources.data_gearwheel_new : Resources.data_gearwheel;
+            UcBackupViewController.AutoBackupOnOff = cbAutoBackup.Checked;
+        }
+
+        private void BackupOnStartup_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateCheckedState(sender, tsbBackupOnStartup, cbBackupOnStartup);
+
+            tsbBackupOnStartup.Image = cbBackupOnStartup.Checked ? Resources.KMA2_new_24x24 : Resources.KMA2_24;
+        }
+
+        private void BackupOnKSPLaunch_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateCheckedState(sender, tsbBackupOnKSPLaunch, cbBackupOnKSPLaunch);
+
+            tsbBackupOnKSPLaunch.Image = cbBackupOnKSPLaunch.Checked ? Resources.kerbal_new_24x24 : Resources.kerbal_24x24;
+        }
+
+        private void TextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (!updating)
+            {
+                if (AutoBackup)
+                {
+                    // reset backup timer
+                    UcBackupViewController.AutoBackupOnOff = false;
+                    UcBackupViewController.AutoBackupOnOff = true;
+                }
+                UcBackupViewController.SaveBackupSettings();
+            }
         }
 
         #endregion
@@ -223,6 +321,24 @@ namespace KSPModAdmin.Plugin.BackupTab
         public override string GetTabCaption()
         {
             return Messages.MSG_BACKUPTAB_VIEW_TITLE;
+        }
+
+        /// <summary>
+        /// Starts the update mode.
+        /// Value changes to backup options wont invoke a save options.
+        /// </summary>
+        public void StartUpdate()
+        {
+            updating = true;
+        }
+
+        /// <summary>
+        /// Ends the update mode.
+        /// Value changes to backup options will invoke a save options again.
+        /// </summary>
+        public void EndUpdate()
+        {
+            updating = false;
         }
 
         /// <summary>
@@ -258,7 +374,8 @@ namespace KSPModAdmin.Plugin.BackupTab
 
             ShowSelectPathLabel = !HasValidBackupPath;
 
-            UcBackupViewController.SaveBackupSettings();
+            if (!updating)
+                UcBackupViewController.SaveBackupSettings();
         }
 
         private void UpdateEnabldeState()
@@ -271,42 +388,34 @@ namespace KSPModAdmin.Plugin.BackupTab
             tsbRemoveBackup.Enabled = (selBackup != null) && HasValidBackupPath && !ShowOptions;
             tsbRemoveAllBackups.Enabled = HasValidBackupPath && !ShowOptions;
             tsbRefreshBackupview.Enabled = HasValidBackupPath && !ShowOptions;
+            tsbEditBackupNote.Enabled = (selBackup != null) && HasValidBackupPath && !ShowOptions;
         }
 
-        private void cbAutoBackup_CheckedChanged(object sender, EventArgs e)
+        private void UpdateCheckedState(object sender, ToolStripButton tsb, CheckBox cb)
         {
-            if (tsbAutoBackup.Checked != cbAutoBackup.Checked)
-                tsbAutoBackup.Checked = cbAutoBackup.Checked;
+            var value = (sender == tsb) ? tsb.Checked : cb.Checked;
+            if (value != cb.Checked)
+                cb.Checked = value;
+            if (value != tsb.Checked)
+                tsb.Checked = value;
+
+            if (!updating)
+                UcBackupViewController.SaveBackupSettings();
         }
 
-        private void cbBackupOnStartup_CheckedChanged(object sender, EventArgs e)
+        private void EditSelectedBackupNote()
         {
-            if (tsbBackupOnStartup.Checked != cbBackupOnStartup.Checked)
-                tsbBackupOnStartup.Checked = cbBackupOnStartup.Checked;
-        }
+            var row = SelectedBackup;
+            if (row == null)
+                return;
 
-        private void cbBackupOnKSPLaunch_CheckedChanged(object sender, EventArgs e)
-        {
-            if (tsbBackupOnKSPLaunch.Checked != cbBackupOnKSPLaunch.Checked)
-                tsbBackupOnKSPLaunch.Checked = cbBackupOnKSPLaunch.Checked;
-        }
-
-        private void tsbAutoBackup_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cbAutoBackup.Checked != tsbAutoBackup.Checked)
-                cbAutoBackup.Checked = tsbAutoBackup.Checked;
-        }
-
-        private void tsbBackupOnStartup_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cbBackupOnStartup.Checked != tsbBackupOnStartup.Checked)
-                cbBackupOnStartup.Checked = tsbBackupOnStartup.Checked;
-        }
-
-        private void tsbBackupOnKSPLaunch_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cbBackupOnKSPLaunch.Checked != tsbBackupOnKSPLaunch.Checked)
-                cbBackupOnKSPLaunch.Checked = tsbBackupOnKSPLaunch.Checked;
+            var dlg = new frmEditNote { BackupName = row.Name, BackupNote = row.Note };
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                row.Name = dlg.BackupName;
+                row.Note = dlg.BackupNote;
+                UcBackupViewController.SaveBackupSettings();
+            }
         }
     }
 }
