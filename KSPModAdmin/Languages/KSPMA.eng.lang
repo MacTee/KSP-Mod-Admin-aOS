@@ -706,4 +706,7 @@
   <Control Name="btnClose" Value="Close">
     <ChildControl Name="btnClose_ToolTip" Value="Closes the dialog."/>
   </Control>
+  <Control Name="tsbHelp" Value="tsbHelp">
+    <ChildControl Name="tsbHelp_ToolTip" Value="Open help^Opens the KSP Mod Admin Wiki on GitHup with your browser."/>
+  </Control>
 </Language>
