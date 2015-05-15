@@ -315,6 +315,8 @@ namespace KSPModAdmin.Core.Controller
 
             LoadPlugins();
 
+            View.OrderTabPages();
+
             OptionsController.AvailableLanguages = Localizer.GlobalInstance.AvailableLanguages;
             OptionsController.SelectedLanguage = Localizer.GlobalInstance.CurrentLanguage;
 

@@ -124,5 +124,14 @@ namespace KSPModAdmin.Core.Views
             SelectedKSPPath = kspPath;
             cbKSPPath.SelectedIndexChanged += cbKSPPath_SelectedIndexChanged;
         }
+
+        /// <summary>
+        /// Options tab will be the last TabPage.
+        /// </summary>
+        internal void OrderTabPages()
+        {
+            tabControl1.TabPages.Remove(tabPageOptions);
+            tabControl1.TabPages.Add(tabPageOptions);
+        }
     }
 }
