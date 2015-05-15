@@ -333,11 +333,14 @@ namespace KSPModAdmin.Core.Controller
                 OptionsController.SelectedKSPPath = dlg.KSPPath;
             }
 
-            // auto KSP MA update check.
+            // Auto KSP MA update check.
             OptionsController.Check4AppUpdates();
 
-            // auto mod update check.
+            // Auto mod update check.
             OptionsController.Check4ModUpdates(true);
+
+            // Initializing is done.
+            EventDistributor.InvokeKSPMAStarted(Instance);
         }
 
         /// <summary>

@@ -34,6 +34,11 @@ namespace KSPModAdmin.Core
     /// </summary>
     public delegate void KSPPathChangedHandler(string kspPath);
 
+    /// <summary>
+    /// Delegate for the KSPMAStarted event.
+    /// </summary>
+    public delegate void KSPMAStartedHandler(object sender);
+
     #endregion
 
     /// <summary>
@@ -80,6 +85,12 @@ namespace KSPModAdmin.Core
         /// Occurs when the language got changed.
         /// </summary>
         public static event LanguageChangedHandler LanguageChanged = null;
+
+        /// <summary>
+        /// Event for KspMAStarted.
+        /// Occurs when KSP Mod Admin is completely loaded and ready.
+        /// </summary>
+        public static event KSPMAStartedHandler KSPMAStarted = null;
 
 
         /// <summary>
@@ -128,6 +139,15 @@ namespace KSPModAdmin.Core
         {
             if (LanguageChanged != null)
                 LanguageChanged(sender);
+        }
+
+        /// <summary>
+        /// Invokes the KSPMAStarted event to inform all listeners.
+        /// </summary>
+        public static void InvokeKSPMAStarted(object sender)
+        {
+            if (KSPMAStarted != null)
+                KSPMAStarted(sender);
         }
 
 
