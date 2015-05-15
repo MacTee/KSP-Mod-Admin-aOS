@@ -43,6 +43,9 @@
       <Value>Param</Value>
       <Value>src</Value>
       <Value>uc</Value>
+      <Value>Mdd</Value>
+      <Value>init</Value>
+      <Value>cfg</Value>
     </CollectionProperty>
   </GlobalSettings>
   <Parsers>

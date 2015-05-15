@@ -8,7 +8,12 @@ using System.Text.RegularExpressions;
 
 namespace KSPModAdmin.Core.Utils
 {
-    public delegate void DownloadProgressCallback(long bytesRecaived, long fileSize);
+    /// <summary>
+    /// Delegate of a callback function to propagate the download progress.
+    /// </summary>
+    /// <param name="bytesReceived">the bytes received so far.</param>
+    /// <param name="fileSize">Full file size.</param>
+    public delegate void DownloadProgressCallback(long bytesReceived, long fileSize);
 
     /// <summary>
     /// Wrapper class for www (internet) related logic.
@@ -128,7 +133,7 @@ namespace KSPModAdmin.Core.Utils
         /// </summary>
         /// <param name="downloadURL">Url to the file to download.</param>
         /// <param name="downloadPath">Path to save the file to without filename!</param>
-        /// <param name="downloadProgressCallback">Callback function which will recaive download progress information.</param>
+        /// <param name="downloadProgressCallback">Callback function which will receive download progress information.</param>
         /// <returns>The full path to the downloaded file (path and filename).</returns>
         public static string DownloadFile2(string downloadURL, string downloadPath, DownloadProgressCallback downloadProgressCallback = null)
         {
