@@ -11,7 +11,7 @@ namespace KSPModAdmin.Core.Views
     [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Reviewed. Suppression is OK here.")]
     public partial class ucKSPStartup : UserControl
     {
-        public bool settingsFileFound = false;
+        private bool settingsFileFound = false;
 
         #region Constants
 

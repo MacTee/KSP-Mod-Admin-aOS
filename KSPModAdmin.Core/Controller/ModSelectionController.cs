@@ -515,7 +515,6 @@ namespace KSPModAdmin.Core.Controller
         /// Uninstalls and removes the mods from the ModSelection.
         /// </summary>
         /// <param name="modsToRemove">The mods to remove.</param>
-        /// <param name="silent">Flag to avoid pop up messages.</param>
         public static void RemoveMod(ModNode[] modsToRemove)
         {
             if (modsToRemove == null || modsToRemove.Length == 0)
@@ -562,7 +561,6 @@ namespace KSPModAdmin.Core.Controller
         /// <summary>
         /// Uninstalls and removes all mods in the ModSelection.
         /// </summary>
-        /// <param name="silent">Flag to avoid pop up messages.</param>
         public static void RemoveAllMods()
         {
             if (DialogResult.Yes == MessageBox.Show(View.ParentForm, Messages.MSG_DELETE_ALL_MODS_QUESTION, Messages.MSG_TITLE_ATTENTION, MessageBoxButtons.YesNo, MessageBoxIcon.None, MessageBoxDefaultButton.Button2))
