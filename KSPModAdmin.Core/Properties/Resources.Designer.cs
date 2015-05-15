@@ -1273,6 +1273,16 @@ namespace KSPModAdmin.Core.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap kerbal_24x24 {
+            get {
+                object obj = ResourceManager.GetObject("kerbal_24x24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap KMA2_48 {
             get {
                 object obj = ResourceManager.GetObject("KMA2_48", resourceCulture);
