@@ -108,6 +108,18 @@
   <ItemGroup>
     <None Include="Resources\flag_scotland.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\loader.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\flag_scotland_add_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\flag_scotland_delete_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy /E /Y /R /I "$(ProjectDir)Languages" "$(SolutionDir)KSPModAdmin\$(OutDir)lang"</PostBuildEvent>

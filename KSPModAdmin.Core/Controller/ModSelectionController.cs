@@ -1678,5 +1678,20 @@ namespace KSPModAdmin.Core.Controller
 
             return sb.ToString();
         }
+
+
+
+
+
+        public static void UpdateNodeByDestination(string fileDestination)
+        {
+            var relativeDestination = KSPPathHelper.GetRelativePath(fileDestination).ToLower();
+            var a = ModRegister.RegisterdModFiles;
+            if (!ModRegister.RegisterdModFiles.ContainsKey(relativeDestination))
+                return;
+
+            var nodes = ModRegister.RegisterdModFiles[relativeDestination];
+            RefreshCheckedStateOfMods(nodes.ToArray());
+        }
     }
 }

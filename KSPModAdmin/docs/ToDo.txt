@@ -35,6 +35,9 @@
 
 - Progressbar for frmAddMod during download. 
 
+- TreeViewAdv
+  - string cutting (if string is bigger than column) is wirde
+
 - MONO:
   - TreeListView improvement -> Column Header draw and row offset ...
 
