@@ -297,7 +297,7 @@
 		<ChildControl Name="cbShowConflictSolver_ToolTip" Value="Show conflict detection dialog^Show/hides the conflict detection doalog after conflict detection."/>
 	</Control>
   
-  <Control Name="frmAddMod" Value="Adding mod"/>
+  <Control Name="frmAddMod" Value="Add mod"/>
   <Control Name="cbInstallAfterAdd" Value="Install after add.">
     <ChildControl Name="cbInstallAfterAdd_ToolTip" Value="Check to let KSP MA install the new mod right after adding."/>
   </Control>
@@ -463,7 +463,7 @@
   <String Name="MSG_ERROR_DURING_SAVING_KSP_MOD_SETTINGS" Value="Error during saving of KSP Mod settings!"/>
   <String Name="MSG_ERROR_MESSAGE_0" Value="Error message: {0}"/>
   <String Name="MSG_ACCESS_DENIED_DIALOG_MESSAGE" Value="KSP Mod Admin can't save its config file. The access to the KSP path was denied.^If you have install KSP into the Program folder of Windows,^KSP MA needs admin rights to manipulate (save/change KSP MA config file).^You can move you install dir of KSP to another spot or start KSPMA in admin mode with:^  - a right click on the KSPModAdmin.exe and choose &quot;Run as Admin&quot;^or for a permanent change:^  - right click the KSPModAdmin.exe^  - choose properties^  - choose compatibility^  - check the &quot;Run as Admin&quot; CheckBox at the bottom.^  - press OK."/>
-  <String Name="MSG_DELETE_ALL_MODS_QUESTION" Value="Are you sure to uninstall all Mod?"/>
+  <String Name="MSG_DELETE_ALL_MODS_QUESTION" Value="Are you sure to uninstall all mods?"/>
   <String Name="MSG_DELETE_MOD_0_QUESTION" Value="Are you sure to uninstall the mod &quot;{0}&quot;?"/>
   <String Name="MSG_INVALID_URL_SAVE_ANYWAY" Value="Invalid URL save anyway?"/>
   <String Name="MSG_ENTER_VALID_URL_FIRST" Value="Enter a URL first please."/>
@@ -678,7 +678,6 @@
   <Control Name="tsmiCmsOneModOpenFolder" Value="Open folder"/>
   <Control Name="tsmiCmsOneModOpenFile" Value="Open file"/>
   <Control Name="frmConflictSolver" Value="Conflict Solver"/>
-  <Control Name="btnCancel" Value="Cancel"/>
   <Control Name="btnSolve" Value="Solve conflicts"/>
   <Control Name="frmConflictSolver_Item_00" Value="Filename"/>
   <Control Name="frmConflictSolver_Item_01" Value="Destination"/>
@@ -704,4 +703,10 @@
     <ChildControl Name="cbNodColoringUpdatableMods_ToolTip" Value="Node coloring on/off^Turns the colorization of mod nodes which are outdated on or off."/>
   </Control>
   <String Name="MSG_NO_SITEHANDLER_FOUND_FOR_URL_0" Value="No SiteHandler for URL &quot;{0}&quot; found!^Mod Info Update aborded!"/>
+  <Control Name="btnClose" Value="Close">
+    <ChildControl Name="btnClose_ToolTip" Value="Closes the dialog."/>
+  </Control>
+  <Control Name="tsbHelp" Value="tsbHelp">
+    <ChildControl Name="tsbHelp_ToolTip" Value="Open help^Opens the KSP Mod Admin Wiki on GitHup with your browser."/>
+  </Control>
 </Language>

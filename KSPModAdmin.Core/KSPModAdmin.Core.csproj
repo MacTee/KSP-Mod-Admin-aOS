@@ -66,7 +66,7 @@
     </Reference>
     <Reference Include="SharpCompress, Version=0.10.3.0, Culture=neutral, PublicKeyToken=beaf6f427e128133, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Externals\SharpCompress.dll</HintPath>
+      <HintPath>..\packages\sharpcompress.0.10.3\lib\net40\SharpCompress.dll</HintPath>
     </Reference>
     <Reference Include="StyleCop">
       <HintPath>..\packages\StyleCop.4.7.49.0\lib\net35\StyleCop.dll</HintPath>
@@ -610,6 +610,32 @@
     <None Include="Resources\components_package_replace.png" />
     <None Include="Resources\components_scroll_out1.png" />
     <None Include="Resources\folder_up.png" />
+    <None Include="Resources\component_add_24x24.png" />
+    <None Include="Resources\component_delete_24x24.png" />
+    <None Include="Resources\components_delete_24x24.png" />
+    <None Include="Resources\component_next_data_24x24.png" />
+    <None Include="Resources\component_delete_data_24x24.png" />
+    <None Include="Resources\gears_preferences_24x24.png" />
+    <None Include="Resources\components_checkbox_unchecked_24x24.png" />
+    <None Include="Resources\components_checkbox_checked_24x24.png" />
+    <None Include="Resources\components_replace_checkbox_checked_24x24.png" />
+    <None Include="Resources\component_warning_24x24.png" />
+    <None Include="Resources\components_replace_clock_24x24.png" />
+    <None Include="Resources\components_replace_earth_24x24.png" />
+    <None Include="Resources\components_folder_view_24x24.png" />
+    <None Include="Resources\component_edit_scroll_24x24.png" />
+    <None Include="Resources\component_folder_gearwheel_24x24.png" />
+    <None Include="Resources\component_gearwheel_24x24.png" />
+    <None Include="Resources\component_next_earth_24x24.png" />
+    <None Include="Resources\component_replace_checkbox_checked_24x24.png" />
+    <None Include="Resources\component_replace_clock_24x24.png" />
+    <None Include="Resources\component_replace_earth_24x24.png" />
+    <None Include="Resources\component_scroll_scroll_24x24.png" />
+    <None Include="Resources\components_package_replace_24x24.png" />
+    <None Include="Resources\compress_24x24.png" />
+    <None Include="Resources\components_gearwheel_24x24.png" />
+    <None Include="Resources\kerbal_24x24.png" />
+    <None Include="Resources\help_earth.png" />
     <Content Include="Utils\Controls\CheckBoxComboBox\_license\license.txt" />
     <Content Include="Utils\Controls\FolderSelectionDialog\_license\license.txt" />
     <Content Include="Utils\Controls\TreeViewAdv\_license\license.txt" />
@@ -706,7 +732,6 @@
     <None Include="Resources\folder_add.png" />
     <None Include="Resources\page.png" />
     <None Include="Resources\page_add.png" />
-    <Content Include="Externals\SharpCompress.dll" />
     <None Include="Settings.StyleCop" />
     <None Include="Utils\Controls\TreeViewAdv\NodeControls\ClassDiagram.cd" />
   </ItemGroup>

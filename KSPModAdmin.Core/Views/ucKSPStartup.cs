@@ -11,7 +11,7 @@ namespace KSPModAdmin.Core.Views
     [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Reviewed. Suppression is OK here.")]
     public partial class ucKSPStartup : UserControl
     {
-        public bool settingsFileFound = false;
+        private bool settingsFileFound = false;
 
         #region Constants
 
@@ -278,7 +278,8 @@ namespace KSPModAdmin.Core.Views
             cbResolutions.Enabled = (enable && cbResolutions.Items != null && cbResolutions.Items.Count > 0);
             cbForceOpenGL.Enabled = (enable && Environment.OSVersion.Platform != PlatformID.MacOSX && Environment.OSVersion.Platform != PlatformID.Unix);
             cbForceOpenGL.Visible = (Environment.OSVersion.Platform != PlatformID.MacOSX && Environment.OSVersion.Platform != PlatformID.Unix);
-            cbUse64Bit.Enabled = enable;
+            cbUse64Bit.Enabled = (enable && (Environment.OSVersion.Platform == PlatformID.MacOSX || Environment.OSVersion.Platform == PlatformID.Unix));
+            cbUse64Bit.Visible = (Environment.OSVersion.Platform == PlatformID.MacOSX || Environment.OSVersion.Platform == PlatformID.Unix);
         }
     }
 }

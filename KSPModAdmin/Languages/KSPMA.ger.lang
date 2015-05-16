@@ -25,8 +25,8 @@
     <Control Name="tsmiCmsEditModInfos" Value="ModInfos bearbeiten" />
     <Control Name="tsmiCmsCopyModInfos" Value="ModInfos kopieren" />
     <Control Name="tsmiCmsUpdatecheckMod" Value="Nach Updates für diese Mod suchen." />
-    <Control Name="tsmiCmsVisitVersionControlSite" Value="Versionskontrollseite besuchen" />
-    <Control Name="tsmiCmsVisitAdditionalLink" Value="Seite des zusätzlichen Links besuchen" />
+    <Control Name="tsmiCmsVisitVersionControlSite" Value="Versionskontrollwebseite besuchen" />
+    <Control Name="tsmiCmsVisitAdditionalLink" Value="Webseite des zusätzlichen Links besuchen" />
     <Control Name="tsmiCmsSolveConflicts" Value="Konflikte beseitigen" />
     <Control Name="tsmiCmsProceedMod" Value="Mod bearbeiten" />
     <Control Name="tsmiCmsRemoveMod" Value="Mod entfernen" />
@@ -309,7 +309,7 @@
   <Control Name="lblModPath" Value="Modarchiv Pfad oder URL:" />
   <Control Name="lblModName" Value="Mod Name:" />
   <Control Name="btnCancel" Value="Abbruch">
-    <ChildControl Name="btnCancel_ToolTip" Value="Bricht das hinzufügen ab und schließt den Dialog." />
+    <ChildControl Name="btnCancel_ToolTip" Value="Schließt den Dialog." />
   </Control>
   <Control Name="btnAdd" Value="Hinzufügen">
     <ChildControl Name="btnAdd_ToolTip" Value="Fügt die angegebene Mod der Modauswahl hinzu." />
@@ -667,7 +667,6 @@
   <Control Name="tsmiCmsOneModOpenFile" Value="Öffne Datei"/>
   <Control Name="frmConflictSolver" Value="Konfliktlöser"/>
   <Control Name="lblConflictSolverDesc" Value="Um einen Konflikt zu bereinigen, einfach eine der mods einer Konfliktdatei ausw&#228;hlen.^Nach dem selektieren der mods für jede Konfliktdatei den Knopf &quot;Konflikte beheben&quot; klicken.^KSP Mod Admin wird dann die Zielpfade der Konfliktdateien, der nicht ausgew&#228;hlten mods, zur&#252;cksetzten."/>
-  <Control Name="btnCancel" Value="Verwerfen"/>
   <Control Name="btnSolve" Value="Konflikte beheben"/>
   <Control Name="frmConflictSolver_Item_00" Value="Dateiname"/>
   <Control Name="frmConflictSolver_Item_01" Value="Zielpfad"/>
@@ -693,4 +692,10 @@
     <ChildControl Name="cbNodColoringUpdatableMods_ToolTip" Value="Färbung für veraltete Mods ein/ausschalten^Schaltet das Einfärben für veraltete Mods ein oder aus."/>
   </Control>
   <String Name="MSG_NO_SITEHANDLER_FOUND_FOR_URL_0" Value="Keinen SiteHandler für die URL &quot;{0}&quot; gefunden!^Mod Info Update wird abgebrochen!"/>
+  <Control Name="btnClose" Value="Schließen">
+    <ChildControl Name="btnClose_ToolTip" Value="Schließt den Dialog." />
+  </Control>
+  <Control Name="tsbHelp" Value="tsbHelp">
+    <ChildControl Name="tsbHelp_ToolTip" Value="Hilfe öffnen^Öffnet die KSP Mod Admin Wiki Seite auf GitHub mit deinem Browser."/>
+  </Control>
 </Language>
