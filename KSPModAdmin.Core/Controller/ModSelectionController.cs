@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -1579,6 +1580,11 @@ namespace KSPModAdmin.Core.Controller
             dlg.ModSelectionColumns = View.GetModSelectionViewInfo().ModSelectionColumnsInfo;
             if (dlg.ShowDialog() == DialogResult.OK)
                 dlg.ModSelectionColumns.ToTreeViewAdv(View.tvModSelection);
+        }
+
+        public static void OpenWiki()
+        {
+            Process.Start(Constants.WIKIURL);
         }
 
         /// <summary>

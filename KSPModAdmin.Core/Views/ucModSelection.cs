@@ -404,6 +404,11 @@ namespace KSPModAdmin.Core.Views
             ModSelectionController.CheckAllMods();
         }
 
+        private void tsbHelp_Click(object sender, EventArgs e)
+        {
+            ModSelectionController.OpenWiki();
+        }
+
         private void tsmiCmsTreeViewOptions_Click(object sender, EventArgs e)
         {
             ModSelectionController.OpenTreeViewOptions();

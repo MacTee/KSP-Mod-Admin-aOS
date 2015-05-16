@@ -36,8 +36,8 @@
             this.cbBorderlessWin = new System.Windows.Forms.CheckBox();
             this.cbResolutions = new System.Windows.Forms.ComboBox();
             this.cbUse64Bit = new System.Windows.Forms.CheckBox();
-            this.btnLaunchKSP = new System.Windows.Forms.Button();
             this.ttKSPStartup = new System.Windows.Forms.ToolTip(this.components);
+            this.btnLaunchKSP = new System.Windows.Forms.Button();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -148,11 +148,14 @@
             this.btnLaunchKSP.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnLaunchKSP.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLaunchKSP.Image = global::KSPModAdmin.Core.Properties.Resources.kerbal_24x24;
+            this.btnLaunchKSP.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnLaunchKSP.Location = new System.Drawing.Point(3, -1);
             this.btnLaunchKSP.Name = "btnLaunchKSP";
             this.btnLaunchKSP.Size = new System.Drawing.Size(665, 40);
             this.btnLaunchKSP.TabIndex = 1;
             this.btnLaunchKSP.Text = "Launch Kerbal Space Program";
+            this.btnLaunchKSP.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.ttKSPStartup.SetToolTip(this.btnLaunchKSP, "Runs the KSP.exe of the selected KSP install path.");
             this.btnLaunchKSP.UseVisualStyleBackColor = true;
             this.btnLaunchKSP.Click += new System.EventHandler(this.btnLunchKSP_Click);

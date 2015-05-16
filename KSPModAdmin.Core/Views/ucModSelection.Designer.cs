@@ -189,6 +189,7 @@ namespace KSPModAdmin.Core.Views
             this.tsbUncheckAllMods = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.tsbHelp = new System.Windows.Forms.ToolStripButton();
             this.tsProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.tslBusy = new System.Windows.Forms.ToolStripLabel();
             this.tsbTreeViewOption = new System.Windows.Forms.ToolStripButton();
@@ -1029,6 +1030,7 @@ namespace KSPModAdmin.Core.Views
             this.tsbUncheckAllMods,
             this.toolStripSeparator1,
             this.toolStripLabel1,
+            this.tsbHelp,
             this.tsProgressBar,
             this.tslBusy,
             this.tsbTreeViewOption,
@@ -1251,6 +1253,19 @@ namespace KSPModAdmin.Core.Views
             this.toolStripLabel1.Name = "toolStripLabel1";
             this.toolStripLabel1.Size = new System.Drawing.Size(0, 32);
             // 
+            // tsbHelp
+            // 
+            this.tsbHelp.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tsbHelp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbHelp.Image = global::KSPModAdmin.Core.Properties.Resources.help_earth;
+            this.tsbHelp.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsbHelp.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbHelp.Name = "tsbHelp";
+            this.tsbHelp.Size = new System.Drawing.Size(28, 32);
+            this.tsbHelp.Text = "toolStripButton1";
+            this.tsbHelp.ToolTipText = "Open help\r\nOpens the wiki on GitHup with your browser.";
+            this.tsbHelp.Click += new System.EventHandler(this.tsbHelp_Click);
+            // 
             // tsProgressBar
             // 
             this.tsProgressBar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -1448,5 +1463,6 @@ namespace KSPModAdmin.Core.Views
         private System.Windows.Forms.ToolStripMenuItem tsmiOpenConflictSolver;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator16;
         private System.Windows.Forms.ToolStripButton tsbSolveConflicts;
+        private System.Windows.Forms.ToolStripButton tsbHelp;
     }
 }
