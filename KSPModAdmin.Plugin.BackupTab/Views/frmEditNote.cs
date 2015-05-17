@@ -16,6 +16,7 @@ namespace KSPModAdmin.Plugin.BackupTab.Views
         public frmEditNote()
         {
             InitializeComponent();
+            tbNote.Focus();
         }
 
         /// <summary>
