@@ -1582,6 +1582,9 @@ namespace KSPModAdmin.Core.Controller
                 dlg.ModSelectionColumns.ToTreeViewAdv(View.tvModSelection);
         }
 
+        /// <summary>
+        /// Opens the default browser with the KMA² Wiki url.
+        /// </summary>
         public static void OpenWiki()
         {
             Process.Start(Constants.WIKIURL);
@@ -1679,14 +1682,13 @@ namespace KSPModAdmin.Core.Controller
             return sb.ToString();
         }
 
-
-
-
-
-        public static void UpdateNodeByDestination(string fileDestination)
+        /// <summary>
+        /// Refreshes the CheckedState of the ModNodes with the fileDestination.
+        /// </summary>
+        /// <param name="fileDestination">Destination path of the file.</param>
+        public static void RefreshCheckedStateOfNodeByDestination(string fileDestination)
         {
             var relativeDestination = KSPPathHelper.GetRelativePath(fileDestination).ToLower();
-            var a = ModRegister.RegisterdModFiles;
             if (!ModRegister.RegisterdModFiles.ContainsKey(relativeDestination))
                 return;
 

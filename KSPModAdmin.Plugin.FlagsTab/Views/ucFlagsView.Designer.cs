@@ -97,6 +97,8 @@
             this.tsbAddFlag.Name = "tsbAddFlag";
             this.tsbAddFlag.Size = new System.Drawing.Size(28, 28);
             this.tsbAddFlag.Text = "toolStripButton2";
+            this.tsbAddFlag.ToolTipText = "Add new Flag\r\nOpens a FileSelect dialog to select a png which will be added to th" +
+    "e KSP flags.\r\nThe png will be resized to 256x160.";
             this.tsbAddFlag.Click += new System.EventHandler(this.tsbAddFlag_Click);
             // 
             // tsbRemoveFlag
@@ -108,6 +110,7 @@
             this.tsbRemoveFlag.Name = "tsbRemoveFlag";
             this.tsbRemoveFlag.Size = new System.Drawing.Size(28, 28);
             this.tsbRemoveFlag.Text = "toolStripButton3";
+            this.tsbRemoveFlag.ToolTipText = "Remove flag\r\nDeletes and removes the selected flag.";
             this.tsbRemoveFlag.Click += new System.EventHandler(this.tsbRemoveFlag_Click);
             // 
             // toolStripSeparator2
@@ -127,6 +130,7 @@
             this.tsscbModFilter.Name = "tsscbModFilter";
             this.tsscbModFilter.RightMargin = 10;
             this.tsscbModFilter.Size = new System.Drawing.Size(277, 31);
+            this.tsscbModFilter.ToolTipText = "Flag Filter\r\nSelect a filter to adjust the displayed falg groups.";
             this.tsscbModFilter.SelectedIndexChanged += new System.EventHandler(this.tsscbModFilter_SelectedIndexChanged);
             // 
             // tslProcessing

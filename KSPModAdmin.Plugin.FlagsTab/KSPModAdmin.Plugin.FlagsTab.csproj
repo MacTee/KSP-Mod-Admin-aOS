@@ -94,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Languages\KSPMA.FlagsTabPlugin.eng.lang" />
+    <None Include="Languages\KSPMA.FlagsTabPlugin.ger.lang" />
     <None Include="Languages\KSPMA.FlagsTabPlugin.fake.lang" />
     <None Include="packages.config" />
     <None Include="Settings.StyleCop" />

@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
-using System.Xml;
 using KSPModAdmin.Core;
 using KSPModAdmin.Core.Controller;
 using KSPModAdmin.Core.Utils;
-using KSPModAdmin.Core.Utils.Localization;
 using KSPModAdmin.Plugin.FlagsTab.Views;
 
 namespace KSPModAdmin.Plugin.FlagsTab.Controller
@@ -18,10 +17,12 @@ namespace KSPModAdmin.Plugin.FlagsTab.Controller
     /// <summary>
     /// Controller class for the Translation view.
     /// </summary>
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class FlagsViewController
     {
         #region Members
 
+        public const string EXTENSION_PNG = ".png";
         public const string FILTER_ALL = "All";
         public const string FILTER_MYFLAG = "MyFlag";
         public const string FLAGS = "Flags";
@@ -30,7 +31,7 @@ namespace KSPModAdmin.Plugin.FlagsTab.Controller
         public const int FLAG_HEIGHT = 160;
 
         /// <summary>
-        /// List of all flags by group.
+        /// List of all available flags (group, ListViewItem).
         /// </summary>
         private static List<KeyValuePair<string, ListViewItem>> flags = new List<KeyValuePair<string, ListViewItem>>();
 
@@ -42,6 +43,8 @@ namespace KSPModAdmin.Plugin.FlagsTab.Controller
         private static FlagsViewController instance = null;
 
         #endregion
+
+        #region Properties
 
         /// <summary>
         /// Gets the singleton of this class.
@@ -56,8 +59,14 @@ namespace KSPModAdmin.Plugin.FlagsTab.Controller
         /// </summary>
         public static ucFlagsView View { get; protected set; }
 
+        /// <summary>
+        /// List of all available flags (group, ListViewItem).
+        /// </summary>
         public static List<KeyValuePair<string, ListViewItem>> Flags { get { return flags; } }
 
+        /// <summary>
+        /// Gets the full path to the MyFlags/Flags folder of the current selected KSP installation.
+        /// </summary>
         public static string MyFlagsFullPath
         {
             get
@@ -66,6 +75,9 @@ namespace KSPModAdmin.Plugin.FlagsTab.Controller
             }
         }
 
+        /// <summary>
+        /// Gets the full path to the MyFlags folder of the current selected KSP installation.
+        /// </summary>
         public static string MyFlagsPath
         {
             get
@@ -73,6 +85,8 @@ namespace KSPModAdmin.Plugin.FlagsTab.Controller
                 return Path.Combine(KSPPathHelper.GetPath(KSPPaths.GameData), MYFLAGS);
             }
         }
+
+        #endregion
 
         internal static void Initialize(ucFlagsView view)
         {
@@ -127,7 +141,7 @@ namespace KSPModAdmin.Plugin.FlagsTab.Controller
             if (ignoreIndexChange)
                 return;
 
-            Messenger.AddInfo("Refreshing flag tab ...");
+            Messenger.AddInfo(Messages.MSG_FLAG_SCAN_STARTED);
 
             ignoreIndexChange = true;
             string lastFilter = View.SelectedFilter;
@@ -152,7 +166,9 @@ namespace KSPModAdmin.Plugin.FlagsTab.Controller
                     EventDistributor.InvokeAsyncTaskDone(Instance);
 
                     if (ex != null)
-                        MessageBox.Show(View.ParentForm, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Messenger.AddError(Messages.MSG_ERROR_DURING_FLAG_SCAN, ex);
+                    else
+                        Messenger.AddError(Core.Messages.MSG_DONE, ex);
 
                     if (lastFilter != null &&
                         (lastFilter == FILTER_ALL || lastFilter == FILTER_MYFLAG || View.GetGroup(lastFilter) != null))
@@ -167,7 +183,7 @@ namespace KSPModAdmin.Plugin.FlagsTab.Controller
         }
 
         /// <summary>
-        /// Searches the dir and all subdirs for flags.
+        /// Searches the dir and all sub directories for flags.
         /// </summary>
         /// <param name="dir">The directory to search.</param>
         private static void SearchDir4FlagsDirs(string dir)
@@ -175,19 +191,12 @@ namespace KSPModAdmin.Plugin.FlagsTab.Controller
             if (dir == string.Empty) 
                 return;
 
-            try
-            {
-                if (dir.ToLower().EndsWith("flags"))
+                if (dir.ToLower().EndsWith(FLAGS.ToLower()))
                     SearchFlags(dir);
 
                 string[] subdirs = Directory.GetDirectories(dir);
                 foreach (string subdir in subdirs)
                     SearchDir4FlagsDirs(subdir);
-            }
-            catch (Exception ex)
-            {
-                Messenger.AddError(ex.Message, ex);
-            }
         }
 
         /// <summary>
@@ -198,7 +207,7 @@ namespace KSPModAdmin.Plugin.FlagsTab.Controller
         {
             foreach (string file in Directory.GetFiles(dir))
             {
-                if (Path.GetExtension(file).ToLower() == ".png")
+                if (Path.GetExtension(file).ToLower() == EXTENSION_PNG.ToLower())
                     AddFlagToList(file);
             }
         }
@@ -209,16 +218,21 @@ namespace KSPModAdmin.Plugin.FlagsTab.Controller
         /// <param name="file">Full path to the Flag file.</param>
         private static void AddFlagToList(string file)
         {
-            if (File.Exists(file))
+            try
             {
-                Image image = Image.FromFile(file);
-                int index = View.AddImageListImage(image);
-
-                ListViewItem item = new ListViewItem();
-                item.ImageIndex = index;
-                item.Text = Path.GetFileNameWithoutExtension(file);
-                item.Tag = file;
-                flags.Add(new KeyValuePair<string, ListViewItem>(GetGroupName(file), item));
+                if (File.Exists(file))
+                {
+                    Image image = Image.FromFile(file);
+                    string groupName = GetGroupName(file);
+                    string flagname = Path.GetFileNameWithoutExtension(file);
+                    var item = View.CreateNewFlagItem(flagname, groupName, image, file);
+                    flags.Add(new KeyValuePair<string, ListViewItem>(groupName, item));
+                    Messenger.AddInfo(string.Format(Messages.MSG_FLAG_0_ADDED, flagname));
+                }
+            }
+            catch (Exception ex)
+            {
+                Messenger.AddError(string.Format(Messages.MSG_ERROR_FLAG_0_ADD_FAILED, file), ex);
             }
         }
 
@@ -231,8 +245,8 @@ namespace KSPModAdmin.Plugin.FlagsTab.Controller
         private static string GetGroupName(string file)
         {
             string result = Path.GetDirectoryName(file);
-            result = result.Substring(0, result.ToLower().Replace("\\flags", string.Empty).Length);
-            result = result.Substring(result.LastIndexOf("\\") + 1);
+            result = result.Substring(0, result.ToLower().Replace(Path.DirectorySeparatorChar + FLAGS.ToLower(), string.Empty).Length);
+            result = result.Substring(result.LastIndexOf(Path.DirectorySeparatorChar) + 1);
             return result;
         }
 
@@ -251,79 +265,78 @@ namespace KSPModAdmin.Plugin.FlagsTab.Controller
             {
                 string filename = dlg.FileName;
 
-                Image image = null;
                 try
                 {
-                    string path = KSPPathHelper.GetPath(KSPPaths.GameData);
-                    if (path == string.Empty)
-                    {
-                        Messenger.AddInfo("Invalid KSP path.");
-                        return;
-                    }
-
-                    // Create .../GameData if not exist.
-                    if (!Directory.Exists(path))
-                    {
-                        Messenger.AddInfo("Creating directory \".../GameData\".");
-                        Directory.CreateDirectory(path);
-                    }
-
-                    // Create .../MyFlgas/Flags is not exist.
-                    path = MyFlagsFullPath;
-                    if (!Directory.Exists(path))
-                    {
-                        Messenger.AddInfo("Creating directory \".../MyFlgas/Flags\".");
-                        path = MyFlagsPath;
-                        if (!Directory.Exists(path))
-                            Directory.CreateDirectory(path);
-
-                        // Forlder must be named like "Flags" case sensitive!!!!
-                        Directory.CreateDirectory(MyFlagsFullPath);
-                    }
+                    CreateNeededDirectories();
 
                     // delete file with same name.
-                    string savePath = Path.Combine(MyFlagsFullPath, Path.GetFileNameWithoutExtension(filename) + ".png");
+                    string savePath = Path.Combine(MyFlagsFullPath, Path.GetFileNameWithoutExtension(filename) + EXTENSION_PNG);
                     if (File.Exists(savePath))
                     {
-                        Messenger.AddInfo(string.Format("Deleting existing flag \"{0}\".", savePath));
+                        Messenger.AddInfo(string.Format(Messages.MSG_DELETE_EXISTING_FLAG_0, savePath));
                         File.Delete(savePath);
                     }
 
                     // save image with max flag size to gamedata/myflags/flags/.
-                    image = Image.FromFile(filename);
-                    if (image.Size.Width != FLAG_WIDTH || image.Size.Height != FLAG_HEIGHT)
+                    using (var image = Image.FromFile(filename))
                     {
-                        Messenger.AddInfo("Adjusting flag size ...");
-                        Bitmap newImage = new Bitmap(FLAG_WIDTH, FLAG_HEIGHT);
-                        using (Graphics graphicsHandle = Graphics.FromImage(newImage))
+                        if (image.Size.Width != FLAG_WIDTH || image.Size.Height != FLAG_HEIGHT)
                         {
-                            graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                            graphicsHandle.DrawImage(image, 0, 0, FLAG_WIDTH, FLAG_HEIGHT);
+                            Messenger.AddInfo(Messages.MSG_ADJUSTING_FLAG_SIZE);
+                            Bitmap newImage = new Bitmap(FLAG_WIDTH, FLAG_HEIGHT);
+                            using (Graphics graphicsHandle = Graphics.FromImage(newImage))
+                            {
+                                graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                                graphicsHandle.DrawImage(image, 0, 0, FLAG_WIDTH, FLAG_HEIGHT);
+                            }
+                            Messenger.AddInfo(string.Format(Messages.MSG_SAVING_FLAG_0, savePath));
+                            newImage.Save(savePath, ImageFormat.Png);
                         }
-                        Messenger.AddInfo("Saving flag ...");
-                        newImage.Save(savePath, ImageFormat.Png);
-                        image = newImage;
+                        else
+                        {
+                            Messenger.AddInfo(string.Format(Messages.MSG_COPY_FLAG_0, savePath));
+                            image.Save(savePath, ImageFormat.Png);
+                        }
                     }
-                    else
-                    {
-                        Messenger.AddInfo("Saving flag ...");
-                        image.Save(savePath, ImageFormat.Png);
-                    }
+
+                    AddFlagToList(savePath);
                 }
                 catch (Exception ex)
                 {
-                    image = null;
-                    // TODO:
-                    MessageBox.Show(View.ParentForm, "Error during flag creation. \"" + ex.Message + "\"", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
-                if (image != null)
-                {
-                    string flagname = Path.GetFileNameWithoutExtension(filename);
-                    flags.Add(new KeyValuePair<string, ListViewItem>("MyFlags", View.CreateNewFlagItem(flagname, image, filename)));
+                    Messenger.AddError(Messages.MSG_ERROR_FLAG_CREATION_FAILED, ex);
                 }
 
                 RefreshFlagTab();
+            }
+        }
+
+        private static void CreateNeededDirectories()
+        {
+            string path = KSPPathHelper.GetPath(KSPPaths.GameData);
+            if (path == string.Empty)
+            {
+                Messenger.AddInfo("Invalid KSP path.");
+                return;
+            }
+
+            // Create .../GameData if not exist.
+            if (!Directory.Exists(path))
+            {
+                Messenger.AddInfo(string.Format(Messages.MSG_CREATING_DIR_0, path));
+                Directory.CreateDirectory(path);
+            }
+
+            // Create .../MyFlgas/Flags is not exist.
+            path = MyFlagsFullPath;
+            if (!Directory.Exists(path))
+            {
+                Messenger.AddInfo(string.Format(Messages.MSG_CREATING_DIR_0, path));
+                path = MyFlagsPath;
+                if (!Directory.Exists(path))
+                    Directory.CreateDirectory(path);
+
+                // Forlder must be named like "Flags" case sensitive!!!!
+                Directory.CreateDirectory(MyFlagsFullPath);
             }
         }
 
@@ -352,14 +365,14 @@ namespace KSPModAdmin.Plugin.FlagsTab.Controller
                                 try
                                 {
                                     File.Delete(filename);
+                                    Messenger.AddInfo(string.Format(Messages.MSG_FLAG_0_DELETED, filename));
                                     firstTry = false;
                                 }
                                 catch (Exception ex)
                                 {
                                     if (!firstTry)
                                     {
-                                        // TODO: Messenger only...
-                                        MessageBox.Show(View.ParentForm, "Error while deleting file. " + Environment.NewLine + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        Messenger.AddError(string.Format(Messages.MSG_ERROR_DELETE_FLAG_0_FAILED, filename), ex);
                                         continue;
                                     }
 
@@ -386,13 +399,12 @@ namespace KSPModAdmin.Plugin.FlagsTab.Controller
                                 flags.Remove(pair2Del);
 
                             // remove from mod selection
-                            ModSelectionController.UpdateNodeByDestination(filename);
+                            ModSelectionController.RefreshCheckedStateOfNodeByDestination(filename);
                         }
                     }
                     catch (Exception ex)
                     {
-                        // TODO:
-                        MessageBox.Show(View.ParentForm, "Error while deleting file. " + Environment.NewLine + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        Messenger.AddError(string.Format(Messages.MSG_ERROR_DELETE_FLAG_0_FAILED, filename), ex);
                     }
                 }
 

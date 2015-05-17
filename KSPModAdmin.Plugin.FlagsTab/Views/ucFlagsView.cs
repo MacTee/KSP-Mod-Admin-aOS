@@ -4,19 +4,20 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Linq;
-using System.Reflection;
 using System.Windows.Forms;
-using KSPModAdmin.Core;
-using KSPModAdmin.Core.Utils.Controls;
 using KSPModAdmin.Core.Views;
 using KSPModAdmin.Plugin.FlagsTab.Controller;
-using KSPModAdmin.Plugin.FlagsTab.Properties;
 
 namespace KSPModAdmin.Plugin.FlagsTab.Views
 {
     [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Reviewed. Suppression is OK here.")]
     public partial class ucFlagsView : ucBase
     {
+        #region Properties
+
+        /// <summary>
+        /// Gets or sets the currently selected filter.
+        /// </summary>
         public string SelectedFilter
         {
             get { return tsscbModFilter.SelectedItem != null ? tsscbModFilter.SelectedItem.ToString() : FlagsViewController.FILTER_ALL; }
@@ -32,16 +33,28 @@ namespace KSPModAdmin.Plugin.FlagsTab.Views
             }
         }
 
+        /// <summary>
+        /// Gets or sets the flag to determine if the processing icon should be shown or not.
+        /// </summary>
         public bool ShowProcessingIcon
         { 
             get { return tslProcessing.Visible; } 
             set { tslProcessing.Visible = value; } 
         }
 
+        /// <summary>
+        /// Gets a list of all filters.
+        /// </summary>
         public IEnumerable<string> FlagFilter { get { return tsscbModFilter.Items.Cast<string>(); } }
 
+        /// <summary>
+        /// Gets the currently selected Flag.
+        /// </summary>
         public ListView.SelectedListViewItemCollection SelectedFlags { get { return lvFlags.SelectedItems; } }
 
+        #endregion
+
+        #region Constructor
 
         /// <summary>
         /// Creates a new instance of the ucTranslationView class.
@@ -56,11 +69,35 @@ namespace KSPModAdmin.Plugin.FlagsTab.Views
             FlagsViewController.Initialize(this);
         }
 
+        #endregion
+
         #region Event handling
 
         private void ucPluginView_Load(object sender, EventArgs e)
         {
             // do View related init here or in the FlagsViewController.Initialize(...) methode.
+            if (lvFlags.Items.Count == 0)
+                FlagsViewController.RefreshFlagTab();
+        }
+
+        private void tsbFlagsRefresh_Click(object sender, EventArgs e)
+        {
+            FlagsViewController.RefreshFlagTab();
+        }
+
+        private void tsbAddFlag_Click(object sender, EventArgs e)
+        {
+            FlagsViewController.ImportFlag();
+        }
+
+        private void tsbRemoveFlag_Click(object sender, EventArgs e)
+        {
+            FlagsViewController.DeleteSelectedFlag();
+        }
+
+        private void tsscbModFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FillListView(FlagsViewController.Flags);
         }
 
         #endregion
@@ -94,27 +131,10 @@ namespace KSPModAdmin.Plugin.FlagsTab.Views
             this.Enabled = enable;
         }
 
-        private void tsbFlagsRefresh_Click(object sender, EventArgs e)
-        {
-            FlagsViewController.RefreshFlagTab();
-        }
 
-        private void tsbAddFlag_Click(object sender, EventArgs e)
-        {
-            FlagsViewController.ImportFlag();
-        }
-
-        private void tsbRemoveFlag_Click(object sender, EventArgs e)
-        {
-            FlagsViewController.DeleteSelectedFlag();
-        }
-
-        private void tsscbModFilter_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            FillListView(FlagsViewController.Flags);
-        }
-
-
+        /// <summary>
+        /// Clears all data of this view.
+        /// </summary>
         public void ClearAll()
         {
             lvFlags.Items.Clear();
@@ -125,33 +145,34 @@ namespace KSPModAdmin.Plugin.FlagsTab.Views
             tsscbModFilter.Items.Clear();
         }
 
+        /// <summary>
+        /// Adds a filter to the list of possible filters.
+        /// </summary>
+        /// <param name="filter">The filter to add.</param>
         public void AddFilter(string filter)
         {
             tsscbModFilter.Items.Add(filter);
         }
 
-        public int AddImageListImage(Image image)
-        {
-            ilFlags.Images.Add(image);
-            return ilFlags.Images.Count - 1;
-        }
-
-
         /// <summary>
         /// Creates a new ListViewItem for a flag.
         /// </summary>
         /// <param name="flagname">Name of the Flag.</param>
+        /// <param name="group">The name of the group (for the ListViewItem).</param>
         /// <param name="image">The image of the flag.</param>
         /// <param name="filename">Full path of the flag file.</param>
         /// <returns>The new created ListViewItem.</returns>
-        public ListViewItem CreateNewFlagItem(string flagname, Image image, string filename)
+        public ListViewItem CreateNewFlagItem(string flagname, string group, Image image, string filename)
         {
-            ilFlags.Images.Add(image);
+            InvokeIfRequired(() =>
+            {
+                ilFlags.Images.Add(image);
+            });
 
             ListViewItem lvItem = new ListViewItem();
             lvItem.Text = flagname;
             lvItem.ImageIndex = ilFlags.Images.Count - 1;
-            lvItem.Group = GetGroup(FlagsViewController.FILTER_MYFLAG);
+            lvItem.Group = GetGroup(group);
             lvItem.Tag = filename;
 
             return lvItem;
@@ -182,7 +203,12 @@ namespace KSPModAdmin.Plugin.FlagsTab.Views
                 }
             }
             if (!found)
-                tsscbModFilter.Items.Add(groupName);
+            {
+                InvokeIfRequired(() =>
+                {
+                    tsscbModFilter.Items.Add(groupName);
+                });
+            }
 
             return newGroup;
         }
