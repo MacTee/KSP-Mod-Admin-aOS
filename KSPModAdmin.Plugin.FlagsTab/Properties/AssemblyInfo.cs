@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("KSPModAdmin aOS - BackupTab Plugin")]
-[assembly: AssemblyDescription("A Plugin for KSP Mod Admin aOS that addes a tab to manage backups of KSP content.")]
+[assembly: AssemblyTitle("KSPModAdmin aOS - FlagsTab Plugin")]
+[assembly: AssemblyDescription("A Plugin for KSP Mod Admin aOS that addes a tab to manage the flags of KSP.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("KSPModAdmin BackupTab Plugin")]
+[assembly: AssemblyProduct("KSPModAdmin FlagsTab Plugin")]
 [assembly: AssemblyCopyright("Copyright © Bastian Heinrich 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

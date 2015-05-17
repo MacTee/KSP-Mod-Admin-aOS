@@ -55,6 +55,7 @@
             this.tbName.ReadOnly = true;
             this.tbName.Size = new System.Drawing.Size(363, 20);
             this.tbName.TabIndex = 1;
+            this.tbName.TabStop = false;
             // 
             // lblBackupNote
             // 
@@ -97,7 +98,7 @@
             this.btnCancel.Location = new System.Drawing.Point(361, 64);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(96, 23);
-            this.btnCancel.TabIndex = 2;
+            this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCancel.UseVisualStyleBackColor = true;
