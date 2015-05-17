@@ -1489,7 +1489,7 @@ namespace KSPModAdmin.Core.Controller
                     }
                     catch (Exception ex)
                     {
-                        View.InvokeIfRequired(() => MessageBox.Show(View.ParentForm, string.Format(Messages.MSG_ZIP_CREATION_FAILED_0, ex.Message), Messages.MSG_TITLE_ERROR, MessageBoxButtons.OK, MessageBoxIcon.Error));
+                        Messenger.AddError(string.Format(Messages.MSG_ZIP_CREATION_FAILED_0, ex.Message));
                         return false;
                     }
                 },

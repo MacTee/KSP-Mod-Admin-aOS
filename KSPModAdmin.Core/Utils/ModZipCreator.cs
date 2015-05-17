@@ -118,7 +118,7 @@ namespace KSPModAdmin.Core.Utils
             string absPath = KSPPathHelper.GetAbsolutePath(node.Destination);
             string gameDataPath = KSPPathHelper.GetPath(KSPPaths.GameData);
             string path = absPath.Replace(gameDataPath + Path.DirectorySeparatorChar, string.Empty);
-            if (node.IsFile)
+            if (node.IsFile && node.IsInstalled)
                 zip.AddEntry(path, absPath);
 
             foreach (ModNode child in node.Nodes)
