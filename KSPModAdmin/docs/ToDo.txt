@@ -28,7 +28,7 @@
 //// TODO
 ///////////////////// 
 
-- Zip creation is broke! (try to zip a half installed mod)
+- Relocate ZipArchive path for a mod ... maybe on the edit modinfos dialog?
 
 - Known KSP Path: Relative ksp path search (options/path) create a new dialog for this option.
 
