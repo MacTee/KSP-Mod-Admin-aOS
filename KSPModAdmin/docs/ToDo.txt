@@ -30,11 +30,6 @@
 
 - Known KSP Path: Relative ksp path search (options/path) create a new dialog for this option.
 
-- cutdown of uckspstartup
-- Disable 64-Bit vor windows.
-
-- Set default button on remove mods to "No" ...
-
 - LINUX - Steam installs KSP to a hidden folder...
   Workaround: Create a link to the install directory and use that instead
 

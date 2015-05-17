@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using KSPModAdmin.Core;
 using KSPModAdmin.Core.Utils;
 using KSPModAdmin.Plugin.Template.Properties;
+using KSPModAdmin.Plugin.Template.Views;
 
 namespace KSPModAdmin.Plugin.Template
 {

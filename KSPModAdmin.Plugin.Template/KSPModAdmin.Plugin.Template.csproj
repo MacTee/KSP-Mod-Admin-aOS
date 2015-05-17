@@ -74,11 +74,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="PluginController.cs" />
-    <Compile Include="ucPluginView.cs">
+    <Compile Include="Controller\PluginViewController.cs" />
+    <Compile Include="Views\ucPluginView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ucPluginView.Designer.cs">
+    <Compile Include="Views\ucPluginView.Designer.cs">
       <DependentUpon>ucPluginView.cs</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -87,7 +87,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="ucPluginView.resx">
+    <EmbeddedResource Include="Views\ucPluginView.resx">
       <DependentUpon>ucPluginView.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>

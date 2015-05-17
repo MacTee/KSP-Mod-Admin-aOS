@@ -7,13 +7,14 @@ using KSPModAdmin.Core;
 using KSPModAdmin.Core.Controller;
 using KSPModAdmin.Core.Utils;
 using KSPModAdmin.Core.Utils.Localization;
+using KSPModAdmin.Plugin.Template.Views;
 
-namespace KSPModAdmin.Plugin.Template
+namespace KSPModAdmin.Plugin.Template.Controller
 {
     /// <summary>
     /// Controller class for the Translation view.
     /// </summary>
-    public class PluginController
+    public class PluginViewController
     {
         /// <summary>
         /// Gets or sets the view of the controller.

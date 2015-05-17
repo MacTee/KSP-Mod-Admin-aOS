@@ -3,9 +3,10 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Windows.Forms;
 using KSPModAdmin.Core.Views;
+using KSPModAdmin.Plugin.Template.Controller;
 using KSPModAdmin.Plugin.Template.Properties;
 
-namespace KSPModAdmin.Plugin.Template
+namespace KSPModAdmin.Plugin.Template.Views
 {
     [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Reviewed. Suppression is OK here.")]
     public partial class ucPluginView : ucBase
@@ -20,14 +21,14 @@ namespace KSPModAdmin.Plugin.Template
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime || DesignMode)
                 return;
 
-            PluginController.Initialize(this);
+            PluginViewController.Initialize(this);
         }
 
         #region Event handling
 
         private void ucPluginView_Load(object sender, EventArgs e)
         {
-            // do View related init here or in the PluginController.Initialize(...) methode.
+            // do View related init here or in the PluginViewController.Initialize(...) methode.
         }
 
         #endregion

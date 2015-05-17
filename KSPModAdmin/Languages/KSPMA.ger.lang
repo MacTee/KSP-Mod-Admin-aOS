@@ -25,8 +25,8 @@
     <Control Name="tsmiCmsEditModInfos" Value="ModInfos bearbeiten" />
     <Control Name="tsmiCmsCopyModInfos" Value="ModInfos kopieren" />
     <Control Name="tsmiCmsUpdatecheckMod" Value="Nach Updates für diese Mod suchen." />
-    <Control Name="tsmiCmsVisitVersionControlSite" Value="Versionskontrollseite besuchen" />
-    <Control Name="tsmiCmsVisitAdditionalLink" Value="Seite des zusätzlichen Links besuchen" />
+    <Control Name="tsmiCmsVisitVersionControlSite" Value="Versionskontrollwebseite besuchen" />
+    <Control Name="tsmiCmsVisitAdditionalLink" Value="Webseite des zusätzlichen Links besuchen" />
     <Control Name="tsmiCmsSolveConflicts" Value="Konflikte beseitigen" />
     <Control Name="tsmiCmsProceedMod" Value="Mod bearbeiten" />
     <Control Name="tsmiCmsRemoveMod" Value="Mod entfernen" />
