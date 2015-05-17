@@ -348,6 +348,7 @@ namespace KSPModAdmin.Plugin.BackupTab.Views
         {
             // Enable/Disable your View Controls here.
             // Normally when KSP MA calls this methode with enable = false, all controls should be disabled.
+            this.Enabled = enable;
         }
 
         internal void LanguageChanged()

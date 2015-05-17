@@ -1489,7 +1489,7 @@ namespace KSPModAdmin.Core.Controller
                     }
                     catch (Exception ex)
                     {
-                        View.InvokeIfRequired(() => MessageBox.Show(View.ParentForm, string.Format(Messages.MSG_ZIP_CREATION_FAILED_0, ex.Message), Messages.MSG_TITLE_ERROR, MessageBoxButtons.OK, MessageBoxIcon.Error));
+                        Messenger.AddError(string.Format(Messages.MSG_ZIP_CREATION_FAILED_0, ex.Message));
                         return false;
                     }
                 },
@@ -1582,6 +1582,9 @@ namespace KSPModAdmin.Core.Controller
                 dlg.ModSelectionColumns.ToTreeViewAdv(View.tvModSelection);
         }
 
+        /// <summary>
+        /// Opens the default browser with the KMA² Wiki url.
+        /// </summary>
         public static void OpenWiki()
         {
             Process.Start(Constants.WIKIURL);
@@ -1677,6 +1680,20 @@ namespace KSPModAdmin.Core.Controller
             }
 
             return sb.ToString();
+        }
+
+        /// <summary>
+        /// Refreshes the CheckedState of the ModNodes with the fileDestination.
+        /// </summary>
+        /// <param name="fileDestination">Destination path of the file.</param>
+        public static void RefreshCheckedStateOfNodeByDestination(string fileDestination)
+        {
+            var relativeDestination = KSPPathHelper.GetRelativePath(fileDestination).ToLower();
+            if (!ModRegister.RegisterdModFiles.ContainsKey(relativeDestination))
+                return;
+
+            var nodes = ModRegister.RegisterdModFiles[relativeDestination];
+            RefreshCheckedStateOfMods(nodes.ToArray());
         }
     }
 }

@@ -206,7 +206,7 @@ namespace KSPModAdmin.Plugin.BackupTab.Controller
         /// </summary>
         protected static void AsyncTaskStarted(object sender)
         {
-            View.SetEnabledOfAllControls(true);
+            View.SetEnabledOfAllControls(false);
         }
 
         /// <summary>
@@ -215,7 +215,7 @@ namespace KSPModAdmin.Plugin.BackupTab.Controller
         /// </summary>
         protected static void AsyncTaskDone(object sender)
         {
-            View.SetEnabledOfAllControls(false);
+            View.SetEnabledOfAllControls(true);
         }
 
         /// <summary>
