@@ -1,5 +1,5 @@
 <Language Name="ger" LongName="Deutsch">
-  <String Name="MSG_BACKUPTAB_VIEW_TITLE" Value="Backups"/>
+  <String Name="MSG_BACKUPTAB_VIEW_TITLE" Value="Backup"/>
   
   <Control Name="tsbRefreshBackupview" Value="tsbRefreshBackupview">
     <ChildControl Name="tsbRefreshBackupview_ToolTip" Value="Aktualisieren^Skannt erneut den Backup Ordner."/>
@@ -64,7 +64,6 @@
   
   <String Name="UcBackupView_Item_00" Value="Dateiname"/>
   <String Name="UcBackupView_Item_01" Value="Notiz"/>
-  <String Name="MSG_BACKUPTAB_VIEW_TITLE" Value="Backup"/>
   <String Name="MSG_BACKUP_LOAD_CFG" Value="Lade Backup Configuration Datei &quot;{0}&quot; ..."/>;
   <String Name="MSG_CREATE_NEW_BACKUP_CFG" Value="Erzeuge neue Backup Configuration Datei &quot;{0}&quot;."/>;
   <String Name="MSG_BACKUP_SRC_MISSING" Value="Erst einen Backup Ordner wählen!"/>;
