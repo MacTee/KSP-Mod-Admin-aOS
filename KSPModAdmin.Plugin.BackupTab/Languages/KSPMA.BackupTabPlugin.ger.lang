@@ -82,6 +82,5 @@
   <String Name="MSG_BACKUP_SELECT_FOLDER" Value="Bitte wähle einen Backup Ordner."/>;
   <String Name="MSG_BACKUP_LOAD_ERROR_0" Value="Fehler während des ladens des Backups: &quot;{0}&quot;"/>;
   <String Name="MSG_BACKUP_FOLDER_NOT_FOUND_0" Value="Backup Ordner nicht gefunden! &quot;{0}&quot;"/>;
+  <String Name="MSG_BACKUP_STARTED" Value="Backup gestartet..."/>;
 </Language>
-  
-  

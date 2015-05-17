@@ -82,6 +82,7 @@
   <String Name="MSG_BACKUP_SELECT_FOLDER" Value="(T)Please select a backup folder."/>;
   <String Name="MSG_BACKUP_LOAD_ERROR_0" Value="(T)Error during backup loading: &quot;{0}&quot;"/>;
   <String Name="MSG_BACKUP_FOLDER_NOT_FOUND_0" Value="(T)Backup folder not found! &quot;{0}&quot;"/>;
+  <String Name="MSG_BACKUP_STARTED" Value="(T)Backup started..."/>;
 </Language>
   
   
