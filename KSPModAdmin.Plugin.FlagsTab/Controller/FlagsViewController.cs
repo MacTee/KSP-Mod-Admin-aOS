@@ -459,6 +459,10 @@ namespace KSPModAdmin.Plugin.FlagsTab.Controller
                 var fullpath = Path.Combine(MyFlagsFullPath, FLAG_FILENAME);
                 if (!File.Exists(fullpath))
                 {
+                    if (!Directory.Exists(MyFlagsFullPath)) // Create the folder if it does not exist
+                    {
+                        Directory.CreateDirectory(MyFlagsFullPath);
+                    }
                     Image image = Resources.KMA2_Flag;
                     image.Save(fullpath);
                     image.Dispose();
