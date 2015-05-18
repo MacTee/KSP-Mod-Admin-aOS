@@ -2117,5 +2117,35 @@ namespace KSPModAdmin.Core
             }
         }
         private const string DEFAULT_MSG_ERROR_EXPORT_FAILED_0 = "Error! Export failed: \"{0}\"";
+
+        public static string MSG_SELECT_NEW_ARCHIVE_PATH
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_SELECT_NEW_ARCHIVE_PATH"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_SELECT_NEW_ARCHIVE_PATH).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_SELECT_NEW_ARCHIVE_PATH = "Please select the new archive path.";
+
+        public static string MSG_MOD_0_ARCHIVE_PATH_CHANGED_TO_1
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_MOD_0_ARCHIVE_PATH_CHANGED_TO_1"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_MOD_0_ARCHIVE_PATH_CHANGED_TO_1).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_MOD_0_ARCHIVE_PATH_CHANGED_TO_1 = "Archive path of mod \"{0}\" changed to \"{1}\".";
+
+        public static string MSG_MOD_ARCHIVE_0_NOT_FOUND_MOD_1
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_MOD_ARCHIVE_0_NOT_FOUND_MOD_1"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_MOD_ARCHIVE_0_NOT_FOUND_MOD_1).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_MOD_ARCHIVE_0_NOT_FOUND_MOD_1 = "Mod archive \"{0}\" not found. Can't change archive path of mod \"{1}\".";
     }
 }

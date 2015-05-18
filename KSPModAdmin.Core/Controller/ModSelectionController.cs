@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Collections.Generic;
+using FolderSelect;
 using KSPModAdmin.Core.Model;
 using KSPModAdmin.Core.Utils;
 using KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.Helper;
@@ -1502,6 +1503,52 @@ namespace KSPModAdmin.Core.Controller
                 {
                     View.SetProgressBarStates(true, nodeCount, processedNodeCount);
                 });
+        }
+
+        #endregion
+
+        #region Relocate mod archive path
+
+        public static void RelocateArchivePath(ModNode selectedMod)
+        {
+            if (selectedMod == null)
+                return;
+
+            selectedMod = selectedMod.ZipRoot;
+
+            var dlg = new FolderSelectDialog();
+            dlg.Title = Messages.MSG_SELECT_NEW_ARCHIVE_PATH;
+            dlg.InitialDirectory = OptionsController.DownloadPath;
+            if (!dlg.ShowDialog(View.ParentForm.Handle))
+                return;
+
+            RelocateArchivePath(selectedMod, dlg.FileName);
+        }
+
+        public static void RelocateArchivePathAllMods()
+        {
+            var dlg = new FolderSelectDialog();
+            dlg.Title = Messages.MSG_SELECT_NEW_ARCHIVE_PATH;
+            dlg.InitialDirectory = OptionsController.DownloadPath;
+            if (!dlg.ShowDialog(View.ParentForm.Handle))
+                return;
+
+            foreach (ModNode mod in Model.Nodes)
+                RelocateArchivePath(mod, dlg.FileName);
+        }
+
+        private static void RelocateArchivePath(ModNode modNode, string newPath)
+        {
+            var newFullPath = Path.Combine(newPath, Path.GetFileName(modNode.Key));
+            if (File.Exists(newFullPath))
+            {
+                modNode.Key = newFullPath;
+                Messenger.AddInfo(string.Format(Messages.MSG_MOD_0_ARCHIVE_PATH_CHANGED_TO_1, modNode.Name, newFullPath));
+            }
+            else
+            {
+                Messenger.AddInfo(string.Format(Messages.MSG_MOD_ARCHIVE_0_NOT_FOUND_MOD_1, newFullPath, modNode.Name));
+            }
         }
 
         #endregion
