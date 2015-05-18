@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -10,6 +11,7 @@ using System.Windows.Forms;
 using KSPModAdmin.Core;
 using KSPModAdmin.Core.Controller;
 using KSPModAdmin.Core.Utils;
+using KSPModAdmin.Plugin.FlagsTab.Properties;
 using KSPModAdmin.Plugin.FlagsTab.Views;
 
 namespace KSPModAdmin.Plugin.FlagsTab.Controller
@@ -27,6 +29,8 @@ namespace KSPModAdmin.Plugin.FlagsTab.Controller
         public const string FILTER_MYFLAG = "MyFlag";
         public const string FLAGS = "Flags";
         public const string MYFLAGS = FILTER_MYFLAG;
+        public const string FLAG_FILENAME = "KMA2_Flag.png";
+        public const string KMA2 = "KSP Mod Admin v2";
         public const int FLAG_WIDTH = 256;
         public const int FLAG_HEIGHT = 160;
 
@@ -85,6 +89,9 @@ namespace KSPModAdmin.Plugin.FlagsTab.Controller
                 return Path.Combine(KSPPathHelper.GetPath(KSPPaths.GameData), MYFLAGS);
             }
         }
+
+        [DefaultValue(true)]
+        public static bool CreateKMAFlag { get; set; }
 
         #endregion
 
@@ -225,6 +232,10 @@ namespace KSPModAdmin.Plugin.FlagsTab.Controller
                     Image image = Image.FromFile(file);
                     string groupName = GetGroupName(file);
                     string flagname = Path.GetFileNameWithoutExtension(file);
+
+                    if (flagname.Equals(Path.GetFileNameWithoutExtension(FLAG_FILENAME), StringComparison.CurrentCultureIgnoreCase))
+                        groupName = KMA2;
+
                     var item = View.CreateNewFlagItem(flagname, groupName, image, file);
                     flags.Add(new KeyValuePair<string, ListViewItem>(groupName, item));
                     Messenger.AddInfo(string.Format(Messages.MSG_FLAG_0_ADDED, flagname));
@@ -358,6 +369,10 @@ namespace KSPModAdmin.Plugin.FlagsTab.Controller
                     {
                         if (File.Exists(filename))
                         {
+                            // Esteregg #1
+                            if (Path.GetFileName(filename).Equals(FLAG_FILENAME, StringComparison.CurrentCultureIgnoreCase) && AskUser())
+                                return;
+
                             // delete file (try twice sometimes the file is still in use).
                             bool firstTry = true;
                             while (firstTry)
@@ -412,6 +427,48 @@ namespace KSPModAdmin.Plugin.FlagsTab.Controller
             }
         }
 
+        private static bool AskUser()
+        {
+            if (MessageBox.Show(View.ParentForm, "Do you want to delete the KMA² flag?", string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                return true;
+
+            if (MessageBox.Show(View.ParentForm, "I thinks it's pretty awesome. Can i abort the delete?", string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+                return true;
+
+            if (MessageBox.Show(View.ParentForm, string.Format("Can't delete KMA2 flag its used by KSP Mod Admin aOS!{0}Try again?", Environment.NewLine), "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error) == DialogResult.No)
+            {
+                MessageBox.Show(View.ParentForm, "=)", string.Empty, MessageBoxButtons.OK);
+                return true;
+            }
+
+            MessageBox.Show(View.ParentForm, "Ok ok, well then ... good bye =(", string.Empty, MessageBoxButtons.OK);
+
+            return false;
+        }
+
         #endregion
+
+        public static void CreateKMA2Flag()
+        {
+            // TODO: Get CreateKMAFlag from AppConfig.
+            if (!CreateKMAFlag)
+                return;
+
+            try
+            {
+                var fullpath = Path.Combine(MyFlagsFullPath, FLAG_FILENAME);
+                if (!File.Exists(fullpath))
+                {
+                    Image image = Resources.KMA2_Flag;
+                    image.Save(fullpath);
+                    image.Dispose();
+                    Messenger.AddInfo(string.Format(Messages.MSG_FLAG_0_ADDED, Path.GetFileNameWithoutExtension(fullpath)));
+                }
+            }
+            catch (Exception ex)
+            {
+                Messenger.AddError("Error! Can't create KMA² flag.", ex);
+            }
+        }
     }
 }
