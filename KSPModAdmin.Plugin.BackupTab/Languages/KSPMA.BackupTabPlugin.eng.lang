@@ -1,5 +1,5 @@
 <Language Name="eng" LongName="English">
-  <String Name="MSG_BACKUPTAB_VIEW_TITLE" Value="(T)Backups"/>
+  <String Name="MSG_BACKUPTAB_VIEW_TITLE" Value="Backup"/>
   
   <Control Name="tsbRefreshBackupview" Value="tsbRefreshBackupview">
     <ChildControl Name="tsbRefreshBackupview_ToolTip" Value="Refresh^Scans the backup directory again."/>
@@ -67,7 +67,6 @@
 
   <String Name="UcBackupView_Item_00" Value="FileName"/>
   <String Name="UcBackupView_Item_01" Value="Note"/>
-  <String Name="MSG_BACKUPTAB_VIEW_TITLE" Value="Backup"/>
   <String Name="MSG_BACKUP_LOAD_CFG" Value="Loading backup configuration file &quot;{0}&quot; ..."/>;
   <String Name="MSG_CREATE_NEW_BACKUP_CFG" Value="Create new Backup configuration file &quot;{0}&quot;."/>;
   <String Name="MSG_BACKUP_SRC_MISSING" Value="Select a Backup first!"/>;
@@ -85,6 +84,7 @@
   <String Name="MSG_BACKUP_SELECT_FOLDER" Value="Please select a backup folder."/>;
   <String Name="MSG_BACKUP_LOAD_ERROR_0" Value="Error during backup loading: &quot;{0}&quot;"/>;
   <String Name="MSG_BACKUP_FOLDER_NOT_FOUND_0" Value="Backup folder not found! &quot;{0}&quot;"/>;
+  <String Name="MSG_BACKUP_STARTED" Value="Backup started..."/>;
 </Language>
   
   

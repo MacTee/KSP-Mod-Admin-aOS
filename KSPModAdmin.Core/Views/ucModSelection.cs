@@ -409,6 +409,16 @@ namespace KSPModAdmin.Core.Views
             ModSelectionController.OpenWiki();
         }
 
+        private void tsbRelocateArchivePath_Click(object sender, EventArgs e)
+        {
+            ModSelectionController.RelocateArchivePath(SelectedMod);
+        }
+
+        private void tsmiRelocateArchivePathAllMods_Click(object sender, EventArgs e)
+        {
+            ModSelectionController.RelocateArchivePathAllMods();
+        }
+
         private void tsmiCmsTreeViewOptions_Click(object sender, EventArgs e)
         {
             ModSelectionController.OpenTreeViewOptions();
@@ -495,6 +505,7 @@ namespace KSPModAdmin.Core.Views
                 tsmiResetDestination.Enabled = true;
 
                 tsbCreateZip.Enabled = !selectedNode.ZipExists;
+                tsbRelocateArchivePath.Enabled = true;
             }
             else
             {
@@ -506,10 +517,10 @@ namespace KSPModAdmin.Core.Views
                 KSPVersion = "0.21 or higher";
                 ModAuthor = "BHeinrich (MacKerbal@mactee.de)";
                 ModCreationDate = "25.04.2013";
-                ModChangeDate = "08.05.2015";
+                ModChangeDate = "18.05.2015";
                 ModOutdated = false;
                 ModRating = string.Empty;
-                ModDownloads = "85k+";
+                ModDownloads = "86k+";
                 ModNote = "KSP MA aOS is the mod managing tool for KSP on any OS. ;)";
                 FileName = "KSPModAdmin.exe";
                 FileDestination = string.Empty;
@@ -550,6 +561,7 @@ namespace KSPModAdmin.Core.Views
                 tsmiResetDestination.Enabled = false;
 
                 tsbCreateZip.Enabled = false;
+                tsbRelocateArchivePath.Enabled = false;
             }
 
             lvModSelection.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.ColumnContent);

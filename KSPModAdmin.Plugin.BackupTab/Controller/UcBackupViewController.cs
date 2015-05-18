@@ -811,7 +811,7 @@ namespace KSPModAdmin.Plugin.BackupTab.Controller
                 {
                     EventDistributor.InvokeAsyncTaskStarted(Instance);
                     View.ShowProcessing = true;
-                    Messenger.AddInfo("Backup started.");
+                    Messenger.AddInfo(Messages.MSG_BACKUP_STARTED);
                     AsyncTask<string>.DoWork(() => BackupDir(dir, name, backupPath), BackupDirFinished);
                 }
                 else

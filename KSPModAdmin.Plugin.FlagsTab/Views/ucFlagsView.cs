@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using KSPModAdmin.Core.Views;
@@ -76,8 +77,11 @@ namespace KSPModAdmin.Plugin.FlagsTab.Views
         private void ucPluginView_Load(object sender, EventArgs e)
         {
             // do View related init here or in the FlagsViewController.Initialize(...) methode.
+            FlagsViewController.CreateKMA2Flag();
+
             if (lvFlags.Items.Count == 0)
                 FlagsViewController.RefreshFlagTab();
+
         }
 
         private void tsbFlagsRefresh_Click(object sender, EventArgs e)
