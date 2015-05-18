@@ -28,6 +28,8 @@
 //// TODO
 ///////////////////// 
 
+- Maybe its time for a force delete option. To delete folders which contain untracked files.
+
 - Relocate ZipArchive path for a mod ... maybe on the edit modinfos dialog?
 
 - Known KSP Path: Relative ksp path search (options/path) create a new dialog for this option.

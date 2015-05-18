@@ -698,4 +698,6 @@
   <Control Name="tsbHelp" Value="tsbHelp">
     <ChildControl Name="tsbHelp_ToolTip" Value="Hilfe öffnen^Öffnet die KSP Mod Admin Wiki Seite auf GitHub mit deinem Browser."/>
   </Control>
+
+  <String Name="MSG_ERROR_EXPORT_FAILED_0" Value="Fehler! Export fehlgeschlagen: &quot;{0}&quot;"/>
 </Language>

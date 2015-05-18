@@ -78,7 +78,10 @@ namespace KSPModAdmin.Core.Views
         {
             List<ModNode> modsToExport = GetModsToExport();
             if (modsToExport.Count <= 0)
+            {
                 MessageBox.Show(this, Messages.MSG_NO_MODS_TO_EXPORT, Messages.MSG_TITLE_ATTENTION);
+                Messenger.AddInfo(Messages.MSG_NO_MODS_TO_EXPORT);
+            }
             else
             {
                 SaveFileDialog dlg = new SaveFileDialog();
@@ -88,22 +91,27 @@ namespace KSPModAdmin.Core.Views
                 {
                     pbExport.Visible = true;
                     AddMessage(string.Format(Messages.MSG_EXPORT_TO_0, dlg.FileName));
-                    new AsyncTask<bool>(() =>
-                                        {
-                                            ModPackHandler.MessageCallbackFunction = AddMessage;
-                                            ModPackHandler.Export(modsToExport, dlg.FileName, cbIncludeMods.Checked);
-                                            ModPackHandler.MessageCallbackFunction = null;
-                                            return true;
-                                        },
-                                        (b, ex) =>
-                                        {
-                                            pbExport.Visible = false;
-                                            if (ex != null) 
-                                                MessageBox.Show(this, ex.Message, Messages.MSG_TITLE_ERROR);
-                                            else
-                                                AddMessage(Messages.MSG_EXPORT_DONE);
-                                        }).Run();
-                    Close();
+                    AsyncTask<bool>.DoWork(() =>
+                        {
+                            ModPackHandler.MessageCallbackFunction = AddMessage;
+                            ModPackHandler.Export(modsToExport, dlg.FileName, cbIncludeMods.Checked);
+                            ModPackHandler.MessageCallbackFunction = null;
+                            return true;
+                        },
+                        (b, ex) =>
+                        {
+                            pbExport.Visible = false;
+                            if (ex != null)
+                            {
+                                AddMessage(string.Format(Messages.MSG_ERROR_EXPORT_FAILED_0, ex.Message), true, ex);
+                                MessageBox.Show(this, string.Format(Messages.MSG_ERROR_EXPORT_FAILED_0, ex.Message), Messages.MSG_TITLE_ERROR);
+                            }
+                            else
+                            {
+                                AddMessage(Messages.MSG_EXPORT_DONE);
+                                Close();
+                            }
+                        });
                 }
                 else
                     AddMessage(Messages.MSG_EXPORT_ABORTED);
@@ -152,8 +160,6 @@ namespace KSPModAdmin.Core.Views
                             InvokeIfRequired(() => ModSelectionController.RemoveAllMods());
                         }
 
-                        //// InvokeIfRequired(() => OptionsController.GetValidDownloadPath());
-
                         AddMessage(string.Format(Messages.MSG_IMPORTING_FROM_0, dlg.FileName));
                         ModPackHandler.MessageCallbackFunction = AddMessage;
                         ModPackHandler.Import(dlg.FileName, OptionsController.DownloadPath, cbExtract.Checked, cbDownloadIfNeeded.Checked, rbCopyDestination.Checked, rbAddOnly.Checked);
@@ -165,7 +171,7 @@ namespace KSPModAdmin.Core.Views
                         pbImport.Visible = false;
                         if (ex != null)
                         {
-                            AddMessage(Messages.MSG_IMPORTING_FAILED); 
+                            AddMessage(Messages.MSG_IMPORTING_FAILED, true, ex); 
                             MessageBox.Show(this, ex.Message, Messages.MSG_TITLE_ERROR);
                         }
                         else
@@ -181,15 +187,25 @@ namespace KSPModAdmin.Core.Views
 
         #endregion
 
-        private void AddMessage(string msg)
+        private void AddMessage(string msg, bool error = false, Exception ex = null)
         {
-            AddMessage(null, msg);
+            _AddMessage(msg);
         }
 
         private void AddMessage(object sender, string msg)
         {
+            _AddMessage(msg);
+        }
+
+        private void _AddMessage(string msg, bool error = false, Exception ex = null)
+        {
             InvokeIfRequired(() => lblCurrentAction.Text = msg);
-            Messenger.AddInfo(msg);
+            if(!error)
+                Messenger.AddInfo(msg);
+            else if (ex == null)
+                Messenger.AddError(msg);
+            else 
+                Messenger.AddError(msg, ex);
         }
     }
 }
