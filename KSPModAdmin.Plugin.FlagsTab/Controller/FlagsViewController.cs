@@ -109,6 +109,8 @@ namespace KSPModAdmin.Plugin.FlagsTab.Controller
 
         internal static void Initialize(ucFlagsView view)
         {
+            CreateKMAFlag = true;
+
             View = view;
 
             EventDistributor.AsyncTaskStarted += AsyncTaskStarted;
@@ -440,6 +442,7 @@ namespace KSPModAdmin.Plugin.FlagsTab.Controller
 
                             // delete file (try twice sometimes the file is still in use).
                             bool firstTry = true;
+                            bool failed = false;
                             while (firstTry)
                             {
                                 try
@@ -453,13 +456,17 @@ namespace KSPModAdmin.Plugin.FlagsTab.Controller
                                     if (!firstTry)
                                     {
                                         Messenger.AddError(string.Format(Messages.MSG_ERROR_DELETE_FLAG_0_FAILED, filename), ex);
-                                        continue;
+                                        failed = true;
                                     }
+                                    else
+                                        Thread.Sleep(300);
 
-                                    Thread.Sleep(300);
                                     firstTry = false;
                                 }
                             }
+
+                            if (failed) 
+                                continue;
 
                             // remove pic from ListView
                             var pair2Del = new KeyValuePair<string, ListViewItem>(string.Empty, null);
