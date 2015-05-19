@@ -106,7 +106,16 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
         public bool CheckForUpdates(ModInfo modInfo, ref ModInfo newModInfo)
         {
             newModInfo = GetModInfo(modInfo.ModURL);
-            return !modInfo.Version.Equals(newModInfo.Version);
+            if (string.IsNullOrEmpty(modInfo.Version) && !string.IsNullOrEmpty(newModInfo.Version))
+                return true;
+            else if (!string.IsNullOrEmpty(modInfo.Version) && !string.IsNullOrEmpty(newModInfo.Version))
+                return !modInfo.Version.Equals(newModInfo.Version);
+            else if (string.IsNullOrEmpty(modInfo.CreationDate) && !string.IsNullOrEmpty(newModInfo.CreationDate))
+                return true;
+            else if (!string.IsNullOrEmpty(modInfo.CreationDate) && !string.IsNullOrEmpty(newModInfo.CreationDate))
+                return modInfo.CreationDateAsDateTime < newModInfo.CreationDateAsDateTime;
+
+            return false;
         }
 
         /// <summary>
@@ -172,17 +181,23 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
             var htmlDoc = new HtmlWeb().Load(GetPathToReleases(modInfo.ModURL));
             htmlDoc.OptionFixNestedTags = true;
 
-
             // To scrape the fields, now using HtmlAgilityPack and XPATH search strings.
             // Easy way to get XPATH search: use chrome, inspect element, highlight the needed data and right-click and copy XPATH
             HtmlNode latestRelease = htmlDoc.DocumentNode.SelectSingleNode("//*[@class='release label-latest']");
             HtmlNode versionNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@class='release label-latest']/div[1]/ul/li[1]/a/span[2]");
+            if (versionNode == null)
+                versionNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='js-repo-pjax-container']/div[2]/ul/li[1]/div/div/h3/a/span");
             HtmlNode updateNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@class='release label-latest']/div[2]/div/p/time");
+            if (updateNode == null)
+                updateNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='js-repo-pjax-container']/div[2]/ul/li[1]/span/time");
 
-            if (versionNode == null) return;
+            if (versionNode == null || updateNode == null)
+                Messenger.AddError("Error! Can't parse GitHib version or creation date!");
 
-            modInfo.Version = Regex.Replace(versionNode.InnerText, @"[A-z]", string.Empty);
-            modInfo.ChangeDateAsDateTime = DateTime.Parse(updateNode.Attributes["datetime"].Value);
+            if (versionNode != null)
+                modInfo.Version = Regex.Replace(versionNode.InnerText, @"[A-z]", string.Empty);
+            if (updateNode != null)
+                modInfo.ChangeDateAsDateTime = DateTime.Parse(updateNode.Attributes["datetime"].Value);
         }
 
         /// <summary>
