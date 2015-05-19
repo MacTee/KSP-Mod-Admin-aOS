@@ -124,6 +124,9 @@
   <ItemGroup>
     <None Include="Resources\KMA2_Flag.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Cant_Display_DDS.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy /E /Y /R /I "$(ProjectDir)Languages" "$(SolutionDir)KSPModAdmin\$(OutDir)lang"</PostBuildEvent>

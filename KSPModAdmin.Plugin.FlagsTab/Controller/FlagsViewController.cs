@@ -16,6 +16,10 @@ using KSPModAdmin.Plugin.FlagsTab.Views;
 
 namespace KSPModAdmin.Plugin.FlagsTab.Controller
 {
+    using System.CodeDom;
+    using System.Linq;
+    using System.Runtime.InteropServices;
+
     /// <summary>
     /// Controller class for the Translation view.
     /// </summary>
@@ -24,7 +28,6 @@ namespace KSPModAdmin.Plugin.FlagsTab.Controller
     {
         #region Members
 
-        public const string EXTENSION_PNG = ".png";
         public const string FILTER_ALL = "All";
         public const string FILTER_MYFLAG = "MyFlag";
         public const string FLAGS = "Flags";
@@ -33,6 +36,8 @@ namespace KSPModAdmin.Plugin.FlagsTab.Controller
         public const string KMA2 = "KSP Mod Admin v2";
         public const int FLAG_WIDTH = 256;
         public const int FLAG_HEIGHT = 160;
+        public const string EXTENSION_PNG = ".png";
+        public const string EXTENSION_DDS = ".dds";
 
         /// <summary>
         /// List of all available flags (group, ListViewItem).
@@ -89,6 +94,11 @@ namespace KSPModAdmin.Plugin.FlagsTab.Controller
                 return Path.Combine(KSPPathHelper.GetPath(KSPPaths.GameData), MYFLAGS);
             }
         }
+
+        /// <summary>
+        /// Array of supported flag image extensions.
+        /// </summary>
+        public static string[] Exctensions { get { return new[] { EXTENSION_PNG, EXTENSION_DDS }; } }
 
         [DefaultValue(true)]
         public static bool CreateKMAFlag { get; set; }
@@ -175,7 +185,7 @@ namespace KSPModAdmin.Plugin.FlagsTab.Controller
                     if (ex != null)
                         Messenger.AddError(Messages.MSG_ERROR_DURING_FLAG_SCAN, ex);
                     else
-                        Messenger.AddError(Core.Messages.MSG_DONE, ex);
+                        Messenger.AddInfo(Core.Messages.MSG_DONE);
 
                     if (lastFilter != null &&
                         (lastFilter == FILTER_ALL || lastFilter == FILTER_MYFLAG || View.GetGroup(lastFilter) != null))
@@ -214,9 +224,19 @@ namespace KSPModAdmin.Plugin.FlagsTab.Controller
         {
             foreach (string file in Directory.GetFiles(dir))
             {
-                if (Path.GetExtension(file).ToLower() == EXTENSION_PNG.ToLower())
+                if (IsSupportedFormat(Path.GetExtension(file)))
                     AddFlagToList(file);
             }
+        }
+
+        /// <summary>
+        /// Returns true when the passed fileExtension is a supported image format.
+        /// </summary>
+        /// <param name="fileExtension">The fileExtension to check.</param>
+        /// <returns>True when the passed fileExtension is a supported image format, otherwise false.</returns>
+        private static bool IsSupportedFormat(string fileExtension)
+        {
+            return Exctensions.Any(ext => ext.Equals(fileExtension, StringComparison.CurrentCultureIgnoreCase));
         }
 
         /// <summary>
@@ -229,7 +249,17 @@ namespace KSPModAdmin.Plugin.FlagsTab.Controller
             {
                 if (File.Exists(file))
                 {
-                    Image image = Image.FromFile(file);
+                    Image image = null;
+
+                    string extension = Path.GetExtension(file);
+                    if (extension.Equals(EXTENSION_DDS, StringComparison.CurrentCultureIgnoreCase))
+                        image = DdsToBitMap(file);
+                    else
+                        image = Image.FromFile(file);
+
+                    if (image == null)
+                        return;
+
                     string groupName = GetGroupName(file);
                     string flagname = Path.GetFileNameWithoutExtension(file);
 
@@ -259,6 +289,25 @@ namespace KSPModAdmin.Plugin.FlagsTab.Controller
             result = result.Substring(0, result.ToLower().Replace(Path.DirectorySeparatorChar + FLAGS.ToLower(), string.Empty).Length);
             result = result.Substring(result.LastIndexOf(Path.DirectorySeparatorChar) + 1);
             return result;
+        }
+
+        private static Image DdsToBitMap(string file)
+        {
+            Image image = null;
+
+            try
+            {
+                image = Resources.Cant_Display_DDS;
+                //byte[] b = File.ReadAllBytes(file);
+                //DDSImage ddsImage = new DDSImage(b);
+                //image = ddsImage.BitmapImage;
+            }
+            catch (Exception ex)
+            {
+                image = null;
+            }
+
+            return image;
         }
 
         #endregion
