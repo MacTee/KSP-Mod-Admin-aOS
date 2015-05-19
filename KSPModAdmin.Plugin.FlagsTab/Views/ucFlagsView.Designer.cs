@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.ttFlags = new System.Windows.Forms.ToolTip(this.components);
-            this.lvFlags = new System.Windows.Forms.ListView();
+            this.lvFlags = new KSPModAdmin.Core.Utils.Controls.ListViewAdv();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsbFlagsRefresh = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -168,7 +168,7 @@
         #endregion
 
         private System.Windows.Forms.ToolTip ttFlags;
-        private System.Windows.Forms.ListView lvFlags;
+        private KSPModAdmin.Core.Utils.Controls.ListViewAdv lvFlags;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton tsbFlagsRefresh;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;

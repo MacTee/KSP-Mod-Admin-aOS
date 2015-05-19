@@ -27,6 +27,7 @@
   <String Name="MSG_CREATING_DIR_0" Value="Erstelle Verzeichnis &quot;{0}&quot;."/>
   <String Name="MSG_FLAG_0_DELETED" Value="Flagge &quot;{0}&quot; gelöscht."/>
   <String Name="MSG_ERROR_DELETE_FLAG_0_FAILED" Value="Fehler! Löschen der Flagge &quot;{0}&quot; fehlgeschlagen!"/>
+  <String Name="MSG_REALY_DELETE_FLAG_0" Value="Die Flagge &quot;{0}&quot; wirklich löschen?"/>
 
 </Language>
   

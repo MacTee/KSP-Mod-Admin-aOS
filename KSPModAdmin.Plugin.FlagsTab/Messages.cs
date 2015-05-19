@@ -139,5 +139,15 @@ namespace KSPModAdmin.Plugin.FlagsTab
             }
         }
         private const string DEFAULT_MSG_ERROR_DELETE_FLAG_0_FAILED = "Error! Deleting flag \"{0}\" failed!";
+
+        public static string MSG_REALY_DELETE_FLAG_0
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_REALY_DELETE_FLAG_0"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_REALY_DELETE_FLAG_0).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_REALY_DELETE_FLAG_0 = "Do you realy want to delete the flag \"{0}\"?";
     }
 }

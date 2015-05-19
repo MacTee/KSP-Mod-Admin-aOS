@@ -27,6 +27,7 @@
   <String Name="MSG_CREATING_DIR_0" Value="Creating directory &quot;{0}&quot;."/>
   <String Name="MSG_FLAG_0_DELETED" Value="Flag &quot;{0}&quot; deleted."/>
   <String Name="MSG_ERROR_DELETE_FLAG_0_FAILED" Value="Error! Deleting flag &quot;{0}&quot; failed!"/>
+  <String Name="MSG_REALY_DELETE_FLAG_0" Value="Do you realy want to delete the flag &quot;{0}&quot;?"/>
 
 </Language>
   

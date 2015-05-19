@@ -20,6 +20,8 @@ namespace KSPModAdmin.Plugin.FlagsTab.Controller
     using System.Linq;
     using System.Runtime.InteropServices;
 
+    using KSPModAdmin.Core.Utils.Logging;
+
     /// <summary>
     /// Controller class for the Translation view.
     /// </summary>
@@ -114,9 +116,11 @@ namespace KSPModAdmin.Plugin.FlagsTab.Controller
             EventDistributor.KSPRootChanged += KSPRootChanged;
 
             // Add your stuff to initialize here.
+            View.AddActionKey(VirtualKey.VK_DELETE, DeleteFlag);
+            View.AddActionKey(VirtualKey.VK_BACK, DeleteFlag);
         }
 
-        #region EventDistributor callback functions.
+        #region Event handling.
 
         /// <summary>
         /// Callback function for the AsyncTaskStarted event.
@@ -143,6 +147,16 @@ namespace KSPModAdmin.Plugin.FlagsTab.Controller
         private static void KSPRootChanged(string kspPath)
         {
             // TODO: ...
+        }
+
+        /// <summary>
+        /// Deletes the selected Flag.
+        /// </summary>
+        /// <returns>Returns true cause we have handled the key.</returns>
+        private static bool DeleteFlag(ActionKeyInfo keyState)
+        {
+            DeleteSelectedFlag();
+            return true;
         }
 
         #endregion
@@ -298,12 +312,13 @@ namespace KSPModAdmin.Plugin.FlagsTab.Controller
             try
             {
                 image = Resources.Cant_Display_DDS;
-                //byte[] b = File.ReadAllBytes(file);
-                //DDSImage ddsImage = new DDSImage(b);
-                //image = ddsImage.BitmapImage;
+                ////byte[] b = File.ReadAllBytes(file);
+                ////DDSImage ddsImage = new DDSImage(b);
+                ////image = ddsImage.BitmapImage;
             }
             catch (Exception ex)
             {
+                Log.AddErrorS("Error in DdsToBitMap", ex);
                 image = null;
             }
 
@@ -419,7 +434,8 @@ namespace KSPModAdmin.Plugin.FlagsTab.Controller
                         if (File.Exists(filename))
                         {
                             // Esteregg #1
-                            if (Path.GetFileName(filename).Equals(FLAG_FILENAME, StringComparison.CurrentCultureIgnoreCase) && AskUser())
+                            if (AskUser(Path.GetFileNameWithoutExtension(filename)) || 
+                                (Path.GetFileName(filename).Equals(FLAG_FILENAME, StringComparison.CurrentCultureIgnoreCase) && AskUser2()))
                                 return;
 
                             // delete file (try twice sometimes the file is still in use).
@@ -476,7 +492,12 @@ namespace KSPModAdmin.Plugin.FlagsTab.Controller
             }
         }
 
-        private static bool AskUser()
+        private static bool AskUser(string flagName)
+        {
+            return MessageBox.Show(View.ParentForm, string.Format(Messages.MSG_REALY_DELETE_FLAG_0, flagName), Core.Messages.MSG_TITLE_ATTENTION, MessageBoxButtons.YesNo) == DialogResult.No;
+        }
+
+        private static bool AskUser2()
         {
             if (MessageBox.Show(View.ParentForm, "Do you want to delete the KMA² flag?", string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                 return true;

@@ -195,6 +195,18 @@ namespace KSPModAdmin.Core.Views
             tvModSelection.SelectedNode = null;
         }
 
+        /// <summary>
+        /// Add a ActionKey CallbackFunction binding to the flag ListView.
+        /// </summary>
+        /// <param name="key">The action key that raises the callback.</param>
+        /// <param name="callback">The callback function with the action that should be called.</param>
+        /// <param name="modifierKeys">Required state of the modifier keys to get the callback function called.</param>
+        /// <param name="once">Flag to determine if the callback function should only be called once.</param>
+        public void AddActionKey(VirtualKey key, ActionKeyHandler callback, ModifierKey[] modifierKeys = null, bool once = false)
+        {
+            tvModSelection.AddActionKey(key, callback, modifierKeys, once);
+        }
+
         #region Event handling
 
         private void ucModSelection_Load(object sender, EventArgs e)

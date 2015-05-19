@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using KSPModAdmin.Core.Views;
+using KSPModAdmin.Core.Utils;
 using KSPModAdmin.Plugin.FlagsTab.Controller;
 
 namespace KSPModAdmin.Plugin.FlagsTab.Views
@@ -81,7 +81,6 @@ namespace KSPModAdmin.Plugin.FlagsTab.Views
 
             if (lvFlags.Items.Count == 0)
                 FlagsViewController.RefreshFlagTab();
-
         }
 
         private void tsbFlagsRefresh_Click(object sender, EventArgs e)
@@ -233,6 +232,18 @@ namespace KSPModAdmin.Plugin.FlagsTab.Views
                     group.Items.Add(pair.Value);
                     lvFlags.Items.Add(pair.Value);
                 }
+        }
+
+        /// <summary>
+        /// Add a ActionKey CallbackFunction binding to the flag ListView.
+        /// </summary>
+        /// <param name="key">The action key that raises the callback.</param>
+        /// <param name="callback">The callback function with the action that should be called.</param>
+        /// <param name="modifierKeys">Required state of the modifier keys to get the callback function called.</param>
+        /// <param name="once">Flag to determine if the callback function should only be called once.</param>
+        public void AddActionKey(VirtualKey key, ActionKeyHandler callback, ModifierKey[] modifierKeys = null, bool once = false)
+        {
+            lvFlags.AddActionKey(key, callback, modifierKeys, once);
         }
     }
 }

@@ -503,6 +503,9 @@ namespace KSPModAdmin.Core.Controller
             EventDistributor.AsyncTaskStarted += AsyncTaskStarted;
             EventDistributor.AsyncTaskDone += AsyncTaskDone;
             EventDistributor.LanguageChanged += LanguageChanged;
+
+            View.AddActionKey(VirtualKey.VK_DELETE, DeleteKnownPath);
+            View.AddActionKey(VirtualKey.VK_BACK, DeleteKnownPath);
         }
 
         #region Public
@@ -1368,6 +1371,12 @@ namespace KSPModAdmin.Core.Controller
         #endregion
 
         #endregion
+
+        private static bool DeleteKnownPath(ActionKeyInfo keyState)
+        {
+            RemoveKSPPath();
+            return true;
+        }
 
         #region EventDistributor callback functions.
 

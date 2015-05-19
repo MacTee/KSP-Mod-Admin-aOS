@@ -92,6 +92,9 @@ namespace KSPModAdmin.Core.Controller
             EventDistributor.KSPRootChanged += KSPRootChanged;
 
             ModSelectionTreeModel.BeforeCheckedChange += BeforeCheckedChange;
+
+            View.AddActionKey(VirtualKey.VK_DELETE, DeleteMod);
+            View.AddActionKey(VirtualKey.VK_BACK, DeleteMod);
         }
 
 
@@ -172,6 +175,17 @@ namespace KSPModAdmin.Core.Controller
                         args.NewValue = false;
                 }
             }
+        }
+
+        /// <summary>
+        /// ActionKey callback function to handle Delete and Back key.
+        /// Deletes the selected mod(s).
+        /// </summary>
+        /// <returns>True, cause we have handled the key.</returns>
+        protected static bool DeleteMod(ActionKeyInfo keyState)
+        {
+            RemoveMod(View.SelectedMods.ToArray());
+            return true;
         }
 
         #endregion
@@ -1509,6 +1523,9 @@ namespace KSPModAdmin.Core.Controller
 
         #region Relocate mod archive path
 
+        /// <summary>
+        /// Opens a FolderSelect dialog and sets the archive path of the selected mod to the "selected folder" + "mod archive filename" if the archive is found in the new folder.
+        /// </summary>
         public static void RelocateArchivePath(ModNode selectedMod)
         {
             if (selectedMod == null)
@@ -1525,6 +1542,9 @@ namespace KSPModAdmin.Core.Controller
             RelocateArchivePath(selectedMod, dlg.FileName);
         }
 
+        /// <summary>
+        /// Opens a FolderSelect dialog and sets the archive paths of all mods to the "selected folder" + "mod archive filename" if the archive is found in the new folder.
+        /// </summary>
         public static void RelocateArchivePathAllMods()
         {
             var dlg = new FolderSelectDialog();

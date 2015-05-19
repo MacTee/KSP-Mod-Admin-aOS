@@ -200,7 +200,7 @@ namespace KSPModAdmin.Core.Views
         private void _AddMessage(string msg, bool error = false, Exception ex = null)
         {
             InvokeIfRequired(() => lblCurrentAction.Text = msg);
-            if(!error)
+            if (!error)
                 Messenger.AddInfo(msg);
             else if (ex == null)
                 Messenger.AddError(msg);
