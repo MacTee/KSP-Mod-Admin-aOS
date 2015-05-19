@@ -109,7 +109,7 @@ namespace KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.NodeControls
             _format.Trimming = Trimming;
 
             _formatFlags = _baseFormatFlags | TextHelper.TranslateAligmentToFlag(TextAlign)
-                | TextHelper.TranslateTrimmingToFlag(Trimming);
+                | TextHelper.TranslateTrimmingToFlag(Trimming) | TextFormatFlags.EndEllipsis;
         }
 
         public override Size MeasureSize(TreeNodeAdv node, DrawContext context)

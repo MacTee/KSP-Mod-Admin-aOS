@@ -193,6 +193,7 @@ namespace KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.Helper
                             nodeTextBox.IncrementalSearchEnabled = columnItem.IncrementalSearchEnabled;
                             nodeTextBox.LeftMargin = columnItem.LeftMargin;
                             nodeTextBox.ParentColumn = treeColumn;
+                            nodeTextBox.UseCompatibleTextRendering = true;
                             treeViewAdv.NodeControls.Add(nodeTextBox);
                             break;
                     }
