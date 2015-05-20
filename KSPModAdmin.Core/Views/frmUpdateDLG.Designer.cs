@@ -53,7 +53,7 @@
             this.btnCancel.Location = new System.Drawing.Point(502, 261);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(110, 25);
-            this.btnCancel.TabIndex = 2;
+            this.btnCancel.TabIndex = 5;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -72,7 +72,7 @@
             this.tbMessage.ReadOnly = true;
             this.tbMessage.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.tbMessage.Size = new System.Drawing.Size(622, 214);
-            this.tbMessage.TabIndex = 1;
+            this.tbMessage.TabIndex = 0;
             this.tbMessage.TabStop = false;
             this.tbMessage.WordWrap = false;
             // 
@@ -84,7 +84,7 @@
             this.tbDownloadPath.Name = "tbDownloadPath";
             this.tbDownloadPath.ReadOnly = true;
             this.tbDownloadPath.Size = new System.Drawing.Size(433, 20);
-            this.tbDownloadPath.TabIndex = 3;
+            this.tbDownloadPath.TabIndex = 1;
             // 
             // lblDownloadPath
             // 
@@ -92,7 +92,7 @@
             this.lblDownloadPath.Location = new System.Drawing.Point(3, 0);
             this.lblDownloadPath.Name = "lblDownloadPath";
             this.lblDownloadPath.Size = new System.Drawing.Size(119, 25);
-            this.lblDownloadPath.TabIndex = 4;
+            this.lblDownloadPath.TabIndex = 0;
             this.lblDownloadPath.Text = "Download path:";
             this.lblDownloadPath.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -103,7 +103,7 @@
             this.lblPostDownloadAction.Location = new System.Drawing.Point(3, 0);
             this.lblPostDownloadAction.Name = "lblPostDownloadAction";
             this.lblPostDownloadAction.Size = new System.Drawing.Size(119, 25);
-            this.lblPostDownloadAction.TabIndex = 4;
+            this.lblPostDownloadAction.TabIndex = 0;
             this.lblPostDownloadAction.Text = "Post download action:";
             this.lblPostDownloadAction.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -120,7 +120,7 @@
             this.cbPostDownloadAction.Location = new System.Drawing.Point(128, 3);
             this.cbPostDownloadAction.Name = "cbPostDownloadAction";
             this.cbPostDownloadAction.Size = new System.Drawing.Size(236, 21);
-            this.cbPostDownloadAction.TabIndex = 5;
+            this.cbPostDownloadAction.TabIndex = 1;
             this.ttUpdateDLG.SetToolTip(this.cbPostDownloadAction, "The action that should be executed after a update.");
             // 
             // btnDownload
@@ -131,7 +131,7 @@
             this.btnDownload.Location = new System.Drawing.Point(388, 261);
             this.btnDownload.Name = "btnDownload";
             this.btnDownload.Size = new System.Drawing.Size(108, 25);
-            this.btnDownload.TabIndex = 1;
+            this.btnDownload.TabIndex = 4;
             this.btnDownload.Text = "Download";
             this.btnDownload.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnDownload.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -146,7 +146,7 @@
             this.btnDownloadPath.Location = new System.Drawing.Point(585, 226);
             this.btnDownloadPath.Name = "btnDownloadPath";
             this.btnDownloadPath.Size = new System.Drawing.Size(25, 23);
-            this.btnDownloadPath.TabIndex = 4;
+            this.btnDownloadPath.TabIndex = 2;
             this.ttUpdateDLG.SetToolTip(this.btnDownloadPath, "Opens a folder browser to select a download folder.");
             this.btnDownloadPath.UseVisualStyleBackColor = true;
             this.btnDownloadPath.Click += new System.EventHandler(this.btnDownloadPath_Click);
@@ -165,7 +165,7 @@
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(564, 25);
-            this.tableLayoutPanel1.TabIndex = 6;
+            this.tableLayoutPanel1.TabIndex = 1;
             // 
             // tableLayoutPanel2
             // 
@@ -181,7 +181,7 @@
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(367, 25);
-            this.tableLayoutPanel2.TabIndex = 7;
+            this.tableLayoutPanel2.TabIndex = 3;
             // 
             // frmUpdateDLG
             // 

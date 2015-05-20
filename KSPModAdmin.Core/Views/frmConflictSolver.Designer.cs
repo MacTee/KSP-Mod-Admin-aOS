@@ -54,7 +54,7 @@
             this.treeViewAdv.Name = "treeViewAdv";
             this.treeViewAdv.SelectedNode = null;
             this.treeViewAdv.Size = new System.Drawing.Size(910, 331);
-            this.treeViewAdv.TabIndex = 0;
+            this.treeViewAdv.TabIndex = 1;
             this.treeViewAdv.Text = "treeViewAdv1";
             this.treeViewAdv.UseColumns = true;
             // 
@@ -81,7 +81,7 @@
             this.btnSolve.Location = new System.Drawing.Point(736, 401);
             this.btnSolve.Name = "btnSolve";
             this.btnSolve.Size = new System.Drawing.Size(105, 23);
-            this.btnSolve.TabIndex = 1;
+            this.btnSolve.TabIndex = 2;
             this.btnSolve.Text = "Solve conflicts";
             this.btnSolve.UseVisualStyleBackColor = true;
             this.btnSolve.Click += new System.EventHandler(this.btnSolve_Click);
@@ -93,7 +93,7 @@
             this.btnCancel.Location = new System.Drawing.Point(847, 401);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 1;
+            this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -104,7 +104,7 @@
             this.lblConflictSolverDesc.Location = new System.Drawing.Point(21, 9);
             this.lblConflictSolverDesc.Name = "lblConflictSolverDesc";
             this.lblConflictSolverDesc.Size = new System.Drawing.Size(458, 52);
-            this.lblConflictSolverDesc.TabIndex = 2;
+            this.lblConflictSolverDesc.TabIndex = 0;
             this.lblConflictSolverDesc.Text = resources.GetString("lblConflictSolverDesc.Text");
             // 
             // frmConflictSolver

@@ -68,7 +68,7 @@ namespace KSPModAdmin.Core.Views
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(689, 540);
-            this.tabControl1.TabIndex = 2;
+            this.tabControl1.TabIndex = 0;
             // 
             // tabPageModSelection
             // 
@@ -91,7 +91,7 @@ namespace KSPModAdmin.Core.Views
             this.ucModSelection1.Location = new System.Drawing.Point(3, 0);
             this.ucModSelection1.Name = "ucModSelection1";
             this.ucModSelection1.Size = new System.Drawing.Size(675, 442);
-            this.ucModSelection1.TabIndex = 0;
+            this.ucModSelection1.TabIndex = 1;
             // 
             // ucKSPStartup1
             // 
@@ -136,7 +136,7 @@ namespace KSPModAdmin.Core.Views
             this.lblKSPPath.Location = new System.Drawing.Point(3, 0);
             this.lblKSPPath.Name = "lblKSPPath";
             this.lblKSPPath.Size = new System.Drawing.Size(84, 26);
-            this.lblKSPPath.TabIndex = 3;
+            this.lblKSPPath.TabIndex = 0;
             this.lblKSPPath.Text = "KSP install path:";
             this.lblKSPPath.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -149,7 +149,7 @@ namespace KSPModAdmin.Core.Views
             this.cbKSPPath.Location = new System.Drawing.Point(93, 3);
             this.cbKSPPath.Name = "cbKSPPath";
             this.cbKSPPath.Size = new System.Drawing.Size(579, 21);
-            this.cbKSPPath.TabIndex = 4;
+            this.cbKSPPath.TabIndex = 1;
             this.ttMain.SetToolTip(this.cbKSPPath, "Chose the KSP install path to perform actions on.");
             this.cbKSPPath.SelectedIndexChanged += new System.EventHandler(this.cbKSPPath_SelectedIndexChanged);
             // 
@@ -210,7 +210,7 @@ namespace KSPModAdmin.Core.Views
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(675, 26);
-            this.tableLayoutPanel1.TabIndex = 6;
+            this.tableLayoutPanel1.TabIndex = 0;
             // 
             // frmMain
             // 

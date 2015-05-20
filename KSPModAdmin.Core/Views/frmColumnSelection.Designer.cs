@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Mod");
-            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("Version");
-            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("VersionControl");
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Mod");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Version");
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("VersionControl");
             this.lblColSelectDisplayed = new System.Windows.Forms.Label();
             this.lblColSelectAvailable = new System.Windows.Forms.Label();
             this.lvDisplayedColumns = new System.Windows.Forms.ListView();
@@ -48,7 +48,7 @@
             this.lblColSelectDisplayed.Location = new System.Drawing.Point(12, 45);
             this.lblColSelectDisplayed.Name = "lblColSelectDisplayed";
             this.lblColSelectDisplayed.Size = new System.Drawing.Size(135, 13);
-            this.lblColSelectDisplayed.TabIndex = 0;
+            this.lblColSelectDisplayed.TabIndex = 1;
             this.lblColSelectDisplayed.Text = "Displayed in ModSelection:";
             // 
             // lblColSelectAvailable
@@ -57,7 +57,7 @@
             this.lblColSelectAvailable.Location = new System.Drawing.Point(181, 45);
             this.lblColSelectAvailable.Name = "lblColSelectAvailable";
             this.lblColSelectAvailable.Size = new System.Drawing.Size(95, 13);
-            this.lblColSelectAvailable.TabIndex = 0;
+            this.lblColSelectAvailable.TabIndex = 3;
             this.lblColSelectAvailable.Text = "Available columns:";
             // 
             // lvDisplayedColumns
@@ -68,13 +68,13 @@
             this.lvDisplayedColumns.FullRowSelect = true;
             this.lvDisplayedColumns.GridLines = true;
             this.lvDisplayedColumns.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem4,
-            listViewItem5,
-            listViewItem6});
+            listViewItem1,
+            listViewItem2,
+            listViewItem3});
             this.lvDisplayedColumns.Location = new System.Drawing.Point(15, 61);
             this.lvDisplayedColumns.Name = "lvDisplayedColumns";
             this.lvDisplayedColumns.Size = new System.Drawing.Size(163, 200);
-            this.lvDisplayedColumns.TabIndex = 1;
+            this.lvDisplayedColumns.TabIndex = 2;
             this.lvDisplayedColumns.UseCompatibleStateImageBehavior = false;
             this.lvDisplayedColumns.View = System.Windows.Forms.View.Details;
             this.lvDisplayedColumns.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.listView_ItemDrag);
@@ -97,7 +97,7 @@
             this.lvAvailableColumns.Location = new System.Drawing.Point(184, 61);
             this.lvAvailableColumns.Name = "lvAvailableColumns";
             this.lvAvailableColumns.Size = new System.Drawing.Size(163, 200);
-            this.lvAvailableColumns.TabIndex = 1;
+            this.lvAvailableColumns.TabIndex = 4;
             this.lvAvailableColumns.UseCompatibleStateImageBehavior = false;
             this.lvAvailableColumns.View = System.Windows.Forms.View.Details;
             this.lvAvailableColumns.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.listView_ItemDrag);
@@ -127,7 +127,7 @@
             this.btnApply.Location = new System.Drawing.Point(121, 268);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(110, 25);
-            this.btnApply.TabIndex = 4;
+            this.btnApply.TabIndex = 5;
             this.btnApply.Text = "Apply";
             this.btnApply.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnApply.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -141,7 +141,7 @@
             this.btnCancel.Location = new System.Drawing.Point(237, 268);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(110, 25);
-            this.btnCancel.TabIndex = 5;
+            this.btnCancel.TabIndex = 6;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;

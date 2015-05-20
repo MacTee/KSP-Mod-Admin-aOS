@@ -77,7 +77,7 @@
             this.gbExport.Location = new System.Drawing.Point(7, 3);
             this.gbExport.Name = "gbExport";
             this.gbExport.Size = new System.Drawing.Size(449, 131);
-            this.gbExport.TabIndex = 1;
+            this.gbExport.TabIndex = 0;
             this.gbExport.TabStop = false;
             this.gbExport.Text = "Export:";
             // 
@@ -106,7 +106,7 @@
             this.cbModSelection.Location = new System.Drawing.Point(47, 93);
             this.cbModSelection.Name = "cbModSelection";
             this.cbModSelection.Size = new System.Drawing.Size(257, 21);
-            this.cbModSelection.TabIndex = 3;
+            this.cbModSelection.TabIndex = 4;
             // 
             // cbIncludeMods
             // 
@@ -116,7 +116,7 @@
             this.cbIncludeMods.Location = new System.Drawing.Point(304, 21);
             this.cbIncludeMods.Name = "cbIncludeMods";
             this.cbIncludeMods.Size = new System.Drawing.Size(130, 17);
-            this.cbIncludeMods.TabIndex = 2;
+            this.cbIncludeMods.TabIndex = 1;
             this.cbIncludeMods.Text = "Include mod archives.";
             this.cbIncludeMods.UseVisualStyleBackColor = true;
             // 
@@ -127,7 +127,7 @@
             this.rbExportSelectedOnly.Location = new System.Drawing.Point(28, 70);
             this.rbExportSelectedOnly.Name = "rbExportSelectedOnly";
             this.rbExportSelectedOnly.Size = new System.Drawing.Size(117, 17);
-            this.rbExportSelectedOnly.TabIndex = 2;
+            this.rbExportSelectedOnly.TabIndex = 3;
             this.rbExportSelectedOnly.Text = "Selected mods only";
             this.rbExportSelectedOnly.UseVisualStyleBackColor = true;
             this.rbExportSelectedOnly.CheckedChanged += new System.EventHandler(this.rbExportSelectedOnly_CheckedChanged);
@@ -152,7 +152,7 @@
             this.lblExportInfo.Location = new System.Drawing.Point(13, 22);
             this.lblExportInfo.Name = "lblExportInfo";
             this.lblExportInfo.Size = new System.Drawing.Size(235, 13);
-            this.lblExportInfo.TabIndex = 1;
+            this.lblExportInfo.TabIndex = 0;
             this.lblExportInfo.Text = "Export a ModPack for sharing with other players.";
             // 
             // btnExport
@@ -163,7 +163,7 @@
             this.btnExport.Location = new System.Drawing.Point(345, 91);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(89, 25);
-            this.btnExport.TabIndex = 0;
+            this.btnExport.TabIndex = 5;
             this.btnExport.Text = "Export";
             this.btnExport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnExport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -202,7 +202,7 @@
             this.gbDestinationOption.Location = new System.Drawing.Point(16, 95);
             this.gbDestinationOption.Name = "gbDestinationOption";
             this.gbDestinationOption.Size = new System.Drawing.Size(418, 52);
-            this.gbDestinationOption.TabIndex = 14;
+            this.gbDestinationOption.TabIndex = 4;
             this.gbDestinationOption.TabStop = false;
             this.gbDestinationOption.Text = "Destination options:";
             // 
@@ -214,7 +214,7 @@
             this.rbCopyDestination.Location = new System.Drawing.Point(27, 19);
             this.rbCopyDestination.Name = "rbCopyDestination";
             this.rbCopyDestination.Size = new System.Drawing.Size(106, 17);
-            this.rbCopyDestination.TabIndex = 2;
+            this.rbCopyDestination.TabIndex = 0;
             this.rbCopyDestination.TabStop = true;
             this.rbCopyDestination.Text = "Copy destination.";
             this.rbCopyDestination.UseVisualStyleBackColor = true;
@@ -226,7 +226,7 @@
             this.rbUseAutoDestDetection.Location = new System.Drawing.Point(191, 19);
             this.rbUseAutoDestDetection.Name = "rbUseAutoDestDetection";
             this.rbUseAutoDestDetection.Size = new System.Drawing.Size(176, 17);
-            this.rbUseAutoDestDetection.TabIndex = 2;
+            this.rbUseAutoDestDetection.TabIndex = 1;
             this.rbUseAutoDestDetection.Text = "User Auto destination detection.";
             this.rbUseAutoDestDetection.UseVisualStyleBackColor = true;
             // 
@@ -240,7 +240,7 @@
             this.gbInstallOptions.Location = new System.Drawing.Point(16, 153);
             this.gbInstallOptions.Name = "gbInstallOptions";
             this.gbInstallOptions.Size = new System.Drawing.Size(418, 52);
-            this.gbInstallOptions.TabIndex = 14;
+            this.gbInstallOptions.TabIndex = 5;
             this.gbInstallOptions.TabStop = false;
             this.gbInstallOptions.Text = "Install options:";
             // 
@@ -252,7 +252,7 @@
             this.rbInstall.Location = new System.Drawing.Point(27, 19);
             this.rbInstall.Name = "rbInstall";
             this.rbInstall.Size = new System.Drawing.Size(83, 17);
-            this.rbInstall.TabIndex = 2;
+            this.rbInstall.TabIndex = 0;
             this.rbInstall.TabStop = true;
             this.rbInstall.Text = "Install mods.";
             this.rbInstall.UseVisualStyleBackColor = true;
@@ -264,7 +264,7 @@
             this.rbAddOnly.Location = new System.Drawing.Point(191, 19);
             this.rbAddOnly.Name = "rbAddOnly";
             this.rbAddOnly.Size = new System.Drawing.Size(169, 17);
-            this.rbAddOnly.TabIndex = 2;
+            this.rbAddOnly.TabIndex = 1;
             this.rbAddOnly.Text = "Add mods only (manual install).";
             this.rbAddOnly.UseVisualStyleBackColor = true;
             // 
@@ -276,7 +276,7 @@
             this.cbClearModSelection.Location = new System.Drawing.Point(255, 72);
             this.cbClearModSelection.Name = "cbClearModSelection";
             this.cbClearModSelection.Size = new System.Drawing.Size(179, 17);
-            this.cbClearModSelection.TabIndex = 2;
+            this.cbClearModSelection.TabIndex = 3;
             this.cbClearModSelection.Text = "Clear ModSelection befor import.";
             this.cbClearModSelection.UseVisualStyleBackColor = true;
             // 
@@ -311,7 +311,7 @@
             this.lblCurrentAction.Location = new System.Drawing.Point(13, 208);
             this.lblCurrentAction.Name = "lblCurrentAction";
             this.lblCurrentAction.Size = new System.Drawing.Size(314, 34);
-            this.lblCurrentAction.TabIndex = 1;
+            this.lblCurrentAction.TabIndex = 6;
             this.lblCurrentAction.Text = "Current Action...";
             // 
             // cbDownloadIfNeeded
@@ -323,7 +323,7 @@
             this.cbDownloadIfNeeded.Location = new System.Drawing.Point(28, 49);
             this.cbDownloadIfNeeded.Name = "cbDownloadIfNeeded";
             this.cbDownloadIfNeeded.Size = new System.Drawing.Size(199, 17);
-            this.cbDownloadIfNeeded.TabIndex = 2;
+            this.cbDownloadIfNeeded.TabIndex = 1;
             this.cbDownloadIfNeeded.Text = "Download needed mods (if possible).";
             this.cbDownloadIfNeeded.UseVisualStyleBackColor = true;
             this.cbDownloadIfNeeded.CheckedChanged += new System.EventHandler(this.cbDownloadIfNeeded_CheckedChanged);
@@ -335,7 +335,7 @@
             this.lblImportInfo.Location = new System.Drawing.Point(13, 23);
             this.lblImportInfo.Name = "lblImportInfo";
             this.lblImportInfo.Size = new System.Drawing.Size(164, 13);
-            this.lblImportInfo.TabIndex = 1;
+            this.lblImportInfo.TabIndex = 0;
             this.lblImportInfo.Text = "Import mods from a ModPack file.";
             // 
             // btnImport
@@ -346,7 +346,7 @@
             this.btnImport.Location = new System.Drawing.Point(345, 213);
             this.btnImport.Name = "btnImport";
             this.btnImport.Size = new System.Drawing.Size(89, 25);
-            this.btnImport.TabIndex = 0;
+            this.btnImport.TabIndex = 7;
             this.btnImport.Text = "Import";
             this.btnImport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnImport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
