@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using KSPModAdmin.Core;
@@ -16,11 +17,6 @@ using KSPModAdmin.Plugin.FlagsTab.Views;
 
 namespace KSPModAdmin.Plugin.FlagsTab.Controller
 {
-    using System.CodeDom;
-    using System.Linq;
-    using System.Runtime.InteropServices;
-
-    using KSPModAdmin.Core.Utils.Logging;
 
     /// <summary>
     /// Controller class for the Translation view.
@@ -307,46 +303,19 @@ namespace KSPModAdmin.Plugin.FlagsTab.Controller
             return result;
         }
 
-        private static int i = 0;
-        private static int j = 0;
         private static Image DdsToBitMap(string file)
         {
             Image image = null;
 
             try
             {
-                View.InvokeIfRequired(
-                    () =>
-                    {
-                        View.ParentForm.Text =
-                            View.ParentForm.Text.Replace(" - DDSImage (4o66)", string.Empty).Replace(" - DDSImage (me)", string.Empty);
-                    });
-                byte[] b = File.ReadAllBytes(file);
-                if (i % 2 == 0)
-                {
-                    View.InvokeIfRequired(() => { View.ParentForm.Text += " - DDSImage (me)"; });
-                    j++;
-                    DDSImage ddsImage = new DDSImage(b);
-                    image = ddsImage.BitmapImage;
-                }
-                else
-                {
-                    View.InvokeIfRequired(() => { View.ParentForm.Text += " - DDSImage (4o66)"; });
-                    j++;
-                    DDSImage2 ddsImage2 = new DDSImage2(b);
-                    image = ddsImage2.images[0];
-                }
+                image = Resources.Cant_Display_DDS;
+                // TODO: Load DDS to BitMap
             }
             catch (Exception ex)
             {
                 image = Resources.Cant_Display_DDS;
                 Messenger.AddError(string.Format("Error while reading dds image \"{0}\"", file), ex);
-            }
-
-            if (j == 2)
-            {
-                i++;
-                j = 0;
             }
 
             return image;
@@ -531,9 +500,6 @@ namespace KSPModAdmin.Plugin.FlagsTab.Controller
 
         private static bool AskUser2()
         {
-            if (MessageBox.Show(View.ParentForm, "Do you want to delete the KMA² flag?", string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
-                return true;
-
             if (MessageBox.Show(View.ParentForm, "I thinks it's pretty awesome. Can i abort the delete?", string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
                 return true;
 

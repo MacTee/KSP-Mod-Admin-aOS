@@ -121,10 +121,6 @@
     <Compile Include="Utils\Controls\TreeViewEx.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Utils\Misc\DDSImage.cs" />
-    <Compile Include="Utils\Misc\DDSImage2.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Utils\ModPackHandler.cs" />
     <Compile Include="Utils\SiteHandler\CurseForgeHandler.cs" />
     <Compile Include="Utils\SiteHandler\CurseHandler.cs" />
