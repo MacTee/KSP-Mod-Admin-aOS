@@ -853,6 +853,9 @@ namespace KSPModAdmin.Core.Model
         /// <summary>
         /// Gets the flag if one of the childes is checked.
         /// </summary>
-        public  bool HasCheckedChilds { get { return HasInstalledChilds; } }
+        public bool HasCheckedChilds
+        {
+            get { return HasInstalledChilds; }
+        }
     }
 }

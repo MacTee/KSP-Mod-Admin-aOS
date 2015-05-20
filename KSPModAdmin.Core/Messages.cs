@@ -2157,6 +2157,5 @@ namespace KSPModAdmin.Core
             }
         }
         private const string DEFAULT_MSG_COPY_MOD_0_DESTINATION_FAILED = "Error! Copy destinations of mod \"{0}\" failed!";
-        
     }
 }

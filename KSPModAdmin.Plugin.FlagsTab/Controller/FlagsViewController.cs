@@ -319,10 +319,10 @@ namespace KSPModAdmin.Plugin.FlagsTab.Controller
                     () =>
                     {
                         View.ParentForm.Text =
-                            View.ParentForm.Text.Replace(" - DDSImage (4o66)", "").Replace(" - DDSImage (me)", "");
+                            View.ParentForm.Text.Replace(" - DDSImage (4o66)", string.Empty).Replace(" - DDSImage (me)", string.Empty);
                     });
                 byte[] b = File.ReadAllBytes(file);
-                if (i%2 == 0)
+                if (i % 2 == 0)
                 {
                     View.InvokeIfRequired(() => { View.ParentForm.Text += " - DDSImage (me)"; });
                     j++;

@@ -264,6 +264,9 @@ namespace KSPModAdmin.Core.Controller
                 tt.AutoPopDelay = (int)(ttDisplayTime * 1000);
             }
 
+            if (control.GetType() == typeof(ToolStrip))
+                ((ToolStrip)control).ShowItemToolTips = ttOnOff;
+
             foreach (Control ctrl in control.Controls)
                 SetToolTipValues(ttOnOff, ttDelay, ttDisplayTime, ctrl);
         }

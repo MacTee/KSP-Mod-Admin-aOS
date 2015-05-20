@@ -704,4 +704,6 @@
   <String Name="MSG_SELECT_NEW_ARCHIVE_PATH" Value="(T)Please select the new archive path."/>
   <String Name="MSG_MOD_0_ARCHIVE_PATH_CHANGED_TO_1" Value="(T)Archive path of mod &quot;{0}&quot; changed to &quot;{1}&quot;."/>
   <String Name="MSG_MOD_ARCHIVE_0_NOT_FOUND_MOD_1" Value="(T)Mod archive &quot;{0}&quot; not found. Can't change archive path of mod &quot;{1}&quot;."/>
+  <String Name="MSG_COPY_MOD_0_DESTINATION_FAILED" Value="(T)Error! Copy destinations of mod &quot;{0}&quot; failed!"/>
+  
 </Language>
