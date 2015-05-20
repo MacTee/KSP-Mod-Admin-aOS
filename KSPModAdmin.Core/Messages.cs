@@ -2147,5 +2147,16 @@ namespace KSPModAdmin.Core
             }
         }
         private const string DEFAULT_MSG_MOD_ARCHIVE_0_NOT_FOUND_MOD_1 = "Mod archive \"{0}\" not found. Can't change archive path of mod \"{1}\".";
+
+        public static string MSG_COPY_MOD_0_DESTINATION_FAILED
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_COPY_MOD_0_DESTINATION_FAILED"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_COPY_MOD_0_DESTINATION_FAILED).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_COPY_MOD_0_DESTINATION_FAILED = "Error! Copy destinations of mod \"{0}\" failed!";
+        
     }
 }

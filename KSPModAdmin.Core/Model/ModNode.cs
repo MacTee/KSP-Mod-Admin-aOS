@@ -12,7 +12,7 @@ namespace KSPModAdmin.Core.Model
     /// <summary>
     /// Representation of a Node of a mod from the ModSelection tree.
     /// </summary>
-    public class ModNode : Node
+    public class ModNode : Node, ICopyModInfo
     {
         /// <summary>
         /// Gets the child node with the given key.
@@ -757,7 +757,7 @@ namespace KSPModAdmin.Core.Model
         /// </summary>
         /// <param name="fileNodes">For recursive calls! List of already found file nodes.</param>
         /// <returns>A list of TreeNodeMod that represents a file entry.</returns>
-        public List<ModNode> GetAllFileNodes(List<ModNode> fileNodes = null)
+        private List<ModNode> GetAllFileNodes(List<ModNode> fileNodes)
         {
             if (fileNodes == null)
                 fileNodes = new List<ModNode>();
@@ -822,5 +822,37 @@ namespace KSPModAdmin.Core.Model
             foreach (ModNode child in modNode.Nodes)
                 UncheckAllInternal(child);
         }
+
+        /// <summary>
+        /// Gets flat list of all file nodes this tree containing.
+        /// </summary>
+        /// <returns>A flat list of all file nodes this tree containing.</returns>
+        public List<ICopyModInfo> GetAllFileNodes()
+        {
+            return GetAllFileNodes();
+        }
+
+        /// <summary>
+        /// Gets the parent node.
+        /// </summary>
+        /// <returns>The parent node.</returns>
+        public ICopyModInfo GetParent()
+        {
+            return Parent as ModNode;
+        }
+
+        /// <summary>
+        /// Gets the root node of this node (top most parent).
+        /// </summary>
+        /// <returns>The root node of this node (top most parent).</returns>
+        public ICopyModInfo GetRoot()
+        {
+            return ZipRoot;
+        }
+
+        /// <summary>
+        /// Gets the flag if one of the childes is checked.
+        /// </summary>
+        public  bool HasCheckedChilds { get { return HasInstalledChilds; } }
     }
 }

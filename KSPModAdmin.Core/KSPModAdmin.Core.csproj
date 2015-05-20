@@ -99,6 +99,7 @@
     <Compile Include="IKSPMAPlugin.cs" />
     <Compile Include="Config\KSPConfig.cs" />
     <Compile Include="Messages.cs" />
+    <Compile Include="Model\ICopyModInfo.cs" />
     <Compile Include="Utils\Controls\TreeViewAdv\Helper\ColumnData.cs" />
     <Compile Include="Model\ConflicDataTreeModel.cs" />
     <Compile Include="Model\ConflictInfoNode.cs" />

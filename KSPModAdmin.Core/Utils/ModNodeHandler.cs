@@ -331,6 +331,185 @@ namespace KSPModAdmin.Core.Utils
 
         #region Copy mod
 
+        #region OLDCODE
+
+        /////// <summary>
+        /////// Tries to find notes in the new mod, that matches to the outdated mod.
+        /////// If a matching node was found the destination and/or the checked state of the node will be copied.
+        /////// </summary>
+        /////// <param name="outdatedMod">The outdated mod.</param>
+        /////// <param name="newMod">The new (updated) mod.</param>
+        /////// <returns>True if matching files where found, otherwise false.</returns>
+        ////public static bool TryCopyDestToMatchingNodes2(ModNode outdatedMod, ModNode newMod)
+        ////{
+        ////    ////if (outdatedMod.Name == newMod.Name)
+        ////    ////    return true;
+
+        ////    bool matchFound = false;
+        ////    List<ModNode> outdatedFileNodes = outdatedMod.GetAllFileNodes();
+        ////    if (outdatedFileNodes.Count == 0)
+        ////        return matchFound;
+
+        ////    ////List<Tuple<TreeNodeMod, Tuple<TreeNodeMod, TreeNodeMod>>> newMatchingFileNodes1 = 
+        ////    ////    new List<Tuple<TreeNodeMod, Tuple<TreeNodeMod, TreeNodeMod>>>();
+        ////    foreach (var node in outdatedFileNodes)
+        ////    {
+        ////        ModNode parentOld = node.Parent as ModNode;
+        ////        if (parentOld == null)
+        ////            continue;
+
+        ////        string path = parentOld.Text + '/' + node.Text;
+        ////        ModNode matchingNew = ModSelectionTreeModel.SearchNodeByPathNew(path, newMod, '/');
+        ////        if (matchingNew == null)
+        ////            continue;
+
+        ////        matchFound = true;
+        ////        if (OptionsController.ModUpdateBehavior == ModUpdateBehavior.CopyDestination)
+        ////        {
+        ////            matchingNew.Destination = node.Destination;
+        ////            ((ModNode)matchingNew.Parent).Destination = ((ModNode)node.Parent).Destination;
+        ////        }
+        ////        matchingNew.Checked = node.Checked;
+        ////        ((ModNode)matchingNew.Parent).Checked = ((ModNode)node.Parent).Checked;
+
+        ////        ModNode parentNew = matchingNew;
+        ////        while (parentOld != null)
+        ////        {
+        ////            if (parentOld.Parent == null)
+        ////                break;
+
+        ////            path = parentOld.Parent.Text + '/' + path;
+        ////            if (ModSelectionTreeModel.SearchNodeByPathNew(path, newMod, '/') == null)
+        ////                break;
+
+        ////            parentNew = parentNew.Parent as ModNode;
+        ////            if (parentNew == null)
+        ////                break;
+
+        ////            if (OptionsController.ModUpdateBehavior == ModUpdateBehavior.CopyDestination)
+        ////                parentNew.Destination = parentOld.Destination;
+        ////            parentNew.Checked = parentOld.Checked;
+        ////            parentOld = parentOld.Parent as ModNode;
+        ////        }
+
+        ////        ////newMatchingFileNodes1.Add(new Tuple<TreeNodeMod, Tuple<TreeNodeMod, TreeNodeMod>>(parentOld,
+        ////        ////    new Tuple<TreeNodeMod, TreeNodeMod>(matchingNew, node)));
+        ////    }
+
+        ////    return matchFound;
+        ////}
+
+        /////// <summary>
+        /////// Tries to find notes in the new mod, that matches to the outdated mod.
+        /////// If a matching node was found the destination and/or the checked state of the node will be copied.
+        /////// </summary>
+        /////// <param name="outdatedMod">The outdated mod.</param>
+        /////// <param name="newMod">The new (updated) mod.</param>
+        /////// <returns>True if matching files where found, otherwise false.</returns>
+        ////public static bool TryCopyDestToMatchingNodes3(ModNode outdatedMod, ModNode newMod)
+        ////{
+        ////    // Get all files with destination.
+        ////    bool matchFound = false;
+        ////    List<ModNode> outdatedFileNodes = outdatedMod.GetAllFileNodes().Where(x => !string.IsNullOrEmpty(x.Destination)).ToList();
+        ////    if (outdatedFileNodes.Count == 0)
+        ////        return matchFound;
+
+        ////    // copy destination and checked state for each file.
+        ////    foreach (var node in outdatedFileNodes)
+        ////    {
+        ////        // files must have at least one parent (folder)!
+        ////        ModNode parentOld = node.Parent as ModNode;
+        ////        if (parentOld == null)
+        ////            continue;
+
+        ////        // Find matching node in modarchive.
+        ////        string path = parentOld.Name + '/' + node.Name;
+        ////        ModNode matchingNew = ModSelectionTreeModel.SearchNodeByPathNew(path, newMod, '/');
+        ////        if (matchingNew == null)
+        ////            continue;
+
+        ////        // copy destination and checked state
+        ////        matchFound = true;
+        ////        matchingNew.Destination = node.Destination;
+        ////        ((ModNode)matchingNew.Parent).Destination = ((ModNode)node.Parent).Destination;
+        ////        matchingNew.Checked = node.Checked;
+        ////        ((ModNode)matchingNew.Parent).Checked = node.Checked || ((ModNode)node.Parent).Checked;
+
+        ////        // go up the tree to set destinations for parent folders.
+        ////        ModNode parentNew = matchingNew;
+        ////        while (parentOld != null)
+        ////        {
+        ////            if (parentOld.Parent as ModNode == null)
+        ////                break;
+
+        ////            // Find matching parent node in modarchive.
+        ////            path = ((ModNode)parentOld.Parent).Name + '/' + path;
+        ////            if (ModSelectionTreeModel.SearchNodeByPathNew(path, newMod, '/') == null)
+        ////                break;
+
+        ////            parentNew = parentNew.Parent as ModNode;
+        ////            if (parentNew == null)
+        ////                break;
+
+        ////            // copy destination and checked state
+        ////            parentNew.Destination = parentOld.Destination;
+        ////            parentNew.Checked = parentOld.Checked || parentOld.HasInstalledChilds;
+
+        ////            // repeat all with parent of parent node.
+        ////            parentOld = parentOld.Parent as ModNode;
+        ////        }
+        ////    }
+
+        ////    return matchFound;
+        ////}
+
+        /////// <summary>
+        /////// Tries to find notes in the new mod, that matches to the outdated mod.
+        /////// If a matching node was found the destination and/or the checked state of the node will be copied.
+        /////// </summary>
+        /////// <param name="outdatedMod">The outdated mod.</param>
+        /////// <param name="newMod">The new (updated) mod.</param>
+        /////// <returns>True if matching files where found, otherwise false.</returns>
+        ////public static bool TryCopyDestToMatchingNodes(ModNode outdatedMod, ModNode newMod)
+        ////{
+        ////    // Get all files with destination.
+        ////    bool matchFound = false;
+        ////    List<ModNode> outdatedFileNodes = outdatedMod.GetAllFileNodes().ToList(); ////.Where(x => !string.IsNullOrEmpty(x.Destination)).ToList();
+        ////    if (outdatedFileNodes.Count == 0)
+        ////        return matchFound;
+
+        ////    foreach (var file in outdatedFileNodes)
+        ////    {
+        ////        // Ignore mod folder cause it may contain version numbers
+        ////        var fullTreePath = file.GetFullTreePath().Replace(file.ZipRoot.GetFullTreePath(), string.Empty);
+
+        ////        ModNode matchingNew = ModSelectionTreeModel.SearchNodeByPathNew(fullTreePath, newMod, '/');
+        ////        if (matchingNew == null)
+        ////            continue;
+
+        ////        matchFound = true;
+
+        ////        matchingNew.Destination = file.Destination;
+        ////        matchingNew.SetChecked(file.Checked, true);
+                
+        ////        // Copy infos for each parent up to root node.
+        ////        var parentNew = matchingNew.Parent as ModNode;
+        ////        var parentOld = file.Parent as ModNode;
+        ////        while (parentNew != null && parentOld != null)
+        ////        {
+        ////            parentNew.Destination = parentOld.Destination;
+        ////            parentNew.SetChecked(parentOld.Checked, true);
+
+        ////            parentNew = parentNew.Parent as ModNode;
+        ////            parentOld = parentOld.Parent as ModNode;
+        ////        }
+        ////    }
+
+        ////    return matchFound;
+        ////}
+
+        #endregion
+
         /// <summary>
         /// Tries to find notes in the new mod, that matches to the outdated mod.
         /// If a matching node was found the destination and/or the checked state of the node will be copied.
@@ -338,63 +517,39 @@ namespace KSPModAdmin.Core.Utils
         /// <param name="outdatedMod">The outdated mod.</param>
         /// <param name="newMod">The new (updated) mod.</param>
         /// <returns>True if matching files where found, otherwise false.</returns>
-        public static bool TryCopyDestToMatchingNodes(ModNode outdatedMod, ModNode newMod)
+        public static bool TryCopyDestToMatchingNodes(ICopyModInfo outdatedMod, ModNode newMod)
         {
-            ////if (outdatedMod.Name == newMod.Name)
-            ////    return true;
-
-            bool matchFound = false;
-            List<ModNode> outdatedFileNodes = outdatedMod.GetAllFileNodes();
+            // Get all files with destination.
+            List<ICopyModInfo> outdatedFileNodes = outdatedMod.GetAllFileNodes();
             if (outdatedFileNodes.Count == 0)
-                return matchFound;
+                return false;
 
-            ////List<Tuple<TreeNodeMod, Tuple<TreeNodeMod, TreeNodeMod>>> newMatchingFileNodes1 = 
-            ////    new List<Tuple<TreeNodeMod, Tuple<TreeNodeMod, TreeNodeMod>>>();
-            foreach (var node in outdatedFileNodes)
+            foreach (var file in outdatedFileNodes)
             {
-                ModNode parentOld = node.Parent as ModNode;
-                if (parentOld == null)
-                    continue;
+                // Ignore mod folder cause it may contain version numbers
+                var fullTreePath = file.GetFullTreePath().Remove(0, file.GetRoot().GetFullTreePath().Length);
 
-                string path = parentOld.Text + '/' + node.Text;
-                ModNode matchingNew = ModSelectionTreeModel.SearchNodeByPathNew(path, newMod, '/');
+                ModNode matchingNew = ModSelectionTreeModel.SearchNodeByPathNew(fullTreePath, newMod, '/');
                 if (matchingNew == null)
-                    continue;
+                    return false;
 
-                matchFound = true;
-                if (OptionsController.ModUpdateBehavior == ModUpdateBehavior.CopyDestination)
+                matchingNew.Destination = file.Destination;
+                matchingNew.SetChecked(file.Checked, true);
+
+                // Copy infos for each parent up to root node.
+                var parentNew = matchingNew.Parent as ModNode;
+                var parentOld = file.GetParent();
+                while (parentNew != null && parentOld != null)
                 {
-                    matchingNew.Destination = node.Destination;
-                    ((ModNode)matchingNew.Parent).Destination = ((ModNode)node.Parent).Destination;
-                }
-                matchingNew.Checked = node.Checked;
-                ((ModNode)matchingNew.Parent).Checked = ((ModNode)node.Parent).Checked;
-
-                ModNode parentNew = matchingNew;
-                while (parentOld != null)
-                {
-                    if (parentOld.Parent == null)
-                        break;
-
-                    path = parentOld.Parent.Text + '/' + path;
-                    if (ModSelectionTreeModel.SearchNodeByPathNew(path, newMod, '/') == null)
-                        break;
+                    parentNew.Destination = parentOld.Destination;
+                    parentNew.SetChecked(parentOld.Checked || parentOld.HasCheckedChilds, true);
 
                     parentNew = parentNew.Parent as ModNode;
-                    if (parentNew == null)
-                        break;
-
-                    if (OptionsController.ModUpdateBehavior == ModUpdateBehavior.CopyDestination)
-                        parentNew.Destination = parentOld.Destination;
-                    parentNew.Checked = parentOld.Checked;
-                    parentOld = parentOld.Parent as ModNode;
+                    parentOld = parentOld.GetParent();
                 }
-
-                ////newMatchingFileNodes1.Add(new Tuple<TreeNodeMod, Tuple<TreeNodeMod, TreeNodeMod>>(parentOld,
-                ////    new Tuple<TreeNodeMod, TreeNodeMod>(matchingNew, node)));
             }
 
-            return matchFound;
+            return true;
         }
 
         #endregion
