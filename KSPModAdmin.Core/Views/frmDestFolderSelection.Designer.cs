@@ -51,7 +51,7 @@
             this.btnOK.Location = new System.Drawing.Point(238, 173);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(110, 25);
-            this.btnOK.TabIndex = 0;
+            this.btnOK.TabIndex = 7;
             this.btnOK.Text = "OK";
             this.btnOK.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnOK.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -65,7 +65,7 @@
             this.btnCancel.Location = new System.Drawing.Point(354, 173);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(110, 25);
-            this.btnCancel.TabIndex = 0;
+            this.btnCancel.TabIndex = 8;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -79,7 +79,7 @@
             this.lblSelectedSource.Margin = new System.Windows.Forms.Padding(3, 3, 3, 0);
             this.lblSelectedSource.Name = "lblSelectedSource";
             this.lblSelectedSource.Size = new System.Drawing.Size(93, 13);
-            this.lblSelectedSource.TabIndex = 1;
+            this.lblSelectedSource.TabIndex = 0;
             this.lblSelectedSource.Text = "Select the source:";
             // 
             // CB_Source
@@ -91,7 +91,7 @@
             this.CB_Source.Location = new System.Drawing.Point(23, 25);
             this.CB_Source.Name = "CB_Source";
             this.CB_Source.Size = new System.Drawing.Size(428, 21);
-            this.CB_Source.TabIndex = 2;
+            this.CB_Source.TabIndex = 1;
             // 
             // lblSelectDestination
             // 
@@ -100,7 +100,7 @@
             this.lblSelectDestination.Location = new System.Drawing.Point(12, 104);
             this.lblSelectDestination.Name = "lblSelectDestination";
             this.lblSelectDestination.Size = new System.Drawing.Size(112, 13);
-            this.lblSelectDestination.TabIndex = 1;
+            this.lblSelectDestination.TabIndex = 4;
             this.lblSelectDestination.Text = "Select the destination:";
             // 
             // cbDestination
@@ -111,7 +111,7 @@
             this.cbDestination.Location = new System.Drawing.Point(23, 120);
             this.cbDestination.Name = "cbDestination";
             this.cbDestination.Size = new System.Drawing.Size(428, 21);
-            this.cbDestination.TabIndex = 2;
+            this.cbDestination.TabIndex = 5;
             this.cbDestination.SelectedIndexChanged += new System.EventHandler(this.CB_Dest_SelectedIndexChanged);
             // 
             // lblSelectDestinationNote
@@ -121,7 +121,7 @@
             this.lblSelectDestinationNote.Location = new System.Drawing.Point(7, 155);
             this.lblSelectDestinationNote.Name = "lblSelectDestinationNote";
             this.lblSelectDestinationNote.Size = new System.Drawing.Size(460, 13);
-            this.lblSelectDestinationNote.TabIndex = 1;
+            this.lblSelectDestinationNote.TabIndex = 6;
             this.lblSelectDestinationNote.Text = "Note: If you choose a folder as source the destination will be set to all its sub" +
     "folders and files too.";
             // 
@@ -142,7 +142,7 @@
             this.rbCopySourceToDestination.Location = new System.Drawing.Point(39, 52);
             this.rbCopySourceToDestination.Name = "rbCopySourceToDestination";
             this.rbCopySourceToDestination.Size = new System.Drawing.Size(196, 17);
-            this.rbCopySourceToDestination.TabIndex = 3;
+            this.rbCopySourceToDestination.TabIndex = 2;
             this.rbCopySourceToDestination.TabStop = true;
             this.rbCopySourceToDestination.Text = "Copy selected source to destination.";
             this.rbCopySourceToDestination.UseVisualStyleBackColor = true;
@@ -155,7 +155,7 @@
             this.cbListFoldersOnly.Location = new System.Drawing.Point(102, 3);
             this.cbListFoldersOnly.Name = "cbListFoldersOnly";
             this.cbListFoldersOnly.Size = new System.Drawing.Size(98, 17);
-            this.cbListFoldersOnly.TabIndex = 4;
+            this.cbListFoldersOnly.TabIndex = 1;
             this.cbListFoldersOnly.Text = "List folders only";
             this.cbListFoldersOnly.UseVisualStyleBackColor = true;
             this.cbListFoldersOnly.CheckedChanged += new System.EventHandler(this.CB_ListFoldersOnly_CheckedChanged);
@@ -172,7 +172,7 @@
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(441, 24);
-            this.tableLayoutPanel1.TabIndex = 5;
+            this.tableLayoutPanel1.TabIndex = 0;
             // 
             // frmDestFolderSelection
             // 

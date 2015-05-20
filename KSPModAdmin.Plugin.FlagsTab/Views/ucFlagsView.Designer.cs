@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.ttFlags = new System.Windows.Forms.ToolTip(this.components);
             this.lvFlags = new KSPModAdmin.Core.Utils.Controls.ListViewAdv();
+            this.ilFlags = new System.Windows.Forms.ImageList(this.components);
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsbFlagsRefresh = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -40,7 +41,6 @@
             this.tslModFilter = new System.Windows.Forms.ToolStripLabel();
             this.tsscbModFilter = new KSPModAdmin.Core.Utils.Controls.ToolStripSpringComboBox();
             this.tslProcessing = new System.Windows.Forms.ToolStripLabel();
-            this.ilFlags = new System.Windows.Forms.ImageList(this.components);
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,8 +52,14 @@
             this.lvFlags.Name = "lvFlags";
             this.lvFlags.Size = new System.Drawing.Size(540, 369);
             this.lvFlags.SmallImageList = this.ilFlags;
-            this.lvFlags.TabIndex = 20;
+            this.lvFlags.TabIndex = 1;
             this.lvFlags.UseCompatibleStateImageBehavior = false;
+            // 
+            // ilFlags
+            // 
+            this.ilFlags.ColorDepth = System.Windows.Forms.ColorDepth.Depth16Bit;
+            this.ilFlags.ImageSize = new System.Drawing.Size(128, 80);
+            this.ilFlags.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // toolStrip1
             // 
@@ -69,7 +75,7 @@
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(540, 31);
-            this.toolStrip1.TabIndex = 28;
+            this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // tsbFlagsRefresh
@@ -141,12 +147,6 @@
             this.tslProcessing.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
             this.tslProcessing.Size = new System.Drawing.Size(16, 28);
             this.tslProcessing.Visible = false;
-            // 
-            // ilFlags
-            // 
-            this.ilFlags.ColorDepth = System.Windows.Forms.ColorDepth.Depth16Bit;
-            this.ilFlags.ImageSize = new System.Drawing.Size(128, 80);
-            this.ilFlags.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // ucFlagsView
             // 
