@@ -28,6 +28,8 @@
 //// TODO
 ///////////////////// 
 
+- ToolTip on/off don't works for ToolStrip.
+
 - Maybe its time for a force delete option. To delete folders which contain untracked files.
 
 - Known KSP Path: Relative ksp path search (options/path) create a new dialog for this option.

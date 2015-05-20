@@ -307,21 +307,46 @@ namespace KSPModAdmin.Plugin.FlagsTab.Controller
             return result;
         }
 
+        private static int i = 0;
+        private static int j = 0;
         private static Image DdsToBitMap(string file)
         {
             Image image = null;
 
             try
             {
-                image = Resources.Cant_Display_DDS;
-                ////byte[] b = File.ReadAllBytes(file);
-                ////DDSImage ddsImage = new DDSImage(b);
-                ////image = ddsImage.BitmapImage;
+                View.InvokeIfRequired(
+                    () =>
+                    {
+                        View.ParentForm.Text =
+                            View.ParentForm.Text.Replace(" - DDSImage (4o66)", "").Replace(" - DDSImage (me)", "");
+                    });
+                byte[] b = File.ReadAllBytes(file);
+                if (i%2 == 0)
+                {
+                    View.InvokeIfRequired(() => { View.ParentForm.Text += " - DDSImage (me)"; });
+                    j++;
+                    DDSImage ddsImage = new DDSImage(b);
+                    image = ddsImage.BitmapImage;
+                }
+                else
+                {
+                    View.InvokeIfRequired(() => { View.ParentForm.Text += " - DDSImage (4o66)"; });
+                    j++;
+                    DDSImage2 ddsImage2 = new DDSImage2(b);
+                    image = ddsImage2.images[0];
+                }
             }
             catch (Exception ex)
             {
-                Log.AddErrorS("Error in DdsToBitMap", ex);
-                image = null;
+                image = Resources.Cant_Display_DDS;
+                Messenger.AddError(string.Format("Error while reading dds image \"{0}\"", file), ex);
+            }
+
+            if (j == 2)
+            {
+                i++;
+                j = 0;
             }
 
             return image;
@@ -536,10 +561,10 @@ namespace KSPModAdmin.Plugin.FlagsTab.Controller
                 var fullpath = Path.Combine(MyFlagsFullPath, FLAG_FILENAME);
                 if (!File.Exists(fullpath))
                 {
-                    if (!Directory.Exists(MyFlagsFullPath)) // Create the folder if it does not exist
-                    {
+                    // Create the folder if it does not exist
+                    if (!Directory.Exists(MyFlagsFullPath))
                         Directory.CreateDirectory(MyFlagsFullPath);
-                    }
+                    
                     Image image = Resources.KMA2_Flag;
                     image.Save(fullpath);
                     image.Dispose();
