@@ -36,8 +36,9 @@ namespace KSPModAdmin.Core.Utils.Controls
 
             foreach (ToolStripItem item in Owner.Items)
             {
-                // Ignore items on the overflow menu.
-                if (item.IsOnOverflow) continue;
+                // Ignore items on the overflow menu or self.
+                if (item.IsOnOverflow || item == this)
+                    continue;
 
                 if (item is ToolStripSpringTextBox)
                 {

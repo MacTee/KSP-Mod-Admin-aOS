@@ -53,7 +53,7 @@
             this.btnAddAndClose.Location = new System.Drawing.Point(230, 203);
             this.btnAddAndClose.Name = "btnAddAndClose";
             this.btnAddAndClose.Size = new System.Drawing.Size(165, 25);
-            this.btnAddAndClose.TabIndex = 4;
+            this.btnAddAndClose.TabIndex = 8;
             this.btnAddAndClose.Text = "Add && Close";
             this.btnAddAndClose.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAddAndClose.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -68,7 +68,7 @@
             this.btnClose.Location = new System.Drawing.Point(401, 203);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(110, 25);
-            this.btnClose.TabIndex = 5;
+            this.btnClose.TabIndex = 9;
             this.btnClose.Text = "Close";
             this.btnClose.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnClose.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -82,7 +82,7 @@
             this.lblModName.Location = new System.Drawing.Point(25, 21);
             this.lblModName.Name = "lblModName";
             this.lblModName.Size = new System.Drawing.Size(174, 13);
-            this.lblModName.TabIndex = 1;
+            this.lblModName.TabIndex = 0;
             this.lblModName.Text = "ModName (leave blank for auto fill):";
             // 
             // tbModName
@@ -101,7 +101,7 @@
             this.lblModPath.Location = new System.Drawing.Point(25, 69);
             this.lblModPath.Name = "lblModPath";
             this.lblModPath.Size = new System.Drawing.Size(157, 13);
-            this.lblModPath.TabIndex = 1;
+            this.lblModPath.TabIndex = 2;
             this.lblModPath.Text = "Enter mod archive path or URL:";
             // 
             // tbModPath
@@ -111,7 +111,7 @@
             this.tbModPath.Location = new System.Drawing.Point(28, 85);
             this.tbModPath.Name = "tbModPath";
             this.tbModPath.Size = new System.Drawing.Size(436, 20);
-            this.tbModPath.TabIndex = 2;
+            this.tbModPath.TabIndex = 3;
             this.ttAddMod.SetToolTip(this.tbModPath, "Enter a path to a mod archive, a craft or a URL to a mod.\r\n(URL with http:// or h" +
         "ttps://).");
             // 
@@ -123,7 +123,7 @@
             this.btnFolderSearch.Location = new System.Drawing.Point(470, 83);
             this.btnFolderSearch.Name = "btnFolderSearch";
             this.btnFolderSearch.Size = new System.Drawing.Size(25, 24);
-            this.btnFolderSearch.TabIndex = 3;
+            this.btnFolderSearch.TabIndex = 4;
             this.btnFolderSearch.Tag = "\"Start\"";
             this.ttAddMod.SetToolTip(this.btnFolderSearch, "Opens a file browser to selecct a mod archive.");
             this.btnFolderSearch.UseVisualStyleBackColor = true;
@@ -147,7 +147,7 @@
             this.lblNote.Location = new System.Drawing.Point(16, 118);
             this.lblNote.Name = "lblNote";
             this.lblNote.Size = new System.Drawing.Size(495, 53);
-            this.lblNote.TabIndex = 1;
+            this.lblNote.TabIndex = 5;
             this.lblNote.Text = "NOTE: After KSP MA has added the mod you have to check / uncheck your wanted part" +
     "s of the mod and press \"Process All\" to install the mod.\r\nOr check the checkbox " +
     "below for immediate install of the mod.";
@@ -171,7 +171,7 @@
             this.btnAdd.Location = new System.Drawing.Point(98, 203);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(126, 25);
-            this.btnAdd.TabIndex = 4;
+            this.btnAdd.TabIndex = 7;
             this.btnAdd.Text = "Add";
             this.btnAdd.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;

@@ -1,4 +1,6 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System;
+using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -7,6 +9,9 @@ namespace KSPModAdmin.Core.Utils.Controls
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class ToolStripSpringComboBox : ToolStripComboBox
     {
+        [DefaultValue(0)]
+        public int RightMargin { get; set; }
+
         public override Size GetPreferredSize(Size constrainingSize)
         {
             // Use the default size if the text box is on the overflow menu
@@ -34,8 +39,9 @@ namespace KSPModAdmin.Core.Utils.Controls
 
             foreach (ToolStripItem item in Owner.Items)
             {
-                // Ignore items on the overflow menu.
-                if (item.IsOnOverflow) continue;
+                // Ignore items on the overflow menu or self.
+                if (item.IsOnOverflow || item == this) 
+                    continue;
 
                 if (item is ToolStripSpringTextBox)
                 {
@@ -51,6 +57,8 @@ namespace KSPModAdmin.Core.Utils.Controls
                     width = width - item.Width - item.Margin.Horizontal;
                 }
             }
+
+            width -= RightMargin;
 
             // If there are multiple ToolStripSpringTextBox items in the owning
             // ToolStrip, divide the total available width between them. 

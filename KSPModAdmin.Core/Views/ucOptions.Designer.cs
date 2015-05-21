@@ -82,7 +82,7 @@ namespace KSPModAdmin.Core.Views
             this.btnOpenKSPRoot = new System.Windows.Forms.Button();
             this.lblSelectedKSPPath = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.tvKnownPaths = new System.Windows.Forms.TreeView();
+            this.tvKnownPaths = new KSPModAdmin.Core.Utils.Controls.TreeViewExAkm();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblKSPPathNote = new System.Windows.Forms.Label();
             this.tbNote = new System.Windows.Forms.TextBox();
@@ -2233,7 +2233,7 @@ namespace KSPModAdmin.Core.Views
         internal System.Windows.Forms.CheckBox cbConflictDetectionOnOff;
         internal System.Windows.Forms.Label lblKSPPathNote;
         internal System.Windows.Forms.TextBox tbNote;
-        internal System.Windows.Forms.TreeView tvKnownPaths;
+        internal TreeViewExAkm tvKnownPaths;
         internal TextBoxNumeric tbDepth;
         internal System.Windows.Forms.SplitContainer splitContainer1;
         internal System.Windows.Forms.Panel panel1;

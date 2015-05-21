@@ -953,6 +953,26 @@ namespace KSPModAdmin.Core.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap compress_replace_folder_16x16 {
+            get {
+                object obj = ResourceManager.GetObject("compress_replace_folder_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap compress_replace_folder_24x24 {
+            get {
+                object obj = ResourceManager.GetObject("compress_replace_folder_24x24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap data_add {
             get {
                 object obj = ResourceManager.GetObject("data_add", resourceCulture);

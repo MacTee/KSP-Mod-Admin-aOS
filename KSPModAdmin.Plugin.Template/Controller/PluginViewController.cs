@@ -7,13 +7,14 @@ using KSPModAdmin.Core;
 using KSPModAdmin.Core.Controller;
 using KSPModAdmin.Core.Utils;
 using KSPModAdmin.Core.Utils.Localization;
+using KSPModAdmin.Plugin.Template.Views;
 
-namespace KSPModAdmin.Plugin.Template
+namespace KSPModAdmin.Plugin.Template.Controller
 {
     /// <summary>
     /// Controller class for the Translation view.
     /// </summary>
-    public class PluginController
+    public class PluginViewController
     {
         /// <summary>
         /// Gets or sets the view of the controller.
@@ -38,7 +39,7 @@ namespace KSPModAdmin.Plugin.Template
         /// </summary>
         protected static void AsyncTaskStarted(object sender)
         {
-            View.SetEnabledOfAllControls(true);
+            View.SetEnabledOfAllControls(false);
         }
 
         /// <summary>
@@ -47,7 +48,7 @@ namespace KSPModAdmin.Plugin.Template
         /// </summary>
         protected static void AsyncTaskDone(object sender)
         {
-            View.SetEnabledOfAllControls(false);
+            View.SetEnabledOfAllControls(true);
         }
 
         #endregion

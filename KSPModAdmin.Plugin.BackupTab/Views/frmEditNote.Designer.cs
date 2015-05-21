@@ -55,6 +55,7 @@
             this.tbName.ReadOnly = true;
             this.tbName.Size = new System.Drawing.Size(363, 20);
             this.tbName.TabIndex = 1;
+            this.tbName.TabStop = false;
             // 
             // lblBackupNote
             // 
@@ -62,7 +63,7 @@
             this.lblBackupNote.Location = new System.Drawing.Point(55, 41);
             this.lblBackupNote.Name = "lblBackupNote";
             this.lblBackupNote.Size = new System.Drawing.Size(33, 13);
-            this.lblBackupNote.TabIndex = 0;
+            this.lblBackupNote.TabIndex = 2;
             this.lblBackupNote.Text = "Note:";
             // 
             // tbNote
@@ -72,7 +73,7 @@
             this.tbNote.Location = new System.Drawing.Point(94, 38);
             this.tbNote.Name = "tbNote";
             this.tbNote.Size = new System.Drawing.Size(363, 20);
-            this.tbNote.TabIndex = 1;
+            this.tbNote.TabIndex = 3;
             // 
             // btnChangeBackupNote
             // 
@@ -83,7 +84,7 @@
             this.btnChangeBackupNote.Location = new System.Drawing.Point(262, 64);
             this.btnChangeBackupNote.Name = "btnChangeBackupNote";
             this.btnChangeBackupNote.Size = new System.Drawing.Size(93, 23);
-            this.btnChangeBackupNote.TabIndex = 2;
+            this.btnChangeBackupNote.TabIndex = 4;
             this.btnChangeBackupNote.Text = "Save";
             this.btnChangeBackupNote.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnChangeBackupNote.UseVisualStyleBackColor = true;
@@ -97,7 +98,7 @@
             this.btnCancel.Location = new System.Drawing.Point(361, 64);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(96, 23);
-            this.btnCancel.TabIndex = 2;
+            this.btnCancel.TabIndex = 5;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnCancel.UseVisualStyleBackColor = true;

@@ -534,6 +534,19 @@ namespace KSPModAdmin.Core.Views
             OptionsController.Initialize(this);
         }
 
+        
+        /// <summary>
+        /// Add a ActionKey CallbackFunction binding to the flag ListView.
+        /// </summary>
+        /// <param name="key">The action key that raises the callback.</param>
+        /// <param name="callback">The callback function with the action that should be called.</param>
+        /// <param name="modifierKeys">Required state of the modifier keys to get the callback function called.</param>
+        /// <param name="once">Flag to determine if the callback function should only be called once.</param>
+        public void AddActionKey(VirtualKey key, ActionKeyHandler callback, ModifierKey[] modifierKeys = null, bool once = false)
+        {
+            tvKnownPaths.AddActionKey(key, callback, modifierKeys, once);
+        }
+
 
         /// <summary>
         /// Sets the selected KSP path without raising event SelectedIndexChanged.
@@ -547,7 +560,6 @@ namespace KSPModAdmin.Core.Views
             mSelectedKSPPath = kspPath;
             cbKSPPath.SelectedIndexChanged += CbKSPPath_SelectedIndexChanged;
         }
-
 
         #region Update Tab events
 

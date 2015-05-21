@@ -1,0 +1,34 @@
+<Language Name="ger" LongName="Deutsch">
+  <String Name="MSG_FLAGS_VIEW_TITLE" Value="Flaggen"/>
+
+  <Control Name="tsbFlagsRefresh" Value="tsbFlagsRefresh">
+    <ChildControl Name="tsbFlagsRefresh_ToolTip" Value="Aktualisieren^Leert die Lister der Flaggen und starten den Scann nach Flaggen erneut."/>
+  </Control>
+  <Control Name="tsbAddFlag" Value="tsbAddFlag">
+    <ChildControl Name="tsbAddFlag_ToolTip" Value="Flagge hinzufügen^Öffnet eine Dateiauswahldialog um eine PNG Datei auszuwählen, die dann als Flagge in KSP importiert wird.^Die größe der PNG Bilddatei wird auf 256x160 angepasst."/>
+  </Control>
+  <Control Name="tsbRemoveFlag" Value="tsbRemoveFlag">
+    <ChildControl Name="tsbRemoveFlag_ToolTip" Value="Flagge entfernen^Löscht und entfernt die ausgewählte Flagge."/>
+  </Control>
+  <Control Name="tslModFilter" Value="Ordner/Mod filter:"/>
+  <Control Name="tsscbModFilter" Value="">
+    <ChildControl Name="tsscbModFilter_ToolTip" Value="Flaggen Filter^Wähle einen Filter um nur eine bestimmte Flaggengruppen anzuzeigen."/>
+  </Control>
+
+  <String Name="MSG_FLAG_SCAN_STARTED" Value="Flaggen scann gestartet ..."/>
+  <String Name="MSG_ERROR_DURING_FLAG_SCAN" Value="Fehler während des Flaggen scanns! Scann abgebrochen!"/>
+  <String Name="MSG_FLAG_0_ADDED" Value="Flagge &quot;{0}&quot; hinzugefügt."/>
+  <String Name="MSG_ERROR_FLAG_0_ADD_FAILED" Value="Fehler! Hinzufügen der Flagge &quot;{0}&quot; abgebrochen!"/>
+  <String Name="MSG_DELETE_EXISTING_FLAG_0" Value="Lösche existierende Flagge &quot;{0}&quot;..."/>
+  <String Name="MSG_ADJUSTING_FLAG_SIZE" Value="Flaggengröße wird auf 256x160 angepasst..."/>
+  <String Name="MSG_SAVING_FLAG_0" Value="Speichere neue Flagge &quot;{0}&quot;..."/>
+  <String Name="MSG_COPY_FLAG_0" Value="Kopiere Flagge &quot;{0}&quot;..."/>
+  <String Name="MSG_ERROR_FLAG_CREATION_FAILED" Value="Fehler! Erstellen der Flagge fehlgeschlagen!"/>
+  <String Name="MSG_CREATING_DIR_0" Value="Erstelle Verzeichnis &quot;{0}&quot;."/>
+  <String Name="MSG_FLAG_0_DELETED" Value="Flagge &quot;{0}&quot; gelöscht."/>
+  <String Name="MSG_ERROR_DELETE_FLAG_0_FAILED" Value="Fehler! Löschen der Flagge &quot;{0}&quot; fehlgeschlagen!"/>
+  <String Name="MSG_REALY_DELETE_FLAG_0" Value="Die Flagge &quot;{0}&quot; wirklich löschen?"/>
+
+</Language>
+  
+  

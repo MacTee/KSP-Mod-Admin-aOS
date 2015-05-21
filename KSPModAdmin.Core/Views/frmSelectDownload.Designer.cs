@@ -52,7 +52,7 @@
             this.label1.Location = new System.Drawing.Point(23, 13);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(422, 28);
-            this.label1.TabIndex = 2;
+            this.label1.TabIndex = 0;
             this.label1.Text = "Please select on of the following links where the mod could be downloaded.";
             // 
             // btnCancel

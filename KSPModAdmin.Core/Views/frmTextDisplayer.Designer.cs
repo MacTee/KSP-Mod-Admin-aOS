@@ -40,7 +40,7 @@
             this.btnOK.Location = new System.Drawing.Point(577, 391);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
-            this.btnOK.TabIndex = 0;
+            this.btnOK.TabIndex = 1;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
@@ -56,10 +56,10 @@
             this.TextBox.ReadOnly = true;
             this.TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.TextBox.Size = new System.Drawing.Size(664, 382);
-            this.TextBox.TabIndex = 1;
+            this.TextBox.TabIndex = 0;
             this.TextBox.WordWrap = false;
             // 
-            // TextDisplayer
+            // frmTextDisplayer
             // 
             this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -68,7 +68,7 @@
             this.Controls.Add(this.TextBox);
             this.Controls.Add(this.btnOK);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "TextDisplayer";
+            this.Name = "frmTextDisplayer";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "TextDisplayer";

@@ -709,4 +709,12 @@
   <Control Name="tsbHelp" Value="tsbHelp">
     <ChildControl Name="tsbHelp_ToolTip" Value="Open help^Opens the KSP Mod Admin Wiki on GitHup with your browser."/>
   </Control>
+
+  <String Name="MSG_ERROR_EXPORT_FAILED_0" Value="Error! Export failed: &quot;{0}&quot;"/>
+
+  <String Name="MSG_SELECT_NEW_ARCHIVE_PATH" Value="Please select the new archive path."/>
+  <String Name="MSG_MOD_0_ARCHIVE_PATH_CHANGED_TO_1" Value="Archive path of mod &quot;{0}&quot; changed to &quot;{1}&quot;."/>
+  <String Name="MSG_MOD_ARCHIVE_0_NOT_FOUND_MOD_1" Value="Mod archive &quot;{0}&quot; not found. Can't change archive path of mod &quot;{1}&quot;."/>
+  <String Name="MSG_COPY_MOD_0_DESTINATION_FAILED" Value="Error! Copy destinations of mod &quot;{0}&quot; failed!"/>
+  
 </Language>

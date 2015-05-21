@@ -556,9 +556,12 @@ namespace KSPModAdmin.Core.Utils
  * }
  * 
  * // Declaration of the callback function.
+ * // Returns true cause we have handled the key.
  * protected bool Handle_DeleteKey(ActionKeyInfo actionKeyInfo)
  * {
- *     // performe the action you want.
+ *     // perform the action you want.
+ *     // ...
+ *     return true;
  * }
  *
  */

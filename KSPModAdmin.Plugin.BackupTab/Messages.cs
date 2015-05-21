@@ -192,5 +192,15 @@ namespace KSPModAdmin.Plugin.BackupTab
             }
         }
         private const string DEFAULT_MSG_BACKUP_LOAD_CFG = "Loading backup configuration file \"{0}\" ...";
+
+        public static string MSG_BACKUP_STARTED
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_BACKUP_STARTED"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_BACKUP_STARTED).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_BACKUP_STARTED = "Backup started...";
     }
 }

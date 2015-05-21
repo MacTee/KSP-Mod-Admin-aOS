@@ -1,0 +1,34 @@
+<Language Name="fake" LongName="Fake language">
+  <String Name="MSG_FLAGS_VIEW_TITLE" Value="(T)Flags"/>
+
+  <Control Name="tsbFlagsRefresh" Value="tsbFlagsRefresh">
+    <ChildControl Name="tsbFlagsRefresh_ToolTip" Value="(T)Refresh^Empties current list of flags and restarts the scan for flags."/>
+  </Control>
+  <Control Name="tsbAddFlag" Value="tsbAddFlag">
+    <ChildControl Name="tsbAddFlag_ToolTip" Value="(T)Add new Flag^Opens a FileSelect dialog to select a png which will be added to the KSP flags.^The png will be resized to 256x160."/>
+  </Control>
+  <Control Name="tsbRemoveFlag" Value="tsbRemoveFlag">
+    <ChildControl Name="tsbRemoveFlag_ToolTip" Value="(T)Remove flag^Deletes and removes the selected flag."/>
+  </Control>
+  <Control Name="tslModFilter" Value="(T)Folder/Mod filter:"/>
+  <Control Name="tsscbModFilter" Value="">
+    <ChildControl Name="tsscbModFilter_ToolTip" Value="(T)Flag Filter^Select a filter to adjust the displayed falg groups."/>
+  </Control>
+
+  <String Name="MSG_FLAG_SCAN_STARTED" Value="(T)Flag scan started ..."/>
+  <String Name="MSG_ERROR_DURING_FLAG_SCAN" Value="(T)Error during flag scan! Scan aborded!"/>
+  <String Name="MSG_FLAG_0_ADDED" Value="(T)Flag &quot;{0}&quot; added."/>
+  <String Name="MSG_ERROR_FLAG_0_ADD_FAILED" Value="(T)Error! Adding of flag &quot;{0}&quot; aborded!"/>
+  <String Name="MSG_DELETE_EXISTING_FLAG_0" Value="(T)Deleting existing flag &quot;{0}&quot;."/>
+  <String Name="MSG_ADJUSTING_FLAG_SIZE" Value="(T)Adjusting flag size to 256x160..."/>
+  <String Name="MSG_SAVING_FLAG_0" Value="(T)Saving new flag &quot;{0}&quot;..."/>
+  <String Name="MSG_COPY_FLAG_0" Value="(T)Copy flag &quot;{0}&quot;..."/>
+  <String Name="MSG_ERROR_FLAG_CREATION_FAILED" Value="(T)Error! Flag creation faild!"/>
+  <String Name="MSG_CREATING_DIR_0" Value="(T)Creating directory &quot;{0}&quot;."/>
+  <String Name="MSG_FLAG_0_DELETED" Value="(T)Flag &quot;{0}&quot; deleted."/>
+  <String Name="MSG_ERROR_DELETE_FLAG_0_FAILED" Value="(T)Error! Deleting flag &quot;{0}&quot; failed!"/>
+  <String Name="MSG_REALY_DELETE_FLAG_0" Value="Do you realy want to delete the flag &quot;{0}&quot;?"/>
+
+</Language>
+  
+  

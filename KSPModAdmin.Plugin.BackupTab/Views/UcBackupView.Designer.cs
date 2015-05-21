@@ -35,10 +35,22 @@
             this.cbAutoBackup = new System.Windows.Forms.CheckBox();
             this.tbBackupPath = new System.Windows.Forms.TextBox();
             this.tsBackups = new System.Windows.Forms.ToolStrip();
+            this.tsbRefreshBackupview = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbEditBackupNote = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbNewBackup = new System.Windows.Forms.ToolStripButton();
+            this.tsbBackupSaves = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbRemoveBackup = new System.Windows.Forms.ToolStripButton();
+            this.tsbRemoveAllBackups = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.tslProcessing = new System.Windows.Forms.ToolStripLabel();
+            this.tsbAutoBackup = new System.Windows.Forms.ToolStripButton();
+            this.tsbBackupOnStartup = new System.Windows.Forms.ToolStripButton();
+            this.tsbBackupOnKSPLaunch = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbBackupOptions = new System.Windows.Forms.ToolStripButton();
             this.grbBackups = new System.Windows.Forms.GroupBox();
             this.pnlOptions = new System.Windows.Forms.Panel();
             this.grpBackupOptions = new System.Windows.Forms.GroupBox();
@@ -53,20 +65,8 @@
             this.lblSelectBackupPathFirst = new System.Windows.Forms.Label();
             this.tvBackups = new KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.TreeViewAdv();
             this.btnRecoverBackup = new System.Windows.Forms.Button();
-            this.tsbRefreshBackupview = new System.Windows.Forms.ToolStripButton();
-            this.tsbNewBackup = new System.Windows.Forms.ToolStripButton();
-            this.tsbBackupSaves = new System.Windows.Forms.ToolStripButton();
-            this.tsbRemoveBackup = new System.Windows.Forms.ToolStripButton();
-            this.tsbRemoveAllBackups = new System.Windows.Forms.ToolStripButton();
-            this.tslProcessing = new System.Windows.Forms.ToolStripLabel();
-            this.tsbAutoBackup = new System.Windows.Forms.ToolStripButton();
-            this.tsbBackupOnStartup = new System.Windows.Forms.ToolStripButton();
-            this.tsbBackupOnKSPLaunch = new System.Windows.Forms.ToolStripButton();
-            this.tsbBackupOptions = new System.Windows.Forms.ToolStripButton();
             this.btnOpenBackupDir = new System.Windows.Forms.Button();
             this.btnBackupPath = new System.Windows.Forms.Button();
-            this.tsbEditBackupNote = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.tsBackups.SuspendLayout();
             this.grbBackups.SuspendLayout();
             this.pnlOptions.SuspendLayout();
@@ -83,7 +83,7 @@
             this.cbBackupOnKSPLaunch.Location = new System.Drawing.Point(26, 143);
             this.cbBackupOnKSPLaunch.Name = "cbBackupOnKSPLaunch";
             this.cbBackupOnKSPLaunch.Size = new System.Drawing.Size(137, 17);
-            this.cbBackupOnKSPLaunch.TabIndex = 2;
+            this.cbBackupOnKSPLaunch.TabIndex = 4;
             this.cbBackupOnKSPLaunch.Text = "Backup on KSP launch";
             this.ttPlugin.SetToolTip(this.cbBackupOnKSPLaunch, "Backup on KSP launch\r\nIf on, KSP Mod Admin will create a backup of the KSP saves " +
         "folder of the selected KSP path, when KSP will be launched.");
@@ -97,7 +97,7 @@
             this.cbBackupOnStartup.Location = new System.Drawing.Point(26, 111);
             this.cbBackupOnStartup.Name = "cbBackupOnStartup";
             this.cbBackupOnStartup.Size = new System.Drawing.Size(181, 17);
-            this.cbBackupOnStartup.TabIndex = 2;
+            this.cbBackupOnStartup.TabIndex = 3;
             this.cbBackupOnStartup.Text = "Backup on KSP Mod Admin start";
             this.ttPlugin.SetToolTip(this.cbBackupOnStartup, "Backup on KSP Mod Admin Start\r\nIf on, KSP Mod Admin will create a backup of the K" +
         "SP saves folder of the selected KSP path, when KSP Mod Admin is started.");
@@ -111,7 +111,7 @@
             this.cbAutoBackup.Location = new System.Drawing.Point(26, 32);
             this.cbAutoBackup.Name = "cbAutoBackup";
             this.cbAutoBackup.Size = new System.Drawing.Size(87, 17);
-            this.cbAutoBackup.TabIndex = 2;
+            this.cbAutoBackup.TabIndex = 0;
             this.cbAutoBackup.Text = "Auto backup";
             this.ttPlugin.SetToolTip(this.cbAutoBackup, "AutoBackup on/off\r\nIf on, KSP Mod Admin will create a backup of the KSP saves fol" +
         "der of the selected KSP path.\r\nDefault interval is every 60 minutes. Settings ca" +
@@ -127,7 +127,7 @@
             this.tbBackupPath.Name = "tbBackupPath";
             this.tbBackupPath.ReadOnly = true;
             this.tbBackupPath.Size = new System.Drawing.Size(603, 20);
-            this.tbBackupPath.TabIndex = 27;
+            this.tbBackupPath.TabIndex = 0;
             this.tbBackupPath.TabStop = false;
             // 
             // tsBackups
@@ -152,239 +152,8 @@
             this.tsBackups.Location = new System.Drawing.Point(3, 16);
             this.tsBackups.Name = "tsBackups";
             this.tsBackups.Size = new System.Drawing.Size(669, 31);
-            this.tsBackups.TabIndex = 37;
+            this.tsBackups.TabIndex = 0;
             this.tsBackups.Text = "toolStrip2";
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 31);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 31);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 31);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 31);
-            // 
-            // grbBackups
-            // 
-            this.grbBackups.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.grbBackups.Controls.Add(this.pnlOptions);
-            this.grbBackups.Controls.Add(this.pnlSelectBackupPath);
-            this.grbBackups.Controls.Add(this.tvBackups);
-            this.grbBackups.Controls.Add(this.btnRecoverBackup);
-            this.grbBackups.Controls.Add(this.tsBackups);
-            this.grbBackups.Location = new System.Drawing.Point(0, 39);
-            this.grbBackups.Name = "grbBackups";
-            this.grbBackups.Size = new System.Drawing.Size(675, 468);
-            this.grbBackups.TabIndex = 38;
-            this.grbBackups.TabStop = false;
-            this.grbBackups.Text = "Backups:";
-            // 
-            // pnlOptions
-            // 
-            this.pnlOptions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlOptions.Controls.Add(this.grpBackupOptions);
-            this.pnlOptions.Location = new System.Drawing.Point(16, 61);
-            this.pnlOptions.Name = "pnlOptions";
-            this.pnlOptions.Size = new System.Drawing.Size(640, 348);
-            this.pnlOptions.TabIndex = 40;
-            this.pnlOptions.Visible = false;
-            // 
-            // grpBackupOptions
-            // 
-            this.grpBackupOptions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.grpBackupOptions.Controls.Add(this.cbAutoBackup);
-            this.grpBackupOptions.Controls.Add(this.tableLayoutPanel2);
-            this.grpBackupOptions.Controls.Add(this.cbBackupOnStartup);
-            this.grpBackupOptions.Controls.Add(this.tableLayoutPanel1);
-            this.grpBackupOptions.Controls.Add(this.cbBackupOnKSPLaunch);
-            this.grpBackupOptions.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpBackupOptions.Location = new System.Drawing.Point(3, 3);
-            this.grpBackupOptions.Name = "grpBackupOptions";
-            this.grpBackupOptions.Size = new System.Drawing.Size(634, 342);
-            this.grpBackupOptions.TabIndex = 5;
-            this.grpBackupOptions.TabStop = false;
-            this.grpBackupOptions.Text = "Backup options:";
-            // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel2.ColumnCount = 3;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 146F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Controls.Add(this.lblMaxBackupFiles, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.tbMaxBackupFiles, 1, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(12, 74);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 1;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(702, 26);
-            this.tableLayoutPanel2.TabIndex = 4;
-            // 
-            // lblMaxBackupFiles
-            // 
-            this.lblMaxBackupFiles.AutoSize = true;
-            this.lblMaxBackupFiles.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblMaxBackupFiles.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMaxBackupFiles.Location = new System.Drawing.Point(3, 0);
-            this.lblMaxBackupFiles.Name = "lblMaxBackupFiles";
-            this.lblMaxBackupFiles.Size = new System.Drawing.Size(140, 26);
-            this.lblMaxBackupFiles.TabIndex = 0;
-            this.lblMaxBackupFiles.Text = "Max. backup files:";
-            this.lblMaxBackupFiles.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // tbMaxBackupFiles
-            // 
-            this.tbMaxBackupFiles.AllowDecimalSeparator = false;
-            this.tbMaxBackupFiles.AllowGroupSeparator = false;
-            this.tbMaxBackupFiles.AllowNegativeSign = false;
-            this.tbMaxBackupFiles.AllowSpace = false;
-            this.tbMaxBackupFiles.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbMaxBackupFiles.Location = new System.Drawing.Point(149, 3);
-            this.tbMaxBackupFiles.MaxLength = 2;
-            this.tbMaxBackupFiles.Name = "tbMaxBackupFiles";
-            this.tbMaxBackupFiles.Size = new System.Drawing.Size(23, 20);
-            this.tbMaxBackupFiles.TabIndex = 1;
-            this.tbMaxBackupFiles.Text = "5";
-            this.tbMaxBackupFiles.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.ColumnCount = 4;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 146F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.lblBackupInterval, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.tbBackupIterval, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lblBackupTime, 2, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 49);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(702, 25);
-            this.tableLayoutPanel1.TabIndex = 3;
-            // 
-            // lblBackupInterval
-            // 
-            this.lblBackupInterval.AutoSize = true;
-            this.lblBackupInterval.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblBackupInterval.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBackupInterval.Location = new System.Drawing.Point(3, 0);
-            this.lblBackupInterval.Name = "lblBackupInterval";
-            this.lblBackupInterval.Size = new System.Drawing.Size(140, 25);
-            this.lblBackupInterval.TabIndex = 0;
-            this.lblBackupInterval.Text = "Backup interval:";
-            this.lblBackupInterval.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // tbBackupIterval
-            // 
-            this.tbBackupIterval.AllowDecimalSeparator = false;
-            this.tbBackupIterval.AllowGroupSeparator = false;
-            this.tbBackupIterval.AllowNegativeSign = false;
-            this.tbBackupIterval.AllowSpace = false;
-            this.tbBackupIterval.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbBackupIterval.Location = new System.Drawing.Point(149, 3);
-            this.tbBackupIterval.MaxLength = 4;
-            this.tbBackupIterval.Name = "tbBackupIterval";
-            this.tbBackupIterval.Size = new System.Drawing.Size(37, 20);
-            this.tbBackupIterval.TabIndex = 1;
-            this.tbBackupIterval.Text = "60";
-            this.tbBackupIterval.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
-            // 
-            // lblBackupTime
-            // 
-            this.lblBackupTime.AutoSize = true;
-            this.lblBackupTime.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblBackupTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBackupTime.Location = new System.Drawing.Point(192, 0);
-            this.lblBackupTime.Name = "lblBackupTime";
-            this.lblBackupTime.Size = new System.Drawing.Size(43, 25);
-            this.lblBackupTime.TabIndex = 0;
-            this.lblBackupTime.Text = "minutes";
-            this.lblBackupTime.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // pnlSelectBackupPath
-            // 
-            this.pnlSelectBackupPath.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlSelectBackupPath.BackColor = System.Drawing.Color.Transparent;
-            this.pnlSelectBackupPath.Controls.Add(this.lblSelectBackupPathFirst);
-            this.pnlSelectBackupPath.Location = new System.Drawing.Point(82, 176);
-            this.pnlSelectBackupPath.Name = "pnlSelectBackupPath";
-            this.pnlSelectBackupPath.Size = new System.Drawing.Size(517, 80);
-            this.pnlSelectBackupPath.TabIndex = 39;
-            // 
-            // lblSelectBackupPathFirst
-            // 
-            this.lblSelectBackupPathFirst.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblSelectBackupPathFirst.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSelectBackupPathFirst.Location = new System.Drawing.Point(3, 29);
-            this.lblSelectBackupPathFirst.Name = "lblSelectBackupPathFirst";
-            this.lblSelectBackupPathFirst.Size = new System.Drawing.Size(511, 23);
-            this.lblSelectBackupPathFirst.TabIndex = 0;
-            this.lblSelectBackupPathFirst.Text = "Please select a backup path first (Button in top right corner).";
-            this.lblSelectBackupPathFirst.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tvBackups
-            // 
-            this.tvBackups.BackColor = System.Drawing.SystemColors.Window;
-            this.tvBackups.DefaultToolTipProvider = null;
-            this.tvBackups.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tvBackups.DragDropMarkColor = System.Drawing.Color.Black;
-            this.tvBackups.GridLineStyle = ((KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.GridLineStyle)((KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.GridLineStyle.Horizontal | KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.GridLineStyle.Vertical)));
-            this.tvBackups.LineColor = System.Drawing.SystemColors.ControlDark;
-            this.tvBackups.Location = new System.Drawing.Point(3, 47);
-            this.tvBackups.Model = null;
-            this.tvBackups.Name = "tvBackups";
-            this.tvBackups.SelectedNode = null;
-            this.tvBackups.ShowLines = false;
-            this.tvBackups.ShowPlusMinus = false;
-            this.tvBackups.Size = new System.Drawing.Size(669, 378);
-            this.tvBackups.TabIndex = 38;
-            this.tvBackups.Text = "treeViewAdv1";
-            this.tvBackups.UseColumns = true;
-            this.tvBackups.SelectionChanged += new System.EventHandler(this.tvBackups_SelectionChanged);
-            this.tvBackups.DoubleClick += new System.EventHandler(this.tvBackups_DoubleClick);
-            // 
-            // btnRecoverBackup
-            // 
-            this.btnRecoverBackup.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btnRecoverBackup.Enabled = false;
-            this.btnRecoverBackup.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRecoverBackup.Image = global::KSPModAdmin.Plugin.BackupTab.Properties.Resources.data_into_floppy_disk_24x24;
-            this.btnRecoverBackup.Location = new System.Drawing.Point(3, 425);
-            this.btnRecoverBackup.Name = "btnRecoverBackup";
-            this.btnRecoverBackup.Size = new System.Drawing.Size(669, 40);
-            this.btnRecoverBackup.TabIndex = 34;
-            this.btnRecoverBackup.Text = " Recover selected Backup";
-            this.btnRecoverBackup.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnRecoverBackup.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnRecoverBackup.UseVisualStyleBackColor = true;
-            this.btnRecoverBackup.Click += new System.EventHandler(this.btnRecoverBackup_Click);
             // 
             // tsbRefreshBackupview
             // 
@@ -397,6 +166,28 @@
             this.tsbRefreshBackupview.Text = "toolStripButton1";
             this.tsbRefreshBackupview.ToolTipText = "Scans the backup folder and repopulate the table again.";
             this.tsbRefreshBackupview.Click += new System.EventHandler(this.tsbRefresh_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 31);
+            // 
+            // tsbEditBackupNote
+            // 
+            this.tsbEditBackupNote.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbEditBackupNote.Image = global::KSPModAdmin.Plugin.BackupTab.Properties.Resources.note_edit;
+            this.tsbEditBackupNote.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsbEditBackupNote.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbEditBackupNote.Name = "tsbEditBackupNote";
+            this.tsbEditBackupNote.Size = new System.Drawing.Size(28, 28);
+            this.tsbEditBackupNote.Text = "toolStripButton1";
+            this.tsbEditBackupNote.ToolTipText = "Edit backup note\r\nOpens the edit backup note dialog.";
+            this.tsbEditBackupNote.Click += new System.EventHandler(this.tsbEditBackupNote_Click);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 31);
             // 
             // tsbNewBackup
             // 
@@ -420,6 +211,11 @@
             this.tsbBackupSaves.Text = "toolStripButton4";
             this.tsbBackupSaves.Click += new System.EventHandler(this.tsbBackupSaves_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 31);
+            // 
             // tsbRemoveBackup
             // 
             this.tsbRemoveBackup.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -441,6 +237,11 @@
             this.tsbRemoveAllBackups.Size = new System.Drawing.Size(28, 28);
             this.tsbRemoveAllBackups.Text = "toolStripButton6";
             this.tsbRemoveAllBackups.Click += new System.EventHandler(this.tsbRemoveAllBackups_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 31);
             // 
             // tslProcessing
             // 
@@ -492,6 +293,11 @@
     "folder of the selected KSP path, when KSP will be launched.";
             this.tsbBackupOnKSPLaunch.CheckedChanged += new System.EventHandler(this.BackupOnKSPLaunch_CheckedChanged);
             // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 31);
+            // 
             // tsbBackupOptions
             // 
             this.tsbBackupOptions.CheckOnClick = true;
@@ -505,6 +311,217 @@
             this.tsbBackupOptions.ToolTipText = "Open/Close backup options\r\nOpens or closes the backup options panel.";
             this.tsbBackupOptions.CheckStateChanged += new System.EventHandler(this.tsbBackupOptions_CheckStateChanged);
             // 
+            // grbBackups
+            // 
+            this.grbBackups.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grbBackups.Controls.Add(this.pnlOptions);
+            this.grbBackups.Controls.Add(this.pnlSelectBackupPath);
+            this.grbBackups.Controls.Add(this.tvBackups);
+            this.grbBackups.Controls.Add(this.btnRecoverBackup);
+            this.grbBackups.Controls.Add(this.tsBackups);
+            this.grbBackups.Location = new System.Drawing.Point(0, 39);
+            this.grbBackups.Name = "grbBackups";
+            this.grbBackups.Size = new System.Drawing.Size(675, 468);
+            this.grbBackups.TabIndex = 3;
+            this.grbBackups.TabStop = false;
+            this.grbBackups.Text = "Backups:";
+            // 
+            // pnlOptions
+            // 
+            this.pnlOptions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlOptions.Controls.Add(this.grpBackupOptions);
+            this.pnlOptions.Location = new System.Drawing.Point(16, 61);
+            this.pnlOptions.Name = "pnlOptions";
+            this.pnlOptions.Size = new System.Drawing.Size(640, 348);
+            this.pnlOptions.TabIndex = 2;
+            this.pnlOptions.Visible = false;
+            // 
+            // grpBackupOptions
+            // 
+            this.grpBackupOptions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grpBackupOptions.Controls.Add(this.cbAutoBackup);
+            this.grpBackupOptions.Controls.Add(this.tableLayoutPanel2);
+            this.grpBackupOptions.Controls.Add(this.cbBackupOnStartup);
+            this.grpBackupOptions.Controls.Add(this.tableLayoutPanel1);
+            this.grpBackupOptions.Controls.Add(this.cbBackupOnKSPLaunch);
+            this.grpBackupOptions.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpBackupOptions.Location = new System.Drawing.Point(3, 3);
+            this.grpBackupOptions.Name = "grpBackupOptions";
+            this.grpBackupOptions.Size = new System.Drawing.Size(634, 342);
+            this.grpBackupOptions.TabIndex = 0;
+            this.grpBackupOptions.TabStop = false;
+            this.grpBackupOptions.Text = "Backup options:";
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel2.ColumnCount = 3;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 146F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Controls.Add(this.lblMaxBackupFiles, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.tbMaxBackupFiles, 1, 0);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(12, 74);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(702, 26);
+            this.tableLayoutPanel2.TabIndex = 2;
+            // 
+            // lblMaxBackupFiles
+            // 
+            this.lblMaxBackupFiles.AutoSize = true;
+            this.lblMaxBackupFiles.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblMaxBackupFiles.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMaxBackupFiles.Location = new System.Drawing.Point(3, 0);
+            this.lblMaxBackupFiles.Name = "lblMaxBackupFiles";
+            this.lblMaxBackupFiles.Size = new System.Drawing.Size(140, 26);
+            this.lblMaxBackupFiles.TabIndex = 0;
+            this.lblMaxBackupFiles.Text = "Max. backup files:";
+            this.lblMaxBackupFiles.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // tbMaxBackupFiles
+            // 
+            this.tbMaxBackupFiles.AllowDecimalSeparator = false;
+            this.tbMaxBackupFiles.AllowGroupSeparator = false;
+            this.tbMaxBackupFiles.AllowNegativeSign = false;
+            this.tbMaxBackupFiles.AllowSpace = false;
+            this.tbMaxBackupFiles.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbMaxBackupFiles.Location = new System.Drawing.Point(149, 3);
+            this.tbMaxBackupFiles.MaxLength = 2;
+            this.tbMaxBackupFiles.Name = "tbMaxBackupFiles";
+            this.tbMaxBackupFiles.Size = new System.Drawing.Size(23, 20);
+            this.tbMaxBackupFiles.TabIndex = 1;
+            this.tbMaxBackupFiles.Text = "5";
+            this.tbMaxBackupFiles.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.ColumnCount = 4;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 146F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.lblBackupInterval, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.tbBackupIterval, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblBackupTime, 2, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 49);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(702, 25);
+            this.tableLayoutPanel1.TabIndex = 1;
+            // 
+            // lblBackupInterval
+            // 
+            this.lblBackupInterval.AutoSize = true;
+            this.lblBackupInterval.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblBackupInterval.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBackupInterval.Location = new System.Drawing.Point(3, 0);
+            this.lblBackupInterval.Name = "lblBackupInterval";
+            this.lblBackupInterval.Size = new System.Drawing.Size(140, 25);
+            this.lblBackupInterval.TabIndex = 0;
+            this.lblBackupInterval.Text = "Backup interval:";
+            this.lblBackupInterval.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // tbBackupIterval
+            // 
+            this.tbBackupIterval.AllowDecimalSeparator = false;
+            this.tbBackupIterval.AllowGroupSeparator = false;
+            this.tbBackupIterval.AllowNegativeSign = false;
+            this.tbBackupIterval.AllowSpace = false;
+            this.tbBackupIterval.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbBackupIterval.Location = new System.Drawing.Point(149, 3);
+            this.tbBackupIterval.MaxLength = 4;
+            this.tbBackupIterval.Name = "tbBackupIterval";
+            this.tbBackupIterval.Size = new System.Drawing.Size(37, 20);
+            this.tbBackupIterval.TabIndex = 1;
+            this.tbBackupIterval.Text = "60";
+            this.tbBackupIterval.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
+            // 
+            // lblBackupTime
+            // 
+            this.lblBackupTime.AutoSize = true;
+            this.lblBackupTime.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblBackupTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBackupTime.Location = new System.Drawing.Point(192, 0);
+            this.lblBackupTime.Name = "lblBackupTime";
+            this.lblBackupTime.Size = new System.Drawing.Size(43, 25);
+            this.lblBackupTime.TabIndex = 2;
+            this.lblBackupTime.Text = "minutes";
+            this.lblBackupTime.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // pnlSelectBackupPath
+            // 
+            this.pnlSelectBackupPath.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlSelectBackupPath.BackColor = System.Drawing.Color.Transparent;
+            this.pnlSelectBackupPath.Controls.Add(this.lblSelectBackupPathFirst);
+            this.pnlSelectBackupPath.Location = new System.Drawing.Point(82, 176);
+            this.pnlSelectBackupPath.Name = "pnlSelectBackupPath";
+            this.pnlSelectBackupPath.Size = new System.Drawing.Size(517, 80);
+            this.pnlSelectBackupPath.TabIndex = 3;
+            // 
+            // lblSelectBackupPathFirst
+            // 
+            this.lblSelectBackupPathFirst.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblSelectBackupPathFirst.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSelectBackupPathFirst.Location = new System.Drawing.Point(3, 29);
+            this.lblSelectBackupPathFirst.Name = "lblSelectBackupPathFirst";
+            this.lblSelectBackupPathFirst.Size = new System.Drawing.Size(511, 23);
+            this.lblSelectBackupPathFirst.TabIndex = 0;
+            this.lblSelectBackupPathFirst.Text = "Please select a backup path first (Button in top right corner).";
+            this.lblSelectBackupPathFirst.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tvBackups
+            // 
+            this.tvBackups.BackColor = System.Drawing.SystemColors.Window;
+            this.tvBackups.DefaultToolTipProvider = null;
+            this.tvBackups.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvBackups.DragDropMarkColor = System.Drawing.Color.Black;
+            this.tvBackups.GridLineStyle = ((KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.GridLineStyle)((KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.GridLineStyle.Horizontal | KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.GridLineStyle.Vertical)));
+            this.tvBackups.LineColor = System.Drawing.SystemColors.ControlDark;
+            this.tvBackups.Location = new System.Drawing.Point(3, 47);
+            this.tvBackups.Model = null;
+            this.tvBackups.Name = "tvBackups";
+            this.tvBackups.SelectedNode = null;
+            this.tvBackups.ShowLines = false;
+            this.tvBackups.ShowPlusMinus = false;
+            this.tvBackups.Size = new System.Drawing.Size(669, 378);
+            this.tvBackups.TabIndex = 1;
+            this.tvBackups.Text = "treeViewAdv1";
+            this.tvBackups.UseColumns = true;
+            this.tvBackups.SelectionChanged += new System.EventHandler(this.tvBackups_SelectionChanged);
+            this.tvBackups.DoubleClick += new System.EventHandler(this.tvBackups_DoubleClick);
+            // 
+            // btnRecoverBackup
+            // 
+            this.btnRecoverBackup.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btnRecoverBackup.Enabled = false;
+            this.btnRecoverBackup.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRecoverBackup.Image = global::KSPModAdmin.Plugin.BackupTab.Properties.Resources.data_into_floppy_disk_24x24;
+            this.btnRecoverBackup.Location = new System.Drawing.Point(3, 425);
+            this.btnRecoverBackup.Name = "btnRecoverBackup";
+            this.btnRecoverBackup.Size = new System.Drawing.Size(669, 40);
+            this.btnRecoverBackup.TabIndex = 4;
+            this.btnRecoverBackup.Text = " Recover selected Backup";
+            this.btnRecoverBackup.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnRecoverBackup.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnRecoverBackup.UseVisualStyleBackColor = true;
+            this.btnRecoverBackup.Click += new System.EventHandler(this.btnRecoverBackup_Click);
+            // 
             // btnOpenBackupDir
             // 
             this.btnOpenBackupDir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -512,7 +529,7 @@
             this.btnOpenBackupDir.Location = new System.Drawing.Point(615, 10);
             this.btnOpenBackupDir.Name = "btnOpenBackupDir";
             this.btnOpenBackupDir.Size = new System.Drawing.Size(25, 24);
-            this.btnOpenBackupDir.TabIndex = 35;
+            this.btnOpenBackupDir.TabIndex = 1;
             this.btnOpenBackupDir.UseVisualStyleBackColor = true;
             this.btnOpenBackupDir.Click += new System.EventHandler(this.btnOpenBackupDir_Click);
             // 
@@ -524,26 +541,9 @@
             this.btnBackupPath.Location = new System.Drawing.Point(646, 9);
             this.btnBackupPath.Name = "btnBackupPath";
             this.btnBackupPath.Size = new System.Drawing.Size(25, 24);
-            this.btnBackupPath.TabIndex = 29;
+            this.btnBackupPath.TabIndex = 2;
             this.btnBackupPath.UseVisualStyleBackColor = true;
             this.btnBackupPath.Click += new System.EventHandler(this.btnBackupPath_Click);
-            // 
-            // tsbEditBackupNote
-            // 
-            this.tsbEditBackupNote.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbEditBackupNote.Image = global::KSPModAdmin.Plugin.BackupTab.Properties.Resources.note_edit;
-            this.tsbEditBackupNote.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.tsbEditBackupNote.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbEditBackupNote.Name = "tsbEditBackupNote";
-            this.tsbEditBackupNote.Size = new System.Drawing.Size(28, 28);
-            this.tsbEditBackupNote.Text = "toolStripButton1";
-            this.tsbEditBackupNote.ToolTipText = "Edit backup note\r\nOpens the edit backup note dialog.";
-            this.tsbEditBackupNote.Click += new System.EventHandler(this.tsbEditBackupNote_Click);
-            // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 31);
             // 
             // UcBackupView
             // 

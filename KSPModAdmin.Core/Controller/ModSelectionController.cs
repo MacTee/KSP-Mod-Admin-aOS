@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Collections.Generic;
+using FolderSelect;
 using KSPModAdmin.Core.Model;
 using KSPModAdmin.Core.Utils;
 using KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.Helper;
@@ -91,6 +92,9 @@ namespace KSPModAdmin.Core.Controller
             EventDistributor.KSPRootChanged += KSPRootChanged;
 
             ModSelectionTreeModel.BeforeCheckedChange += BeforeCheckedChange;
+
+            View.AddActionKey(VirtualKey.VK_DELETE, DeleteMod);
+            View.AddActionKey(VirtualKey.VK_BACK, DeleteMod);
         }
 
 
@@ -171,6 +175,17 @@ namespace KSPModAdmin.Core.Controller
                         args.NewValue = false;
                 }
             }
+        }
+
+        /// <summary>
+        /// ActionKey callback function to handle Delete and Back key.
+        /// Deletes the selected mod(s).
+        /// </summary>
+        /// <returns>True, cause we have handled the key.</returns>
+        protected static bool DeleteMod(ActionKeyInfo keyState)
+        {
+            RemoveMod(View.SelectedMods.ToArray());
+            return true;
         }
 
         #endregion
@@ -1244,6 +1259,7 @@ namespace KSPModAdmin.Core.Controller
         public static void CheckForModUpdates(ModNode[] mods)
         {
             _CheckForModUpdates(mods);
+            View.InvalidateView();
         }
 
         /// <summary>
@@ -1256,12 +1272,12 @@ namespace KSPModAdmin.Core.Controller
             View.SetEnabledOfAllControls(false);
             View.ShowBusy = true;
 
-            AsyncTask<bool> asyncJob = new AsyncTask<bool>();
-            asyncJob.SetCallbackFunctions(() =>
-            {
-                _CheckForModUpdates(mods);
-                return true;
-            },
+            AsyncTask<bool>.DoWork(
+                () =>
+                {
+                    _CheckForModUpdates(mods);
+                    return true;
+                },
                 (result, ex) =>
                 {
                     EventDistributor.InvokeAsyncTaskDone(Instance);
@@ -1270,8 +1286,9 @@ namespace KSPModAdmin.Core.Controller
 
                     if (ex != null)
                         Messenger.AddError(string.Format(Messages.MSG_ERROR_DURING_MOD_UPDATE_0, ex.Message), ex);
+
+                    View.InvalidateView();
                 });
-            asyncJob.Run();
         }
 
         /// <summary>
@@ -1489,7 +1506,7 @@ namespace KSPModAdmin.Core.Controller
                     }
                     catch (Exception ex)
                     {
-                        View.InvokeIfRequired(() => MessageBox.Show(View.ParentForm, string.Format(Messages.MSG_ZIP_CREATION_FAILED_0, ex.Message), Messages.MSG_TITLE_ERROR, MessageBoxButtons.OK, MessageBoxIcon.Error));
+                        Messenger.AddError(string.Format(Messages.MSG_ZIP_CREATION_FAILED_0, ex.Message));
                         return false;
                     }
                 },
@@ -1502,6 +1519,58 @@ namespace KSPModAdmin.Core.Controller
                 {
                     View.SetProgressBarStates(true, nodeCount, processedNodeCount);
                 });
+        }
+
+        #endregion
+
+        #region Relocate mod archive path
+
+        /// <summary>
+        /// Opens a FolderSelect dialog and sets the archive path of the selected mod to the "selected folder" + "mod archive filename" if the archive is found in the new folder.
+        /// </summary>
+        public static void RelocateArchivePath(ModNode selectedMod)
+        {
+            if (selectedMod == null)
+                return;
+
+            selectedMod = selectedMod.ZipRoot;
+
+            var dlg = new FolderSelectDialog();
+            dlg.Title = Messages.MSG_SELECT_NEW_ARCHIVE_PATH;
+            dlg.InitialDirectory = OptionsController.DownloadPath;
+            if (!dlg.ShowDialog(View.ParentForm.Handle))
+                return;
+
+            RelocateArchivePath(selectedMod, dlg.FileName);
+        }
+
+        /// <summary>
+        /// Opens a FolderSelect dialog and sets the archive paths of all mods to the "selected folder" + "mod archive filename" if the archive is found in the new folder.
+        /// </summary>
+        public static void RelocateArchivePathAllMods()
+        {
+            var dlg = new FolderSelectDialog();
+            dlg.Title = Messages.MSG_SELECT_NEW_ARCHIVE_PATH;
+            dlg.InitialDirectory = OptionsController.DownloadPath;
+            if (!dlg.ShowDialog(View.ParentForm.Handle))
+                return;
+
+            foreach (ModNode mod in Model.Nodes)
+                RelocateArchivePath(mod, dlg.FileName);
+        }
+
+        private static void RelocateArchivePath(ModNode modNode, string newPath)
+        {
+            var newFullPath = Path.Combine(newPath, Path.GetFileName(modNode.Key));
+            if (File.Exists(newFullPath))
+            {
+                modNode.Key = newFullPath;
+                Messenger.AddInfo(string.Format(Messages.MSG_MOD_0_ARCHIVE_PATH_CHANGED_TO_1, modNode.Name, newFullPath));
+            }
+            else
+            {
+                Messenger.AddInfo(string.Format(Messages.MSG_MOD_ARCHIVE_0_NOT_FOUND_MOD_1, newFullPath, modNode.Name));
+            }
         }
 
         #endregion
@@ -1582,6 +1651,9 @@ namespace KSPModAdmin.Core.Controller
                 dlg.ModSelectionColumns.ToTreeViewAdv(View.tvModSelection);
         }
 
+        /// <summary>
+        /// Opens the default browser with the KMA² Wiki url.
+        /// </summary>
         public static void OpenWiki()
         {
             Process.Start(Constants.WIKIURL);
@@ -1677,6 +1749,20 @@ namespace KSPModAdmin.Core.Controller
             }
 
             return sb.ToString();
+        }
+
+        /// <summary>
+        /// Refreshes the CheckedState of the ModNodes with the fileDestination.
+        /// </summary>
+        /// <param name="fileDestination">Destination path of the file.</param>
+        public static void RefreshCheckedStateOfNodeByDestination(string fileDestination)
+        {
+            var relativeDestination = KSPPathHelper.GetRelativePath(fileDestination).ToLower();
+            if (!ModRegister.RegisterdModFiles.ContainsKey(relativeDestination))
+                return;
+
+            var nodes = ModRegister.RegisterdModFiles[relativeDestination];
+            RefreshCheckedStateOfMods(nodes.ToArray());
         }
     }
 }

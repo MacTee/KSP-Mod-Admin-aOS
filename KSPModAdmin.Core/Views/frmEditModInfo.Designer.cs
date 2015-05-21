@@ -91,7 +91,7 @@
             this.tbName.Location = new System.Drawing.Point(121, 4);
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(244, 20);
-            this.tbName.TabIndex = 4;
+            this.tbName.TabIndex = 1;
             // 
             // lblModNameModInfoEditor
             // 
@@ -100,7 +100,7 @@
             this.lblModNameModInfoEditor.Location = new System.Drawing.Point(3, 0);
             this.lblModNameModInfoEditor.Name = "lblModNameModInfoEditor";
             this.lblModNameModInfoEditor.Size = new System.Drawing.Size(112, 27);
-            this.lblModNameModInfoEditor.TabIndex = 1;
+            this.lblModNameModInfoEditor.TabIndex = 0;
             this.lblModNameModInfoEditor.Text = "Mod Name:";
             this.lblModNameModInfoEditor.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -117,7 +117,7 @@
             this.tbAuthor.Location = new System.Drawing.Point(121, 4);
             this.tbAuthor.Name = "tbAuthor";
             this.tbAuthor.Size = new System.Drawing.Size(244, 20);
-            this.tbAuthor.TabIndex = 7;
+            this.tbAuthor.TabIndex = 1;
             // 
             // lblAuthorModInfoEditor
             // 
@@ -126,7 +126,7 @@
             this.lblAuthorModInfoEditor.Location = new System.Drawing.Point(3, 0);
             this.lblAuthorModInfoEditor.Name = "lblAuthorModInfoEditor";
             this.lblAuthorModInfoEditor.Size = new System.Drawing.Size(112, 27);
-            this.lblAuthorModInfoEditor.TabIndex = 1;
+            this.lblAuthorModInfoEditor.TabIndex = 0;
             this.lblAuthorModInfoEditor.Text = "Author:";
             this.lblAuthorModInfoEditor.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -136,7 +136,7 @@
             this.tbRating.Location = new System.Drawing.Point(290, 4);
             this.tbRating.Name = "tbRating";
             this.tbRating.Size = new System.Drawing.Size(75, 20);
-            this.tbRating.TabIndex = 10;
+            this.tbRating.TabIndex = 3;
             // 
             // lblRatingModInfoEditor
             // 
@@ -145,7 +145,7 @@
             this.lblRatingModInfoEditor.Location = new System.Drawing.Point(202, 0);
             this.lblRatingModInfoEditor.Name = "lblRatingModInfoEditor";
             this.lblRatingModInfoEditor.Size = new System.Drawing.Size(82, 27);
-            this.lblRatingModInfoEditor.TabIndex = 1;
+            this.lblRatingModInfoEditor.TabIndex = 2;
             this.lblRatingModInfoEditor.Text = "Rating:";
             this.lblRatingModInfoEditor.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -155,7 +155,7 @@
             this.tbDownloads.Location = new System.Drawing.Point(290, 4);
             this.tbDownloads.Name = "tbDownloads";
             this.tbDownloads.Size = new System.Drawing.Size(75, 20);
-            this.tbDownloads.TabIndex = 11;
+            this.tbDownloads.TabIndex = 3;
             // 
             // lblDownloadsModInfoEditor
             // 
@@ -164,7 +164,7 @@
             this.lblDownloadsModInfoEditor.Location = new System.Drawing.Point(202, 0);
             this.lblDownloadsModInfoEditor.Name = "lblDownloadsModInfoEditor";
             this.lblDownloadsModInfoEditor.Size = new System.Drawing.Size(82, 27);
-            this.lblDownloadsModInfoEditor.TabIndex = 1;
+            this.lblDownloadsModInfoEditor.TabIndex = 2;
             this.lblDownloadsModInfoEditor.Text = "Downloads:";
             this.lblDownloadsModInfoEditor.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -175,7 +175,7 @@
             this.tbNote.Multiline = true;
             this.tbNote.Name = "tbNote";
             this.tbNote.Size = new System.Drawing.Size(243, 84);
-            this.tbNote.TabIndex = 12;
+            this.tbNote.TabIndex = 1;
             // 
             // lblNoteModInfoEditor
             // 
@@ -184,7 +184,7 @@
             this.lblNoteModInfoEditor.Location = new System.Drawing.Point(3, 0);
             this.lblNoteModInfoEditor.Name = "lblNoteModInfoEditor";
             this.lblNoteModInfoEditor.Size = new System.Drawing.Size(113, 90);
-            this.lblNoteModInfoEditor.TabIndex = 1;
+            this.lblNoteModInfoEditor.TabIndex = 0;
             this.lblNoteModInfoEditor.Text = "Note:";
             this.lblNoteModInfoEditor.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
@@ -206,7 +206,7 @@
             this.btnCancel.Location = new System.Drawing.Point(290, 386);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(110, 25);
-            this.btnCancel.TabIndex = 14;
+            this.btnCancel.TabIndex = 13;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -221,7 +221,7 @@
             this.btnSave.Location = new System.Drawing.Point(174, 386);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(110, 25);
-            this.btnSave.TabIndex = 13;
+            this.btnSave.TabIndex = 12;
             this.btnSave.Text = "Save";
             this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -235,7 +235,7 @@
             this.lblCreationDateModInfoEditor.Location = new System.Drawing.Point(3, 0);
             this.lblCreationDateModInfoEditor.Name = "lblCreationDateModInfoEditor";
             this.lblCreationDateModInfoEditor.Size = new System.Drawing.Size(112, 27);
-            this.lblCreationDateModInfoEditor.TabIndex = 1;
+            this.lblCreationDateModInfoEditor.TabIndex = 0;
             this.lblCreationDateModInfoEditor.Text = "Creation date:";
             this.lblCreationDateModInfoEditor.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -247,7 +247,7 @@
             this.dtpCreation.Location = new System.Drawing.Point(121, 4);
             this.dtpCreation.Name = "dtpCreation";
             this.dtpCreation.Size = new System.Drawing.Size(75, 20);
-            this.dtpCreation.TabIndex = 8;
+            this.dtpCreation.TabIndex = 1;
             // 
             // lblDownloadDateModInfoEditor
             // 
@@ -256,7 +256,7 @@
             this.lblDownloadDateModInfoEditor.Location = new System.Drawing.Point(3, 0);
             this.lblDownloadDateModInfoEditor.Name = "lblDownloadDateModInfoEditor";
             this.lblDownloadDateModInfoEditor.Size = new System.Drawing.Size(112, 27);
-            this.lblDownloadDateModInfoEditor.TabIndex = 1;
+            this.lblDownloadDateModInfoEditor.TabIndex = 0;
             this.lblDownloadDateModInfoEditor.Text = "Download date:";
             this.lblDownloadDateModInfoEditor.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -268,14 +268,14 @@
             this.dtpDownload.Location = new System.Drawing.Point(121, 4);
             this.dtpDownload.Name = "dtpDownload";
             this.dtpDownload.Size = new System.Drawing.Size(75, 20);
-            this.dtpDownload.TabIndex = 9;
+            this.dtpDownload.TabIndex = 1;
             // 
             // tbAdditionalURL
             // 
             this.tbAdditionalURL.Location = new System.Drawing.Point(121, 3);
             this.tbAdditionalURL.Name = "tbAdditionalURL";
             this.tbAdditionalURL.Size = new System.Drawing.Size(244, 20);
-            this.tbAdditionalURL.TabIndex = 3;
+            this.tbAdditionalURL.TabIndex = 1;
             // 
             // cbVersionControl
             // 
@@ -285,7 +285,7 @@
             this.cbVersionControl.Location = new System.Drawing.Point(121, 3);
             this.cbVersionControl.Name = "cbVersionControl";
             this.cbVersionControl.Size = new System.Drawing.Size(103, 21);
-            this.cbVersionControl.TabIndex = 0;
+            this.cbVersionControl.TabIndex = 1;
             // 
             // lblAdditionalURLModInfo
             // 
@@ -294,7 +294,7 @@
             this.lblAdditionalURLModInfo.Location = new System.Drawing.Point(3, 0);
             this.lblAdditionalURLModInfo.Name = "lblAdditionalURLModInfo";
             this.lblAdditionalURLModInfo.Size = new System.Drawing.Size(112, 27);
-            this.lblAdditionalURLModInfo.TabIndex = 1;
+            this.lblAdditionalURLModInfo.TabIndex = 0;
             this.lblAdditionalURLModInfo.Text = "Additional link:";
             this.lblAdditionalURLModInfo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -305,7 +305,7 @@
             this.lblVersionControlModInfo.Location = new System.Drawing.Point(3, 0);
             this.lblVersionControlModInfo.Name = "lblVersionControlModInfo";
             this.lblVersionControlModInfo.Size = new System.Drawing.Size(112, 27);
-            this.lblVersionControlModInfo.TabIndex = 1;
+            this.lblVersionControlModInfo.TabIndex = 0;
             this.lblVersionControlModInfo.Text = "Version Control:";
             this.lblVersionControlModInfo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -316,7 +316,7 @@
             this.lblModURLModInfo.Location = new System.Drawing.Point(3, 0);
             this.lblModURLModInfo.Name = "lblModURLModInfo";
             this.lblModURLModInfo.Size = new System.Drawing.Size(112, 27);
-            this.lblModURLModInfo.TabIndex = 1;
+            this.lblModURLModInfo.TabIndex = 0;
             this.lblModURLModInfo.Text = "Mod URL:";
             this.lblModURLModInfo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -332,7 +332,7 @@
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(368, 27);
-            this.tableLayoutPanel1.TabIndex = 15;
+            this.tableLayoutPanel1.TabIndex = 0;
             // 
             // tableLayoutPanel2
             // 
@@ -346,7 +346,7 @@
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(368, 27);
-            this.tableLayoutPanel2.TabIndex = 16;
+            this.tableLayoutPanel2.TabIndex = 3;
             // 
             // tableLayoutPanel3
             // 
@@ -360,7 +360,7 @@
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(368, 27);
-            this.tableLayoutPanel3.TabIndex = 16;
+            this.tableLayoutPanel3.TabIndex = 1;
             // 
             // tableLayoutPanel4
             // 
@@ -375,7 +375,7 @@
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel4.Size = new System.Drawing.Size(368, 90);
-            this.tableLayoutPanel4.TabIndex = 17;
+            this.tableLayoutPanel4.TabIndex = 11;
             // 
             // tableLayoutPanel5
             // 
@@ -389,7 +389,7 @@
             this.tableLayoutPanel5.RowCount = 1;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel5.Size = new System.Drawing.Size(368, 27);
-            this.tableLayoutPanel5.TabIndex = 17;
+            this.tableLayoutPanel5.TabIndex = 4;
             // 
             // tableLayoutPanel6
             // 
@@ -407,7 +407,7 @@
             this.tableLayoutPanel6.RowCount = 1;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel6.Size = new System.Drawing.Size(368, 27);
-            this.tableLayoutPanel6.TabIndex = 17;
+            this.tableLayoutPanel6.TabIndex = 5;
             // 
             // lblProductIDModInfoEditor
             // 
@@ -416,7 +416,7 @@
             this.lblProductIDModInfoEditor.Location = new System.Drawing.Point(3, 0);
             this.lblProductIDModInfoEditor.Name = "lblProductIDModInfoEditor";
             this.lblProductIDModInfoEditor.Size = new System.Drawing.Size(112, 27);
-            this.lblProductIDModInfoEditor.TabIndex = 1;
+            this.lblProductIDModInfoEditor.TabIndex = 0;
             this.lblProductIDModInfoEditor.Text = "ProductID:";
             this.lblProductIDModInfoEditor.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -426,7 +426,7 @@
             this.tbProductID.Location = new System.Drawing.Point(121, 4);
             this.tbProductID.Name = "tbProductID";
             this.tbProductID.Size = new System.Drawing.Size(75, 20);
-            this.tbProductID.TabIndex = 5;
+            this.tbProductID.TabIndex = 1;
             // 
             // lblVersionModInfoEditor
             // 
@@ -435,7 +435,7 @@
             this.lblVersionModInfoEditor.Location = new System.Drawing.Point(202, 0);
             this.lblVersionModInfoEditor.Name = "lblVersionModInfoEditor";
             this.lblVersionModInfoEditor.Size = new System.Drawing.Size(82, 27);
-            this.lblVersionModInfoEditor.TabIndex = 1;
+            this.lblVersionModInfoEditor.TabIndex = 2;
             this.lblVersionModInfoEditor.Text = "Version:";
             this.lblVersionModInfoEditor.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -445,7 +445,7 @@
             this.tbVersion.Location = new System.Drawing.Point(290, 4);
             this.tbVersion.Name = "tbVersion";
             this.tbVersion.Size = new System.Drawing.Size(75, 20);
-            this.tbVersion.TabIndex = 6;
+            this.tbVersion.TabIndex = 3;
             // 
             // tableLayoutPanel7
             // 
@@ -460,7 +460,7 @@
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
             this.tableLayoutPanel7.Size = new System.Drawing.Size(368, 27);
-            this.tableLayoutPanel7.TabIndex = 17;
+            this.tableLayoutPanel7.TabIndex = 7;
             // 
             // tableLayoutPanel8
             // 
@@ -475,9 +475,9 @@
             this.tableLayoutPanel8.Name = "tableLayoutPanel8";
             this.tableLayoutPanel8.RowCount = 1;
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
             this.tableLayoutPanel8.Size = new System.Drawing.Size(368, 27);
-            this.tableLayoutPanel8.TabIndex = 17;
+            this.tableLayoutPanel8.TabIndex = 10;
             // 
             // tableLayoutPanel9
             // 
@@ -495,7 +495,7 @@
             this.tableLayoutPanel9.RowCount = 1;
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel9.Size = new System.Drawing.Size(368, 27);
-            this.tableLayoutPanel9.TabIndex = 18;
+            this.tableLayoutPanel9.TabIndex = 8;
             // 
             // tableLayoutPanel10
             // 
@@ -510,7 +510,7 @@
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
             this.tableLayoutPanel10.Size = new System.Drawing.Size(368, 27);
-            this.tableLayoutPanel10.TabIndex = 19;
+            this.tableLayoutPanel10.TabIndex = 6;
             // 
             // lblKSPVersionModInfoEditor
             // 
@@ -519,7 +519,7 @@
             this.lblKSPVersionModInfoEditor.Location = new System.Drawing.Point(3, 0);
             this.lblKSPVersionModInfoEditor.Name = "lblKSPVersionModInfoEditor";
             this.lblKSPVersionModInfoEditor.Size = new System.Drawing.Size(112, 27);
-            this.lblKSPVersionModInfoEditor.TabIndex = 1;
+            this.lblKSPVersionModInfoEditor.TabIndex = 0;
             this.lblKSPVersionModInfoEditor.Text = "KSP Version:";
             this.lblKSPVersionModInfoEditor.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -529,7 +529,7 @@
             this.textBox1.Location = new System.Drawing.Point(121, 4);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(244, 20);
-            this.textBox1.TabIndex = 7;
+            this.textBox1.TabIndex = 1;
             // 
             // tableLayoutPanel11
             // 
@@ -547,7 +547,7 @@
             this.tableLayoutPanel11.RowCount = 1;
             this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel11.Size = new System.Drawing.Size(368, 27);
-            this.tableLayoutPanel11.TabIndex = 20;
+            this.tableLayoutPanel11.TabIndex = 9;
             // 
             // lblChangeDateModInfoEditor
             // 
@@ -556,7 +556,7 @@
             this.lblChangeDateModInfoEditor.Location = new System.Drawing.Point(3, 0);
             this.lblChangeDateModInfoEditor.Name = "lblChangeDateModInfoEditor";
             this.lblChangeDateModInfoEditor.Size = new System.Drawing.Size(112, 27);
-            this.lblChangeDateModInfoEditor.TabIndex = 1;
+            this.lblChangeDateModInfoEditor.TabIndex = 0;
             this.lblChangeDateModInfoEditor.Text = "Changed date:";
             this.lblChangeDateModInfoEditor.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
@@ -568,7 +568,7 @@
             this.dtpChange.Location = new System.Drawing.Point(121, 4);
             this.dtpChange.Name = "dtpChange";
             this.dtpChange.Size = new System.Drawing.Size(75, 20);
-            this.dtpChange.TabIndex = 9;
+            this.dtpChange.TabIndex = 1;
             // 
             // frmEditModInfo
             // 

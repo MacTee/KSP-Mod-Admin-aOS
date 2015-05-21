@@ -192,9 +192,11 @@ namespace KSPModAdmin.Plugin.BackupTab.Controller
 
             // Add your stuff to initialize here.
             View.Model = model;
+            View.AddActionKey(VirtualKey.VK_DELETE, RemoveBackup);
+            View.AddActionKey(VirtualKey.VK_BACK, RemoveBackup);
 
             autoBackupTimer = new Timer();
-            autoBackupTimer.Tick += new EventHandler(AutoBackupTimer_Tick);
+            autoBackupTimer.Tick += new EventHandler(AutoBackupTimerTick);
             autoBackupTimer.Tag = false;
         }
 
@@ -206,7 +208,7 @@ namespace KSPModAdmin.Plugin.BackupTab.Controller
         /// </summary>
         protected static void AsyncTaskStarted(object sender)
         {
-            View.SetEnabledOfAllControls(true);
+            View.SetEnabledOfAllControls(false);
         }
 
         /// <summary>
@@ -215,14 +217,14 @@ namespace KSPModAdmin.Plugin.BackupTab.Controller
         /// </summary>
         protected static void AsyncTaskDone(object sender)
         {
-            View.SetEnabledOfAllControls(false);
+            View.SetEnabledOfAllControls(true);
         }
 
         /// <summary>
         /// Callback function for the LanguageChanged event.
         /// This is the place where you can translate non accessible controls.
         /// </summary>
-        private static void LanguageChanged(object sender)
+        protected static void LanguageChanged(object sender)
         {
             View.LanguageChanged();
         }
@@ -231,7 +233,7 @@ namespace KSPModAdmin.Plugin.BackupTab.Controller
         /// Callback function for the KSPRootChanged event.
         /// This is the place to handle a change of the selected KSP installation path..
         /// </summary>
-        private static void KSPRootChanged(string kspPath)
+        protected static void KSPRootChanged(string kspPath)
         {
             View.StartUpdate();
             View.BackupPath = string.Empty;
@@ -243,7 +245,7 @@ namespace KSPModAdmin.Plugin.BackupTab.Controller
         /// Callback function for the StartingKSP event.
         /// This is the place to handle anything when KSP is launching.
         /// </summary>
-        private static void StartingKSP(object sender)
+        protected static void StartingKSP(object sender)
         {
             LoadBackupSettings();
             ScanBackupDirectory();
@@ -255,7 +257,7 @@ namespace KSPModAdmin.Plugin.BackupTab.Controller
         /// Callback function for the KSPMAStarted event.
         /// This is the place to handle anything like additional initializing if init is depended on fully loaded ModSelection.
         /// </summary>
-        private static void KSPMAStarted(object sender)
+        protected static void KSPMAStarted(object sender)
         {
             LoadBackupSettings();
             ScanBackupDirectory();
@@ -266,9 +268,21 @@ namespace KSPModAdmin.Plugin.BackupTab.Controller
         /// <summary>
         /// Handles the Tick event of the mAutoBackupTimer timer.
         /// </summary>
-        private static void AutoBackupTimer_Tick(object sender, EventArgs e)
+        protected static void AutoBackupTimerTick(object sender, EventArgs e)
         {
             DoAutoBackup();
+        }
+
+        /// <summary>
+        /// ActionKey callback function to handle Delete and Back key.
+        /// Deletes the selected backup.
+        /// </summary>
+        /// <returns>True, cause we have handled the key.</returns>
+        protected static bool RemoveBackup(ActionKeyInfo keyState)
+        {
+            RemoveSelectedBackup();
+
+            return true;
         }
 
         #endregion
@@ -811,7 +825,7 @@ namespace KSPModAdmin.Plugin.BackupTab.Controller
                 {
                     EventDistributor.InvokeAsyncTaskStarted(Instance);
                     View.ShowProcessing = true;
-                    Messenger.AddInfo("Backup started.");
+                    Messenger.AddInfo(Messages.MSG_BACKUP_STARTED);
                     AsyncTask<string>.DoWork(() => BackupDir(dir, name, backupPath), BackupDirFinished);
                 }
                 else

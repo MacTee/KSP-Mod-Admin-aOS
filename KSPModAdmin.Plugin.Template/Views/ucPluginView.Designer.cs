@@ -1,4 +1,4 @@
-﻿namespace KSPModAdmin.Plugin.Template
+﻿namespace KSPModAdmin.Plugin.Template.Views
 {
     partial class ucPluginView
     {

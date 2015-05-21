@@ -14,6 +14,8 @@ using KSPModAdmin.Plugin.BackupTab.Properties;
 
 namespace KSPModAdmin.Plugin.BackupTab.Views
 {
+    using KSPModAdmin.Core.Utils;
+
     [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Reviewed. Suppression is OK here.")]
     public partial class UcBackupView : ucBase
     {
@@ -304,6 +306,18 @@ namespace KSPModAdmin.Plugin.BackupTab.Views
         #endregion
 
         /// <summary>
+        /// Add a ActionKey CallbackFunction binding to the backup TreeViewAdv.
+        /// </summary>
+        /// <param name="key">The action key that raises the callback.</param>
+        /// <param name="callback">The callback function with the action that should be called.</param>
+        /// <param name="modifierKeys">Required state of the modifier keys to get the callback function called.</param>
+        /// <param name="once">Flag to determine if the callback function should only be called once.</param>
+        public void AddActionKey(VirtualKey key, ActionKeyHandler callback, ModifierKey[] modifierKeys = null, bool once = false)
+        {
+            tvBackups.AddActionKey(key, callback, modifierKeys, once);
+        }
+
+        /// <summary>
         /// Forces the view to redraw.
         /// </summary>
         public override void InvalidateView()
@@ -348,6 +362,7 @@ namespace KSPModAdmin.Plugin.BackupTab.Views
         {
             // Enable/Disable your View Controls here.
             // Normally when KSP MA calls this methode with enable = false, all controls should be disabled.
+            this.Enabled = enable;
         }
 
         internal void LanguageChanged()

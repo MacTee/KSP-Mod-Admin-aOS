@@ -195,6 +195,18 @@ namespace KSPModAdmin.Core.Views
             tvModSelection.SelectedNode = null;
         }
 
+        /// <summary>
+        /// Add a ActionKey CallbackFunction binding to the flag ListView.
+        /// </summary>
+        /// <param name="key">The action key that raises the callback.</param>
+        /// <param name="callback">The callback function with the action that should be called.</param>
+        /// <param name="modifierKeys">Required state of the modifier keys to get the callback function called.</param>
+        /// <param name="once">Flag to determine if the callback function should only be called once.</param>
+        public void AddActionKey(VirtualKey key, ActionKeyHandler callback, ModifierKey[] modifierKeys = null, bool once = false)
+        {
+            tvModSelection.AddActionKey(key, callback, modifierKeys, once);
+        }
+
         #region Event handling
 
         private void ucModSelection_Load(object sender, EventArgs e)
@@ -409,6 +421,16 @@ namespace KSPModAdmin.Core.Views
             ModSelectionController.OpenWiki();
         }
 
+        private void tsbRelocateArchivePath_Click(object sender, EventArgs e)
+        {
+            ModSelectionController.RelocateArchivePath(SelectedMod);
+        }
+
+        private void tsmiRelocateArchivePathAllMods_Click(object sender, EventArgs e)
+        {
+            ModSelectionController.RelocateArchivePathAllMods();
+        }
+
         private void tsmiCmsTreeViewOptions_Click(object sender, EventArgs e)
         {
             ModSelectionController.OpenTreeViewOptions();
@@ -495,6 +517,7 @@ namespace KSPModAdmin.Core.Views
                 tsmiResetDestination.Enabled = true;
 
                 tsbCreateZip.Enabled = !selectedNode.ZipExists;
+                tsbRelocateArchivePath.Enabled = true;
             }
             else
             {
@@ -506,10 +529,10 @@ namespace KSPModAdmin.Core.Views
                 KSPVersion = "0.21 or higher";
                 ModAuthor = "BHeinrich (MacKerbal@mactee.de)";
                 ModCreationDate = "25.04.2013";
-                ModChangeDate = "08.05.2015";
+                ModChangeDate = "18.05.2015";
                 ModOutdated = false;
                 ModRating = string.Empty;
-                ModDownloads = "85k+";
+                ModDownloads = "86k+";
                 ModNote = "KSP MA aOS is the mod managing tool for KSP on any OS. ;)";
                 FileName = "KSPModAdmin.exe";
                 FileDestination = string.Empty;
@@ -550,6 +573,7 @@ namespace KSPModAdmin.Core.Views
                 tsmiResetDestination.Enabled = false;
 
                 tsbCreateZip.Enabled = false;
+                tsbRelocateArchivePath.Enabled = false;
             }
 
             lvModSelection.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.ColumnContent);
