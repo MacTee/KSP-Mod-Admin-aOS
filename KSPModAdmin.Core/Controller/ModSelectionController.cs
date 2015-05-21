@@ -1259,6 +1259,7 @@ namespace KSPModAdmin.Core.Controller
         public static void CheckForModUpdates(ModNode[] mods)
         {
             _CheckForModUpdates(mods);
+            View.InvalidateView();
         }
 
         /// <summary>
@@ -1271,12 +1272,12 @@ namespace KSPModAdmin.Core.Controller
             View.SetEnabledOfAllControls(false);
             View.ShowBusy = true;
 
-            AsyncTask<bool> asyncJob = new AsyncTask<bool>();
-            asyncJob.SetCallbackFunctions(() =>
-            {
-                _CheckForModUpdates(mods);
-                return true;
-            },
+            AsyncTask<bool>.DoWork(
+                () =>
+                {
+                    _CheckForModUpdates(mods);
+                    return true;
+                },
                 (result, ex) =>
                 {
                     EventDistributor.InvokeAsyncTaskDone(Instance);
@@ -1285,8 +1286,9 @@ namespace KSPModAdmin.Core.Controller
 
                     if (ex != null)
                         Messenger.AddError(string.Format(Messages.MSG_ERROR_DURING_MOD_UPDATE_0, ex.Message), ex);
+
+                    View.InvalidateView();
                 });
-            asyncJob.Run();
         }
 
         /// <summary>
