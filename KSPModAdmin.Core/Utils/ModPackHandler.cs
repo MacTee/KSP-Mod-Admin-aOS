@@ -725,7 +725,7 @@ namespace KSPModAdmin.Core.Utils
             /// Gets flat list of all file nodes this tree containing.
             /// </summary>
             /// <returns>A flat list of all file nodes this tree containing.</returns>
-            public List<ICopyModInfo> GetAllFileNodes()
+            public List<ICopyModInfo> GetAllFileNodesAsICopyModInfo()
             {
                 var a = new List<ICopyModInfo>();
                 a.AddRange(GetAllFileImportInfo());
