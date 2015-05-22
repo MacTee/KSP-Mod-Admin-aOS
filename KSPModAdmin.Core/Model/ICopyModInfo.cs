@@ -11,7 +11,7 @@ namespace KSPModAdmin.Core.Model
         /// Gets flat list of all file nodes this tree containing.
         /// </summary>
         /// <returns>A flat list of all file nodes this tree containing.</returns>
-        List<ICopyModInfo> GetAllFileNodes();
+        List<ICopyModInfo> GetAllFileNodesAsICopyModInfo();
 
         /// <summary>
         /// Gets the full path this node within the tree.

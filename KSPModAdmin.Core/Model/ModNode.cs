@@ -757,7 +757,7 @@ namespace KSPModAdmin.Core.Model
         /// </summary>
         /// <param name="fileNodes">For recursive calls! List of already found file nodes.</param>
         /// <returns>A list of TreeNodeMod that represents a file entry.</returns>
-        private List<ModNode> GetAllFileNodes(List<ModNode> fileNodes)
+        public List<ModNode> GetAllFileNodes(List<ModNode> fileNodes = null)
         {
             if (fileNodes == null)
                 fileNodes = new List<ModNode>();
@@ -827,9 +827,9 @@ namespace KSPModAdmin.Core.Model
         /// Gets flat list of all file nodes this tree containing.
         /// </summary>
         /// <returns>A flat list of all file nodes this tree containing.</returns>
-        public List<ICopyModInfo> GetAllFileNodes()
+        public List<ICopyModInfo> GetAllFileNodesAsICopyModInfo()
         {
-            return GetAllFileNodes();
+            return GetAllFileNodes(new List<ModNode>()).Cast<ICopyModInfo>().ToList();
         }
 
         /// <summary>
