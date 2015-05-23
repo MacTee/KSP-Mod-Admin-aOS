@@ -705,5 +705,7 @@
   <String Name="MSG_MOD_0_ARCHIVE_PATH_CHANGED_TO_1" Value="Archivpfad der mod &quot;{0}&quot; geändert in &quot;{1}&quot;."/>
   <String Name="MSG_MOD_ARCHIVE_0_NOT_FOUND_MOD_1" Value="Mod Archiv &quot;{0}&quot; nicht gefunden. Archivpfad kann nicht in &quot;{1}&quot; geändert werden."/>
   <String Name="MSG_COPY_MOD_0_DESTINATION_FAILED" Value="Fehler! Kopieren der Zielpfade der mod &quot;{0}&quot; fehlgeschlagen!"/>
-  
+
+  <String Name="MSG_SCAN_ERROR_DURING_SCAN" Value="Fehler während des Gamedata Ordner Scans!"/>
+
 </Language>
