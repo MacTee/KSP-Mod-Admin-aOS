@@ -178,6 +178,7 @@ namespace KSPModAdmin.Core.Utils
                 AVCInfo newAvcInfo = null;
                 try
                 {
+                    // Get newest AVC informations for this mod.
                     newAvcInfo = AVCParser.ReadFromWeb(avcInfo.Url);
                 }
                 catch (Exception ex)
