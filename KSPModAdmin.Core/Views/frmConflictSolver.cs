@@ -246,7 +246,7 @@ namespace KSPModAdmin.Core.Views
 
             if (missingSelection.Count > 0 && missingSelection.Count < 16)
                 MessageBox.Show(this, GetValidationMsg(missingSelection), Messages.MSG_TITLE_VALIDATION);
-            else if (missingSelection.Count < 15)
+            else if (missingSelection.Count > 15)
                 MessageBox.Show(this, GetValidationMsg(missingSelection, true), Messages.MSG_TITLE_VALIDATION);
 
             return missingSelection.Count == 0;
