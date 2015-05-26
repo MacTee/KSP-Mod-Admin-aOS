@@ -174,6 +174,36 @@ namespace KSPModAdmin.Core.Config
                 }
             }
 
+            XmlNodeList avcSupportOnOff = doc.GetElementsByTagName(Constants.AVCSUPPORT);
+            if (avcSupportOnOff.Count >= 1)
+            {
+                foreach (XmlAttribute att in avcSupportOnOff[0].Attributes)
+                {
+                    if (att.Name == Constants.ONOFF && att.Value != null)
+                        OptionsController.AVCSupportOnOff = (att.Value.Equals(Constants.TRUE, StringComparison.CurrentCultureIgnoreCase));
+                }
+            }
+
+            XmlNodeList avcIgnoreName = doc.GetElementsByTagName(Constants.AVCIGNORENAME);
+            if (avcIgnoreName.Count >= 1)
+            {
+                foreach (XmlAttribute att in avcIgnoreName[0].Attributes)
+                {
+                    if (att.Name == Constants.ONOFF && att.Value != null)
+                        OptionsController.AVCIgnoreName = (att.Value.Equals(Constants.TRUE, StringComparison.CurrentCultureIgnoreCase));
+                }
+            }
+
+            XmlNodeList avcIgnoreURL = doc.GetElementsByTagName(Constants.AVCIGNOREURL);
+            if (avcIgnoreURL.Count >= 1)
+            {
+                foreach (XmlAttribute att in avcIgnoreURL[0].Attributes)
+                {
+                    if (att.Name == Constants.ONOFF && att.Value != null)
+                        OptionsController.AVCIgnoreURL = (att.Value.Equals(Constants.TRUE, StringComparison.CurrentCultureIgnoreCase));
+                }
+            }
+
             XmlNodeList colorDestinationDetected = doc.GetElementsByTagName(Constants.DESTINATIONDETECTED);
             if (colorDestinationDetected.Count >= 1)
             {
@@ -471,6 +501,27 @@ namespace KSPModAdmin.Core.Config
             node = ConfigHelper.CreateConfigNode(doc, Constants.CONFLICTDETECTIONOPTIONS, new string[,]
             {
                 { Constants.ONOFF, OptionsController.ConflictDetectionOnOff.ToString() }
+            });
+            generalNode.AppendChild(node);
+
+            // AVC support
+            node = ConfigHelper.CreateConfigNode(doc, Constants.AVCSUPPORT, new string[,]
+            {
+                { Constants.ONOFF, OptionsController.AVCSupportOnOff.ToString() }
+            });
+            generalNode.AppendChild(node);
+
+            // AVC ignore name
+            node = ConfigHelper.CreateConfigNode(doc, Constants.AVCIGNORENAME, new string[,]
+            {
+                { Constants.ONOFF, OptionsController.AVCIgnoreName.ToString() }
+            });
+            generalNode.AppendChild(node);
+
+            // AVC ignore url
+            node = ConfigHelper.CreateConfigNode(doc, Constants.AVCIGNOREURL, new string[,]
+            {
+                { Constants.ONOFF, OptionsController.AVCIgnoreURL.ToString() }
             });
             generalNode.AppendChild(node);
 

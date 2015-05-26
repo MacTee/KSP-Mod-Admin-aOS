@@ -328,6 +328,31 @@ namespace KSPModAdmin.Core.Views
 
         #endregion
 
+        #region AVC Support
+
+        /// <summary>
+        /// Gets or sets the flag to determine if the AVC version file support should be turned on or off.
+        /// </summary>
+        [DefaultValue(true), Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
+        public bool AVCSupportOnOff { get { return cbAVCSupport.Checked; } set { cbAVCSupport.Checked = value; } }
+
+        /// <summary>
+        /// Gets or sets the flag to determine if the mod name of the AVC version file should be ignored or not (during mod add).
+        /// </summary>
+        [DefaultValue(true), Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
+        public bool AVCIgnoreName { get { return cbAVCIgnoreName.Checked; } set { cbAVCIgnoreName.Checked = value; } }
+
+        /// <summary>
+        /// Gets or sets the flag to determine if the mod URL of the AVC version file should be ignored or not (during mod add).
+        /// </summary>
+        [DefaultValue(true), Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
+        public bool AVCIgnoreURL { get { return cbAVCIgnoreURL.Checked; } set { cbAVCIgnoreURL.Checked = value; } }
+
+        #endregion
+
         /// <summary>
         /// Gets or sets the flag to determine if the Conflict detection should be turned on or off.
         /// </summary>
@@ -812,13 +837,19 @@ namespace KSPModAdmin.Core.Views
             ModSelectionController.InvalidateView();
         }
 
-        #endregion
-
         private void cbLanguages_SelectedIndexChanged(object sender, EventArgs e)
         {
             var lang = (cbLanguages.SelectedItem != null && !string.IsNullOrEmpty(cbLanguages.SelectedItem.ToString())) ? cbLanguages.SelectedItem.ToString() : string.Empty;
             Localizer.GlobalInstance.CurrentLanguage = Localizer.GlobalInstance.GetLanguageNameByLongName(lang);
             EventDistributor.InvokeLanguageChanged(this);
         }
+
+        private void cbAVCSupport_CheckedChanged(object sender, EventArgs e)
+        {
+            cbAVCIgnoreName.Enabled = cbAVCSupport.Checked;
+            cbAVCIgnoreURL.Enabled = cbAVCSupport.Checked;
+        }
+
+        #endregion
     }
 }

@@ -368,6 +368,25 @@ namespace KSPModAdmin.Core.Controller
 
         #endregion
 
+        #region AVC Support
+
+        /// <summary>
+        /// Gets or sets the flag to determine if the AVC version file support should be turned on or off.
+        /// </summary>
+        public static bool AVCSupportOnOff { get { return (View == null) || View.AVCSupportOnOff; } set { if (View != null) View.AVCSupportOnOff = value; } }
+
+        /// <summary>
+        /// Gets or sets the flag to determine if the mod name of the AVC version file should be ignored or not (during mod add).
+        /// </summary>
+        public static bool AVCIgnoreName { get { return (View != null) && View.AVCIgnoreName; } set { if (View != null) View.AVCIgnoreName = value; } }
+
+        /// <summary>
+        /// Gets or sets the flag to determine if the mod URL of the AVC version file should be ignored or not (during mod add).
+        /// </summary>
+        public static bool AVCIgnoreURL { get { return (View != null) && View.AVCIgnoreURL; } set { if (View != null) View.AVCIgnoreURL = value; } }
+
+        #endregion
+
         /// <summary>
         /// Gets or sets the flag to determine if the Conflict detection should be turned on or off.
         /// </summary>

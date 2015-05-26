@@ -284,10 +284,6 @@
   <Control Name="btnModOutdated" Value="">
     <ChildControl Name="btnModOutdated_ToolTip" Value="(T)Chose node color for nodes where the mod is outdated." />
   </Control>
-  <Control Name="gpModConflictHandling" Value="(T)Mod file conflict handling:" />
-  <Control Name="cbConflictDetectionOnOff" Value="(T)Conflict detection On / Off">
-    <ChildControl Name="cbConflictDetectionOnOff_ToolTip" Value="(T)Conflict detection On / Off^Turns the conflict detection on or off." />
-  </Control>
   <Control Name="cbShowConflictSolver" Value="(T)Show conflict solving dialog">
     <ChildControl Name="cbShowConflictSolver_ToolTip" Value="(T)Show conflict detection dialog^Show/hides the conflict detection doalog after conflict detection." />
   </Control>
@@ -708,5 +704,19 @@
 
   <String Name="MSG_SCAN_ERROR_DURING_SCAN" Value="(T)Error during Gamedata folder scan."/>
 
+  <Control Name="gpModConflictHandling" Value="(T)Conflict detection:" />
+  <Control Name="cbConflictDetectionOnOff" Value="(T)On / Off">
+    <ChildControl Name="cbConflictDetectionOnOff_ToolTip" Value="(T)Conflict detection On / Off^Turns the conflict detection on or off."/>
+  </Control>
+  <Control Name="grpAVCSupport" Value="(T)AVC version file support:"/>
+  <Control Name="cbAVCSupport" Value="(T)On / Off">
+    <ChildControl Name="cbAVCSupport_ToolTip" Value="(T)AVC version file support^Turns the AVC version file support on or off."/>
+  </Control>
+  <Control Name="cbAVCIgnoreName" Value="(T)Ignore name">
+    <ChildControl Name="cbAVCIgnoreName_ToolTip" Value="(T)Ignore name^Ignore the mod name from the AVC version file during mod add."/>
+  </Control>
+  <Control Name="cbAVCIgnoreURL" Value="(T)Ignore URL">
+    <ChildControl Name="cbAVCIgnoreURL_ToolTip" Value="(T)Ignore URL^Ignore the mod URL from the AVC version file during mod add."/>
+  </Control>
 
 </Language>
