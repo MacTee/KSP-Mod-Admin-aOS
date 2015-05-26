@@ -285,8 +285,9 @@ namespace KSPModAdmin.Core.Controller
                 Localizer.GlobalInstance.DefaultLanguage = "eng";
                 langLoadFailed = !Localizer.GlobalInstance.LoadLanguages(KSPPathHelper.GetPath(KSPPaths.LanguageFolder), true);
             }
-            catch
+            catch (Exception ex)
             {
+                Log.AddErrorS("Error in MainController.LoadLanguages()", ex);
                 langLoadFailed = true;
             }
 

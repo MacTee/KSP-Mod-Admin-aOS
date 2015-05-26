@@ -136,14 +136,15 @@ namespace KSPModAdmin.Core.Utils
         /// <returns>The plain url to the mod, where the ModInfos would be get from.</returns>
         public string ReduceToPlainUrl(string url)
         {
-            if (url.EndsWith("/files/latest"))
-                return url.Replace("/files/latest", string.Empty);
-            if (url.EndsWith("/files"))
+            Uri uri = new Uri(url);
+            if (uri.AbsoluteUri.EndsWith("/files/latest"))
+                return uri.AbsoluteUri.Replace("/files/latest", string.Empty);
+            if (uri.AbsoluteUri.EndsWith("/files"))
                 return url.Replace("/files", string.Empty);
-            if (url.EndsWith("/images"))
+            if (uri.AbsoluteUri.EndsWith("/images"))
                 return url.Replace("/images", string.Empty);
-
-            return url;
+            
+            return uri.AbsoluteUri;
         }
 
         /// <summary>
@@ -163,13 +164,6 @@ namespace KSPModAdmin.Core.Utils
 
             // To scrape the fields, now using HtmlAgilityPack and XPATH search strings.
             // Easy way to get XPATH search: use chrome, inspect element, highlight the needed data and right-click and copy XPATH
-            ////HtmlNode nameNode = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='project-details-container']/div[@class='project-user']/h1[@class='project-title']/a/span");
-            ////HtmlNode idNode = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='sidebar-actions']/ul/li[@class='view-on-curse']/a");
-            ////HtmlNode createNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='content']/section[2]/div[1]/div[2]/ul/li[1]/div[2]/abbr");
-            ////HtmlNode updateNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='content']/section[2]/div[1]/div[2]/ul/li[2]/div[2]/abbr");
-            ////HtmlNode downloadNode = htmlDoc.DocumentNode.SelectSingleNode("//ul[@class='cf-details project-details']/li/div[starts-with(., 'Total Downloads')]/following::div[1]");
-            ////HtmlNode authorNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='content']/section[2]/div[3]/div[2]/ul/li/div[2]/p/a/span");
-
             HtmlNode nameNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='project-overview']/div/div[1]/h2/span/span/span");
             HtmlNode idNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='project-overview']/div/div[2]/div/div/div[1]/div[2]/ul[2]/li[8]/a");
             HtmlNode createNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='project-overview']/div/div[2]/div/div/div[1]/div[2]/ul[2]/li[6]/abbr");
@@ -202,69 +196,11 @@ namespace KSPModAdmin.Core.Utils
         /// <returns>URL pointing to the latest file download</returns>
         private string GetDownloadURL(string url)
         {
+            url = ReduceToPlainUrl(url);
             if (url.EndsWith("/"))
                 return url + "files/latest";
             else
                 return url + "/files/latest";
-        }
-
-        // Do we need any of these anymore, if they're nto being used?
-        ////private string GetName(string titleHTMLString) // not in use?
-        ////{
-        ////    int index = titleHTMLString.IndexOf("title=\"");
-        ////    titleHTMLString = titleHTMLString.Substring(index + 7);
-        ////    index = titleHTMLString.IndexOf("\">");
-        ////    string name = titleHTMLString.Substring(0, index);
-        ////    return name.Trim();
-        ////}
-
-        private DateTime GetDateTime(string curseForgeDateString)
-        {
-            int index = curseForgeDateString.IndexOf(",") + 2;
-            curseForgeDateString = curseForgeDateString.Substring(index);
-            index = curseForgeDateString.IndexOf(" ") + 1;
-            index = curseForgeDateString.IndexOf(" ", index) + 1;
-            index = curseForgeDateString.IndexOf(" ", index) + 1;
-            index = curseForgeDateString.IndexOf(" ", index);
-            string date = curseForgeDateString.Substring(0, index);
-            index = curseForgeDateString.IndexOf("(");
-            string tempTimeZone = curseForgeDateString.Substring(index).Substring(0);
-            index = tempTimeZone.IndexOf("-");
-            if (index < 0)
-                index = tempTimeZone.IndexOf("+") + 1;
-            else
-                index += 1;
-            string timeZone = tempTimeZone.Substring(0, index);
-            tempTimeZone = tempTimeZone.Substring(index);
-            index = tempTimeZone.IndexOf(":");
-            if (index < 2)
-                timeZone += "0" + tempTimeZone;
-            else
-                timeZone += tempTimeZone;
-
-            TimeZoneInfo curseZone = null;
-            foreach (TimeZoneInfo zone in TimeZoneInfo.GetSystemTimeZones())
-            {
-                if (!zone.DisplayName.StartsWith(timeZone))
-                    continue;
-
-                curseZone = zone;
-                break;
-            }
-
-            DateTime myDate = DateTime.MinValue;
-            if (DateTime.TryParse(date, out myDate) && curseZone != null)
-                return TimeZoneInfo.ConvertTime(myDate, curseZone, TimeZoneInfo.Local);
-            else
-                return DateTime.MinValue;
-        }
-
-        private string GetFilesURL(string curseForgeURL)
-        {
-            if (curseForgeURL.EndsWith("/"))
-                return curseForgeURL + "files";
-            else
-                return curseForgeURL + "/files";
         }
     }
 }

@@ -182,6 +182,7 @@ namespace KSPModAdmin.Core.Utils
                 catch (Exception ex)
                 {
                     Messenger.AddError(string.Format("Error while downloading \"{0}\"!", downloadURL), ex);
+                    fullpath = string.Empty;
                 }
                 finally
                 {
