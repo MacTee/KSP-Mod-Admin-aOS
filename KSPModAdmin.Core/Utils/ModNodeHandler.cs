@@ -44,9 +44,12 @@ namespace KSPModAdmin.Core.Utils
             if (File.Exists(modInfo.LocalPath))
             {
                 // Get AVC version file informations.
-                AVCInfo avcInfo = TryReadAVCVersionFile(modInfo.LocalPath);
-                if (avcInfo != null)
-                    ImportAvcInfo(avcInfo, ref modInfo);
+                if (OptionsController.AVCSupportOnOff)
+                {
+                    AVCInfo avcInfo = TryReadAVCVersionFile(modInfo.LocalPath);
+                    if (avcInfo != null)
+                        ImportAvcInfo(avcInfo, ref modInfo);
+                }
 
                 // Still no name? Use filename then
                 if (string.IsNullOrEmpty(modInfo.Name))
@@ -166,18 +169,19 @@ namespace KSPModAdmin.Core.Utils
             Messenger.AddDebug(string.Format(Messages.MSG_IMPORTING_AVC_VERSIONFILE_INFO_0, modInfo.Name));
 
             string fileName = Path.GetFileNameWithoutExtension(modInfo.LocalPath);
-            if (!string.IsNullOrEmpty(avcInfo.Name) && (string.IsNullOrEmpty(modInfo.Name) || modInfo.Name == fileName))
+            if (!OptionsController.AVCIgnoreName && !string.IsNullOrEmpty(avcInfo.Name) && (string.IsNullOrEmpty(modInfo.Name) || modInfo.Name == fileName))
                 modInfo.Name = avcInfo.Name;
             if (!string.IsNullOrEmpty(avcInfo.Version) && (string.IsNullOrEmpty(modInfo.Version)))
                 modInfo.Version = avcInfo.Version;
             if (!string.IsNullOrEmpty(avcInfo.KspVersion) && (string.IsNullOrEmpty(modInfo.KSPVersion)))
                 modInfo.KSPVersion = avcInfo.KspVersion;
 
-            if (!string.IsNullOrEmpty(avcInfo.Url) && (string.IsNullOrEmpty(modInfo.AvcURL)))
+            if (!OptionsController.AVCIgnoreURL && !string.IsNullOrEmpty(avcInfo.Url) && (string.IsNullOrEmpty(modInfo.AvcURL)))
             {
                 AVCInfo newAvcInfo = null;
                 try
                 {
+                    // Get newest AVC informations for this mod.
                     newAvcInfo = AVCParser.ReadFromWeb(avcInfo.Url);
                 }
                 catch (Exception ex)

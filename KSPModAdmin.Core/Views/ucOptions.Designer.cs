@@ -87,11 +87,11 @@ namespace KSPModAdmin.Core.Views
             this.lblKSPPathNote = new System.Windows.Forms.Label();
             this.tbNote = new System.Windows.Forms.TextBox();
             this.tabPageMisc = new System.Windows.Forms.TabPage();
-            this.gbDestinationDetection = new System.Windows.Forms.GroupBox();
-            this.tableLayoutPanel14 = new System.Windows.Forms.TableLayoutPanel();
-            this.rbDDSmartDestDetection = new System.Windows.Forms.RadioButton();
-            this.rbDDJustDump = new System.Windows.Forms.RadioButton();
-            this.cbDDCopyToGameData = new System.Windows.Forms.CheckBox();
+            this.grpAVCSupport = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel15 = new System.Windows.Forms.TableLayoutPanel();
+            this.cbAVCSupport = new System.Windows.Forms.CheckBox();
+            this.cbAVCIgnoreURL = new System.Windows.Forms.CheckBox();
+            this.cbAVCIgnoreName = new System.Windows.Forms.CheckBox();
             this.gbToolTip = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel13 = new System.Windows.Forms.TableLayoutPanel();
             this.lblSecond2 = new System.Windows.Forms.Label();
@@ -101,6 +101,11 @@ namespace KSPModAdmin.Core.Views
             this.lblToolTipDelay = new System.Windows.Forms.Label();
             this.lblSecond1 = new System.Windows.Forms.Label();
             this.tbToolTipDelay = new KSPModAdmin.Core.Utils.Controls.Aga.Controls.NumericTextBox();
+            this.gbDestinationDetection = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel14 = new System.Windows.Forms.TableLayoutPanel();
+            this.rbDDSmartDestDetection = new System.Windows.Forms.RadioButton();
+            this.rbDDJustDump = new System.Windows.Forms.RadioButton();
+            this.cbDDCopyToGameData = new System.Windows.Forms.CheckBox();
             this.gbLaguage = new System.Windows.Forms.GroupBox();
             this.cbLanguages = new System.Windows.Forms.ComboBox();
             this.gbNodeColors = new System.Windows.Forms.GroupBox();
@@ -191,10 +196,12 @@ namespace KSPModAdmin.Core.Views
             this.splitContainer1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tabPageMisc.SuspendLayout();
-            this.gbDestinationDetection.SuspendLayout();
-            this.tableLayoutPanel14.SuspendLayout();
+            this.grpAVCSupport.SuspendLayout();
+            this.tableLayoutPanel15.SuspendLayout();
             this.gbToolTip.SuspendLayout();
             this.tableLayoutPanel13.SuspendLayout();
+            this.gbDestinationDetection.SuspendLayout();
+            this.tableLayoutPanel14.SuspendLayout();
             this.gbLaguage.SuspendLayout();
             this.gbNodeColors.SuspendLayout();
             this.tableLayoutPanel11.SuspendLayout();
@@ -919,8 +926,9 @@ namespace KSPModAdmin.Core.Views
             // tabPageMisc
             // 
             this.tabPageMisc.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPageMisc.Controls.Add(this.gbDestinationDetection);
+            this.tabPageMisc.Controls.Add(this.grpAVCSupport);
             this.tabPageMisc.Controls.Add(this.gbToolTip);
+            this.tabPageMisc.Controls.Add(this.gbDestinationDetection);
             this.tabPageMisc.Controls.Add(this.gbLaguage);
             this.tabPageMisc.Controls.Add(this.gbNodeColors);
             this.tabPageMisc.Controls.Add(this.gpModConflictHandling);
@@ -931,82 +939,79 @@ namespace KSPModAdmin.Core.Views
             this.tabPageMisc.TabIndex = 2;
             this.tabPageMisc.Text = "Misc";
             // 
-            // gbDestinationDetection
+            // grpAVCSupport
             // 
-            this.gbDestinationDetection.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.grpAVCSupport.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbDestinationDetection.Controls.Add(this.tableLayoutPanel14);
-            this.gbDestinationDetection.Controls.Add(this.cbDDCopyToGameData);
-            this.gbDestinationDetection.Location = new System.Drawing.Point(0, 54);
-            this.gbDestinationDetection.Name = "gbDestinationDetection";
-            this.gbDestinationDetection.Size = new System.Drawing.Size(667, 69);
-            this.gbDestinationDetection.TabIndex = 32;
-            this.gbDestinationDetection.TabStop = false;
-            this.gbDestinationDetection.Text = "Destination detection:";
+            this.grpAVCSupport.Controls.Add(this.tableLayoutPanel15);
+            this.grpAVCSupport.Location = new System.Drawing.Point(0, 165);
+            this.grpAVCSupport.Name = "grpAVCSupport";
+            this.grpAVCSupport.Size = new System.Drawing.Size(667, 49);
+            this.grpAVCSupport.TabIndex = 3;
+            this.grpAVCSupport.TabStop = false;
+            this.grpAVCSupport.Text = "AVC version file support:";
             // 
-            // tableLayoutPanel14
+            // tableLayoutPanel15
             // 
-            this.tableLayoutPanel14.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel14.ColumnCount = 4;
-            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel14.Controls.Add(this.rbDDSmartDestDetection, 0, 0);
-            this.tableLayoutPanel14.Controls.Add(this.rbDDJustDump, 2, 0);
-            this.tableLayoutPanel14.Location = new System.Drawing.Point(9, 15);
-            this.tableLayoutPanel14.Name = "tableLayoutPanel14";
-            this.tableLayoutPanel14.RowCount = 1;
-            this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel14.Size = new System.Drawing.Size(652, 24);
-            this.tableLayoutPanel14.TabIndex = 2;
+            this.tableLayoutPanel15.ColumnCount = 6;
+            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel15.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel15.Controls.Add(this.cbAVCSupport, 0, 0);
+            this.tableLayoutPanel15.Controls.Add(this.cbAVCIgnoreURL, 4, 0);
+            this.tableLayoutPanel15.Controls.Add(this.cbAVCIgnoreName, 2, 0);
+            this.tableLayoutPanel15.Location = new System.Drawing.Point(6, 19);
+            this.tableLayoutPanel15.Name = "tableLayoutPanel15";
+            this.tableLayoutPanel15.RowCount = 1;
+            this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel15.Size = new System.Drawing.Size(655, 23);
+            this.tableLayoutPanel15.TabIndex = 1;
             // 
-            // rbDDSmartDestDetection
+            // cbAVCSupport
             // 
-            this.rbDDSmartDestDetection.AutoSize = true;
-            this.rbDDSmartDestDetection.Checked = true;
-            this.rbDDSmartDestDetection.Location = new System.Drawing.Point(3, 3);
-            this.rbDDSmartDestDetection.Name = "rbDDSmartDestDetection";
-            this.rbDDSmartDestDetection.Size = new System.Drawing.Size(229, 17);
-            this.rbDDSmartDestDetection.TabIndex = 1;
-            this.rbDDSmartDestDetection.TabStop = true;
-            this.rbDDSmartDestDetection.Text = "Smart destination detection (recommended)";
-            this.ttOptions.SetToolTip(this.rbDDSmartDestDetection, "KSP MA searches for a similar KSP folder structure in the mod archive\r\nand sets t" +
-        "he destination of the mod files accordingly.");
-            this.rbDDSmartDestDetection.UseVisualStyleBackColor = true;
-            this.rbDDSmartDestDetection.CheckedChanged += new System.EventHandler(this.rbDDSmartDestDetection_CheckedChanged);
+            this.cbAVCSupport.AutoSize = true;
+            this.cbAVCSupport.Checked = true;
+            this.cbAVCSupport.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbAVCSupport.Location = new System.Drawing.Point(3, 3);
+            this.cbAVCSupport.Name = "cbAVCSupport";
+            this.cbAVCSupport.Size = new System.Drawing.Size(65, 17);
+            this.cbAVCSupport.TabIndex = 0;
+            this.cbAVCSupport.Text = "On / Off";
+            this.ttOptions.SetToolTip(this.cbAVCSupport, "AVC version file support\r\nTurns the AVC version file support on or off.");
+            this.cbAVCSupport.UseVisualStyleBackColor = true;
+            this.cbAVCSupport.CheckedChanged += new System.EventHandler(this.cbAVCSupport_CheckedChanged);
             // 
-            // rbDDJustDump
+            // cbAVCIgnoreURL
             // 
-            this.rbDDJustDump.AutoSize = true;
-            this.rbDDJustDump.Location = new System.Drawing.Point(258, 3);
-            this.rbDDJustDump.Name = "rbDDJustDump";
-            this.rbDDJustDump.Size = new System.Drawing.Size(197, 17);
-            this.rbDDJustDump.TabIndex = 1;
-            this.rbDDJustDump.Text = "Just copy mod archive to GameData";
-            this.ttOptions.SetToolTip(this.rbDDJustDump, "The destination of the mod archive node will be set to GameData.\r\nNOTE: May cause" +
-        " problems with conflict detection!");
-            this.rbDDJustDump.UseVisualStyleBackColor = true;
+            this.cbAVCIgnoreURL.AutoSize = true;
+            this.cbAVCIgnoreURL.Location = new System.Drawing.Point(205, 3);
+            this.cbAVCIgnoreURL.Name = "cbAVCIgnoreURL";
+            this.cbAVCIgnoreURL.Size = new System.Drawing.Size(81, 17);
+            this.cbAVCIgnoreURL.TabIndex = 0;
+            this.cbAVCIgnoreURL.Text = "Ignore URL";
+            this.ttOptions.SetToolTip(this.cbAVCIgnoreURL, "Ignore URL\r\nIgnore the mod URL from the AVC version file during mod add.");
+            this.cbAVCIgnoreURL.UseVisualStyleBackColor = true;
             // 
-            // cbDDCopyToGameData
+            // cbAVCIgnoreName
             // 
-            this.cbDDCopyToGameData.AutoSize = true;
-            this.cbDDCopyToGameData.Location = new System.Drawing.Point(24, 42);
-            this.cbDDCopyToGameData.Name = "cbDDCopyToGameData";
-            this.cbDDCopyToGameData.Size = new System.Drawing.Size(161, 17);
-            this.cbDDCopyToGameData.TabIndex = 0;
-            this.cbDDCopyToGameData.Text = "Fallback to GameData folder";
-            this.ttOptions.SetToolTip(this.cbDDCopyToGameData, "If destination detection fails the destination of the mod archive node\r\nwill be s" +
-        "et to the GameData folder.\r\nNOTE: May cause problems with conflict detection!");
-            this.cbDDCopyToGameData.UseVisualStyleBackColor = true;
+            this.cbAVCIgnoreName.AutoSize = true;
+            this.cbAVCIgnoreName.Location = new System.Drawing.Point(94, 3);
+            this.cbAVCIgnoreName.Name = "cbAVCIgnoreName";
+            this.cbAVCIgnoreName.Size = new System.Drawing.Size(85, 17);
+            this.cbAVCIgnoreName.TabIndex = 0;
+            this.cbAVCIgnoreName.Text = "Ignore name";
+            this.ttOptions.SetToolTip(this.cbAVCIgnoreName, "Ignore name\r\nIgnore the mod name from the AVC version file during mod add.");
+            this.cbAVCIgnoreName.UseVisualStyleBackColor = true;
             // 
             // gbToolTip
             // 
             this.gbToolTip.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gbToolTip.Controls.Add(this.tableLayoutPanel13);
-            this.gbToolTip.Location = new System.Drawing.Point(0, 166);
+            this.gbToolTip.Location = new System.Drawing.Point(0, 215);
             this.gbToolTip.Name = "gbToolTip";
             this.gbToolTip.Size = new System.Drawing.Size(667, 45);
             this.gbToolTip.TabIndex = 5;
@@ -1124,6 +1129,76 @@ namespace KSPModAdmin.Core.Views
             this.tbToolTipDelay.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.tbToolTipDelay.TextChanged += new System.EventHandler(this.tbToolTipDelay_TextChanged);
             // 
+            // gbDestinationDetection
+            // 
+            this.gbDestinationDetection.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbDestinationDetection.Controls.Add(this.tableLayoutPanel14);
+            this.gbDestinationDetection.Controls.Add(this.cbDDCopyToGameData);
+            this.gbDestinationDetection.Location = new System.Drawing.Point(0, 54);
+            this.gbDestinationDetection.Name = "gbDestinationDetection";
+            this.gbDestinationDetection.Size = new System.Drawing.Size(667, 69);
+            this.gbDestinationDetection.TabIndex = 32;
+            this.gbDestinationDetection.TabStop = false;
+            this.gbDestinationDetection.Text = "Destination detection:";
+            // 
+            // tableLayoutPanel14
+            // 
+            this.tableLayoutPanel14.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel14.ColumnCount = 4;
+            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel14.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel14.Controls.Add(this.rbDDSmartDestDetection, 0, 0);
+            this.tableLayoutPanel14.Controls.Add(this.rbDDJustDump, 2, 0);
+            this.tableLayoutPanel14.Location = new System.Drawing.Point(9, 15);
+            this.tableLayoutPanel14.Name = "tableLayoutPanel14";
+            this.tableLayoutPanel14.RowCount = 1;
+            this.tableLayoutPanel14.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel14.Size = new System.Drawing.Size(652, 24);
+            this.tableLayoutPanel14.TabIndex = 2;
+            // 
+            // rbDDSmartDestDetection
+            // 
+            this.rbDDSmartDestDetection.AutoSize = true;
+            this.rbDDSmartDestDetection.Checked = true;
+            this.rbDDSmartDestDetection.Location = new System.Drawing.Point(3, 3);
+            this.rbDDSmartDestDetection.Name = "rbDDSmartDestDetection";
+            this.rbDDSmartDestDetection.Size = new System.Drawing.Size(229, 17);
+            this.rbDDSmartDestDetection.TabIndex = 1;
+            this.rbDDSmartDestDetection.TabStop = true;
+            this.rbDDSmartDestDetection.Text = "Smart destination detection (recommended)";
+            this.ttOptions.SetToolTip(this.rbDDSmartDestDetection, "KSP MA searches for a similar KSP folder structure in the mod archive\r\nand sets t" +
+        "he destination of the mod files accordingly.");
+            this.rbDDSmartDestDetection.UseVisualStyleBackColor = true;
+            this.rbDDSmartDestDetection.CheckedChanged += new System.EventHandler(this.rbDDSmartDestDetection_CheckedChanged);
+            // 
+            // rbDDJustDump
+            // 
+            this.rbDDJustDump.AutoSize = true;
+            this.rbDDJustDump.Location = new System.Drawing.Point(258, 3);
+            this.rbDDJustDump.Name = "rbDDJustDump";
+            this.rbDDJustDump.Size = new System.Drawing.Size(197, 17);
+            this.rbDDJustDump.TabIndex = 1;
+            this.rbDDJustDump.Text = "Just copy mod archive to GameData";
+            this.ttOptions.SetToolTip(this.rbDDJustDump, "The destination of the mod archive node will be set to GameData.\r\nNOTE: May cause" +
+        " problems with conflict detection!");
+            this.rbDDJustDump.UseVisualStyleBackColor = true;
+            // 
+            // cbDDCopyToGameData
+            // 
+            this.cbDDCopyToGameData.AutoSize = true;
+            this.cbDDCopyToGameData.Location = new System.Drawing.Point(24, 42);
+            this.cbDDCopyToGameData.Name = "cbDDCopyToGameData";
+            this.cbDDCopyToGameData.Size = new System.Drawing.Size(161, 17);
+            this.cbDDCopyToGameData.TabIndex = 0;
+            this.cbDDCopyToGameData.Text = "Fallback to GameData folder";
+            this.ttOptions.SetToolTip(this.cbDDCopyToGameData, "If destination detection fails the destination of the mod archive node\r\nwill be s" +
+        "et to the GameData folder.\r\nNOTE: May cause problems with conflict detection!");
+            this.cbDDCopyToGameData.UseVisualStyleBackColor = true;
+            // 
             // gbLaguage
             // 
             this.gbLaguage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -1158,9 +1233,9 @@ namespace KSPModAdmin.Core.Views
             this.gbNodeColors.Controls.Add(this.tableLayoutPanel8);
             this.gbNodeColors.Controls.Add(this.tableLayoutPanel7);
             this.gbNodeColors.Controls.Add(this.tableLayoutPanel6);
-            this.gbNodeColors.Location = new System.Drawing.Point(0, 212);
+            this.gbNodeColors.Location = new System.Drawing.Point(1, 261);
             this.gbNodeColors.Name = "gbNodeColors";
-            this.gbNodeColors.Size = new System.Drawing.Size(667, 268);
+            this.gbNodeColors.Size = new System.Drawing.Size(667, 216);
             this.gbNodeColors.TabIndex = 3;
             this.gbNodeColors.TabStop = false;
             this.gbNodeColors.Text = "ModSelection node colors:";
@@ -2046,7 +2121,7 @@ namespace KSPModAdmin.Core.Views
             this.gpModConflictHandling.Size = new System.Drawing.Size(667, 40);
             this.gpModConflictHandling.TabIndex = 2;
             this.gpModConflictHandling.TabStop = false;
-            this.gpModConflictHandling.Text = "Mod file conflict handling:";
+            this.gpModConflictHandling.Text = "Conflict detection:";
             // 
             // cbConflictDetectionOnOff
             // 
@@ -2105,13 +2180,16 @@ namespace KSPModAdmin.Core.Views
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.tabPageMisc.ResumeLayout(false);
+            this.grpAVCSupport.ResumeLayout(false);
+            this.tableLayoutPanel15.ResumeLayout(false);
+            this.tableLayoutPanel15.PerformLayout();
+            this.gbToolTip.ResumeLayout(false);
+            this.tableLayoutPanel13.ResumeLayout(false);
+            this.tableLayoutPanel13.PerformLayout();
             this.gbDestinationDetection.ResumeLayout(false);
             this.gbDestinationDetection.PerformLayout();
             this.tableLayoutPanel14.ResumeLayout(false);
             this.tableLayoutPanel14.PerformLayout();
-            this.gbToolTip.ResumeLayout(false);
-            this.tableLayoutPanel13.ResumeLayout(false);
-            this.tableLayoutPanel13.PerformLayout();
             this.gbLaguage.ResumeLayout(false);
             this.gbNodeColors.ResumeLayout(false);
             this.tableLayoutPanel11.ResumeLayout(false);
@@ -2269,5 +2347,10 @@ namespace KSPModAdmin.Core.Views
         private System.Windows.Forms.CheckBox cbDDCopyToGameData;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel14;
         private System.Windows.Forms.CheckBox cbNodColoringUpdatableMods;
+        internal System.Windows.Forms.GroupBox grpAVCSupport;
+        internal System.Windows.Forms.CheckBox cbAVCIgnoreURL;
+        internal System.Windows.Forms.CheckBox cbAVCIgnoreName;
+        internal System.Windows.Forms.CheckBox cbAVCSupport;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel15;
     }
 }

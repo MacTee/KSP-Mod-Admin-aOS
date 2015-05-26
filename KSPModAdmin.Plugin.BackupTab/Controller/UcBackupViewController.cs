@@ -10,6 +10,7 @@ using KSPModAdmin.Core;
 using KSPModAdmin.Core.Config;
 using KSPModAdmin.Core.Controller;
 using KSPModAdmin.Core.Utils;
+using KSPModAdmin.Core.Utils.Logging;
 using KSPModAdmin.Plugin.BackupTab.Model;
 using KSPModAdmin.Plugin.BackupTab.Views;
 using SharpCompress.Archive;
@@ -916,7 +917,7 @@ namespace KSPModAdmin.Plugin.BackupTab.Controller
                 string path = KSPPathHelper.GetPath(KSPPaths.KSPRoot);
                 if (!Directory.Exists(Path.Combine(path, directory)))
                 {
-                    string[] dirs = directory.Split('\\');
+                    string[] dirs = directory.Split(Path.DirectorySeparatorChar);
                     foreach (string dir in dirs)
                     {
                         path = Path.Combine(path, dir);
@@ -925,7 +926,10 @@ namespace KSPModAdmin.Plugin.BackupTab.Controller
                     }
                 }
             }
-            catch (Exception) { }
+            catch (Exception ex)
+            {
+                Log.AddErrorS("Error in UcBackupViewController.CreateNeededDir()", ex);
+            }
         }
 
         /// <summary>

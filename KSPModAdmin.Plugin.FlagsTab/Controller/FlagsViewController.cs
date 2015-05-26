@@ -17,7 +17,6 @@ using KSPModAdmin.Plugin.FlagsTab.Views;
 
 namespace KSPModAdmin.Plugin.FlagsTab.Controller
 {
-
     /// <summary>
     /// Controller class for the Translation view.
     /// </summary>
@@ -186,7 +185,7 @@ namespace KSPModAdmin.Plugin.FlagsTab.Controller
 
             AsyncTask<bool>.DoWork(() =>
                 {
-                    SearchDir4FlagsDirs(KSPPathHelper.GetPath(KSPPaths.KSPRoot));
+                    SearchDir4FlagsDirs(KSPPathHelper.GetPath(KSPPaths.GameData));
                     return true;
                 },
                 (bool result, Exception ex) =>

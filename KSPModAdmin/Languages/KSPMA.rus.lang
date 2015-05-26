@@ -284,10 +284,6 @@
   <Control Name="btnModOutdated" Value="">
     <ChildControl Name="btnModOutdated_ToolTip" Value="Выберите цвет для устаревших элементов модов." />
   </Control>
-  <Control Name="gpModConflictHandling" Value="Разрешение конфликтов модов:" />
-  <Control Name="cbConflictDetectionOnOff" Value="Обнаружение конфликтов">
-    <ChildControl Name="cbConflictDetectionOnOff_ToolTip" Value="Обнаружение конфликтов^Включает/выключает обнаружение конфликтов элементов модов." />
-  </Control>
   <Control Name="cbShowConflictSolver" Value="Показать диалог разрешения конфликтов">
     <ChildControl Name="cbShowConflictSolver_ToolTip" Value="Показать диалог разрешения конфликтов^Показывать диалог разрешения конфликтов после обнаружения конфликта." />
   </Control>
@@ -701,5 +697,22 @@
   <String Name="MSG_MOD_0_ARCHIVE_PATH_CHANGED_TO_1" Value="Archive path of mod &quot;{0}&quot; changed to &quot;{1}&quot;."/>
   <String Name="MSG_MOD_ARCHIVE_0_NOT_FOUND_MOD_1" Value="Mod archive &quot;{0}&quot; not found. Can't change archive path of mod &quot;{1}&quot;."/>
   <String Name="MSG_COPY_MOD_0_DESTINATION_FAILED" Value="Error! Copy destinations of mod &quot;{0}&quot; failed!"/>
+
+  <String Name="MSG_SCAN_ERROR_DURING_SCAN" Value="Error during Gamedata folder scan."/>
+
+  <Control Name="gpModConflictHandling" Value="Обнаружение конфликтов:" /> <!--Разрешение конфликтов модов:-->
+  <Control Name="cbConflictDetectionOnOff" Value="Вкл / Выкл"> <!--Обнаружение конфликтов-->
+    <ChildControl Name="cbConflictDetectionOnOff_ToolTip" Value="Обнаружение конфликтов^Включает/выключает обнаружение конфликтов элементов модов." />
+  </Control>
+  <Control Name="grpAVCSupport" Value="AVC version file support:"/>
+  <Control Name="cbAVCSupport" Value="Вкл / Выкл">
+    <ChildControl Name="cbAVCSupport_ToolTip" Value="AVC version file support^Turns the AVC version file support on or off."/>
+  </Control>
+  <Control Name="cbAVCIgnoreName" Value="Ignore name">
+    <ChildControl Name="cbAVCIgnoreName_ToolTip" Value="Ignore name^Ignore the mod name from the AVC version file during mod add."/>
+  </Control>
+  <Control Name="cbAVCIgnoreURL" Value="Ignore URL">
+    <ChildControl Name="cbAVCIgnoreURL_ToolTip" Value="Ignore URL^Ignore the mod URL from the AVC version file during mod add."/>
+  </Control>
   
 </Language>

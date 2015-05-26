@@ -157,16 +157,7 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
         public bool CheckForUpdates(ModInfo modInfo, ref ModInfo newModInfo)
         {
             newModInfo = GetModInfo(modInfo.ModURL);
-            if (modInfo.Version == null)
-            {
-                return true;
-            }
-            else if (!modInfo.Version.Equals(newModInfo.Version))
-            {
-                return true;
-            }
-
-            return false;
+            return (VersionComparer.CompareVersions(modInfo.Version, newModInfo.Version) == VersionComparer.Result.AisSmallerB);
         }
 
         /// <summary>
@@ -199,51 +190,6 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
         public string ReduceToPlainUrl(string url)
         {
             return url;
-        }
-
-
-        private DateTime GetDateTime(string dateString)
-        {
-            var dateParts = dateString.Split(new string[] { "-" }, StringSplitOptions.None);
-            return new DateTime(Convert.ToInt32(dateParts[0]), Convert.ToInt32(dateParts[2]), Convert.ToInt32(dateParts[1]));
-
-            ////int index = dateString.IndexOf(",") + 2;
-            ////dateString = dateString.Substring(index);
-            ////index = dateString.IndexOf(" ") + 1;
-            ////index = dateString.IndexOf(" ", index) + 1;
-            ////index = dateString.IndexOf(" ", index) + 1;
-            ////index = dateString.IndexOf(" ", index);
-            ////string date = dateString.Substring(0, index);
-            ////index = dateString.IndexOf("(");
-            ////string tempTimeZone = dateString.Substring(index).Substring(0);
-            ////index = tempTimeZone.IndexOf("-");
-            ////if (index < 0)
-            ////    index = tempTimeZone.IndexOf("+") + 1;
-            ////else
-            ////    index += 1;
-            ////string timeZone = tempTimeZone.Substring(0, index);
-            ////tempTimeZone = tempTimeZone.Substring(index);
-            ////index = tempTimeZone.IndexOf(":");
-            ////if (index < 2)
-            ////    timeZone += "0" + tempTimeZone;
-            ////else
-            ////    timeZone += tempTimeZone;
-
-            ////TimeZoneInfo curseZone = null;
-            ////foreach (TimeZoneInfo zone in TimeZoneInfo.GetSystemTimeZones())
-            ////{
-            ////    if (!zone.DisplayName.StartsWith(timeZone))
-            ////        continue;
-
-            ////    curseZone = zone;
-            ////    break;
-            ////}
-
-            ////DateTime myDate = DateTime.MinValue;
-            ////if (DateTime.TryParse(date, out myDate) && curseZone != null)
-            ////    return TimeZoneInfo.ConvertTime(myDate, curseZone, TimeZoneInfo.Local);
-            ////else
-            ////    return DateTime.MinValue;
         }
 
         private string GetDownloadURL(ModInfo modInfo)

@@ -108,14 +108,14 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
             Messenger.AddError("No download support for KSP Forum mods, update check only!");
             MessageBox.Show("No download support for KSP Forum mods, update check only!", Messages.MSG_TITLE_ATTENTION);
             return false;
-            //if (modInfo == null)
-            //    return false;
+            ////if (modInfo == null)
+            ////    return false;
 
-            //string downloadUrl = GetDownloadUrl(modInfo);
-            //modInfo.LocalPath = Path.Combine(OptionsController.DownloadPath, GetDownloadName(downloadUrl));
-            //Www.DownloadFile(downloadUrl, modInfo.LocalPath, downloadProgressHandler);
+            ////string downloadUrl = GetDownloadUrl(modInfo);
+            ////modInfo.LocalPath = Path.Combine(OptionsController.DownloadPath, GetDownloadName(downloadUrl));
+            ////Www.DownloadFile(downloadUrl, modInfo.LocalPath, downloadProgressHandler);
 
-            //return File.Exists(modInfo.LocalPath);
+            ////return File.Exists(modInfo.LocalPath);
         }
 
         /// <summary>
@@ -130,7 +130,7 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 
             int index = url.IndexOf("-");
             if (index > 0)
-                url = url.Substring(1, index).Replace(THREADS, "");
+                url = url.Substring(0, index);
 
             return url;
         }
@@ -142,7 +142,6 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 
             // To scrape the fields, now using HtmlAgilityPack and XPATH search strings.
             // Easy way to get XPATH search: use chrome, inspect element, highlight the needed data and right-click and copy XPATH
-
             modInfo.ProductID = GetProductID(modInfo.ModURL);
             modInfo.CreationDateAsDateTime = GetCreationDate(htmlDoc);
             modInfo.ChangeDateAsDateTime = GetChangeDate(htmlDoc);
@@ -184,7 +183,6 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
         private DateTime GetChangeDate(HtmlDocument htmlDoc)
         {
             // var latestRelease = htmlDoc.DocumentNode.SelectNodes("/html[1]/body[1]/div[2]/div[6]/ol[1]/li[1]/div[2]/div[2]/div[2]"); // don't works =/
-
             DateTime dt = DateTime.MinValue;
             try
             {
@@ -204,7 +202,7 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
                     content = content.Substring(content.IndexOf(lastEdited) + lastEdited.Length);
                     content = content.Substring(content.IndexOf(";") + 1);
                     content = content.Substring(0, content.IndexOf("<"));
-                    content = content.Replace("at", "").Replace("th", "").Replace("st", "").Replace("nd", "").Replace("rd", "").Trim();
+                    content = content.Replace("at", string.Empty).Replace("th", string.Empty).Replace("st", string.Empty).Replace("nd", string.Empty).Replace("rd", string.Empty).Trim();
                     DateTime.TryParse(content, out dt);
                 }
             }
@@ -220,7 +218,7 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
             HtmlNode creationDate = htmlDoc.DocumentNode.SelectSingleNode("/html[1]/body[1]/div[2]/div[6]/ol[1]/li/div[1]/span[1]/span/text()");
             DateTime dt = DateTime.MinValue;
             if (creationDate != null)
-                DateTime.TryParse(creationDate.OuterHtml.Replace(",&nbsp;", "").Replace("th", "").Replace("st", "").Replace("nd", "").Replace("rd", ""), out dt);
+                DateTime.TryParse(creationDate.OuterHtml.Replace(",&nbsp;", string.Empty).Replace("th", string.Empty).Replace("st", string.Empty).Replace("nd", string.Empty).Replace("rd", string.Empty), out dt);
             return dt;
         }
 
@@ -231,7 +229,7 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
             {
                 int index = modUrl.IndexOf("-");
                 if (index > 0)
-                    result = modUrl.Substring(1, index).Replace(THREADS, "");
+                    result = modUrl.Substring(1, index).Replace(THREADS, string.Empty);
                 else
                 {
                     index = modUrl.IndexOf(THREADS) + THREADS.Length + 1;

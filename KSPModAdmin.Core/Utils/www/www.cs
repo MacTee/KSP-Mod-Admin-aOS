@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
+using KSPModAdmin.Core.Utils.Logging;
 
 namespace KSPModAdmin.Core.Utils
 {
@@ -47,7 +48,8 @@ namespace KSPModAdmin.Core.Utils
             }
             catch (Exception ex)
             {
-                return ex.ToString();
+                Log.AddErrorS("Error in www.Load()", ex);
+                return string.Empty;
             }
         }
 
@@ -180,6 +182,7 @@ namespace KSPModAdmin.Core.Utils
                 catch (Exception ex)
                 {
                     Messenger.AddError(string.Format("Error while downloading \"{0}\"!", downloadURL), ex);
+                    fullpath = string.Empty;
                 }
                 finally
                 {

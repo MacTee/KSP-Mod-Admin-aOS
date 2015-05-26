@@ -4,6 +4,7 @@ using System.Management;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using KSPModAdmin.Core.Utils.Logging;
 
 namespace KSPModAdmin.Core.Utils
 {
@@ -169,8 +170,10 @@ namespace KSPModAdmin.Core.Utils
                     }
                 }
             }
-            catch (Exception) 
-            { }
+            catch (Exception ex) 
+            {
+                Log.AddErrorS("Error in ScreenHelper.GetResolutionsViaWMI()", ex);
+            }
 
             return resolutions;
         }

@@ -171,6 +171,9 @@ namespace KSPModAdmin.Core
         public const string FALLBACK = "FallBack";
         public const string TOOLTIPOPTIONS = "ToolTipOptions";
         public const string CONFLICTDETECTIONOPTIONS = "ConflictDetectionOptions";
+        public const string AVCSUPPORT = "AVCSupport";
+        public const string AVCIGNORENAME = "AVCIgnoreName";
+        public const string AVCIGNOREURL = "AVCIgnoreURL";
         public const string ONOFF = "OnOff";
         public const string DELAY = "Delay";
         public const string DISPLAYTIME = "DisplayTime";
