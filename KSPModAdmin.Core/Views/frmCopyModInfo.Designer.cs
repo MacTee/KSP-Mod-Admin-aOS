@@ -45,7 +45,7 @@
             this.btnCancel.Location = new System.Drawing.Point(262, 127);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(110, 25);
-            this.btnCancel.TabIndex = 3;
+            this.btnCancel.TabIndex = 5;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -60,7 +60,7 @@
             this.btnCopy.Location = new System.Drawing.Point(146, 127);
             this.btnCopy.Name = "btnCopy";
             this.btnCopy.Size = new System.Drawing.Size(110, 25);
-            this.btnCopy.TabIndex = 3;
+            this.btnCopy.TabIndex = 4;
             this.btnCopy.Text = "Copy";
             this.btnCopy.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCopy.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -73,7 +73,7 @@
             this.lblCopyModInfosModName.Location = new System.Drawing.Point(23, 21);
             this.lblCopyModInfosModName.Name = "lblCopyModInfosModName";
             this.lblCopyModInfosModName.Size = new System.Drawing.Size(122, 13);
-            this.lblCopyModInfosModName.TabIndex = 4;
+            this.lblCopyModInfosModName.TabIndex = 0;
             this.lblCopyModInfosModName.Text = "Copy the ModInfos from:";
             // 
             // tbSourceMod
@@ -84,7 +84,7 @@
             this.tbSourceMod.Name = "tbSourceMod";
             this.tbSourceMod.ReadOnly = true;
             this.tbSourceMod.Size = new System.Drawing.Size(329, 20);
-            this.tbSourceMod.TabIndex = 5;
+            this.tbSourceMod.TabIndex = 1;
             // 
             // lblCopyModInfosTo
             // 
@@ -92,7 +92,7 @@
             this.lblCopyModInfosTo.Location = new System.Drawing.Point(23, 69);
             this.lblCopyModInfosTo.Name = "lblCopyModInfosTo";
             this.lblCopyModInfosTo.Size = new System.Drawing.Size(23, 13);
-            this.lblCopyModInfosTo.TabIndex = 4;
+            this.lblCopyModInfosTo.TabIndex = 2;
             this.lblCopyModInfosTo.Text = "To:";
             // 
             // cbDestMod
@@ -105,7 +105,7 @@
             this.cbDestMod.Location = new System.Drawing.Point(26, 90);
             this.cbDestMod.Name = "cbDestMod";
             this.cbDestMod.Size = new System.Drawing.Size(329, 21);
-            this.cbDestMod.TabIndex = 6;
+            this.cbDestMod.TabIndex = 3;
             // 
             // frmCopyModInfo
             // 

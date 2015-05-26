@@ -121,10 +121,6 @@
     <Compile Include="Utils\Controls\TreeViewEx.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Utils\Misc\DDSImage.cs" />
-    <Compile Include="Utils\Misc\DDSImage2.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Utils\ModPackHandler.cs" />
     <Compile Include="Utils\SiteHandler\CurseForgeHandler.cs" />
     <Compile Include="Utils\SiteHandler\CurseHandler.cs" />
@@ -488,9 +484,6 @@
     <Compile Include="Utils\Misc\PluginLoader.cs" />
     <Compile Include="Utils\Misc\ScreenHelper.cs" />
     <Compile Include="Utils\Misc\VersionHelper.cs" />
-    <Compile Include="Utils\www\KSPForum.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Utils\www\www.cs" />
     <Compile Include="Utils\ModZipCreator.cs" />
     <Compile Include="Views\frmAddMod.cs">

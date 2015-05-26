@@ -28,14 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ucTranslationView1 = new Plugin.Translation.ucTranslationView();
+            this.ucTranslationView1 = new KSPModAdmin.Plugin.Translation.ucTranslationView();
             this.SuspendLayout();
             // 
             // ucTranslationView1
             // 
             this.ucTranslationView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ucTranslationView1.LanguageFileContent = null;
             this.ucTranslationView1.Location = new System.Drawing.Point(0, 0);
+            this.ucTranslationView1.MinimumSize = new System.Drawing.Size(450, 400);
             this.ucTranslationView1.Name = "ucTranslationView1";
             this.ucTranslationView1.Size = new System.Drawing.Size(687, 471);
             this.ucTranslationView1.TabIndex = 0;

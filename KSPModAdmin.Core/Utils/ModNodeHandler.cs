@@ -178,6 +178,7 @@ namespace KSPModAdmin.Core.Utils
                 AVCInfo newAvcInfo = null;
                 try
                 {
+                    // Get newest AVC informations for this mod.
                     newAvcInfo = AVCParser.ReadFromWeb(avcInfo.Url);
                 }
                 catch (Exception ex)
@@ -520,7 +521,7 @@ namespace KSPModAdmin.Core.Utils
         public static bool TryCopyDestToMatchingNodes(ICopyModInfo outdatedMod, ModNode newMod)
         {
             // Get all files with destination.
-            List<ICopyModInfo> outdatedFileNodes = outdatedMod.GetAllFileNodes();
+            List<ICopyModInfo> outdatedFileNodes = outdatedMod.GetAllFileNodesAsICopyModInfo();
             if (outdatedFileNodes.Count == 0)
                 return false;
 

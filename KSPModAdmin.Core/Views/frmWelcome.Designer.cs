@@ -65,7 +65,7 @@
             this.btnFinish.Location = new System.Drawing.Point(298, 238);
             this.btnFinish.Name = "btnFinish";
             this.btnFinish.Size = new System.Drawing.Size(93, 23);
-            this.btnFinish.TabIndex = 1;
+            this.btnFinish.TabIndex = 8;
             this.btnFinish.Text = "Finish";
             this.ttWelcome.SetToolTip(this.btnFinish, "Finish configuration and go to KSP Mod Admin.");
             this.btnFinish.UseVisualStyleBackColor = true;
@@ -79,7 +79,7 @@
             this.tbKSPPath.Name = "tbKSPPath";
             this.tbKSPPath.ReadOnly = true;
             this.tbKSPPath.Size = new System.Drawing.Size(475, 20);
-            this.tbKSPPath.TabIndex = 8;
+            this.tbKSPPath.TabIndex = 6;
             this.tbKSPPath.TabStop = false;
             // 
             // lblWelcomeAuthor
@@ -88,7 +88,7 @@
             this.lblWelcomeAuthor.Location = new System.Drawing.Point(188, 0);
             this.lblWelcomeAuthor.Name = "lblWelcomeAuthor";
             this.lblWelcomeAuthor.Size = new System.Drawing.Size(98, 13);
-            this.lblWelcomeAuthor.TabIndex = 6;
+            this.lblWelcomeAuthor.TabIndex = 0;
             this.lblWelcomeAuthor.Text = "by Bastian Heinrich";
             // 
             // lblWelcomeStep1
@@ -99,7 +99,7 @@
             this.lblWelcomeStep1.Location = new System.Drawing.Point(118, 3);
             this.lblWelcomeStep1.Name = "lblWelcomeStep1";
             this.lblWelcomeStep1.Size = new System.Drawing.Size(239, 17);
-            this.lblWelcomeStep1.TabIndex = 7;
+            this.lblWelcomeStep1.TabIndex = 0;
             this.lblWelcomeStep1.Text = "Please select your KSP install folder.";
             // 
             // lblWelcomeTitle
@@ -109,7 +109,7 @@
             this.lblWelcomeTitle.Location = new System.Drawing.Point(98, 0);
             this.lblWelcomeTitle.Name = "lblWelcomeTitle";
             this.lblWelcomeTitle.Size = new System.Drawing.Size(279, 24);
-            this.lblWelcomeTitle.TabIndex = 5;
+            this.lblWelcomeTitle.TabIndex = 0;
             this.lblWelcomeTitle.Text = "Welcome to KSP Mod Admin";
             // 
             // lblWelcomeNote
@@ -129,7 +129,7 @@
             this.btnExit.Location = new System.Drawing.Point(397, 238);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(93, 23);
-            this.btnExit.TabIndex = 2;
+            this.btnExit.TabIndex = 9;
             this.btnExit.Text = "Exit";
             this.ttWelcome.SetToolTip(this.btnExit, "Exit KSP Mod Admin.");
             this.btnExit.UseVisualStyleBackColor = true;
@@ -143,7 +143,7 @@
             this.btnSelectFolder.Location = new System.Drawing.Point(170, 3);
             this.btnSelectFolder.Name = "btnSelectFolder";
             this.btnSelectFolder.Size = new System.Drawing.Size(134, 23);
-            this.btnSelectFolder.TabIndex = 4;
+            this.btnSelectFolder.TabIndex = 0;
             this.btnSelectFolder.Text = "Select folder";
             this.btnSelectFolder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.ttWelcome.SetToolTip(this.btnSelectFolder, "Opens the folder select dialog, to select a KSP install folder.");
@@ -158,7 +158,7 @@
             this.lblWelcomeSelectLanguages.Location = new System.Drawing.Point(106, 4);
             this.lblWelcomeSelectLanguages.Name = "lblWelcomeSelectLanguages";
             this.lblWelcomeSelectLanguages.Size = new System.Drawing.Size(263, 17);
-            this.lblWelcomeSelectLanguages.TabIndex = 9;
+            this.lblWelcomeSelectLanguages.TabIndex = 0;
             this.lblWelcomeSelectLanguages.Text = "Please choose your preferred language.";
             // 
             // cbWelcomeLanguages
@@ -168,7 +168,7 @@
             this.cbWelcomeLanguages.Location = new System.Drawing.Point(160, 3);
             this.cbWelcomeLanguages.Name = "cbWelcomeLanguages";
             this.cbWelcomeLanguages.Size = new System.Drawing.Size(154, 21);
-            this.cbWelcomeLanguages.TabIndex = 10;
+            this.cbWelcomeLanguages.TabIndex = 0;
             this.cbWelcomeLanguages.SelectedIndexChanged += new System.EventHandler(this.cbWelcomeLanguages_SelectedIndexChanged);
             // 
             // tableLayoutPanel1
@@ -185,7 +185,7 @@
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(475, 24);
-            this.tableLayoutPanel1.TabIndex = 11;
+            this.tableLayoutPanel1.TabIndex = 0;
             // 
             // tableLayoutPanel2
             // 
@@ -201,7 +201,7 @@
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(475, 17);
-            this.tableLayoutPanel2.TabIndex = 12;
+            this.tableLayoutPanel2.TabIndex = 1;
             // 
             // tableLayoutPanel3
             // 
@@ -217,7 +217,7 @@
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(475, 21);
-            this.tableLayoutPanel3.TabIndex = 13;
+            this.tableLayoutPanel3.TabIndex = 2;
             // 
             // tableLayoutPanel4
             // 
@@ -233,7 +233,7 @@
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel4.Size = new System.Drawing.Size(475, 26);
-            this.tableLayoutPanel4.TabIndex = 14;
+            this.tableLayoutPanel4.TabIndex = 3;
             // 
             // tableLayoutPanel5
             // 
@@ -249,7 +249,7 @@
             this.tableLayoutPanel5.RowCount = 1;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel5.Size = new System.Drawing.Size(475, 20);
-            this.tableLayoutPanel5.TabIndex = 15;
+            this.tableLayoutPanel5.TabIndex = 4;
             // 
             // tableLayoutPanel6
             // 
@@ -265,7 +265,7 @@
             this.tableLayoutPanel6.RowCount = 1;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel6.Size = new System.Drawing.Size(475, 29);
-            this.tableLayoutPanel6.TabIndex = 16;
+            this.tableLayoutPanel6.TabIndex = 5;
             // 
             // pictureBox1
             // 
