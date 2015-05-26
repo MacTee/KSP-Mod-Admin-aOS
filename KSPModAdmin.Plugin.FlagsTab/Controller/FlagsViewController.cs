@@ -17,7 +17,6 @@ using KSPModAdmin.Plugin.FlagsTab.Views;
 
 namespace KSPModAdmin.Plugin.FlagsTab.Controller
 {
-
     /// <summary>
     /// Controller class for the Translation view.
     /// </summary>

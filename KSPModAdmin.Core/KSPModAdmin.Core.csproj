@@ -484,6 +484,7 @@
     <Compile Include="Utils\Misc\PluginLoader.cs" />
     <Compile Include="Utils\Misc\ScreenHelper.cs" />
     <Compile Include="Utils\Misc\VersionHelper.cs" />
+    <Compile Include="Utils\Misc\VersionComparer.cs" />
     <Compile Include="Utils\www\www.cs" />
     <Compile Include="Utils\ModZipCreator.cs" />
     <Compile Include="Views\frmAddMod.cs">
