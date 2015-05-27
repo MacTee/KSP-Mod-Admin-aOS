@@ -48,14 +48,9 @@
 - ContextMenus for BackupTab and FlagsTab.
 
 - AVC Plugin version file support
-  - igrnoe option -> so infos won't be imported.
   - Bug fix see BUGS above.
   
 - ReadMe
-
-- is everything Async ???
-
-- Control rearrangement for localization
 
 - Restart destination detection.
 
