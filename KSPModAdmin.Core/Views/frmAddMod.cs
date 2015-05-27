@@ -40,6 +40,7 @@ namespace KSPModAdmin.Core.Views
             btnFolderSearch.Enabled = false;
             cbInstallAfterAdd.Enabled = false;
             picLoading.Visible = true;
+            progressBar1.Visible = true;
             ModSelectionController.View.ShowBusy = true;
 
             string modPath = tbModPath.Text;
@@ -64,9 +65,9 @@ namespace KSPModAdmin.Core.Views
                         return false;
 
                     Messenger.AddInfo(Messages.MSG_URL_DETECTED_STARTING_DOWNLOAD);
-                    newMod = handler.HandleAdd(modPath, tbModName.Text, cbInstallAfterAdd.Checked);
+                    newMod = handler.HandleAdd(modPath, tbModName.Text, cbInstallAfterAdd.Checked, UpdateProgressBar);
                 }
-                                    
+
                 else if (ValidModPath(modPath))
                     newMod = ModSelectionController.HandleModAddViaPath(modPath, tbModName.Text, cbInstallAfterAdd.Checked);
 
@@ -93,6 +94,7 @@ namespace KSPModAdmin.Core.Views
                 btnFolderSearch.Enabled = true;
                 cbInstallAfterAdd.Enabled = true;
                 picLoading.Visible = false;
+                progressBar1.Visible = false;
                 ModSelectionController.View.ShowBusy = false;
 
                 if (success && sender == btnAddAndClose)
@@ -138,6 +140,20 @@ namespace KSPModAdmin.Core.Views
             return ((ext == Constants.EXT_ZIP || ext == Constants.EXT_RAR ||
                      ext == Constants.EXT_7ZIP || ext == Constants.EXT_CRAFT) && 
                      File.Exists(tbModPath.Text));
+        }
+
+        private void UpdateProgressBar(long bytesReceived, long fileSize)
+        {
+            InvokeIfRequired(() =>
+                {
+                    int res = (int)(bytesReceived / 1000);
+                    int max = (int)(fileSize / 1000);
+                    progressBar1.Minimum = 0;
+                    if (max > progressBar1.Minimum)
+                        progressBar1.Maximum = max;
+                    if (res >= progressBar1.Minimum && res <= progressBar1.Maximum)
+                        progressBar1.Value = res;
+                });
         }
     }
 }

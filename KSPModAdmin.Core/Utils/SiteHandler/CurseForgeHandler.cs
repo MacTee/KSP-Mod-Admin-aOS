@@ -39,9 +39,9 @@ namespace KSPModAdmin.Core.Utils
         /// <param name="url">The URL to the mod.</param>
         /// <param name="modName">The name for the mod.</param>
         /// <param name="install">Flag to determine if the mod should be installed after adding.</param>
-        /// <param name="downloadProgressHandler">Callback function for download progress.</param>
+        /// <param name="downloadProgressCallback">Callback function for download progress.</param>
         /// <returns>The root node of the added mod, or null.</returns>
-        public ModNode HandleAdd(string url, string modName, bool install, DownloadProgressChangedEventHandler downloadProgressHandler = null)
+        public ModNode HandleAdd(string url, string modName, bool install, DownloadProgressCallback downloadProgressCallback = null)
         {
             url = ReduceToPlainUrl(url);
 
@@ -53,7 +53,7 @@ namespace KSPModAdmin.Core.Utils
                 modInfo.Name = modName;
 
             ModNode newMod = null;
-            if (DownloadMod(ref modInfo, downloadProgressHandler))
+            if (DownloadMod(ref modInfo, downloadProgressCallback))
                 newMod = ModSelectionController.HandleModAddViaModInfo(modInfo, install);
 
             return newMod;
@@ -94,9 +94,9 @@ namespace KSPModAdmin.Core.Utils
         /// Downloads the mod.
         /// </summary>
         /// <param name="modInfo">The infos of the mod. Must have at least ModURL and LocalPath</param>
-        /// <param name="downloadProgressHandler">Callback function for download progress.</param>
+        /// <param name="downloadProgressCallback">Callback function for download progress.</param>
         /// <returns>True if the mod was downloaded.</returns>
-        public bool DownloadMod(ref ModInfo modInfo, DownloadProgressChangedEventHandler downloadProgressHandler = null)
+        public bool DownloadMod(ref ModInfo modInfo, DownloadProgressCallback downloadProgressCallback = null)
         {
             if (modInfo == null)
                 return false;
@@ -112,7 +112,7 @@ namespace KSPModAdmin.Core.Utils
             string downloadURL = GetDownloadURL(modInfo.ModURL);
             if (fileNode == null || (fileNode.InnerHtml.Contains("...") && fileNode2 == null))
             {
-                modInfo.LocalPath = Www.DownloadFile2(downloadURL, OptionsController.DownloadPath);
+                modInfo.LocalPath = Www.DownloadFile2(downloadURL, OptionsController.DownloadPath, downloadProgressCallback);
                 return !string.IsNullOrEmpty(modInfo.LocalPath) && File.Exists(modInfo.LocalPath);
             }
 
@@ -124,7 +124,7 @@ namespace KSPModAdmin.Core.Utils
 
             modInfo.LocalPath = Path.Combine(OptionsController.DownloadPath, filename);
 
-            Www.DownloadFile(downloadURL, modInfo.LocalPath, downloadProgressHandler);
+            Www.DownloadFile(downloadURL, modInfo.LocalPath, downloadProgressCallback);
 
             return File.Exists(modInfo.LocalPath);
         }

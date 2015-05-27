@@ -35,9 +35,9 @@ namespace KSPModAdmin.Core.Utils
         /// <param name="url">The URL to the mod.</param>
         /// <param name="modName">The name for the mod.</param>
         /// <param name="install">Flag to determine if the mod should be installed after adding.</param>
-        /// <param name="downloadProgressHandler">Callback function for download progress.</param>
+        /// <param name="downloadProgressCallback">Callback function for download progress.</param>
         /// <returns>The root node of the added mod, or null.</returns>
-        ModNode HandleAdd(string url, string modName, bool install, DownloadProgressChangedEventHandler downloadProgressHandler = null);
+        ModNode HandleAdd(string url, string modName, bool install, DownloadProgressCallback downloadProgressCallback = null);
 
         /// <summary>
         /// Checks if updates are available for the passed mod.
@@ -51,9 +51,9 @@ namespace KSPModAdmin.Core.Utils
         /// Downloads the mod.
         /// </summary>
         /// <param name="modInfo">The infos of the mod. Must have at least ModURL and LocalPath</param>
-        /// <param name="downloadProgressHandler">Callback function for download progress.</param>
+        /// <param name="downloadProgressCallback">Callback function for download progress.</param>
         /// <returns>True if the mod was downloaded.</returns>
-        bool DownloadMod(ref ModInfo modInfo, DownloadProgressChangedEventHandler downloadProgressHandler = null);
+        bool DownloadMod(ref ModInfo modInfo, DownloadProgressCallback downloadProgressCallback = null);
 
         /// <summary>
         /// Returns the plain url to the mod, where the ModInfos would be get from.
