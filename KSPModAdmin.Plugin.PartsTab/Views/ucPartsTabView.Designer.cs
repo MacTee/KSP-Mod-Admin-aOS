@@ -37,14 +37,18 @@
             this.cbCategoryFilter = new System.Windows.Forms.ComboBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsbPartsRefresh = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbPartsRemove = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbPartsEdit = new System.Windows.Forms.ToolStripButton();
             this.tsbPartsChangeCategory = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbProcessing = new System.Windows.Forms.ToolStripButton();
             this.treeViewAdv1 = new KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.TreeViewAdv();
+            this.gbPartsFilter = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.toolStrip1.SuspendLayout();
+            this.gbPartsFilter.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblCount
@@ -60,20 +64,24 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(5, 64);
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Location = new System.Drawing.Point(232, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 13);
+            this.label1.Size = new System.Drawing.Size(31, 27);
             this.label1.TabIndex = 23;
-            this.label1.Text = "Mod filter:";
+            this.label1.Text = "Mod:";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // lblBuildingFilter
             // 
             this.lblBuildingFilter.AutoSize = true;
-            this.lblBuildingFilter.Location = new System.Drawing.Point(5, 37);
+            this.lblBuildingFilter.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblBuildingFilter.Location = new System.Drawing.Point(3, 0);
             this.lblBuildingFilter.Name = "lblBuildingFilter";
-            this.lblBuildingFilter.Size = new System.Drawing.Size(74, 13);
+            this.lblBuildingFilter.Size = new System.Drawing.Size(52, 27);
             this.lblBuildingFilter.TabIndex = 24;
-            this.lblBuildingFilter.Text = "Category filter:";
+            this.lblBuildingFilter.Text = "Category:";
+            this.lblBuildingFilter.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // cbModFilter
             // 
@@ -84,9 +92,9 @@
             this.cbModFilter.Items.AddRange(new object[] {
             "All",
             "Squad"});
-            this.cbModFilter.Location = new System.Drawing.Point(85, 61);
+            this.cbModFilter.Location = new System.Drawing.Point(269, 3);
             this.cbModFilter.Name = "cbModFilter";
-            this.cbModFilter.Size = new System.Drawing.Size(348, 21);
+            this.cbModFilter.Size = new System.Drawing.Size(160, 21);
             this.cbModFilter.TabIndex = 21;
             // 
             // cbCategoryFilter
@@ -104,9 +112,9 @@
             "Aero",
             "Utility",
             "Science"});
-            this.cbCategoryFilter.Location = new System.Drawing.Point(85, 34);
+            this.cbCategoryFilter.Location = new System.Drawing.Point(61, 3);
             this.cbCategoryFilter.Name = "cbCategoryFilter";
-            this.cbCategoryFilter.Size = new System.Drawing.Size(348, 21);
+            this.cbCategoryFilter.Size = new System.Drawing.Size(160, 21);
             this.cbCategoryFilter.TabIndex = 22;
             // 
             // toolStrip1
@@ -135,6 +143,11 @@
             this.tsbPartsRefresh.Size = new System.Drawing.Size(28, 28);
             this.tsbPartsRefresh.Text = "toolStripButton1";
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 31);
+            // 
             // tsbPartsRemove
             // 
             this.tsbPartsRemove.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -144,6 +157,11 @@
             this.tsbPartsRemove.Name = "tsbPartsRemove";
             this.tsbPartsRemove.Size = new System.Drawing.Size(28, 28);
             this.tsbPartsRemove.Text = "toolStripButton2";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 31);
             // 
             // tsbPartsEdit
             // 
@@ -165,16 +183,6 @@
             this.tsbPartsChangeCategory.Size = new System.Drawing.Size(28, 28);
             this.tsbPartsChangeCategory.Text = "toolStripButton4";
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 31);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 31);
-            // 
             // tsbProcessing
             // 
             this.tsbProcessing.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -187,17 +195,53 @@
             // 
             // treeViewAdv1
             // 
+            this.treeViewAdv1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.treeViewAdv1.BackColor = System.Drawing.SystemColors.Window;
             this.treeViewAdv1.DefaultToolTipProvider = null;
             this.treeViewAdv1.DragDropMarkColor = System.Drawing.Color.Black;
             this.treeViewAdv1.LineColor = System.Drawing.SystemColors.ControlDark;
-            this.treeViewAdv1.Location = new System.Drawing.Point(0, 88);
+            this.treeViewAdv1.Location = new System.Drawing.Point(0, 87);
             this.treeViewAdv1.Model = null;
             this.treeViewAdv1.Name = "treeViewAdv1";
             this.treeViewAdv1.SelectedNode = null;
-            this.treeViewAdv1.Size = new System.Drawing.Size(450, 296);
+            this.treeViewAdv1.Size = new System.Drawing.Size(450, 297);
             this.treeViewAdv1.TabIndex = 28;
             this.treeViewAdv1.Text = "treeViewAdv1";
+            // 
+            // gbPartsFilter
+            // 
+            this.gbPartsFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbPartsFilter.Controls.Add(this.tableLayoutPanel1);
+            this.gbPartsFilter.Location = new System.Drawing.Point(3, 29);
+            this.gbPartsFilter.Name = "gbPartsFilter";
+            this.gbPartsFilter.Size = new System.Drawing.Size(444, 54);
+            this.gbPartsFilter.TabIndex = 29;
+            this.gbPartsFilter.TabStop = false;
+            this.gbPartsFilter.Text = "Filter:";
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.ColumnCount = 5;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.lblBuildingFilter, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.cbCategoryFilter, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label1, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.cbModFilter, 4, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 19);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(432, 27);
+            this.tableLayoutPanel1.TabIndex = 0;
             // 
             // ucPartsTabView
             // 
@@ -206,16 +250,16 @@
             this.Controls.Add(this.treeViewAdv1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.lblCount);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.lblBuildingFilter);
-            this.Controls.Add(this.cbModFilter);
-            this.Controls.Add(this.cbCategoryFilter);
+            this.Controls.Add(this.gbPartsFilter);
             this.MinimumSize = new System.Drawing.Size(450, 400);
             this.Name = "ucPartsTabView";
             this.Size = new System.Drawing.Size(450, 400);
             this.Load += new System.EventHandler(this.ucPluginView_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.gbPartsFilter.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -238,5 +282,7 @@
         private System.Windows.Forms.ToolStripButton tsbPartsChangeCategory;
         private System.Windows.Forms.ToolStripButton tsbProcessing;
         private Core.Utils.Controls.Aga.Controls.Tree.TreeViewAdv treeViewAdv1;
+        private System.Windows.Forms.GroupBox gbPartsFilter;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }
