@@ -75,6 +75,9 @@
     <Control Name="tsbCreateZip" Value="toolStripButton14">
       <ChildControl Name="tsbCreateZip_ToolTip" Value="Создать Zip-архив^Создаёт новый zip-архив с модом." />
     </Control>
+	<Control Name="tsbRelocateArchivePath" Value="toolStripButton1">
+      <ChildControl Name="tsbRelocateArchivePath_ToolTip" Value="Измените путь к архиву^Изменить место хранения архива мода молнии."/>
+    </Control>
   </Control>
   <Control Name="lvModSelection" Value="">
     <ChildControl Name="lvModSelection_Column_1" Value="" />
