@@ -108,6 +108,30 @@
   <ItemGroup>
     <None Include="Resources\help2.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\loader.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\brick_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\brick_delete_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\brick_edit_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\brick_folder_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bricks_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bricks.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy /E /Y /R /I "$(ProjectDir)Languages" "$(SolutionDir)KSPModAdmin\$(OutDir)lang"</PostBuildEvent>

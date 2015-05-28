@@ -19,7 +19,7 @@ namespace KSPModAdmin.Plugin.PartsTab
         /// <summary>
         /// Name of the plugin.
         /// </summary>
-        public string Name { get { return "Generic Plugin"; } }
+        public string Name { get { return "PartsTab"; } }
 
         /// <summary>
         /// Description of the plugin.
@@ -28,7 +28,7 @@ namespace KSPModAdmin.Plugin.PartsTab
         {
             get
             {
-                return "This Plugin adds a tab to [insert purpose here].";
+                return "This Plugin adds a tab to manage the parts of the chosen KSP install path.";
             }
         }
 
@@ -40,7 +40,7 @@ namespace KSPModAdmin.Plugin.PartsTab
             get
             {
                 if (mMainTabViews == null)
-                    mMainTabViews = new[] { new TabView(new ucPartsTabView(), Resources.Unknown) };
+                    mMainTabViews = new[] { new TabView(new ucPartsTabView(), Resources.bricks) };
 
                 return mMainTabViews;
             }
