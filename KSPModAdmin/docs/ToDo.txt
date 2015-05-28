@@ -71,8 +71,6 @@
   
 - Search in ModSelection.
 
-- Center CheckBoxes in TreeViewAdv.
-
 - Implementation of a waffle iron !!! =)
 
 
