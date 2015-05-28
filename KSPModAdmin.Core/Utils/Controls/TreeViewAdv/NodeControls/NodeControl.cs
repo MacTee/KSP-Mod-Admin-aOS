@@ -62,7 +62,20 @@ namespace KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.NodeControls
 				if (_parent != null)
 					_parent.FullUpdate();
 			}
-		}
+        }
+
+        private HorizontalAlignment _horizontalAlign = HorizontalAlignment.Left;
+        [DefaultValue(HorizontalAlignment.Left)]
+        public HorizontalAlignment HorizontalAlign
+        {
+            get { return _horizontalAlign; }
+            set
+            {
+                _horizontalAlign = value;
+                if (_parent != null)
+                    _parent.FullUpdate();
+            }
+        }
 
 		private int _leftMargin = 0;
 		public int LeftMargin
@@ -90,15 +103,40 @@ namespace KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.NodeControls
 			Rectangle r = context.Bounds;
 			Size s = GetActualSize(node, context);
 			Size bs = new Size(r.Width - LeftMargin, Math.Min(r.Height, s.Height));
+
+		    Rectangle rect = Rectangle.Empty;
 			switch (VerticalAlign)
 			{
 				case VerticalAlignment.Top:
-					return new Rectangle(new Point(r.X + LeftMargin, r.Y), bs);
+                    rect = new Rectangle(new Point(r.X + LeftMargin, r.Y), bs);
+			        break;
 				case VerticalAlignment.Bottom:
-					return new Rectangle(new Point(r.X + LeftMargin, r.Bottom - s.Height), bs);
-				default:
-					return new Rectangle(new Point(r.X + LeftMargin, r.Y + (r.Height - s.Height) / 2), bs);
-			}
+                    rect = new Rectangle(new Point(r.X + LeftMargin, r.Bottom - s.Height), bs);
+                    break;
+                default:
+                    rect = new Rectangle(new Point(r.X + LeftMargin, r.Y + (r.Height - s.Height) / 2), bs);
+                    break;
+            }
+		    switch (HorizontalAlign)
+		    {
+		        case HorizontalAlignment.Center:
+            		int newWidth = bs.Width - s.Width;
+		            if (newWidth > 1)
+		            {
+                        int deltaToCenter = newWidth / 2;
+		                rect = new Rectangle(new Point(r.X + deltaToCenter, rect.Y), new Size(bs.Width, bs.Height));
+		            }
+		            break;
+		        case HorizontalAlignment.Right:
+                    int deltaToRight = bs.Width - s.Width;
+		            rect = new Rectangle(new Point(r.X + deltaToRight, rect.Y), new Size(bs.Width, bs.Height));
+		            break;
+		        default:
+		            rect = new Rectangle(new Point(r.X, rect.Y), new Size(bs.Width, bs.Height));
+		            break;
+		    }
+
+		    return rect;
 		}
 
 		protected void CheckThread()

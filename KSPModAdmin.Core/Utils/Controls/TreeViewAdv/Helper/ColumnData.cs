@@ -41,6 +41,7 @@ namespace KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.Helper
         public bool EditEnabled { get; set; }
         public bool IncrementalSearchEnabled { get; set; }
         public int LeftMargin { get; set; }
+        public HorizontalAlignment HorizontalAlign { get; set; }
         public ImageScaleMode ImageScaleMode { get; set; }
 
         public ColumnItemData()
@@ -50,6 +51,7 @@ namespace KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.Helper
             EditEnabled = false;
             IncrementalSearchEnabled = false;
             LeftMargin = 0;
+            HorizontalAlign = HorizontalAlignment.Left;
             ImageScaleMode = ImageScaleMode.Clip;
         }
     }

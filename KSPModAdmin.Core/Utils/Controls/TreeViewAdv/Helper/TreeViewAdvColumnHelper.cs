@@ -174,6 +174,7 @@ namespace KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.Helper
                             nodeCheckBox.DataPropertyName = columnItem.DataPropertyName;
                             nodeCheckBox.EditEnabled = columnItem.EditEnabled;
                             nodeCheckBox.LeftMargin = columnItem.LeftMargin;
+                            nodeCheckBox.HorizontalAlign = columnItem.HorizontalAlign;
                             nodeCheckBox.ParentColumn = treeColumn;
                             treeViewAdv.NodeControls.Add(nodeCheckBox);
                             break;
@@ -182,6 +183,7 @@ namespace KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.Helper
                             NodeIcon nodeIcon = new NodeIcon();
                             nodeIcon.DataPropertyName = columnItem.DataPropertyName;
                             nodeIcon.LeftMargin = columnItem.LeftMargin;
+                            nodeIcon.HorizontalAlign = columnItem.HorizontalAlign;
                             nodeIcon.ScaleMode = columnItem.ImageScaleMode;
                             nodeIcon.ParentColumn = treeColumn;
                             treeViewAdv.NodeControls.Add(nodeIcon);
