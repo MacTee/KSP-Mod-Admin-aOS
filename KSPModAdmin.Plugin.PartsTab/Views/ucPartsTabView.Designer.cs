@@ -42,10 +42,10 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbPartsEdit = new System.Windows.Forms.ToolStripButton();
             this.tsbPartsChangeCategory = new System.Windows.Forms.ToolStripButton();
-            this.tsbProcessing = new System.Windows.Forms.ToolStripButton();
-            this.treeViewAdv1 = new KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.TreeViewAdv();
+            this.tvParts = new KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.TreeViewAdv();
             this.gbPartsFilter = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tslPartsProcessing = new System.Windows.Forms.ToolStripLabel();
             this.toolStrip1.SuspendLayout();
             this.gbPartsFilter.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -126,7 +126,7 @@
             this.toolStripSeparator2,
             this.tsbPartsEdit,
             this.tsbPartsChangeCategory,
-            this.tsbProcessing});
+            this.tslPartsProcessing});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(450, 31);
@@ -142,6 +142,7 @@
             this.tsbPartsRefresh.Name = "tsbPartsRefresh";
             this.tsbPartsRefresh.Size = new System.Drawing.Size(28, 28);
             this.tsbPartsRefresh.Text = "toolStripButton1";
+            this.tsbPartsRefresh.Click += new System.EventHandler(this.tsbPartsRefresh_Click);
             // 
             // toolStripSeparator1
             // 
@@ -151,12 +152,14 @@
             // tsbPartsRemove
             // 
             this.tsbPartsRemove.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbPartsRemove.Enabled = false;
             this.tsbPartsRemove.Image = global::KSPModAdmin.Plugin.PartsTab.Properties.Resources.brick_delete_24x24;
             this.tsbPartsRemove.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbPartsRemove.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbPartsRemove.Name = "tsbPartsRemove";
             this.tsbPartsRemove.Size = new System.Drawing.Size(28, 28);
             this.tsbPartsRemove.Text = "toolStripButton2";
+            this.tsbPartsRemove.Click += new System.EventHandler(this.tsbPartsRemove_Click);
             // 
             // toolStripSeparator2
             // 
@@ -166,49 +169,45 @@
             // tsbPartsEdit
             // 
             this.tsbPartsEdit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbPartsEdit.Enabled = false;
             this.tsbPartsEdit.Image = global::KSPModAdmin.Plugin.PartsTab.Properties.Resources.brick_edit_24x24;
             this.tsbPartsEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbPartsEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbPartsEdit.Name = "tsbPartsEdit";
             this.tsbPartsEdit.Size = new System.Drawing.Size(28, 28);
             this.tsbPartsEdit.Text = "toolStripButton3";
+            this.tsbPartsEdit.Click += new System.EventHandler(this.tsbPartsEdit_Click);
             // 
             // tsbPartsChangeCategory
             // 
             this.tsbPartsChangeCategory.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbPartsChangeCategory.Enabled = false;
             this.tsbPartsChangeCategory.Image = global::KSPModAdmin.Plugin.PartsTab.Properties.Resources.brick_folder_24x24;
             this.tsbPartsChangeCategory.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbPartsChangeCategory.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbPartsChangeCategory.Name = "tsbPartsChangeCategory";
             this.tsbPartsChangeCategory.Size = new System.Drawing.Size(28, 28);
             this.tsbPartsChangeCategory.Text = "toolStripButton4";
+            this.tsbPartsChangeCategory.Click += new System.EventHandler(this.tsbPartsChangeCategory_Click);
             // 
-            // tsbProcessing
+            // tvParts
             // 
-            this.tsbProcessing.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.tsbProcessing.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbProcessing.Image = global::KSPModAdmin.Plugin.PartsTab.Properties.Resources.loader;
-            this.tsbProcessing.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbProcessing.Name = "tsbProcessing";
-            this.tsbProcessing.Size = new System.Drawing.Size(23, 28);
-            this.tsbProcessing.Text = "toolStripButton5";
-            // 
-            // treeViewAdv1
-            // 
-            this.treeViewAdv1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.tvParts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.treeViewAdv1.BackColor = System.Drawing.SystemColors.Window;
-            this.treeViewAdv1.DefaultToolTipProvider = null;
-            this.treeViewAdv1.DragDropMarkColor = System.Drawing.Color.Black;
-            this.treeViewAdv1.LineColor = System.Drawing.SystemColors.ControlDark;
-            this.treeViewAdv1.Location = new System.Drawing.Point(0, 87);
-            this.treeViewAdv1.Model = null;
-            this.treeViewAdv1.Name = "treeViewAdv1";
-            this.treeViewAdv1.SelectedNode = null;
-            this.treeViewAdv1.Size = new System.Drawing.Size(450, 297);
-            this.treeViewAdv1.TabIndex = 28;
-            this.treeViewAdv1.Text = "treeViewAdv1";
+            this.tvParts.BackColor = System.Drawing.SystemColors.Window;
+            this.tvParts.DefaultToolTipProvider = null;
+            this.tvParts.DragDropMarkColor = System.Drawing.Color.Black;
+            this.tvParts.LineColor = System.Drawing.SystemColors.ControlDark;
+            this.tvParts.Location = new System.Drawing.Point(0, 87);
+            this.tvParts.Model = null;
+            this.tvParts.Name = "tvParts";
+            this.tvParts.SelectedNode = null;
+            this.tvParts.Size = new System.Drawing.Size(450, 297);
+            this.tvParts.TabIndex = 28;
+            this.tvParts.Text = "treeViewAdv1";
+            this.tvParts.UseColumns = true;
+            this.tvParts.SelectionChanged += new System.EventHandler(this.tvParts_SelectionChanged);
             // 
             // gbPartsFilter
             // 
@@ -243,11 +242,21 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(432, 27);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
+            // tslPartsProcessing
+            // 
+            this.tslPartsProcessing.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tslPartsProcessing.Image = global::KSPModAdmin.Plugin.PartsTab.Properties.Resources.loader;
+            this.tslPartsProcessing.Name = "tslPartsProcessing";
+            this.tslPartsProcessing.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
+            this.tslPartsProcessing.Size = new System.Drawing.Size(16, 28);
+            this.tslPartsProcessing.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
+            this.tslPartsProcessing.Visible = false;
+            // 
             // ucPartsTabView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.treeViewAdv1);
+            this.Controls.Add(this.tvParts);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.lblCount);
             this.Controls.Add(this.gbPartsFilter);
@@ -280,9 +289,9 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton tsbPartsEdit;
         private System.Windows.Forms.ToolStripButton tsbPartsChangeCategory;
-        private System.Windows.Forms.ToolStripButton tsbProcessing;
-        private Core.Utils.Controls.Aga.Controls.Tree.TreeViewAdv treeViewAdv1;
+        private Core.Utils.Controls.Aga.Controls.Tree.TreeViewAdv tvParts;
         private System.Windows.Forms.GroupBox gbPartsFilter;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.ToolStripLabel tslPartsProcessing;
     }
 }
