@@ -101,30 +101,11 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
         public static void RefreshPartsTab()
         {
             ScanDir();
-            //EventDistributor.InvokeAsyncTaskStarted(Instance);
-            //View.ShowProcessingIcon = true;
-            //model.Nodes.Clear();
-            //AsyncTask<bool>.DoWork(
-            //    () =>
-            //    {
-            //        System.Threading.Thread.Sleep(3000);
-            //        return true;
-            //    },
-            //    (b, ex) =>
-            //    {
-            //        EventDistributor.InvokeAsyncTaskDone(Instance);
-            //        View.ShowProcessingIcon = false;
-
-            //        var node = new PartNode() { Name = "sensorAtmosphere", Category = "Science", Mod = "Squad", Title = "Atmospheric Fluid Spectro-Variometer" };
-            //        node.Nodes.Add(new PartNode() { Name = "", Category = "", Mod = "", Title = "Ion-Powered Space Probe" });
-            //        node.Nodes.Add(new PartNode() { Name = "", Category = "", Mod = "", Title = "Rover + Skycrane" });
-            //        model.Nodes.Add(node);
-            //        model.Nodes.Add(new PartNode() { Name = "GooExperiment", Category = "Science", Mod = "Squad", Title = "Mystery Goo™ Containment Unit" });
-            //    });
         }
 
         public static void RemovePart()
         {
+            RemovePart(View.SelectedPart);
         }
 
         public static void EditPart()
@@ -133,11 +114,6 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
 
         public static void ChangeCategory()
         {
-        }
-
-        public static void SelectionChanged()
-        {
-            PartNode selNode = View.SelectedPart;
         }
 
         public static void RefreshTreeView()
@@ -412,69 +388,62 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
         
         #region RemovePart
 
-        /////// <summary>
-        /////// Removes the part from KSP and unchecks it in the mod selection.
-        /////// </summary>
-        /////// <param name="partNode">The part node to remove.</param>
-        ////private void RemovePart(PartNode partNode)
-        ////{
-        ////    string partFolder = GetPartFolder(partNode);
-        ////    string partPath = KSPPathHelper.GetRelativePath(Path.GetDirectoryName(partNode.FilePath));
-        ////    ModNode node = ModSelectionController.SearchNode(partFolder);
+        /// <summary>
+        /// Removes the part from KSP and unchecks it in the mod selection.
+        /// </summary>
+        /// <param name="partNode">The part node to remove.</param>
+        private static void RemovePart(PartNode partNode)
+        {
+            if (partNode == null)
+                return;
 
-        ////    DialogResult dlgResult = DialogResult.Cancel;
-        ////    if (node == null)
-        ////        dlgResult = MessageBox.Show(this, "The part you are trying to delete is not from a mod.\n\rDo you want to delete the part permanetly?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            string partPath = Path.GetDirectoryName(KSPPathHelper.GetAbsolutePath(partNode.FilePath));
+            ModNode node = ModSelectionTreeModel.SearchNodeByDestination(partNode.FilePath, ModSelectionController.Model);
 
-        ////    if (partNode.Nodes != null && partNode.Nodes.Count > 0)
-        ////    {
-        ////        StringBuilder sb = new StringBuilder();
-        ////        sb.AppendLine("The part you are trying to delete is used by the following craft(s):");
-        ////        foreach (var tempNode in partNode.Nodes)
-        ////            sb.AppendFormat("- {0}{1}", tempNode.Text, Environment.NewLine);
-        ////        sb.AppendLine();
-        ////        sb.AppendLine("Delete it anyway?");
-        ////        dlgResult = MessageBox.Show(this, sb.ToString(), "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-        ////    }
+            DialogResult dlgResult = DialogResult.Cancel;
+            if (node == null)
+                dlgResult = MessageBox.Show(View.ParentForm, "The part you are trying to delete is not from a mod.\n\rDo you want to delete the part permanetly?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-        ////    if ((node != null || dlgResult == DialogResult.Yes) && Directory.Exists(partPath))
-        ////    {
-        ////        Directory.Delete(partPath, true);
+            if (partNode.Nodes != null && partNode.Nodes.Count > 0)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine("The part you are trying to delete is used by the following craft(s):");
+                foreach (var tempNode in partNode.Nodes)
+                    sb.AppendFormat("- {0}{1}", tempNode.Text, Environment.NewLine);
+                sb.AppendLine();
+                sb.AppendLine("Delete it anyway?");
+                dlgResult = MessageBox.Show(View.ParentForm, sb.ToString(), "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            }
 
-        ////        if (node != null)
-        ////        {
-        ////            if (partNode.Nodes != null)
-        ////            {
-        ////                foreach (var n in partNode.Nodes)
-        ////                    ((TreeNodeCraft)n.Tag).RemovePartRelation(partNode);
-        ////            }
+            if ((node != null || dlgResult == DialogResult.Yes) && Directory.Exists(partPath))
+            {
+                Directory.Delete(partPath, true);
 
-        ////            node.Checked = false;
-        ////            node.NodeType = NodeType.UnknownFolder;
-        ////            foreach (ModNode child in node.Nodes)
-        ////            {
-        ////                child.Checked = false;
-        ////                child.NodeType = child.IsFile ? NodeType.UnknownFile : NodeType.UnknownFolder;
-        ////            }
-        ////        }
+                if (node != null)
+                {
+                    if (partNode.Nodes != null)
+                    {
+                        // TODO: Remove attached craft nodes.
+                        //foreach (var n in partNode.Nodes)
+                        //    ((TreeNodeCraft)n.Tag).RemovePartRelation(partNode);
+                    }
 
-        ////        model.Nodes.Remove(partNode);
-        ////        allNodes.Remove(partNode);
-        ////    }
-        ////}
+                    node = node.Parent as ModNode;
+                    node.SetChecked(false);
+                    node.IsInstalled = false;
+                    node.NodeType = NodeType.UnknownFolder;
+                    foreach (ModNode child in node.Nodes)
+                    {
+                        child.SetChecked(false);
+                        child.IsInstalled = false;
+                        child.NodeType = child.IsFile ? NodeType.UnknownFile : NodeType.UnknownFolder;
+                    }
+                }
 
-        /////// <summary>
-        /////// Returns the part folder where the part.cfg lies.
-        /////// </summary>
-        /////// <param name="partNode">The part to get the folder from.</param>
-        /////// <returns>The part folder where the part.cfg lies.</returns>
-        ////private string GetPartFolder(PartNode partNode)
-        ////{
-        ////    string path = partNode.FilePath.Substring(0, partNode.FilePath.LastIndexOf(Path.DirectorySeparatorChar));
-        ////    path = path.Substring(path.LastIndexOf(Path.DirectorySeparatorChar) + 1);
-
-        ////    return path;
-        ////}
+                model.Nodes.Remove(partNode);
+                allNodes.Remove(partNode);
+            }
+        }
         
         #endregion
         

@@ -135,6 +135,37 @@ namespace KSPModAdmin.Core.Model
             return null;
         }
 
+        public static ModNode SearchNodeByDestination(string searchText, TreeModel model)
+        {
+            ModNode node = null;
+            foreach (var startNode in model.Nodes)
+            {
+                node = SearchNodeByDestination(searchText, startNode as ModNode);
+                if (node != null)
+                    break;
+            }
+
+            return node;
+        }
+
+        public static ModNode SearchNodeByDestination(string searchText, ModNode startNode)
+        {
+            ModNode node = null;
+            if (startNode.Destination.Equals(searchText, StringComparison.CurrentCultureIgnoreCase))
+                node = startNode as ModNode;
+            else
+            {
+                foreach (ModNode child in startNode.Nodes)
+                {
+                    node = SearchNodeByDestination(searchText, child);
+                    if (node != null)
+                        break;
+                }
+            }
+            return node;
+        }
+
+
         /// <summary>
         /// Searches the tree for the first Node where the name matches the search text.
         /// </summary>
@@ -159,6 +190,44 @@ namespace KSPModAdmin.Core.Model
             }
 
             return node;
+        }
+
+        /// <summary>
+        /// Searches the tree for the first Node where the name matches the search text.
+        /// </summary>
+        /// <param name="searchText">The search string.</param>
+        /// <param name="model">The TreeModel to search in.</param>
+        /// <returns>The first Node where the name matches the search text.</returns>
+        public static ModNode SearchNode(string searchText, TreeModel model)
+        {
+            foreach (var node in model.Nodes)
+            {
+                var n = SearchNode(searchText, node);
+                if (n != null)
+                    return n;
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Searches the tree for the Nodes where the name matches the search text.
+        /// </summary>
+        /// <param name="searchText">The search string.</param>
+        /// <param name="model">The TreeModel to search in.</param>
+        /// <returns>A list of Nodes where the name matches the search text.</returns>
+        public static List<ModNode> SearchAllNodes(string searchText, TreeModel model)
+        {
+            var restult = new List<ModNode>();
+
+            foreach (var node in model.Nodes)
+            {
+                var n = SearchNode(searchText, node);
+                if (n != null)
+                    restult.Add(n);
+            }
+
+            return restult;
         }
 
         /// <summary>
