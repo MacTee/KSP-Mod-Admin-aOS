@@ -63,12 +63,12 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
             View.Model = model;
             View.AddActionKey(VirtualKey.VK_DELETE, (x) =>
             {
-                RemovePart();
+                RemoveSelectedPart();
                 return true;
             });
             View.AddActionKey(VirtualKey.VK_BACK, (x) =>
             {
-                RemovePart();
+                RemoveSelectedPart();
                 return true;
             });
 
@@ -101,19 +101,6 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
         public static void RefreshPartsTab()
         {
             ScanDir();
-        }
-
-        public static void RemovePart()
-        {
-            RemovePart(View.SelectedPart);
-        }
-
-        public static void EditPart()
-        {
-        }
-
-        public static void ChangeCategory()
-        {
         }
 
         public static void RefreshTreeView()
@@ -389,10 +376,18 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
         #region RemovePart
 
         /// <summary>
+        /// Removes the selected part from KSP and unchecks it in the mod selection.
+        /// </summary>
+        public static void RemoveSelectedPart()
+        {
+            RemovePart(View.SelectedPart);
+        }
+
+        /// <summary>
         /// Removes the part from KSP and unchecks it in the mod selection.
         /// </summary>
         /// <param name="partNode">The part node to remove.</param>
-        private static void RemovePart(PartNode partNode)
+        public static void RemovePart(PartNode partNode)
         {
             if (partNode == null)
                 return;
@@ -447,79 +442,84 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
         
         #endregion
         
-        #region RenameCraft
+        #region Edit/Rename Part
 
-        /////// <summary>
-        /////// Asks the user for a new name for the part and renames it. 
-        /////// </summary>
-        /////// <param name="partNode">The part node to rename.</param>
-        ////private void RenameCraft(PartNode partNode)
-        ////{
-        ////    frmNameSelection dlg = new frmNameSelection();
-        ////    dlg.Description = "Please choose a new name (ATTANTION: This may corrupting crafts!).";
-        ////    dlg.NewName = partNode.Name;
-        ////    dlg.KnownNames = GetListOfPartNames();
-        ////    if (dlg.ShowDialog(View.ParentForm) == DialogResult.OK)
-        ////    {
-        ////        string fullPath = KSPPathHelper.GetRelativePath(partNode.FilePath);
-        ////        if (File.Exists(fullPath))
-        ////        {
-        ////            string allText = File.ReadAllText(fullPath);
-        ////            string newText = allText.Replace("name = " + partNode.Name, "name = " + dlg.NewName);
-        ////            File.WriteAllText(fullPath, newText);
-        ////            partNode.Name = dlg.NewName;
-        ////            partNode.Text = partNode.ToString();
-        ////        }
-        ////    }
-        ////}
+        public static void EditSelectedPart()
+        {
+            RenamePart(View.SelectedPart);
+        }
 
-        /////// <summary>
-        /////// Returns a list of all part names.
-        /////// </summary>
-        /////// <returns>A list of all part names.</returns>
-        ////private List<string> GetListOfPartNames()
-        ////{
-        ////    return (from PartNode part in allNodes select part.Name).ToList();
-        ////}
+        /// <summary>
+        /// Asks the user for a new name for the part and renames it. 
+        /// </summary>
+        /// <param name="partNode">The part node to rename.</param>
+        /// <param name="newName">The new name to set, if != empty the dilaog will be skipped.</param>
+        public static void RenamePart(PartNode partNode)
+        {
+            frmNameSelection dlg = new frmNameSelection();
+            dlg.Description = "Please choose a new name (ATTANTION: This may corrupting crafts!).";
+            dlg.NewTitle = partNode.Title;
+            dlg.NewName = partNode.Name;
+            dlg.KnownNames = (from PartNode part in allNodes select part.Name).ToList();
+            if (dlg.ShowDialog(View.ParentForm) == DialogResult.OK)
+            {
+                string fullPath = KSPPathHelper.GetAbsolutePath(partNode.FilePath);
+                if (File.Exists(fullPath))
+                {
+                    string allText = File.ReadAllText(fullPath);
+                    string newText = allText.Replace("name = " + partNode.Name, "name = " + dlg.NewName);
+                    newText = newText.Replace("title = " + partNode.Title, "title = " + dlg.NewTitle);
+                    File.WriteAllText(fullPath, newText);
+                    partNode.Name = dlg.NewName;
+                    partNode.Title = dlg.NewTitle;
+                    //partNode.Text = partNode.ToString();
+                }
+            }
+        }
         
         #endregion
 
         #region ChangeCategory
 
-        /////// <summary>
-        /////// Changes the category of the part.
-        /////// </summary>
-        /////// <param name="partNode">The node of the part to change the category from.</param>
-        /////// <param name="newCategory">The new category to set the partNode to.</param>
-        ////private void ChangeCategory(PartNode partNode, string newCategory = "")
-        ////{
-        ////    frmPartCategorySelection dlg = new frmPartCategorySelection();
-        ////    dlg.Category = partNode.Category;
-        ////    if (newCategory != string.Empty || dlg.ShowDialog(View.ParentForm) == DialogResult.OK)
-        ////    {
-        ////        string category = newCategory;
-        ////        if (newCategory == string.Empty)
-        ////            category = dlg.Category;
-        ////        string fullPath = KSPPathHelper.GetRelativePath(partNode.FilePath);
-        ////        if (File.Exists(fullPath))
-        ////        {
-        ////            string allText = File.ReadAllText(fullPath);
-        ////            string newText = allText.Replace("category = " + partNode.Category, "category = " + category);
-        ////            File.WriteAllText(fullPath, newText);
-        ////            partNode.Category = category;
+        public static void ChangeCategoryOfSelectedPart()
+        {
+            ChangeCategory(View.SelectedPart);
+        }
 
-        ////            foreach (var node in partNode.Nodes)
-        ////            {
-        ////                if (node.Text.StartsWith("Category = "))
-        ////                {
-        ////                    node.Text = "Category = " + partNode.Category;
-        ////                    break;
-        ////                }
-        ////            }
-        ////        }
-        ////    }
-        ////    View.InvalidateView();
-        ////}
+        /// <summary>
+        /// Changes the category of the part.
+        /// </summary>
+        /// <param name="partNode">The node of the part to change the category from.</param>
+        /// <param name="newCategory">The new category to set the partNode to, if != empty the dilaog will be skipped.</param>
+        public static void ChangeCategory(PartNode partNode, string newCategory = "")
+        {
+            frmPartCategorySelection dlg = new frmPartCategorySelection();
+            dlg.Category = partNode.Category;
+            if (newCategory != string.Empty || dlg.ShowDialog(View.ParentForm) == DialogResult.OK)
+            {
+                string category = newCategory;
+                if (newCategory == string.Empty)
+                    category = dlg.Category;
+                string fullPath = KSPPathHelper.GetAbsolutePath(partNode.FilePath);
+                if (File.Exists(fullPath))
+                {
+                    string allText = File.ReadAllText(fullPath);
+                    string newText = allText.Replace("category = " + partNode.Category, "category = " + category);
+                    File.WriteAllText(fullPath, newText);
+                    partNode.Category = category;
+
+                    foreach (var node in partNode.Nodes)
+                    {
+                        if (node.Text.StartsWith("Category = "))
+                        {
+                            node.Text = "Category = " + partNode.Category;
+                            break;
+                        }
+                    }
+                }
+            }
+            View.InvalidateView();
+        }
         
         #endregion
 

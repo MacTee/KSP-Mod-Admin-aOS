@@ -232,17 +232,17 @@ namespace KSPModAdmin.Plugin.PartsTab.Views
 
         private void tsbPartsRemove_Click(object sender, EventArgs e)
         {
-            PartsTabViewController.RemovePart();
+            PartsTabViewController.RemoveSelectedPart();
         }
 
         private void tsbPartsEdit_Click(object sender, EventArgs e)
         {
-            PartsTabViewController.EditPart();
+            PartsTabViewController.EditSelectedPart();
         }
 
         private void tsbPartsChangeCategory_Click(object sender, EventArgs e)
         {
-            PartsTabViewController.ChangeCategory();
+            PartsTabViewController.ChangeCategoryOfSelectedPart();
         }
 
         private void tvParts_SelectionChanged(object sender, EventArgs e)

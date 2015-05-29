@@ -77,6 +77,18 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Controller\PartsTabViewController.cs" />
+    <Compile Include="Views\frmNameSelection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frmNameSelection.Designer.cs">
+      <DependentUpon>frmNameSelection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\frmPartCategorySelection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frmPartCategorySelection.Designer.cs">
+      <DependentUpon>frmPartCategorySelection.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\ucPartsTabView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -88,6 +100,12 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\frmNameSelection.resx">
+      <DependentUpon>frmNameSelection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\frmPartCategorySelection.resx">
+      <DependentUpon>frmPartCategorySelection.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ucPartsTabView.resx">
       <DependentUpon>ucPartsTabView.cs</DependentUpon>
@@ -152,6 +170,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tick.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
