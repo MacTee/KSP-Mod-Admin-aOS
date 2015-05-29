@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Windows.Forms;
+using KSPModAdmin.Core;
 using KSPModAdmin.Core.Utils;
 using KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.Helper;
 using KSPModAdmin.Core.Utils.Localization;
 using KSPModAdmin.Core.Views;
 using KSPModAdmin.Plugin.PartsTab.Controller;
 using KSPModAdmin.Plugin.PartsTab.Model;
-using KSPModAdmin.Plugin.PartsTab.Properties;
+using Messages = KSPModAdmin.Plugin.PartsTab.Messages;
 
 namespace KSPModAdmin.Plugin.PartsTab.Views
 {
@@ -177,6 +179,29 @@ namespace KSPModAdmin.Plugin.PartsTab.Views
             UpdateEnabldeState();
         }
 
+        private void Filter_DropDown(object sender, EventArgs e)
+        {
+            var cb = sender as ComboBox;
+            if (cb == null)
+                return;
+
+            int maxWidth = 0;
+            int temp = 0;
+            Label label1 = new Label();
+
+            foreach (var obj in cb.Items)
+            {
+                label1.Text = obj.ToString();
+                temp = label1.PreferredWidth;
+                if (temp > maxWidth)
+                    maxWidth = temp;
+            }
+            label1.Dispose();
+
+            if (maxWidth > cb.Width)
+                cb.DropDownWidth = maxWidth;
+        }
+
         #endregion
 
         /// <summary>
@@ -233,6 +258,9 @@ namespace KSPModAdmin.Plugin.PartsTab.Views
                 UpdateEnabldeState();
         }
 
+        /// <summary>
+        /// Updates the enabled state for each control on this view.
+        /// </summary>
         private void UpdateEnabldeState()
         {
             var selBackup = SelectedPart;

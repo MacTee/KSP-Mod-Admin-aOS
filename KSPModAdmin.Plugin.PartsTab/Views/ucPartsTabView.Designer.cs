@@ -42,10 +42,10 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbPartsEdit = new System.Windows.Forms.ToolStripButton();
             this.tsbPartsChangeCategory = new System.Windows.Forms.ToolStripButton();
+            this.tslPartsProcessing = new System.Windows.Forms.ToolStripLabel();
             this.tvParts = new KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.TreeViewAdv();
             this.gbPartsFilter = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.tslPartsProcessing = new System.Windows.Forms.ToolStripLabel();
             this.toolStrip1.SuspendLayout();
             this.gbPartsFilter.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -55,7 +55,7 @@
             // 
             this.lblCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblCount.AutoSize = true;
-            this.lblCount.Location = new System.Drawing.Point(3, 387);
+            this.lblCount.Location = new System.Drawing.Point(3, 429);
             this.lblCount.Name = "lblCount";
             this.lblCount.Size = new System.Drawing.Size(47, 13);
             this.lblCount.TabIndex = 26;
@@ -65,7 +65,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(232, 0);
+            this.label1.Location = new System.Drawing.Point(266, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(31, 27);
             this.label1.TabIndex = 23;
@@ -92,10 +92,11 @@
             this.cbModFilter.Items.AddRange(new object[] {
             "All",
             "Squad"});
-            this.cbModFilter.Location = new System.Drawing.Point(269, 3);
+            this.cbModFilter.Location = new System.Drawing.Point(303, 3);
             this.cbModFilter.Name = "cbModFilter";
-            this.cbModFilter.Size = new System.Drawing.Size(160, 21);
+            this.cbModFilter.Size = new System.Drawing.Size(294, 21);
             this.cbModFilter.TabIndex = 21;
+            this.cbModFilter.DropDown += new System.EventHandler(this.Filter_DropDown);
             // 
             // cbCategoryFilter
             // 
@@ -114,8 +115,9 @@
             "Science"});
             this.cbCategoryFilter.Location = new System.Drawing.Point(61, 3);
             this.cbCategoryFilter.Name = "cbCategoryFilter";
-            this.cbCategoryFilter.Size = new System.Drawing.Size(160, 21);
+            this.cbCategoryFilter.Size = new System.Drawing.Size(194, 21);
             this.cbCategoryFilter.TabIndex = 22;
+            this.cbCategoryFilter.DropDown += new System.EventHandler(this.Filter_DropDown);
             // 
             // toolStrip1
             // 
@@ -129,7 +131,7 @@
             this.tslPartsProcessing});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(450, 31);
+            this.toolStrip1.Size = new System.Drawing.Size(675, 31);
             this.toolStrip1.TabIndex = 27;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -190,6 +192,16 @@
             this.tsbPartsChangeCategory.Text = "toolStripButton4";
             this.tsbPartsChangeCategory.Click += new System.EventHandler(this.tsbPartsChangeCategory_Click);
             // 
+            // tslPartsProcessing
+            // 
+            this.tslPartsProcessing.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tslPartsProcessing.Image = global::KSPModAdmin.Plugin.PartsTab.Properties.Resources.loader;
+            this.tslPartsProcessing.Name = "tslPartsProcessing";
+            this.tslPartsProcessing.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
+            this.tslPartsProcessing.Size = new System.Drawing.Size(16, 28);
+            this.tslPartsProcessing.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
+            this.tslPartsProcessing.Visible = false;
+            // 
             // tvParts
             // 
             this.tvParts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -203,7 +215,7 @@
             this.tvParts.Model = null;
             this.tvParts.Name = "tvParts";
             this.tvParts.SelectedNode = null;
-            this.tvParts.Size = new System.Drawing.Size(450, 297);
+            this.tvParts.Size = new System.Drawing.Size(675, 339);
             this.tvParts.TabIndex = 28;
             this.tvParts.Text = "treeViewAdv1";
             this.tvParts.UseColumns = true;
@@ -216,7 +228,7 @@
             this.gbPartsFilter.Controls.Add(this.tableLayoutPanel1);
             this.gbPartsFilter.Location = new System.Drawing.Point(3, 29);
             this.gbPartsFilter.Name = "gbPartsFilter";
-            this.gbPartsFilter.Size = new System.Drawing.Size(444, 54);
+            this.gbPartsFilter.Size = new System.Drawing.Size(669, 54);
             this.gbPartsFilter.TabIndex = 29;
             this.gbPartsFilter.TabStop = false;
             this.gbPartsFilter.Text = "Filter:";
@@ -225,12 +237,13 @@
             // 
             this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.ColumnCount = 5;
+            this.tableLayoutPanel1.ColumnCount = 6;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 5F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 300F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.lblBuildingFilter, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.cbCategoryFilter, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label1, 3, 0);
@@ -239,18 +252,8 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(432, 27);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(657, 27);
             this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // tslPartsProcessing
-            // 
-            this.tslPartsProcessing.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.tslPartsProcessing.Image = global::KSPModAdmin.Plugin.PartsTab.Properties.Resources.loader;
-            this.tslPartsProcessing.Name = "tslPartsProcessing";
-            this.tslPartsProcessing.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
-            this.tslPartsProcessing.Size = new System.Drawing.Size(16, 28);
-            this.tslPartsProcessing.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
-            this.tslPartsProcessing.Visible = false;
             // 
             // ucPartsTabView
             // 
@@ -262,7 +265,7 @@
             this.Controls.Add(this.gbPartsFilter);
             this.MinimumSize = new System.Drawing.Size(450, 400);
             this.Name = "ucPartsTabView";
-            this.Size = new System.Drawing.Size(450, 400);
+            this.Size = new System.Drawing.Size(675, 442);
             this.Load += new System.EventHandler(this.ucPluginView_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
