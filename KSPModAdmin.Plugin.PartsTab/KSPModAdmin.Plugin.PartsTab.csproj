@@ -94,6 +94,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Languages\KSPMA.PartsTabPlugin.ger.lang" />
     <None Include="Languages\KSPMA.PartsTabPlugin.eng.lang" />
     <None Include="Languages\KSPMA.PartsTabPlugin.fake.lang" />
     <None Include="packages.config" />
@@ -114,7 +115,7 @@
     <None Include="Resources\loader.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\refresh.png" />
+    <None Include="Resources\refresh_24x24.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\brick_24x24.png" />
@@ -133,6 +134,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\bricks.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\brick.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\brick_delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\brick_edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\brick_replace.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\brick_replace_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

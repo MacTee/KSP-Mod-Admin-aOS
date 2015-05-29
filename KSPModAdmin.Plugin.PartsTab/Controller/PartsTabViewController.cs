@@ -13,6 +13,9 @@ using KSPModAdmin.Plugin.PartsTab.Views;
 namespace KSPModAdmin.Plugin.PartsTab.Controller
 {
     using System.Linq;
+    using System.Text;
+
+    using KSPModAdmin.Core.Model;
 
     /// <summary>
     /// Controller class for the Translation view.
@@ -21,8 +24,14 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
     {
         #region Members
 
+        public const string All = "All";
+        public const string Squad = "Squad";
+
         private static PartsTabViewController instance = null;
+        private static List<PartNode> allNodes = new List<PartNode>();
         private static PartsTreeModel model = new PartsTreeModel();
+        private static List<string> allModFilter = new List<string>();
+        private static bool filling = false;
 
         #endregion
 
@@ -62,6 +71,9 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
                 RemovePart();
                 return true;
             });
+
+            allModFilter.Add(All);
+            allModFilter.Add(Squad);
         }
 
         #region EventDistributor callback functions.
@@ -128,22 +140,28 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
             PartNode selNode = View.SelectedPart;
         }
 
+        public static void RefreshTreeView()
+        {
+            FillTreeView(allNodes);
+        }
+
+        #region Scan
 
         /// <summary>
         /// Scans the KSP install directory and sub directories for *.craft files.
         /// </summary>
         private static void ScanDir()
         {
-            //cbModFilter.Items.Clear();
-            //cbModFilter.Items.Add("All");
-            //cbModFilter.Items.Add("Squad");
-            //cbModFilter.SelectedIndex = 0;
+            allModFilter.Clear();
+            allModFilter.Add(All);
+            allModFilter.Add(Squad);
+            View.SelectedModFilter = All;
 
             model.Nodes.Clear();
 
             View.ShowProcessingIcon = true;
             EventDistributor.InvokeAsyncTaskStarted(Instance);
-            AsyncTask<List<PartNode>>.DoWork(() =>
+            AsyncTask<bool>.DoWork(() =>
                 {
                     // Get part.cfg files from GameData folder.
                     string gameDatePath = KSPPathHelper.GetPath(KSPPaths.GameData);
@@ -175,19 +193,22 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
                     else
                         Messenger.AddInfo(string.Format("No part.cfg files found in \"{0}\".", gameDatePath));
 
-                    return nodes;
+                    allNodes.Clear();
+                    foreach (PartNode node in nodes)
+                        allNodes.Add(node);
+
+                    return true;
                 },
                 (result, ex) =>
                 {
+                    View.ShowProcessingIcon = false;
                     EventDistributor.InvokeAsyncTaskDone(Instance);
 
                     if (ex != null)
                         MessageBox.Show("Error during part reading! \"" + ex.Message + "\"");
                     else
-                        FillTreeView(result);
-
-                    //tvParts.FocusedNode = null;
-
+                        RefreshTreeView();
+                    
                     //if (ScanComplete != null)
                     //    ScanComplete(GetListOfAllParts());
                 });
@@ -299,7 +320,8 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
                 mod = mod.Substring(0, mod.IndexOf("\\"));
                 partNode.Mod = mod;
 
-                //View.InvokeIfRequired(() => { if (!cbModFilter.Items.Contains(mod)) cbModFilter.Items.Add(mod); });
+                if (!allModFilter.Contains(mod)) 
+                    allModFilter.Add(mod);
             }
 
             return partNode;
@@ -355,7 +377,6 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
                     string category = nameValuePair[1].Trim();
                     if (int.TryParse(category, out categoryIndex))
                         category = TranslateCategoryIndex(categoryIndex);
-                    //partNode.Text = string.Format("{0} - {1}", partNode.PartName, partNode.Category);
                     partNode.Category = category;
                 }
             }
@@ -387,29 +408,182 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
             return string.Empty;
         }
 
+        #endregion
+        
+        #region RemovePart
+
+        /////// <summary>
+        /////// Removes the part from KSP and unchecks it in the mod selection.
+        /////// </summary>
+        /////// <param name="partNode">The part node to remove.</param>
+        ////private void RemovePart(PartNode partNode)
+        ////{
+        ////    string partFolder = GetPartFolder(partNode);
+        ////    string partPath = KSPPathHelper.GetRelativePath(Path.GetDirectoryName(partNode.FilePath));
+        ////    ModNode node = ModSelectionController.SearchNode(partFolder);
+
+        ////    DialogResult dlgResult = DialogResult.Cancel;
+        ////    if (node == null)
+        ////        dlgResult = MessageBox.Show(this, "The part you are trying to delete is not from a mod.\n\rDo you want to delete the part permanetly?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+        ////    if (partNode.Nodes != null && partNode.Nodes.Count > 0)
+        ////    {
+        ////        StringBuilder sb = new StringBuilder();
+        ////        sb.AppendLine("The part you are trying to delete is used by the following craft(s):");
+        ////        foreach (var tempNode in partNode.Nodes)
+        ////            sb.AppendFormat("- {0}{1}", tempNode.Text, Environment.NewLine);
+        ////        sb.AppendLine();
+        ////        sb.AppendLine("Delete it anyway?");
+        ////        dlgResult = MessageBox.Show(this, sb.ToString(), "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+        ////    }
+
+        ////    if ((node != null || dlgResult == DialogResult.Yes) && Directory.Exists(partPath))
+        ////    {
+        ////        Directory.Delete(partPath, true);
+
+        ////        if (node != null)
+        ////        {
+        ////            if (partNode.Nodes != null)
+        ////            {
+        ////                foreach (var n in partNode.Nodes)
+        ////                    ((TreeNodeCraft)n.Tag).RemovePartRelation(partNode);
+        ////            }
+
+        ////            node.Checked = false;
+        ////            node.NodeType = NodeType.UnknownFolder;
+        ////            foreach (ModNode child in node.Nodes)
+        ////            {
+        ////                child.Checked = false;
+        ////                child.NodeType = child.IsFile ? NodeType.UnknownFile : NodeType.UnknownFolder;
+        ////            }
+        ////        }
+
+        ////        model.Nodes.Remove(partNode);
+        ////        allNodes.Remove(partNode);
+        ////    }
+        ////}
+
+        /////// <summary>
+        /////// Returns the part folder where the part.cfg lies.
+        /////// </summary>
+        /////// <param name="partNode">The part to get the folder from.</param>
+        /////// <returns>The part folder where the part.cfg lies.</returns>
+        ////private string GetPartFolder(PartNode partNode)
+        ////{
+        ////    string path = partNode.FilePath.Substring(0, partNode.FilePath.LastIndexOf(Path.DirectorySeparatorChar));
+        ////    path = path.Substring(path.LastIndexOf(Path.DirectorySeparatorChar) + 1);
+
+        ////    return path;
+        ////}
+        
+        #endregion
+        
+        #region RenameCraft
+
+        /////// <summary>
+        /////// Asks the user for a new name for the part and renames it. 
+        /////// </summary>
+        /////// <param name="partNode">The part node to rename.</param>
+        ////private void RenameCraft(PartNode partNode)
+        ////{
+        ////    frmNameSelection dlg = new frmNameSelection();
+        ////    dlg.Description = "Please choose a new name (ATTANTION: This may corrupting crafts!).";
+        ////    dlg.NewName = partNode.Name;
+        ////    dlg.KnownNames = GetListOfPartNames();
+        ////    if (dlg.ShowDialog(View.ParentForm) == DialogResult.OK)
+        ////    {
+        ////        string fullPath = KSPPathHelper.GetRelativePath(partNode.FilePath);
+        ////        if (File.Exists(fullPath))
+        ////        {
+        ////            string allText = File.ReadAllText(fullPath);
+        ////            string newText = allText.Replace("name = " + partNode.Name, "name = " + dlg.NewName);
+        ////            File.WriteAllText(fullPath, newText);
+        ////            partNode.Name = dlg.NewName;
+        ////            partNode.Text = partNode.ToString();
+        ////        }
+        ////    }
+        ////}
+
+        /////// <summary>
+        /////// Returns a list of all part names.
+        /////// </summary>
+        /////// <returns>A list of all part names.</returns>
+        ////private List<string> GetListOfPartNames()
+        ////{
+        ////    return (from PartNode part in allNodes select part.Name).ToList();
+        ////}
+        
+        #endregion
+
+        #region ChangeCategory
+
+        /////// <summary>
+        /////// Changes the category of the part.
+        /////// </summary>
+        /////// <param name="partNode">The node of the part to change the category from.</param>
+        /////// <param name="newCategory">The new category to set the partNode to.</param>
+        ////private void ChangeCategory(PartNode partNode, string newCategory = "")
+        ////{
+        ////    frmPartCategorySelection dlg = new frmPartCategorySelection();
+        ////    dlg.Category = partNode.Category;
+        ////    if (newCategory != string.Empty || dlg.ShowDialog(View.ParentForm) == DialogResult.OK)
+        ////    {
+        ////        string category = newCategory;
+        ////        if (newCategory == string.Empty)
+        ////            category = dlg.Category;
+        ////        string fullPath = KSPPathHelper.GetRelativePath(partNode.FilePath);
+        ////        if (File.Exists(fullPath))
+        ////        {
+        ////            string allText = File.ReadAllText(fullPath);
+        ////            string newText = allText.Replace("category = " + partNode.Category, "category = " + category);
+        ////            File.WriteAllText(fullPath, newText);
+        ////            partNode.Category = category;
+
+        ////            foreach (var node in partNode.Nodes)
+        ////            {
+        ////                if (node.Text.StartsWith("Category = "))
+        ////                {
+        ////                    node.Text = "Category = " + partNode.Category;
+        ////                    break;
+        ////                }
+        ////            }
+        ////        }
+        ////    }
+        ////    View.InvalidateView();
+        ////}
+        
+        #endregion
+
         /// <summary>
         /// Fills the TreView dependent on the filter settings.
         /// </summary>
         private static void FillTreeView(List<PartNode> nodes)
         {
-            model.Nodes.Clear();
+            if (nodes == null || model == null || View == null || filling)
+                return;
+
+            filling = true;
+            View.InvokeIfRequired(() => model.Nodes.Clear());
+
+            // TODO: Sort by mod and name
+            //allNodes.Nodes.Sort((p1, p2) => p1.Title.CompareTo(p2.Title));
+
+            int count = 0;
+            string catFilter = View.SelectedCategoryFilter;
+            string modFilter = View.SelectedModFilter;
             foreach (PartNode node in nodes)
-                model.Nodes.Add(node);
+                if ((catFilter == All || node.Category.Equals(catFilter, StringComparison.CurrentCultureIgnoreCase)) &&
+                    (modFilter == All || node.Mod.Equals(modFilter, StringComparison.CurrentCultureIgnoreCase)))
+                {
+                    View.InvokeIfRequired(() => model.Nodes.Add(node));
+                    ++count;
+                }
 
+            View.ModFilter = allModFilter.ToArray();
+            View.SelectedModFilter = modFilter;
+            View.PartCountText = string.Format(Messages.MSG_PARTS_COUNT_TEXT, model.Nodes.Count, allNodes.Count);
 
-            // Sort by mod and name
-            //model.Nodes.Sort((p1, p2) => p1.PartTitle.CompareTo(p2.PartTitle));
-
-            //int count = 0;
-            //foreach (PartNode node in mPartNodes)
-            //    if ((cbCategoryFilter.SelectedIndex == 0 || node.Category.ToLower() == cbCategoryFilter.SelectedItem.ToString().ToLower()) &&
-            //        (cbModFilter.SelectedIndex == 0 || node.Mod.ToLower() == cbModFilter.SelectedItem.ToString().ToLower()))
-            //    {
-            //        InvokeIfRequired(() => tvParts.Nodes.Add(node));
-            //        ++count;
-            //    }
-
-            //lblCount.Text = string.Format("{0} ({1}) Parts", count, mPartNodes.Count);
+            filling = false;
         }
     }
 }

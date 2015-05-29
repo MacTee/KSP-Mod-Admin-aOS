@@ -9,5 +9,14 @@ namespace KSPModAdmin.Plugin.PartsTab.Model
         public string FilePath { get; set; }
         public string Category { get; set; }
         public string Mod { get; set; }
+
+        public PartNode()
+        {
+            Name = string.Empty;
+            Title = string.Empty;
+            FilePath = string.Empty;
+            Category = string.Empty;
+            Mod = string.Empty;
+        }
     }
 }

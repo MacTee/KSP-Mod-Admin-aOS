@@ -46,6 +46,7 @@
       <Value>Mdd</Value>
       <Value>init</Value>
       <Value>cfg</Value>
+      <Value>lbl</Value>
     </CollectionProperty>
   </GlobalSettings>
   <Parsers>

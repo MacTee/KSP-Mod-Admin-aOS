@@ -63,9 +63,29 @@ namespace KSPModAdmin.Plugin.PartsTab.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap brick {
+            get {
+                object obj = ResourceManager.GetObject("brick", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap brick_24x24 {
             get {
                 object obj = ResourceManager.GetObject("brick_24x24", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap brick_delete {
+            get {
+                object obj = ResourceManager.GetObject("brick_delete", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,6 +103,16 @@ namespace KSPModAdmin.Plugin.PartsTab.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap brick_edit {
+            get {
+                object obj = ResourceManager.GetObject("brick_edit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap brick_edit_24x24 {
             get {
                 object obj = ResourceManager.GetObject("brick_edit_24x24", resourceCulture);
@@ -93,9 +123,19 @@ namespace KSPModAdmin.Plugin.PartsTab.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap brick_folder_24x24 {
+        internal static System.Drawing.Bitmap brick_replace {
             get {
-                object obj = ResourceManager.GetObject("brick_folder_24x24", resourceCulture);
+                object obj = ResourceManager.GetObject("brick_replace", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap brick_replace_24x24 {
+            get {
+                object obj = ResourceManager.GetObject("brick_replace_24x24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -136,6 +176,16 @@ namespace KSPModAdmin.Plugin.PartsTab.Properties {
         internal static System.Drawing.Bitmap refresh {
             get {
                 object obj = ResourceManager.GetObject("refresh", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap refresh_24x24 {
+            get {
+                object obj = ResourceManager.GetObject("refresh_24x24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -1,0 +1,31 @@
+<Language Name="ger" LongName="Deutsch">
+  <String Name="MSG_PARTSTAB_VIEW_TITLE" Value="Bauteile"/>
+
+  <Control Name="tsbPartsRefresh" Value="tsbPartsRefresh">
+    <ChildControl Name="tsbPartsRefresh_ToolTip" Value="Aktualisieren^Startet den Scan des KSP Installatinsverzeichnises nach Bauteilen."/>
+  </Control>
+  <Control Name="tsbPartsRemove" Value="tsbPartsRemove">
+    <ChildControl Name="tsbPartsRemove_ToolTip" Value="Bauteile entfernen^Entfernt eine Bauteile von der HD.^Wurde das Bauteil durch eine Mod hinzugefügt, wird der Hacken am BAuteil entfernt und das bauteil deinstalliert."/>
+  </Control>
+  <Control Name="tsbPartsEdit" Value="tsbPartsEdit">
+    <ChildControl Name="tsbPartsEdit_ToolTip" Value="Bauteile bearbeiten^Öffnet den Bauteileditor."/>
+  </Control>
+  <Control Name="tsbPartsChangeCategory" Value="tsbPartsChangeCategory">
+    <ChildControl Name="tsbPartsChangeCategory_ToolTip" Value="Kategorie ändern^Öffnet den Dialog für die Categorieänderung."/>
+  </Control>
+  
+  <Control Name="gbPartsFilter" Value="Filter:"/>
+  <Control Name="lblPartsFilterCategory" Value="Kategorie:"/>
+  <Control Name="lblPartsFilterMod" Value="Mod:"/>
+  <Control Name="tsmiPartsRefresh" Value="Aktualisieren"/>
+  <Control Name="tsmiPartsRemovePart" Value="Bauteile entfernen"/>
+  <Control Name="tsmiPartsEditPart" Value="Bauteile bearbeiten"/>
+  <Control Name="tsmiPartsChangeCategory" Value="Kategorie ändern"/>
+
+  <String Name="UcPartsTabView_Item_00" Value="Titel/Craft"/>
+  <String Name="UcPartsTabView_Item_01" Value="Bauteile"/>
+  <String Name="UcPartsTabView_Item_02" Value="Kategorie"/>
+  <String Name="UcPartsTabView_Item_03" Value="Mod"/>
+
+  <String Name="MSG_PARTS_COUNT_TEXT" Value="{0} ({1}) Bauteile"/>
+</Language>

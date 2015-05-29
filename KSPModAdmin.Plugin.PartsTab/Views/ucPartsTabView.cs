@@ -15,6 +15,8 @@ using Messages = KSPModAdmin.Plugin.PartsTab.Messages;
 
 namespace KSPModAdmin.Plugin.PartsTab.Views
 {
+    using System.Linq;
+
     [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Reviewed. Suppression is OK here.")]
     public partial class ucPartsTabView : ucBase
     {
@@ -29,6 +31,9 @@ namespace KSPModAdmin.Plugin.PartsTab.Views
             set { tvParts.Model = value; }
         }
 
+        /// <summary>
+        /// Gets the selected PartNode.
+        /// </summary>
         public PartNode SelectedPart
         {
             get { return tvParts.SelectedNode != null ? tvParts.SelectedNode.Tag as PartNode : null; }
@@ -47,6 +52,70 @@ namespace KSPModAdmin.Plugin.PartsTab.Views
             }
         }
 
+        /// <summary>
+        /// Gets or sets the text of the part count label (lblPartsCount).
+        /// </summary>
+        public string PartCountText
+        { 
+            get { return lblPartsCount.Text; }
+            set { lblPartsCount.Text = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets the category filter.
+        /// </summary>
+        public string[] CategoryFilter
+        {
+            get
+            {
+                return cbCategoryFilter.Items.Cast<string>().ToArray();
+            }
+            set
+            {
+                cbCategoryFilter.Items.Clear();
+                foreach (var entry in value)
+                    cbCategoryFilter.Items.Add(entry);
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the selected category filter.
+        /// </summary>
+        public string SelectedCategoryFilter
+        {
+            get { return cbCategoryFilter.SelectedItem != null ? cbCategoryFilter.SelectedItem as string : PartsTabViewController.All; }
+            set { cbCategoryFilter.SelectedItem = value; } 
+        }
+
+        /// <summary>
+        /// Gets or sets the mod filter.
+        /// </summary>
+        public string[] ModFilter
+        {
+            get
+            {
+                return cbModFilter.Items.Cast<string>().ToArray();
+            }
+            set
+            {
+                cbModFilter.Items.Clear();
+                foreach (string entry in value)
+                    cbModFilter.Items.Add(entry);
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the selected mod filter.
+        /// </summary>
+        public string SelectedModFilter
+        {
+            get { return cbModFilter.SelectedItem != null ? cbModFilter.SelectedItem as string : PartsTabViewController.All; }
+            set { cbModFilter.SelectedItem = value; } 
+        }
+
+        /// <summary>
+        /// Gets the Column definition for the TreeViewAdv control.
+        /// </summary>
         private List<ColumnData> Columns
         {
             get
@@ -56,7 +125,7 @@ namespace KSPModAdmin.Plugin.PartsTab.Views
                     new ColumnData()
                     {
                         Name = "Title",
-                        Header = "Title/Craft", //Localizer.GlobalInstance["UcPartsTabView_Item_03"], // "Title/Craft",
+                        Header = Localizer.GlobalInstance["UcPartsTabView_Item_00"], // "Title/Craft",
                         SortOrder = SortOrder.None,
                         TooltipText = null,
                         Width = 200,
@@ -74,7 +143,7 @@ namespace KSPModAdmin.Plugin.PartsTab.Views
                     new ColumnData()
                     {
                         Name = "PartCraft",
-                        Header = "Part", //Localizer.GlobalInstance["UcPartsTabView_Item_00"], // "Part",
+                        Header = Localizer.GlobalInstance["UcPartsTabView_Item_01"], // "Part",
                         SortOrder = SortOrder.None,
                         TooltipText = null,
                         Width = 180,
@@ -92,7 +161,7 @@ namespace KSPModAdmin.Plugin.PartsTab.Views
                     new ColumnData()
                     {
                         Name = "Category",
-                        Header = "Category", //Localizer.GlobalInstance["UcPartsTabView_Item_01"], // "Category",
+                        Header = Localizer.GlobalInstance["UcPartsTabView_Item_02"], // "Category",
                         SortOrder = SortOrder.None,
                         TooltipText = null,
                         Width = 90,
@@ -110,7 +179,7 @@ namespace KSPModAdmin.Plugin.PartsTab.Views
                     new ColumnData()
                     {
                         Name = "Mod",
-                        Header = "Mod", //Localizer.GlobalInstance["UcPartsTabView_Item_02"], // "Mod",
+                        Header = Localizer.GlobalInstance["UcPartsTabView_Item_03"], // "Mod",
                         SortOrder = SortOrder.None,
                         TooltipText = null,
                         Width = 200,
@@ -143,6 +212,8 @@ namespace KSPModAdmin.Plugin.PartsTab.Views
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime || DesignMode)
                 return;
 
+            SelectedCategoryFilter = PartsTabViewController.All;
+            SelectedModFilter = PartsTabViewController.All;
             PartsTabViewController.Initialize(this);
         }
 
@@ -200,6 +271,11 @@ namespace KSPModAdmin.Plugin.PartsTab.Views
 
             if (maxWidth > cb.Width)
                 cb.DropDownWidth = maxWidth;
+        }
+
+        private void Filter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PartsTabViewController.RefreshTreeView();
         }
 
         #endregion
@@ -263,15 +339,23 @@ namespace KSPModAdmin.Plugin.PartsTab.Views
         /// </summary>
         private void UpdateEnabldeState()
         {
-            var selBackup = SelectedPart;
+            var selPart = SelectedPart;
 
             tsbPartsRefresh.Enabled = true;
-            tsbPartsRemove.Enabled = (selBackup != null);
-            tsbPartsEdit.Enabled = (selBackup != null);
-            tsbPartsChangeCategory.Enabled = (selBackup != null);
+            tsbPartsRemove.Enabled = (selPart != null);
+            tsbPartsEdit.Enabled = (selPart != null);
+            tsbPartsChangeCategory.Enabled = (selPart != null);
             cbCategoryFilter.Enabled = true;
             cbModFilter.Enabled = true;
             tvParts.Enabled = true;
+        }
+
+        private void cmsParts_Opening(object sender, CancelEventArgs e)
+        {
+            var selPart = SelectedPart;
+            tsmiPartsRemovePart.Enabled = (selPart != null);
+            tsmiPartsEditPart.Enabled = (selPart != null);
+            tsmiPartsChangeCategory.Enabled = (selPart != null);
         }
     }
 }

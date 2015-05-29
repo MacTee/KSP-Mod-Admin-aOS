@@ -1,3 +1,31 @@
 <Language Name="fake" LongName="Fake language">
   <String Name="MSG_PARTSTAB_VIEW_TITLE" Value="(T)Parts"/>
+
+  <Control Name="tsbPartsRefresh" Value="(T)tsbPartsRefresh">
+    <ChildControl Name="tsbPartsRefresh_ToolTip" Value="(T)Refresh^Starts the scans of the KSP install directory for parts."/>
+  </Control>
+  <Control Name="tsbPartsRemove" Value="(T)tsbPartsRemove">
+    <ChildControl Name="tsbPartsRemove_ToolTip" Value="(T)Remove Part^Removes the part from the HD. If the part was added by a mod it will be unchecked and uninstalled."/>
+  </Control>
+  <Control Name="tsbPartsEdit" Value="(T)tsbPartsEdit">
+    <ChildControl Name="tsbPartsEdit_ToolTip" Value="(T)Edit part^Opens the Part editor."/>
+  </Control>
+  <Control Name="tsbPartsChangeCategory" Value="(T)tsbPartsChangeCategory">
+    <ChildControl Name="tsbPartsChangeCategory_ToolTip" Value="(T)Change category^Opens the Change part category dialog."/>
+  </Control>
+
+  <Control Name="gbPartsFilter" Value="(T)Filter:"/>
+  <Control Name="lblPartsFilterCategory" Value="(T)Category:"/>
+  <Control Name="lblPartsFilterMod" Value="(T)Mod:"/>
+  <Control Name="tsmiPartsRefresh" Value="(T)Refresh"/>
+  <Control Name="tsmiPartsRemovePart" Value="(T)Remove part"/>
+  <Control Name="tsmiPartsEditPart" Value="(T)Edit part"/>
+  <Control Name="tsmiPartsChangeCategory" Value="(T)Change category"/>
+
+  <String Name="UcPartsTabView_Item_00" Value="(T)Title/Craft"/>
+  <String Name="UcPartsTabView_Item_01" Value="(T)Part"/>
+  <String Name="UcPartsTabView_Item_02" Value="(T)Category"/>
+  <String Name="UcPartsTabView_Item_03" Value="(T)Mod"/>
+
+  <String Name="MSG_PARTS_COUNT_TEXT" Value="(T){0} ({1}) Parts"/>
 </Language>
