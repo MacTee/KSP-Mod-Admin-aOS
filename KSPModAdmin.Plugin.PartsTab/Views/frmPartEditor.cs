@@ -7,7 +7,7 @@ using KSPModAdmin.Core.Views;
 namespace KSPModAdmin.Plugin.PartsTab.Views
 {
     [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Reviewed. Suppression is OK here.")]
-    public partial class frmNameSelection : frmBase
+    public partial class frmPartEditor : frmBase
     {
         #region Properties
 
@@ -20,6 +20,22 @@ namespace KSPModAdmin.Plugin.PartsTab.Views
         /// Gets or sets the tbNewTitle Text property.
         /// </summary>
         public string NewTitle { get { return tbNewTitle.Text; } set { tbNewTitle.Text = value; } }
+
+        /// <summary>
+        /// Gets or sets the selected part category.
+        /// </summary>
+        public string NewCategory
+        {
+            get { return (string)cbCategory.SelectedItem; }
+            set
+            {
+                foreach (string item in cbCategory.Items)
+                {
+                    if (item == value)
+                        cbCategory.SelectedItem = item;
+                }
+            }
+        }
 
         /// <summary>
         /// Gets or sets the Description Text.
@@ -38,7 +54,7 @@ namespace KSPModAdmin.Plugin.PartsTab.Views
         /// <summary>
         /// Creates a new instance of the frmNameSelection class.
         /// </summary>
-        public frmNameSelection()
+        public frmPartEditor()
         {
             InitializeComponent();
         }
@@ -55,6 +71,9 @@ namespace KSPModAdmin.Plugin.PartsTab.Views
             tbNewName.Select();
             tbNewName.SelectAll();
             tbNewName.Focus();
+
+            if (cbCategory.SelectedIndex < 0)
+                cbCategory.SelectedIndex = 0;
         }
 
         /// <summary>

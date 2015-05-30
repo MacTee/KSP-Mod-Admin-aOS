@@ -23,6 +23,14 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
     public class PartsTabViewController
     {
         #region Members
+        private const string PROPULSION = "Propulsion";
+        private const string CONTROL = "Control";
+        private const string STRUCTURAL = "Structural";
+        private const string AERO = "Aero";
+        private const string UTILITY = "Utility";
+        private const string SCIENCE = "Science";
+        private const string PODS = "Pods";
+        private const string EXTENSION_CFG = "*.cfg";
 
         /// <summary>
         /// Default filter to display all content.
@@ -65,6 +73,7 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
 
             EventDistributor.AsyncTaskStarted += AsyncTaskStarted;
             EventDistributor.AsyncTaskDone += AsyncTaskDone;
+            EventDistributor.KSPRootChanged += KSPRootChanged;
 
             // Add your stuff to initialize here.
             View.Model = model;
@@ -103,6 +112,21 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
             View.SetEnabledOfAllControls(true);
         }
 
+        private static void KSPRootChanged(string kspPath)
+        {
+            allNodes.Clear();
+            model.Nodes.Clear();
+
+            allModFilter.Clear();
+            allModFilter.Add(All);
+            allModFilter.Add(Squad);
+
+            View.SelectedCategoryFilter = All;
+            View.SelectedModFilter = All;
+
+            View.InvalidateView();
+        }
+
         #endregion
 
         /// <summary>
@@ -139,16 +163,18 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
             EventDistributor.InvokeAsyncTaskStarted(Instance);
             AsyncTask<bool>.DoWork(() =>
                 {
+                    Messenger.AddInfo(Messages.MSG_PART_SCAN_STARTED);
+
                     // Get part.cfg files from GameData folder.
                     string gameDatePath = KSPPathHelper.GetPath(KSPPaths.GameData);
-                    string[] files = Directory.GetFiles(gameDatePath, "*.cfg", SearchOption.AllDirectories);
+                    string[] files = Directory.GetFiles(gameDatePath, EXTENSION_CFG, SearchOption.AllDirectories);
 
                     // Get part.cfg files from additional folders.
                     string partsPath = KSPPathHelper.GetPath(KSPPaths.Parts);
                     string[] addPaths = new[] { partsPath };
                     foreach (var path in addPaths)
                     {
-                        string[] files2 = Directory.GetFiles(path, "*.cfg", SearchOption.AllDirectories);
+                        string[] files2 = Directory.GetFiles(path, EXTENSION_CFG, SearchOption.AllDirectories);
                         int oldLength = files.Length;
                         Array.Resize<string>(ref files, oldLength + files2.Length);
                         Array.Copy(files2, 0, files, oldLength, files2.Length);
@@ -159,6 +185,7 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
                     if (files.Length > 0)
                         foreach (string file in files)
                         {
+                            Messenger.AddInfo(string.Format(Messages.MSG_SCAN_FILE_0_FOR_PARTS, file));
                             var newNodes = CreatePartNodes(file);
                             foreach (var newNode in newNodes)
                             {
@@ -167,11 +194,13 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
                             }
                         }
                     else
-                        Messenger.AddInfo(string.Format("No part.cfg files found in \"{0}\".", gameDatePath));
+                        Messenger.AddInfo(string.Format(Messages.MSG_NO_PARTCFG_FOUND_0, gameDatePath));
 
                     allNodes.Clear();
                     foreach (PartNode node in nodes)
                         allNodes.Add(node);
+
+                    Messenger.AddInfo(Messages.MSG_PART_SCAN_DONE);
 
                     return true;
                 },
@@ -181,7 +210,7 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
                     EventDistributor.InvokeAsyncTaskDone(Instance);
 
                     if (ex != null)
-                        MessageBox.Show("Error during part reading! \"" + ex.Message + "\"");
+                        Messenger.AddError(string.Format(Messages.MSG_ERROR_DURING_PART_READING_0, ex.Message), ex);
                     else
                         RefreshTreeView();
                     
@@ -199,17 +228,11 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
         {
             var result = new List<PartNode>();
             if (string.IsNullOrEmpty(file))
-            {
-                Messenger.AddInfo(string.Format("Error during part reading.{0}Path is empty.", Environment.NewLine));
                 return result;
-            }
 
             string[] lines = File.ReadLines(file).ToArray();
             if (lines.Length == 0)
-            {
-                Messenger.AddInfo(string.Format("Error during part reading \"{0}\"{1}File content empty.", file, Environment.NewLine));
                 return result;
-            }
 
             int braceCount = 0;
             bool isPartFile = false;
@@ -219,7 +242,7 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
             {
                 if (line == null)
                 {
-                    Messenger.AddError(string.Format("Error during part reading \"{0}\"{1}Enexpected 'null' line.", file, Environment.NewLine));
+                    Messenger.AddError(string.Format(Messages.MSG_ERROR_DURING_PART_READING_0_UNEXPECTED_EMPTY_LINE, file));
                     continue;
                 }
 
@@ -279,7 +302,10 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
         private static void AddNode(PartNode node, List<PartNode> list)
         {
             if (node != null && !string.IsNullOrEmpty(node.Name) && !list.Contains(node))
+            {
+                Messenger.AddInfo(string.Format(Messages.MSG_PART_FOUND_AND_ADDED_0, node.Name));
                 list.Add(node);
+            }
         }
 
         /// <summary>
@@ -291,9 +317,9 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
         {
             PartNode partNode = new PartNode();
             partNode.FilePath = KSPPathHelper.GetRelativePath(file);
-            if (file.Contains("GameData"))
+            if (file.Contains(Constants.GAMEDATA))
             {
-                string mod = file.Substring(file.IndexOf("GameData") + 9);
+                string mod = file.Substring(file.IndexOf(Constants.GAMEDATA) + 9);
                 mod = mod.Substring(0, mod.IndexOf("\\"));
                 partNode.Mod = mod;
 
@@ -319,7 +345,7 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
             {
                 string[] nameValuePair = tempLine.Split('=');
                 if (nameValuePair.Length != 2)
-                    Messenger.AddError(string.Format("Error during part reading \"{0}\"{1}Name / title parameter missmatch.", file, Environment.NewLine));
+                    Messenger.AddError(string.Format(Messages.MSG_ERROR_DURING_PART_READING_0_NAME_TITLE_MISSMATCH, file));
 
                 else
                 {
@@ -333,7 +359,7 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
             {
                 string[] nameValuePair = tempLine.Split('=');
                 if (nameValuePair.Length != 2)
-                    Messenger.AddError(string.Format("Error during part reading \"{0}\"{1}Name / title parameter missmatch.", file, Environment.NewLine));
+                    Messenger.AddError(string.Format(Messages.MSG_ERROR_DURING_PART_READING_0_NAME_TITLE_MISSMATCH, file));
 
                 else
                 {
@@ -346,7 +372,7 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
             {
                 string[] nameValuePair = tempLine.Split('=');
                 if (nameValuePair.Length != 2)
-                    Messenger.AddError(string.Format("Error during part reading \"{0}\"{1}Name / title parameter missmatch.", file, Environment.NewLine));
+                    Messenger.AddError(string.Format(Messages.MSG_ERROR_DURING_PART_READING_0_NAME_TITLE_MISSMATCH, file));
 
                 else
                 {
@@ -368,19 +394,19 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
             switch (categoryIndex)
             {
                 case 0:
-                    return "Propulsion";
+                    return PROPULSION;
                 case 1:
-                    return "Control";
+                    return CONTROL;
                 case 2:
-                    return "Structural";
+                    return STRUCTURAL;
                 case 3:
-                    return "Aero";
+                    return AERO;
                 case 4:
-                    return "Utility";
+                    return UTILITY;
                 case 5:
-                    return "Science";
+                    return SCIENCE;
                 case 6:
-                    return "Pods";
+                    return PODS;
             }
 
             return string.Empty;
@@ -412,21 +438,22 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
 
             DialogResult dlgResult = DialogResult.Cancel;
             if (node == null)
-                dlgResult = MessageBox.Show(View.ParentForm, "The part you are trying to delete is not from a mod.\n\rDo you want to delete the part permanetly?", string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                dlgResult = MessageBox.Show(View.ParentForm, Messages.MSG_PART_NOT_FROM_MOD_DELETE_WARNING, string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
             if (partNode.Nodes != null && partNode.Nodes.Count > 0)
             {
                 StringBuilder sb = new StringBuilder();
-                sb.AppendLine("The part you are trying to delete is used by the following craft(s):");
+                sb.AppendLine(Messages.MSG_PART_USED_DELETE_WARNING);
                 foreach (var tempNode in partNode.Nodes)
                     sb.AppendFormat("- {0}{1}", tempNode.Text, Environment.NewLine);
                 sb.AppendLine();
-                sb.AppendLine("Delete it anyway?");
+                sb.AppendLine(Messages.MSG_DELETE_ANYWAY);
                 dlgResult = MessageBox.Show(View.ParentForm, sb.ToString(), string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             }
 
             if ((node != null || dlgResult == DialogResult.Yes) && Directory.Exists(partPath))
             {
+                Messenger.AddInfo(string.Format(Messages.MSG_DIR_0_OF_PART_1_DELETED, partPath, node.Name));
                 Directory.Delete(partPath, true);
 
                 if (node != null)
@@ -442,11 +469,13 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
                     node.SetChecked(false);
                     node.IsInstalled = false;
                     node.NodeType = NodeType.UnknownFolder;
+                    Messenger.AddInfo(string.Format(Messages.MSG_MODNODE_0_UNCHECKED, node.Name));
                     foreach (ModNode child in node.Nodes)
                     {
                         child.SetChecked(false);
                         child.IsInstalled = false;
                         child.NodeType = child.IsFile ? NodeType.UnknownFile : NodeType.UnknownFolder;
+                        Messenger.AddInfo(string.Format(Messages.MSG_MODNODE_0_UNCHECKED, child.Name));
                     }
                 }
 
@@ -457,26 +486,26 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
         
         #endregion
         
-        #region Edit/Rename Part
+        #region Edit Part
 
         /// <summary>
         /// Opens the PartEditor with the currently selected part.
         /// </summary>
         public static void EditSelectedPart()
         {
-            RenamePart(View.SelectedPart);
+            EditPart(View.SelectedPart);
         }
 
         /// <summary>
-        /// Asks the user for a new name for the part and renames it. 
+        /// Opens the Part Editor with the passed PartNode. 
         /// </summary>
-        /// <param name="partNode">The part node to rename.</param>
-        public static void RenamePart(PartNode partNode)
+        /// <param name="partNode">The part node to edit.</param>
+        public static void EditPart(PartNode partNode)
         {
-            frmNameSelection dlg = new frmNameSelection();
-            dlg.Description = "Please choose a new name (ATTANTION: This may corrupting crafts!).";
+            frmPartEditor dlg = new frmPartEditor();
             dlg.NewTitle = partNode.Title;
             dlg.NewName = partNode.Name;
+            dlg.NewCategory = partNode.Category;
             dlg.KnownNames = (from PartNode part in allNodes select part.Name).ToList();
             if (dlg.ShowDialog(View.ParentForm) == DialogResult.OK)
             {
@@ -484,61 +513,37 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
                 if (File.Exists(fullPath))
                 {
                     string allText = File.ReadAllText(fullPath);
-                    string newText = allText.Replace("name = " + partNode.Name, "name = " + dlg.NewName);
-                    newText = newText.Replace("title = " + partNode.Title, "title = " + dlg.NewTitle);
-                    File.WriteAllText(fullPath, newText);
-                    partNode.Name = dlg.NewName;
-                    partNode.Title = dlg.NewTitle;
-                    ////partNode.Text = partNode.ToString();
-                }
-            }
-        }
-        
-        #endregion
-
-        #region ChangeCategory
-
-        /// <summary>
-        /// Opens the ChangeCategory dialog to change the category of a part.
-        /// </summary>
-        public static void ChangeCategoryOfSelectedPart()
-        {
-            ChangeCategory(View.SelectedPart);
-        }
-
-        /// <summary>
-        /// Changes the category of the part.
-        /// </summary>
-        /// <param name="partNode">The node of the part to change the category from.</param>
-        /// <param name="newCategory">The new category to set the partNode to, if != empty the dialog will be skipped.</param>
-        public static void ChangeCategory(PartNode partNode, string newCategory = "")
-        {
-            frmPartCategorySelection dlg = new frmPartCategorySelection();
-            dlg.Category = partNode.Category;
-            if (newCategory != string.Empty || dlg.ShowDialog(View.ParentForm) == DialogResult.OK)
-            {
-                string category = newCategory;
-                if (newCategory == string.Empty)
-                    category = dlg.Category;
-                string fullPath = KSPPathHelper.GetAbsolutePath(partNode.FilePath);
-                if (File.Exists(fullPath))
-                {
-                    string allText = File.ReadAllText(fullPath);
-                    string newText = allText.Replace("category = " + partNode.Category, "category = " + category);
-                    File.WriteAllText(fullPath, newText);
-                    partNode.Category = category;
-
-                    foreach (var node in partNode.Nodes)
+                    string newText = allText;
+                    if (partNode.Name != dlg.NewName)
                     {
-                        if (node.Text.StartsWith("Category = "))
+                        newText = allText.Replace("name = " + partNode.Name, "name = " + dlg.NewName);
+                        Messenger.AddInfo(string.Format(Messages.MSG_NAME_OF_PART_0_CHANGED_1, partNode.Name, dlg.NewName));
+                        partNode.Name = dlg.NewName;
+                    }
+                    if (partNode.Title != dlg.NewTitle)
+                    {
+                        newText = newText.Replace("title = " + partNode.Title, "title = " + dlg.NewTitle);
+                        Messenger.AddInfo(string.Format(Messages.MSG_TITLE_OF_PART_0_CHANGED_FROM_1_TO_2, partNode.Name, partNode.Title, dlg.NewTitle));
+                        partNode.Title = dlg.NewTitle;
+                    }
+                    if (partNode.Category != dlg.NewCategory)
+                    {
+                        newText = allText.Replace("category = " + partNode.Category, "category = " + dlg.NewCategory);
+                        Messenger.AddInfo(string.Format(Messages.MSG_CATEGORY_OF_PART_0_CHANGED_FROM_1_TO_2, partNode.Name, partNode.Category, dlg.NewCategory));
+                        partNode.Category = dlg.NewCategory;
+
+                        foreach (var node in partNode.Nodes)
                         {
-                            node.Text = "Category = " + partNode.Category;
-                            break;
+                            if (node.Text.StartsWith("Category = "))
+                            {
+                                node.Text = "Category = " + partNode.Category;
+                                break;
+                            }
                         }
                     }
+                    File.WriteAllText(fullPath, newText);
                 }
             }
-            View.InvalidateView();
         }
         
         #endregion

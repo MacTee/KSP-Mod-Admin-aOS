@@ -42,7 +42,6 @@
             this.tsbPartsRemove = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbPartsEdit = new System.Windows.Forms.ToolStripButton();
-            this.tsbPartsChangeCategory = new System.Windows.Forms.ToolStripButton();
             this.tslPartsProcessing = new System.Windows.Forms.ToolStripLabel();
             this.tvParts = new KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.TreeViewAdv();
             this.cmsParts = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -51,7 +50,6 @@
             this.tsmiPartsRemovePart = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiPartsEditPart = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiPartsChangeCategory = new System.Windows.Forms.ToolStripMenuItem();
             this.gbPartsFilter = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tsParts.SuspendLayout();
@@ -138,7 +136,6 @@
             this.tsbPartsRemove,
             this.toolStripSeparator2,
             this.tsbPartsEdit,
-            this.tsbPartsChangeCategory,
             this.tslPartsProcessing});
             this.tsParts.Location = new System.Drawing.Point(0, 0);
             this.tsParts.Name = "tsParts";
@@ -191,18 +188,6 @@
             this.tsbPartsEdit.Text = "toolStripButton3";
             this.tsbPartsEdit.Click += new System.EventHandler(this.tsbPartsEdit_Click);
             // 
-            // tsbPartsChangeCategory
-            // 
-            this.tsbPartsChangeCategory.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbPartsChangeCategory.Enabled = false;
-            this.tsbPartsChangeCategory.Image = global::KSPModAdmin.Plugin.PartsTab.Properties.Resources.brick_replace_24x24;
-            this.tsbPartsChangeCategory.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.tsbPartsChangeCategory.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbPartsChangeCategory.Name = "tsbPartsChangeCategory";
-            this.tsbPartsChangeCategory.Size = new System.Drawing.Size(28, 28);
-            this.tsbPartsChangeCategory.Text = "toolStripButton4";
-            this.tsbPartsChangeCategory.Click += new System.EventHandler(this.tsbPartsChangeCategory_Click);
-            // 
             // tslPartsProcessing
             // 
             this.tslPartsProcessing.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -240,10 +225,9 @@
             this.toolStripSeparator3,
             this.tsmiPartsRemovePart,
             this.toolStripSeparator4,
-            this.tsmiPartsEditPart,
-            this.tsmiPartsChangeCategory});
+            this.tsmiPartsEditPart});
             this.cmsParts.Name = "cmsParts";
-            this.cmsParts.Size = new System.Drawing.Size(165, 126);
+            this.cmsParts.Size = new System.Drawing.Size(165, 104);
             this.cmsParts.Opening += new System.ComponentModel.CancelEventHandler(this.cmsParts_Opening);
             // 
             // tsmiPartsRefresh
@@ -279,14 +263,6 @@
             this.tsmiPartsEditPart.Size = new System.Drawing.Size(164, 22);
             this.tsmiPartsEditPart.Text = "Edit Part";
             this.tsmiPartsEditPart.Click += new System.EventHandler(this.tsbPartsEdit_Click);
-            // 
-            // tsmiPartsChangeCategory
-            // 
-            this.tsmiPartsChangeCategory.Image = global::KSPModAdmin.Plugin.PartsTab.Properties.Resources.brick_replace_24x24;
-            this.tsmiPartsChangeCategory.Name = "tsmiPartsChangeCategory";
-            this.tsmiPartsChangeCategory.Size = new System.Drawing.Size(164, 22);
-            this.tsmiPartsChangeCategory.Text = "Change category";
-            this.tsmiPartsChangeCategory.Click += new System.EventHandler(this.tsbPartsChangeCategory_Click);
             // 
             // gbPartsFilter
             // 
@@ -359,7 +335,6 @@
         private System.Windows.Forms.ToolStripButton tsbPartsRemove;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton tsbPartsEdit;
-        private System.Windows.Forms.ToolStripButton tsbPartsChangeCategory;
         private Core.Utils.Controls.Aga.Controls.Tree.TreeViewAdv tvParts;
         private System.Windows.Forms.GroupBox gbPartsFilter;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
@@ -370,6 +345,5 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiPartsRemovePart;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem tsmiPartsEditPart;
-        private System.Windows.Forms.ToolStripMenuItem tsmiPartsChangeCategory;
     }
 }

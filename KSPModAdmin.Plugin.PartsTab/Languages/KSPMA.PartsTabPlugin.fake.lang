@@ -20,7 +20,6 @@
   <Control Name="tsmiPartsRefresh" Value="(T)Refresh"/>
   <Control Name="tsmiPartsRemovePart" Value="(T)Remove part"/>
   <Control Name="tsmiPartsEditPart" Value="(T)Edit part"/>
-  <Control Name="tsmiPartsChangeCategory" Value="(T)Change category"/>
 
   <String Name="UcPartsTabView_Item_00" Value="(T)Title/Craft"/>
   <String Name="UcPartsTabView_Item_01" Value="(T)Part"/>
@@ -28,4 +27,27 @@
   <String Name="UcPartsTabView_Item_03" Value="(T)Mod"/>
 
   <String Name="MSG_PARTS_COUNT_TEXT" Value="(T){0} ({1}) Parts"/>
+
+  <Control Name="frmPartEditor" Value="(T)Part Editor (Experimental)"/>
+  <Control Name="lblPartEditorCategory" Value="(T)Category:"/>
+  <Control Name="lblNewTitle" Value="(T)Title:"/>
+  <Control Name="lblName" Value="(T)Name:"/>
+  <Control Name="lblNameSelectionDescription" Value="(T)Beware: Changes may break crafts or even the part.cfg file!"/>
+
+  <String Name="MSG_PART_SCAN_STARTED" Value="(T)Part scan started..."/>
+  <String Name="MSG_PART_SCAN_STARTED" Value="(T)Part scan done."/>
+  <String Name="MSG_SCAN_FILE_0_FOR_PARTS" Value="(T)Scan file &amp;quot;{0}&amp;quot; for parts..."/>
+  <String Name="MSG_NO_PARTCFG_FOUND_0" Value="(T)No part.cfg files found in &amp;quot;{0}&amp;quot;."/>
+  <String Name="MSG_ERROR_DURING_PART_READING_0" Value="(T)Error during part reading! &amp;quot;{0}&amp;quot;"/>
+  <String Name="MSG_ERROR_DURING_PART_READING_0_UNEXPECTED_EMPTY_LINE" Value="(T)Error during part reading &amp;quot;{0}&amp;quot;^Enexpected 'null' line."/>
+  <String Name="MSG_PART_FOUND_AND_ADDED_0" Value="(T)Part found and added &amp;quot;{0}&amp;quot;."/>
+  <String Name="MSG_ERROR_DURING_PART_READING_0_NAME_TITLE_MISSMATCH" Value="(T)Error during part reading &amp;quot;{0}&amp;quot;^Name / title / category parameter missmatch."/>
+  <String Name="MSG_PART_NOT_FROM_MOD_DELETE_WARNING" Value="(T)The part you are trying to delete is not from a mod.^Do you want to delete the part permanetly?"/>
+  <String Name="MSG_PART_USED_DELETE_WARNING" Value="(T)The part you are trying to delete is used by the following craft(s):"/>
+  <String Name="MSG_DELETE_ANYWAY" Value="(T)Delete it anyway?"/>
+  <String Name="MSG_DIR_0_OF_PART_1_DELETED" Value="(T)Directory &amp;quot;{0}&amp;quot; of part &amp;quot;{1}&amp;quot; deleted."/>
+  <String Name="MSG_MODNODE_0_UNCHECKED" Value="(T)ModNode &amp;quot;{0}&amp;quot; unchecked."/>
+  <String Name="MSG_NAME_OF_PART_0_CHANGED_1" Value="(T)Name of part &amp;quot;{0}&amp;quot; changed to &amp;quot;{1}&amp;quot;."/>
+  <String Name="MSG_TITLE_OF_PART_0_CHANGED_FROM_1_TO_2" Value="(T)Title of part &amp;quot;{0}&amp;quot; changed from &amp;quot;{1}&amp;quot; to &amp;quot;{2}&amp;quot;."/>
+  <String Name="MSG_CATEGORY_OF_PART_0_CHANGED_FROM_1_TO_2" Value="(T)Category of part &amp;quot;{0}&amp;quot; changed from &amp;quot;{1}&amp;quot; to &amp;quot;{2}&amp;quot;."/>
 </Language>

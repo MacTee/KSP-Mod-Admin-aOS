@@ -240,11 +240,6 @@ namespace KSPModAdmin.Plugin.PartsTab.Views
             PartsTabViewController.EditSelectedPart();
         }
 
-        private void tsbPartsChangeCategory_Click(object sender, EventArgs e)
-        {
-            PartsTabViewController.ChangeCategoryOfSelectedPart();
-        }
-
         private void tvParts_SelectionChanged(object sender, EventArgs e)
         {
             UpdateEnabldeState();
@@ -276,6 +271,13 @@ namespace KSPModAdmin.Plugin.PartsTab.Views
         private void Filter_SelectedIndexChanged(object sender, EventArgs e)
         {
             PartsTabViewController.RefreshTreeView();
+        }
+
+        private void cmsParts_Opening(object sender, CancelEventArgs e)
+        {
+            var selPart = SelectedPart;
+            tsmiPartsRemovePart.Enabled = (selPart != null);
+            tsmiPartsEditPart.Enabled = (selPart != null);
         }
 
         #endregion
@@ -325,7 +327,6 @@ namespace KSPModAdmin.Plugin.PartsTab.Views
                 tsbPartsRefresh.Enabled = enable;
                 tsbPartsRemove.Enabled = enable;
                 tsbPartsEdit.Enabled = enable;
-                tsbPartsChangeCategory.Enabled = enable;
                 cbCategoryFilter.Enabled = enable;
                 cbModFilter.Enabled = enable;
                 tvParts.Enabled = enable;
@@ -344,18 +345,9 @@ namespace KSPModAdmin.Plugin.PartsTab.Views
             tsbPartsRefresh.Enabled = true;
             tsbPartsRemove.Enabled = (selPart != null);
             tsbPartsEdit.Enabled = (selPart != null);
-            tsbPartsChangeCategory.Enabled = (selPart != null);
             cbCategoryFilter.Enabled = true;
             cbModFilter.Enabled = true;
             tvParts.Enabled = true;
-        }
-
-        private void cmsParts_Opening(object sender, CancelEventArgs e)
-        {
-            var selPart = SelectedPart;
-            tsmiPartsRemovePart.Enabled = (selPart != null);
-            tsmiPartsEditPart.Enabled = (selPart != null);
-            tsmiPartsChangeCategory.Enabled = (selPart != null);
         }
     }
 }

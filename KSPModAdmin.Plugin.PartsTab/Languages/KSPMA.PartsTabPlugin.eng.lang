@@ -20,7 +20,6 @@
   <Control Name="tsmiPartsRefresh" Value="Refresh"/>
   <Control Name="tsmiPartsRemovePart" Value="Remove part"/>
   <Control Name="tsmiPartsEditPart" Value="Edit part"/>
-  <Control Name="tsmiPartsChangeCategory" Value="Change category"/>
 
   <String Name="UcPartsTabView_Item_00" Value="Title/Craft"/>
   <String Name="UcPartsTabView_Item_01" Value="Part"/>
@@ -28,5 +27,28 @@
   <String Name="UcPartsTabView_Item_03" Value="Mod"/>
   
   <String Name="MSG_PARTS_COUNT_TEXT" Value="{0} ({1}) Parts"/>
+
+  <Control Name="frmPartEditor" Value="Part Editor (Experimental)"/>
+  <Control Name="lblPartEditorCategory" Value="Category:"/>
+  <Control Name="lblNewTitle" Value="Title:"/>
+  <Control Name="lblName" Value="Name:"/>
+  <Control Name="lblNameSelectionDescription" Value="Beware: Changes may break crafts or even the part.cfg file!"/>
+
+  <String Name="MSG_PART_SCAN_STARTED" Value="Part scan started..."/>
+  <String Name="MSG_PART_SCAN_STARTED" Value="Part scan done."/>
+  <String Name="MSG_SCAN_FILE_0_FOR_PARTS" Value="Scan file &amp;quot;{0}&amp;quot; for parts..."/>
+  <String Name="MSG_NO_PARTCFG_FOUND_0" Value="No part.cfg files found in &amp;quot;{0}&amp;quot;."/>
+  <String Name="MSG_ERROR_DURING_PART_READING_0" Value="Error during part reading! &amp;quot;{0}&amp;quot;"/>
+  <String Name="MSG_ERROR_DURING_PART_READING_0_UNEXPECTED_EMPTY_LINE" Value="Error during part reading &amp;quot;{0}&amp;quot;^Enexpected 'null' line."/>
+  <String Name="MSG_PART_FOUND_AND_ADDED_0" Value="Part found and added &amp;quot;{0}&amp;quot;."/>
+  <String Name="MSG_ERROR_DURING_PART_READING_0_NAME_TITLE_MISSMATCH" Value="Error during part reading &amp;quot;{0}&amp;quot;^Name / title / category parameter missmatch."/>
+  <String Name="MSG_PART_NOT_FROM_MOD_DELETE_WARNING" Value="The part you are trying to delete is not from a mod.^Do you want to delete the part permanetly?"/>
+  <String Name="MSG_PART_USED_DELETE_WARNING" Value="The part you are trying to delete is used by the following craft(s):"/>
+  <String Name="MSG_DELETE_ANYWAY" Value="Delete it anyway?"/>
+  <String Name="MSG_DIR_0_OF_PART_1_DELETED" Value="Directory &amp;quot;{0}&amp;quot; of part &amp;quot;{1}&amp;quot; deleted."/>
+  <String Name="MSG_MODNODE_0_UNCHECKED" Value="ModNode &amp;quot;{0}&amp;quot; unchecked."/>
+  <String Name="MSG_NAME_OF_PART_0_CHANGED_1" Value="Name of part &amp;quot;{0}&amp;quot; changed to &amp;quot;{1}&amp;quot;."/>
+  <String Name="MSG_TITLE_OF_PART_0_CHANGED_FROM_1_TO_2" Value="Title of part &amp;quot;{0}&amp;quot; changed from &amp;quot;{1}&amp;quot; to &amp;quot;{2}&amp;quot;."/>
+  <String Name="MSG_CATEGORY_OF_PART_0_CHANGED_FROM_1_TO_2" Value="Category of part &amp;quot;{0}&amp;quot; changed from &amp;quot;{1}&amp;quot; to &amp;quot;{2}&amp;quot;."/>
 
 </Language>

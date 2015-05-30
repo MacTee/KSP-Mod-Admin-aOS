@@ -77,17 +77,11 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Controller\PartsTabViewController.cs" />
-    <Compile Include="Views\frmNameSelection.cs">
+    <Compile Include="Views\frmPartEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\frmNameSelection.Designer.cs">
-      <DependentUpon>frmNameSelection.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\frmPartCategorySelection.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\frmPartCategorySelection.Designer.cs">
-      <DependentUpon>frmPartCategorySelection.cs</DependentUpon>
+    <Compile Include="Views\frmPartEditor.Designer.cs">
+      <DependentUpon>frmPartEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\ucPartsTabView.cs">
       <SubType>UserControl</SubType>
@@ -101,11 +95,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\frmNameSelection.resx">
-      <DependentUpon>frmNameSelection.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\frmPartCategorySelection.resx">
-      <DependentUpon>frmPartCategorySelection.cs</DependentUpon>
+    <EmbeddedResource Include="Views\frmPartEditor.resx">
+      <DependentUpon>frmPartEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ucPartsTabView.resx">
       <DependentUpon>ucPartsTabView.cs</DependentUpon>
