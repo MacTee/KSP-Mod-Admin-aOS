@@ -27,7 +27,11 @@
   <String Name="MSG_CREATING_DIR_0" Value="(T)Creating directory &quot;{0}&quot;."/>
   <String Name="MSG_FLAG_0_DELETED" Value="(T)Flag &quot;{0}&quot; deleted."/>
   <String Name="MSG_ERROR_DELETE_FLAG_0_FAILED" Value="(T)Error! Deleting flag &quot;{0}&quot; failed!"/>
-  <String Name="MSG_REALY_DELETE_FLAG_0" Value="Do you realy want to delete the flag &quot;{0}&quot;?"/>
+  <String Name="MSG_REALY_DELETE_FLAG_0" Value="(T)Do you realy want to delete the flag &quot;{0}&quot;?"/>
+  
+  <Control Name="tsmiFlagsTabRefresh" Value="(T)Refresh"/>
+  <Control Name="tsmiFlagsTabAddNewFlag" Value="(T)Add new Flag"/>
+  <Control Name="tsmiFlagsTabRemoveFlag" Value="(T)Remove flag"/>
 
 </Language>
   

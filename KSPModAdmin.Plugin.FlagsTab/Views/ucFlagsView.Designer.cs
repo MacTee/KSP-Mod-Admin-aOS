@@ -31,6 +31,11 @@
             this.components = new System.ComponentModel.Container();
             this.ttFlags = new System.Windows.Forms.ToolTip(this.components);
             this.lvFlags = new KSPModAdmin.Core.Utils.Controls.ListViewAdv();
+            this.cmsFlagsTab = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiFlagsTabRefresh = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmiFlagsTabAddNewFlag = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiFlagsTabRemoveFlag = new System.Windows.Forms.ToolStripMenuItem();
             this.ilFlags = new System.Windows.Forms.ImageList(this.components);
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsbFlagsRefresh = new System.Windows.Forms.ToolStripButton();
@@ -41,11 +46,13 @@
             this.tslModFilter = new System.Windows.Forms.ToolStripLabel();
             this.tsscbModFilter = new KSPModAdmin.Core.Utils.Controls.ToolStripSpringComboBox();
             this.tslProcessing = new System.Windows.Forms.ToolStripLabel();
+            this.cmsFlagsTab.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lvFlags
             // 
+            this.lvFlags.ContextMenuStrip = this.cmsFlagsTab;
             this.lvFlags.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvFlags.LargeImageList = this.ilFlags;
             this.lvFlags.Location = new System.Drawing.Point(0, 31);
@@ -54,6 +61,47 @@
             this.lvFlags.SmallImageList = this.ilFlags;
             this.lvFlags.TabIndex = 1;
             this.lvFlags.UseCompatibleStateImageBehavior = false;
+            this.lvFlags.SelectedIndexChanged += new System.EventHandler(this.lvFlags_SelectedIndexChanged);
+            // 
+            // cmsFlagsTab
+            // 
+            this.cmsFlagsTab.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiFlagsTabRefresh,
+            this.toolStripSeparator3,
+            this.tsmiFlagsTabAddNewFlag,
+            this.tsmiFlagsTabRemoveFlag});
+            this.cmsFlagsTab.Name = "cmsFlagsTab";
+            this.cmsFlagsTab.Size = new System.Drawing.Size(147, 76);
+            this.cmsFlagsTab.Opening += new System.ComponentModel.CancelEventHandler(this.cmsFlagsTab_Opening);
+            // 
+            // tsmiFlagsTabRefresh
+            // 
+            this.tsmiFlagsTabRefresh.Image = global::KSPModAdmin.Plugin.FlagsTab.Properties.Resources.refresh;
+            this.tsmiFlagsTabRefresh.Name = "tsmiFlagsTabRefresh";
+            this.tsmiFlagsTabRefresh.Size = new System.Drawing.Size(146, 22);
+            this.tsmiFlagsTabRefresh.Text = "Refresh";
+            this.tsmiFlagsTabRefresh.Click += new System.EventHandler(this.tsbFlagsRefresh_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(143, 6);
+            // 
+            // tsmiFlagsTabAddNewFlag
+            // 
+            this.tsmiFlagsTabAddNewFlag.Image = global::KSPModAdmin.Plugin.FlagsTab.Properties.Resources.flag_scotland_add_24x24;
+            this.tsmiFlagsTabAddNewFlag.Name = "tsmiFlagsTabAddNewFlag";
+            this.tsmiFlagsTabAddNewFlag.Size = new System.Drawing.Size(146, 22);
+            this.tsmiFlagsTabAddNewFlag.Text = "Add new Flag";
+            this.tsmiFlagsTabAddNewFlag.Click += new System.EventHandler(this.tsbAddFlag_Click);
+            // 
+            // tsmiFlagsTabRemoveFlag
+            // 
+            this.tsmiFlagsTabRemoveFlag.Image = global::KSPModAdmin.Plugin.FlagsTab.Properties.Resources.flag_scotland_delete_24x24;
+            this.tsmiFlagsTabRemoveFlag.Name = "tsmiFlagsTabRemoveFlag";
+            this.tsmiFlagsTabRemoveFlag.Size = new System.Drawing.Size(146, 22);
+            this.tsmiFlagsTabRemoveFlag.Text = "Remove flag";
+            this.tsmiFlagsTabRemoveFlag.Click += new System.EventHandler(this.tsbRemoveFlag_Click);
             // 
             // ilFlags
             // 
@@ -110,6 +158,7 @@
             // tsbRemoveFlag
             // 
             this.tsbRemoveFlag.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbRemoveFlag.Enabled = false;
             this.tsbRemoveFlag.Image = global::KSPModAdmin.Plugin.FlagsTab.Properties.Resources.flag_scotland_delete_24x24;
             this.tsbRemoveFlag.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbRemoveFlag.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -158,6 +207,7 @@
             this.Name = "ucFlagsView";
             this.Size = new System.Drawing.Size(540, 400);
             this.Load += new System.EventHandler(this.ucPluginView_Load);
+            this.cmsFlagsTab.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -179,5 +229,10 @@
         private Core.Utils.Controls.ToolStripSpringComboBox tsscbModFilter;
         private System.Windows.Forms.ToolStripLabel tslProcessing;
         private System.Windows.Forms.ImageList ilFlags;
+        private System.Windows.Forms.ContextMenuStrip cmsFlagsTab;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFlagsTabRefresh;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFlagsTabAddNewFlag;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFlagsTabRemoveFlag;
     }
 }

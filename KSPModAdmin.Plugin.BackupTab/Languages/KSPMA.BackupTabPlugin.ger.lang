@@ -92,4 +92,5 @@
   <Control Name="tsbBackupTabRemoveSelectedBackup" Value="Ausgewähltes backup entfernen"/>
   <Control Name="tsbBackupTabRemoveAllBackups" Value="Alle Backups entfernen"/>
   <Control Name="tsbBackupTabOpenBackupOptions" Value="Öffnen/Schließen der Backup Optionen"/>
+
 </Language>
