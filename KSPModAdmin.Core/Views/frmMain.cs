@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 using KSPModAdmin.Core.Controller;
 using KSPModAdmin.Core.Model;
@@ -77,6 +78,50 @@ namespace KSPModAdmin.Core.Views
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public ucKSPStartup UcKSPStartup { get { return ucKSPStartup1; } }
 
+        /// <summary>
+        /// Gets or sets the TabPage order by the unique identifier of the TabViews.
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public IEnumerable<string> TapOrder
+        {
+            get
+            {
+                var tabOrder = new List<string>();
+                foreach (TabPage tab in tabControl1.TabPages)
+                    if (tab.Tag != null)
+                        tabOrder.Add(tab.Tag.ToString());
+
+                return tabOrder;
+            }
+            set
+            {
+                if (value == null)
+                    return;
+
+                // get current TabPages
+                var oldTabPages = new List<TabPage>();
+                foreach (TabPage tab in tabControl1.TabPages)
+                    oldTabPages.Add(tab);
+                
+                tabControl1.TabPages.Clear();
+                
+                // Add TabPages in defined order.
+                foreach (string id in value)
+                {
+                    var tab = oldTabPages.FirstOrDefault(x => x.Tag != null && x.Tag.ToString() == id);
+                    if (tab == null)
+                        continue;
+                    tabControl1.TabPages.Add(tab);
+                    oldTabPages.Remove(tab);
+                }
+
+                // Add remaining TabPages.
+                foreach (TabPage remainingTab in oldTabPages)
+                    tabControl1.TabPages.Add(remainingTab);
+            }
+        }
+
 
         /// <summary>
         /// Creates a new instance of the frmMain class.
@@ -87,6 +132,9 @@ namespace KSPModAdmin.Core.Views
 
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime || DesignMode)
                 return;
+
+            tabPageModSelection.Tag = new Guid("{F6DC12F3-BAA4-47F7-ADE4-46DF57C8ECFA}");
+            tabPageOptions.Tag = new Guid("{66D27BD4-3A31-45D5-AB80-1DF61FDB48E5}");
         }
 
 
@@ -123,15 +171,6 @@ namespace KSPModAdmin.Core.Views
             SelectedKSPPath = null;
             SelectedKSPPath = kspPath;
             cbKSPPath.SelectedIndexChanged += cbKSPPath_SelectedIndexChanged;
-        }
-
-        /// <summary>
-        /// Options tab will be the last TabPage.
-        /// </summary>
-        internal void OrderTabPages()
-        {
-            tabControl1.TabPages.Remove(tabPageOptions);
-            tabControl1.TabPages.Add(tabPageOptions);
         }
     }
 }

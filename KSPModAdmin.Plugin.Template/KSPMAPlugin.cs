@@ -40,7 +40,7 @@ namespace KSPModAdmin.Plugin.Template
             get
             {
                 if (mMainTabViews == null)
-                    mMainTabViews = new[] { new TabView(new ucPluginView(), Resources.Unknown) };
+                    mMainTabViews = new[] { new TabView(new Guid("{13FC3AEC-83C4-4BF3-948C-209A9043AC04}"), new ucPluginView(), Resources.Unknown) };
 
                 return mMainTabViews;
             }

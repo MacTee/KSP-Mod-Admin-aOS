@@ -40,7 +40,7 @@ namespace KSPModAdmin.Plugin.PartsTab
             get
             {
                 if (mMainTabViews == null)
-                    mMainTabViews = new[] { new TabView(new ucPartsTabView(), Resources.bricks) };
+                    mMainTabViews = new[] { new TabView(new Guid("{7AE29F16-C3B9-4B63-BFE5-C85D48BC4757}"), new ucPartsTabView(), Resources.bricks) };
 
                 return mMainTabViews;
             }

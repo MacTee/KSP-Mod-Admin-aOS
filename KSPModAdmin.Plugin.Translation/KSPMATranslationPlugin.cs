@@ -39,7 +39,7 @@ namespace KSPModAdmin.Plugin.Translation
             get
             {
                 if (mMainTabViews == null)
-                    mMainTabViews = new[] { new TabView(new ucTranslationView(), Resources.text) };
+                    mMainTabViews = new[] { new TabView(new Guid("{8CD4B6DC-E336-4F8D-A301-E19760736FF7}"), new ucTranslationView(), Resources.text) };
 
                 return mMainTabViews;
             }

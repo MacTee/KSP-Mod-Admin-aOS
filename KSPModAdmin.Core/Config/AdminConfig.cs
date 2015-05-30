@@ -397,6 +397,19 @@ namespace KSPModAdmin.Core.Config
                         OptionsController.Color4OutdatedMods = (att.Value.Equals(Constants.TRUE, StringComparison.CurrentCultureIgnoreCase));
                 }
             }
+            
+            var tabOrder = new List<string>();
+            nodes = doc.GetElementsByTagName(Constants.TAB);
+            foreach (XmlNode n in nodes)
+            {
+                foreach (XmlAttribute att in n.Attributes)
+                {
+                    if (att.Name == Constants.UNIQUEIDENTIFIER && att.Value != null)
+                        tabOrder.Add(att.Value);
+                }
+            }
+            if (tabOrder.Count > 0)
+                MainController.LastTabOrder = tabOrder;
 
             return true;
         }
@@ -603,6 +616,15 @@ namespace KSPModAdmin.Core.Config
             // No Color 4 Outdated Mods
             node = ConfigHelper.CreateConfigNode(doc, Constants.COLOR4OUTDATEDMODS, Constants.VALUE, OptionsController.Color4OutdatedMods.ToString());
             generalNode.AppendChild(node);
+
+            // Tab order.
+            XmlNode tabOrderNode = doc.CreateElement(Constants.TABORDER);
+            foreach (string tabIdentifier in MainController.TapOrder)
+            {
+                XmlNode tabNode = ConfigHelper.CreateConfigNode(doc, Constants.TAB, new string[,] { { Constants.UNIQUEIDENTIFIER, tabIdentifier } });
+                tabOrderNode.AppendChild(tabNode);
+            }
+            generalNode.AppendChild(tabOrderNode);
 
             doc.Save(path);
 

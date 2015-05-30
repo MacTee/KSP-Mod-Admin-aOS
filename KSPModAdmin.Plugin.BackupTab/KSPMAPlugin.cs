@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using KSPModAdmin.Core;
 using KSPModAdmin.Plugin.BackupTab.Properties;
 using KSPModAdmin.Plugin.BackupTab.Views;
@@ -38,7 +39,7 @@ namespace KSPModAdmin.Plugin.BackupTab
             get
             {
                 if (mMainTabViews == null)
-                    mMainTabViews = new[] { new TabView(new UcBackupView(), Resources.data) };
+                    mMainTabViews = new[] { new TabView(new Guid("{7C7CBE6F-80F3-46FD-8820-DDFF58C281ED}"), new UcBackupView(), Resources.data) };
 
                 return mMainTabViews;
             }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using KSPModAdmin.Core.Utils.Controls;
 using KSPModAdmin.Core.Utils.Localization;
 
 namespace KSPModAdmin.Core.Views
@@ -33,7 +34,7 @@ namespace KSPModAdmin.Core.Views
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabControl1 = new TabControlEx();
             this.tabPageModSelection = new System.Windows.Forms.TabPage();
             this.ucModSelection1 = new KSPModAdmin.Core.Views.ucModSelection();
             this.ucKSPStartup1 = new KSPModAdmin.Core.Views.ucKSPStartup();
@@ -69,6 +70,8 @@ namespace KSPModAdmin.Core.Views
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(689, 540);
             this.tabControl1.TabIndex = 0;
+            this.tabControl1.AllowDrop = true;
+            this.tabControl1.AllowTabDrag = true;
             // 
             // tabPageModSelection
             // 
@@ -243,7 +246,7 @@ namespace KSPModAdmin.Core.Views
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabControl1;
+        private TabControlEx tabControl1;
         private System.Windows.Forms.TabPage tabPageModSelection;
         private System.Windows.Forms.Label lblKSPPath;
         internal System.Windows.Forms.ComboBox cbKSPPath;
