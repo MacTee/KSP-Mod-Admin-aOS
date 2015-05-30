@@ -24,7 +24,14 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
     {
         #region Members
 
+        /// <summary>
+        /// Default filter to display all content.
+        /// </summary>
         public const string All = "All";
+
+        /// <summary>
+        /// Filter for Squat related content.
+        /// </summary>
         public const string Squad = "Squad";
 
         private static PartsTabViewController instance = null;
@@ -98,11 +105,17 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
 
         #endregion
 
+        /// <summary>
+        /// Clears the TreeView and starts a new scan for parts.
+        /// </summary>
         public static void RefreshPartsTab()
         {
             ScanDir();
         }
 
+        /// <summary>
+        /// Refreshes the TreeView without a new scan.
+        /// </summary>
         public static void RefreshTreeView()
         {
             FillTreeView(allNodes);
@@ -172,15 +185,16 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
                     else
                         RefreshTreeView();
                     
-                    //if (ScanComplete != null)
-                    //    ScanComplete(GetListOfAllParts());
+                    ////if (ScanComplete != null)
+                    ////    ScanComplete(GetListOfAllParts());
                 });
         }
 
         /// <summary>
-        /// Adds the passe part to the internal part list.
+        /// Parses the file content and creates a PartNode foreach found part.
         /// </summary>
-        /// <param name="file">fullpath to the part file.</param>
+        /// <param name="file">Full path to the part file.</param>
+        /// <returns>A list of PartNodes from the passed file.</returns>
         private static List<PartNode> CreatePartNodes(string file)
         {
             var result = new List<PartNode>();
@@ -215,7 +229,7 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
                     isWithinPartDev = true;
                     braceCount += 1;
                     AddNode(partNode, result);
-                    partNode = GetNewPartNode(file);
+                    partNode = CreateNewPartNode(file);
                 }
 
                 else if (line.ToLower().Trim().StartsWith("part"))
@@ -228,7 +242,7 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
                     {
                         isWithinPartDev = true;
                         AddNode(partNode, result);
-                        partNode = GetNewPartNode(file);
+                        partNode = CreateNewPartNode(file);
                     }
                     else
                         isWithinPartDev = false;
@@ -272,8 +286,8 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
         /// Creates a new default TreeNodePart.
         /// </summary>
         /// <param name="file">The full path of the part cfg file.</param>
-        /// <returns></returns>
-        private static PartNode GetNewPartNode(string file)
+        /// <returns>The new created PartNode from the passed file.</returns>
+        private static PartNode CreateNewPartNode(string file)
         {
             PartNode partNode = new PartNode();
             partNode.FilePath = KSPPathHelper.GetRelativePath(file);
@@ -348,6 +362,7 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
         /// <summary>
         /// Translate the category number to a category string.
         /// </summary>
+        /// <returns>The translated string of the category index.</returns>
         private static string TranslateCategoryIndex(int categoryIndex)
         {
             switch (categoryIndex)
@@ -397,7 +412,7 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
 
             DialogResult dlgResult = DialogResult.Cancel;
             if (node == null)
-                dlgResult = MessageBox.Show(View.ParentForm, "The part you are trying to delete is not from a mod.\n\rDo you want to delete the part permanetly?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                dlgResult = MessageBox.Show(View.ParentForm, "The part you are trying to delete is not from a mod.\n\rDo you want to delete the part permanetly?", string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
             if (partNode.Nodes != null && partNode.Nodes.Count > 0)
             {
@@ -407,7 +422,7 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
                     sb.AppendFormat("- {0}{1}", tempNode.Text, Environment.NewLine);
                 sb.AppendLine();
                 sb.AppendLine("Delete it anyway?");
-                dlgResult = MessageBox.Show(View.ParentForm, sb.ToString(), "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                dlgResult = MessageBox.Show(View.ParentForm, sb.ToString(), string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             }
 
             if ((node != null || dlgResult == DialogResult.Yes) && Directory.Exists(partPath))
@@ -418,9 +433,9 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
                 {
                     if (partNode.Nodes != null)
                     {
-                        // TODO: Remove attached craft nodes.
-                        //foreach (var n in partNode.Nodes)
-                        //    ((TreeNodeCraft)n.Tag).RemovePartRelation(partNode);
+                        //// TODO: Remove attached craft nodes.
+                        ////foreach (var n in partNode.Nodes)
+                        ////    ((TreeNodeCraft)n.Tag).RemovePartRelation(partNode);
                     }
 
                     node = node.Parent as ModNode;
@@ -444,6 +459,9 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
         
         #region Edit/Rename Part
 
+        /// <summary>
+        /// Opens the PartEditor with the currently selected part.
+        /// </summary>
         public static void EditSelectedPart()
         {
             RenamePart(View.SelectedPart);
@@ -453,7 +471,6 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
         /// Asks the user for a new name for the part and renames it. 
         /// </summary>
         /// <param name="partNode">The part node to rename.</param>
-        /// <param name="newName">The new name to set, if != empty the dilaog will be skipped.</param>
         public static void RenamePart(PartNode partNode)
         {
             frmNameSelection dlg = new frmNameSelection();
@@ -472,7 +489,7 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
                     File.WriteAllText(fullPath, newText);
                     partNode.Name = dlg.NewName;
                     partNode.Title = dlg.NewTitle;
-                    //partNode.Text = partNode.ToString();
+                    ////partNode.Text = partNode.ToString();
                 }
             }
         }
@@ -481,6 +498,9 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
 
         #region ChangeCategory
 
+        /// <summary>
+        /// Opens the ChangeCategory dialog to change the category of a part.
+        /// </summary>
         public static void ChangeCategoryOfSelectedPart()
         {
             ChangeCategory(View.SelectedPart);
@@ -490,7 +510,7 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
         /// Changes the category of the part.
         /// </summary>
         /// <param name="partNode">The node of the part to change the category from.</param>
-        /// <param name="newCategory">The new category to set the partNode to, if != empty the dilaog will be skipped.</param>
+        /// <param name="newCategory">The new category to set the partNode to, if != empty the dialog will be skipped.</param>
         public static void ChangeCategory(PartNode partNode, string newCategory = "")
         {
             frmPartCategorySelection dlg = new frmPartCategorySelection();
@@ -524,7 +544,7 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
         #endregion
 
         /// <summary>
-        /// Fills the TreView dependent on the filter settings.
+        /// Fills the TreeView dependent on the filter settings.
         /// </summary>
         private static void FillTreeView(List<PartNode> nodes)
         {
@@ -534,8 +554,8 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
             filling = true;
             View.InvokeIfRequired(() => model.Nodes.Clear());
 
-            // TODO: Sort by mod and name
-            //allNodes.Nodes.Sort((p1, p2) => p1.Title.CompareTo(p2.Title));
+            //// TODO: Sort by mod and name
+            ////allNodes.Nodes.Sort((p1, p2) => p1.Title.CompareTo(p2.Title));
 
             int count = 0;
             string catFilter = View.SelectedCategoryFilter;

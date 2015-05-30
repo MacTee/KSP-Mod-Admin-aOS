@@ -50,7 +50,7 @@
             this.tbNewName.Name = "tbNewName";
             this.tbNewName.Size = new System.Drawing.Size(304, 20);
             this.tbNewName.TabIndex = 1;
-            this.tbNewName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tb_KeyDown);
+            this.tbNewName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
             // 
             // lblNameSelectionDescription
             // 
@@ -152,7 +152,7 @@
             this.tbNewTitle.Name = "tbNewTitle";
             this.tbNewTitle.Size = new System.Drawing.Size(304, 20);
             this.tbNewTitle.TabIndex = 1;
-            this.tbNewTitle.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tb_KeyDown);
+            this.tbNewTitle.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
             // 
             // frmNameSelection
             // 

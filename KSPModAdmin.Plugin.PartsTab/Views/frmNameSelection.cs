@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Windows.Forms;
 using KSPModAdmin.Core.Views;
 
 namespace KSPModAdmin.Plugin.PartsTab.Views
 {
+    [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Reviewed. Suppression is OK here.")]
     public partial class frmNameSelection : frmBase
     {
         #region Properties
@@ -46,10 +48,8 @@ namespace KSPModAdmin.Plugin.PartsTab.Views
         #region Event handling
 
         /// <summary>
-        /// Handels the Load event of the frmNameSelection
+        /// Handles the Load event of the frmNameSelection
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void frmNameSelection_Load(object sender, EventArgs e)
         {
             tbNewName.Select();
@@ -58,10 +58,8 @@ namespace KSPModAdmin.Plugin.PartsTab.Views
         }
 
         /// <summary>
-        /// Handels the Click event of the btnOK
+        /// Handles the Click event of the btnOK
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnOK_Click(object sender, EventArgs e)
         {
             if (tbNewName.Text.Length == 0)
@@ -78,10 +76,8 @@ namespace KSPModAdmin.Plugin.PartsTab.Views
         }
 
         /// <summary>
-        /// Handels the Click event of the btnCancel
+        /// Handles the Click event of the btnCancel
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnCancel_Click(object sender, EventArgs e)
         {
             DialogResult = System.Windows.Forms.DialogResult.Cancel;
@@ -89,11 +85,9 @@ namespace KSPModAdmin.Plugin.PartsTab.Views
         }
 
         /// <summary>
-        /// Handels the KeyDown event of the tbNewName
+        /// Handles the KeyDown event of the tbNewName
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void tb_KeyDown(object sender, KeyEventArgs e)
+        private void TextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
                 btnOK_Click(null, null);

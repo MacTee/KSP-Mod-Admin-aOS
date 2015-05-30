@@ -3,6 +3,9 @@ using KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree;
 
 namespace KSPModAdmin.Plugin.PartsTab.Model
 {
+    /// <summary>
+    /// Model for UcPartsTabView TreeViewAdv.
+    /// </summary>
     public class PartsTreeModel : TreeModel
     {
         /// <summary>

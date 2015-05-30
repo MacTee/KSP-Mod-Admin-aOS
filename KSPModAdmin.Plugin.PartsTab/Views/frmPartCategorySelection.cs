@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using KSPModAdmin.Core.Views;
 
 namespace KSPModAdmin.Plugin.PartsTab.Views
 {
+    [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Reviewed. Suppression is OK here.")]
     public partial class frmPartCategorySelection : frmBase
     {
         #region Properties
@@ -42,8 +44,6 @@ namespace KSPModAdmin.Plugin.PartsTab.Views
         /// <summary>
         /// Handel the Load event of the frmPartCategorySelection.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void frmPartCategorySelection_Load(object sender, EventArgs e)
         {
             if (cbCategory.SelectedIndex < 0)
@@ -55,8 +55,6 @@ namespace KSPModAdmin.Plugin.PartsTab.Views
         /// <summary>
         /// Handel the Click event of the btnOK.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnOK_Click(object sender, EventArgs e)
         {
             DialogResult = System.Windows.Forms.DialogResult.OK;
@@ -66,8 +64,6 @@ namespace KSPModAdmin.Plugin.PartsTab.Views
         /// <summary>
         /// Handel the Click event of the btnCancel.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnCancel_Click(object sender, EventArgs e)
         {
             DialogResult = System.Windows.Forms.DialogResult.Cancel;
