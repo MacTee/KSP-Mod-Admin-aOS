@@ -4,6 +4,9 @@
   <Control Name="tsbRefreshBackupview" Value="tsbRefreshBackupview">
     <ChildControl Name="tsbRefreshBackupview_ToolTip" Value="Aktualisieren^Skannt erneut den Backup Ordner."/>
   </Control>
+  <Control Name="tsbEditBackupNote" Value="tsbEditBackupNote">
+    <ChildControl Name="tsbEditBackupNote_ToolTip" Value="Backup Notiz beaebeiten^Offnet den Backup Notiz bearbeiten Dialog."/>
+  </Control>
   <Control Name="tsbNewBackup" Value="tsbNewBackup">
     <ChildControl Name="tsbNewBackup_ToolTip" Value="Neues Backup erstellen^Öffnet den Ordner Auswähldialog und erzeugt dann ein Backup des ausgewählten Ordners."/>
   </Control>
@@ -16,14 +19,11 @@
   <Control Name="tsbRemoveAllBackups" Value="tsbRemoveAllBackups">
     <ChildControl Name="tsbRemoveAllBackups_ToolTip" Value="Alle Backups entfernen^Löscht und entfernt alle backups des Backup Ordners."/>
   </Control>
-  <Control Name="tsbRefreshBackupview" Value="tsbRefreshBackupview">
-    <ChildControl Name="tsbRefreshBackupview_ToolTip" Value="Aktualisieren^Scant den Backup Ordner und füllte die Tabelle erneut."/>
-  </Control>
   <Control Name="btnOpenBackupDir" Value="">
     <ChildControl Name="btnOpenBackupDir_ToolTip" Value="Öffne Backup Ordner^Öffnet den Backup Ordner in einem Explorer Fenster."/>
   </Control>
   <Control Name="btnBackupPath" Value="">
-    <ChildControl Name="btnBackupPath_ToolTip" Value="Neuen Backup Ordner auswählen^Öffnet den Ordner Auswahldialog um einen neuen Backup Ordner zu wählen."/>
+    <ChildControl Name="btnBackupPath_ToolTip" Value="Neuen Backup Ordner wählen^Öffnet den Ordner Auswahldialog um einen neuen Backup Ordner zu wählen."/>
   </Control>
   <Control Name="lblSelectBackupPathFirst" Value="Bitte einen Backup Ordner wählen (Knopf rechts oben in der Ecke)."/>
   <Control Name="btnRecoverBackup" Value="Backup wieder herstellen">
@@ -82,4 +82,14 @@
   <String Name="MSG_BACKUP_LOAD_ERROR_0" Value="Fehler während des ladens des Backups: &quot;{0}&quot;"/>;
   <String Name="MSG_BACKUP_FOLDER_NOT_FOUND_0" Value="Backup Ordner nicht gefunden! &quot;{0}&quot;"/>;
   <String Name="MSG_BACKUP_STARTED" Value="Backup gestartet..."/>;
+
+  <Control Name="tsbBackupTabRefresh" Value="Aktualisieren"/>
+  <Control Name="tsbBackupTabOpenBackupDir" Value="Öffne Backup Ordner"/>
+  <Control Name="tsbBackupTabSelectNewBackupDir" Value="Neuen Backup Ordner wählen"/>
+  <Control Name="tsbBackupTabEditBackupNote" Value="Backup Notiz beaebeiten"/>
+  <Control Name="tsbBackupTabNewBackup" Value="Neues Backup erstellen"/>
+  <Control Name="tsbBackupTabBackupSaveFolder" Value="Backup saves Ordner"/>
+  <Control Name="tsbBackupTabRemoveSelectedBackup" Value="Ausgewähltes backup entfernen"/>
+  <Control Name="tsbBackupTabRemoveAllBackups" Value="Alle Backups entfernen"/>
+  <Control Name="tsbBackupTabOpenBackupOptions" Value="Öffnen/Schließen der Backup Optionen"/>
 </Language>
