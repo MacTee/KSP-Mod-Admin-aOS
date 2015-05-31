@@ -245,6 +245,12 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Controller
             string[] lines = File.ReadLines(file).ToArray<string>();
             foreach (string line in lines)
             {
+                if (line == null)
+                {
+                    Messenger.AddError(string.Format(Messages.MSG_ERROR_DURING_CRAFT_READING_0_UNEXPECTED_EMPTY_LINE, file));
+                    continue;
+                }
+
                 string tempLine = line.Trim();
                 if (!partInfo)
                 {
@@ -289,7 +295,10 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Controller
                         string partName = tempLine.Split('=')[1].Trim();
                         partName = partName.Substring(0, partName.LastIndexOf("_"));
                         if (!craftNode.ContainsPart(partName))
+                        {
+                            Messenger.AddInfo(string.Format(Messages.MSG_PART_0_ADDED_TO_CRAFT_1, partName, craftNode.Name));
                             craftNode.Nodes.Add(new CraftNode() { Name = partName + " (1)", FilePath = partName });
+                        }
                         else
                         {
                             try
@@ -306,10 +315,11 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Controller
                                 string str = part.Name.Substring(i1, length);
                                 int i = int.Parse(str) + 1;
                                 part.Name = string.Format("{0} ({1})", partName, i);
+                                Messenger.AddInfo(string.Format(Messages.MSG_PARTCOUNT_FOR_PART_0_IN_CRAFT_1_CHANGED_TO_2, partName, craftNode.Name, i));
                             }
                             catch (Exception ex)
                             {
-                                Messenger.AddError(ex.Message, ex);
+                                Messenger.AddError(string.Format(Messages.MSG_ERROR_DURING_CRAFT_READING_0, file), ex);
                             }
                         }
                     }
@@ -357,10 +367,14 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Controller
 
             AsyncTask<bool>.DoWork(() =>
                 {
+                    Messenger.AddInfo(Messages.MSG_CRAFT_VALIDATION_STARTED);
+
                     View.InvokeIfRequired(() => model.Nodes.Clear());
 
                     foreach (CraftNode craft in allCrafts)
                     {
+                        Messenger.AddInfo(string.Format(Messages.MSG_VALIDATING_CRAFT_0, craft.Name));
+
                         Dictionary<string, CraftNode> alreadyCheckedParts = new Dictionary<string, CraftNode>();
                         foreach (CraftNode part in craft.Nodes)
                         {
@@ -400,6 +414,11 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Controller
                             }
                         }
 
+                        if (craft.IsInvalidOrHasInvalidChilds)
+                            Messenger.AddInfo(string.Format(Messages.MSG_VALIDATING_CRAFT_0_FAILED, craft.Name));
+                        else
+                            Messenger.AddInfo(string.Format(Messages.MSG_VALIDATING_CRAFT_0_SUCCESSFUL, craft.Name));
+
                         ////craft.SortPartsByDisplayText();
                     }
 
@@ -412,9 +431,11 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Controller
                     PartsTabViewController.ScanComplete -= Parts_ScanComplete;
 
                     if (ex != null)
-                        MessageBox.Show(View.ParentForm, string.Format("Error during craft validating. \"{0}\"", ex.Message));
+                        MessageBox.Show(View.ParentForm, string.Format(Messages.MSG_ERROR_DURING_CRAFT_VALIDATION_0, ex.Message));
                     else
                         RefreshTreeView();
+
+                    Messenger.AddInfo(Messages.MSG_CRAFT_VALIDATION_DONE);
                 });
         }
 
@@ -444,6 +465,9 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Controller
                 string newPath = GetNewPath(craftNode, newType);
                 File.WriteAllText(fullPath, newText);
                 File.Move(fullPath, newPath);
+
+                Messenger.AddInfo(string.Format(Messages.MSG_BUILDING_OF_CRAFT_0_SWAPPED_1_2, craftNode.Name, craftNode.Type, newType));
+
                 craftNode.Type = newType;
                 craftNode.FilePath = newPath;
 
@@ -473,7 +497,7 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Controller
         private static string GetNewPath(CraftNode craftNode, string newType)
         {
             string fullPath = KSPPathHelper.GetAbsolutePath(craftNode.FilePath);
-            int index = fullPath.ToLower().IndexOf("\\" + craftNode.Type.ToLower() + "\\");
+            int index = fullPath.ToLower().IndexOf(Path.DirectorySeparatorChar + craftNode.Type.ToLower() + Path.DirectorySeparatorChar);
 
             if (index > -1)
             {
@@ -528,15 +552,18 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Controller
 
             DialogResult dlgResult = DialogResult.Cancel;
             if (node == null)
-                dlgResult = MessageBox.Show(View.ParentForm, "The craft you are trying to delete is not from a mod.\n\rDo you want to delete the craft permanetly?", string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                dlgResult = MessageBox.Show(View.ParentForm, Messages.MSG_CRAFT_NOT_FROM_MOD_DELETE_WARNING, string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
             if (node != null || dlgResult == DialogResult.Yes)
             {
                 if (File.Exists(craftPath))
                 {
                     File.Delete(craftPath);
+                    Messenger.AddInfo(string.Format(Messages.MSG_CRAFT_0_DELETED, craftPath));
+
                     if (node != null)
                     {
+                        Messenger.AddInfo(string.Format(Messages.MSG_MODSELECTION_UPDATED_PART_0, node.Name));
                         node.Checked = false;
                         node.NodeType = NodeType.UnknownFile;
                     }
@@ -546,7 +573,10 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Controller
                     foreach (CraftNode pNode in craftNode.Nodes)
                     {
                         if (pNode.RelatedPart != null)
+                        {
                             pNode.RelatedPart.RemoveCraft(craftNode);
+                            Messenger.AddInfo(string.Format(Messages.MSG_PARTTAB_UPDATED_PART_0, pNode.RelatedPart.Name));
+                        }
                     }
                 }
             }

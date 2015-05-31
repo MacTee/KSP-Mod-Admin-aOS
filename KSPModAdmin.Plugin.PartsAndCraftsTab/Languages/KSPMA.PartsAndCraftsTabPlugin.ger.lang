@@ -13,29 +13,26 @@
   <Control Name="tsbPartsChangeCategory" Value="tsbPartsChangeCategory">
     <ChildControl Name="tsbPartsChangeCategory_ToolTip" Value="Kategorie ändern^Öffnet den Dialog für die Categorieänderung."/>
   </Control>
-  
   <Control Name="gbPartsFilter" Value="Filter:"/>
   <Control Name="lblPartsFilterCategory" Value="Kategorie:"/>
   <Control Name="lblPartsFilterMod" Value="Mod:"/>
   <Control Name="tsmiPartsRefresh" Value="Aktualisieren"/>
   <Control Name="tsmiPartsRemovePart" Value="Bauteile entfernen"/>
   <Control Name="tsmiPartsEditPart" Value="Bauteile bearbeiten"/>
-
-  <String Name="UcPartsTabView_Item_00" Value="Titel/Flugkörper"/>
-  <String Name="UcPartsTabView_Item_01" Value="Bauteile"/>
-  <String Name="UcPartsTabView_Item_02" Value="Kategorie"/>
-  <String Name="UcPartsTabView_Item_03" Value="Mod"/>
-
-  <String Name="MSG_PARTS_COUNT_TEXT" Value="{0} ({1}) Bauteile"/>
-
-  <Control Name="frmPartEditor" Value="Part Editor (Experimental)"/>
+  <Control Name="frmPartEditor" Value="Bauteil Editor (Experimental)"/>
   <Control Name="lblPartEditorCategory" Value="Kategorie:"/>
   <Control Name="lblNewTitle" Value="Titel:"/>
   <Control Name="lblName" Value="Name:"/>
   <Control Name="lblNameSelectionDescription" Value="Achtung: Änderungen können Flugkörper unbrauchbar machen oder sogar die part.cfg datei zerstören!"/>
 
-  <String Name="MSG_PART_SCAN_STARTED" Value="Part Scan gestartet..."/>
-  <String Name="MSG_PART_SCAN_DONE" Value="Part scan beendet."/>
+  <String Name="UcPartsTabView_Item_00" Value="Titel/Flugkörper"/>
+  <String Name="UcPartsTabView_Item_01" Value="Bauteile"/>
+  <String Name="UcPartsTabView_Item_02" Value="Kategorie"/>
+  <String Name="UcPartsTabView_Item_03" Value="Mod"/>
+  
+  <String Name="MSG_PARTS_COUNT_TEXT" Value="{0} ({1}) Bauteile"/>
+  <String Name="MSG_PART_SCAN_STARTED" Value="Bauteilscan gestartet..."/>
+  <String Name="MSG_PART_SCAN_DONE" Value="Bauteilscan beendet."/>
   <String Name="MSG_SCAN_FILE_0_FOR_PARTS" Value="Scanne Datei &amp;quot;{0}&amp;quot; nach Bauteilen..."/>
   <String Name="MSG_NO_PARTCFG_FOUND_0" Value="Keine part.cfg Dateien in &amp;quot;{0}&amp;quot; gefunden."/>
   <String Name="MSG_ERROR_DURING_PART_READING_0" Value="Fehler während des lesens! &amp;quot;{0}&amp;quot;"/>
@@ -53,12 +50,6 @@
 
   
   <String Name="MSG_CRAFTSTAB_VIEW_TITLE" Value="Flugkörper"/>
-
-  <String Name="UcCraftsTabView_Item_00" Value="Flugkörper/Bauteil"/>
-  <String Name="UcCraftsTabView_Item_01" Value="Typ"/>
-  <String Name="UcCraftsTabView_Item_02" Value="Ordner"/>
-  <String Name="UcCraftsTabView_Item_03" Value="Version"/>
-  <String Name="UcCraftsTabView_Item_04" Value="Mods"/>
 
   <Control Name="tsbCraftsTabRefresh" Value="tsbCraftsTabRefresh">
     <ChildControl Name="tsbCraftsTabRefresh_ToolTip" Value="Aktualisieren^Startet den Flugkörperscann im KSP Installationsordner."/>
@@ -81,10 +72,33 @@
   </Control>
   <Control Name="tsmiCraftsTabRemoveCraft" Value="Flugkörper entfernen"/>
   <Control Name="tslBuildingFilter" Value="Gebäude filter:"/>
-
-  <!--<Control Name="lblCraftsTabCount" Value="Count: 0"/>-->
-  <String Name="MSG_CRAFTS_COUNT_TEXT" Value="{0} ({1}) Flugkörper"/>
-
   <Control Name="lblCraftsTabNote" Value="NOTIZ: Flugkörper mit fehlenden Bauteilen sind rot markiert."/>
+
+  <String Name="UcCraftsTabView_Item_00" Value="Flugkörper/Bauteil"/>
+  <String Name="UcCraftsTabView_Item_01" Value="Typ"/>
+  <String Name="UcCraftsTabView_Item_02" Value="Ordner"/>
+  <String Name="UcCraftsTabView_Item_03" Value="Version"/>
+  <String Name="UcCraftsTabView_Item_04" Value="Mods"/>
+  
+  <String Name="MSG_CRAFTS_COUNT_TEXT" Value="{0} ({1}) Flugkörper"/>
+  <String Name="MSG_CRAFT_SCAN_STARTED" Value="Flugkörperscann gestartet..."/>
+  <String Name="MSG_CRAFT_SCAN_DONE" Value="Flugkörperscann beendet."/>
+  <String Name="MSG_SCAN_FILE_0_FOR_CRAFTS" Value="Scanne Datei &amp;quot;{0}&amp;quot; nach Flugkörpern..."/>
+  <String Name="MSG_NO_CRAFTCFG_FOUND_0" Value="Keine *.craft Dateinen in &amp;quot;{0}&amp;quot; gefunden."/>
+  <String Name="MSG_ERROR_DURING_CRAFT_READING_0" Value="Fehler während des Flogkörper auslesens! &amp;quot;{0}&amp;quot;"/>
+  <String Name="MSG_ERROR_DURING_CRAFT_READING_0_UNEXPECTED_EMPTY_LINE" Value="Fehler während des Flogkörper auslesens &amp;quot;{0}&amp;quot;^Unerwartete leere Zeile."/>
+  <String Name="MSG_PART_0_ADDED_TO_CRAFT_1" Value="Bauteil &amp;quot;{0}&amp;quot; zu Flugkörper &amp;quot;{1}&amp;quot; hinzugefügt."/>
+  <String Name="MSG_PARTCOUNT_FOR_PART_0_IN_CRAFT_1_CHANGED_TO_2" Value="Bauteilanzahl des Bauteils &amp;quot;{0}&amp;quot; des Flugkörpers &amp;quot;{1}&amp;quot; auf {2} angepasst."/>
+  <String Name="MSG_CRAFT_VALIDATION_STARTED" Value="Flugkörpervalidaierung gestartet..."/>
+  <String Name="MSG_CRAFT_VALIDATION_DONE" Value="Flugkörpervalidaierung beendet."/>
+  <String Name="MSG_VALIDATING_CRAFT_0" Value="Validiere Flugkörper &amp;quot;{0}&amp;quot;..."/>
+  <String Name="MSG_VALIDATING_CRAFT_0_SUCCESSFUL" Value="Validirung des Flugkörpers &amp;quot;{0}&amp;quot; erfolgreich."/>
+  <String Name="MSG_VALIDATING_CRAFT_0_FAILED" Value="Validirung des Flugkörpers &amp;quot;{0}&amp;quot; fehlgeschlagen!"/>
+  <String Name="MSG_ERROR_DURING_CRAFT_VALIDATION_0" Value="Fehler während der Flugkörpervalidaierung. &amp;quot;{0}&amp;quot;"/>
+  <String Name="MSG_BUILDING_OF_CRAFT_0_SWAPPED_1_2" Value="Gebäude des Flugkörpers &amp;quot;{0}&amp;quot; von &amp;quot;{1}&amp;quot; in &amp;quot;{2}&amp;quot; geändert."/>
+  <String Name="MSG_CRAFT_0_DELETED" Value="Flugkörpers &amp;quot;{0}&amp;quot; gelöscht."/>
+  <String Name="MSG_CRAFT_NOT_FROM_MOD_DELETE_WARNING" Value="The craft you are trying to delete is not from a mod.^Do you want to delete the craft permanetly?"/>
+  <String Name="MSG_PARTTAB_UPDATED_PART_0" Value="Bauteil &amp;quot;{0}&amp;quot; im Bauteile-Tab aktualisiert."/>
+  <String Name="MSG_MODSELECTION_UPDATED_PART_0" Value="Bauteil &amp;quot;{0}&amp;quot; in der ModSelection aktualisiert."/>
 
 </Language>

@@ -348,7 +348,7 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Controller
             if (file.Contains(Constants.GAMEDATA))
             {
                 string mod = file.Substring(file.IndexOf(Constants.GAMEDATA) + 9);
-                mod = mod.Substring(0, mod.IndexOf("\\"));
+                mod = mod.Substring(0, mod.IndexOf(Path.DirectorySeparatorChar));
                 partNode.Mod = mod;
 
                 if (!allModFilter.Contains(mod)) 
