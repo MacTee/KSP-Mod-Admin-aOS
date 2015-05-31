@@ -1,4 +1,4 @@
-﻿namespace KSPModAdmin.Plugin.PartsTab.Views
+﻿namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Views
 {
     partial class ucPartsTabView
     {
@@ -146,7 +146,7 @@
             // tsbPartsRefresh
             // 
             this.tsbPartsRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbPartsRefresh.Image = global::KSPModAdmin.Plugin.PartsTab.Properties.Resources.refresh_24x24;
+            this.tsbPartsRefresh.Image = global::KSPModAdmin.Plugin.PartsAndCraftsTab.Properties.Resources.refresh_24x24;
             this.tsbPartsRefresh.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbPartsRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbPartsRefresh.Name = "tsbPartsRefresh";
@@ -163,7 +163,7 @@
             // 
             this.tsbPartsRemove.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbPartsRemove.Enabled = false;
-            this.tsbPartsRemove.Image = global::KSPModAdmin.Plugin.PartsTab.Properties.Resources.brick_delete_24x24;
+            this.tsbPartsRemove.Image = global::KSPModAdmin.Plugin.PartsAndCraftsTab.Properties.Resources.brick_delete_24x24;
             this.tsbPartsRemove.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbPartsRemove.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbPartsRemove.Name = "tsbPartsRemove";
@@ -180,7 +180,7 @@
             // 
             this.tsbPartsEdit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbPartsEdit.Enabled = false;
-            this.tsbPartsEdit.Image = global::KSPModAdmin.Plugin.PartsTab.Properties.Resources.brick_edit_24x24;
+            this.tsbPartsEdit.Image = global::KSPModAdmin.Plugin.PartsAndCraftsTab.Properties.Resources.brick_edit_24x24;
             this.tsbPartsEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbPartsEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbPartsEdit.Name = "tsbPartsEdit";
@@ -191,7 +191,7 @@
             // tslPartsProcessing
             // 
             this.tslPartsProcessing.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.tslPartsProcessing.Image = global::KSPModAdmin.Plugin.PartsTab.Properties.Resources.loader;
+            this.tslPartsProcessing.Image = global::KSPModAdmin.Plugin.PartsAndCraftsTab.Properties.Resources.loader;
             this.tslPartsProcessing.Name = "tslPartsProcessing";
             this.tslPartsProcessing.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
             this.tslPartsProcessing.Size = new System.Drawing.Size(16, 28);
@@ -245,7 +245,7 @@
             // 
             // tsmiPartsRemovePart
             // 
-            this.tsmiPartsRemovePart.Image = global::KSPModAdmin.Plugin.PartsTab.Properties.Resources.brick_delete;
+            this.tsmiPartsRemovePart.Image = global::KSPModAdmin.Plugin.PartsAndCraftsTab.Properties.Resources.brick_delete;
             this.tsmiPartsRemovePart.Name = "tsmiPartsRemovePart";
             this.tsmiPartsRemovePart.Size = new System.Drawing.Size(164, 22);
             this.tsmiPartsRemovePart.Text = "Remove part";
@@ -258,7 +258,7 @@
             // 
             // tsmiPartsEditPart
             // 
-            this.tsmiPartsEditPart.Image = global::KSPModAdmin.Plugin.PartsTab.Properties.Resources.brick_edit;
+            this.tsmiPartsEditPart.Image = global::KSPModAdmin.Plugin.PartsAndCraftsTab.Properties.Resources.brick_edit;
             this.tsmiPartsEditPart.Name = "tsmiPartsEditPart";
             this.tsmiPartsEditPart.Size = new System.Drawing.Size(164, 22);
             this.tsmiPartsEditPart.Text = "Edit Part";

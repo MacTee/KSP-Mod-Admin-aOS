@@ -6,16 +6,16 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Model
     /// <summary>
     /// Model for UcPartsTabView TreeViewAdv.
     /// </summary>
-    public class PartsTreeModel : TreeModel
+    public class CraftsTreeModel : TreeModel
     {
         /// <summary>
-        /// Adds a BackupDataNode range to the Model.
+        /// Adds a CraftDataNode range to the Model.
         /// </summary>
         /// <param name="nodes">The nodes to add.</param>
         /// <returns>A list of the added nodes.</returns>
-        public List<PartNode> AddRange(List<PartNode> nodes)
+        public List<CraftNode> AddRange(List<CraftNode> nodes)
         {
-            List<PartNode> addedNodes = new List<PartNode>();
+            List<CraftNode> addedNodes = new List<CraftNode>();
             foreach (var node in nodes)
             {
                 Nodes.Add(node);

@@ -1,6 +1,6 @@
 ﻿using KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree;
 
-namespace KSPModAdmin.Plugin.PartsTab.Model
+namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Model
 {
     /// <summary>
     /// The TreeNode for the PartsTab TreeViewAdv of the UcPartsTabView.

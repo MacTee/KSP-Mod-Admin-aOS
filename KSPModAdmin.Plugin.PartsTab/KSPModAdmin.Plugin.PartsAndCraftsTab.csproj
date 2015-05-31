@@ -7,8 +7,8 @@
     <ProjectGuid>{8D812F36-171B-4FCE-BCFA-DCEED4648C01}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>KSPModAdmin.Plugin.PartsTab</RootNamespace>
-    <AssemblyName>KSPModAdmin.Plugin.PartsTab</AssemblyName>
+    <RootNamespace>KSPModAdmin.Plugin.PartsAndCraftsTab</RootNamespace>
+    <AssemblyName>KSPModAdmin.Plugin.PartsAndCraftsTab</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -66,9 +66,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\CraftsTabViewController.cs" />
     <Compile Include="KSPMAPlugin.cs" />
     <Compile Include="Messages.cs" />
+    <Compile Include="Model\CraftNode.cs" />
     <Compile Include="Model\PartNode.cs" />
+    <Compile Include="Model\CraftsTreeModel.cs" />
     <Compile Include="Model\PartsTreeModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -89,6 +92,12 @@
     <Compile Include="Views\ucPartsTabView.Designer.cs">
       <DependentUpon>ucPartsTabView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\ucCraftsTabView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\ucCraftsTabView.Designer.cs">
+      <DependentUpon>ucCraftsTabView.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -101,11 +110,14 @@
     <EmbeddedResource Include="Views\ucPartsTabView.resx">
       <DependentUpon>ucPartsTabView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\ucCraftsTabView.resx">
+      <DependentUpon>ucCraftsTabView.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Languages\KSPMA.PartsTabPlugin.ger.lang" />
-    <None Include="Languages\KSPMA.PartsTabPlugin.eng.lang" />
-    <None Include="Languages\KSPMA.PartsTabPlugin.fake.lang" />
+    <None Include="Languages\KSPMA.PartsAndCraftsTabPlugin.ger.lang" />
+    <None Include="Languages\KSPMA.PartsAndCraftsTabPlugin.eng.lang" />
+    <None Include="Languages\KSPMA.PartsAndCraftsTabPlugin.fake.lang" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\LanguageEntry.datasource" />
     <None Include="Settings.StyleCop" />
@@ -167,6 +179,36 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\tick.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\airplane.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\airplane_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\airplane_24x24_checkbox_checked.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\airplane_24x24_delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\airplane_24x24_replace.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\airplane_24x24_scroll.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\airplane_checkbox_checked.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\airplane_delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\airplane_replace.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\airplane_scroll.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

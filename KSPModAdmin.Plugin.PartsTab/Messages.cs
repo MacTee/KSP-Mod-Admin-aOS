@@ -2,7 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using KSPModAdmin.Core.Utils.Localization;
 
-namespace KSPModAdmin.Plugin.PartsTab
+namespace KSPModAdmin.Plugin.PartsAndCraftsTab
 {
     [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:ElementsMustBeDocumented", Justification = "Reviewed. Suppression is OK here.")]
     public class Messages
@@ -190,5 +190,16 @@ namespace KSPModAdmin.Plugin.PartsTab
             }
         }
         private const string DEFAULT_MSG_CATEGORY_OF_PART_0_CHANGED_FROM_1_TO_2 = "Category of part \"{0}\" changed from \"{1}\" to \"{2}\".";
+
+
+        public static string MSG_CRAFTSTAB_VIEW_TITLE
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_CRAFTSTAB_VIEW_TITLE"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_CRAFTSTAB_VIEW_TITLE).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_CRAFTSTAB_VIEW_TITLE = "Crafts";
     }
 }

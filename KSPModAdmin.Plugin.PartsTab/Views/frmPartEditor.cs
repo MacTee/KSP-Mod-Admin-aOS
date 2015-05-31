@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Windows.Forms;
 using KSPModAdmin.Core.Views;
 
-namespace KSPModAdmin.Plugin.PartsTab.Views
+namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Views
 {
     [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Reviewed. Suppression is OK here.")]
     public partial class frmPartEditor : frmBase

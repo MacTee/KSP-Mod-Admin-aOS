@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.IO;
 using System.Windows.Forms;
-using KSPModAdmin.Core;
 using KSPModAdmin.Core.Controller;
 using KSPModAdmin.Core.Utils;
 using KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.Helper;
@@ -12,32 +10,36 @@ using KSPModAdmin.Core.Utils.Localization;
 using KSPModAdmin.Core.Views;
 using KSPModAdmin.Plugin.PartsAndCraftsTab.Controller;
 using KSPModAdmin.Plugin.PartsAndCraftsTab.Model;
-using Messages = KSPModAdmin.Plugin.PartsAndCraftsTab.Messages;
+using KSPModAdmin.Plugin.PartsAndCraftsTab.Properties;
 
 namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Views
 {
-    using System.Linq;
-
     [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Reviewed. Suppression is OK here.")]
-    public partial class ucPartsTabView : ucBase
+    public partial class ucCraftsTabView : ucBase
     {
         #region Properties
-
+        
         /// <summary>
         /// The Model of the TreeViewAdv for the Backups.
         /// </summary>
-        public PartsTreeModel Model
+        public CraftsTreeModel Model
         {
-            get { return tvParts.Model as PartsTreeModel; }
-            set { tvParts.Model = value; }
+            get { return tvCrafts.Model as CraftsTreeModel; }
+            set { tvCrafts.Model = value; }
         }
 
         /// <summary>
-        /// Gets the selected PartNode.
+        /// Gets the selected CraftNode.
         /// </summary>
-        public PartNode SelectedPart
+        public CraftNode SelectedCraft
         {
-            get { return tvParts.SelectedNode != null ? tvParts.SelectedNode.Tag as PartNode : null; }
+            get { return tvCrafts.SelectedNode != null ? tvCrafts.SelectedNode.Tag as CraftNode : null; }
+        }
+
+        public string SelectedBuildingFilter
+        {
+            get { return cbCraftsTabBuildingFilter.SelectedItem != null ? cbCraftsTabBuildingFilter.SelectedItem as string : PartsTabViewController.All; }
+            set { cbCraftsTabBuildingFilter.SelectedItem = value; }
         }
 
         /// <summary>
@@ -45,73 +47,12 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Views
         /// </summary>
         public bool ShowProcessingIcon
         {
-            get { return tslPartsProcessing.Visible; }
+            get { return tslCraftsTabProcessing.Visible; }
             set
             {
-                tslPartsProcessing.Visible = value;
+                tslCraftsTabProcessing.Visible = value;
                 SetEnabledOfAllControls(!value);
             }
-        }
-
-        /// <summary>
-        /// Gets or sets the text of the part count label (lblPartsCount).
-        /// </summary>
-        public string PartCountText
-        { 
-            get { return lblPartsCount.Text; }
-            set { lblPartsCount.Text = value; }
-        }
-
-        /// <summary>
-        /// Gets or sets the category filter.
-        /// </summary>
-        public string[] CategoryFilter
-        {
-            get
-            {
-                return cbCategoryFilter.Items.Cast<string>().ToArray();
-            }
-            set
-            {
-                cbCategoryFilter.Items.Clear();
-                foreach (var entry in value)
-                    cbCategoryFilter.Items.Add(entry);
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the selected category filter.
-        /// </summary>
-        public string SelectedCategoryFilter
-        {
-            get { return cbCategoryFilter.SelectedItem != null ? cbCategoryFilter.SelectedItem as string : PartsTabViewController.All; }
-            set { cbCategoryFilter.SelectedItem = value; } 
-        }
-
-        /// <summary>
-        /// Gets or sets the mod filter.
-        /// </summary>
-        public string[] ModFilter
-        {
-            get
-            {
-                return cbModFilter.Items.Cast<string>().ToArray();
-            }
-            set
-            {
-                cbModFilter.Items.Clear();
-                foreach (string entry in value)
-                    cbModFilter.Items.Add(entry);
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the selected mod filter.
-        /// </summary>
-        public string SelectedModFilter
-        {
-            get { return cbModFilter.SelectedItem != null ? cbModFilter.SelectedItem as string : PartsTabViewController.All; }
-            set { cbModFilter.SelectedItem = value; } 
         }
 
         /// <summary>
@@ -125,8 +66,8 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Views
                 {
                     new ColumnData()
                     {
-                        Name = "Title",
-                        Header = Localizer.GlobalInstance["UcPartsTabView_Item_00"], // "Title/Craft",
+                        Name = "Name",
+                        Header = Localizer.GlobalInstance["UcCraftsTabView_Item_00"], // "Craft/Part",
                         SortOrder = SortOrder.None,
                         TooltipText = null,
                         Width = 200,
@@ -135,7 +76,7 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Views
                             new ColumnItemData()
                             {
                                 Type = ColumnItemType.NodeTextBox,
-                                DataPropertyName = "Title",
+                                DataPropertyName = "Name",
                                 IncrementalSearchEnabled = true,
                                 LeftMargin = 3
                             }
@@ -143,8 +84,8 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Views
                     },
                     new ColumnData()
                     {
-                        Name = "PartCraft",
-                        Header = Localizer.GlobalInstance["UcPartsTabView_Item_01"], // "Part",
+                        Name = "Type",
+                        Header = Localizer.GlobalInstance["UcCraftsTabView_Item_01"], // "Type",
                         SortOrder = SortOrder.None,
                         TooltipText = null,
                         Width = 180,
@@ -153,7 +94,7 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Views
                             new ColumnItemData()
                             {
                                 Type = ColumnItemType.NodeTextBox,
-                                DataPropertyName = "Name",
+                                DataPropertyName = "Type",
                                 IncrementalSearchEnabled = true,
                                 LeftMargin = 3,
                             }
@@ -161,8 +102,8 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Views
                     },
                     new ColumnData()
                     {
-                        Name = "Category",
-                        Header = Localizer.GlobalInstance["UcPartsTabView_Item_02"], // "Category",
+                        Name = "Folder",
+                        Header = Localizer.GlobalInstance["UcCraftsTabView_Item_02"], // "Folder",
                         SortOrder = SortOrder.None,
                         TooltipText = null,
                         Width = 90,
@@ -171,7 +112,7 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Views
                             new ColumnItemData()
                             {
                                 Type = ColumnItemType.NodeTextBox,
-                                DataPropertyName = "Category",
+                                DataPropertyName = "Folder",
                                 IncrementalSearchEnabled = true,
                                 LeftMargin = 3
                             }
@@ -179,8 +120,8 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Views
                     },
                     new ColumnData()
                     {
-                        Name = "Mod",
-                        Header = Localizer.GlobalInstance["UcPartsTabView_Item_03"], // "Mod",
+                        Name = "Version",
+                        Header = Localizer.GlobalInstance["UcCraftsTabView_Item_03"], // "Version",
                         SortOrder = SortOrder.None,
                         TooltipText = null,
                         Width = 200,
@@ -189,7 +130,25 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Views
                             new ColumnItemData()
                             {
                                 Type = ColumnItemType.NodeTextBox,
-                                DataPropertyName = "Mod",
+                                DataPropertyName = "Version",
+                                IncrementalSearchEnabled = true,
+                                LeftMargin = 3
+                            }
+                        }
+                    },
+                    new ColumnData()
+                    {
+                        Name = "Mods",
+                        Header = Localizer.GlobalInstance["UcCraftsTabView_Item_04"], // "Mods",
+                        SortOrder = SortOrder.None,
+                        TooltipText = null,
+                        Width = 200,
+                        Items = new List<ColumnItemData>()
+                        {
+                            new ColumnItemData()
+                            {
+                                Type = ColumnItemType.NodeTextBox,
+                                DataPropertyName = "Mods",
                                 IncrementalSearchEnabled = true,
                                 LeftMargin = 3
                             }
@@ -206,16 +165,15 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Views
         /// <summary>
         /// Creates a new instance of the ucTranslationView class.
         /// </summary>
-        public ucPartsTabView()
+        public ucCraftsTabView()
         {
             InitializeComponent();
 
             if (LicenseManager.UsageMode == LicenseUsageMode.Designtime || DesignMode)
                 return;
 
-            SelectedCategoryFilter = PartsTabViewController.All;
-            SelectedModFilter = PartsTabViewController.All;
-            PartsTabViewController.Initialize(this);
+            CraftsTabViewController.Initialize(this);
+            SetEnabledOfAllControls(true);
         }
 
         #region Event handling
@@ -223,62 +181,48 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Views
         private void ucPluginView_Load(object sender, EventArgs e)
         {
             // do View related init here or in the PluginViewController.Initialize(...) methode.
-            TreeViewAdvColumnHelper.ColumnsToTreeViewAdv(tvParts, Columns);
+            TreeViewAdvColumnHelper.ColumnsToTreeViewAdv(tvCrafts, Columns);
+            cbCraftsTabBuildingFilter.SelectedIndex = 0;
         }
 
-        private void tsbPartsRefresh_Click(object sender, EventArgs e)
+        private void tsbCraftsTabRefresh_Click(object sender, EventArgs e)
         {
-            PartsTabViewController.RefreshPartsTab();
+            CraftsTabViewController.RefreshCraftsTab();
         }
 
-        private void tsbPartsRemove_Click(object sender, EventArgs e)
+        private void tsbCraftsTabValidate_Click(object sender, EventArgs e)
         {
-            PartsTabViewController.RemoveSelectedPart();
+            CraftsTabViewController.ValidateCrafts();
         }
 
-        private void tsbPartsEdit_Click(object sender, EventArgs e)
+        private void tsbCraftsTabRename_Click(object sender, EventArgs e)
         {
-            PartsTabViewController.EditSelectedPart();
+            CraftsTabViewController.RenameSelectedCraft();
         }
 
-        private void tvParts_SelectionChanged(object sender, EventArgs e)
+        private void tsbCraftsTabSwap_Click(object sender, EventArgs e)
         {
-            UpdateEnabldeState();
+            CraftsTabViewController.SwapBuildingOfSelectedCraft();
         }
 
-        private void Filter_DropDown(object sender, EventArgs e)
+        private void tsbCraftsTabRemove_Click(object sender, EventArgs e)
         {
-            var cb = sender as ComboBox;
-            if (cb == null)
-                return;
-
-            int maxWidth = 0;
-            int temp = 0;
-            Label label1 = new Label();
-
-            foreach (var obj in cb.Items)
-            {
-                label1.Text = obj.ToString();
-                temp = label1.PreferredWidth;
-                if (temp > maxWidth)
-                    maxWidth = temp;
-            }
-            label1.Dispose();
-
-            if (maxWidth > cb.Width)
-                cb.DropDownWidth = maxWidth;
+            CraftsTabViewController.RemoveSelectedCraft();
         }
 
-        private void Filter_SelectedIndexChanged(object sender, EventArgs e)
+        private void cbCraftsTabBuildingFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
-            PartsTabViewController.RefreshTreeView();
+            CraftsTabViewController.RefreshTreeView();
         }
 
-        private void cmsParts_Opening(object sender, CancelEventArgs e)
+        private void cmsCraftsTab_Opening(object sender, CancelEventArgs e)
         {
-            var selPart = SelectedPart;
-            tsmiPartsRemovePart.Enabled = (selPart != null);
-            tsmiPartsEditPart.Enabled = (selPart != null);
+            var sel = SelectedCraft;
+            tsmiCraftsTabRefresh.Enabled = true;
+            tsmiCraftsTabRemoveCraft.Enabled = sel != null;
+            tsmiCraftsTabRenameCraft.Enabled = sel != null;
+            tsmiCraftsTabSwapBuildings.Enabled = sel != null;
+            tsmiCraftsTabValidateCrafts.Enabled = true;
         }
 
         #endregion
@@ -289,7 +233,7 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Views
             ControlTranslator.TranslateControls(Localizer.GlobalInstance, this as Control, OptionsController.SelectedLanguage);
 
             // translate columns of ModSelection TreeView
-            foreach (NamedTreeColumn column in tvParts.Columns)
+            foreach (NamedTreeColumn column in tvCrafts.Columns)
             {
                 var newColData = TreeViewAdvColumnHelper.GetColumn(Columns, column.Name);
                 if (newColData != null)
@@ -306,7 +250,7 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Views
         /// <param name="once">Flag to determine if the callback function should only be called once.</param>
         public void AddActionKey(VirtualKey key, ActionKeyHandler callback, ModifierKey[] modifierKeys = null, bool once = false)
         {
-            tvParts.AddActionKey(key, callback, modifierKeys, once);
+            tvCrafts.AddActionKey(key, callback, modifierKeys, once);
         }
 
         /// <summary>
@@ -325,7 +269,7 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Views
         /// <returns>The Name for the parent TabPage.</returns>
         public override string GetTabCaption()
         {
-            return Messages.MSG_PARTSTAB_VIEW_TITLE;
+            return Messages.MSG_CRAFTSTAB_VIEW_TITLE;
         }
 
         /// <summary>
@@ -336,33 +280,28 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Views
             // Enable/Disable your View Controls here.
             // Normally when KSP MA calls this methode with enable = false, all controls should be disabled.
             ////this.Enabled = enable;
-
             if (!enable)
             {
-                tsbPartsRefresh.Enabled = enable;
-                tsbPartsRemove.Enabled = enable;
-                tsbPartsEdit.Enabled = enable;
-                cbCategoryFilter.Enabled = enable;
-                cbModFilter.Enabled = enable;
-                tvParts.Enabled = enable;
+                tsbCraftsTabRefresh.Enabled = enable;
+                tsbCraftsTabRemove.Enabled = enable;
+                tsbCraftsTabRename.Enabled = enable;
+                tsbCraftsTabSwap.Enabled = enable;
+                tsbCraftsTabValidate.Enabled = enable;
+                cbCraftsTabBuildingFilter.Enabled = enable;
+                tvCrafts.Enabled = enable;
             }
             else
-                UpdateEnabldeState();
+            {
+                var sel = SelectedCraft;
+                tsbCraftsTabRefresh.Enabled = true;
+                tsbCraftsTabRemove.Enabled = sel != null;
+                tsbCraftsTabRename.Enabled = sel != null;
+                tsbCraftsTabSwap.Enabled = sel != null;
+                tsbCraftsTabValidate.Enabled = true;
+                cbCraftsTabBuildingFilter.Enabled = true;
+                tvCrafts.Enabled = true;
+            }
         }
 
-        /// <summary>
-        /// Updates the enabled state for each control on this view.
-        /// </summary>
-        private void UpdateEnabldeState()
-        {
-            var selPart = SelectedPart;
-
-            tsbPartsRefresh.Enabled = true;
-            tsbPartsRemove.Enabled = (selPart != null);
-            tsbPartsEdit.Enabled = (selPart != null);
-            cbCategoryFilter.Enabled = true;
-            cbModFilter.Enabled = true;
-            tvParts.Enabled = true;
-        }
     }
 }

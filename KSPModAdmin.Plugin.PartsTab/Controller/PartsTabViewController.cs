@@ -7,10 +7,10 @@ using KSPModAdmin.Core;
 using KSPModAdmin.Core.Controller;
 using KSPModAdmin.Core.Utils;
 using KSPModAdmin.Core.Utils.Localization;
-using KSPModAdmin.Plugin.PartsTab.Model;
-using KSPModAdmin.Plugin.PartsTab.Views;
+using KSPModAdmin.Plugin.PartsAndCraftsTab.Model;
+using KSPModAdmin.Plugin.PartsAndCraftsTab.Views;
 
-namespace KSPModAdmin.Plugin.PartsTab.Controller
+namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Controller
 {
     using System.Linq;
     using System.Text;
@@ -73,6 +73,7 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
 
             EventDistributor.AsyncTaskStarted += AsyncTaskStarted;
             EventDistributor.AsyncTaskDone += AsyncTaskDone;
+            EventDistributor.LanguageChanged += LanguageChanged;
             EventDistributor.KSPRootChanged += KSPRootChanged;
 
             // Add your stuff to initialize here.
@@ -112,6 +113,19 @@ namespace KSPModAdmin.Plugin.PartsTab.Controller
             View.SetEnabledOfAllControls(true);
         }
 
+        /// <summary>
+        /// Callback function for the LanguageChanged event.
+        /// This is the place where you can translate non accessible controls.
+        /// </summary>
+        protected static void LanguageChanged(object sender)
+        {
+            View.LanguageChanged();
+        }
+
+        /// <summary>
+        /// Callback function for the KSPRootChanged event.
+        /// This is the place to handle a change of the selected KSP installation path..
+        /// </summary>
         private static void KSPRootChanged(string kspPath)
         {
             allNodes.Clear();

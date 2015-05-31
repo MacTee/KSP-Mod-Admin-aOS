@@ -1,4 +1,4 @@
-﻿namespace KSPModAdmin.Plugin.PartsTab.Views
+﻿namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Views
 {
     partial class frmPartEditor
     {
@@ -70,7 +70,7 @@
             // 
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOK.Image = global::KSPModAdmin.Plugin.PartsTab.Properties.Resources.tick;
+            this.btnOK.Image = global::KSPModAdmin.Plugin.PartsAndCraftsTab.Properties.Resources.tick;
             this.btnOK.Location = new System.Drawing.Point(186, 110);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(100, 25);
@@ -84,7 +84,7 @@
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.Image = global::KSPModAdmin.Plugin.PartsTab.Properties.Resources.delete2;
+            this.btnCancel.Image = global::KSPModAdmin.Plugin.PartsAndCraftsTab.Properties.Resources.delete2;
             this.btnCancel.Location = new System.Drawing.Point(292, 110);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(100, 25);

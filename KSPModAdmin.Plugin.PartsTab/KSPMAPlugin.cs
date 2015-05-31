@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using KSPModAdmin.Core;
 using KSPModAdmin.Core.Utils;
-using KSPModAdmin.Plugin.PartsTab.Properties;
-using KSPModAdmin.Plugin.PartsTab.Views;
+using KSPModAdmin.Plugin.PartsAndCraftsTab.Views;
+using KSPModAdmin.Plugin.PartsAndCraftsTab.Properties;
 
-namespace KSPModAdmin.Plugin.PartsTab
+namespace KSPModAdmin.Plugin.PartsAndCraftsTab
 {
     /// <summary>
     /// KSP MA plugin container class.
@@ -19,7 +19,7 @@ namespace KSPModAdmin.Plugin.PartsTab
         /// <summary>
         /// Name of the plugin.
         /// </summary>
-        public string Name { get { return "PartsTab"; } }
+        public string Name { get { return "PartsAndCraftsTab"; } }
 
         /// <summary>
         /// Description of the plugin.
@@ -28,7 +28,7 @@ namespace KSPModAdmin.Plugin.PartsTab
         {
             get
             {
-                return "This Plugin adds a tab to manage the parts of the chosen KSP install path.";
+                return "This Plugin adds two tabs. These tabs let you manage the parts and crafts of the chosen KSP install path.";
             }
         }
 
@@ -40,7 +40,11 @@ namespace KSPModAdmin.Plugin.PartsTab
             get
             {
                 if (mMainTabViews == null)
-                    mMainTabViews = new[] { new TabView(new Guid("{7AE29F16-C3B9-4B63-BFE5-C85D48BC4757}"), new ucPartsTabView(), Resources.bricks) };
+                    mMainTabViews = new[]
+                    {
+                        new TabView(new Guid("{7AE29F16-C3B9-4B63-BFE5-C85D48BC4757}"), new ucPartsTabView(), Resources.bricks),
+                        new TabView(new Guid("{EE4DA64E-A343-48BD-8689-39E04F8FBDD5}"), new ucCraftsTabView(), Resources.airplane)
+                    };
 
                 return mMainTabViews;
             }
