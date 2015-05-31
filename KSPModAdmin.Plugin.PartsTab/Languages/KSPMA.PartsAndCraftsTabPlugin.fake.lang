@@ -83,7 +83,7 @@
   <Control Name="tslBuildingFilter" Value="(T)Building filter:"/>
 
   <!--<Control Name="lblCraftsTabCount" Value="Count: 0"/>-->
-  <!--<String Name="MSG_CRAFTS_COUNT_TEXT" Value="{0} ({1}) Parts"/>-->
+  <String Name="MSG_CRAFTS_COUNT_TEXT" Value="(T){0} ({1}) Crafts"/>
 
   <Control Name="lblCraftsTabNote" Value="(T)NOTE: Crafts with invalid parts are red."/>
 

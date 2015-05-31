@@ -83,7 +83,7 @@
   <Control Name="tslBuildingFilter" Value="Gebäude filter:"/>
 
   <!--<Control Name="lblCraftsTabCount" Value="Count: 0"/>-->
-  <!--<String Name="MSG_CRAFTS_COUNT_TEXT" Value="{0} ({1}) Parts"/>-->
+  <String Name="MSG_CRAFTS_COUNT_TEXT" Value="{0} ({1}) Flugkörper"/>
 
   <Control Name="lblCraftsTabNote" Value="NOTIZ: Flugkörper mit fehlenden Bauteilen sind rot markiert."/>
 

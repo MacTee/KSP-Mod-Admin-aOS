@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
 using System.Windows.Forms;
 using KSPModAdmin.Core.Controller;
 using KSPModAdmin.Core.Utils;
 using KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.Helper;
+using KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.NodeControls;
 using KSPModAdmin.Core.Utils.Localization;
 using KSPModAdmin.Core.Views;
 using KSPModAdmin.Plugin.PartsAndCraftsTab.Controller;
@@ -36,6 +38,9 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Views
             get { return tvCrafts.SelectedNode != null ? tvCrafts.SelectedNode.Tag as CraftNode : null; }
         }
 
+        /// <summary>
+        /// Gets or sets the selected building filter.
+        /// </summary>
         public string SelectedBuildingFilter
         {
             get { return cbCraftsTabBuildingFilter.SelectedItem != null ? cbCraftsTabBuildingFilter.SelectedItem as string : PartsTabViewController.All; }
@@ -53,6 +58,15 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Views
                 tslCraftsTabProcessing.Visible = value;
                 SetEnabledOfAllControls(!value);
             }
+        }
+
+        /// <summary>
+        /// Gets or sets the text of the craft count label (lblCraftsTabCount).
+        /// </summary>
+        public string CraftCountText
+        {
+            get { return lblCraftsTabCount.Text; }
+            set { lblCraftsTabCount.Text = value; }
         }
 
         /// <summary>
@@ -224,6 +238,18 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Views
             tsmiCraftsTabSwapBuildings.Enabled = sel != null;
             tsmiCraftsTabValidateCrafts.Enabled = true;
         }
+        
+        private void tvCrafts_DrawControl(object o, DrawEventArgs e)
+        {
+            CraftNode node = (CraftNode)e.Node.Tag;
+            if (e.Text != node.Name)
+                return;
+
+            e.TextColor = Color.Black;
+
+            if (node.IsInvalidOrHasInvalidChilds)
+                e.TextColor = Color.FromArgb(255, 0, 0);
+        }
 
         #endregion
 
@@ -302,6 +328,5 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Views
                 tvCrafts.Enabled = true;
             }
         }
-
     }
 }

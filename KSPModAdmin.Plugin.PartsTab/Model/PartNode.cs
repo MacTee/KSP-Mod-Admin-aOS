@@ -44,5 +44,55 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Model
             Category = string.Empty;
             Mod = string.Empty;
         }
+
+        /// <summary>
+        /// Adds a related craft to this part.
+        /// </summary>
+        /// <param name="craft">The related craft to add.</param>
+        public void AddRelatedCraft(CraftNode craft)
+        {
+            if (!ContainsCraft(craft.Name))
+            {
+                PartNode cNode = new PartNode() { Title = craft.Name, FilePath = craft.FilePath };
+                cNode.Tag = craft;
+                Nodes.Add(cNode);
+            }
+        }
+
+        /// <summary>
+        /// Checks of this part has a related craft with the passed name.
+        /// </summary>
+        /// <param name="craftName">The name to look for.</param>
+        /// <returns>True if a craft with the passed name was found.</returns>
+        public bool ContainsCraft(string craftName)
+        {
+            foreach (PartNode craft in Nodes)
+            {
+                if (craft.Title == craftName)
+                    return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Removes a craft relation.
+        /// </summary>
+        /// <param name="craftNode">The CraftNode to remove.</param>
+        public void RemoveCraft(CraftNode craftNode)
+        {
+            PartNode temp = null;
+            foreach (PartNode craft in Nodes)
+            {
+                if (craft.Tag != null && ((CraftNode)craft.Tag).FilePath == craftNode.FilePath)
+                {
+                    temp = craft;
+                    break;
+                }
+            }
+
+            if (temp != null)
+                Nodes.Remove(temp);
+        }
     }
 }

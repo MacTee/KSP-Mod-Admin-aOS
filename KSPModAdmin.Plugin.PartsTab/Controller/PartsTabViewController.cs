@@ -1,28 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text;
 using System.Windows.Forms;
-using System.Xml;
 using KSPModAdmin.Core;
 using KSPModAdmin.Core.Controller;
+using KSPModAdmin.Core.Model;
 using KSPModAdmin.Core.Utils;
-using KSPModAdmin.Core.Utils.Localization;
 using KSPModAdmin.Plugin.PartsAndCraftsTab.Model;
 using KSPModAdmin.Plugin.PartsAndCraftsTab.Views;
 
 namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Controller
 {
-    using System.Linq;
-    using System.Text;
-
-    using KSPModAdmin.Core.Model;
+    /// <summary>
+    /// Delegate for the ScanComplete event
+    /// </summary>
+    /// <param name="partList">The list of found parts.</param>
+    public delegate void ScanCompleteHandler(List<PartNode> partList);
 
     /// <summary>
     /// Controller class for the Translation view.
     /// </summary>
     public class PartsTabViewController
     {
+        /// <summary>
+        /// Event ScanComplete occurs when the scan of parts is complete.
+        /// </summary>
+        public static event ScanCompleteHandler ScanComplete;
+
         #region Members
+
         private const string PROPULSION = "Propulsion";
         private const string CONTROL = "Control";
         private const string STRUCTURAL = "Structural";
@@ -64,6 +72,12 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Controller
         /// Gets or sets the view of the controller.
         /// </summary>
         public static ucPartsTabView View { get; protected set; }
+
+        /// <summary>
+        /// Gets or sets the list of all known parts.
+        /// </summary>
+        public static List<PartNode> Parts { get { return allNodes; } set { allNodes = value; } }
+
 
         #endregion
 
@@ -227,9 +241,9 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Controller
                         Messenger.AddError(string.Format(Messages.MSG_ERROR_DURING_PART_READING_0, ex.Message), ex);
                     else
                         RefreshTreeView();
-                    
-                    ////if (ScanComplete != null)
-                    ////    ScanComplete(GetListOfAllParts());
+
+                    if (ScanComplete != null)
+                        ScanComplete(Parts);
                 });
         }
 

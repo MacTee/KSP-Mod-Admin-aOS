@@ -201,5 +201,26 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab
             }
         }
         private const string DEFAULT_MSG_CRAFTSTAB_VIEW_TITLE = "Crafts";
+
+        public static string MSG_CRAFTS_COUNT_TEXT
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_CRAFTS_COUNT_TEXT"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_CRAFTS_COUNT_TEXT).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_CRAFTS_COUNT_TEXT = "{0} ({1}) Crafts";
+
+
+        public static string MSG_CRAFT_SCAN_STARTED { get { return "MSG_CRAFT_SCAN_STARTED"; } }
+
+        public static string MSG_SCAN_FILE_0_FOR_CRAFTS { get { return "MSG_SCAN_FILE_0_FOR_CRAFTS"; } }
+
+        public static string MSG_NO_CRAFTCFG_FOUND_0 { get { return "MSG_NO_CRAFTCFG_FOUND_0"; } }
+
+        public static string MSG_CRAFT_SCAN_DONE { get { return "MSG_CRAFT_SCAN_DONE"; } }
+
+        public static string MSG_ERROR_DURING_CRAFT_READING_0 { get { return "MSG_ERROR_DURING_CRAFT_READING_0"; } }
     }
 }
