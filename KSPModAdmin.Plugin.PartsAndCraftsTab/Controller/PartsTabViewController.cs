@@ -488,9 +488,14 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Controller
                 {
                     if (partNode.Nodes != null)
                     {
-                        //// TODO: Remove attached craft nodes.
-                        ////foreach (var n in partNode.Nodes)
-                        ////    ((TreeNodeCraft)n.Tag).RemovePartRelation(partNode);
+                        foreach (var n in partNode.Nodes)
+                        {
+                            var craft = n.Tag as CraftNode;
+                            if (craft == null)
+                                continue;
+
+                            craft.RemovePartRelation(partNode);
+                        }
                     }
 
                     node = node.Parent as ModNode;
