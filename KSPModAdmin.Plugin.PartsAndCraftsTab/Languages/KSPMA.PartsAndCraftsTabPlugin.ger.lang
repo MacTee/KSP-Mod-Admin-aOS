@@ -35,7 +35,7 @@
   <Control Name="lblNameSelectionDescription" Value="Achtung: Änderungen können Flugkörper unbrauchbar machen oder sogar die part.cfg datei zerstören!"/>
 
   <String Name="MSG_PART_SCAN_STARTED" Value="Part Scan gestartet..."/>
-  <String Name="MSG_PART_SCAN_STARTED" Value="Part scan beendet."/>
+  <String Name="MSG_PART_SCAN_DONE" Value="Part scan beendet."/>
   <String Name="MSG_SCAN_FILE_0_FOR_PARTS" Value="Scanne Datei &amp;quot;{0}&amp;quot; nach Bauteilen..."/>
   <String Name="MSG_NO_PARTCFG_FOUND_0" Value="Keine part.cfg Dateien in &amp;quot;{0}&amp;quot; gefunden."/>
   <String Name="MSG_ERROR_DURING_PART_READING_0" Value="Fehler während des lesens! &amp;quot;{0}&amp;quot;"/>

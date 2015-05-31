@@ -35,7 +35,7 @@
   <Control Name="lblNameSelectionDescription" Value="Beware: Changes may break crafts or even the part.cfg file!"/>
 
   <String Name="MSG_PART_SCAN_STARTED" Value="Part scan started..."/>
-  <String Name="MSG_PART_SCAN_STARTED" Value="Part scan done."/>
+  <String Name="MSG_PART_SCAN_DONE" Value="Part scan done."/>
   <String Name="MSG_SCAN_FILE_0_FOR_PARTS" Value="Scan file &amp;quot;{0}&amp;quot; for parts..."/>
   <String Name="MSG_NO_PARTCFG_FOUND_0" Value="No part.cfg files found in &amp;quot;{0}&amp;quot;."/>
   <String Name="MSG_ERROR_DURING_PART_READING_0" Value="Error during part reading! &amp;quot;{0}&amp;quot;"/>
