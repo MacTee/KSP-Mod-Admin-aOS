@@ -25,6 +25,7 @@ Features:
   - for Mods (includes auto check for updates and auto install/update of outdated mods).
 - Conflict detection and easy conflict solving for files that are referenced by more than one mod.
 - Easy to use backup system. To backup your KSP saves or part customizations.
+- Part and Craft management.
 - Flag management and import.
 - Plugin support for "3rd party" extensions (See KSPModAdmin.Translation.Plugin as a sample).
 - Project code included or on GitHub https://github.com/MacTee/KSP-Mod-Admin-aOS (VS2013 Solution - Language: C#).
