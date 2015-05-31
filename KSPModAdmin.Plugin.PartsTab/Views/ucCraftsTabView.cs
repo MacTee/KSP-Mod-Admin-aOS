@@ -211,7 +211,7 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Views
 
         private void tsbCraftsTabRename_Click(object sender, EventArgs e)
         {
-            CraftsTabViewController.RenameSelectedCraft();
+            CraftsTabViewController.EditSelectedCraft();
         }
 
         private void tsbCraftsTabSwap_Click(object sender, EventArgs e)
@@ -249,6 +249,18 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Views
 
             if (node.IsInvalidOrHasInvalidChilds)
                 e.TextColor = Color.FromArgb(255, 0, 0);
+        }
+
+        private void tvCrafts_SelectionChanged(object sender, EventArgs e)
+        {
+            var sel = SelectedCraft;
+            tsbCraftsTabRefresh.Enabled = true;
+            tsbCraftsTabRemove.Enabled = sel != null;
+            tsbCraftsTabRename.Enabled = sel != null;
+            tsbCraftsTabSwap.Enabled = sel != null;
+            tsbCraftsTabValidate.Enabled = true;
+            cbCraftsTabBuildingFilter.Enabled = true;
+            tvCrafts.Enabled = true;
         }
 
         #endregion

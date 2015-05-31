@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Xml;
 using KSPModAdmin.Core;
 using KSPModAdmin.Core.Controller;
+using KSPModAdmin.Core.Model;
 using KSPModAdmin.Core.Utils;
 using KSPModAdmin.Core.Utils.Localization;
 using KSPModAdmin.Plugin.PartsAndCraftsTab.Model;
@@ -18,11 +19,15 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Controller
     /// </summary>
     public class CraftsTabViewController
     {
+        #region Mamber
+
         private const string EXTENSION_CRAFT = "*.craft";
 
         private static CraftsTabViewController instance = null;
         private static List<CraftNode> allCrafts = new List<CraftNode>();
         private static CraftsTreeModel model = new CraftsTreeModel();
+
+        #endregion
 
         #region Properties
 
@@ -111,40 +116,6 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Controller
         public static void RefreshCraftsTab()
         {
             ScanDir();
-        }
-
-        /// <summary>
-        /// Checks all crafts if they uses a unknown part.
-        /// Searches in the parts list from the PartsTab.
-        /// </summary>
-        public static void ValidateCrafts()
-        {
-            PartsTabViewController.ScanComplete += Parts_ScanComplete;
-            PartsTabViewController.RefreshPartsTab();
-        }
-
-        /// <summary>
-        /// Opens the Craft Editor with the selected craft.
-        /// </summary>
-        public static void RenameSelectedCraft()
-        {
-            MessageBox.Show("Not implemented yet!", string.Empty);
-        }
-
-        /// <summary>
-        /// Swaps the start building of the selected craft.
-        /// </summary>
-        public static void SwapBuildingOfSelectedCraft()
-        {
-            MessageBox.Show("Not implemented yet!", string.Empty);
-        }
-
-        /// <summary>
-        /// Removes the selected craft
-        /// </summary>
-        public static void RemoveSelectedCraft()
-        {
-            MessageBox.Show("Not implemented yet!", string.Empty);
         }
 
         /// <summary>
@@ -366,6 +337,16 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Controller
         #region Validate
 
         /// <summary>
+        /// Checks all crafts if they uses a unknown part.
+        /// Searches in the parts list from the PartsTab.
+        /// </summary>
+        public static void ValidateCrafts()
+        {
+            PartsTabViewController.ScanComplete += Parts_ScanComplete;
+            PartsTabViewController.RefreshPartsTab();
+        }
+
+        /// <summary>
         /// Checks if all parts of the craft are installed.
         /// </summary>
         /// <param name="partList">The list of installed parts.</param>
@@ -435,6 +416,140 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Controller
                     else
                         RefreshTreeView();
                 });
+        }
+
+        #endregion
+
+        #region Swap
+
+        /// <summary>
+        /// Swaps the start building of the selected craft.
+        /// </summary>
+        public static void SwapBuildingOfSelectedCraft()
+        {
+            SwapBuildingOfSelectedCraft(View.SelectedCraft);
+        }
+
+        /// <summary>
+        /// Swaps the start building of the craft.
+        /// </summary>
+        public static void SwapBuildingOfSelectedCraft(CraftNode craftNode)
+        {
+            string fullPath = KSPPathHelper.GetAbsolutePath(craftNode.FilePath);
+            if (File.Exists(fullPath))
+            {
+                string newType = GetOtherBuilding(craftNode.Type);
+                string allText = File.ReadAllText(fullPath);
+                string newText = allText.Replace("type = " + craftNode.Type, "type = " + newType);
+                string newPath = GetNewPath(craftNode, newType);
+                File.WriteAllText(fullPath, newText);
+                File.Move(fullPath, newPath);
+                craftNode.Type = newType;
+                craftNode.FilePath = newPath;
+
+                View.InvalidateView();
+            }
+        }
+
+        /// <summary>
+        /// Returns the other vehicle building.
+        /// </summary>
+        /// <param name="building">Current vehicle building.</param>
+        /// <returns>The other vehicle building.</returns>
+        private static string GetOtherBuilding(string building)
+        {
+            if (building.Equals(Constants.VAB, StringComparison.CurrentCultureIgnoreCase))
+                return Constants.SPH.ToUpper();
+            else
+                return Constants.VAB.ToUpper();
+        }
+
+        /// <summary>
+        /// Returns the new path for the craft.
+        /// </summary>
+        /// <param name="craftNode">The CraftNode to get a new path for.</param>
+        /// <param name="newType">the new type of the craft.</param>
+        /// <returns>The new path for the craft.</returns>
+        private static string GetNewPath(CraftNode craftNode, string newType)
+        {
+            string fullPath = KSPPathHelper.GetAbsolutePath(craftNode.FilePath);
+            int index = fullPath.ToLower().IndexOf("\\" + craftNode.Type.ToLower() + "\\");
+
+            if (index > -1)
+            {
+                string start = fullPath.Substring(0, index + 1);
+                string end = fullPath.Substring(index + 5);
+
+                return Path.Combine(Path.Combine(start, newType.ToUpper()), end);
+            }
+            else
+                return fullPath;
+        }
+
+        #endregion
+
+        #region Edit
+
+        /// <summary>
+        /// Opens the Craft Editor with the selected craft.
+        /// </summary>
+        public static void EditSelectedCraft()
+        {
+            EditSelectedCraft(View.SelectedCraft);
+        }
+
+        /// <summary>
+        /// Opens the Craft Editor with the selected craft.
+        /// </summary>
+        public static void EditSelectedCraft(CraftNode craftNode)
+        {
+            MessageBox.Show("Not implemented yet!", string.Empty);
+        }
+
+        #endregion
+
+        #region Remove
+
+        /// <summary>
+        /// Removes the selected craft
+        /// </summary>
+        public static void RemoveSelectedCraft()
+        {
+            RemoveSelectedCraft(View.SelectedCraft);
+        }
+
+        /// <summary>
+        /// Removes the selected craft
+        /// </summary>
+        public static void RemoveSelectedCraft(CraftNode craftNode)
+        {
+            string craftPath = KSPPathHelper.GetAbsolutePath(craftNode.FilePath);
+            ModNode node = ModSelectionTreeModel.SearchNodeByDestination(craftNode.FilePath, ModSelectionController.Model);
+
+            DialogResult dlgResult = DialogResult.Cancel;
+            if (node == null)
+                dlgResult = MessageBox.Show(View.ParentForm, "The craft you are trying to delete is not from a mod.\n\rDo you want to delete the craft permanetly?", string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (node != null || dlgResult == DialogResult.Yes)
+            {
+                if (File.Exists(craftPath))
+                {
+                    File.Delete(craftPath);
+                    if (node != null)
+                    {
+                        node.Checked = false;
+                        node.NodeType = NodeType.UnknownFile;
+                    }
+
+                    model.Nodes.Remove(craftNode);
+
+                    foreach (CraftNode pNode in craftNode.Nodes)
+                    {
+                        if (pNode.RelatedPart != null)
+                            pNode.RelatedPart.RemoveCraft(craftNode);
+                    }
+                }
+            }
         }
 
         #endregion

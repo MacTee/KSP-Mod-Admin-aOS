@@ -212,6 +212,7 @@
             this.tvCrafts.TabIndex = 1;
             this.tvCrafts.Text = "treeViewAdv1";
             this.tvCrafts.UseColumns = true;
+            this.tvCrafts.SelectionChanged += new System.EventHandler(this.tvCrafts_SelectionChanged);
             this.tvCrafts.DrawControl += new System.EventHandler<KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.NodeControls.DrawEventArgs>(this.tvCrafts_DrawControl);
             // 
             // cmsCraftsTab
