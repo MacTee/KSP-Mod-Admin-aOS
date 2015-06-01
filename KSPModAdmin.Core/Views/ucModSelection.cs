@@ -529,7 +529,7 @@ namespace KSPModAdmin.Core.Views
                 KSPVersion = "0.21 or higher";
                 ModAuthor = "BHeinrich (MacKerbal@mactee.de)";
                 ModCreationDate = "25.04.2013";
-                ModChangeDate = "18.05.2015";
+                ModChangeDate = VersionHelper.GetChangeDate(false).ToString();
                 ModOutdated = false;
                 ModRating = string.Empty;
                 ModDownloads = "86k+";
