@@ -81,6 +81,20 @@ namespace KSPModAdmin.Core.Controller
         /// </summary>
         public static ucKSPStartup LaunchPanel { get { return View.ucKSPStartup1; } }
 
+        /// <summary>
+        /// Gets or sets the TabOrder of the main TabControl by UniqueIdentifier.
+        /// </summary>
+        public static IEnumerable<string> TapOrder
+        {
+            get { return View.TapOrder; }
+            set { View.TapOrder = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets the last TabOrder of the main TabControl by UniqueIdentifier.
+        /// </summary>
+        public static List<string> LastTabOrder { get; set; }
+
         #endregion
 
         #region Constructors
@@ -99,6 +113,8 @@ namespace KSPModAdmin.Core.Controller
         {
             if (mInstance == null)
                 mInstance = new MainController();
+
+            LastTabOrder = new List<string>();
         }
 
         #endregion
@@ -319,7 +335,7 @@ namespace KSPModAdmin.Core.Controller
 
             LoadPlugins();
 
-            View.OrderTabPages();
+            View.TapOrder = LastTabOrder;
 
             OptionsController.AvailableLanguages = Localizer.GlobalInstance.AvailableLanguages;
             OptionsController.SelectedLanguage = Localizer.GlobalInstance.CurrentLanguage;
@@ -576,6 +592,7 @@ namespace KSPModAdmin.Core.Controller
                             Log.AddDebugS(string.Format("Try add TabPage \"{0}\" ...", tabView.TabUserControl.GetTabCaption()));
 
                             TabPage tabPage = new TabPage();
+                            tabPage.Tag = tabView.UniqueIdentifier.ToString();
                             tabPage.Text = tabView.TabUserControl.GetTabCaption();
                             tabPage.Controls.Add(tabView.TabUserControl);
                             tabView.TabUserControl.Dock = DockStyle.Fill;

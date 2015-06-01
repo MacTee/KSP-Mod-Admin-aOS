@@ -42,6 +42,7 @@
             this.lblNote = new System.Windows.Forms.Label();
             this.picLoading = new System.Windows.Forms.PictureBox();
             this.btnAdd = new System.Windows.Forms.Button();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.picLoading)).BeginInit();
             this.SuspendLayout();
             // 
@@ -156,7 +157,7 @@
             // 
             this.picLoading.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.picLoading.Image = ((System.Drawing.Image)(resources.GetObject("picLoading.Image")));
-            this.picLoading.Location = new System.Drawing.Point(69, 206);
+            this.picLoading.Location = new System.Drawing.Point(335, 174);
             this.picLoading.Name = "picLoading";
             this.picLoading.Size = new System.Drawing.Size(18, 20);
             this.picLoading.TabIndex = 16;
@@ -178,11 +179,20 @@
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(359, 174);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(152, 20);
+            this.progressBar1.TabIndex = 17;
+            this.progressBar1.Visible = false;
+            // 
             // frmAddMod
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(523, 238);
+            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.picLoading);
             this.Controls.Add(this.cbInstallAfterAdd);
             this.Controls.Add(this.btnFolderSearch);
@@ -225,5 +235,6 @@
         private System.Windows.Forms.CheckBox cbInstallAfterAdd;
         private System.Windows.Forms.PictureBox picLoading;
         private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.ProgressBar progressBar1;
     }
 }

@@ -76,6 +76,9 @@
     <Control Name="tsbCreateZip" Value="">
       <ChildControl Name="tsbCreateZip_ToolTip" Value="Zip erzeugen^Erzeugt ein neues Ziparchive von der ausgewählten Mod." />
     </Control>
+	<Control Name="tsbRelocateArchivePath" Value="toolStripButton1">
+      <ChildControl Name="tsbRelocateArchivePath_ToolTip" Value="Verlagern Archivpfad^Ändern Sie den Speicherort der mod Zip-Archiv."/>
+    </Control>
   </Control>
   <Control Name="lvModSelection" Value="">
     <ChildControl Name="lvModSelection_Column_1" Value="" />

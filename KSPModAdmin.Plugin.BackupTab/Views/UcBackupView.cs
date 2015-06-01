@@ -251,9 +251,15 @@ namespace KSPModAdmin.Plugin.BackupTab.Views
             EditSelectedBackupNote();
         }
 
+        private void tsbBackupTabOpenBackupOptions_Click(object sender, EventArgs e)
+        {
+            tsbBackupOptions.Checked = !tsbBackupOptions.Checked;
+        }
+
         private void tsbBackupOptions_CheckStateChanged(object sender, EventArgs e)
         {
             tsbBackupOptions.Image = tsbBackupOptions.CheckState == CheckState.Checked ? Resources.gear_new : Resources.gear;
+            tsbBackupTabOpenBackupOptions.Image = tsbBackupOptions.CheckState == CheckState.Checked ? Resources.gear_new : Resources.gear;
             ShowOptions = tsbBackupOptions.CheckState == CheckState.Checked;
         }
 
@@ -301,6 +307,21 @@ namespace KSPModAdmin.Plugin.BackupTab.Views
                 }
                 UcBackupViewController.SaveBackupSettings();
             }
+        }
+
+        private void cmsBackups_Opened(object sender, EventArgs e)
+        {
+            var selBackup = SelectedBackup;
+            tsbBackupTabOpenBackupDir.Enabled = HasValidBackupPath && !ShowOptions;
+            tsbBackupTabSelectNewBackupDir.Enabled = true;
+            tsbBackupTabEditBackupNote.Enabled = (selBackup != null) && HasValidBackupPath && !ShowOptions;
+            tsbBackupTabNewBackup.Enabled = HasValidBackupPath && !ShowOptions;
+            tsbBackupTabBackupSaveFolder.Enabled = HasValidBackupPath && !ShowOptions;
+            tsbBackupTabRecoverSelectedBackup.Enabled = (selBackup != null) && HasValidBackupPath && !ShowOptions;
+            tsbBackupTabRemoveSelectedBackup.Enabled = (selBackup != null) && HasValidBackupPath && !ShowOptions;
+            tsbBackupTabRemoveAllBackups.Enabled = HasValidBackupPath && !ShowOptions;
+            tsbBackupTabRefresh.Enabled = HasValidBackupPath && !ShowOptions;
+            tsbBackupTabOpenBackupOptions.Enabled = true;
         }
 
         #endregion

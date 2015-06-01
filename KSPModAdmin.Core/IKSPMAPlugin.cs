@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using KSPModAdmin.Core.Views;
 
 namespace KSPModAdmin.Core
@@ -42,6 +43,11 @@ namespace KSPModAdmin.Core
     public class TabView
     {
         /// <summary>
+        /// A Guid as unique identifier for this view.
+        /// </summary>
+        public Guid UniqueIdentifier { get; private set; }
+
+        /// <summary>
         /// The ucBase derived UserControl to add to the TabPage.
         /// </summary>
         public ucBase TabUserControl { get; private set; }
@@ -51,12 +57,15 @@ namespace KSPModAdmin.Core
         /// </summary>
         public Image TabIcon { get; private set; }
 
-
         /// <summary>
         /// Creates a new instance of the TabView class.
         /// </summary>
-        public TabView(ucBase tabUserControl, Image tabIcon = null)
+        /// <param name="uniqueIdentifier">A new create guid to identifier this view.</param>
+        /// <param name="tabUserControl">The UserControl that should be added to the TabPage</param>
+        /// <param name="tabIcon">The icon that should be used on the TabHeader.</param>
+        public TabView(Guid uniqueIdentifier, ucBase tabUserControl, Image tabIcon = null)
         {
+            UniqueIdentifier = uniqueIdentifier;
             TabUserControl = tabUserControl;
             TabIcon = tabIcon;
         }

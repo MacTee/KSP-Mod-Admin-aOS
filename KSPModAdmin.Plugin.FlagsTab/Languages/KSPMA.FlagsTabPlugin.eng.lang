@@ -29,6 +29,10 @@
   <String Name="MSG_ERROR_DELETE_FLAG_0_FAILED" Value="Error! Deleting flag &quot;{0}&quot; failed!"/>
   <String Name="MSG_REALY_DELETE_FLAG_0" Value="Do you realy want to delete the flag &quot;{0}&quot;?"/>
 
+  <Control Name="tsmiFlagsTabRefresh" Value="Refresh"/>
+  <Control Name="tsmiFlagsTabAddNewFlag" Value="Add new Flag"/>
+  <Control Name="tsmiFlagsTabRemoveFlag" Value="Remove flag"/>
+
 </Language>
   
   

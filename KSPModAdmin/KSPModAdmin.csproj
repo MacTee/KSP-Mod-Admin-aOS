@@ -159,7 +159,8 @@
 md "$(ProjectDir)$(OutDir)Plugins"
 xcopy /E /Y /R /I "$(SolutionDir)KSPModAdmin.Plugin.Translation\$(OutDir)KSPModAdmin.Plugin.Translation.dll" "$(ProjectDir)$(OutDir)Plugins"
 xcopy /E /Y /R /I "$(SolutionDir)KSPModAdmin.Plugin.BackupTab\$(OutDir)KSPModAdmin.Plugin.BackupTab.dll" "$(ProjectDir)$(OutDir)Plugins"
-xcopy /E /Y /R /I "$(SolutionDir)KSPModAdmin.Plugin.FlagsTab\$(OutDir)KSPModAdmin.Plugin.FlagsTab.dll" "$(ProjectDir)$(OutDir)Plugins"</PostBuildEvent>
+xcopy /E /Y /R /I "$(SolutionDir)KSPModAdmin.Plugin.FlagsTab\$(OutDir)KSPModAdmin.Plugin.FlagsTab.dll" "$(ProjectDir)$(OutDir)Plugins"
+xcopy /E /Y /R /I "$(SolutionDir)KSPModAdmin.Plugin.PartsAndCraftsTab\$(OutDir)KSPModAdmin.Plugin.PartsAndCraftsTab.dll" "$(ProjectDir)$(OutDir)Plugins"</PostBuildEvent>
   </PropertyGroup>
   <Import Project="..\packages\StyleCop.MSBuild.4.7.49.1\build\StyleCop.MSBuild.Targets" Condition="Exists('..\packages\StyleCop.MSBuild.4.7.49.1\build\StyleCop.MSBuild.Targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -126,6 +126,8 @@ namespace KSPModAdmin.Core
         public const string MODUPDATEBEHAVIOR = "ModUpdateBehavior";
         public const string DELETEOLDARCHIVES = "DeleteOldArchivesAfterUpdate";
         public const string COLOR4OUTDATEDMODS = "Color4OudatedMods";
+        public const string TABORDER = "TabOrder";
+        public const string TAB = "Tab";
         public const string DOWNLOAD_PATH = "DownloadPath";
         public const string NAME = "Name";
         public const string LONGNAME = "LongName";
@@ -145,6 +147,7 @@ namespace KSPModAdmin.Core
         public const string POSTDOWNLOADACTION = "PostDownloadAction";
         public const string OVERRRIDE = "Override";
         public const string VALUE = "Value";
+        public const string UNIQUEIDENTIFIER = "UniqueIdentifier";
         public const string ADDDATE = "AddDate";
         public const string NOTE = "Note";
         public const string PRODUCTID = "ProductID";

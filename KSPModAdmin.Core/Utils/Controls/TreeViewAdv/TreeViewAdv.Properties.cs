@@ -258,7 +258,15 @@ namespace KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree
 		{
 			get { return _allowColumnReorder; }
 			set { _allowColumnReorder = value; }
-		}
+        }
+
+        private bool _allowColumnSort;
+        [DefaultValue(false), Category("Behavior")]
+        public bool AllowColumnSort
+        {
+            get { return _allowColumnSort; }
+            set { _allowColumnSort = value; }
+        }
 
 		private bool _showLines = true;
 		[DefaultValue(true), Category("Behavior")]

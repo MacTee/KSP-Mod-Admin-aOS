@@ -167,7 +167,8 @@ namespace KSPModAdmin.Core.Model
                                 Type = ColumnItemType.NodeCheckBox,
                                 DataPropertyName = "IsOutdated",
                                 EditEnabled = false,
-                                LeftMargin = 3
+                                LeftMargin = 3,
+                                HorizontalAlign = HorizontalAlignment.Center
                                 ////Type = ColumnItemType.NodeTextBox,
                                 ////DataPropertyName = "IsOutdated",
                                 ////IncrementalSearchEnabled = true,
@@ -243,7 +244,8 @@ namespace KSPModAdmin.Core.Model
                                 Type = ColumnItemType.NodeCheckBox,
                                 DataPropertyName = "HasCollision",
                                 EditEnabled = false,
-                                LeftMargin = 3
+                                LeftMargin = 3,
+                                HorizontalAlign = HorizontalAlignment.Center
                                 ////Type = ColumnItemType.NodeTextBox,
                                 ////DataPropertyName = "HasCollision",
                                 ////IncrementalSearchEnabled = true,
@@ -265,7 +267,8 @@ namespace KSPModAdmin.Core.Model
                                 Type = ColumnItemType.NodeCheckBox,
                                 DataPropertyName = "IsInstalled",
                                 EditEnabled = false,
-                                LeftMargin = 3
+                                LeftMargin = 3,
+                                HorizontalAlign = HorizontalAlignment.Center
                                 ////Type = ColumnItemType.NodeTextBox,
                                 ////DataPropertyName = "IsInstalled",
                                 ////IncrementalSearchEnabled = true,

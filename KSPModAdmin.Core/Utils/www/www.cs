@@ -117,15 +117,29 @@ namespace KSPModAdmin.Core.Utils
         /// </summary>
         /// <param name="downloadURL">Url to the file to download.</param>
         /// <param name="downloadPath">Path to save the file to.</param>
-        public static void DownloadFile(string downloadURL, string downloadPath, DownloadProgressChangedEventHandler downloadProgressHandler = null)
+        public static void DownloadFile(string downloadURL, string downloadPath, DownloadProgressCallback downloadProgressCallback = null)
         {
             using (WebClient webClient = new WebClient())
             {
                 webClient.Credentials = CredentialCache.DefaultCredentials;
-                if (downloadProgressHandler != null)
-                    webClient.DownloadProgressChanged += downloadProgressHandler;
+                webClient.DownloadProgressChanged += (sender, args) =>
+                    {
+                        if (downloadProgressCallback != null)
+                            downloadProgressCallback(args.BytesReceived, args.TotalBytesToReceive);
+                    };
 
-                webClient.DownloadFile(new Uri(downloadURL), downloadPath);
+                bool wait = true;
+                webClient.DownloadFileCompleted += (sender, args) =>
+                    {
+                        wait = false;
+                    };
+
+                // User DownloadFileAsync cause DownloadFile doesn't fire the DownloadProgressChanged event.
+                webClient.DownloadFileAsync(new Uri(downloadURL), downloadPath);
+                while (wait)
+                {
+                    // Wait till download is finished.
+                }
             }
         }
 

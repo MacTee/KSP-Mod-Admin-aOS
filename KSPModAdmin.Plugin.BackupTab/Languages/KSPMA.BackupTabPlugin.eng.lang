@@ -56,7 +56,7 @@
   <Control Name="tsbBackupOnKSPLaunch" Value="Backup on KSP launch">
     <ChildControl Name="tsbBackupOnKSPLaunch_ToolTip" Value="Backup on KSP launch^If on, KSP Mod Admin will create a backup of the KSP saves folder of the selected KSP path, when KSP will be launched."/>
   </Control>
-  <Control Name="tsbBackupOptions" Value="Backup on KSP launch">
+  <Control Name="tsbBackupOptions" Value="Open/Close backup options">
     <ChildControl Name="tsbBackupOptions_ToolTip" Value="Open/Close backup options^Opens or closes the backup options panel."/>
   </Control>
   
@@ -85,6 +85,16 @@
   <String Name="MSG_BACKUP_LOAD_ERROR_0" Value="Error during backup loading: &quot;{0}&quot;"/>;
   <String Name="MSG_BACKUP_FOLDER_NOT_FOUND_0" Value="Backup folder not found! &quot;{0}&quot;"/>;
   <String Name="MSG_BACKUP_STARTED" Value="Backup started..."/>;
+
+  <Control Name="tsbBackupTabRefresh" Value="Refresh"/>
+  <Control Name="tsbBackupTabOpenBackupDir" Value="Open backup directory"/>
+  <Control Name="tsbBackupTabSelectNewBackupDir" Value="Select new backup directory"/>
+  <Control Name="tsbBackupTabEditBackupNote" Value="Edit backup note"/>
+  <Control Name="tsbBackupTabNewBackup" Value="New backup"/>
+  <Control Name="tsbBackupTabBackupSaveFolder" Value="Backup saves folder"/>
+  <Control Name="tsbBackupTabRemoveSelectedBackup" Value="Remove selected backup"/>
+  <Control Name="tsbBackupTabRemoveAllBackups" Value="Remove all backups"/>
+  <Control Name="tsbBackupTabOpenBackupOptions" Value="Open/Close backup options"/>
 </Language>
   
   

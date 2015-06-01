@@ -1,0 +1,104 @@
+<Language Name="fake" LongName="Fake language">
+  <String Name="MSG_PARTSTAB_VIEW_TITLE" Value="(T)Parts"/>
+
+  <Control Name="tsbPartsRefresh" Value="(T)tsbPartsRefresh">
+    <ChildControl Name="tsbPartsRefresh_ToolTip" Value="(T)Refresh^Starts the scans of the KSP install directory for parts."/>
+  </Control>
+  <Control Name="tsbPartsRemove" Value="(T)tsbPartsRemove">
+    <ChildControl Name="tsbPartsRemove_ToolTip" Value="(T)Remove Part^Removes the part from the HD. If the part was added by a mod it will be unchecked and uninstalled."/>
+  </Control>
+  <Control Name="tsbPartsEdit" Value="(T)tsbPartsEdit">
+    <ChildControl Name="tsbPartsEdit_ToolTip" Value="(T)Edit part^Opens the Part editor."/>
+  </Control>
+  <Control Name="tsbPartsChangeCategory" Value="(T)tsbPartsChangeCategory">
+    <ChildControl Name="tsbPartsChangeCategory_ToolTip" Value="(T)Change category^Opens the Change part category dialog."/>
+  </Control>
+  <Control Name="gbPartsFilter" Value="(T)Filter:"/>
+  <Control Name="lblPartsFilterCategory" Value="(T)Category:"/>
+  <Control Name="lblPartsFilterMod" Value="(T)Mod:"/>
+  <Control Name="tsmiPartsRefresh" Value="(T)Refresh"/>
+  <Control Name="tsmiPartsRemovePart" Value="(T)Remove part"/>
+  <Control Name="tsmiPartsEditPart" Value="(T)Edit part"/>
+  <Control Name="frmPartEditor" Value="(T)Part Editor (Experimental)"/>
+  <Control Name="lblPartEditorCategory" Value="(T)Category:"/>
+  <Control Name="lblNewTitle" Value="(T)Title:"/>
+  <Control Name="lblName" Value="(T)Name:"/>
+  <Control Name="lblNameSelectionDescription" Value="(T)Beware: Changes may break crafts or even the part.cfg file!"/>
+
+  <String Name="UcPartsTabView_Item_00" Value="(T)Title/Craft"/>
+  <String Name="UcPartsTabView_Item_01" Value="(T)Part"/>
+  <String Name="UcPartsTabView_Item_02" Value="(T)Category"/>
+  <String Name="UcPartsTabView_Item_03" Value="(T)Mod"/>
+
+  <String Name="MSG_PARTS_COUNT_TEXT" Value="(T){0} ({1}) Parts"/>
+  <String Name="MSG_PART_SCAN_STARTED" Value="(T)Part scan started..."/>
+  <String Name="MSG_PART_SCAN_DONE" Value="(T)Part scan done."/>
+  <String Name="MSG_SCAN_FILE_0_FOR_PARTS" Value="(T)Scan file &amp;quot;{0}&amp;quot; for parts..."/>
+  <String Name="MSG_NO_PARTCFG_FOUND_0" Value="(T)No part.cfg files found in &amp;quot;{0}&amp;quot;."/>
+  <String Name="MSG_ERROR_DURING_PART_READING_0" Value="(T)Error during part reading! &amp;quot;{0}&amp;quot;"/>
+  <String Name="MSG_ERROR_DURING_PART_READING_0_UNEXPECTED_EMPTY_LINE" Value="(T)Error during part reading &amp;quot;{0}&amp;quot;^Enexpected 'null' line."/>
+  <String Name="MSG_PART_FOUND_AND_ADDED_0" Value="(T)Part found and added &amp;quot;{0}&amp;quot;."/>
+  <String Name="MSG_ERROR_DURING_PART_READING_0_NAME_TITLE_MISSMATCH" Value="(T)Error during part reading &amp;quot;{0}&amp;quot;^Name / title / category parameter missmatch."/>
+  <String Name="MSG_PART_NOT_FROM_MOD_DELETE_WARNING" Value="(T)The part you are trying to delete is not from a mod.^Do you want to delete the part permanetly?"/>
+  <String Name="MSG_PART_USED_DELETE_WARNING" Value="(T)The part you are trying to delete is used by the following craft(s):"/>
+  <String Name="MSG_DELETE_ANYWAY" Value="(T)Delete it anyway?"/>
+  <String Name="MSG_DIR_0_OF_PART_1_DELETED" Value="(T)Directory &amp;quot;{0}&amp;quot; of part &amp;quot;{1}&amp;quot; deleted."/>
+  <String Name="MSG_MODNODE_0_UNCHECKED" Value="(T)ModNode &amp;quot;{0}&amp;quot; unchecked."/>
+  <String Name="MSG_NAME_OF_PART_0_CHANGED_1" Value="(T)Name of part &amp;quot;{0}&amp;quot; changed to &amp;quot;{1}&amp;quot;."/>
+  <String Name="MSG_TITLE_OF_PART_0_CHANGED_FROM_1_TO_2" Value="(T)Title of part &amp;quot;{0}&amp;quot; changed from &amp;quot;{1}&amp;quot; to &amp;quot;{2}&amp;quot;."/>
+  <String Name="MSG_CATEGORY_OF_PART_0_CHANGED_FROM_1_TO_2" Value="(T)Category of part &amp;quot;{0}&amp;quot; changed from &amp;quot;{1}&amp;quot; to &amp;quot;{2}&amp;quot;."/>
+
+
+  <String Name="MSG_CRAFTSTAB_VIEW_TITLE" Value="(T)Crafts"/>
+
+  <Control Name="tsbCraftsTabRefresh" Value="tsbCraftsTabRefresh">
+    <ChildControl Name="tsbCraftsTabRefresh_ToolTip" Value="(T)Refresh^Starts the scans of the KSP install directory for crafts."/>
+  </Control>
+  <Control Name="tsmiCraftsTabRefresh" Value="(T)Refresh"/>
+  <Control Name="tsbCraftsTabValidate" Value="tsbCraftsTabValidate">
+    <ChildControl Name="tsbCraftsTabValidate_ToolTip" Value="(T)Validate crafts^Starts the validation of all crafts."/>
+  </Control>
+  <Control Name="tsmiCraftsTabValidateCrafts" Value="(T)Validate crafts"/>
+  <Control Name="tsbCraftsTabRename" Value="tsbCraftsTabRename">
+    <ChildControl Name="tsbCraftsTabRename_ToolTip" Value="(T)Rename craft^Opens the craft editor."/>
+  </Control>
+  <Control Name="tsmiCraftsTabRenameCraft" Value="(T)Rename craft"/>
+  <Control Name="tsbCraftsTabSwap" Value="tsbCraftsTabSwap">
+    <ChildControl Name="tsbCraftsTabSwap_ToolTip" Value="(T)Swap buildings^Swaps the building of the craft."/>
+  </Control>
+  <Control Name="tsmiCraftsTabSwapBuildings" Value="(T)Swap buildings"/>
+  <Control Name="tsbCraftsTabRemove" Value="tsbCraftsTabRemove">
+    <ChildControl Name="tsbCraftsTabRemove_ToolTip" Value="(T)Remove craft^Removes the craft from the HD. If the craft was added by a mod it will be unchecked and uninstalled."/>
+  </Control>
+  <Control Name="tsmiCraftsTabRemoveCraft" Value="(T)Remove craft"/>
+  <Control Name="tslBuildingFilter" Value="(T)Building filter:"/>
+  <Control Name="lblCraftsTabNote" Value="(T)NOTE: Crafts with invalid parts are red."/>
+
+  <String Name="UcCraftsTabView_Item_00" Value="(T)Craft/Part"/>
+  <String Name="UcCraftsTabView_Item_01" Value="(T)Type"/>
+  <String Name="UcCraftsTabView_Item_02" Value="(T)Folder"/>
+  <String Name="UcCraftsTabView_Item_03" Value="(T)Version"/>
+  <String Name="UcCraftsTabView_Item_04" Value="(T)Mods"/>
+  
+  <String Name="MSG_CRAFTS_COUNT_TEXT" Value="(T){0} ({1}) Crafts"/>
+  <String Name="MSG_CRAFT_SCAN_STARTED" Value="(T)Crafts scan started..."/>
+  <String Name="MSG_CRAFT_SCAN_DONE" Value="(T)Crafts scan done."/>
+  <String Name="MSG_SCAN_FILE_0_FOR_CRAFTS" Value="(T)Scan file &amp;quot;{0}&amp;quot; for crafts..."/>
+  <String Name="MSG_NO_CRAFTCFG_FOUND_0" Value="(T)No *.craft files found in &amp;quot;{0}&amp;quot;."/>
+  <String Name="MSG_ERROR_DURING_CRAFT_READING_0" Value="(T)Error during part reading! &amp;quot;{0}&amp;quot;"/>
+  <String Name="MSG_ERROR_DURING_CRAFT_READING_0_UNEXPECTED_EMPTY_LINE" Value="(T)Error during craft reading &amp;quot;{0}&amp;quot;^Enexpected 'null' line."/>
+  <String Name="MSG_PART_0_ADDED_TO_CRAFT_1" Value="(T)Part &amp;quot;{0}&amp;quot; added to craft &amp;quot;{1}&amp;quot;."/>
+  <String Name="MSG_PARTCOUNT_FOR_PART_0_IN_CRAFT_1_CHANGED_TO_2" Value="(T)Part count of part &amp;quot;{0}&amp;quot; in craft &amp;quot;{1}&amp;quot; changed to {2}."/>
+  <String Name="MSG_CRAFT_VALIDATION_STARTED" Value="(T)Crafts validation started..."/>
+  <String Name="MSG_CRAFT_VALIDATION_DONE" Value="(T)Crafts validation done."/>
+  <String Name="MSG_VALIDATING_CRAFT_0" Value="(T)Validating craft &amp;quot;{0}&amp;quot;..."/>
+  <String Name="MSG_VALIDATING_CRAFT_0_SUCCESSFUL" Value="(T)Validation successful for craft &amp;quot;{0}&amp;quot;."/>
+  <String Name="MSG_VALIDATING_CRAFT_0_FAILED" Value="(T)Validation failed for craft &amp;quot;{0}&amp;quot;!"/>
+  <String Name="MSG_ERROR_DURING_CRAFT_VALIDATION_0" Value="(T)Error during craft validation. &amp;quot;{0}&amp;quot;"/>
+  <String Name="MSG_BUILDING_OF_CRAFT_0_SWAPPED_1_2" Value="(T)Building of craft &amp;quot;{0}&amp;quot; swapped from &amp;quot;{1}&amp;quot; to &amp;quot;{2}&amp;quot;."/>
+  <String Name="MSG_CRAFT_0_DELETED" Value="(T)Craft &amp;quot;{0}&amp;quot; deleted."/>
+  <String Name="MSG_CRAFT_NOT_FROM_MOD_DELETE_WARNING" Value="(T)The craft you are trying to delete is not from a mod.^Do you want to delete the craft permanetly?"/>
+  <String Name="MSG_PARTTAB_UPDATED_PART_0" Value="(T)Part &amp;quot;{0}&amp;quot; on PartTab updated."/>
+  <String Name="MSG_MODSELECTION_UPDATED_PART_0" Value="(T)Part &amp;quot;{0}&amp;quot; in ModSelection updated."/>
+
+</Language>
