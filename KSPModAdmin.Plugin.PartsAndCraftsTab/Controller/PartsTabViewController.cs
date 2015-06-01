@@ -481,8 +481,8 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Controller
             {
                 StringBuilder sb = new StringBuilder();
                 sb.AppendLine(Messages.MSG_PART_USED_DELETE_WARNING);
-                foreach (var tempNode in partNode.Nodes)
-                    sb.AppendFormat("- {0}{1}", tempNode.Text, Environment.NewLine);
+                foreach (PartNode tempNode in partNode.Nodes)
+                    sb.AppendFormat("- {0}{1}", tempNode.Title, Environment.NewLine);
                 sb.AppendLine();
                 sb.AppendLine(Messages.MSG_DELETE_ANYWAY);
                 dlgResult = MessageBox.Show(View.ParentForm, sb.ToString(), string.Empty, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -490,23 +490,23 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Controller
 
             if ((node != null || dlgResult == DialogResult.Yes) && Directory.Exists(partPath))
             {
-                Messenger.AddInfo(string.Format(Messages.MSG_DIR_0_OF_PART_1_DELETED, partPath, node.Name));
+                Messenger.AddInfo(string.Format(Messages.MSG_DIR_0_OF_PART_1_DELETED, partPath, Path.GetFileName(partPath)));
                 Directory.Delete(partPath, true);
+
+                if (partNode.Nodes != null)
+                {
+                    foreach (var n in partNode.Nodes)
+                    {
+                        var craft = n.Tag as CraftNode;
+                        if (craft == null)
+                            continue;
+
+                        craft.RemovePartRelation(partNode);
+                    }
+                }
 
                 if (node != null)
                 {
-                    if (partNode.Nodes != null)
-                    {
-                        foreach (var n in partNode.Nodes)
-                        {
-                            var craft = n.Tag as CraftNode;
-                            if (craft == null)
-                                continue;
-
-                            craft.RemovePartRelation(partNode);
-                        }
-                    }
-
                     node = node.Parent as ModNode;
                     node.SetChecked(false);
                     node.IsInstalled = false;

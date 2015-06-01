@@ -61,6 +61,7 @@
             // 
             // tsCraftsTab
             // 
+            this.tsCraftsTab.AutoSize = false;
             this.tsCraftsTab.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbCraftsTabRefresh,
             this.toolStripSeparator1,
@@ -76,7 +77,7 @@
             this.tslCraftsTabProcessing});
             this.tsCraftsTab.Location = new System.Drawing.Point(0, 0);
             this.tsCraftsTab.Name = "tsCraftsTab";
-            this.tsCraftsTab.Size = new System.Drawing.Size(514, 39);
+            this.tsCraftsTab.Size = new System.Drawing.Size(675, 39);
             this.tsCraftsTab.TabIndex = 0;
             this.tsCraftsTab.Text = "toolStrip1";
             // 
@@ -180,7 +181,7 @@
             "SPH"});
             this.cbCraftsTabBuildingFilter.Name = "cbCraftsTabBuildingFilter";
             this.cbCraftsTabBuildingFilter.RightMargin = 10;
-            this.cbCraftsTabBuildingFilter.Size = new System.Drawing.Size(168, 39);
+            this.cbCraftsTabBuildingFilter.Size = new System.Drawing.Size(329, 39);
             this.cbCraftsTabBuildingFilter.SelectedIndexChanged += new System.EventHandler(this.cbCraftsTabBuildingFilter_SelectedIndexChanged);
             // 
             // tslCraftsTabProcessing
@@ -204,11 +205,11 @@
             this.tvCrafts.DefaultToolTipProvider = null;
             this.tvCrafts.DragDropMarkColor = System.Drawing.Color.Black;
             this.tvCrafts.LineColor = System.Drawing.SystemColors.ControlDark;
-            this.tvCrafts.Location = new System.Drawing.Point(0, 37);
+            this.tvCrafts.Location = new System.Drawing.Point(0, 42);
             this.tvCrafts.Model = null;
             this.tvCrafts.Name = "tvCrafts";
             this.tvCrafts.SelectedNode = null;
-            this.tvCrafts.Size = new System.Drawing.Size(514, 344);
+            this.tvCrafts.Size = new System.Drawing.Size(675, 381);
             this.tvCrafts.TabIndex = 1;
             this.tvCrafts.Text = "treeViewAdv1";
             this.tvCrafts.UseColumns = true;
@@ -289,9 +290,9 @@
             // 
             this.lblCraftsTabNote.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCraftsTabNote.Location = new System.Drawing.Point(179, 384);
+            this.lblCraftsTabNote.Location = new System.Drawing.Point(179, 426);
             this.lblCraftsTabNote.Name = "lblCraftsTabNote";
-            this.lblCraftsTabNote.Size = new System.Drawing.Size(332, 13);
+            this.lblCraftsTabNote.Size = new System.Drawing.Size(493, 13);
             this.lblCraftsTabNote.TabIndex = 4;
             this.lblCraftsTabNote.Text = "NOTE: Crafts with invalid parts are red.";
             this.lblCraftsTabNote.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -300,7 +301,7 @@
             // 
             this.lblCraftsTabCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblCraftsTabCount.AutoSize = true;
-            this.lblCraftsTabCount.Location = new System.Drawing.Point(3, 384);
+            this.lblCraftsTabCount.Location = new System.Drawing.Point(3, 426);
             this.lblCraftsTabCount.Name = "lblCraftsTabCount";
             this.lblCraftsTabCount.Size = new System.Drawing.Size(47, 13);
             this.lblCraftsTabCount.TabIndex = 5;
@@ -316,7 +317,7 @@
             this.Controls.Add(this.tsCraftsTab);
             this.MinimumSize = new System.Drawing.Size(450, 400);
             this.Name = "ucCraftsTabView";
-            this.Size = new System.Drawing.Size(514, 400);
+            this.Size = new System.Drawing.Size(675, 442);
             this.Load += new System.EventHandler(this.ucPluginView_Load);
             this.tsCraftsTab.ResumeLayout(false);
             this.tsCraftsTab.PerformLayout();
