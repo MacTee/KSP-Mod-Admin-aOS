@@ -2,6 +2,9 @@ using System;
 
 namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Helper
 {
+    /// <summary>
+    /// Helper class that contains functions to manipulate part.cfg and *.craft.
+    /// </summary>
     public class CfgFileHelper
     {
         /// <summary>

@@ -4,20 +4,17 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 using KSPModAdmin.Core;
 using KSPModAdmin.Core.Controller;
 using KSPModAdmin.Core.Model;
 using KSPModAdmin.Core.Utils;
+using KSPModAdmin.Plugin.PartsAndCraftsTab.Helper;
 using KSPModAdmin.Plugin.PartsAndCraftsTab.Model;
 using KSPModAdmin.Plugin.PartsAndCraftsTab.Views;
 
 namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Controller
 {
-    using System.Dynamic;
-    using System.Text.RegularExpressions;
-
-    using KSPModAdmin.Plugin.PartsAndCraftsTab.Helper;
-
     /// <summary>
     /// Delegate for the ScanComplete event
     /// </summary>

@@ -3,21 +3,16 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using System.Xml;
 using KSPModAdmin.Core;
 using KSPModAdmin.Core.Controller;
 using KSPModAdmin.Core.Model;
 using KSPModAdmin.Core.Utils;
-using KSPModAdmin.Core.Utils.Localization;
+using KSPModAdmin.Plugin.PartsAndCraftsTab.Helper;
 using KSPModAdmin.Plugin.PartsAndCraftsTab.Model;
 using KSPModAdmin.Plugin.PartsAndCraftsTab.Views;
 
 namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Controller
 {
-    using System.Text.RegularExpressions;
-
-    using KSPModAdmin.Plugin.PartsAndCraftsTab.Helper;
-
     /// <summary>
     /// Controller class for the CraftsTab view.
     /// </summary>
@@ -529,9 +524,9 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Controller
         /// <returns>True if the text was changed.</returns>
         private static bool ChangeParameter(ref string text, string craftName, string parameterName, string oldValue, string newValue)
         {
-            //var martch = Regex.Match(text, PARAMETER_REGEX.Replace(NAMEPARAMETER, NAME).Replace(VALUEPARAMETER, partName));
-            //if (martch.Success)
-            //{
+            ////var martch = Regex.Match(text, PARAMETER_REGEX.Replace(NAMEPARAMETER, NAME).Replace(VALUEPARAMETER, partName));
+            ////if (martch.Success)
+            ////{
                 int index = CfgFileHelper.GetIndexOfParameter(text, "ship", craftName, 0, false);
                 if (index < 0)
                     return false;
@@ -543,9 +538,9 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Controller
                 text = text.Substring(0, index) + newValue + text.Substring(index + oldValue.Length);
 
                 return true;
-            //}
+            ////}
 
-            //return false;
+            ////return false;
         }
 
         #endregion
