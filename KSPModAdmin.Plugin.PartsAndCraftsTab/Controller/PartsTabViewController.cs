@@ -13,6 +13,9 @@ using KSPModAdmin.Plugin.PartsAndCraftsTab.Views;
 
 namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Controller
 {
+    using System.Dynamic;
+    using System.Text.RegularExpressions;
+
     /// <summary>
     /// Delegate for the ScanComplete event
     /// </summary>
@@ -39,6 +42,13 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Controller
         private const string SCIENCE = "Science";
         private const string PODS = "Pods";
         private const string EXTENSION_CFG = "*.cfg";
+
+        private const string PARAMETER_REGEX = "({NAME})[ ]{0,1}[=]{1}[ ]{0,1}({VALUE})";
+        private const string NAMEPARAMETER = "{NAME}";
+        private const string VALUEPARAMETER = "{VALUE}";
+        private const string NAME = "name";
+        private const string TITLE = "title";
+        private const string CATEGORY = "category";
 
         /// <summary>
         /// Default filter to display all content.
@@ -536,9 +546,9 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Controller
         public static void EditPart(PartNode partNode)
         {
             frmPartEditor dlg = new frmPartEditor();
-            dlg.NewTitle = partNode.Title;
-            dlg.NewName = partNode.Name;
-            dlg.NewCategory = partNode.Category;
+            dlg.Title = partNode.Title;
+            dlg.PartName = partNode.Name;
+            dlg.Category = partNode.Category;
             dlg.KnownNames = (from PartNode part in allNodes select part.Name).ToList();
             if (dlg.ShowDialog(View.ParentForm) == DialogResult.OK)
             {
@@ -546,22 +556,27 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Controller
                 if (File.Exists(fullPath))
                 {
                     string allText = File.ReadAllText(fullPath);
-                    string newText = allText;
                     if (partNode.Name != dlg.NewName)
                     {
-                        newText = allText.Replace("name = " + partNode.Name, "name = " + dlg.NewName);
+                        if (!ChangeParameter(ref allText, partNode.Name, NAME, partNode.Name, dlg.NewName))
+                            return;
+
                         Messenger.AddInfo(string.Format(Messages.MSG_NAME_OF_PART_0_CHANGED_1, partNode.Name, dlg.NewName));
                         partNode.Name = dlg.NewName;
                     }
                     if (partNode.Title != dlg.NewTitle)
                     {
-                        newText = newText.Replace("title = " + partNode.Title, "title = " + dlg.NewTitle);
+                        if (!ChangeParameter(ref allText, partNode.Name, TITLE, partNode.Title, dlg.NewTitle))
+                            return;
+
                         Messenger.AddInfo(string.Format(Messages.MSG_TITLE_OF_PART_0_CHANGED_FROM_1_TO_2, partNode.Name, partNode.Title, dlg.NewTitle));
                         partNode.Title = dlg.NewTitle;
                     }
                     if (partNode.Category != dlg.NewCategory)
                     {
-                        newText = allText.Replace("category = " + partNode.Category, "category = " + dlg.NewCategory);
+                        if (!ChangeParameter(ref allText, partNode.Name, CATEGORY, partNode.Category, dlg.NewCategory))
+                            return;
+
                         Messenger.AddInfo(string.Format(Messages.MSG_CATEGORY_OF_PART_0_CHANGED_FROM_1_TO_2, partNode.Name, partNode.Category, dlg.NewCategory));
                         partNode.Category = dlg.NewCategory;
 
@@ -574,9 +589,90 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Controller
                             }
                         }
                     }
-                    File.WriteAllText(fullPath, newText);
+                    File.WriteAllText(fullPath, allText);
                 }
             }
+        }
+
+        /// <summary>
+        /// Changes the oldValue of the passed parameter to the passed newValue.
+        /// Only for the named part.
+        /// </summary>
+        /// <param name="text">The text to search and replace in.</param>
+        /// <param name="partName">The name of the part to change a parameter from.</param>
+        /// <param name="parameterName">The parameter to change the value of.</param>
+        /// <param name="oldValue">The old value of the parameter.</param>
+        /// <param name="newValue">The new value for the parameter.</param>
+        /// <returns>True if the text was changed.</returns>
+        private static bool ChangeParameter(ref string text, string partName, string parameterName, string oldValue, string newValue)
+        {
+
+            var martch = Regex.Match(text, PARAMETER_REGEX.Replace(NAMEPARAMETER, NAME).Replace(VALUEPARAMETER, partName));
+            if (martch.Success)
+            {
+                int index = GetIndexOfParameter(text, NAME, partName, 0, false);
+                if (index < 0) 
+                    return false;
+
+                index = GetIndexOfParameter(text, parameterName, oldValue, index);
+                if (index < 0)
+                    return false;
+
+                text = text.Substring(0, index) + newValue + text.Substring(index + oldValue.Length);
+
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Gets the index of the parameter / name combination within the passed text.
+        /// The Index points to the beginning of the parameter value.
+        /// </summary>
+        /// <param name="text">The text to search in.</param>
+        /// <param name="parameterName">The parameter name to search with.</param>
+        /// <param name="value">The parameter value to search with.</param>
+        /// <param name="startIndex">Start index to start the search from.</param>
+        /// <returns>The index that is points to the beginning of the value or -1.</returns>
+        private static int GetIndexOfParameter(string text, string parameterName, string value, int startIndex = 0, bool behindMatch = true)
+        {
+            int index = GetIndexOf(text, string.Format("{0} = {1}", parameterName, value), startIndex, behindMatch);
+            if (behindMatch && index >= 0)
+                return index - value.Length;
+            
+            if (index < 0)
+                index = GetIndexOf(text, string.Format("{0} ={1}", parameterName, value), startIndex, behindMatch);
+            if (behindMatch && index >= 0)
+                return index - value.Length;
+
+            if (index < 0)
+                index = GetIndexOf(text, string.Format("{0}= {1}", parameterName, value), startIndex, behindMatch);
+            if (behindMatch && index >= 0)
+                return index - value.Length;
+            
+            if (index < 0)
+                index = GetIndexOf(text, string.Format("{0}={1}", parameterName, value), startIndex, behindMatch);
+            if (behindMatch && index >= 0)
+                return index - value.Length;
+
+            return index;
+        }
+
+        /// <summary>
+        /// Gets the index behind the search text.
+        /// </summary>
+        /// <param name="text">The text to search in.</param>
+        /// <param name="searchString">The string to search for.</param>
+        /// <param name="startIndex">Start index to start the search from.</param>
+        /// <returns>The index behind the searchText or -1.</returns>
+        private static int GetIndexOf(string text, string searchString, int startIndex = 0, bool behindMatch = true)
+        {
+            int index = text.IndexOf(searchString, startIndex, StringComparison.CurrentCultureIgnoreCase);
+            if (behindMatch && index >= 0)
+                index += searchString.Length;
+
+            return index;
         }
         
         #endregion

@@ -12,29 +12,53 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Views
         #region Properties
 
         /// <summary>
-        /// Gets or sets the tbNewName Text property.
+        /// Gets or sets the Name .
         /// </summary>
-        public string NewName { get { return tbNewName.Text; } set { tbNewName.Text = value; } }
+        public string PartName { get { return partName; } set { tbNewName.Text = partName = value; } }
+        private string partName = string.Empty;
+
+        /// <summary>
+        /// Gets the tbNewName Text property.
+        /// </summary>
+        public string NewName { get { return tbNewName.Text; } }
 
         /// <summary>
         /// Gets or sets the tbNewTitle Text property.
         /// </summary>
-        public string NewTitle { get { return tbNewTitle.Text; } set { tbNewTitle.Text = value; } }
+        public string Title { get { return title; } set { tbNewTitle.Text = title = value; } }
+        private string title = string.Empty;
+
+        /// <summary>
+        /// Gets the tbNewTitle Text property.
+        /// </summary>
+        public string NewTitle { get { return tbNewTitle.Text; } }
 
         /// <summary>
         /// Gets or sets the selected part category.
         /// </summary>
-        public string NewCategory
+        public string Category
         {
-            get { return (string)cbCategory.SelectedItem; }
+            get { return category; }
             set
             {
                 foreach (string item in cbCategory.Items)
                 {
                     if (item == value)
+                    {
                         cbCategory.SelectedItem = item;
+                        category = item;
+                    }
                 }
             }
+        }
+        private string category = string.Empty;
+
+        /// <summary>
+        /// Gets the selected part category.
+        /// </summary>
+        public string NewCategory
+        {
+            get { return (string)cbCategory.SelectedItem; }
         }
 
         /// <summary>
@@ -84,12 +108,12 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Views
             if (tbNewName.Text.Length == 0)
                 MessageBox.Show(this, "Please enter a new name first.");
 
-            else if (KnownNames.Contains(NewName))
+            else if (NewName != PartName && KnownNames.Contains(NewName))
                 MessageBox.Show(this, "Name already exists!");
 
             else
             {
-                DialogResult = System.Windows.Forms.DialogResult.OK;
+                DialogResult = DialogResult.OK;
                 Close();
             }
         }
