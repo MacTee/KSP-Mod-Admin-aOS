@@ -14,6 +14,10 @@ using KSPModAdmin.Plugin.PartsAndCraftsTab.Views;
 
 namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Controller
 {
+    using System.Text.RegularExpressions;
+
+    using KSPModAdmin.Plugin.PartsAndCraftsTab.Helper;
+
     /// <summary>
     /// Controller class for the CraftsTab view.
     /// </summary>
@@ -166,11 +170,11 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Controller
                 {
                     Messenger.AddInfo(Messages.MSG_CRAFT_SCAN_STARTED);
 
-                    // Get part.cfg files from GameData folder.
+                    // Get *.craft files from GameData folder.
                     string gameDatePath = KSPPathHelper.GetPath(KSPPaths.GameData);
                     string[] files = Directory.GetFiles(gameDatePath, EXTENSION_CRAFT, SearchOption.AllDirectories);
 
-                    // Get part.cfg files from additional folders.
+                    // Get *.craft files from additional folders.
                     string path1 = KSPPathHelper.GetPath(KSPPaths.VAB);
                     string path2 = KSPPathHelper.GetPath(KSPPaths.SPH);
                     string[] addPaths = new[] { path1, path2 };
@@ -460,10 +464,12 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Controller
             if (File.Exists(fullPath))
             {
                 string newType = GetOtherBuilding(craftNode.Type);
-                string allText = File.ReadAllText(fullPath);
-                string newText = allText.Replace("type = " + craftNode.Type, "type = " + newType);
                 string newPath = GetNewPath(craftNode, newType);
-                File.WriteAllText(fullPath, newText);
+                string allText = File.ReadAllText(fullPath);
+                if (!ChangeParameter(ref allText, craftNode.Name, "type", craftNode.Type, newType))
+                    return;
+
+                File.WriteAllText(fullPath, allText);
                 File.Move(fullPath, newPath);
 
                 Messenger.AddInfo(string.Format(Messages.MSG_BUILDING_OF_CRAFT_0_SWAPPED_1_2, craftNode.Name, craftNode.Type, newType));
@@ -508,6 +514,38 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Controller
             }
             else
                 return fullPath;
+        }
+
+
+        /// <summary>
+        /// Changes the oldValue of the passed parameter to the passed newValue.
+        /// Only for the named part.
+        /// </summary>
+        /// <param name="text">The text to search and replace in.</param>
+        /// <param name="craftName">The name of the craft to change a parameter from.</param>
+        /// <param name="parameterName">The parameter to change the value of.</param>
+        /// <param name="oldValue">The old value of the parameter.</param>
+        /// <param name="newValue">The new value for the parameter.</param>
+        /// <returns>True if the text was changed.</returns>
+        private static bool ChangeParameter(ref string text, string craftName, string parameterName, string oldValue, string newValue)
+        {
+            //var martch = Regex.Match(text, PARAMETER_REGEX.Replace(NAMEPARAMETER, NAME).Replace(VALUEPARAMETER, partName));
+            //if (martch.Success)
+            //{
+                int index = CfgFileHelper.GetIndexOfParameter(text, "ship", craftName, 0, false);
+                if (index < 0)
+                    return false;
+
+                index = CfgFileHelper.GetIndexOfParameter(text, parameterName, oldValue, index);
+                if (index < 0)
+                    return false;
+
+                text = text.Substring(0, index) + newValue + text.Substring(index + oldValue.Length);
+
+                return true;
+            //}
+
+            //return false;
         }
 
         #endregion

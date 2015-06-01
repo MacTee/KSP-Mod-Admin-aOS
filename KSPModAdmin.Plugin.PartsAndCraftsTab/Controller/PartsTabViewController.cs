@@ -16,6 +16,8 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Controller
     using System.Dynamic;
     using System.Text.RegularExpressions;
 
+    using KSPModAdmin.Plugin.PartsAndCraftsTab.Helper;
+
     /// <summary>
     /// Delegate for the ScanComplete event
     /// </summary>
@@ -606,15 +608,14 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Controller
         /// <returns>True if the text was changed.</returns>
         private static bool ChangeParameter(ref string text, string partName, string parameterName, string oldValue, string newValue)
         {
-
             var martch = Regex.Match(text, PARAMETER_REGEX.Replace(NAMEPARAMETER, NAME).Replace(VALUEPARAMETER, partName));
             if (martch.Success)
             {
-                int index = GetIndexOfParameter(text, NAME, partName, 0, false);
+                int index = CfgFileHelper.GetIndexOfParameter(text, NAME, partName, 0, false);
                 if (index < 0) 
                     return false;
 
-                index = GetIndexOfParameter(text, parameterName, oldValue, index);
+                index = CfgFileHelper.GetIndexOfParameter(text, parameterName, oldValue, index);
                 if (index < 0)
                     return false;
 
@@ -624,55 +625,6 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Controller
             }
 
             return false;
-        }
-
-        /// <summary>
-        /// Gets the index of the parameter / name combination within the passed text.
-        /// The Index points to the beginning of the parameter value.
-        /// </summary>
-        /// <param name="text">The text to search in.</param>
-        /// <param name="parameterName">The parameter name to search with.</param>
-        /// <param name="value">The parameter value to search with.</param>
-        /// <param name="startIndex">Start index to start the search from.</param>
-        /// <returns>The index that is points to the beginning of the value or -1.</returns>
-        private static int GetIndexOfParameter(string text, string parameterName, string value, int startIndex = 0, bool behindMatch = true)
-        {
-            int index = GetIndexOf(text, string.Format("{0} = {1}", parameterName, value), startIndex, behindMatch);
-            if (behindMatch && index >= 0)
-                return index - value.Length;
-            
-            if (index < 0)
-                index = GetIndexOf(text, string.Format("{0} ={1}", parameterName, value), startIndex, behindMatch);
-            if (behindMatch && index >= 0)
-                return index - value.Length;
-
-            if (index < 0)
-                index = GetIndexOf(text, string.Format("{0}= {1}", parameterName, value), startIndex, behindMatch);
-            if (behindMatch && index >= 0)
-                return index - value.Length;
-            
-            if (index < 0)
-                index = GetIndexOf(text, string.Format("{0}={1}", parameterName, value), startIndex, behindMatch);
-            if (behindMatch && index >= 0)
-                return index - value.Length;
-
-            return index;
-        }
-
-        /// <summary>
-        /// Gets the index behind the search text.
-        /// </summary>
-        /// <param name="text">The text to search in.</param>
-        /// <param name="searchString">The string to search for.</param>
-        /// <param name="startIndex">Start index to start the search from.</param>
-        /// <returns>The index behind the searchText or -1.</returns>
-        private static int GetIndexOf(string text, string searchString, int startIndex = 0, bool behindMatch = true)
-        {
-            int index = text.IndexOf(searchString, startIndex, StringComparison.CurrentCultureIgnoreCase);
-            if (behindMatch && index >= 0)
-                index += searchString.Length;
-
-            return index;
         }
         
         #endregion

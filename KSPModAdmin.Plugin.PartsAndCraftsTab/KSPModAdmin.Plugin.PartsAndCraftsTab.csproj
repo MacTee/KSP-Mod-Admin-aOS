@@ -66,6 +66,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helper\CfgFileHelper.cs" />
     <Compile Include="Controller\CraftsTabViewController.cs" />
     <Compile Include="KSPMAPlugin.cs" />
     <Compile Include="Messages.cs" />
