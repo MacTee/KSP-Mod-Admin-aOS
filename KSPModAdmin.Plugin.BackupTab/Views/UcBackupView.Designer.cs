@@ -505,6 +505,7 @@
             // 
             // tvBackups
             // 
+            this.tvBackups.AllowColumnSort = true;
             this.tvBackups.BackColor = System.Drawing.SystemColors.Window;
             this.tvBackups.ContextMenuStrip = this.cmsBackups;
             this.tvBackups.DefaultToolTipProvider = null;

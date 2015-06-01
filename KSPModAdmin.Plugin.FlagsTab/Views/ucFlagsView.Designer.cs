@@ -55,9 +55,9 @@
             this.lvFlags.ContextMenuStrip = this.cmsFlagsTab;
             this.lvFlags.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvFlags.LargeImageList = this.ilFlags;
-            this.lvFlags.Location = new System.Drawing.Point(0, 31);
+            this.lvFlags.Location = new System.Drawing.Point(0, 39);
             this.lvFlags.Name = "lvFlags";
-            this.lvFlags.Size = new System.Drawing.Size(540, 369);
+            this.lvFlags.Size = new System.Drawing.Size(540, 361);
             this.lvFlags.SmallImageList = this.ilFlags;
             this.lvFlags.TabIndex = 1;
             this.lvFlags.UseCompatibleStateImageBehavior = false;
@@ -121,8 +121,9 @@
             this.tsscbModFilter,
             this.tslProcessing});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.MinimumSize = new System.Drawing.Size(540, 39);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(540, 31);
+            this.toolStrip1.Size = new System.Drawing.Size(540, 39);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -133,14 +134,14 @@
             this.tsbFlagsRefresh.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbFlagsRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbFlagsRefresh.Name = "tsbFlagsRefresh";
-            this.tsbFlagsRefresh.Size = new System.Drawing.Size(28, 28);
+            this.tsbFlagsRefresh.Size = new System.Drawing.Size(28, 36);
             this.tsbFlagsRefresh.Text = "toolStripButton1";
             this.tsbFlagsRefresh.Click += new System.EventHandler(this.tsbFlagsRefresh_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 31);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 39);
             // 
             // tsbAddFlag
             // 
@@ -149,7 +150,7 @@
             this.tsbAddFlag.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbAddFlag.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbAddFlag.Name = "tsbAddFlag";
-            this.tsbAddFlag.Size = new System.Drawing.Size(28, 28);
+            this.tsbAddFlag.Size = new System.Drawing.Size(28, 36);
             this.tsbAddFlag.Text = "toolStripButton2";
             this.tsbAddFlag.ToolTipText = "Add new Flag\r\nOpens a FileSelect dialog to select a png which will be added to th" +
     "e KSP flags.\r\nThe png will be resized to 256x160.";
@@ -163,7 +164,7 @@
             this.tsbRemoveFlag.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbRemoveFlag.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbRemoveFlag.Name = "tsbRemoveFlag";
-            this.tsbRemoveFlag.Size = new System.Drawing.Size(28, 28);
+            this.tsbRemoveFlag.Size = new System.Drawing.Size(28, 36);
             this.tsbRemoveFlag.Text = "toolStripButton3";
             this.tsbRemoveFlag.ToolTipText = "Remove flag\r\nDeletes and removes the selected flag.";
             this.tsbRemoveFlag.Click += new System.EventHandler(this.tsbRemoveFlag_Click);
@@ -171,12 +172,12 @@
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 31);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 39);
             // 
             // tslModFilter
             // 
             this.tslModFilter.Name = "tslModFilter";
-            this.tslModFilter.Size = new System.Drawing.Size(100, 28);
+            this.tslModFilter.Size = new System.Drawing.Size(100, 36);
             this.tslModFilter.Text = "Folder/Mod filter:";
             // 
             // tsscbModFilter
@@ -184,7 +185,7 @@
             this.tsscbModFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.tsscbModFilter.Name = "tsscbModFilter";
             this.tsscbModFilter.RightMargin = 10;
-            this.tsscbModFilter.Size = new System.Drawing.Size(277, 31);
+            this.tsscbModFilter.Size = new System.Drawing.Size(277, 39);
             this.tsscbModFilter.ToolTipText = "Flag Filter\r\nSelect a filter to adjust the displayed falg groups.";
             this.tsscbModFilter.SelectedIndexChanged += new System.EventHandler(this.tsscbModFilter_SelectedIndexChanged);
             // 
@@ -194,7 +195,7 @@
             this.tslProcessing.Image = global::KSPModAdmin.Plugin.FlagsTab.Properties.Resources.loader;
             this.tslProcessing.Name = "tslProcessing";
             this.tslProcessing.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
-            this.tslProcessing.Size = new System.Drawing.Size(16, 28);
+            this.tslProcessing.Size = new System.Drawing.Size(16, 36);
             this.tslProcessing.Visible = false;
             // 
             // ucFlagsView

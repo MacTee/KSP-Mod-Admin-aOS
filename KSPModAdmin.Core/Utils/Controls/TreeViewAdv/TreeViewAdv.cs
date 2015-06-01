@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Security.Permissions;
 using System.Threading;
 using System.Windows.Forms;
@@ -87,6 +88,23 @@ namespace KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree
         public event EventHandler<TreeColumnEventArgs> ColumnClicked;
         internal void OnColumnClicked(TreeColumn column)
         {
+            if (AllowColumnSort)
+            {
+                if (column == null)
+                    return;
+
+                if (column.SortOrder == SortOrder.None)
+                    column.SortOrder = SortOrder.Ascending;
+
+                else if (column.SortOrder == SortOrder.Descending)
+                    column.SortOrder = SortOrder.Ascending;
+
+                else if (column.SortOrder == SortOrder.Ascending)
+                    column.SortOrder = SortOrder.Descending;
+
+                SortColumn(column);
+            }
+
             if (ColumnClicked != null)
                 ColumnClicked(this, new TreeColumnEventArgs(column));
         }
@@ -289,6 +307,37 @@ namespace KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree
         }
 
         #endregion
+
+        internal void SortColumn(TreeColumn column)
+        {
+            if (column == null)
+                return;
+
+            var nodes = ((TreeModel)Model).Nodes.ToList();
+            nodes.Sort(delegate(Node node1, Node node2)
+            {
+                NodeControl nodeControl = NodeControls.FirstOrDefault(control => control.ParentColumn == column);
+                if (nodeControl == null)
+                    return 0;
+
+                string propName = nodeControl.GetType().GetProperty("DataPropertyName").GetValue(nodeControl, null).ToString();
+
+                object obj1 = node1.GetType().GetProperty(propName).GetValue(node1, null);
+                object obj2 = node2.GetType().GetProperty(propName).GetValue(node2, null);
+                string value1 = (obj1 == null) ? string.Empty : obj1.ToString();
+                string value2 = (obj2 == null) ? string.Empty : obj2.ToString();
+
+                return column.SortOrder == SortOrder.Ascending ? value1.CompareTo(value2) : value2.CompareTo(value1);
+            });
+
+            ((TreeModel)Model).Nodes.Clear();
+            foreach (var node in nodes)
+                ((TreeModel)Model).Nodes.Add(node);
+
+            Invalidate();
+            Update();
+            Refresh();
+        }
 
         void ExpandingIconChanged(object sender, EventArgs e)
         {

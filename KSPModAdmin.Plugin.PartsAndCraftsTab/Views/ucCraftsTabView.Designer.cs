@@ -197,6 +197,7 @@
             // 
             // tvCrafts
             // 
+            this.tvCrafts.AllowColumnSort = true;
             this.tvCrafts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -205,7 +206,7 @@
             this.tvCrafts.DefaultToolTipProvider = null;
             this.tvCrafts.DragDropMarkColor = System.Drawing.Color.Black;
             this.tvCrafts.LineColor = System.Drawing.SystemColors.ControlDark;
-            this.tvCrafts.Location = new System.Drawing.Point(0, 42);
+            this.tvCrafts.Location = new System.Drawing.Point(0, 39);
             this.tvCrafts.Model = null;
             this.tvCrafts.Name = "tvCrafts";
             this.tvCrafts.SelectedNode = null;

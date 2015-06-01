@@ -832,29 +832,29 @@ namespace KSPModAdmin.Core.Views
                 default:
                     nodes = ((ModSelectionTreeModel)tvModSelection.Model).Nodes.Cast<ModNode>().ToList();
                     nodes.Sort(delegate(ModNode node1, ModNode node2)
-                    {
-                        NodeControl nodeControl = null;
-                        foreach (NodeControl control in tvModSelection.NodeControls)
                         {
-                            if (control.ParentColumn == column)
+                            NodeControl nodeControl = null;
+                            foreach (NodeControl control in tvModSelection.NodeControls)
                             {
-                                nodeControl = control;
-                                break;
+                                if (control.ParentColumn == column)
+                                {
+                                    nodeControl = control;
+                                    break;
+                                }
                             }
-                        }
 
-                        string propName = nodeControl.GetType().GetProperty("DataPropertyName").GetValue(nodeControl, null).ToString();
+                            string propName = nodeControl.GetType().GetProperty("DataPropertyName").GetValue(nodeControl, null).ToString();
 
-                        object obj1 = node1.GetType().GetProperty(propName).GetValue(node1, null);
-                        object obj2 = node2.GetType().GetProperty(propName).GetValue(node2, null);
-                        string value1 = (obj1 == null) ? string.Empty : obj1.ToString();
-                        string value2 = (obj2 == null) ? string.Empty : obj2.ToString();
+                            object obj1 = node1.GetType().GetProperty(propName).GetValue(node1, null);
+                            object obj2 = node2.GetType().GetProperty(propName).GetValue(node2, null);
+                            string value1 = (obj1 == null) ? string.Empty : obj1.ToString();
+                            string value2 = (obj2 == null) ? string.Empty : obj2.ToString();
 
-                        if (column.SortOrder == SortOrder.Ascending)
-                            return value1.CompareTo(value2);
-                        else
-                            return value2.CompareTo(value1);
-                    });
+                            if (column.SortOrder == SortOrder.Ascending)
+                                return value1.CompareTo(value2);
+                            else
+                                return value2.CompareTo(value1);
+                        });
 
                     ((ModSelectionTreeModel)tvModSelection.Model).Nodes.Clear();
                     foreach (ModNode modNode in nodes)
