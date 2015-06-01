@@ -45,8 +45,6 @@
 - Overwrite button states are indistinguishable. It's hard to say, what mode it is in. May be CheckBox would be more visual?
   - Change ToolTip to display On/Off state?
 
-- ContextMenus for BackupTab and FlagsTab.
-
 - AVC Plugin version file support
   - Bug fix see BUGS above.
   

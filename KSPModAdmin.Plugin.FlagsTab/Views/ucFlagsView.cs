@@ -103,6 +103,20 @@ namespace KSPModAdmin.Plugin.FlagsTab.Views
             FillListView(FlagsViewController.Flags);
         }
 
+        private void lvFlags_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            bool hasSelection = lvFlags.SelectedItems.Count > 0;
+            tsbRemoveFlag.Enabled = hasSelection;
+        }
+
+        private void cmsFlagsTab_Opening(object sender, CancelEventArgs e)
+        {
+            bool hasSelection = lvFlags.SelectedItems.Count > 0;
+            tsmiFlagsTabRefresh.Enabled = true;
+            tsmiFlagsTabAddNewFlag.Enabled = true;
+            tsmiFlagsTabRemoveFlag.Enabled = hasSelection;
+        }
+
         #endregion
 
         /// <summary>

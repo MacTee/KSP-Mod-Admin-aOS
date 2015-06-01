@@ -529,7 +529,7 @@ namespace KSPModAdmin.Core.Views
             // 
             this.splitContainer1.BackColor = System.Drawing.SystemColors.ControlDark;
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 31);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 39);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -542,7 +542,7 @@ namespace KSPModAdmin.Core.Views
             this.splitContainer1.Panel2.Controls.Add(this.tsMod);
             this.splitContainer1.Panel2.Controls.Add(this.lvModSelection);
             this.splitContainer1.Panel2MinSize = 0;
-            this.splitContainer1.Size = new System.Drawing.Size(732, 389);
+            this.splitContainer1.Size = new System.Drawing.Size(732, 381);
             this.splitContainer1.SplitterDistance = 364;
             this.splitContainer1.TabIndex = 1;
             // 
@@ -564,7 +564,7 @@ namespace KSPModAdmin.Core.Views
             this.tvModSelection.SelectedNode = null;
             this.tvModSelection.SelectionMode = KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.TreeSelectionMode.Multi;
             this.tvModSelection.ShowNodeToolTips = true;
-            this.tvModSelection.Size = new System.Drawing.Size(364, 389);
+            this.tvModSelection.Size = new System.Drawing.Size(364, 381);
             this.tvModSelection.TabIndex = 0;
             this.tvModSelection.Text = "treeViewAdv1";
             this.tvModSelection.UseColumns = true;
@@ -1035,7 +1035,7 @@ namespace KSPModAdmin.Core.Views
             this.lvModSelection.Location = new System.Drawing.Point(0, 3);
             this.lvModSelection.MultiSelect = false;
             this.lvModSelection.Name = "lvModSelection";
-            this.lvModSelection.Size = new System.Drawing.Size(364, 386);
+            this.lvModSelection.Size = new System.Drawing.Size(364, 378);
             this.lvModSelection.TabIndex = 0;
             this.lvModSelection.UseCompatibleStateImageBehavior = false;
             this.lvModSelection.View = System.Windows.Forms.View.Details;
@@ -1077,8 +1077,9 @@ namespace KSPModAdmin.Core.Views
             this.tsbTreeViewOption,
             this.tsbOverride});
             this.tsModSelection.Location = new System.Drawing.Point(0, 0);
+            this.tsModSelection.MinimumSize = new System.Drawing.Size(575, 39);
             this.tsModSelection.Name = "tsModSelection";
-            this.tsModSelection.Size = new System.Drawing.Size(732, 31);
+            this.tsModSelection.Size = new System.Drawing.Size(732, 39);
             this.tsModSelection.TabIndex = 2;
             this.tsModSelection.Text = "toolStrip1";
             // 
@@ -1092,7 +1093,7 @@ namespace KSPModAdmin.Core.Views
             this.tssbAddMod.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tssbAddMod.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tssbAddMod.Name = "tssbAddMod";
-            this.tssbAddMod.Size = new System.Drawing.Size(40, 28);
+            this.tssbAddMod.Size = new System.Drawing.Size(40, 36);
             this.tssbAddMod.Text = "toolStripSplitButton1";
             this.tssbAddMod.ToolTipText = "Add mod dialog\r\nOpens the \"Add mod dialog\".";
             this.tssbAddMod.ButtonClick += new System.EventHandler(this.tsbAddMod_Click);
@@ -1118,7 +1119,7 @@ namespace KSPModAdmin.Core.Views
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 31);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 39);
             // 
             // tsbRemoveMod
             // 
@@ -1127,7 +1128,7 @@ namespace KSPModAdmin.Core.Views
             this.tsbRemoveMod.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbRemoveMod.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbRemoveMod.Name = "tsbRemoveMod";
-            this.tsbRemoveMod.Size = new System.Drawing.Size(28, 28);
+            this.tsbRemoveMod.Size = new System.Drawing.Size(28, 36);
             this.tsbRemoveMod.Text = "toolStripButton2";
             this.tsbRemoveMod.ToolTipText = "Remove mod\r\nRemoves the highlighted mods.";
             this.tsbRemoveMod.Click += new System.EventHandler(this.tsmiCmsRemoveHighlightedMods_Click);
@@ -1139,7 +1140,7 @@ namespace KSPModAdmin.Core.Views
             this.tsbRemoveAll.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbRemoveAll.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbRemoveAll.Name = "tsbRemoveAll";
-            this.tsbRemoveAll.Size = new System.Drawing.Size(28, 28);
+            this.tsbRemoveAll.Size = new System.Drawing.Size(28, 36);
             this.tsbRemoveAll.Text = "toolStripButton3";
             this.tsbRemoveAll.ToolTipText = "Remove all mods\r\nRemoves all mods from the ModsSelection.";
             this.tsbRemoveAll.Click += new System.EventHandler(this.tsbRemoveAll_Click);
@@ -1147,7 +1148,7 @@ namespace KSPModAdmin.Core.Views
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 31);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 39);
             // 
             // tsbExImport
             // 
@@ -1159,7 +1160,7 @@ namespace KSPModAdmin.Core.Views
             this.tsbExImport.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbExImport.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbExImport.Name = "tsbExImport";
-            this.tsbExImport.Size = new System.Drawing.Size(40, 28);
+            this.tsbExImport.Size = new System.Drawing.Size(40, 36);
             this.tsbExImport.Text = "toolStripButton4";
             this.tsbExImport.ToolTipText = "ModPack Import/Export\r\nOpens the Import/Export dialog for ModPacks.";
             this.tsbExImport.ButtonClick += new System.EventHandler(this.tsbExImport_Click);
@@ -1185,7 +1186,7 @@ namespace KSPModAdmin.Core.Views
             // toolStripSeparator11
             // 
             this.toolStripSeparator11.Name = "toolStripSeparator11";
-            this.toolStripSeparator11.Size = new System.Drawing.Size(6, 31);
+            this.toolStripSeparator11.Size = new System.Drawing.Size(6, 39);
             // 
             // tsbScan
             // 
@@ -1194,7 +1195,7 @@ namespace KSPModAdmin.Core.Views
             this.tsbScan.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbScan.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbScan.Name = "tsbScan";
-            this.tsbScan.Size = new System.Drawing.Size(28, 28);
+            this.tsbScan.Size = new System.Drawing.Size(28, 36);
             this.tsbScan.Text = "toolStripButton5";
             this.tsbScan.ToolTipText = "Scan GameData folder\r\nScans the KSP GameData folder for already installed mods an" +
     "d\r\nadds them if they are not listed in the ModSelection.";
@@ -1203,7 +1204,7 @@ namespace KSPModAdmin.Core.Views
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 31);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 39);
             // 
             // tsbUpdateCheckAllMods
             // 
@@ -1212,7 +1213,7 @@ namespace KSPModAdmin.Core.Views
             this.tsbUpdateCheckAllMods.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbUpdateCheckAllMods.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbUpdateCheckAllMods.Name = "tsbUpdateCheckAllMods";
-            this.tsbUpdateCheckAllMods.Size = new System.Drawing.Size(28, 28);
+            this.tsbUpdateCheckAllMods.Size = new System.Drawing.Size(28, 36);
             this.tsbUpdateCheckAllMods.Text = "toolStripButton1";
             this.tsbUpdateCheckAllMods.ToolTipText = "Updatecheck for all mods\r\nStarts the update check for all mods in the ModSelectio" +
     "n.";
@@ -1225,7 +1226,7 @@ namespace KSPModAdmin.Core.Views
             this.tsbUpdateAllOutdatedMods.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbUpdateAllOutdatedMods.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbUpdateAllOutdatedMods.Name = "tsbUpdateAllOutdatedMods";
-            this.tsbUpdateAllOutdatedMods.Size = new System.Drawing.Size(28, 28);
+            this.tsbUpdateAllOutdatedMods.Size = new System.Drawing.Size(28, 36);
             this.tsbUpdateAllOutdatedMods.Text = "toolStripButton1";
             this.tsbUpdateAllOutdatedMods.ToolTipText = "Update all outdated mods\r\nStarts a updatecheck and updates all outdated mods.";
             this.tsbUpdateAllOutdatedMods.Click += new System.EventHandler(this.tsbUpdateAllOutdatedMods_Click);
@@ -1233,7 +1234,7 @@ namespace KSPModAdmin.Core.Views
             // toolStripSeparator12
             // 
             this.toolStripSeparator12.Name = "toolStripSeparator12";
-            this.toolStripSeparator12.Size = new System.Drawing.Size(6, 31);
+            this.toolStripSeparator12.Size = new System.Drawing.Size(6, 39);
             // 
             // tsbSolveConflicts
             // 
@@ -1242,7 +1243,7 @@ namespace KSPModAdmin.Core.Views
             this.tsbSolveConflicts.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbSolveConflicts.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbSolveConflicts.Name = "tsbSolveConflicts";
-            this.tsbSolveConflicts.Size = new System.Drawing.Size(28, 28);
+            this.tsbSolveConflicts.Size = new System.Drawing.Size(28, 36);
             this.tsbSolveConflicts.Text = "toolStripButton1";
             this.tsbSolveConflicts.ToolTipText = "Open conflic solver.\r\nOpens the conflict solver dialog.";
             this.tsbSolveConflicts.Click += new System.EventHandler(this.tsbSolveConflicts_Click);
@@ -1254,7 +1255,7 @@ namespace KSPModAdmin.Core.Views
             this.tsbRefreshCheckedstateForAllMods.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbRefreshCheckedstateForAllMods.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbRefreshCheckedstateForAllMods.Name = "tsbRefreshCheckedstateForAllMods";
-            this.tsbRefreshCheckedstateForAllMods.Size = new System.Drawing.Size(28, 28);
+            this.tsbRefreshCheckedstateForAllMods.Size = new System.Drawing.Size(28, 36);
             this.tsbRefreshCheckedstateForAllMods.Text = "toolStripButton1";
             this.tsbRefreshCheckedstateForAllMods.ToolTipText = "Refresh checked state of all mods.\r\nChecks all ModNodes with a destination.";
             this.tsbRefreshCheckedstateForAllMods.Click += new System.EventHandler(this.tsbRefreshCheckedstateForAllMods_Click);
@@ -1266,7 +1267,7 @@ namespace KSPModAdmin.Core.Views
             this.tsbCheckAllMods.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbCheckAllMods.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbCheckAllMods.Name = "tsbCheckAllMods";
-            this.tsbCheckAllMods.Size = new System.Drawing.Size(28, 28);
+            this.tsbCheckAllMods.Size = new System.Drawing.Size(28, 36);
             this.tsbCheckAllMods.Text = "toolStripButton1";
             this.tsbCheckAllMods.ToolTipText = "Check all mods\r\nChecks all mods.";
             this.tsbCheckAllMods.Click += new System.EventHandler(this.tsbCheckAllMods_Click);
@@ -1278,7 +1279,7 @@ namespace KSPModAdmin.Core.Views
             this.tsbUncheckAllMods.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbUncheckAllMods.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbUncheckAllMods.Name = "tsbUncheckAllMods";
-            this.tsbUncheckAllMods.Size = new System.Drawing.Size(28, 28);
+            this.tsbUncheckAllMods.Size = new System.Drawing.Size(28, 36);
             this.tsbUncheckAllMods.Text = "toolStripButton1";
             this.tsbUncheckAllMods.ToolTipText = "Uncheck all mods\r\nUnchecks all mods.";
             this.tsbUncheckAllMods.Click += new System.EventHandler(this.tsbUncheckAllMods_Click);
@@ -1286,13 +1287,13 @@ namespace KSPModAdmin.Core.Views
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 31);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 39);
             // 
             // toolStripLabel1
             // 
             this.toolStripLabel1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(0, 28);
+            this.toolStripLabel1.Size = new System.Drawing.Size(0, 36);
             // 
             // tsbHelp
             // 
@@ -1302,7 +1303,7 @@ namespace KSPModAdmin.Core.Views
             this.tsbHelp.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbHelp.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbHelp.Name = "tsbHelp";
-            this.tsbHelp.Size = new System.Drawing.Size(28, 28);
+            this.tsbHelp.Size = new System.Drawing.Size(28, 36);
             this.tsbHelp.Text = "toolStripButton1";
             this.tsbHelp.ToolTipText = "Open help\r\nOpens the wiki on GitHup with your browser.";
             this.tsbHelp.Click += new System.EventHandler(this.tsbHelp_Click);
@@ -1311,7 +1312,7 @@ namespace KSPModAdmin.Core.Views
             // 
             this.tsProgressBar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.tsProgressBar.Name = "tsProgressBar";
-            this.tsProgressBar.Size = new System.Drawing.Size(150, 32);
+            this.tsProgressBar.Size = new System.Drawing.Size(150, 36);
             this.tsProgressBar.Visible = false;
             // 
             // tslBusy
@@ -1331,7 +1332,7 @@ namespace KSPModAdmin.Core.Views
             this.tsbTreeViewOption.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbTreeViewOption.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbTreeViewOption.Name = "tsbTreeViewOption";
-            this.tsbTreeViewOption.Size = new System.Drawing.Size(28, 28);
+            this.tsbTreeViewOption.Size = new System.Drawing.Size(28, 36);
             this.tsbTreeViewOption.Text = "toolStripButton1";
             this.tsbTreeViewOption.ToolTipText = "Open TreeView options\r\nOpens the TreeView options.";
             this.tsbTreeViewOption.Click += new System.EventHandler(this.tsmiCmsTreeViewOptions_Click);
@@ -1344,7 +1345,7 @@ namespace KSPModAdmin.Core.Views
             this.tsbOverride.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.tsbOverride.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbOverride.Name = "tsbOverride";
-            this.tsbOverride.Size = new System.Drawing.Size(28, 28);
+            this.tsbOverride.Size = new System.Drawing.Size(28, 36);
             this.tsbOverride.Text = "Override";
             this.tsbOverride.ToolTipText = "Override files\r\nEnables/disables the override mode of files during installation o" +
     "f mods.";

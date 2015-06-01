@@ -64,6 +64,23 @@
             this.pnlSelectBackupPath = new System.Windows.Forms.Panel();
             this.lblSelectBackupPathFirst = new System.Windows.Forms.Label();
             this.tvBackups = new KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.TreeViewAdv();
+            this.cmsBackups = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsbBackupTabRefresh = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbBackupTabOpenBackupDir = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsbBackupTabSelectNewBackupDir = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbBackupTabEditBackupNote = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbBackupTabNewBackup = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsbBackupTabBackupSaveFolder = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbBackupTabRecoverSelectedBackup = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbBackupTabRemoveSelectedBackup = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsbBackupTabRemoveAllBackups = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbBackupTabOpenBackupOptions = new System.Windows.Forms.ToolStripMenuItem();
             this.btnRecoverBackup = new System.Windows.Forms.Button();
             this.btnOpenBackupDir = new System.Windows.Forms.Button();
             this.btnBackupPath = new System.Windows.Forms.Button();
@@ -74,6 +91,7 @@
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.pnlSelectBackupPath.SuspendLayout();
+            this.cmsBackups.SuspendLayout();
             this.SuspendLayout();
             // 
             // cbBackupOnKSPLaunch
@@ -487,7 +505,9 @@
             // 
             // tvBackups
             // 
+            this.tvBackups.AllowColumnSort = true;
             this.tvBackups.BackColor = System.Drawing.SystemColors.Window;
+            this.tvBackups.ContextMenuStrip = this.cmsBackups;
             this.tvBackups.DefaultToolTipProvider = null;
             this.tvBackups.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tvBackups.DragDropMarkColor = System.Drawing.Color.Black;
@@ -505,6 +525,139 @@
             this.tvBackups.UseColumns = true;
             this.tvBackups.SelectionChanged += new System.EventHandler(this.tvBackups_SelectionChanged);
             this.tvBackups.DoubleClick += new System.EventHandler(this.tvBackups_DoubleClick);
+            // 
+            // cmsBackups
+            // 
+            this.cmsBackups.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsbBackupTabRefresh,
+            this.toolStripSeparator10,
+            this.tsbBackupTabOpenBackupDir,
+            this.tsbBackupTabSelectNewBackupDir,
+            this.toolStripSeparator6,
+            this.tsbBackupTabEditBackupNote,
+            this.toolStripSeparator7,
+            this.tsbBackupTabNewBackup,
+            this.tsbBackupTabBackupSaveFolder,
+            this.toolStripSeparator8,
+            this.tsbBackupTabRecoverSelectedBackup,
+            this.toolStripSeparator11,
+            this.tsbBackupTabRemoveSelectedBackup,
+            this.tsbBackupTabRemoveAllBackups,
+            this.toolStripSeparator9,
+            this.tsbBackupTabOpenBackupOptions});
+            this.cmsBackups.Name = "cmsBackups";
+            this.cmsBackups.Size = new System.Drawing.Size(223, 260);
+            this.cmsBackups.Opened += new System.EventHandler(this.cmsBackups_Opened);
+            // 
+            // tsbBackupTabRefresh
+            // 
+            this.tsbBackupTabRefresh.Image = global::KSPModAdmin.Plugin.BackupTab.Properties.Resources.refresh;
+            this.tsbBackupTabRefresh.Name = "tsbBackupTabRefresh";
+            this.tsbBackupTabRefresh.Size = new System.Drawing.Size(222, 22);
+            this.tsbBackupTabRefresh.Text = "Refresh";
+            this.tsbBackupTabRefresh.Click += new System.EventHandler(this.tsbRefresh_Click);
+            // 
+            // toolStripSeparator10
+            // 
+            this.toolStripSeparator10.Name = "toolStripSeparator10";
+            this.toolStripSeparator10.Size = new System.Drawing.Size(219, 6);
+            // 
+            // tsbBackupTabOpenBackupDir
+            // 
+            this.tsbBackupTabOpenBackupDir.Image = global::KSPModAdmin.Plugin.BackupTab.Properties.Resources.folder1;
+            this.tsbBackupTabOpenBackupDir.Name = "tsbBackupTabOpenBackupDir";
+            this.tsbBackupTabOpenBackupDir.Size = new System.Drawing.Size(222, 22);
+            this.tsbBackupTabOpenBackupDir.Text = "Open backup directory";
+            this.tsbBackupTabOpenBackupDir.Click += new System.EventHandler(this.btnOpenBackupDir_Click);
+            // 
+            // tsbBackupTabSelectNewBackupDir
+            // 
+            this.tsbBackupTabSelectNewBackupDir.Image = global::KSPModAdmin.Plugin.BackupTab.Properties.Resources.folder_view;
+            this.tsbBackupTabSelectNewBackupDir.Name = "tsbBackupTabSelectNewBackupDir";
+            this.tsbBackupTabSelectNewBackupDir.Size = new System.Drawing.Size(222, 22);
+            this.tsbBackupTabSelectNewBackupDir.Text = "Select new backup directory";
+            this.tsbBackupTabSelectNewBackupDir.Click += new System.EventHandler(this.btnBackupPath_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(219, 6);
+            // 
+            // tsbBackupTabEditBackupNote
+            // 
+            this.tsbBackupTabEditBackupNote.Image = global::KSPModAdmin.Plugin.BackupTab.Properties.Resources.note_edit;
+            this.tsbBackupTabEditBackupNote.Name = "tsbBackupTabEditBackupNote";
+            this.tsbBackupTabEditBackupNote.Size = new System.Drawing.Size(222, 22);
+            this.tsbBackupTabEditBackupNote.Text = "Edit backup note";
+            this.tsbBackupTabEditBackupNote.Click += new System.EventHandler(this.tsbEditBackupNote_Click);
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(219, 6);
+            // 
+            // tsbBackupTabNewBackup
+            // 
+            this.tsbBackupTabNewBackup.Image = global::KSPModAdmin.Plugin.BackupTab.Properties.Resources.data_add;
+            this.tsbBackupTabNewBackup.Name = "tsbBackupTabNewBackup";
+            this.tsbBackupTabNewBackup.Size = new System.Drawing.Size(222, 22);
+            this.tsbBackupTabNewBackup.Text = "New backup";
+            this.tsbBackupTabNewBackup.Click += new System.EventHandler(this.tsbNewBackup_Click);
+            // 
+            // tsbBackupTabBackupSaveFolder
+            // 
+            this.tsbBackupTabBackupSaveFolder.Image = global::KSPModAdmin.Plugin.BackupTab.Properties.Resources.data_floppy_disk;
+            this.tsbBackupTabBackupSaveFolder.Name = "tsbBackupTabBackupSaveFolder";
+            this.tsbBackupTabBackupSaveFolder.Size = new System.Drawing.Size(222, 22);
+            this.tsbBackupTabBackupSaveFolder.Text = "Backup save folder";
+            this.tsbBackupTabBackupSaveFolder.Click += new System.EventHandler(this.tsbBackupSaves_Click);
+            // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(219, 6);
+            // 
+            // tsbBackupTabRecoverSelectedBackup
+            // 
+            this.tsbBackupTabRecoverSelectedBackup.Image = global::KSPModAdmin.Plugin.BackupTab.Properties.Resources.data_into_floppy_disk_24x24;
+            this.tsbBackupTabRecoverSelectedBackup.Name = "tsbBackupTabRecoverSelectedBackup";
+            this.tsbBackupTabRecoverSelectedBackup.Size = new System.Drawing.Size(222, 22);
+            this.tsbBackupTabRecoverSelectedBackup.Text = "Recover selected Backup";
+            this.tsbBackupTabRecoverSelectedBackup.Click += new System.EventHandler(this.btnRecoverBackup_Click);
+            // 
+            // toolStripSeparator11
+            // 
+            this.toolStripSeparator11.Name = "toolStripSeparator11";
+            this.toolStripSeparator11.Size = new System.Drawing.Size(219, 6);
+            // 
+            // tsbBackupTabRemoveSelectedBackup
+            // 
+            this.tsbBackupTabRemoveSelectedBackup.Image = global::KSPModAdmin.Plugin.BackupTab.Properties.Resources.data_delete;
+            this.tsbBackupTabRemoveSelectedBackup.Name = "tsbBackupTabRemoveSelectedBackup";
+            this.tsbBackupTabRemoveSelectedBackup.Size = new System.Drawing.Size(222, 22);
+            this.tsbBackupTabRemoveSelectedBackup.Text = "Remove selected backup";
+            this.tsbBackupTabRemoveSelectedBackup.Click += new System.EventHandler(this.tsbRemoveBackup_Click);
+            // 
+            // tsbBackupTabRemoveAllBackups
+            // 
+            this.tsbBackupTabRemoveAllBackups.Image = global::KSPModAdmin.Plugin.BackupTab.Properties.Resources.data2_delete24x24;
+            this.tsbBackupTabRemoveAllBackups.Name = "tsbBackupTabRemoveAllBackups";
+            this.tsbBackupTabRemoveAllBackups.Size = new System.Drawing.Size(222, 22);
+            this.tsbBackupTabRemoveAllBackups.Text = "Remove all backups";
+            this.tsbBackupTabRemoveAllBackups.Click += new System.EventHandler(this.tsbRemoveAllBackups_Click);
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            this.toolStripSeparator9.Size = new System.Drawing.Size(219, 6);
+            // 
+            // tsbBackupTabOpenBackupOptions
+            // 
+            this.tsbBackupTabOpenBackupOptions.Image = global::KSPModAdmin.Plugin.BackupTab.Properties.Resources.gear;
+            this.tsbBackupTabOpenBackupOptions.Name = "tsbBackupTabOpenBackupOptions";
+            this.tsbBackupTabOpenBackupOptions.Size = new System.Drawing.Size(222, 22);
+            this.tsbBackupTabOpenBackupOptions.Text = "Open/Close backup options";
+            this.tsbBackupTabOpenBackupOptions.Click += new System.EventHandler(this.tsbBackupTabOpenBackupOptions_Click);
             // 
             // btnRecoverBackup
             // 
@@ -569,6 +722,7 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.pnlSelectBackupPath.ResumeLayout(false);
+            this.cmsBackups.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -614,5 +768,22 @@
         private System.Windows.Forms.GroupBox grpBackupOptions;
         private System.Windows.Forms.ToolStripButton tsbEditBackupNote;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ContextMenuStrip cmsBackups;
+        private System.Windows.Forms.ToolStripMenuItem tsbBackupTabRefresh;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripMenuItem tsbBackupTabEditBackupNote;
+        private System.Windows.Forms.ToolStripMenuItem tsbBackupTabNewBackup;
+        private System.Windows.Forms.ToolStripMenuItem tsbBackupTabBackupSaveFolder;
+        private System.Windows.Forms.ToolStripMenuItem tsbBackupTabRemoveSelectedBackup;
+        private System.Windows.Forms.ToolStripMenuItem tsbBackupTabRemoveAllBackups;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
+        private System.Windows.Forms.ToolStripMenuItem tsbBackupTabOpenBackupDir;
+        private System.Windows.Forms.ToolStripMenuItem tsbBackupTabSelectNewBackupDir;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
+        private System.Windows.Forms.ToolStripMenuItem tsbBackupTabOpenBackupOptions;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
+        private System.Windows.Forms.ToolStripMenuItem tsbBackupTabRecoverSelectedBackup;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator11;
     }
 }

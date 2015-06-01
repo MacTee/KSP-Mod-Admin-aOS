@@ -40,7 +40,7 @@ namespace KSPModAdmin.Plugin.FlagsTab
             get
             {
                 if (mMainTabViews == null)
-                    mMainTabViews = new[] { new TabView(new ucFlagsView(), Resources.flag_scotland) };
+                    mMainTabViews = new[] { new TabView(new Guid("{7436866C-910D-4B11-ADB2-557FEB4BA378}"), new ucFlagsView(), Resources.flag_scotland) };
 
                 return mMainTabViews;
             }
