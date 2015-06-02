@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using KSPModAdmin.Core;
 using KSPModAdmin.Core.Controller;
-using KSPModAdmin.Core.Utils;
-using KSPModAdmin.Core.Utils.Localization;
-using KSPModAdmin.Core.Views;
 
 namespace KSPModAdmin
 {
