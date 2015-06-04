@@ -678,7 +678,7 @@ namespace KSPModAdmin.Core.Controller
             {
                 string filename = View.llblAdminDownload.Text;
                 string url = string.Empty;
-                if (Environment.OSVersion.Platform == PlatformID.MacOSX || Environment.OSVersion.Platform == PlatformID.Unix)
+                if (PlatformHelper.GetPlatform() == Platform.OsX || PlatformHelper.GetPlatform() == Platform.Linux)
                     url = Constants.SERVICE_DOWNLOAD_LINK_MONO;
                 else
                     url = Constants.SERVICE_DOWNLOAD_LINK_WIN;
@@ -1122,9 +1122,9 @@ namespace KSPModAdmin.Core.Controller
             AsyncTask<string[]>.DoWork(() =>
             {
                 string steamPath = string.Empty;
-                if (Environment.OSVersion.Platform == PlatformID.MacOSX)
+                if (PlatformHelper.GetPlatform() == Platform.OsX)
                     steamPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), STEAM_PATH_MAC);
-                else if (Environment.OSVersion.Platform == PlatformID.Unix)
+                else if (PlatformHelper.GetPlatform() == Platform.Linux)
                     steamPath = Path.Combine(Environment.GetEnvironmentVariable(Constants.HOME), STEAM_PATH_LINUX);
                 else
                 {

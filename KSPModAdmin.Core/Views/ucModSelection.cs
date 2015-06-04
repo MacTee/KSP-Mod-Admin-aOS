@@ -40,7 +40,7 @@ namespace KSPModAdmin.Core.Views
             tvModSelection.Model = ModSelectionController.Model;
 
             // TODO: Fix display error of icons & CheckBoxes when Columns are used!
-            if (Environment.OSVersion.Platform == PlatformID.Unix)
+            if (PlatformHelper.GetPlatform() == Platform.Linux)
                 tvModSelection.UseColumns = false;
         }
 

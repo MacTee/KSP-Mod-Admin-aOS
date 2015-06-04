@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 using System.Reflection;
+using System.Runtime.InteropServices;
 
 namespace KSPModAdmin.Core.Utils
 {
@@ -70,6 +72,58 @@ namespace KSPModAdmin.Core.Utils
             dt = dt.AddSeconds(secondsSince1970);
             dt = dt.AddHours(TimeZone.CurrentTimeZone.GetUtcOffset(dt).Hours);
             return dt;
+        }
+    }
+
+    public enum Platform
+    {
+        Unknown,
+        Win,
+        Linux,
+        OsX
+    }
+
+    public static class PlatformHelper
+    {
+        public static Platform GetPlatform()
+        {
+            if (Path.DirectorySeparatorChar == '\\')
+                return Platform.Win;
+            else if (DetectUnixKernal() == "Darwin")
+                return Platform.OsX;
+			else if (Environment.OSVersion.Platform == PlatformID.Unix)
+                return Platform.Linux;
+			else
+                return Platform.Unknown;
+        }
+
+        //From Managed.Windows.Forms/XplatUI
+        [DllImport("libc")]
+        static extern int uname(IntPtr buf);
+
+        private static string DetectUnixKernal()
+        {
+            IntPtr buf = IntPtr.Zero;
+            try
+            {
+                buf = Marshal.AllocHGlobal(8192);
+                // This is a hacktastic way of getting sysname from uname ()
+                if (uname(buf) == 0)
+                {
+                    string os = Marshal.PtrToStringAnsi(buf);
+                    return os;
+                }
+            }
+            catch
+            {
+            }
+            finally
+            {
+                if (buf != IntPtr.Zero)
+                    Marshal.FreeHGlobal(buf);
+            }
+
+            return "Unknown";
         }
     }
 }
