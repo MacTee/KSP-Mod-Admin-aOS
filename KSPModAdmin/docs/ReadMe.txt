@@ -68,7 +68,7 @@ https://github.com/MacTee/KSP-Mod-Admin-aOS/issues
 
 
 Special thanks to:
-4o66, Gribbleshnibit8, HubertNNN, diomedea, SVlad, TheAlmightyOS, cy-one, Stone Blue, Benzschwagel, TheCardinal, 
+CKAN, 4o66, Gribbleshnibit8, HubertNNN, diomedea, SVlad, TheAlmightyOS, cy-one, Stone Blue, Benzschwagel, TheCardinal, 
 MrHanMan, Meatplow, MorisatoK, Reisu79, Jivaii, hiegova, craigmt1, LeadMagnet, Bergion, shadow651, Horman, cpottinger, 
 Roger25000, zapman987, Pondafarr, ... any many more!
 
