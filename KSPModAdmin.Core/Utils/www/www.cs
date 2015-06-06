@@ -49,7 +49,7 @@ namespace KSPModAdmin.Core.Utils
             }
             catch (WebException wEx)
             {
-                if (PlatformHelper.GetPlatform() != Platform.Win)
+				if (PlatformHelper.GetPlatform() != Platform.Win && wEx.Status == WebExceptionStatus.SendFailure)
                 {
                     string msg = string.Format("Error during www.Load({0}){1}Possible problem: Missing certificates.{1}Enter \"mozroots --sync --import\" in your terminal to add missing certificates.", url, Environment.NewLine);
                     try
