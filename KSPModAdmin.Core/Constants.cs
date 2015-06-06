@@ -38,7 +38,7 @@ namespace KSPModAdmin.Core
 
         // KSP MA folders
         public const string PLUGIN_FOLDER = "Plugins";
-        public const string LANGUAGE_FOLDER = "lang"; // "Languages";
+        public const string LANGUAGE_FOLDER = "Languages";
 
         // KSP folders
         public const string KSP_ROOT = "KSP_Root";

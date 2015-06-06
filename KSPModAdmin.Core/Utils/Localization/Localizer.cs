@@ -189,15 +189,38 @@ namespace KSPModAdmin.Core.Utils.Localization
         /// <summary>
         /// Loads all available languages from the passed directory.
         /// </summary>
+        /// <param name="languageFolderPaths">Paths to the language files.</param>
+        /// <returns>True, if load was without any errors.</returns>
+        public bool LoadLanguages(string[] languageFolderPaths, bool defaultLanguageRequired = false, bool xml = true)
+        {
+            List<string> allLangFiles = new List<string>();
+            foreach (var path in languageFolderPaths)
+            {
+                if (!Directory.Exists(path))
+                    continue;
+
+                string[] langFiles = Directory.GetFiles(path, LANG_FILE_EXTENSION);
+                allLangFiles.AddRange(langFiles);
+            }
+
+            if (allLangFiles.Count == 0)
+                return false;
+
+            return LoadLanguageFiles(allLangFiles.ToArray(), defaultLanguageRequired, xml);
+        }
+
+        /// <summary>
+        /// Loads all available languages from the passed directory.
+        /// </summary>
         /// <param name="languageFolderPath">Path to the language files.</param>
         /// <returns>True, if load was without any errors.</returns>
         public bool LoadLanguages(string languageFolderPath, bool defaultLanguageRequired = false, bool xml = true)
         {
             if (!Directory.Exists(languageFolderPath))
                 return false;
-            
+
             string[] langFiles = Directory.GetFiles(languageFolderPath, LANG_FILE_EXTENSION);
-            return LoadLanguages(langFiles, defaultLanguageRequired, xml);
+            return LoadLanguageFiles(langFiles, defaultLanguageRequired, xml);
         }
 
         /// <summary>
@@ -205,7 +228,7 @@ namespace KSPModAdmin.Core.Utils.Localization
         /// </summary>
         /// <param name="langFiles">Array of paths to the language files.</param>
         /// <returns>True, if load was without any errors.</returns>
-        public bool LoadLanguages(string[] langFiles, bool defaultLanguageRequired = false, bool xml = true)
+        public bool LoadLanguageFiles(string[] langFiles, bool defaultLanguageRequired = false, bool xml = true)
         {
             bool result = false;
             if (langFiles.Length <= 0)
