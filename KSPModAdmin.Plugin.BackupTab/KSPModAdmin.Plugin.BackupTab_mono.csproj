@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{30494873-E614-47FB-9009-514CAA154DCB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>KSPModAdmin.Plugin.BackupTab</RootNamespace>
+    <AssemblyName>KSPModAdmin.Plugin.BackupTab</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\KSPModAdmin\bin\Debug\Plugins\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\KSPModAdmin\bin\Release\Plugins\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug MONO|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\KSPModAdmin\bin\Debug MONO\Plugins\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;__MonoCS__</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <WarningLevel>4</WarningLevel>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release MONO|AnyCPU'">
+    <OutputPath>..\KSPModAdmin\bin\Release MONO\Plugins\</OutputPath>
+    <DefineConstants>TRACE;__MonoCS__</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="SharpCompress">
+      <HintPath>..\packages\sharpcompress.0.10.3\lib\net40\SharpCompress.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Model\BackupNode.cs" />
+    <Compile Include="Model\BackupTreeModel.cs" />
+    <Compile Include="Views\frmEditNote.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frmEditNote.Designer.cs">
+      <DependentUpon>frmEditNote.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KSPMAPlugin.cs" />
+    <Compile Include="Messages.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Controller\UcBackupViewController.cs" />
+    <Compile Include="Views\UcBackupView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\UcBackupView.Designer.cs">
+      <DependentUpon>UcBackupView.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\frmEditNote.resx">
+      <DependentUpon>frmEditNote.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\UcBackupView.resx">
+      <DependentUpon>UcBackupView.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Languages\KSPMA.BackupTabPlugin.ger.lang">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\KSPMA.BackupTabPlugin.eng.lang">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\KSPMA.BackupTabPlugin.fake.lang">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="packages.config" />
+    <None Include="Properties\DataSources\LanguageEntry.datasource" />
+    <None Include="Settings.StyleCop" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\help2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\loader.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\disk_black_data_into.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\data_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\data_copy_delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\data_delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\data_floppy_disk.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folder_view.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folder1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\data.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\data_add_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\data_delete_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\data_floppy_disk_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\data_into_floppy_disk_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\data2_delete24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\disk_blue_out_data_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gear_new.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kerbal_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kerbal_new_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KMA2_24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\KMA2_new_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\data_gearwheel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\data_gearwheel_new.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\note_edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\note_floppy_disk.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\note_floppy_disk_16x16.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ItemGroup>
+    <ProjectReference Include="..\KSPModAdmin.Core\KSPModAdmin.Core_mono.csproj">
+      <Project>{96AA1C9F-C609-4361-8BDD-5AF3968F24DE}</Project>
+      <Name>KSPModAdmin.Core_mono</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>
