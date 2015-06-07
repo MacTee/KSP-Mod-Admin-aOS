@@ -94,7 +94,7 @@ namespace KSPModAdmin.Core.Utils
                         path = Path.Combine(Environment.GetEnvironmentVariable(Constants.HOME), Constants.LINUX_PATH, Constants.APP_CONFIG_FILE);
                         break;
                     case Platform.OsX:
-                        path = Path.Combine(Assembly.GetExecutingAssembly().Location, Constants.APP_CONFIG_FILE);
+                        path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), Constants.APP_CONFIG_FILE);
                         break;
                     default:
                         path = Path.Combine(Application.CommonAppDataPath.Replace(VersionHelper.GetAssemblyVersion(), string.Empty), Constants.APP_CONFIG_FILE);
