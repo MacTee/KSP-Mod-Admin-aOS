@@ -34,11 +34,9 @@ namespace KSPModAdmin.Core.Views
         {
             lblCurrentAction.Text = string.Empty;
 
+            tvImportExportModSelection.Nodes.Clear();
             foreach (ModNode mod in ModSelectionController.Mods)
-            {
-                cbModSelection.Items.Add(mod);
-                cbModSelection.CheckBoxItems[cbModSelection.CheckBoxItems.Count - 1].Checked = true;
-            }
+                tvImportExportModSelection.Nodes.Add(new TreeNode(mod.Name) { Tag = mod, Checked = true });
         }
 
         private void btnExport_Click(object sender, EventArgs e)
@@ -48,7 +46,7 @@ namespace KSPModAdmin.Core.Views
 
         private void rbExportSelectedOnly_CheckedChanged(object sender, EventArgs e)
         {
-            cbModSelection.Enabled = rbExportSelectedOnly.Checked;
+            tvImportExportModSelection.Enabled = rbExportSelectedOnly.Checked;
         }
 
         private void btnImport_Click(object sender, EventArgs e)
@@ -134,7 +132,12 @@ namespace KSPModAdmin.Core.Views
             if (rbExportAll.Checked)
                 return ModSelectionController.Mods.ToList();
             else if (rbExportSelectedOnly.Checked)
-                return (from e in cbModSelection.CheckBoxItems where e.Checked select (ModNode)e.ComboBoxItem).ToList();
+            {
+                var result = (from e in tvImportExportModSelection.Nodes.Cast<TreeNode>()
+                              where e.Tag as ModNode != null && e.Checked
+                              select e.Tag as ModNode).ToList();
+                return result;
+            }
 
             return new List<ModNode>();
         }

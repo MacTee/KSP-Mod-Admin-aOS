@@ -40,8 +40,6 @@
   - "Please select Backup Folder" Label is invisible (lblSelectBackupPathFirst)
   - Button Text allignement...
   - Filter DropDown on Crafts Tab
-  - frmImportExport cashes the app. Problem is the CheckBoxComboBox =(
-    If the CheckBoxComboBox is commented out (don't forget the CheckBoxComboBox properies!) the Dialog runs without problems ...
 
 - ModInfos are automatically added about add-ons where a valid version control site is detected. 
   That is great, however some information fields are not automatically filled (Author, Creation date, Change date). 
