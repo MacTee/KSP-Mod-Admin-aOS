@@ -299,7 +299,7 @@ namespace KSPModAdmin.Core.Controller
             try
             {
                 Localizer.GlobalInstance.DefaultLanguage = "eng";
-                langLoadFailed = !Localizer.GlobalInstance.LoadLanguages(new [] 
+                langLoadFailed = !Localizer.GlobalInstance.LoadLanguages(new[] 
                     {
                         KSPPathHelper.GetPath(KSPPaths.LanguageFolder), 
                         Path.Combine(KSPPathHelper.GetPath(KSPPaths.KSPMA_Plugins), Constants.LANGUAGE_FOLDER) 
