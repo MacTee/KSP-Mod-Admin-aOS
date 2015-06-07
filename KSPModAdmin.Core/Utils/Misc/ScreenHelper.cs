@@ -101,11 +101,10 @@ namespace KSPModAdmin.Core.Utils
             List<string> resolutions = new List<string>();
             if (PlatformHelper.GetPlatform() == Platform.Linux)
                 resolutions = GetResolutionsOnLinux();
+            else if (PlatformHelper.GetPlatform() == Platform.Win)
+                resolutions = GetResolutionsViaNativeMethods();
             else
                 resolutions = GetResolutionsViaWMI();
-
-            if (resolutions.Count == 0)
-                resolutions = GetResolutionsViaNativeMethods();
 
             if (resolutions.Count == 0)
             {
