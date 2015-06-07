@@ -82,16 +82,17 @@
             this.gbExport.Text = "Export:";
             // 
             // tvImportExportModSelection
-			// 
-			this.tvImportExportModSelection.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-				| System.Windows.Forms.AnchorStyles.Left) 
-				| System.Windows.Forms.AnchorStyles.Right)));
+            // 
+            this.tvImportExportModSelection.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tvImportExportModSelection.CheckBoxes = true;
+            this.tvImportExportModSelection.Enabled = false;
             this.tvImportExportModSelection.Location = new System.Drawing.Point(28, 93);
             this.tvImportExportModSelection.Name = "tvImportExportModSelection";
             this.tvImportExportModSelection.ShowLines = false;
             this.tvImportExportModSelection.Size = new System.Drawing.Size(311, 125);
-            this.tvImportExportModSelection.TabIndex = 14;
+            this.tvImportExportModSelection.TabIndex = 4;
             // 
             // pbExport
             // 
