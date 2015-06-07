@@ -4,20 +4,20 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EF04C65E-BFCE-43B6-8C28-6B1793E1B2B5}</ProjectGuid>
+    <ProjectGuid>{3013F199-703C-4A4C-895E-FEC686094118}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>KSPModAdmin.Translation.Plugin</RootNamespace>
-    <AssemblyName>KSPModAdmin.Translation.Plugin</AssemblyName>
+    <RootNamespace>KSPModAdmin.Plugin.Template</RootNamespace>
+    <AssemblyName>KSPModAdmin.Plugin.Template</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <ProductVersion>10.0.0</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\KSPModAdmin\bin\Debug\Plugins\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -25,9 +25,30 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\KSPModAdmin\bin\Release\Plugins\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug MONO|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\KSPModAdmin\bin\Debug MONO\Plugins\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;__MonoCS__</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <WarningLevel>4</WarningLevel>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release MONO|AnyCPU'">
+    <OutputPath>..\KSPModAdmin\bin\Release MONO\Plugins\</OutputPath>
+    <DefineConstants>TRACE;__MonoCS__</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
@@ -42,10 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="KSPMATranslationPlugin.cs" />
-    <Compile Include="LanguageEntry.cs" />
-    <Compile Include="LanguageFileContent.cs" />
-    <Compile Include="LanguageSelectInfo.cs" />
+    <Compile Include="KSPMAPlugin.cs" />
     <Compile Include="Messages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -53,12 +71,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="TranslationController.cs" />
-    <Compile Include="ucTranslationView.cs">
+    <Compile Include="Controller\PluginViewController.cs" />
+    <Compile Include="Views\ucPluginView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ucTranslationView.Designer.cs">
-      <DependentUpon>ucTranslationView.cs</DependentUpon>
+    <Compile Include="Views\ucPluginView.Designer.cs">
+      <DependentUpon>ucPluginView.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -66,37 +84,28 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="ucTranslationView.resx">
-      <DependentUpon>ucTranslationView.cs</DependentUpon>
+    <EmbeddedResource Include="Views\ucPluginView.resx">
+      <DependentUpon>ucPluginView.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Languages\KSPMA.TranslationPlugin.eng.lang" />
-    <None Include="Languages\KSPMA.TranslationPlugin.fake.lang" />
-    <None Include="Languages\KSPMA.TranslationPlugin.ger.lang" />
+    <Content Include="Languages\KSPMA.TemplatePlugin.eng.lang">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\KSPMA.TemplatePlugin.fake.lang">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="packages.config" />
     <None Include="Properties\DataSources\LanguageEntry.datasource" />
+    <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\KSPModAdmin.Core\KSPModAdmin.Core_mono.csproj">
-      <Project>{96AA1C9F-C609-4361-8BDD-5AF3968F24DE}</Project>
-      <Name>KSPModAdmin.Core_mono</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\text.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\disk_blue.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\pencil2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\pencil2_delete.png" />
+    <None Include="Resources\help2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /E /Y /R /I "$(ProjectDir)Languages" "$(SolutionDir)KSPModAdmin\$(OutDir)lang"</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -105,4 +114,10 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <ProjectReference Include="..\KSPModAdmin.Core\KSPModAdmin.Core_mono.csproj">
+      <Project>{96AA1C9F-C609-4361-8BDD-5AF3968F24DE}</Project>
+      <Name>KSPModAdmin.Core_mono</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

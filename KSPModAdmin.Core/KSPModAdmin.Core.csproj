@@ -68,12 +68,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\sharpcompress.0.10.3\lib\net40\SharpCompress.dll</HintPath>
     </Reference>
-    <Reference Include="StyleCop">
-      <HintPath>..\packages\StyleCop.4.7.49.0\lib\net35\StyleCop.dll</HintPath>
-    </Reference>
-    <Reference Include="StyleCop.CSharp">
-      <HintPath>..\packages\StyleCop.4.7.49.0\lib\net35\StyleCop.CSharp.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
@@ -428,38 +422,6 @@
     <Compile Include="Utils\ActionKeyManager\Keyboard.cs" />
     <Compile Include="Utils\ActionKeyManager\VirtualKey.cs" />
     <Compile Include="Utils\Misc\AsyncTask.cs" />
-    <Compile Include="Utils\Controls\CheckBoxComboBox\CheckBoxComboBox.cs">
-      <SubType>Component</SubType>
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Utils\Controls\CheckBoxComboBox\CheckBoxComboBox.Designer.cs">
-      <DependentUpon>CheckBoxComboBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Utils\Controls\CheckBoxComboBox\GripBounds.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Utils\Controls\CheckBoxComboBox\Popup.cs">
-      <SubType>Component</SubType>
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Utils\Controls\CheckBoxComboBox\Popup.Designer.cs">
-      <DependentUpon>Popup.cs</DependentUpon>
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Utils\Controls\CheckBoxComboBox\PopupComboBox.cs">
-      <SubType>Component</SubType>
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Utils\Controls\CheckBoxComboBox\PopupComboBox.Designer.cs">
-      <DependentUpon>PopupComboBox.cs</DependentUpon>
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Utils\Controls\CheckBoxComboBox\Selection Wrappers\ListSelectionWrapper.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Utils\Controls\CheckBoxComboBox\Selection Wrappers\ObjectSelectionWrapper.cs">
-      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>
     <Compile Include="Utils\Controls\TextBoxNumeric.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -643,7 +605,6 @@
     <None Include="Resources\help_earth.png" />
     <None Include="Resources\compress_replace_folder_16x16.png" />
     <None Include="Resources\compress_replace_folder_24x24.png" />
-    <Content Include="Utils\Controls\CheckBoxComboBox\_license\license.txt" />
     <Content Include="Utils\Controls\FolderSelectionDialog\_license\license.txt" />
     <Content Include="Utils\Controls\TreeViewAdv\_license\license.txt" />
     <Content Include="Utils\Controls\TreeViewAdv\_license\ReleaseNotes.txt" />

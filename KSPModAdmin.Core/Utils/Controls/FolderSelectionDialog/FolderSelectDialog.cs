@@ -5,6 +5,7 @@ using System.Windows.Forms;
 // Wraps System.Windows.Forms.OpenFileDialog to make it present
 // a vista-style dialog.
 // ------------------------------------------------------------------
+using KSPModAdmin.Core.Utils;
 
 namespace FolderSelect
 {
@@ -81,8 +82,8 @@ namespace FolderSelect
 		{
 			bool flag = false;
 
-		    if (Environment.OSVersion.Platform == PlatformID.MacOSX ||
-		        Environment.OSVersion.Platform == PlatformID.Unix ||
+            if (PlatformHelper.GetPlatform() == Platform.OsX ||
+                PlatformHelper.GetPlatform() == Platform.Linux ||
 		        Environment.OSVersion.Version.Major < 6)
             {
                 flag = FallBackToFolderBrowserDialog(hWndOwner);

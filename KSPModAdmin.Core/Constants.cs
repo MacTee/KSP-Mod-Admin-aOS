@@ -1,4 +1,5 @@
 ﻿using System;
+using KSPModAdmin.Core.Utils;
 
 namespace KSPModAdmin.Core
 {
@@ -37,7 +38,7 @@ namespace KSPModAdmin.Core
 
         // KSP MA folders
         public const string PLUGIN_FOLDER = "Plugins";
-        public const string LANGUAGE_FOLDER = "lang"; // "Languages";
+        public const string LANGUAGE_FOLDER = "Languages";
 
         // KSP folders
         public const string KSP_ROOT = "KSP_Root";
@@ -71,11 +72,11 @@ namespace KSPModAdmin.Core
         {
             get
             {
-                switch (Environment.OSVersion.Platform)
+                switch (PlatformHelper.GetPlatform())
                 {
-                    case PlatformID.Unix:
+                    case Platform.Linux:
                         return KSP_EXE_LINUX;
-                    case PlatformID.MacOSX:
+                    case Platform.OsX:
                         return KSP_EXE_MAC;
                     default:
                         return KSP_EXE_WIN;
@@ -86,11 +87,11 @@ namespace KSPModAdmin.Core
         {
             get
             {
-                switch (Environment.OSVersion.Platform)
+                switch (PlatformHelper.GetPlatform())
                 {
-                    case PlatformID.Unix:
+                    case Platform.Linux:
                         return KSP_X64_EXE_LINUX;
-                    case PlatformID.MacOSX:
+                    case Platform.OsX:
                         return KSP_X64_EXE_MAC;
                     default:
                         return KSP_X64_EXE_WIN;

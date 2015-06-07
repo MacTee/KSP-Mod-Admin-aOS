@@ -68,7 +68,7 @@ https://github.com/MacTee/KSP-Mod-Admin-aOS/issues
 
 
 Special thanks to:
-4o66, Gribbleshnibit8, HubertNNN, diomedea, SVlad, TheAlmightyOS, cy-one, Stone Blue, Benzschwagel, TheCardinal, 
+CKAN, 4o66, Gribbleshnibit8, HubertNNN, diomedea, SVlad, TheAlmightyOS, cy-one, Stone Blue, Benzschwagel, TheCardinal, 
 MrHanMan, Meatplow, MorisatoK, Reisu79, Jivaii, hiegova, craigmt1, LeadMagnet, Bergion, shadow651, Horman, cpottinger, 
 Roger25000, zapman987, Pondafarr, ... any many more!
 
@@ -84,9 +84,6 @@ License:
     - TreeViewAdv
 	  Project URL: http://www.codeproject.com/Articles/14741/Advanced-TreeView-for-NET
 	  License: Berkeley Software Distribution License see KSPModAdmin/Docs/Licenses/TreeViewAdvLicense.txt for details.
-	- CheckBoxComboBox
-	  Project URL: http://www.codeproject.com/Articles/21085/CheckBox-ComboBox-Extending-the-ComboBox-Class-and
-	  License: The Code Project Open License (CPOL) 1.02 (see http://www.codeproject.com/info/cpol10.aspx).
     - FolderSelectionDialog
 	  Project URL: http://www.lyquidity.com/devblog/?p=136
 	  License: There’s no license as such as you are free to take and do with the code what you will.

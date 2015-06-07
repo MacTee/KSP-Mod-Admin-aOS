@@ -104,8 +104,16 @@ namespace KSPModAdmin.Core.Utils.Controls
             int srcIndex = TabPages.IndexOf(src);
             int dstIndex = TabPages.IndexOf(dst);
 
-            TabPages[dstIndex] = src;
-            TabPages[srcIndex] = dst;
+            if (PlatformHelper.GetPlatform() == Platform.Linux || PlatformHelper.GetPlatform() == Platform.OsX)
+            {
+                TabPages.Insert(dstIndex, src);
+                TabPages.Insert(srcIndex, dst);
+            }
+            else
+            {
+                TabPages[dstIndex] = src;
+                TabPages[srcIndex] = dst;
+            }
 
             if (SelectedIndex == srcIndex)
                SelectedIndex = dstIndex;

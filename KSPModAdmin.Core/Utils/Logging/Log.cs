@@ -434,8 +434,11 @@ namespace KSPModAdmin.Core.Utils.Logging
             if (ex == null)
                 AddMessage(errorMessage + Environment.NewLine, LogLevel.Error);
             else
-                AddMessage(ex.Message + Environment.NewLine + Exception2String(ex) + Environment.NewLine, LogLevel.Error);
-        }
+			{
+				string msg = string.Format("{0}{1}{2}{1}", errorMessage, Environment.NewLine, Exception2String(ex));
+				AddMessage(msg, LogLevel.Error);
+			}
+		}
 
         /// <summary>
         /// Returns the file length in bytes

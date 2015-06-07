@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 using KSPModAdmin.Core.Utils.Logging;
 
 namespace KSPModAdmin.Core.Utils
@@ -46,11 +47,28 @@ namespace KSPModAdmin.Core.Utils
                     }
                 }
             }
+            catch (WebException wEx)
+            {
+				if (PlatformHelper.GetPlatform() != Platform.Win && wEx.Status == WebExceptionStatus.SendFailure)
+                {
+                    string msg = string.Format("Error during www.Load({0}){1}Possible problem: Missing certificates.{1}Enter \"mozroots --sync --import\" in your terminal to add missing certificates.", url, Environment.NewLine);
+                    try
+                    {
+                        MessageBox.Show(msg, Messages.MSG_TITLE_ERROR);
+                    }
+                    catch (Exception)
+                    { }
+                    Messenger.AddError(msg, wEx);
+                }
+                else
+                    Messenger.AddError(string.Format("Error in www.Load({0})", url), wEx);
+            }
             catch (Exception ex)
             {
-                Log.AddErrorS("Error in www.Load()", ex);
-                return string.Empty;
+                Log.AddErrorS(string.Format("Error in www.Load({0})", url), ex);
             }
+
+            return string.Empty;
         }
 
         /// <summary>

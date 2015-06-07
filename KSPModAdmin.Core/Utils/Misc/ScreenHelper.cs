@@ -99,13 +99,12 @@ namespace KSPModAdmin.Core.Utils
         public static string[] GetScreenResolutions()
         {
             List<string> resolutions = new List<string>();
-            if (Environment.OSVersion.Platform == PlatformID.Unix)
+            if (PlatformHelper.GetPlatform() == Platform.Linux)
                 resolutions = GetResolutionsOnLinux();
+            else if (PlatformHelper.GetPlatform() == Platform.Win)
+                resolutions = GetResolutionsViaNativeMethods();
             else
                 resolutions = GetResolutionsViaWMI();
-
-            if (resolutions.Count == 0)
-                resolutions = GetResolutionsViaNativeMethods();
 
             if (resolutions.Count == 0)
             {

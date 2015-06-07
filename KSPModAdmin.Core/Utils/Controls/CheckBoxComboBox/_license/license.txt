@@ -1,5 +1,0 @@
-﻿The CheckBoxComboBox control with all its classes (in the NameSpace KSPModAdmin.Core.Utils.Controls.PresentationControls) 
-are from the open source project "CheckBox ComboBox ..." on Code Project,
-see http://www.codeproject.com/Articles/21085/CheckBox-ComboBox-Extending-the-ComboBox-Class-and.
-
-This project is published under The Code Project Open License (CPOL - http://www.codeproject.com/info/cpol10.aspx).

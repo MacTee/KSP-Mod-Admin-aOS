@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5F053D87-BCF1-4D3A-9EEF-D441C120E795}</ProjectGuid>
+    <ProjectGuid>{8D812F36-171B-4FCE-BCFA-DCEED4648C01}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>KSPModAdmin.Plugin.FlagsTab</RootNamespace>
-    <AssemblyName>KSPModAdmin.Plugin.FlagsTab</AssemblyName>
+    <RootNamespace>KSPModAdmin.Plugin.PartsAndCraftsTab</RootNamespace>
+    <AssemblyName>KSPModAdmin.Plugin.PartsAndCraftsTab</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -38,6 +38,8 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <WarningLevel>4</WarningLevel>
+    <Optimize>false</Optimize>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release MONO|AnyCPU'">
     <OutputPath>..\KSPModAdmin\bin\Release MONO\Plugins\</OutputPath>
@@ -47,6 +49,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -60,79 +63,155 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helper\CfgFileHelper.cs" />
+    <Compile Include="Controller\CraftsTabViewController.cs" />
     <Compile Include="KSPMAPlugin.cs" />
     <Compile Include="Messages.cs" />
+    <Compile Include="Model\CraftNode.cs" />
+    <Compile Include="Model\PartNode.cs" />
+    <Compile Include="Model\CraftsTreeModel.cs" />
+    <Compile Include="Model\PartsTreeModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Controller\FlagsViewController.cs" />
-    <Compile Include="Views\ucFlagsView.cs">
+    <Compile Include="Controller\PartsTabViewController.cs" />
+    <Compile Include="Views\frmPartEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\frmPartEditor.Designer.cs">
+      <DependentUpon>frmPartEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ucPartsTabView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Views\ucFlagsView.Designer.cs">
-      <DependentUpon>ucFlagsView.cs</DependentUpon>
+    <Compile Include="Views\ucPartsTabView.Designer.cs">
+      <DependentUpon>ucPartsTabView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ucCraftsTabView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\ucCraftsTabView.Designer.cs">
+      <DependentUpon>ucCraftsTabView.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\ucFlagsView.resx">
-      <DependentUpon>ucFlagsView.cs</DependentUpon>
+    <EmbeddedResource Include="Views\frmPartEditor.resx">
+      <DependentUpon>frmPartEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ucPartsTabView.resx">
+      <DependentUpon>ucPartsTabView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ucCraftsTabView.resx">
+      <DependentUpon>ucCraftsTabView.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Languages\KSPMA.FlagsTabPlugin.eng.lang">
+    <Content Include="Languages\KSPMA.PartsAndCraftsTabPlugin.ger.lang">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Languages\KSPMA.FlagsTabPlugin.ger.lang">
+    <Content Include="Languages\KSPMA.PartsAndCraftsTabPlugin.eng.lang">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Languages\KSPMA.FlagsTabPlugin.fake.lang">
+    <Content Include="Languages\KSPMA.PartsAndCraftsTabPlugin.fake.lang">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\LanguageEntry.datasource" />
     <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\KSPModAdmin.Core\KSPModAdmin.Core.csproj">
-      <Project>{96aa1c9f-c609-4361-8bdd-5af3968f24de}</Project>
-      <Name>KSPModAdmin.Core</Name>
-      <Private>False</Private>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\flag_scotland.png" />
+    <None Include="Resources\help2.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\loader.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\flag_scotland_add_24x24.png" />
+    <None Include="Resources\refresh_24x24.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\flag_scotland_delete_24x24.png" />
+    <None Include="Resources\brick_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\brick_delete_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\brick_edit_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\brick_folder_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bricks_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bricks.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\brick.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\brick_delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\brick_edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\brick_replace.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\brick_replace_24x24.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\refresh.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\KMA2_Flag.png" />
+    <None Include="Resources\delete2.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\Cant_Display_DDS.png" />
+    <None Include="Resources\tick.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\airplane.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\airplane_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\airplane_24x24_checkbox_checked.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\airplane_24x24_delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\airplane_24x24_replace.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\airplane_24x24_scroll.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\airplane_checkbox_checked.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\airplane_delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\airplane_replace.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\airplane_scroll.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
     </PostBuildEvent>
   </PropertyGroup>
-  <Import Project="..\packages\StyleCop.MSBuild.4.7.49.1\build\StyleCop.MSBuild.Targets" Condition="Exists('..\packages\StyleCop.MSBuild.4.7.49.1\build\StyleCop.MSBuild.Targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
@@ -140,4 +219,10 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <ProjectReference Include="..\KSPModAdmin.Core\KSPModAdmin.Core_mono.csproj">
+      <Project>{96AA1C9F-C609-4361-8BDD-5AF3968F24DE}</Project>
+      <Name>KSPModAdmin.Core_mono</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

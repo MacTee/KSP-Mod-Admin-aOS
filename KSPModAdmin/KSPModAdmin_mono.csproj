@@ -9,9 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>KSPModAdmin</RootNamespace>
     <AssemblyName>KSPModAdmin</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <ProductVersion>10.0.0</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -79,15 +79,24 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="Languages\KSPMA.eng.lang">
+    <Content Include="Languages\KSPMA.eng.lang">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="Languages\KSPMA.fake.lang">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\KSPMA.fake.lang">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="Languages\KSPMA.ger.lang" />
-    <None Include="Languages\KSPMA.ital.lang" />
-    <None Include="Languages\KSPMA.rus.lang" />
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\KSPMA.ger.lang">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\KSPMA.ital.lang">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Languages\KSPMA.rus.lang">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="packages.config" />
     <None Include="Pics\KSPMA Icon\KMA_and_KMA2_icon.psd" />
     <None Include="Pics\KSPMA Icon\KMA_Vectors.ai" />
     <None Include="Properties\Settings.settings">
@@ -99,15 +108,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Settings.StyleCop" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="docs\Licenses\CheckBoxComboBoxLicense.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="docs\Licenses\KerbalStuffWrapperLicense.txt">
+    <Content Include="docs\HowTo_BBCode.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="docs\Licenses\FolderSelectionDialogLicense.txt">
@@ -142,9 +149,8 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /E /Y /R /I "$(ProjectDir)Languages" "$(ProjectDir)$(OutDir)lang"
-md "$(ProjectDir)$(OutDir)Plugins"
-xcopy /E /Y /R /I "$(SolutionDir)KSPModAdmin.Translation.Plugin\$(OutDir)KSPModAdmin.Translation.Plugin.dll" "$(ProjectDir)$(OutDir)Plugins"</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -154,7 +160,7 @@ xcopy /E /Y /R /I "$(SolutionDir)KSPModAdmin.Translation.Plugin\$(OutDir)KSPModA
   </Target>
   -->
   <ItemGroup>
-    <ProjectReference Include="Core\KSPModAdmin.Core_mono.csproj">
+    <ProjectReference Include="..\KSPModAdmin.Core\KSPModAdmin.Core_mono.csproj">
       <Project>{96AA1C9F-C609-4361-8BDD-5AF3968F24DE}</Project>
       <Name>KSPModAdmin.Core_mono</Name>
     </ProjectReference>

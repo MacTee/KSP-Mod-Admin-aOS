@@ -30,10 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmImExport));
-            KSPModAdmin.Core.Utils.Controls.PresentationControls.CheckBoxProperties checkBoxProperties1 = new KSPModAdmin.Core.Utils.Controls.PresentationControls.CheckBoxProperties();
             this.gbExport = new System.Windows.Forms.GroupBox();
+            this.tvImportExportModSelection = new System.Windows.Forms.TreeView();
             this.pbExport = new System.Windows.Forms.PictureBox();
-            this.cbModSelection = new KSPModAdmin.Core.Utils.Controls.PresentationControls.CheckBoxComboBox();
             this.cbIncludeMods = new System.Windows.Forms.CheckBox();
             this.rbExportSelectedOnly = new System.Windows.Forms.RadioButton();
             this.rbExportAll = new System.Windows.Forms.RadioButton();
@@ -64,10 +63,11 @@
             // 
             // gbExport
             // 
-            this.gbExport.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.gbExport.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbExport.Controls.Add(this.tvImportExportModSelection);
             this.gbExport.Controls.Add(this.pbExport);
-            this.gbExport.Controls.Add(this.cbModSelection);
             this.gbExport.Controls.Add(this.cbIncludeMods);
             this.gbExport.Controls.Add(this.rbExportSelectedOnly);
             this.gbExport.Controls.Add(this.rbExportAll);
@@ -76,37 +76,34 @@
             this.gbExport.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gbExport.Location = new System.Drawing.Point(7, 3);
             this.gbExport.Name = "gbExport";
-            this.gbExport.Size = new System.Drawing.Size(449, 131);
+            this.gbExport.Size = new System.Drawing.Size(449, 233);
             this.gbExport.TabIndex = 0;
             this.gbExport.TabStop = false;
             this.gbExport.Text = "Export:";
+            // 
+            // tvImportExportModSelection
+            // 
+            this.tvImportExportModSelection.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tvImportExportModSelection.CheckBoxes = true;
+            this.tvImportExportModSelection.Enabled = false;
+            this.tvImportExportModSelection.Location = new System.Drawing.Point(28, 93);
+            this.tvImportExportModSelection.Name = "tvImportExportModSelection";
+            this.tvImportExportModSelection.ShowLines = false;
+            this.tvImportExportModSelection.Size = new System.Drawing.Size(311, 125);
+            this.tvImportExportModSelection.TabIndex = 4;
             // 
             // pbExport
             // 
             this.pbExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pbExport.Image = ((System.Drawing.Image)(resources.GetObject("pbExport.Image")));
-            this.pbExport.Location = new System.Drawing.Point(319, 94);
+            this.pbExport.Location = new System.Drawing.Point(414, 167);
             this.pbExport.Name = "pbExport";
             this.pbExport.Size = new System.Drawing.Size(20, 20);
             this.pbExport.TabIndex = 13;
             this.pbExport.TabStop = false;
             this.pbExport.Visible = false;
-            // 
-            // cbModSelection
-            // 
-            this.cbModSelection.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            checkBoxProperties1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.cbModSelection.CheckBoxProperties = checkBoxProperties1;
-            this.cbModSelection.DisplayMemberSingleItem = "";
-            this.cbModSelection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbModSelection.Enabled = false;
-            this.cbModSelection.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbModSelection.FormattingEnabled = true;
-            this.cbModSelection.Location = new System.Drawing.Point(47, 93);
-            this.cbModSelection.Name = "cbModSelection";
-            this.cbModSelection.Size = new System.Drawing.Size(257, 21);
-            this.cbModSelection.TabIndex = 4;
             // 
             // cbIncludeMods
             // 
@@ -160,7 +157,7 @@
             this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExport.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExport.Image = global::KSPModAdmin.Core.Properties.Resources.components_package_into;
-            this.btnExport.Location = new System.Drawing.Point(345, 91);
+            this.btnExport.Location = new System.Drawing.Point(345, 193);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(89, 25);
             this.btnExport.TabIndex = 5;
@@ -172,8 +169,7 @@
             // 
             // gbImport
             // 
-            this.gbImport.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.gbImport.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gbImport.Controls.Add(this.gbDestinationOption);
             this.gbImport.Controls.Add(this.gbInstallOptions);
@@ -185,7 +181,7 @@
             this.gbImport.Controls.Add(this.lblImportInfo);
             this.gbImport.Controls.Add(this.btnImport);
             this.gbImport.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gbImport.Location = new System.Drawing.Point(7, 140);
+            this.gbImport.Location = new System.Drawing.Point(7, 242);
             this.gbImport.Name = "gbImport";
             this.gbImport.Size = new System.Drawing.Size(449, 245);
             this.gbImport.TabIndex = 1;
@@ -307,6 +303,8 @@
             // 
             // lblCurrentAction
             // 
+            this.lblCurrentAction.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCurrentAction.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCurrentAction.Location = new System.Drawing.Point(13, 208);
             this.lblCurrentAction.Name = "lblCurrentAction";
@@ -357,7 +355,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(464, 391);
+            this.ClientSize = new System.Drawing.Size(464, 493);
             this.Controls.Add(this.gbImport);
             this.Controls.Add(this.gbExport);
             this.MaximizeBox = false;
@@ -365,7 +363,6 @@
             this.MinimumSize = new System.Drawing.Size(480, 330);
             this.Name = "frmImExport";
             this.ShowIcon = false;
-            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "ModPack im/exporter";
             this.Load += new System.EventHandler(this.frmImExport_Load);
@@ -393,7 +390,6 @@
         private System.Windows.Forms.Label lblImportInfo;
         private System.Windows.Forms.RadioButton rbExportSelectedOnly;
         private System.Windows.Forms.RadioButton rbExportAll;
-        private KSPModAdmin.Core.Utils.Controls.PresentationControls.CheckBoxComboBox cbModSelection;
         private System.Windows.Forms.CheckBox cbExtract;
         private System.Windows.Forms.CheckBox cbDownloadIfNeeded;
         private System.Windows.Forms.CheckBox cbIncludeMods;
@@ -408,5 +404,6 @@
         private System.Windows.Forms.CheckBox cbClearModSelection;
         private System.Windows.Forms.ToolTip ttModImExport;
         private System.Windows.Forms.Label lblCurrentAction;
+        private System.Windows.Forms.TreeView tvImportExportModSelection;
     }
 }

@@ -276,10 +276,10 @@ namespace KSPModAdmin.Core.Views
             rbWindowed.Enabled = enable;
             cbBorderlessWin.Enabled = (enable && rbWindowed.Checked);
             cbResolutions.Enabled = (enable && cbResolutions.Items != null && cbResolutions.Items.Count > 0);
-            cbForceOpenGL.Enabled = (enable && Environment.OSVersion.Platform != PlatformID.MacOSX && Environment.OSVersion.Platform != PlatformID.Unix);
-            cbForceOpenGL.Visible = (Environment.OSVersion.Platform != PlatformID.MacOSX && Environment.OSVersion.Platform != PlatformID.Unix);
-            cbUse64Bit.Enabled = (enable && (Environment.OSVersion.Platform == PlatformID.MacOSX || Environment.OSVersion.Platform == PlatformID.Unix));
-            cbUse64Bit.Visible = (Environment.OSVersion.Platform == PlatformID.MacOSX || Environment.OSVersion.Platform == PlatformID.Unix);
+            cbForceOpenGL.Enabled = (enable && PlatformHelper.GetPlatform() == Platform.Win);
+            cbForceOpenGL.Visible = PlatformHelper.GetPlatform() == Platform.Win;
+            cbUse64Bit.Enabled = (enable && (PlatformHelper.GetPlatform() == Platform.OsX || PlatformHelper.GetPlatform() == Platform.Linux));
+            cbUse64Bit.Visible = (PlatformHelper.GetPlatform() == Platform.OsX || PlatformHelper.GetPlatform() == Platform.Linux);
         }
     }
 }
