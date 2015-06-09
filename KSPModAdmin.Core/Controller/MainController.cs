@@ -299,7 +299,7 @@ namespace KSPModAdmin.Core.Controller
             try
             {
                 Localizer.GlobalInstance.DefaultLanguage = "eng";
-                langLoadFailed = !Localizer.GlobalInstance.LoadLanguages(new [] 
+                langLoadFailed = !Localizer.GlobalInstance.LoadLanguages(new[] 
                     {
                         KSPPathHelper.GetPath(KSPPaths.LanguageFolder), 
                         Path.Combine(KSPPathHelper.GetPath(KSPPaths.KSPMA_Plugins), Constants.LANGUAGE_FOLDER) 
@@ -333,6 +333,7 @@ namespace KSPModAdmin.Core.Controller
             EventDistributor.LanguageChanged += LanguageChanged;
             EventDistributor.KSPRootChanging += KSPRootChanging;
             EventDistributor.KSPRootChanged += KSPRootChanged;
+            EventDistributor.KSPMAStarted += KSPMAStarted;
 
             CreateConfigDir();
             LoadConfigs();
@@ -358,12 +359,6 @@ namespace KSPModAdmin.Core.Controller
                 OptionsController.AddKSPPath(dlg.KSPPath);
                 OptionsController.SelectedKSPPath = dlg.KSPPath;
             }
-
-            // Auto KSP MA update check.
-            OptionsController.Check4AppUpdates();
-
-            // Auto mod update check.
-            OptionsController.Check4ModUpdates(true);
 
             // Initializing is done.
             EventDistributor.InvokeKSPMAStarted(Instance);
@@ -699,6 +694,7 @@ namespace KSPModAdmin.Core.Controller
 
         /// <summary>
         /// Event handler for the KSPPathChanged event from OptionsController.
+        /// Loads the new KSPConfig from the new ksp path.
         /// </summary>
         /// <param name="kspPath">the new selected ksp path.</param>
         protected static void KSPRootChanged(string kspPath)
@@ -707,6 +703,35 @@ namespace KSPModAdmin.Core.Controller
                 LoadKSPConfig();
 
             _SelectedKSPPath = kspPath;
+        }
+
+        /// <summary>
+        /// Event handler for the KSPMAStarted event.
+        /// Starts the app and mod update checks.
+        /// </summary>
+        protected static void KSPMAStarted(object sender)
+        {
+            EventDistributor.InvokeAsyncTaskStarted(Instance);
+            ModSelectionController.View.ShowBusy = true;
+
+            AsyncTask<bool>.DoWork(() =>
+                {
+                    // Auto KSP MA update check.
+                    OptionsController.Check4AppUpdates();
+
+                    // Auto mod update check.
+                    OptionsController.Check4ModUpdates(true);
+
+                    return true;
+                },
+                (result, ex) =>
+                {
+                    EventDistributor.InvokeAsyncTaskDone(Instance);
+                    ModSelectionController.View.ShowBusy = false;
+                    if (ex != null)
+                        Messenger.AddError(string.Format("Error during startup update checks! {0}", ex.Message), ex);
+                }
+            );
         }
 
         #endregion

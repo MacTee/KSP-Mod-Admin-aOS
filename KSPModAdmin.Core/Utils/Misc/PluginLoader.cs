@@ -29,6 +29,7 @@ namespace KSPModAdmin.Core.Utils
             foreach (string dllFile in dllFileNames)
             {
                 ////AssemblyName assemblyName = AssemblyName.GetAssemblyName(dllFile);
+                Messenger.AddDebug("Loading plugin file: " + Path.GetFileName(dllFile));
                 Assembly assembly = Assembly.LoadFile(dllFile);
                 assemblies.Add(assembly);
             }
