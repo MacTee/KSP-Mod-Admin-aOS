@@ -56,16 +56,12 @@ namespace KSPModAdmin.Core.Views
 
         private void cbDownloadIfNeeded_CheckedChanged(object sender, EventArgs e)
         {
-            rbInstall.Enabled = (cbExtract.Checked) && (cbDownloadIfNeeded.Checked);
-            rbAddOnly.Enabled = rbInstall.Enabled;
-            btnImport.Enabled = rbInstall.Enabled;
+            btnImport.Enabled = (cbExtract.Checked || cbDownloadIfNeeded.Checked);
         }
 
         private void cbExtract_CheckedChanged(object sender, EventArgs e)
         {
-            rbInstall.Enabled = (cbExtract.Checked) && (cbDownloadIfNeeded.Checked);
-            rbAddOnly.Enabled = rbInstall.Enabled;
-            btnImport.Enabled = rbInstall.Enabled;
+            btnImport.Enabled = (cbExtract.Checked || cbDownloadIfNeeded.Checked);
         }
 
         #endregion

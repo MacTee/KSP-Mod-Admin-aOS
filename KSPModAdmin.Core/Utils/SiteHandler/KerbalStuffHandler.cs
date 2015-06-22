@@ -15,10 +15,19 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
     public class KerbalStuffHandler : ISiteHandler
     {
         private const string NAME = "KerbalStuff";
-        private const string URL = "http://kerbalstuff.com/";
-        private const string URL2 = "https://kerbalstuff.com/";
-        private const string URL3 = "http://beta.kerbalstuff.com/"; // some mods still have this as the link
         private const string MODINFO_URL = "https://kerbalstuff.com/api/mod/";
+        private static string[] VALIDURLS = new string[]
+        {
+            "http://www.kerbalstuff.com/",
+            "http://kerbalstuff.com/",
+            "https://www.kerbalstuff.com/",
+            "https://kerbalstuff.com/",
+            // some mods still have this as the link
+            "http://www.beta.kerbalstuff.com/", 
+            "http://beta.kerbalstuff.com/",
+            "https://www.beta.kerbalstuff.com/",
+            "https://beta.kerbalstuff.com/"
+        };
 
 
         /// <summary>
@@ -36,7 +45,10 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
         public bool IsValidURL(string url)
         {
             // Should we perhaps put valid hostnames into an array? Would keep the next line growing out of control 
-            return (!string.IsNullOrEmpty(url) && (url.ToLower().StartsWith(URL) || url.ToLower().StartsWith(URL2) || url.ToLower().StartsWith(URL3)));
+            // return (!string.IsNullOrEmpty(url) && (url.ToLower().StartsWith(URL) || url.ToLower().StartsWith(URL2) || url.ToLower().StartsWith(URL3)));
+
+            // yes ;)
+            return (!string.IsNullOrEmpty(url) && VALIDURLS.Any(x => url.StartsWith(x, StringComparison.CurrentCultureIgnoreCase)));
         }
 
         /// <summary>
