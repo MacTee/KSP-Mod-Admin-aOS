@@ -1445,6 +1445,7 @@ namespace KSPModAdmin.Core.Controller
                     else
                     {
                         // No match found -> user must handle update.
+                        Model.AddMod(newMod);
                         View.InvokeIfRequired(() => MessageBox.Show(View.ParentForm, string.Format(Messages.MSG_ERROR_UPDATING_MOD_0_FAILED, outdatedMod.Text)));
                     }
                 }
