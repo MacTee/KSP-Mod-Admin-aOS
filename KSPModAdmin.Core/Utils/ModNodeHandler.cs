@@ -528,6 +528,9 @@ namespace KSPModAdmin.Core.Utils
             if (outdatedFileNodes.Count == 0)
                 return false;
 
+            // Get all files of the new mod
+            List<ICopyModInfo> newModFileNodes = newMod.GetAllFileNodesAsICopyModInfo();
+
             foreach (var file in outdatedFileNodes)
             {
                 // Ignore mod folder cause it may contain version numbers
@@ -535,7 +538,14 @@ namespace KSPModAdmin.Core.Utils
 
                 ModNode matchingNew = ModSelectionTreeModel.SearchNodeByPathNew(fullTreePath, newMod, '/');
                 if (matchingNew == null)
-                    return false;
+                {
+                    // ignore not matching old files
+                    continue;
+                    //return false;
+                }
+
+                if (newModFileNodes.Contains(matchingNew))
+                    newModFileNodes.Remove(matchingNew);
 
                 matchingNew.Destination = file.Destination;
                 matchingNew.SetChecked(file.Checked, true);
@@ -551,6 +561,28 @@ namespace KSPModAdmin.Core.Utils
                     parentNew = parentNew.Parent as ModNode;
                     parentOld = parentOld.GetParent();
                 }
+            }
+
+            var unknownPaths = new List<ICopyModInfo>();
+            foreach (var file in newModFileNodes)
+            {
+                var fullTreePath = file.GetFullTreePath().Remove(0, file.GetRoot().GetFullTreePath().Length);
+                if (!ModSelectionTreeModel.IsKnownPath(fullTreePath, outdatedMod))
+                {
+                    unknownPaths.Add(file);
+                }
+            }
+
+            if (unknownPaths.Count > 0)
+            {
+                Messenger.AddInfo("The following new files have a unknown path:");
+
+                foreach (var file in unknownPaths)
+                    Messenger.AddInfo(string.Format("File: {0}", file.Destination));
+
+                Messenger.AddInfo("Manual update is required!");
+
+                return false;
             }
 
             return true;

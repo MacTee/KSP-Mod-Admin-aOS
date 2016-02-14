@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Linq;
 using KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree;
 
@@ -437,6 +438,27 @@ namespace KSPModAdmin.Core.Model
         {
             if (AfterCheckedChange != null)
                 AfterCheckedChange(obj);
+        }
+
+        /// <summary>
+        /// Checks if the passed full tree path is already known for this mod.
+        /// </summary>
+        /// <param name="fullTreePath">Path to the new mod file (including filename!)</param>
+        /// <param name="outdatedMod">The mod to check against.</param>
+        /// <returns>True if the passed path is already known for this mod, otherwise false.</returns>
+        internal static bool IsKnownPath(string fullTreePath, ICopyModInfo outdatedMod)
+        {
+            List<ICopyModInfo> outdatedFileNodes = outdatedMod.GetAllFileNodesAsICopyModInfo();
+
+            foreach (var file in outdatedFileNodes)
+            {
+                var oldFullTreePath = Path.GetDirectoryName(file.GetFullTreePath().Remove(0, file.GetRoot().GetFullTreePath().Length));
+                var newfullTreePath = Path.GetDirectoryName(fullTreePath);
+                if (oldFullTreePath == newfullTreePath)
+                    return true;
+            }
+
+            return false;
         }
     }
 }

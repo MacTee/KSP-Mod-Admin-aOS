@@ -1398,6 +1398,9 @@ namespace KSPModAdmin.Core.Controller
                     {
                         Messenger.AddInfo(string.Format(Messages.MSG_DOWNLOADING_MOD_0, mod.Name));
                         ModInfo newModInfos = handler.GetModInfo(mod.ModURL);
+                        if (newModInfos == null)
+                            return;
+
                         if (handler.DownloadMod(ref newModInfos, (received, fileSize) => { View.SetProgressBarStates(true, (int)(fileSize / 1000), (int)(received / 1000)); }))
                             UpdateMod(newModInfos, mod);
 
