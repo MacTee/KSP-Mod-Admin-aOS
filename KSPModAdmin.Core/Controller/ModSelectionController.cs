@@ -398,11 +398,23 @@ namespace KSPModAdmin.Core.Controller
                             if (MessageBox.Show(View, sb.ToString(), Messages.MSG_TITLE_ATTENTION, MessageBoxButtons.YesNo) ==
                                 DialogResult.Yes)
                             {
-                                ModNode outdatedMod = Model[modInfo.LocalPath];
-                                Messenger.AddInfo(string.Format(Messages.MSG_REPLACING_MOD_0, outdatedMod.Text));
+                                ModNode outdatedMod = Model[modInfo.ProductID, modInfo.SiteHandlerName];
+                                if (outdatedMod != null)
+                                {
+                                    Messenger.AddInfo(string.Format(Messages.MSG_REPLACING_MOD_0, outdatedMod.Text));
 
-                                newNode = UpdateMod(modInfo, outdatedMod);
-                                Messenger.AddInfo(string.Format(Messages.MSG_MOD_0_REPLACED, newNode.Text));
+                                    newNode = UpdateMod(modInfo, outdatedMod);
+                                    Messenger.AddInfo(string.Format(Messages.MSG_MOD_0_REPLACED, newNode.Text));
+                                }
+                                else
+                                {
+                                    newNode = ModNodeHandler.CreateModNode(modInfo);
+                                    if (newNode != null)
+                                    {
+                                        Model.AddMod(newNode);
+                                        Messenger.AddInfo(string.Format(Messages.MSG_MOD_ADDED_0, newNode.Text));
+                                    }
+                                }
                             }
                         });
                     }
