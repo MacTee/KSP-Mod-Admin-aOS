@@ -6,10 +6,13 @@ using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using HtmlAgilityPack;
 using KSPModAdmin.Core.Controller;
 using KSPModAdmin.Core.Model;
 using KSPModAdmin.Core.Views;
+using Octokit;
+using System.Threading.Tasks;
+using Octokit.Internal;
+using Octokit.Caching;
 
 namespace KSPModAdmin.Core.Utils.SiteHandler
 {
@@ -22,6 +25,15 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
         private const string HOST = "github.com";
         private const string URL_0_1 = "https://github.com/{0}/{1}";
         private const string HOST2 = "raw.githubusercontent.com";
+
+        private static GitHubClient github = new GitHubClient(new ProductHeaderValue("KSPModAdmin", "1.0.0"),
+                                                              new InMemoryCredentialStore(new Credentials("065708e33efe434775a5c0be3085b04d6305aaf5")));
+        //        private static GitHubClient github = new GitHubClient(new Connection(new ProductHeaderValue("KSPModAdmin", "1.0.0"),
+        //                                                                             GitHubClient.GitHubApiUrl,
+        //                                                                             new InMemoryCredentialStore(new Credentials("065708e33efe434775a5c0be3085b04d6305aaf5")),
+        //                                                                             new CachingHttpClient(new HttpClientAdapter(HttpMessageHandlerFactory.CreateDefault), new NaiveInMemoryCache()),
+        //                                                                             new SimpleJsonSerializer()));
+
 
         /// <summary>
         /// Builds the url from the passed user and project name.
@@ -172,32 +184,63 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
             return File.Exists(modInfo.LocalPath);
         }
 
+        private IReadOnlyList<Release> GetReleases(ModInfo modInfo)
+        {
+            Task<IReadOnlyList<Release>> task = github.Repository.Release.GetAll(modInfo.Author, modInfo.Name);
+
+            task.Wait();
+
+            IReadOnlyList<Release> releases = task.Result;
+
+
+            return releases;
+        }
+
+        private Release GetLatestRelease(ref ModInfo modInfo)
+        {
+            IReadOnlyList<Release> releases = GetReleases(modInfo);
+
+            Release latestRelease = null;
+            foreach (Release release in releases)
+            {
+                try
+                {
+                    if (!release.Draft &&
+                        (latestRelease == null || latestRelease.CreatedAt.CompareTo(release.CreatedAt) < 0))
+                    {
+                        latestRelease = release;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Messenger.AddError("Exception thrown whilst determining latest release of " + modInfo.Name, e);
+                }
+            }
+
+            return latestRelease;
+        }
+
         /// <summary>
         /// Takes a site url and parses the site for mod info
         /// </summary>
         /// <param name="modInfo">The modInfo to add data to</param>
         public void ParseSite(ref ModInfo modInfo)
         {
-            var htmlDoc = new HtmlWeb().Load(GetPathToReleases(modInfo.ModURL));
-            htmlDoc.OptionFixNestedTags = true;
+            Release latestRelease = GetLatestRelease(ref modInfo);
+            if (latestRelease == null)
+            {
+                Messenger.AddError("Error! Can't find latest GitHib release");
+            }
+            else
+            {
+                modInfo.Version = GetVersion(latestRelease);
+                modInfo.ChangeDateAsDateTime = latestRelease.CreatedAt.UtcDateTime;
+            }
+        }
 
-            // To scrape the fields, now using HtmlAgilityPack and XPATH search strings.
-            // Easy way to get XPATH search: use chrome, inspect element, highlight the needed data and right-click and copy XPATH
-            HtmlNode latestRelease = htmlDoc.DocumentNode.SelectSingleNode("//*[@class='release label-latest']");
-            HtmlNode versionNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@class='release label-latest']/div[1]/ul/li[1]/a/span[2]");
-            if (versionNode == null)
-                versionNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='js-repo-pjax-container']/div[2]/ul/li[1]/div/div/h3/a/span");
-            HtmlNode updateNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@class='release label-latest']/div[2]/div/p/time");
-            if (updateNode == null)
-                updateNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='js-repo-pjax-container']/div[2]/ul/li[1]/span/time");
-
-            if (versionNode == null || updateNode == null)
-                Messenger.AddError("Error! Can't parse GitHib version or creation date!");
-
-            if (versionNode != null)
-                modInfo.Version = Regex.Replace(versionNode.InnerText, @"[A-z]", string.Empty);
-            if (updateNode != null)
-                modInfo.ChangeDateAsDateTime = DateTime.Parse(updateNode.Attributes["datetime"].Value);
+        private string GetVersion(Release release)
+        {
+            return Regex.Replace(release.Name, @"[A-z]", string.Empty).Trim();
         }
 
         /// <summary>
@@ -266,77 +309,46 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
             return url;
         }
 
-        /// <summary>
-        /// Gets the download path to the latest release in a repository
-        /// </summary>
-        /// <param name="modUrl">URL to the repository's releases page</param>
-        /// <returns>Direct download path of latest release</returns>
-        private static string GetDownloadPath(string modUrl)
-        {
-            var htmlDoc = new HtmlWeb().Load(modUrl);
-            htmlDoc.OptionFixNestedTags = true;
-            var partial = htmlDoc.DocumentNode.SelectSingleNode("//*[@class='release label-latest']/div[2]/ul/li[1]/a").Attributes["href"].Value;
-            ////*[@class='release label-latest']/div[2]/ul/li[1]/a
-            return GetUrlParts(modUrl)[0] + "://" + GetUrlParts(modUrl)[1] + partial;
-        }
 
         /// <summary>
         /// Creates a list of DownloadInfos from a GitHub release
         /// </summary>
         /// <param name="modInfo">The mod to generate the list from</param>
         /// <returns>A list of one or more DownloadInfos for the most recent release of the selected repository</returns>
-        private static List<DownloadInfo> GetDownloadInfo(ModInfo modInfo)
+        private List<DownloadInfo> GetDownloadInfo(ModInfo modInfo)
         {
-            var htmlDoc = new HtmlWeb().Load(GetPathToReleases(modInfo.ModURL));
-            htmlDoc.OptionFixNestedTags = true;
+            List<DownloadInfo> results = new List<DownloadInfo>();
 
-            var releases = new List<DownloadInfo>();
-
-            var nodesrel = htmlDoc.DocumentNode.SelectNodes("//*[@class='release label-latest']/div[2]/ul/li/a");
-
-            var nodespre = htmlDoc.DocumentNode.SelectNodes("//*[@class='release label-prerelease'][1]/div[2]/ul/li/a");
-
-            if (nodesrel != null)
+            IReadOnlyList<Release> releases = GetReleases(modInfo);
+            foreach (Release release in releases)
             {
-                foreach (var s in nodesrel)
+                string downloadUrl = null;
+                foreach (ReleaseAsset asset in release.Assets)
                 {
-                    var url = "https://github.com" + s.Attributes["href"].Value;
-
-                    if (!url.Contains("releases")) continue;
-
-                    var dInfo = new DownloadInfo
+                    if (asset.BrowserDownloadUrl.EndsWith("zip"))
                     {
-                        DownloadURL = url,
-                        Filename = GetUrlParts(url).Last(),
-                        Name = Path.GetFileNameWithoutExtension(GetUrlParts(url).Last())
-                    };
-
-                    releases.Add(dInfo);
+                        downloadUrl = asset.BrowserDownloadUrl;
+                        break;
+                    }
                 }
+
+                if (downloadUrl == null)
+                {
+                    continue;
+                }
+
+                string releaseName = (release.Draft ? "Pre-release: " : "") + GetVersion(release);
+
+                DownloadInfo dInfo = new DownloadInfo()
+                {
+                    DownloadURL = downloadUrl,
+                    Filename = GetUrlParts(downloadUrl).Last(),
+                    Name = releaseName
+                };
+                results.Add(dInfo);
             }
 
-            if (nodespre != null)
-            {
-                foreach (var s in nodespre)
-                {
-                    var url = "https://github.com" + s.Attributes["href"].Value;
-
-                    if (!url.Contains("releases")) continue;
-
-                    var versionNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@class='release label-prerelease']/div[1]/ul/li[1]/a/span[2]").InnerText;
-
-                    var dInfo = new DownloadInfo
-                    {
-                        DownloadURL = url,
-                        Filename = GetUrlParts(url).Last(),
-                        Name = "Pre-release: " + versionNode + ": " + Path.GetFileNameWithoutExtension(GetUrlParts(url).Last())
-                    };
-
-                    releases.Add(dInfo);
-                }
-            }
-
-            return releases;
+            return results;
         }
     }
 }
