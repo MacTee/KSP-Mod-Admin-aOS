@@ -105,6 +105,7 @@ namespace KSPModAdmin.Core.Model
                 modInfo.AdditionalURL = AdditionalURL;
                 modInfo.Version = Version;
                 modInfo.KSPVersion = KSPVersion;
+                modInfo.Note = Note;
                 return modInfo;
             }
             set
@@ -127,6 +128,7 @@ namespace KSPModAdmin.Core.Model
                     AdditionalURL = value.AdditionalURL;
                     Version = value.Version;
                     KSPVersion = value.KSPVersion;
+                    Note = value.Note;
                 }
             }
         }

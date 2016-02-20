@@ -173,6 +173,11 @@ namespace KSPModAdmin.Core.Model
         public string ProductID { get; set; }
 
         /// <summary>
+        /// The notes of the mod
+        /// </summary>
+        public string Note { get; set; }
+
+        /// <summary>
         /// Flag to determine if mod is a archive.
         /// </summary>
         public bool IsArchive
@@ -228,6 +233,9 @@ namespace KSPModAdmin.Core.Model
 
             Version = string.Empty;
             KSPVersion = string.Empty;
+
+            Note = string.Empty;
         }
+
     }
 }
