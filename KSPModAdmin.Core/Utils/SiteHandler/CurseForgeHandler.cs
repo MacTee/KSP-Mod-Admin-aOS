@@ -155,11 +155,15 @@ namespace KSPModAdmin.Core.Utils
         /// <returns>Returns true if successfully extracts data</returns>
         private bool ParseSite(string url, ref ModInfo modInfo)
         {
+            // get curse.com link for this mod.
+            HtmlWeb web = new HtmlWeb();
+            HtmlDocument htmlDoc = web.Load(url);
+            HtmlNode curseUrlNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@class='view-on-curse']/a");
+            string cursePage = curseUrlNode.Attributes["href"].Value;
+
             // changed to use the curse page as it provides the same info but also game version
             // there's no good way to get a mod version from curse. Could use file name? Is using update date (best method?)
-            string cursePage = "http://www.curse.com/ksp-mods/kerbal/" + new Uri(url).Segments[2];
-            HtmlWeb web = new HtmlWeb();
-            HtmlDocument htmlDoc = web.Load(cursePage);
+            htmlDoc = web.Load(cursePage);
             htmlDoc.OptionFixNestedTags = true;
 
             // To scrape the fields, now using HtmlAgilityPack and XPATH search strings.
@@ -178,7 +182,8 @@ namespace KSPModAdmin.Core.Utils
                 return false;
             
             modInfo.Name = nameNode.InnerHtml;
-            modInfo.ProductID = idNode.Attributes["href"].Value.Substring(idNode.Attributes["href"].Value.LastIndexOf("/") + 1);
+            var tempId = idNode.Attributes["href"].Value.Trim('/');
+            modInfo.ProductID = tempId.Substring(tempId.LastIndexOf("/") + 1);
             modInfo.CreationDateAsDateTime = epoch.AddSeconds(Convert.ToDouble(createNode.Attributes["data-epoch"].Value));
             modInfo.ChangeDateAsDateTime = epoch.AddSeconds(Convert.ToDouble(updateNode.Attributes["data-epoch"].Value));
             modInfo.Downloads = downloadNode.InnerHtml.Split(" ")[0];

@@ -1134,6 +1134,9 @@ namespace KSPModAdmin.Core.Controller
                 }
 
                 List<string> kspPaths = new List<string>();
+                if (!string.IsNullOrEmpty(steamPath) && !Directory.Exists(steamPath))
+                    steamPath = steamPath.ToLower();
+
                 if (!string.IsNullOrEmpty(steamPath) && Directory.Exists(steamPath))
                 {
                     string[] dirs = Directory.GetDirectories(steamPath, KSP_SEARCH_PATTERN, SearchOption.TopDirectoryOnly);

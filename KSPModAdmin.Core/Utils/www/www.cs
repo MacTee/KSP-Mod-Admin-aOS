@@ -51,7 +51,7 @@ namespace KSPModAdmin.Core.Utils
             {
 				if (PlatformHelper.GetPlatform() != Platform.Win && wEx.Status == WebExceptionStatus.SendFailure)
                 {
-                    string msg = string.Format("Error during www.Load({0}){1}Possible problem: Missing certificates.{1}Enter \"mozroots --sync --import\" in your terminal to add missing certificates.", url, Environment.NewLine);
+                    string msg = string.Format("Error while loading from {0}.{1}Possible problem: Missing certificates.{1}Enter \"mozroots --sync --import\" in your terminal to add missing certificates.", url, Environment.NewLine);
                     try
                     {
                         MessageBox.Show(msg, Messages.MSG_TITLE_ERROR);
@@ -61,11 +61,11 @@ namespace KSPModAdmin.Core.Utils
                     Messenger.AddError(msg, wEx);
                 }
                 else
-                    Messenger.AddError(string.Format("Error in www.Load({0})", url), wEx);
+                    Messenger.AddError(string.Format("Error while loading from {0}.{2}Response status = {1}{2}Error message: {2}", url, wEx.Status, wEx.Message, Environment.NewLine), wEx);
             }
             catch (Exception ex)
             {
-                Log.AddErrorS(string.Format("Error in www.Load({0})", url), ex);
+                Log.AddErrorS(string.Format("Error while loading from {0}.{2}Error message: {1}", url, ex.Message, Environment.NewLine), ex);
             }
 
             return string.Empty;
