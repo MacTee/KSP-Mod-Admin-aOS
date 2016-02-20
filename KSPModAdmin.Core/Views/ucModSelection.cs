@@ -247,6 +247,11 @@ namespace KSPModAdmin.Core.Views
 
         private void tsbAddMod_Click(object sender, EventArgs e)
         {
+            //Check for a downloads folder (configured and exists)
+            while (string.IsNullOrEmpty(OptionsController.DownloadPath) && !Directory.Exists(OptionsController.DownloadPath))
+            {
+                OptionsController.SelectNewDownloadPath();                
+            }
             ModSelectionController.OpenAddModDialog();
         }
 
