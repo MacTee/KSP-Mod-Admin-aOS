@@ -154,10 +154,7 @@ namespace KSPModAdmin.Core.Utils
 
                 // User DownloadFileAsync cause DownloadFile doesn't fire the DownloadProgressChanged event.
                 webClient.DownloadFileAsync(new Uri(downloadURL), downloadPath);
-                while (wait)
-                {
-                    // Wait till download is finished.
-                }
+                while (wait) { /* Wait till download is finished. */ }
             }
         }
 

@@ -95,7 +95,7 @@ You can configure KSP MA aOS to automatically check for KSP Mod Admin aOs update
 After i start KSP MA i get the following error message:
 "Unexpected runtime error: "An attempt was made to load an assembly from a network location which would have caused the assembly to be sandboxed...""
 This happens when windows has flaged the files of KSP MA as a web download.
-You have to allow access to following files HtmlAgilityPack.dll, KerbalStuffReadOnly.dll, KSPModAdmin.Core.dll, Newtonsoft.Json.dll, SharpCompress.dll and plugins/KSPModAdmin.Translation.Plugin.dll manualy by
+You have to allow access to following files HtmlAgilityPack.dll, KSPModAdmin.Core.dll, Newtonsoft.Json.dll, SharpCompress.dll and plugins/KSPModAdmin.Translation.Plugin.dll manualy by
 1. Right click the dll
 2. Chose properties
 3. Click "Unblock"
