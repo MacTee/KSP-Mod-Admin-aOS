@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using HtmlAgilityPack;
@@ -132,15 +130,6 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
             var downloadInfos = GetDownloadInfo(modInfo);
             DownloadInfo selected = null;
 
-            // If any of the nodes came back as a prerelease, notify the user that there are pre-release nodes
-            foreach (var d in downloadInfos)
-            {
-                if (!d.Name.Contains("Pre-release")) continue;
-
-                var dlg = MessageBox.Show("This download contains a pre-release version. This version might not be stable.", Messages.MSG_TITLE_ATTENTION, MessageBoxButtons.OK);
-                break;
-            }
-
             if (downloadInfos.Count > 1)
             {
                 // create new selection form if more than one download option found
@@ -183,13 +172,8 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 
             // To scrape the fields, now using HtmlAgilityPack and XPATH search strings.
             // Easy way to get XPATH search: use chrome, inspect element, highlight the needed data and right-click and copy XPATH
-            HtmlNode latestRelease = htmlDoc.DocumentNode.SelectSingleNode("//*[@class='release label-latest']");
-            HtmlNode versionNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@class='release label-latest']/div[1]/ul/li[1]/a/span[2]");
-            if (versionNode == null)
-                versionNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='js-repo-pjax-container']/div[2]/ul/li[1]/div/div/h3/a/span");
-            HtmlNode updateNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@class='release label-latest']/div[2]/div/p/time");
-            if (updateNode == null)
-                updateNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='js-repo-pjax-container']/div[2]/ul/li[1]/span/time");
+            HtmlNode versionNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@class='release label-latest']/div/ul/li/a/span"); // "//*[@id='js-repo-pjax-container']/div[2]/div[1]/div[2]/div[1]/div[1]/ul/li[1]/a/span"
+            HtmlNode updateNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@class='release label-latest']/div[2]/div/p/time"); // "//*[@id='js-repo-pjax-container']/div[2]/div[1]/div[2]/div[1]/div[2]/div[1]/p/time"
 
             if (versionNode == null || updateNode == null)
                 Messenger.AddError("Error! Can't parse GitHib version or creation date!");
@@ -267,20 +251,6 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
         }
 
         /// <summary>
-        /// Gets the download path to the latest release in a repository
-        /// </summary>
-        /// <param name="modUrl">URL to the repository's releases page</param>
-        /// <returns>Direct download path of latest release</returns>
-        private static string GetDownloadPath(string modUrl)
-        {
-            var htmlDoc = new HtmlWeb().Load(modUrl);
-            htmlDoc.OptionFixNestedTags = true;
-            var partial = htmlDoc.DocumentNode.SelectSingleNode("//*[@class='release label-latest']/div[2]/ul/li[1]/a").Attributes["href"].Value;
-            ////*[@class='release label-latest']/div[2]/ul/li[1]/a
-            return GetUrlParts(modUrl)[0] + "://" + GetUrlParts(modUrl)[1] + partial;
-        }
-
-        /// <summary>
         /// Creates a list of DownloadInfos from a GitHub release
         /// </summary>
         /// <param name="modInfo">The mod to generate the list from</param>
@@ -292,12 +262,16 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 
             var releases = new List<DownloadInfo>();
 
-            var nodesrel = htmlDoc.DocumentNode.SelectNodes("//*[@class='release label-latest']/div[2]/ul/li/a");
+            // try find last release (select all link nodes of the download section within the class 'release label-latest')
+            var nodesrel = htmlDoc.DocumentNode.SelectNodes("//*[@class='release label-latest']/div/ul/li/a");
 
-            var nodespre = htmlDoc.DocumentNode.SelectNodes("//*[@class='release label-prerelease'][1]/div[2]/ul/li/a");
+            // try find other releases (select all link nodes of the download section within the classes 'release label-latest')
+            if (nodesrel == null)
+                nodesrel = htmlDoc.DocumentNode.SelectNodes("//*[@class='release label-']/div/ul/li/a");
 
             if (nodesrel != null)
             {
+                // iterate over all link nodes and get only urls with 'releases' in it.
                 foreach (var s in nodesrel)
                 {
                     var url = "https://github.com" + s.Attributes["href"].Value;
@@ -309,27 +283,6 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
                         DownloadURL = url,
                         Filename = GetUrlParts(url).Last(),
                         Name = Path.GetFileNameWithoutExtension(GetUrlParts(url).Last())
-                    };
-
-                    releases.Add(dInfo);
-                }
-            }
-
-            if (nodespre != null)
-            {
-                foreach (var s in nodespre)
-                {
-                    var url = "https://github.com" + s.Attributes["href"].Value;
-
-                    if (!url.Contains("releases")) continue;
-
-                    var versionNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@class='release label-prerelease']/div[1]/ul/li[1]/a/span[2]").InnerText;
-
-                    var dInfo = new DownloadInfo
-                    {
-                        DownloadURL = url,
-                        Filename = GetUrlParts(url).Last(),
-                        Name = "Pre-release: " + versionNode + ": " + Path.GetFileNameWithoutExtension(GetUrlParts(url).Last())
                     };
 
                     releases.Add(dInfo);

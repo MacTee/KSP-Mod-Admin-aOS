@@ -65,6 +65,7 @@ namespace KSPModAdmin.Core.Views
                 modInfo.Rating = Rating;
                 modInfo.SiteHandlerName = SiteHandlerName;
                 modInfo.AdditionalURL = AdditionalURL;
+                modInfo.Note = Note;
                 return modInfo;
             }
             set
@@ -86,6 +87,7 @@ namespace KSPModAdmin.Core.Views
                     AdditionalURL = value.AdditionalURL;
                     KSPVersion = value.KSPVersion;
                     Version = value.Version;
+                    Note = value.Note;
                 }
                 else
                 {
@@ -101,6 +103,7 @@ namespace KSPModAdmin.Core.Views
                     ModURL = string.Empty;
                     AdditionalURL = AdditionalURL;
                     KSPVersion = string.Empty;
+                    Note = string.Empty;
                 }
             }
         }

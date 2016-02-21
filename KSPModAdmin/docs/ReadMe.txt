@@ -13,7 +13,7 @@ Features:
 - Multi OS support: Win, Linux and Mac (via Mono-Project (see http://www.mono-project.com/))
 - Supports multiple installations of KSP. Change between different KSP installations with one click.
 - Support of ZIP-, RAR- and 7ZIP- mod archives.
-- Add mods or crafts with drag & drop, file selection or URL (Support of KSP Forum, Curse, CurseForge, KerbalStuff, GitHub and BitBucket urls).
+- Add mods or crafts with drag & drop, file selection or URL (Support of KSP Forum, Curse, CurseForge, SpaceDock, GitHub and BitBucket urls).
 - AVC Plugin version file detection.
 - Auto detects install folder for the mod (if possible the mod will be installed to the GameData folder).
 - Easy install destination control (for those cases the destination can't be auto detected).
