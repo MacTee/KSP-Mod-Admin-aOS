@@ -1,7 +1,7 @@
 ﻿//// BUGS
 /////////////////////
 - ModName changes after Mod update.
-- AVC Plugin - Problem when a mod archive contains multiple version files. (Sample: Mission Controller 2 on KerbalStuff)
+- AVC Plugin - Problem when a mod archive contains multiple version files.
 - Some mods have additional folders that normally doesn't install. 
   It can be folders with alternative data, manuals, etc. For examples see Planet Shine or UniversalStorage [TAC PACK]. 
   Usually Mod Admin can't detect installation path for them and shows warning. When I update this mods, Mod Admin shows warning again for every root node 
@@ -16,7 +16,7 @@
 - After i start KSP MA i get the following error message:
   "Unexpected runtime error: "An attempt was made to load an assembly from a network location which would have caused the assembly to be sandboxed...""
   This happens when windows has flaged the files of KSP MA as a web download.
-  You have to allow access to following files HtmlAgilityPack.dll, KerbalStuffReadOnly.dll, KSPModAdmin.Core.dll, Newtonsoft.Json.dll, SharpCompress.dll and plugins/KSPModAdmin.Translation.Plugin.dll manualy by
+  You have to allow access to following files HtmlAgilityPack.dll, KSPModAdmin.Core.dll, Newtonsoft.Json.dll, SharpCompress.dll and plugins/KSPModAdmin.Translation.Plugin.dll manualy by
   1. Right click the dll
   2. Chose properties
   3. Click "Unblock"
@@ -43,7 +43,7 @@
 
 - ModInfos are automatically added about add-ons where a valid version control site is detected. 
   That is great, however some information fields are not automatically filled (Author, Creation date, Change date). 
-  I currently have add-ons checking with many different Version Control sites (GitHub, CurseForge, KerbalStuff, KSP Forum) 
+  I currently have add-ons checking with many different Version Control sites (GitHub, CurseForge, KSP Forum) 
   but with none those fields are filled.
 
 - Overwrite button states are indistinguishable. It's hard to say, what mode it is in. May be CheckBox would be more visual?

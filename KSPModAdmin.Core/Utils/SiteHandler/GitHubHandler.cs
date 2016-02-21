@@ -1,18 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using HtmlAgilityPack;
 using KSPModAdmin.Core.Controller;
 using KSPModAdmin.Core.Model;
 using KSPModAdmin.Core.Views;
-using Octokit;
-using System.Threading.Tasks;
-using Octokit.Internal;
-using Octokit.Caching;
 
 namespace KSPModAdmin.Core.Utils.SiteHandler
 {
@@ -25,15 +20,6 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
         private const string HOST = "github.com";
         private const string URL_0_1 = "https://github.com/{0}/{1}";
         private const string HOST2 = "raw.githubusercontent.com";
-
-        private static GitHubClient github = new GitHubClient(new ProductHeaderValue("KSPModAdmin", "1.0.0"),
-                                                              new InMemoryCredentialStore(new Credentials("065708e33efe434775a5c0be3085b04d6305aaf5")));
-        //        private static GitHubClient github = new GitHubClient(new Connection(new ProductHeaderValue("KSPModAdmin", "1.0.0"),
-        //                                                                             GitHubClient.GitHubApiUrl,
-        //                                                                             new InMemoryCredentialStore(new Credentials("065708e33efe434775a5c0be3085b04d6305aaf5")),
-        //                                                                             new CachingHttpClient(new HttpClientAdapter(HttpMessageHandlerFactory.CreateDefault), new NaiveInMemoryCache()),
-        //                                                                             new SimpleJsonSerializer()));
-
 
         /// <summary>
         /// Builds the url from the passed user and project name.
@@ -144,15 +130,6 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
             var downloadInfos = GetDownloadInfo(modInfo);
             DownloadInfo selected = null;
 
-            // If any of the nodes came back as a prerelease, notify the user that there are pre-release nodes
-            foreach (var d in downloadInfos)
-            {
-                if (!d.Name.Contains("Pre-release")) continue;
-
-                var dlg = MessageBox.Show("This download contains a pre-release version. This version might not be stable.", Messages.MSG_TITLE_ATTENTION, MessageBoxButtons.OK);
-                break;
-            }
-
             if (downloadInfos.Count > 1)
             {
                 // create new selection form if more than one download option found
@@ -184,63 +161,27 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
             return File.Exists(modInfo.LocalPath);
         }
 
-        private IReadOnlyList<Release> GetReleases(ModInfo modInfo)
-        {
-            Task<IReadOnlyList<Release>> task = github.Repository.Release.GetAll(modInfo.Author, modInfo.Name);
-
-            task.Wait();
-
-            IReadOnlyList<Release> releases = task.Result;
-
-
-            return releases;
-        }
-
-        private Release GetLatestRelease(ref ModInfo modInfo)
-        {
-            IReadOnlyList<Release> releases = GetReleases(modInfo);
-
-            Release latestRelease = null;
-            foreach (Release release in releases)
-            {
-                try
-                {
-                    if (!release.Draft &&
-                        (latestRelease == null || latestRelease.CreatedAt.CompareTo(release.CreatedAt) < 0))
-                    {
-                        latestRelease = release;
-                    }
-                }
-                catch (Exception e)
-                {
-                    Messenger.AddError("Exception thrown whilst determining latest release of " + modInfo.Name, e);
-                }
-            }
-
-            return latestRelease;
-        }
-
         /// <summary>
         /// Takes a site url and parses the site for mod info
         /// </summary>
         /// <param name="modInfo">The modInfo to add data to</param>
         public void ParseSite(ref ModInfo modInfo)
         {
-            Release latestRelease = GetLatestRelease(ref modInfo);
-            if (latestRelease == null)
-            {
-                Messenger.AddError("Error! Can't find latest GitHib release");
-            }
-            else
-            {
-                modInfo.Version = GetVersion(latestRelease);
-                modInfo.ChangeDateAsDateTime = latestRelease.CreatedAt.UtcDateTime;
-            }
-        }
+            var htmlDoc = new HtmlWeb().Load(GetPathToReleases(modInfo.ModURL));
+            htmlDoc.OptionFixNestedTags = true;
 
-        private string GetVersion(Release release)
-        {
-            return Regex.Replace(release.Name, @"[A-z]", string.Empty).Trim();
+            // To scrape the fields, now using HtmlAgilityPack and XPATH search strings.
+            // Easy way to get XPATH search: use chrome, inspect element, highlight the needed data and right-click and copy XPATH
+            HtmlNode versionNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@class='release label-latest']/div/ul/li/a/span"); // "//*[@id='js-repo-pjax-container']/div[2]/div[1]/div[2]/div[1]/div[1]/ul/li[1]/a/span"
+            HtmlNode updateNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@class='release label-latest']/div[2]/div/p/time"); // "//*[@id='js-repo-pjax-container']/div[2]/div[1]/div[2]/div[1]/div[2]/div[1]/p/time"
+
+            if (versionNode == null || updateNode == null)
+                Messenger.AddError("Error! Can't parse GitHib version or creation date!");
+
+            if (versionNode != null)
+                modInfo.Version = Regex.Replace(versionNode.InnerText, @"[A-z]", string.Empty);
+            if (updateNode != null)
+                modInfo.ChangeDateAsDateTime = DateTime.Parse(updateNode.Attributes["datetime"].Value);
         }
 
         /// <summary>
@@ -309,46 +250,46 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
             return url;
         }
 
-
         /// <summary>
         /// Creates a list of DownloadInfos from a GitHub release
         /// </summary>
         /// <param name="modInfo">The mod to generate the list from</param>
         /// <returns>A list of one or more DownloadInfos for the most recent release of the selected repository</returns>
-        private List<DownloadInfo> GetDownloadInfo(ModInfo modInfo)
+        private static List<DownloadInfo> GetDownloadInfo(ModInfo modInfo)
         {
-            List<DownloadInfo> results = new List<DownloadInfo>();
+            var htmlDoc = new HtmlWeb().Load(GetPathToReleases(modInfo.ModURL));
+            htmlDoc.OptionFixNestedTags = true;
 
-            IReadOnlyList<Release> releases = GetReleases(modInfo);
-            foreach (Release release in releases)
+            var releases = new List<DownloadInfo>();
+
+            // try find last release (select all link nodes of the download section within the class 'release label-latest')
+            var nodesrel = htmlDoc.DocumentNode.SelectNodes("//*[@class='release label-latest']/div/ul/li/a");
+
+            // try find other releases (select all link nodes of the download section within the classes 'release label-latest')
+            if (nodesrel == null)
+                nodesrel = htmlDoc.DocumentNode.SelectNodes("//*[@class='release label-']/div/ul/li/a");
+
+            if (nodesrel != null)
             {
-                string downloadUrl = null;
-                foreach (ReleaseAsset asset in release.Assets)
+                // iterate over all link nodes and get only urls with 'releases' in it.
+                foreach (var s in nodesrel)
                 {
-                    if (asset.BrowserDownloadUrl.EndsWith("zip"))
+                    var url = "https://github.com" + s.Attributes["href"].Value;
+
+                    if (!url.Contains("releases")) continue;
+
+                    var dInfo = new DownloadInfo
                     {
-                        downloadUrl = asset.BrowserDownloadUrl;
-                        break;
-                    }
+                        DownloadURL = url,
+                        Filename = GetUrlParts(url).Last(),
+                        Name = Path.GetFileNameWithoutExtension(GetUrlParts(url).Last())
+                    };
+
+                    releases.Add(dInfo);
                 }
-
-                if (downloadUrl == null)
-                {
-                    continue;
-                }
-
-                string releaseName = (release.Draft ? "Pre-release: " : "") + GetVersion(release);
-
-                DownloadInfo dInfo = new DownloadInfo()
-                {
-                    DownloadURL = downloadUrl,
-                    Filename = GetUrlParts(downloadUrl).Last(),
-                    Name = releaseName
-                };
-                results.Add(dInfo);
             }
 
-            return results;
+            return releases;
         }
     }
 }
