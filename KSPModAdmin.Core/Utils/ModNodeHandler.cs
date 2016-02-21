@@ -526,10 +526,20 @@ namespace KSPModAdmin.Core.Utils
             // Get all files with destination.
             List<ICopyModInfo> outdatedFileNodes = outdatedMod.GetAllFileNodesAsICopyModInfo();
             if (outdatedFileNodes.Count == 0)
+            {
+                Messenger.AddInfo("No files in outdated mod found!");
                 return false;
+            }
 
             // Get all files of the new mod
             List<ICopyModInfo> newModFileNodes = newMod.GetAllFileNodesAsICopyModInfo();
+            List<ICopyModInfo> matchingNewModFileNodes = new List<ICopyModInfo>();
+
+            if (newModFileNodes.Count == 0)
+            {
+                Messenger.AddInfo("No files in new mod found!");
+                return false;
+            }
 
             foreach (var file in outdatedFileNodes)
             {
@@ -541,7 +551,6 @@ namespace KSPModAdmin.Core.Utils
                 {
                     // ignore not matching old files
                     continue;
-                    //return false;
                 }
 
                 if (newModFileNodes.Contains(matchingNew))
@@ -549,6 +558,7 @@ namespace KSPModAdmin.Core.Utils
 
                 matchingNew.Destination = file.Destination;
                 matchingNew.SetChecked(file.Checked, true);
+                matchingNewModFileNodes.Add(matchingNew);
 
                 // Copy infos for each parent up to root node.
                 var parentNew = matchingNew.Parent as ModNode;
@@ -564,18 +574,14 @@ namespace KSPModAdmin.Core.Utils
             }
 
             var unknownPaths = new List<ICopyModInfo>();
-            foreach (var file in newModFileNodes)
+            if (newModFileNodes.Count > 0)
             {
-                var fullTreePath = file.GetFullTreePath().Remove(0, file.GetRoot().GetFullTreePath().Length);
-                if (!ModSelectionTreeModel.IsKnownPath(fullTreePath, outdatedMod))
-                {
-                    unknownPaths.Add(file);
-                }
+                unknownPaths = CheckForUnknownDestinationPaths(newModFileNodes, matchingNewModFileNodes, outdatedFileNodes);
             }
 
             if (unknownPaths.Count > 0)
             {
-                Messenger.AddInfo("The following new files have a unknown path:");
+                Messenger.AddInfo("Invalid destination path found for:");
 
                 foreach (var file in unknownPaths)
                     Messenger.AddInfo(string.Format("File: {0}", file.Destination));
@@ -586,6 +592,36 @@ namespace KSPModAdmin.Core.Utils
             }
 
             return true;
+        }
+
+        private static List<ICopyModInfo> CheckForUnknownDestinationPaths(List<ICopyModInfo> notMatchingNewModFileNodes, List<ICopyModInfo> matchingNewModFileNodes, List<ICopyModInfo> outdatedFileNodes)
+        {
+            var unknownPaths = new List<ICopyModInfo>();
+
+            string[] subdirectoryEntries = null;
+            if (matchingNewModFileNodes.Count == 0)
+                subdirectoryEntries = outdatedFileNodes.First().Destination.Split(new[] { Path.DirectorySeparatorChar }, StringSplitOptions.RemoveEmptyEntries);
+            else
+                subdirectoryEntries = matchingNewModFileNodes.First().Destination.Split(new[] { Path.DirectorySeparatorChar }, StringSplitOptions.RemoveEmptyEntries);
+
+            if (subdirectoryEntries.Length < 3)
+            {
+                unknownPaths.AddRange(notMatchingNewModFileNodes);
+            }
+            else
+            {
+                string modPath = string.Join(Path.DirectorySeparatorChar.ToString(), new[] { subdirectoryEntries[0], subdirectoryEntries[1], subdirectoryEntries[2] });
+
+                // all new files that have no match in the old mod must be placed at least within the known mod path.
+                // if one file don't meet this requirement the mod must be updated manualy!
+                foreach (var file in notMatchingNewModFileNodes)
+                {
+                    if (!file.Destination.StartsWith(modPath, StringComparison.CurrentCultureIgnoreCase))
+                        unknownPaths.Add(file);
+                }
+            }
+
+            return unknownPaths;
         }
 
         #endregion
