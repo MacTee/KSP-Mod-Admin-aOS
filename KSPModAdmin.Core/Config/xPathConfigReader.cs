@@ -15,15 +15,15 @@ namespace KSPModAdmin.Core.Config
         {
             var result = new Dictionary<string, string>();
 
-            var rows = configFileContent.Split(new [] {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries);
+            var rows = configFileContent.Replace('\r', ' ').Split('\n');
 
             foreach (var row in rows)
             {
-                var pair = row.Split('=');
-                if (pair.Length != 2)
-                    continue;
+                var index = row.IndexOf('=');
+                var key = row.Substring(0, index).Trim();
+                var value = row.Substring(index+1).Trim();
 
-                result.Add(pair[0], pair[1]);
+                result.Add(key, value);
             }
 
             return result;

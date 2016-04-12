@@ -560,20 +560,6 @@ namespace KSPModAdmin.Core.Controller
             }
         }
 
-        private static void UpdateSiteHandler()
-        {
-            var url = @"https://raw.githubusercontent.com/MacTee/KSP-Mod-Admin-aOS/master/KSPModAdmin.Core/Utils/SiteHandler/xPathConfigs/CurseForgeXPaths.cfg";
-            var content = Www.Load(url);
-            var settings = xPathConfigReader.Read(content);
-            foreach (var setting in settings)
-            {
-                if (OtherAppOptions.ContainsKey(setting.Key))
-                    OtherAppOptions[setting.Key] = setting.Value;
-                else
-                    OtherAppOptions.Add(setting.Key, setting.Value);
-            }
-        }
-
         /// <summary>
         /// Starts an async Job.
         /// Gets the current version from "www.services.mactee.de/..."
@@ -585,7 +571,11 @@ namespace KSPModAdmin.Core.Controller
             mTaskAction = TaskAction.AppUpdateCheck;
             EventDistributor.InvokeAsyncTaskStarted(Instance);
             AsyncTask<WebResponse>.DoWork(
-                () => GetAdminVersionFromWeb(),
+                () =>
+                {
+                    UpdateSiteHandler();
+                    return GetAdminVersionFromWeb();
+                },
                 (WebResponse response, Exception ex) =>
                 {
                     EventDistributor.InvokeAsyncTaskDone(Instance);
@@ -593,8 +583,24 @@ namespace KSPModAdmin.Core.Controller
                     if (ex != null)
                         Messenger.AddError(Messages.MSG_KSPMA_UPDATE_ERROR, ex);
                     else
+                    {
                         HandleAdminVersionWebResponse(response);
+                    }
                 });
+        }
+
+        private static void UpdateSiteHandler()
+        {
+            var url = @"https://raw.githubusercontent.com/MacTee/KSP-Mod-Admin-aOS/dev/KSPModAdmin.Core/Utils/SiteHandler/xPathConfigs/CurseForgeXPaths.cfg";
+            var content = Www.Load(url);
+            var settings = xPathConfigReader.Read(content);
+            foreach (var setting in settings)
+            {
+                if (OtherAppOptions.ContainsKey(setting.Key))
+                    OtherAppOptions[setting.Key] = setting.Value;
+                else
+                    OtherAppOptions.Add(setting.Key, setting.Value);
+            }
         }
 
         private static WebResponse GetAdminVersionFromWeb()
