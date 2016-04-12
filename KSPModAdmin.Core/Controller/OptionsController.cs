@@ -8,6 +8,7 @@ using System.Net;
 using System.Text;
 using System.Windows.Forms;
 using FolderSelect;
+using KSPModAdmin.Core.Config;
 using KSPModAdmin.Core.Model;
 using KSPModAdmin.Core.Utils.Localization;
 using KSPModAdmin.Core.Views;
@@ -488,6 +489,12 @@ namespace KSPModAdmin.Core.Controller
 
         #endregion
 
+        #region Other
+
+        public static Dictionary<string, string> OtherAppOptions { get; set; }
+
+        #endregion
+
         #endregion
 
         #region Constructors
@@ -542,11 +549,28 @@ namespace KSPModAdmin.Core.Controller
             try
             {
                 if (forceUpdateCheck || VersionCheck)
+                {
+                    UpdateSiteHandler();
                     HandleAdminVersionWebResponse(GetAdminVersionFromWeb());
+                }
             }
             catch (Exception ex)
             {
                 Messenger.AddError("Error during KSP MA update check.", ex);
+            }
+        }
+
+        private static void UpdateSiteHandler()
+        {
+            var url = @"https://raw.githubusercontent.com/MacTee/KSP-Mod-Admin-aOS/master/KSPModAdmin.Core/Utils/SiteHandler/xPathConfigs/CurseForgeXPaths.cfg";
+            var content = Www.Load(url);
+            var settings = xPathConfigReader.Read(content);
+            foreach (var setting in settings)
+            {
+                if (OtherAppOptions.ContainsKey(setting.Key))
+                    OtherAppOptions[setting.Key] = setting.Value;
+                else
+                    OtherAppOptions.Add(setting.Key, setting.Value);
             }
         }
 

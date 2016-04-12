@@ -129,6 +129,8 @@ namespace KSPModAdmin.Core
         public const string COLOR4OUTDATEDMODS = "Color4OudatedMods";
         public const string TABORDER = "TabOrder";
         public const string TAB = "Tab";
+        public const string OTHERAPPOPTIONS = "OtherAppOptions";
+        public const string OTHERAPPOPTION = "OtherAppOption";
         public const string DOWNLOAD_PATH = "DownloadPath";
         public const string NAME = "Name";
         public const string LONGNAME = "LongName";
