@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
-using System.Net;
-using System.Web;
+using System.Runtime.Remoting.Messaging;
 using KSPModAdmin.Core.Controller;
 using KSPModAdmin.Core.Model;
 using HtmlAgilityPack;
@@ -13,14 +12,110 @@ namespace KSPModAdmin.Core.Utils
     /// </summary>
     public class CurseForgeHandler : ISiteHandler
     {
+        #region Constants
+
         private const string NAME = "CurseForge";
         private const string HOST = "kerbal.curseforge.com";
+        private const string XPATHCURSEURL = "XPathCurseUrl";
+        private const string XPATHMODNAME = "XPathModName";
+        private const string XPATHMODID = "XPathModId";
+        private const string XPATHMODCREATEDATE = "XPathModCreateDate";
+        private const string XPATHMODUPDATEDATE = "XPathModUpdateDate";
+        private const string XPATHMODDOWNLOADCOUNT = "XPathModDownloadCount";
+        private const string XPATHMODAUTHOR = "XPathModAuthor";
+        private const string XPATHGAMEVERSION = "XPathGameVersion";
+
+        #endregion
+
+        #region Properties
 
         /// <summary>
         /// Gets the Name of the ISiteHandler.
         /// </summary>
         /// <returns>The Name of the ISiteHandler.</returns>
         public string Name { get { return NAME; } }
+
+        private string xPathCurseUrl
+        {
+            get
+            {
+                if (!OptionsController.OtherAppOptions.ContainsKey(XPATHCURSEURL))
+                    OptionsController.OtherAppOptions.Add(XPATHCURSEURL, "//*[@class='view-on-curse']/a");
+                return OptionsController.OtherAppOptions[XPATHCURSEURL];
+            }
+        }
+
+        private string xPathModName
+        {
+            get
+            {
+                if (!OptionsController.OtherAppOptions.ContainsKey(XPATHMODNAME))
+                    OptionsController.OtherAppOptions.Add(XPATHMODNAME, "//*[@id='project-overview']/header/h2");
+                return OptionsController.OtherAppOptions[XPATHMODNAME];
+            }
+        }
+
+        private string xPathModId
+        {
+            get
+            {
+                if (!OptionsController.OtherAppOptions.ContainsKey(XPATHMODID))
+                    OptionsController.OtherAppOptions.Add(XPATHMODID, "//*[@id='project-overview']/div[1]/div[2]/div/ul/li[2]/span");
+                return OptionsController.OtherAppOptions[XPATHMODID];
+            }
+        }
+
+        private string xPathModCreateDate
+        {
+            get
+            {
+                if (!OptionsController.OtherAppOptions.ContainsKey(XPATHMODCREATEDATE))
+                    OptionsController.OtherAppOptions.Add(XPATHMODCREATEDATE, "//*[@id='project-overview']/div[1]/div[2]/ul[2]/li[6]/abbr");
+                return OptionsController.OtherAppOptions[XPATHMODCREATEDATE];
+            }
+        }
+
+        private string xPathModUpdateDate
+        {
+            get
+            {
+                if (!OptionsController.OtherAppOptions.ContainsKey(XPATHMODUPDATEDATE))
+                    OptionsController.OtherAppOptions.Add(XPATHMODUPDATEDATE, "//*[@id='project-overview']/div[1]/div[2]/ul[2]/li[5]/abbr");
+                return OptionsController.OtherAppOptions[XPATHMODUPDATEDATE];
+            }
+        }
+
+        private string xPathModDownloadCount
+        {
+            get
+            {
+                if (!OptionsController.OtherAppOptions.ContainsKey(XPATHMODDOWNLOADCOUNT))
+                    OptionsController.OtherAppOptions.Add(XPATHMODDOWNLOADCOUNT, "//*[@id='project-overview']/div[1]/div[2]/ul[2]/li[4]");
+                return OptionsController.OtherAppOptions[XPATHMODDOWNLOADCOUNT];
+            }
+        }
+
+        private string xPathModAuthor
+        {
+            get
+            {
+                if (!OptionsController.OtherAppOptions.ContainsKey(XPATHMODAUTHOR))
+                    OptionsController.OtherAppOptions.Add(XPATHMODAUTHOR, "//*[@id='project-overview']/div[1]/div[2]/ul[1]/li[1]/a");
+                return OptionsController.OtherAppOptions[XPATHMODAUTHOR]; 
+            }
+        }
+
+        private string xPathGameVersion
+        {
+            get
+            {
+                if (!OptionsController.OtherAppOptions.ContainsKey(XPATHGAMEVERSION))
+                    OptionsController.OtherAppOptions.Add(XPATHGAMEVERSION, "//*[@id='project-overview']/div[1]/div[2]/ul[2]/li[3]");
+                return OptionsController.OtherAppOptions[XPATHGAMEVERSION]; 
+            }
+        }
+
+        #endregion
 
         /// <summary>
         /// Checks if the passed URL is a CurseForge URL.
@@ -158,7 +253,7 @@ namespace KSPModAdmin.Core.Utils
             // get curse.com link for this mod.
             HtmlWeb web = new HtmlWeb();
             HtmlDocument htmlDoc = web.Load(url);
-            HtmlNode curseUrlNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@class='view-on-curse']/a");
+            HtmlNode curseUrlNode = htmlDoc.DocumentNode.SelectSingleNode(xPathCurseUrl);
             string cursePage = curseUrlNode.Attributes["href"].Value;
 
             // changed to use the curse page as it provides the same info but also game version
@@ -168,27 +263,33 @@ namespace KSPModAdmin.Core.Utils
 
             // To scrape the fields, now using HtmlAgilityPack and XPATH search strings.
             // Easy way to get XPATH search: use chrome, inspect element, highlight the needed data and right-click and copy XPATH
-            HtmlNode nameNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='project-overview']/div/div[1]/h2/span/span/span");
-            HtmlNode idNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='project-overview']/div/div[2]/div/div/div[1]/div[2]/ul[2]/li[8]/a");
-            HtmlNode createNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='project-overview']/div/div[2]/div/div/div[1]/div[2]/ul[2]/li[6]/abbr");
-            HtmlNode updateNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='project-overview']/div/div[2]/div/div/div[1]/div[2]/ul[2]/li[5]/abbr");
-            HtmlNode downloadNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='project-overview']/div/div[2]/div/div/div[1]/div[2]/ul[2]/li[4]");
-            HtmlNode authorNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='project-overview']/div/div[2]/div/div/div[1]/div[2]/ul[1]/li[1]/a");
-            HtmlNode gameVersionNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='project-overview']/div/div[2]/div/div/div[1]/div[2]/ul[2]/li[3]");
+            HtmlNode nameNode = htmlDoc.DocumentNode.SelectSingleNode(xPathModName);
+            HtmlNode idNode = htmlDoc.DocumentNode.SelectSingleNode(xPathModId);
+            HtmlNode createNode = htmlDoc.DocumentNode.SelectSingleNode(xPathModCreateDate);
+            HtmlNode updateNode = htmlDoc.DocumentNode.SelectSingleNode(xPathModUpdateDate);
+            HtmlNode downloadNode = htmlDoc.DocumentNode.SelectSingleNode(xPathModDownloadCount);
+            HtmlNode authorNode = htmlDoc.DocumentNode.SelectSingleNode(xPathModAuthor);
+            HtmlNode gameVersionNode = htmlDoc.DocumentNode.SelectSingleNode(xPathGameVersion);
 
             var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc); // Curse stores the date as both text and as Epoch. Go for the most precise value (Epoch).
 
-            if (nameNode == null)
+            if (nameNode == null && idNode == null && createNode == null && updateNode == null)
+            {
+                Messenger.AddError("Parsing of mod page failed!");
                 return false;
+            }
             
             modInfo.Name = nameNode.InnerHtml;
-            var tempId = idNode.Attributes["href"].Value.Trim('/');
+            var tempId = idNode.Attributes["data-id"].Value.Trim('/');
             modInfo.ProductID = tempId.Substring(tempId.LastIndexOf("/") + 1);
             modInfo.CreationDateAsDateTime = epoch.AddSeconds(Convert.ToDouble(createNode.Attributes["data-epoch"].Value));
             modInfo.ChangeDateAsDateTime = epoch.AddSeconds(Convert.ToDouble(updateNode.Attributes["data-epoch"].Value));
-            modInfo.Downloads = downloadNode.InnerHtml.Split(" ")[0];
-            modInfo.Author = authorNode.InnerHtml;
-            modInfo.KSPVersion = gameVersionNode.InnerHtml.Split(" ")[1];
+            if (downloadNode != null)
+                modInfo.Downloads = downloadNode.InnerHtml.Split(" ")[0];
+            if (authorNode != null)
+                modInfo.Author = authorNode.InnerHtml;
+            if (gameVersionNode != null)
+                modInfo.KSPVersion = gameVersionNode.InnerHtml.Split(" ")[1];
             return true;
             
             // more infos could be parsed here (like: short description, Tab content (overview, installation, ...), comments, ...)
