@@ -13,6 +13,55 @@ namespace KSPModAdmin.Core.Utils
     public static class KSPPathHelper
     {
         /// <summary>
+        /// Checks if any KSP.Exe (32 or 64bit) is found in the current selected KSPPath.
+        /// </summary>
+        public static bool AnyKSPExeFound
+        {
+            get
+            {
+                return KSP32ExeFound || KSP64ExeFound;
+            }
+        }
+
+        /// <summary>
+        /// Checks if any 32bit KSP.Exe is found in the current selected KSPPath.
+        /// </summary>
+        public static bool KSP32ExeFound
+        {
+            get
+            {
+                try
+                {
+                    return File.Exists(KSPPathHelper.GetPath(KSPPaths.KSPExe));
+                }
+                catch (Exception ex)
+                {
+                    Logging.Log.AddWarningS(string.Format(Messages.MSG_KSP_EXE_NOT_FOUND_0, ex.Message));
+                    return false;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Checks if any 64bit KSP.Exe is found in the current selected KSPPath.
+        /// </summary>
+        public static bool KSP64ExeFound
+        {
+            get
+            {
+                try
+                {
+                    return File.Exists(KSPPathHelper.GetPath(KSPPaths.KSPX64Exe));
+                }
+                catch (Exception ex)
+                {
+                    Logging.Log.AddWarningS(string.Format(Messages.MSG_KSP_EXE_NOT_FOUND_0, ex.Message));
+                    return false;
+                }
+            }
+        }
+
+        /// <summary>
         /// Checks if the passed path is a KSP folder path.
         /// </summary>
         /// <param name="dir">The directory to check.</param>

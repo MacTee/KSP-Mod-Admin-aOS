@@ -85,6 +85,7 @@
   <ItemGroup>
     <Compile Include="Config\AdminConfig.cs" />
     <Compile Include="Config\ConfigHelper.cs" />
+    <Compile Include="Config\xPathConfigReader.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Controller\MainController.cs" />
     <Compile Include="Controller\ModSelectionController.cs" />
@@ -706,11 +707,13 @@
     <None Include="Resources\page_add.png" />
     <None Include="Settings.StyleCop" />
     <None Include="Utils\Controls\TreeViewAdv\NodeControls\ClassDiagram.cd" />
+    <None Include="Utils\SiteHandler\xPathConfigs\CurseForgeXPaths.cfg" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Utils\Controls\TreeViewAdv\TreeViewAdv.resx">
       <DependentUpon>TreeViewAdv.cs</DependentUpon>

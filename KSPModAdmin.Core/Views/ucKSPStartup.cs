@@ -117,7 +117,7 @@ namespace KSPModAdmin.Core.Views
             EventDistributor.AsyncTaskStarted += TaskStarted;
             EventDistributor.AsyncTaskDone += TaskDone;
 
-            bool validPath = File.Exists(KSPPathHelper.GetPath(KSPPaths.KSPExe));
+            bool validPath = KSPPathHelper.AnyKSPExeFound;
             if (validPath) 
                 ReadKSPSettings();
             SetEnableStates(validPath);
@@ -185,8 +185,8 @@ namespace KSPModAdmin.Core.Views
 
         private void KSPRootChanged(string kspPath)
         {
-            SetEnableStates(File.Exists(KSPPathHelper.GetPath(KSPPaths.KSPExe)));
             ReadKSPSettings();
+            SetEnableStates(KSPPathHelper.AnyKSPExeFound);
         }
 
         private void TaskStarted(object sender)
@@ -196,7 +196,7 @@ namespace KSPModAdmin.Core.Views
 
         private void TaskDone(object sender)
         {
-            SetEnableStates(File.Exists(KSPPathHelper.GetPath(KSPPaths.KSPExe)));
+            SetEnableStates(KSPPathHelper.AnyKSPExeFound);
         }
 
 
@@ -278,8 +278,8 @@ namespace KSPModAdmin.Core.Views
             cbResolutions.Enabled = (enable && cbResolutions.Items != null && cbResolutions.Items.Count > 0);
             cbForceOpenGL.Enabled = (enable && PlatformHelper.GetPlatform() == Platform.Win);
             cbForceOpenGL.Visible = PlatformHelper.GetPlatform() == Platform.Win;
-            cbUse64Bit.Enabled = (enable && (PlatformHelper.GetPlatform() == Platform.OsX || PlatformHelper.GetPlatform() == Platform.Linux));
-            cbUse64Bit.Visible = (PlatformHelper.GetPlatform() == Platform.OsX || PlatformHelper.GetPlatform() == Platform.Linux);
+            cbUse64Bit.Enabled = (enable && (PlatformHelper.GetPlatform() == Platform.OsX || PlatformHelper.GetPlatform() == Platform.Linux || KSPPathHelper.KSP64ExeFound));
+            cbUse64Bit.Visible = (PlatformHelper.GetPlatform() == Platform.OsX || PlatformHelper.GetPlatform() == Platform.Linux || KSPPathHelper.KSP64ExeFound);
         }
     }
 }

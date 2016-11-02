@@ -2157,5 +2157,15 @@ namespace KSPModAdmin.Core
             }
         }
         private const string DEFAULT_MSG_COPY_MOD_0_DESTINATION_FAILED = "Error! Copy destinations of mod \"{0}\" failed!";
+
+        public static string MSG_KSP_EXE_NOT_FOUND_0
+        {
+            get
+            {
+                string msg = Localizer.GlobalInstance["MSG_KSP_EXE_NOT_FOUND_0"];
+                return (!string.IsNullOrEmpty(msg) ? msg : DEFAULT_MSG_KSP_EXE_NOT_FOUND_0).Replace("^", Environment.NewLine);
+            }
+        }
+        private const string DEFAULT_MSG_KSP_EXE_NOT_FOUND_0 = "No KSP.exe found! ({0})";
     }
 }

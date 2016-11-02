@@ -79,6 +79,9 @@
 //// SUGGESTIONS
 /////////////////////
 
+- It took me a long time to understand that unchecking a mod was not enough to disable it. And even longer to understand that "process mod" means reflecting the unchecked boxes to the actual game.
+  It would be simple to correct : When clicking "Launch Kerbal", a popup could say "you have one or more mods that are not processed. Launch anyway?"
+
 - CKAN package support (add as file or url) + CKAN repository browser
 - PartEditor with ModulManager support
 - 

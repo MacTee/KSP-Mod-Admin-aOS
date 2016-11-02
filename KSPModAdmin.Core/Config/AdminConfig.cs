@@ -411,6 +411,27 @@ namespace KSPModAdmin.Core.Config
             if (tabOrder.Count > 0)
                 MainController.LastTabOrder = tabOrder;
 
+
+            OptionsController.OtherAppOptions = new Dictionary<string, string>();
+            nodes = doc.GetElementsByTagName(Constants.OTHERAPPOPTION);
+            if (nodes.Count >= 1)
+            {
+                foreach (XmlNode node in nodes)
+                {
+                    var name = string.Empty;
+                    var value = string.Empty;
+                    foreach (XmlAttribute att in node.Attributes)
+                    {
+                        if (att.Name == Constants.NAME && att.Value != null)
+                            name = att.Value;
+                        if (att.Name == Constants.VALUE && att.Value != null)
+                            value = att.Value;
+                    }
+                    if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(value))
+                        OptionsController.OtherAppOptions.Add(name, value);
+                }
+            }
+
             return true;
         }
 
@@ -625,6 +646,15 @@ namespace KSPModAdmin.Core.Config
                 tabOrderNode.AppendChild(tabNode);
             }
             generalNode.AppendChild(tabOrderNode);
+
+            // OtherAppOptions.
+            XmlNode otherOptionsNode = doc.CreateElement(Constants.OTHERAPPOPTIONS);
+            foreach (var option in OptionsController.OtherAppOptions)
+            {
+                XmlNode optionNode = ConfigHelper.CreateConfigNode(doc, Constants.OTHERAPPOPTION, new string[,] { { Constants.NAME, option.Key }, { Constants.VALUE, option.Value } });
+                otherOptionsNode.AppendChild(optionNode);
+            }
+            generalNode.AppendChild(otherOptionsNode);
 
             doc.Save(path);
 

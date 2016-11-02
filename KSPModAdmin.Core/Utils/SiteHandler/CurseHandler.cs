@@ -9,8 +9,8 @@ namespace KSPModAdmin.Core.Utils
     public class CurseHandler : ISiteHandler
     {
         private const string NAME = "Curse";
-        private const string URL = "http://www.curse.com/ksp-mods/kerbal/";
-        private const string URL2 = "http://curse.com/ksp-mods/kerbal/";
+        private const string URL = "http://mods.curse.com/ksp-mods/kerbal/";
+        private const string URL1 = "https://mods.curse.com/ksp-mods/kerbal/";
 
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace KSPModAdmin.Core.Utils
         /// <returns>True if the passed URL is a valid CurseForge URL, otherwise false.</returns>
         public bool IsValidURL(string url)
         {
-            return (url.StartsWith(URL) || url.StartsWith(URL2));
+            return url.StartsWith(URL) || url.StartsWith(URL1);
         }
 
         /// <summary>
