@@ -170,10 +170,31 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
             var htmlDoc = new HtmlWeb().Load(GetPathToReleases(modInfo.ModURL));
             htmlDoc.OptionFixNestedTags = true;
 
-            // To scrape the fields, now using HtmlAgilityPack and XPATH search strings.
-            // Easy way to get XPATH search: use chrome, inspect element, highlight the needed data and right-click and copy XPATH
-            HtmlNode versionNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@class='release label-latest']/div/ul/li/a/span"); // "//*[@id='js-repo-pjax-container']/div[2]/div[1]/div[2]/div[1]/div[1]/ul/li[1]/a/span"
-            HtmlNode updateNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@class='release label-latest']/div[2]/div/p/time"); // "//*[@id='js-repo-pjax-container']/div[2]/div[1]/div[2]/div[1]/div[2]/div[1]/p/time"
+            // get the node that contains all releases (indepandend of label or tags view)
+            // Easy way to get XPATH search: use chrome, inspect element, highlight the needed data, right-click and copy XPATH
+            var timeLineNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"js-repo-pjax-container\"]/div[2]/div[1]/div[2]");
+            var lableNode = timeLineNode.SelectSingleNode("//*[@class=\"release label-latest\"]");
+            var tagsNode = timeLineNode.SelectSingleNode("//*[@class=\"release-timeline-tags\"]");
+
+            if (lableNode == null && tagsNode == null)
+            {
+                Messenger.AddError("Error! Can't parse GitHib version or creation date!");
+                return;
+            }
+
+            // get data from label or tag view.
+            HtmlNode versionNode = null;
+            HtmlNode updateNode = null;
+            if (lableNode != null)
+            {
+                versionNode = lableNode.SelectSingleNode("//*[@class='release label-latest']/div/ul/li/a/span");
+                updateNode = lableNode.SelectSingleNode("//*[@class='release label-latest']/div[2]/div/p/relative-time");
+            }
+            else if (tagsNode != null)
+            {
+                versionNode = tagsNode.SelectSingleNode("//*/li[1]/div/div/h3/a/span");
+                updateNode = tagsNode.SelectSingleNode("//*/li/span/relative-time");
+            }
 
             if (versionNode == null || updateNode == null)
                 Messenger.AddError("Error! Can't parse GitHib version or creation date!");
@@ -262,21 +283,43 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 
             var releases = new List<DownloadInfo>();
 
-            // try find last release (select all link nodes of the download section within the class 'release label-latest')
-            var nodesrel = htmlDoc.DocumentNode.SelectNodes("//*[@class='release label-latest']/div/ul/li/a");
+            // get the node that contains all releases (indepandend of label or tags view)
+            // Easy way to get XPATH search: use chrome, inspect element, highlight the needed data, right-click and copy XPATH
+            var timeLineNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"js-repo-pjax-container\"]/div[2]/div[1]/div[2]");
+            var lableNode = timeLineNode.SelectSingleNode("//*[@class=\"release label-latest\"]");
+            var tagsNode = timeLineNode.SelectSingleNode("//*[@class=\"release-timeline-tags\"]");
 
-            // try find other releases (select all link nodes of the download section within the classes 'release label-latest')
-            if (nodesrel == null)
-                nodesrel = htmlDoc.DocumentNode.SelectNodes("//*[@class='release label-']/div/ul/li/a");
+            if (lableNode == null && tagsNode == null)
+            {
+                Messenger.AddError("Error! Can't parse GitHib for binaries!");
+                return releases;
+            }
 
-            if (nodesrel != null)
+            // get data from label or tag view.
+            HtmlNodeCollection releaseNodes = null;
+            if (lableNode != null)
+            {
+                // try find last release (select all link nodes of the download section within the class 'release label-latest')
+                releaseNodes = lableNode.SelectNodes("//*[@class='release label-latest']/div[2]/ul/li[1]/a");
+
+                // try find other releases (select all link nodes of the download section within the classes 'release label-latest')
+                if (releaseNodes == null)
+                    releaseNodes = lableNode.SelectNodes("//*[@class='release label-']/div[2]/ul/li[1]/a");
+            }
+            else if (tagsNode != null)
+            {
+                // try find last release (select all link nodes of the download section within the class 'release label-latest')
+                releaseNodes = tagsNode.SelectNodes("//*[@class='release-timeline-tags']/li/div/div/ul/li[2]/a");
+            }
+
+            if (releaseNodes != null)
             {
                 // iterate over all link nodes and get only urls with 'releases' in it.
-                foreach (var s in nodesrel)
+                foreach (var s in releaseNodes)
                 {
                     var url = "https://github.com" + s.Attributes["href"].Value;
 
-                    if (!url.Contains("releases")) continue;
+                    if (!url.Contains("releases") && !url.Contains("archive")) continue;
 
                     var dInfo = new DownloadInfo
                     {
