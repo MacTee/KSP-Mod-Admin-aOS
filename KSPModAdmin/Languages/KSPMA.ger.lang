@@ -721,5 +721,7 @@
   <Control Name="cbAVCIgnoreURL" Value="Ignoriere URL">
     <ChildControl Name="cbAVCIgnoreURL_ToolTip" Value="Ignoriere URL^Ignoriere die Mod URL aus der AVC Versiondatei während des hinzufügens einer Mod."/>
   </Control>
-  
+
+  <String Name="MSG_KSP_EXE_NOT_FOUND_0" Value="Keine KSP.exe nicht gefunden! ({0})"/>
+
 </Language>
