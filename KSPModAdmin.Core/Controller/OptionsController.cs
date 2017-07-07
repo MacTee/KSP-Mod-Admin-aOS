@@ -271,6 +271,14 @@ namespace KSPModAdmin.Core.Controller
             set { if (View != null) View.SearchDepth = value; }
         }
 
+        public static bool HasValidDownloadPath
+        {
+            get
+            {
+                return string.IsNullOrEmpty(DownloadPath) && !Directory.Exists(DownloadPath);
+            }
+        }
+
         #endregion
 
         #region Misc
@@ -702,10 +710,10 @@ namespace KSPModAdmin.Core.Controller
         private static void DownloadNewAdminVersion()
         {
             // get valid download path.
-            if (string.IsNullOrEmpty(DownloadPath) || !Directory.Exists(DownloadPath))
+            if (!OptionsController.HasValidDownloadPath)
                 SelectNewDownloadPath();
 
-            if (!string.IsNullOrEmpty(DownloadPath) && Directory.Exists(DownloadPath))
+            if (OptionsController.HasValidDownloadPath)
             {
                 string filename = View.llblAdminDownload.Text;
                 string url = string.Empty;
@@ -965,7 +973,7 @@ namespace KSPModAdmin.Core.Controller
         /// </summary>
         public static void OpenDownloadFolder()
         {
-            if (string.IsNullOrEmpty(DownloadPath))
+            if (!OptionsController.HasValidDownloadPath)
             {
                 MessageBox.Show(View.ParentForm, string.Format(Messages.MSG_SELECT_0_FOLDER_FIRST, DOWNLOAD));
                 return;
@@ -1009,7 +1017,7 @@ namespace KSPModAdmin.Core.Controller
 
             string pathUser = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
             string pathDownload = Path.Combine(pathUser, DOWNLOADS);
-            if (!string.IsNullOrEmpty(DownloadPath))
+            if (OptionsController.HasValidDownloadPath)
                 pathDownload = DownloadPath;
 
             FolderSelectDialog dlg = new FolderSelectDialog();

@@ -1,0 +1,43 @@
+<Language Name="ger" LongName="Deutsch">
+  <String Name="MSG_MODBROWSER_VIEW_TITLE" Value="Mod Browser"/>
+  <String Name="MSG_MODBROWSER_CKAN_VIEW_TITLE" Value="CKAN"/>
+  <String Name="MSG_MODBROWSER_KERBALSTUFF_VIEW_TITLE" Value="KerbalStuff"/>
+
+  <String Name="UcModBrowserCKANView_Item_00" Value="Mod"/>
+  <String Name="UcModBrowserCKANView_Item_01" Value="Version"/>
+  <String Name="UcModBrowserCKANView_Item_02" Value="Autor"/>
+  <String Name="UcModBrowserCKANView_Item_03" Value="Beschreibung"/>
+  
+  <String Name="MSG_MODBROWSER_CKAN_COUNT_TEXT" Value="{0} ({1}) Mods"/>
+  
+  <Control Name="tslModBrowser" Value="Mod Browser:"/>
+  <Control Name="lblModBrowserTabPleaseSelectModBrowser" Value="Bitte wähle einen ModBrowser..."/>
+
+  <Control Name="tsbModBrowserCkanRefresh" Value="tsbModBrowserCkanRefresh">
+    <ChildControl Name="tsbModBrowserCkanRefresh_ToolTip" Value="Aktualisieren^Aktualisiert das ausgewähle Quelle und downloaded das Quellarchive erneut."/>
+  </Control>
+  <Control Name="tslModBrowserCkanRepository" Value="Quelle:"/>
+  <Control Name="lblModBrowserCkanSelectRepository" Value="Bitte wähle eine Quelle..."/>
+  <Control Name="cbModBrowserCkanJustAdd" Value="Nur hinzufügen oder entfernen">
+    <ChildControl Name="cbModBrowserCkanJustAdd_ToolTip" Value="Wenn ausgewählt fügt KMA2 die neuen mod nur in die ModSelection ein (ohne sie zu installieren).^Diese Mods müssen dann über die ModSelection installiert werden^Abgewählte Mods werden normal deinstalliert und aus der ModSelection entfernt."/>
+  </Control>
+  <Control Name="btnModBrowserCkanProcessChanges" Value="Änderungen bearbeiten">
+    <ChildControl Name="btnModBrowserCkanProcessChanges_ToolTip" Value="Änderungen bearbeiten^Startet die Bearbeitung aller Änderungen. Neu hinzugefügte Mods werden der ModSelection hinzugefügt (und installiert),^Abgewählte Mods werden normal deinstalliert und aus der ModSelection entfernt."/>
+  </Control>
+  
+  <String Name="MSG_REGISTER_MODBROWSER_0" Value="Registriere ModBrowser &quot;{0}&quot;."/>
+  <String Name="MSG_REMOVING_MODBROWSER_0" Value="Entferne ModBrowser &quot;{0}&quot;."/>
+  <String Name="MSG_REFRESHING_REPOSITORIES" Value="Aktualisiere Quellen ..."/>
+  <String Name="MSG_ERROR_DURING_REFRESH_REPOSITORIES_0" Value="Fehler während der Quellenaktualisierung! &quot;{0}&quot;."/>
+  <String Name="MSG_REFRESHING_REPOSITORIES_DONE" Value="Aktualisiere Quellen fertig.."/>
+  <String Name="MSG_DOWNLOADPATH_MISSING" Value="Downloadpfad fehlt!"/>
+  <String Name="MSG_REFRESHING_REPOSITORY_ARCHIVE_0" Value="Aktualisiere Quellenarchive &quot;{0}&quot;..."/>
+  <String Name="MSG_USING_CACHED_ARCHIVE" Value="Using cached archive."/>
+  <String Name="MSG_CREATE_CKAN_ARCHIVE" Value="Erzeuge CKAN archive ordner."/>
+  <String Name="MSG_ERROR_DURING_REFRESH_REPOSITORY_ARCHIVE_0" Value="Fehler während Quellenarchiveaktualisierung! &quot;{0}&quot;"/>
+  <String Name="MSG_REFRESH_REPOSITORY_DONE" Value="Aktualisiere Quellenarchive ferig."/>
+  <String Name="MSG_PROCESSING_STARTED" Value="Änderungen bearbeiten gestartet..."/>
+  <String Name="MSG_PROCESSING_DONE" Value="Änderungen bearbeiten fertig."/>
+</Language>
+  
+  
