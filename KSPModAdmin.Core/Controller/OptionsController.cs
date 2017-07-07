@@ -504,6 +504,7 @@ namespace KSPModAdmin.Core.Controller
         /// </summary>
         private OptionsController()
         {
+            OtherAppOptions = new Dictionary<string, string>();
         }
 
         /// <summary>
