@@ -275,7 +275,7 @@ namespace KSPModAdmin.Core.Controller
         {
             get
             {
-                return string.IsNullOrEmpty(DownloadPath) && !Directory.Exists(DownloadPath);
+                return !string.IsNullOrEmpty(DownloadPath) && Directory.Exists(DownloadPath);
             }
         }
 
