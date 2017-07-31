@@ -1499,10 +1499,10 @@ namespace KSPModAdmin.Core.Controller
         public static void CreateZip(List<ModNode> nodes)
         {
             // get path for the zip
-            if (!Directory.Exists(OptionsController.DownloadPath))
+            if (!OptionsController.HasValidDownloadPath)
                 OptionsController.SelectNewDownloadPath();
 
-            if (!Directory.Exists(OptionsController.DownloadPath))
+            if (!OptionsController.HasValidDownloadPath)
             {
                 Messenger.AddInfo(Messages.MSG_ERROR_NO_DOWNLOAD_FOLDER_SELECTED);
                 Messenger.AddInfo(Messages.MSG_ZIP_CREATION_ABORTED);

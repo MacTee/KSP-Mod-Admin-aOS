@@ -105,6 +105,7 @@
             this.cbForceOpenGL.Text = "Force OpenGL";
             this.ttKSPStartup.SetToolTip(this.cbForceOpenGL, "Starts KSP with OpenGL redering mode.");
             this.cbForceOpenGL.UseVisualStyleBackColor = true;
+            this.cbForceOpenGL.CheckedChanged += new System.EventHandler(this.ValueChanged);
             // 
             // cbBorderlessWin
             // 
@@ -119,6 +120,7 @@
             this.cbBorderlessWin.Text = "Borderless window";
             this.ttKSPStartup.SetToolTip(this.cbBorderlessWin, "Starts KSP with a border less window.");
             this.cbBorderlessWin.UseVisualStyleBackColor = true;
+            this.cbBorderlessWin.CheckedChanged += new System.EventHandler(this.ValueChanged);
             // 
             // cbResolutions
             // 
@@ -130,7 +132,7 @@
             this.cbResolutions.Size = new System.Drawing.Size(129, 21);
             this.cbResolutions.TabIndex = 13;
             this.ttKSPStartup.SetToolTip(this.cbResolutions, "Sets the KSP window/screen resolution.");
-            this.cbResolutions.SelectedIndexChanged += new System.EventHandler(this.cbResolutions_SelectedIndexChanged);
+            this.cbResolutions.SelectedIndexChanged += new System.EventHandler(this.ValueChanged);
             // 
             // cbUse64Bit
             // 
@@ -142,6 +144,7 @@
             this.cbUse64Bit.TabIndex = 15;
             this.cbUse64Bit.Text = "64-bit";
             this.cbUse64Bit.UseVisualStyleBackColor = true;
+            this.cbUse64Bit.CheckedChanged += new System.EventHandler(this.ValueChanged);
             // 
             // btnLaunchKSP
             // 

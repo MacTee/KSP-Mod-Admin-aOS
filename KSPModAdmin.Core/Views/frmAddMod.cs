@@ -53,15 +53,14 @@ namespace KSPModAdmin.Core.Views
                 {
                     InvokeIfRequired(() =>
                     {
-                        if (string.IsNullOrEmpty(OptionsController.DownloadPath))
+                        if (!OptionsController.HasValidDownloadPath)
                         {
                             Messenger.AddInfo(Messages.MSG_DOWNLOAD_PATH_MISSING_PLEASE_SELECT_ONE); 
                             OptionsController.SelectNewDownloadPath();
                         }
                     });
 
-                    if (string.IsNullOrEmpty(OptionsController.DownloadPath) &&
-                        !Directory.Exists(OptionsController.DownloadPath))
+                    if (!OptionsController.HasValidDownloadPath)
                         return false;
 
                     Messenger.AddInfo(Messages.MSG_URL_DETECTED_STARTING_DOWNLOAD);

@@ -1,0 +1,44 @@
+<Language Name="eng" LongName="English">
+  <String Name="MSG_MODBROWSER_VIEW_TITLE" Value="Mod Browser"/>
+  <String Name="MSG_MODBROWSER_CKAN_VIEW_TITLE" Value="CKAN"/>
+  <String Name="MSG_MODBROWSER_KERBALSTUFF_VIEW_TITLE" Value="KerbalStuff"/>
+
+  <String Name="UcModBrowserCKANView_Item_00" Value="Mod"/>
+  <String Name="UcModBrowserCKANView_Item_01" Value="Version"/>
+  <String Name="UcModBrowserCKANView_Item_02" Value="Author"/>
+  <String Name="UcModBrowserCKANView_Item_03" Value="Description"/>
+
+  <String Name="MSG_MODBROWSER_CKAN_COUNT_TEXT" Value="{0} ({1}) Mods"/>
+
+  <Control Name="tslModBrowser" Value="Mod Browser:"/>
+  <Control Name="lblModBrowserTabPleaseSelectModBrowser" Value="Please select a ModBrowser..."/>
+
+  <Control Name="tsbModBrowserCkanRefresh" Value="tsbModBrowserCkanRefresh">
+    <ChildControl Name="tsbModBrowserCkanRefresh_ToolTip" Value="Refresh^Refreshes the selected repository and redownloads the repository archive."/>
+  </Control>
+  <Control Name="tslModBrowserCkanRepository" Value="Repository:"/>
+  <Control Name="lblModBrowserCkanSelectRepository" Value="Please select a Repository..."/>
+  <Control Name="cbModBrowserCkanJustAdd" Value="Just add to ModSelection or deinstall.">
+    <ChildControl Name="cbModBrowserCkanJustAdd_ToolTip" Value="When checked KMA² will only add a mod during processing and won't install it.^To insatll these mods you have to switch to the ModSelection tab."/>
+  </Control>
+  <Control Name="btnModBrowserCkanProcessChanges" Value="Process changes">
+    <ChildControl Name="btnModBrowserCkanProcessChanges_ToolTip" Value="Process changes^Starts the processing of the changes made in the selection.^New checked mods will be added to the ModSelection (and installed),^The unchecked ones will be removed and deinstalled."/>
+  </Control>
+
+  <String Name="MSG_REGISTER_MODBROWSER_0" Value="Register ModBrowser &quot;{0}&quot;."/>
+  <String Name="MSG_REMOVING_MODBROWSER_0" Value="Removing ModBrowser &quot;{0}&quot;."/>
+  <String Name="MSG_REFRESHING_REPOSITORIES" Value="Refreshing repositories ..."/>
+  <String Name="MSG_ERROR_DURING_REFRESH_REPOSITORIES_0" Value="Error during refreshing repositories! &quot;{0}&quot;."/>
+  <String Name="MSG_REFRESHING_REPOSITORIES_DONE" Value="Refreshing repositories done."/>
+  <String Name="MSG_DOWNLOADPATH_MISSING" Value="Download path missing."/>
+  <String Name="MSG_REFRESHING_REPOSITORY_ARCHIVE_0" Value="Refreshing repository archive &quot;{0}&quot;..."/>
+  <String Name="MSG_USING_CACHED_ARCHIVE" Value="Using cached archive."/>
+  <String Name="MSG_CREATE_CKAN_ARCHIVE" Value="Create CKAN archives folder."/>
+  <String Name="MSG_ERROR_DURING_REFRESH_REPOSITORY_ARCHIVE_0" Value="Error during refreshing repository archive! &quot;{0}&quot;"/>
+  <String Name="MSG_REFRESH_REPOSITORY_DONE" Value="Refreshing repository archive done."/>
+  <String Name="MSG_PROCESSING_STARTED" Value="Processing changes started..."/>
+  <String Name="MSG_PROCESSING_DONE" Value="Processing changes done."/>
+
+</Language>
+  
+  

@@ -654,7 +654,10 @@ namespace KSPModAdmin.Core.Controller
         /// </summary>
         protected static void AsyncTaskDone(object sender)
         {
-            View.cbKSPPath.Enabled = true;
+            View.InvokeIfRequired(() =>
+            {
+                View.cbKSPPath.Enabled = true;
+            });
         }
 
         /// <summary>
@@ -663,7 +666,10 @@ namespace KSPModAdmin.Core.Controller
         /// </summary>
         protected static void AsyncTaskStarted(object sender)
         {
-            View.cbKSPPath.Enabled = false;
+            View.InvokeIfRequired(() =>
+            {
+                View.cbKSPPath.Enabled = false;
+            });
         }
 
         /// <summary>

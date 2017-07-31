@@ -174,11 +174,11 @@ namespace KSPModAdmin.Core.Views
         {
             cbBorderlessWin.Enabled = rbWindowed.Checked;
 
-            if (rbFullscreen.Checked)
+            if (rbWindowed.Checked)
                 WriteKSPSettings();
         }
 
-        private void cbResolutions_SelectedIndexChanged(object sender, EventArgs e)
+        private void ValueChanged(object sender, EventArgs e)
         {
             WriteKSPSettings();
         }
