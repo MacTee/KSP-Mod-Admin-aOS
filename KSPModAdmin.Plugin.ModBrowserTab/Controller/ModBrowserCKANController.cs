@@ -218,6 +218,8 @@ namespace KSPModAdmin.Plugin.ModBrowserTab.Controller
 
                             model.AddArchive(newArchive);
                             View.CountLabelText = string.Format(Messages.MSG_MODBROWSER_CKAN_COUNT_TEXT, newArchive.Mods.Count, model.Nodes.Count);
+
+                            FindInstalledMods();
                         }
                         else
                         {
@@ -230,6 +232,14 @@ namespace KSPModAdmin.Plugin.ModBrowserTab.Controller
                     if (finishedCallback != null)
                         finishedCallback();
                 });
+        }
+
+        private static void FindInstalledMods()
+        {
+            foreach (var installedMod in ModSelectionController.Mods.Where((x) => { return x.HasInstalledChilds; }))
+            {
+               // installedMod.
+            }
         }
 
         private static void OnDownloadProgressChanged(object sender, DownloadProgressChangedEventArgs downloadProgressChangedEventArgs)
