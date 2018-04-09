@@ -628,7 +628,17 @@ namespace KSPModAdmin.Core.Model
         /// <summary>
         /// The icon that should be displayed in the TreeView.
         /// </summary>
-        public Image Icon { get { return mIcon; } set { mIcon = value; } }
+        public Image Icon
+        {
+            get
+            {
+                return mIcon;
+            }
+            set
+            {
+                mIcon = value;
+            }
+        }
         private Image mIcon = Resources.folder;
 
 
