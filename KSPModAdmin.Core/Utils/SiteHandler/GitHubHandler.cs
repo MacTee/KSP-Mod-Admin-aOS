@@ -161,6 +161,11 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
             return File.Exists(modInfo.LocalPath);
         }
 
+        private static string timeLineNodeXPath = "//*[@id=\"js-repo-pjax-container\"]/div[2]/div[1]/div[2]";
+        private static string lableNodeXPath = "//*[@class=\"release clearfix label-latest\"]";
+        private static string tagsNodeAXPath = "//*[@class=\"releases-tag-list\"]";
+        private static string tagsNodeBXPath = "//*[@class=\"release-timeline-tags list-style-none\"]";
+
         /// <summary>
         /// Takes a site url and parses the site for mod info
         /// </summary>
@@ -172,9 +177,10 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 
             // get the node that contains all releases (indepandend of label or tags view)
             // Easy way to get XPATH search: use chrome, inspect element, highlight the needed data, right-click and copy XPATH
-            var timeLineNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"js-repo-pjax-container\"]/div[2]/div[1]/div[2]");
-            var lableNode = timeLineNode.SelectSingleNode("//*[@class=\"release label-latest\"]");
-            var tagsNode = timeLineNode.SelectSingleNode("//*[@class=\"release-timeline-tags\"]");
+            var timeLineNode = htmlDoc.DocumentNode.SelectSingleNode(timeLineNodeXPath);
+            var lableNode = timeLineNode.SelectSingleNode(lableNodeXPath);
+            var tagsNode = timeLineNode.SelectSingleNode(tagsNodeAXPath);
+            var tagsNode2 = timeLineNode.SelectSingleNode(tagsNodeBXPath);
 
             if (lableNode == null && tagsNode == null)
             {
@@ -191,6 +197,11 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
                 updateNode = lableNode.SelectSingleNode("//*[@class='release label-latest']/div[2]/div/p/relative-time");
             }
             else if (tagsNode != null)
+            {
+                versionNode = tagsNode.SelectSingleNode("//*/tr[2]/td[2]/div/h3/a/span");
+                updateNode = tagsNode.SelectSingleNode("//*/tr[2]/td[1]/a/relative-time");
+            }
+            else if (tagsNode2 != null)
             {
                 versionNode = tagsNode.SelectSingleNode("//*/li[1]/div/div/h3/a/span");
                 updateNode = tagsNode.SelectSingleNode("//*/li/span/relative-time");
@@ -285,11 +296,12 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 
             // get the node that contains all releases (indepandend of label or tags view)
             // Easy way to get XPATH search: use chrome, inspect element, highlight the needed data, right-click and copy XPATH
-            var timeLineNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"js-repo-pjax-container\"]/div[2]/div[1]/div[2]");
-            var lableNode = timeLineNode.SelectSingleNode("//*[@class=\"release label-latest\"]");
-            var tagsNode = timeLineNode.SelectSingleNode("//*[@class=\"release-timeline-tags\"]");
+            var timeLineNode = htmlDoc.DocumentNode.SelectSingleNode(timeLineNodeXPath);
+            var lableNode = timeLineNode.SelectSingleNode(lableNodeXPath);
+            var tagsNode = timeLineNode.SelectSingleNode(tagsNodeAXPath);
+            var tagsNode2 = timeLineNode.SelectSingleNode(tagsNodeBXPath);
 
-            if (lableNode == null && tagsNode == null)
+            if (lableNode == null && tagsNode == null && tagsNode2 == null)
             {
                 Messenger.AddError("Error! Can't parse GitHib for binaries!");
                 return releases;
@@ -300,16 +312,21 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
             if (lableNode != null)
             {
                 // try find last release (select all link nodes of the download section within the class 'release label-latest')
-                releaseNodes = lableNode.SelectNodes("//*[@class='release label-latest']/div[2]/ul/li[1]/a");
+                releaseNodes = lableNode.SelectNodes("//*[@class='release clearfix label-latest']/div[2]/div[2]/ul/li[1]/a");
 
                 // try find other releases (select all link nodes of the download section within the classes 'release label-latest')
                 if (releaseNodes == null)
-                    releaseNodes = lableNode.SelectNodes("//*[@class='release label-']/div[2]/ul/li[1]/a");
+                    releaseNodes = lableNode.SelectNodes("//*[@class='release clearfix label-']/div[2]/div[2]/ul/li[1]/a");
             }
             else if (tagsNode != null)
             {
+                // try find last release (select all link nodes of the download section within the class 'release-timeline-tags')
+                releaseNodes = tagsNode.SelectNodes("//*/tr/td[2]/div/ul/li[2]/a");
+            }
+            else if (tagsNode2 != null)
+            {
                 // try find last release (select all link nodes of the download section within the class 'release label-latest')
-                releaseNodes = tagsNode.SelectNodes("//*[@class='release-timeline-tags']/li/div/div/ul/li[2]/a");
+                releaseNodes = tagsNode2.SelectNodes("//*[@class='d-block clearfix']/div/div/ul/li[2]/a");
             }
 
             if (releaseNodes != null)
