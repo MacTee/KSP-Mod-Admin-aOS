@@ -182,7 +182,7 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
             var tagsNode = timeLineNode.SelectSingleNode(tagsNodeAXPath);
             var tagsNode2 = timeLineNode.SelectSingleNode(tagsNodeBXPath);
 
-            if (lableNode == null && tagsNode == null)
+            if (lableNode == null && tagsNode == null && tagsNode2 == null)
             {
                 Messenger.AddError("Error! Can't parse GitHib version or creation date!");
                 return;
