@@ -16,11 +16,13 @@ namespace KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.NodeControls
 
         public override Size MeasureSize(TreeNodeAdv node, DrawContext context)
         {
+            Size size = Size.Empty;
+
             Image image = GetIcon(node);
             if (image != null)
-                return image.Size;
-            else
-                return Size.Empty;
+                size = image.Size;
+
+            return size;
         }
 
 
@@ -30,7 +32,7 @@ namespace KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.NodeControls
             if (image != null)
             {
                 Rectangle r = GetBounds(node, context);
-                if ( image.Width > 0 && image.Height > 0 )
+                if (image.Width > 0 && image.Height > 0 )
                 {
                     switch (_scaleMode)
                     {

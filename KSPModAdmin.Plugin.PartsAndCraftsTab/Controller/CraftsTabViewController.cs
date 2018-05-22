@@ -255,7 +255,7 @@ namespace KSPModAdmin.Plugin.PartsAndCraftsTab.Controller
                 {
                     if (tempLine.ToLower().StartsWith("ship =") || tempLine.ToLower().StartsWith("ship="))
                     {
-                        string name = tempLine.Split('=')[1];
+                        string name = tempLine.Split('=').Last();
                         craftNode.Text = name.Trim();
                         craftNode.Name = name.Trim();
                     }
