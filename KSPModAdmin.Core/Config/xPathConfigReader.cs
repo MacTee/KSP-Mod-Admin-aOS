@@ -19,6 +19,9 @@ namespace KSPModAdmin.Core.Config
 
             foreach (var row in rows)
             {
+                if (string.IsNullOrEmpty(row.Trim()))
+                    continue;
+
                 var index = row.IndexOf('=');
                 var key = row.Substring(0, index).Trim();
                 var value = row.Substring(index+1).Trim();

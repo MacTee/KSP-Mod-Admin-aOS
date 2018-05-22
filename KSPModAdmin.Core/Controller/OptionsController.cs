@@ -600,7 +600,7 @@ namespace KSPModAdmin.Core.Controller
 
         private static void UpdateSiteHandler()
         {
-            var url = @"https://raw.githubusercontent.com/MacTee/KSP-Mod-Admin-aOS/master/KSPModAdmin.Core/Utils/SiteHandler/xPathConfigs/CurseForgeXPaths.cfg";
+            var url = @"https://raw.githubusercontent.com/MacTee/KSP-Mod-Admin-aOS/master/KSPModAdmin.Core/Utils/SiteHandler/xPathConfigs/XPaths.cfg";
             var content = Www.Load(url);
             var settings = xPathConfigReader.Read(content);
             foreach (var setting in settings)

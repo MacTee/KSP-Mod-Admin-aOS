@@ -1,4 +1,6 @@
 ﻿using System.Net;
+using HtmlAgilityPack;
+using KSPModAdmin.Core.Controller;
 using KSPModAdmin.Core.Model;
 
 namespace KSPModAdmin.Core.Utils
@@ -9,8 +11,20 @@ namespace KSPModAdmin.Core.Utils
     public class CurseHandler : ISiteHandler
     {
         private const string NAME = "Curse";
-        private const string URL = "http://mods.curse.com/ksp-mods/kerbal/";
-        private const string URL1 = "https://mods.curse.com/ksp-mods/kerbal/";
+        private const string URL = "http://www.curseforge.com/kerbal/ksp-mods/";
+        private const string URL1 = "https://www.curseforge.com/kerbal/ksp-mods/";
+
+        private const string XPATHCURSEFORGEURL = "XPathCurseForgeUrl";
+
+        private string XPathCurseForgeUrl
+        {
+            get
+            {
+                if (!OptionsController.OtherAppOptions.ContainsKey(XPATHCURSEFORGEURL))
+                    OptionsController.OtherAppOptions.Add(XPATHCURSEFORGEURL, "//*[@id='content']/section/div/aside/div[2]/div[3]/p/a");
+                return OptionsController.OtherAppOptions[XPATHCURSEFORGEURL];
+            }
+        }
 
 
         /// <summary>
@@ -105,43 +119,12 @@ namespace KSPModAdmin.Core.Utils
         /// <returns>The parsed download URL from site.</returns>
         private string GetDownloadURL(string url)
         {
-            string filename = string.Empty;
-            return GetDownloadURL(url, ref filename);
-        }
-
-        /// <summary>
-        /// Parse the download URL from site.
-        /// </summary>
-        /// <param name="url">The URL to parse the download URL from.</param>
-        /// <param name="filename">The Filename of the mod archive.</param>
-        /// <returns>The parsed download URL from site.</returns>
-        private string GetDownloadURL(string url, ref string filename)
-        {
-            string siteContent = Www.Load(url);
-
-            int index1 = siteContent.IndexOf("<li class=\"newest-file\">Newest File: ") + 37;
-            if (index1 < 0)
-                return string.Empty;
-            siteContent = siteContent.Substring(index1);
-            index1 = siteContent.IndexOf("</li>");
-            if (index1 < 0)
-                return string.Empty;
-            filename = siteContent.Substring(0, index1);
-
-            index1 = siteContent.IndexOf("<em class=\"cta-button download-large\">");
-            if (index1 < 0)
-                return string.Empty;
-            index1 = siteContent.IndexOf("href=\"", index1) + 6;
-            siteContent = siteContent.Substring(index1);
-            index1 = siteContent.IndexOf("\"");
-            if (index1 < 0)
-                return string.Empty;
-
-            // /ksp-mods/220221-mechjeb/download
-            // http://kerbal.curseforge.com/ksp-mods/220221-mechjeb/files/latest
-            string downloadURL = "http://kerbal.curseforge.com" + siteContent.Substring(0, index1).Replace("/kerbal/", "/").Replace("/download", "/") + "files/latest";
-
-            return (downloadURL.StartsWith("http:/") || downloadURL.StartsWith("https:/")) ? downloadURL : string.Empty;
+            HtmlWeb web = new HtmlWeb();
+            HtmlDocument doc = web.Load(url);
+            HtmlNode curseUrlNode = doc.DocumentNode.SelectSingleNode(XPathCurseForgeUrl);
+            url = curseUrlNode.Attributes["href"].Value;
+            url += url.EndsWith("/") ? "files/latest" : "/files/latest";
+            return url;
         }
     }
 }

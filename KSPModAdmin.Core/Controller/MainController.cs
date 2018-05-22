@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
@@ -126,6 +127,8 @@ namespace KSPModAdmin.Core.Controller
         {
             try
             {
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
                 SetupLogFile();
 
                 LoadLanguages();

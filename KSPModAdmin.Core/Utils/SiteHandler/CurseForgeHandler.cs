@@ -1,9 +1,11 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using KSPModAdmin.Core.Controller;
 using KSPModAdmin.Core.Model;
 using HtmlAgilityPack;
+using KSPModAdmin.Core.Utils.Logging;
 
 namespace KSPModAdmin.Core.Utils
 {
@@ -124,7 +126,7 @@ namespace KSPModAdmin.Core.Utils
         /// <returns>True if the passed URL is a valid CurseForge URL, otherwise false.</returns>
         public bool IsValidURL(string url)
         {
-            return (!string.IsNullOrEmpty(url) && HOST.Equals(new Uri(url).Authority));
+            return !string.IsNullOrEmpty(url) && HOST.Equals(new Uri(url).Authority);
         }
 
         /// <summary>
@@ -196,32 +198,10 @@ namespace KSPModAdmin.Core.Utils
             if (modInfo == null)
                 return false;
 
-            HtmlWeb web = new HtmlWeb();
-            HtmlDocument htmlDoc = web.Load(modInfo.ModURL);
-            htmlDoc.OptionFixNestedTags = true;
-
-            // get filename from hover text
-            HtmlNode fileNode = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='content']/section[2]/div[4]/div[2]/ul/li[1]/div[2]/p/a");
-            HtmlNode fileNode2 = htmlDoc.DocumentNode.SelectSingleNode("//*[@id='content']/section[2]/div[4]/div[2]/ul/li/div[2]/p/a/span");
-
             string downloadURL = GetDownloadURL(modInfo.ModURL);
-            if (fileNode == null || (fileNode.InnerHtml.Contains("...") && fileNode2 == null))
-            {
-                modInfo.LocalPath = Www.DownloadFile2(downloadURL, OptionsController.DownloadPath, downloadProgressCallback);
-                return !string.IsNullOrEmpty(modInfo.LocalPath) && File.Exists(modInfo.LocalPath);
-            }
+            modInfo.LocalPath = Www.DownloadFile2(downloadURL, OptionsController.DownloadPath, downloadProgressCallback);
 
-            string filename = string.Empty;
-            if (fileNode.InnerHtml.Contains("..."))
-                filename = fileNode2.Attributes["title"].Value; // Long filename was truncated
-            else
-                filename = fileNode.InnerHtml;
-
-            modInfo.LocalPath = Path.Combine(OptionsController.DownloadPath, filename);
-
-            Www.DownloadFile(downloadURL, modInfo.LocalPath, downloadProgressCallback);
-
-            return File.Exists(modInfo.LocalPath);
+            return !string.IsNullOrEmpty(modInfo.LocalPath) && File.Exists(modInfo.LocalPath);
         }
 
         /// <summary>
@@ -250,49 +230,50 @@ namespace KSPModAdmin.Core.Utils
         /// <returns>Returns true if successfully extracts data</returns>
         private bool ParseSite(string url, ref ModInfo modInfo)
         {
-            // get curse.com link for this mod.
-            HtmlWeb web = new HtmlWeb();
-            HtmlDocument htmlDoc = web.Load(url);
-            HtmlNode curseUrlNode = htmlDoc.DocumentNode.SelectSingleNode(xPathCurseUrl);
-            string cursePage = curseUrlNode.Attributes["href"].Value;
-
-            // changed to use the curse page as it provides the same info but also game version
-            // there's no good way to get a mod version from curse. Could use file name? Is using update date (best method?)
-            htmlDoc = web.Load(cursePage);
-            htmlDoc.OptionFixNestedTags = true;
-
-            // To scrape the fields, now using HtmlAgilityPack and XPATH search strings.
-            // Easy way to get XPATH search: use chrome, inspect element, highlight the needed data and right-click and copy XPATH
-            HtmlNode nameNode = htmlDoc.DocumentNode.SelectSingleNode(xPathModName);
-            HtmlNode idNode = htmlDoc.DocumentNode.SelectSingleNode(xPathModId);
-            HtmlNode createNode = htmlDoc.DocumentNode.SelectSingleNode(xPathModCreateDate);
-            HtmlNode updateNode = htmlDoc.DocumentNode.SelectSingleNode(xPathModUpdateDate);
-            HtmlNode downloadNode = htmlDoc.DocumentNode.SelectSingleNode(xPathModDownloadCount);
-            HtmlNode authorNode = htmlDoc.DocumentNode.SelectSingleNode(xPathModAuthor);
-            HtmlNode gameVersionNode = htmlDoc.DocumentNode.SelectSingleNode(xPathGameVersion);
-
-            var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc); // Curse stores the date as both text and as Epoch. Go for the most precise value (Epoch).
-
-            if (nameNode == null && idNode == null && createNode == null && updateNode == null)
+            try
             {
-                Messenger.AddError("Parsing of mod page failed!");
-                return false;
+                // get curse.com link for this mod.
+                HtmlWeb web = new HtmlWeb();
+                HtmlDocument doc = web.Load(url);
+                HtmlNode curseUrlNode = doc.DocumentNode.SelectSingleNode(xPathCurseUrl);
+                var cursePage = curseUrlNode.Attributes["href"].Value;
+
+                // changed to use the curse page as it provides the same info but also game version
+                // there's no good way to get a mod version from curse. Could use file name? Is using update date (best method?)
+                HtmlDocument htmlDoc = web.Load(cursePage);
+                htmlDoc.OptionFixNestedTags = true;
+
+                // To scrape the fields, now using HtmlAgilityPack and XPATH search strings.
+                // Easy way to get XPATH search: use chrome, inspect element, highlight the needed data and right-click and copy XPATH
+                HtmlNode nameNode = htmlDoc.DocumentNode.SelectSingleNode(xPathModName);
+                HtmlNode idNode = htmlDoc.DocumentNode.SelectSingleNode(xPathModId);
+                HtmlNode createNode = htmlDoc.DocumentNode.SelectSingleNode(xPathModCreateDate);
+                HtmlNode updateNode = htmlDoc.DocumentNode.SelectSingleNode(xPathModUpdateDate);
+                HtmlNode downloadNode = htmlDoc.DocumentNode.SelectSingleNode(xPathModDownloadCount);
+                HtmlNode authorNode = htmlDoc.DocumentNode.SelectSingleNode(xPathModAuthor);
+                HtmlNode gameVersionNode = htmlDoc.DocumentNode.SelectSingleNode(xPathGameVersion);
+
+                var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc); // Curse stores the date as both text and as Epoch. Go for the most precise value (Epoch).
+
+                modInfo.Name = nameNode.InnerHtml;
+                modInfo.ProductID = idNode.Attributes["data-id"].Value.Trim('/');
+                modInfo.CreationDateAsDateTime = epoch.AddSeconds(Convert.ToDouble(createNode.Attributes["data-epoch"].Value));
+                modInfo.ChangeDateAsDateTime = epoch.AddSeconds(Convert.ToDouble(updateNode.Attributes["data-epoch"].Value));
+                if (downloadNode != null)
+                    modInfo.Downloads = downloadNode.InnerHtml.Split(" ")[0];
+                if (authorNode != null)
+                    modInfo.Author = authorNode.InnerHtml;
+                if (gameVersionNode != null)
+                    modInfo.KSPVersion = gameVersionNode.InnerHtml.Split(" ").Last().Trim();
+
+                return true;
             }
-            
-            modInfo.Name = nameNode.InnerHtml;
-            var tempId = idNode.Attributes["data-id"].Value.Trim('/');
-            modInfo.ProductID = tempId.Substring(tempId.LastIndexOf("/") + 1);
-            modInfo.CreationDateAsDateTime = epoch.AddSeconds(Convert.ToDouble(createNode.Attributes["data-epoch"].Value));
-            modInfo.ChangeDateAsDateTime = epoch.AddSeconds(Convert.ToDouble(updateNode.Attributes["data-epoch"].Value));
-            if (downloadNode != null)
-                modInfo.Downloads = downloadNode.InnerHtml.Split(" ")[0];
-            if (authorNode != null)
-                modInfo.Author = authorNode.InnerHtml;
-            if (gameVersionNode != null)
-                modInfo.KSPVersion = gameVersionNode.InnerHtml.Split(" ")[1];
-            return true;
-            
-            // more infos could be parsed here (like: short description, Tab content (overview, installation, ...), comments, ...)
+            catch (Exception ex)
+            {
+                Messenger.AddError("Parsing of mod page failed!", ex);
+            }
+
+            return false;
         }
 
         /// <summary>
