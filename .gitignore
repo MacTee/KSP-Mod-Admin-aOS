@@ -72,5 +72,6 @@ packages/StyleCop.4.7.49.0
 packages/StyleCop.MSBuild.4.7.49.1
 /.project
 /KSPModAdmin_mono.userprefs
+/.vs
 
 packages/
