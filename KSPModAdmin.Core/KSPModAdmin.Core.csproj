@@ -716,7 +716,7 @@
     <None Include="Resources\page.png" />
     <None Include="Resources\page_add.png" />
     <None Include="Utils\Controls\TreeViewAdv\NodeControls\ClassDiagram.cd" />
-    <None Include="Utils\SiteHandler\xPathConfigs\CurseForgeXPaths.cfg" />
+    <None Include="Utils\SiteHandler\xPathConfigs\XPaths.cfg" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
