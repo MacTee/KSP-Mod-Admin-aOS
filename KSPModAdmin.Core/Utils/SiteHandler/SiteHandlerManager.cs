@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace KSPModAdmin.Core.Utils
+namespace KSPModAdmin.Core.Utils.SiteHandler
 {
     /// <summary>
     /// Manages all available SiteHandlers.
