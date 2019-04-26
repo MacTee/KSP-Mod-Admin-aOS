@@ -12,7 +12,7 @@ namespace KSPModAdmin.UnitTests
         [ClassInitialize]
         public static void InitTests(TestContext testContext)
         {
-            var url = "http://spacedock.info/mod/69/kRPC";
+            var url = "http://spacedock.info/api/mod/69";
             content = Www.Load(url);
         }
 

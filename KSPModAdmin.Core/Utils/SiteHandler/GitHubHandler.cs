@@ -159,6 +159,8 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
             if (selected != null)
             {
                 string downloadUrl = selected.DownloadURL;
+                modInfo.Version = selected.Version;
+                modInfo.ChangeDate = selected.ChangeDate.ToString();
                 modInfo.LocalPath = Path.Combine(OptionsController.DownloadPath, selected.Filename);
                 Www.DownloadFile(downloadUrl, modInfo.LocalPath, downloadProgressCallback);
             }
@@ -207,7 +209,7 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
             }
 
             // Remove empty parts from the list
-            parts = parts.Where(s => !string.IsNullOrWhiteSpace(s)).Distinct().ToList();
+            parts = parts.Where(s => !string.IsNullOrWhiteSpace(s)).ToList();
 
             // TODO Error message should go wherever strings are going.
             if (parts.Count < 4)
@@ -227,17 +229,16 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
                 var htmlDoc = new HtmlWeb().Load(GetPathToReleases(modInfo.ModURL));
                 htmlDoc.OptionFixNestedTags = true;
 
-                var version = GitHubParser.GetVersion(htmlDoc);
-                var changeDate = GitHubParser.GetChangeDate(htmlDoc);
+                var downloadInfos = GitHubParser.GetDownloadInfos(htmlDoc);
 
-                if (string.IsNullOrEmpty(version) || changeDate == DateTime.MinValue)
+                if (downloadInfos.Count == 0)
                 {
-                    Messenger.AddError("Error! Can't parse Version or ChangeDate from gitHub repository!");
+                    Messenger.AddError("Error! Can't parse gitHub repository!");
                     return;
                 }
 
-                modInfo.Version = version;
-                modInfo.ChangeDateAsDateTime = changeDate;
+                modInfo.Version = downloadInfos.First().Version;
+                modInfo.ChangeDateAsDateTime = downloadInfos.First().ChangeDate;
             }
             catch (Exception ex)
             {
@@ -285,278 +286,74 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 
     public class GitHubParser
     {
-        #region XPath
+        //public static List<DownloadInfo> GetDownloadInfos(HtmlAgilityPack.HtmlDocument htmlDoc)
+        //{
+        //    var releases = new List<DownloadInfo>();
 
-        private static readonly string XPATHGITHUBTIMELINE = "xPathGitHubTimeLine";
-        private static readonly string XPATHGITHUBLABEL = "xPathGitHubLabel";
-        private static readonly string XPATHGITHUBTAGS = "xPathGitHubTags";
-        private static readonly string XPATHGITHUBTAGS2 = "xPathGitHubTags2";
-        private static readonly string XPATHGITHUBLABELVERSION = "xPathGitHubLabelVersion";
-        private static readonly string XPATHGITHUBLABELDATE = "xPathGitHubLabelDate";
-        private static readonly string XPATHGITHUBTAGSVERSION = "xPathGitHubTagsVersion";
-        private static readonly string XPATHGITHUBTAGSDATE = "xPathGitHubTagsDate";
-        private static readonly string XPATHGITHUBTAGS2VERSION = "xPathGitHubTags2Version";
-        private static readonly string XPATHGITHUBTAGS2DATE = "xPathGitHubTags2Date";
-        private static readonly string XPATHGITHUBLABELRELEASESLATEST = "xPathGithubLabelReleasesLatest";
-        private static readonly string XPATHGITHUBLABELRELEASES = "xPathGithubLabelReleases";
-        private static readonly string XPATHGITHUBTAGSRELEASES = "xPathGithubTagsReleases";
-        private static readonly string XPATHGITHUBTAGS2RELEASES = "xPathGithubTags2Releases";
+        //    var allLinks = htmlDoc.DocumentNode.SelectNodes("//a[@href]");
 
-        private static string xPathGitHubTimeLine
-        {
-            get
-            {
-                if (!OptionsController.OtherAppOptions.ContainsKey(XPATHGITHUBTIMELINE))
-                    OptionsController.OtherAppOptions.Add(XPATHGITHUBTIMELINE, "//*[@id='js-repo-pjax-container']/div[2]/div[1]/div[2]");
-                return OptionsController.OtherAppOptions[XPATHGITHUBTIMELINE];
-            }
-        }
-        private static string xPathGitHubLabel
-        {
-            get
-            {
-                if (!OptionsController.OtherAppOptions.ContainsKey(XPATHGITHUBLABEL))
-                    OptionsController.OtherAppOptions.Add(XPATHGITHUBLABEL, "//*[@class='release clearfix label-latest']");
-                return OptionsController.OtherAppOptions[XPATHGITHUBLABEL];
-            }
-        }
-        private static string xPathGitHubTags
-        {
-            get
-            {
-                if (!OptionsController.OtherAppOptions.ContainsKey(XPATHGITHUBTAGS))
-                    OptionsController.OtherAppOptions.Add(XPATHGITHUBTAGS, "//*[@class='releases-tag-list']");
-                return OptionsController.OtherAppOptions[XPATHGITHUBTAGS];
-            }
-        }
-        private static string xPathGitHubTags2
-        {
-            get
-            {
-                if (!OptionsController.OtherAppOptions.ContainsKey(XPATHGITHUBTAGS2))
-                    OptionsController.OtherAppOptions.Add(XPATHGITHUBTAGS2, "//*[@class='release-timeline-tags list-style-none']");
-                return OptionsController.OtherAppOptions[XPATHGITHUBTAGS2];
-            }
-        }
-        private static string xPathGitHubLabelVersion
-        {
-            get
-            {
-                if (!OptionsController.OtherAppOptions.ContainsKey(XPATHGITHUBLABELVERSION))
-                    OptionsController.OtherAppOptions.Add(XPATHGITHUBLABELVERSION, "//*[@class='release label-latest']/div/ul/li/a/span");
-                return OptionsController.OtherAppOptions[XPATHGITHUBLABELVERSION];
-            }
-        }
-        private static string xPathGitHubLabelDate
-        {
-            get
-            {
-                if (!OptionsController.OtherAppOptions.ContainsKey(XPATHGITHUBLABELDATE))
-                    OptionsController.OtherAppOptions.Add(XPATHGITHUBLABELDATE, "//*[@class='release label-latest']/div[2]/div/p/relative-time");
-                return OptionsController.OtherAppOptions[XPATHGITHUBLABELDATE];
-            }
-        }
-        private static string xPathGitHubTagsVersion
-        {
-            get
-            {
-                if (!OptionsController.OtherAppOptions.ContainsKey(XPATHGITHUBTAGSVERSION))
-                    OptionsController.OtherAppOptions.Add(XPATHGITHUBTAGSVERSION, "//*/tr[2]/td[2]/div/h3/a/span");
-                return OptionsController.OtherAppOptions[XPATHGITHUBTAGSVERSION];
-            }
-        }
-        private static string xPathGitHubTagsDate
-        {
-            get
-            {
-                if (!OptionsController.OtherAppOptions.ContainsKey(XPATHGITHUBTAGSDATE))
-                    OptionsController.OtherAppOptions.Add(XPATHGITHUBTAGSDATE, "//*/tr[2]/td[1]/a/relative-time");
-                return OptionsController.OtherAppOptions[XPATHGITHUBTAGSDATE];
-            }
-        }
-        private static string xPathGitHubTags2Version
-        {
-            get
-            {
-                if (!OptionsController.OtherAppOptions.ContainsKey(XPATHGITHUBTAGS2VERSION))
-                    OptionsController.OtherAppOptions.Add(XPATHGITHUBTAGS2VERSION, "//*/li[1]/div/div/h3/a/span");
-                return OptionsController.OtherAppOptions[XPATHGITHUBTAGS2VERSION];
-            }
-        }
-        private static string xPathGitHubTags2Date
-        {
-            get
-            {
-                if (!OptionsController.OtherAppOptions.ContainsKey(XPATHGITHUBTAGS2DATE))
-                    OptionsController.OtherAppOptions.Add(XPATHGITHUBTAGS2DATE, "//*/li/span/relative-time");
-                return OptionsController.OtherAppOptions[XPATHGITHUBTAGS2DATE];
-            }
-        }
-        private static string xPathGithubLabelReleasesLatest
-        {
-            get
-            {
-                if (!OptionsController.OtherAppOptions.ContainsKey(XPATHGITHUBLABELRELEASESLATEST))
-                    OptionsController.OtherAppOptions.Add(XPATHGITHUBLABELRELEASESLATEST, "//*[@class='release clearfix label-latest']/div[2]/div[2]/ul/li[1]/a");
-                return OptionsController.OtherAppOptions[XPATHGITHUBLABELRELEASESLATEST];
-            }
-        }
-        private static string xPathGithubLabelReleases
-        {
-            get
-            {
-                if (!OptionsController.OtherAppOptions.ContainsKey(XPATHGITHUBLABELRELEASES))
-                    OptionsController.OtherAppOptions.Add(XPATHGITHUBLABELRELEASES, "//*[@class='release clearfix label-']/div[2]/div[2]/ul/li[1]/a");
-                return OptionsController.OtherAppOptions[XPATHGITHUBLABELRELEASES];
-            }
-        }
-        private static string xPathGithubTagsReleases
-        {
-            get
-            {
-                if (!OptionsController.OtherAppOptions.ContainsKey(XPATHGITHUBTAGSRELEASES))
-                    OptionsController.OtherAppOptions.Add(XPATHGITHUBTAGSRELEASES, "//*/tr/td[2]/div/ul/li[2]/a");
-                return OptionsController.OtherAppOptions[XPATHGITHUBTAGSRELEASES];
-            }
-        }
-        private static string xPathGithubTags2Releases
-        {
-            get
-            {
-                if (!OptionsController.OtherAppOptions.ContainsKey(XPATHGITHUBTAGS2RELEASES))
-                    OptionsController.OtherAppOptions.Add(XPATHGITHUBTAGS2RELEASES, "//*[@class='d-block clearfix']/div/div/ul/li[2]/a");
-                return OptionsController.OtherAppOptions[XPATHGITHUBTAGS2RELEASES];
-            }
-        }
+        //    // iterate over all link nodes and get only urls with 'releases' in it.
+        //    foreach (var s in allLinks)
+        //    {
+        //        var url = "https://github.com" + s.Attributes["href"].Value;
 
-        #endregion
+        //        if (!IsReleaseUrl(url)) continue;
+
+        //        var dInfo = new DownloadInfo
+        //        {
+        //            DownloadURL = url,
+        //            Filename = GitHubHandler.GetUrlParts(url).Last(),
+        //            Name = Path.GetFileNameWithoutExtension(GitHubHandler.GetUrlParts(url).Last())
+        //        };
+
+        //        releases.Add(dInfo);
+        //    }
+
+        //    return releases;
+        //}
 
         public static List<DownloadInfo> GetDownloadInfos(HtmlAgilityPack.HtmlDocument htmlDoc)
         {
             var releases = new List<DownloadInfo>();
 
-            // get the node that contains all releases (indepandend of label or tags view)
-            // Easy way to get XPATH search: use chrome, inspect element, highlight the needed data, right-click and copy XPATH
-            var timeLineNode = htmlDoc.DocumentNode.SelectSingleNode(xPathGitHubTimeLine);
-            var lableNode = timeLineNode.SelectSingleNode(xPathGitHubLabel);
-            var tagsNode = timeLineNode.SelectSingleNode(xPathGitHubTags);
-            var tagsNode2 = timeLineNode.SelectSingleNode(xPathGitHubTags2);
+            var releaseEntries = htmlDoc.DocumentNode.SelectNodes("//*[@class='release-entry']"); // /html/body/div[4]/div/main/div[2]/div[1]/div[3]/div[1]
 
-            // get data from label or tag view.
-            HtmlNodeCollection releaseNodes = null;
-            if (lableNode != null)
+            foreach (var releaseEntry in releaseEntries)
             {
-                // try find last release (select all link nodes of the download section within the class 'release label-latest')
-                releaseNodes = lableNode.SelectNodes(xPathGithubLabelReleasesLatest);
+                var timeNode = releaseEntry.SelectSingleNode(".//div/div[2]/div[1]/p/relative-time");
+                var versionNode = releaseEntry.SelectSingleNode(".//div/div[1]/ul/li[1]/a/span");
 
-                // try find other releases (select all link nodes of the download section within the classes 'release label-')
-                if (releaseNodes == null)
-                    releaseNodes = lableNode.SelectNodes(xPathGithubLabelReleases);
-            }
-            else if (tagsNode != null)
-            {
-                // try find releases (select all link nodes of the download section within the class 'releases-tag-list')
-                releaseNodes = tagsNode.SelectNodes(xPathGithubTagsReleases);
-            }
-            else //if (tagsNode2 != null)
-            {
-                // try find releases (select all link nodes of the download section within the class 'release-timeline-tags list-style-none')
-                releaseNodes = tagsNode2.SelectNodes(xPathGithubTags2Releases);
-            }
+                var detailsNode = releaseEntry.SelectSingleNode(".//div/div[2]/details");
 
-            if (releaseNodes != null)
-            {
-                // iterate over all link nodes and get only urls with 'releases' in it.
-                foreach (var s in releaseNodes)
+                if (timeNode == null || versionNode == null || detailsNode == null)
+                    continue;
+
+                var links = detailsNode.Descendants("a").ToList();
+                var downloadLink = links.FirstOrDefault(x => IsReleaseUrl(x.Attributes["href"].Value));
+
+                if (downloadLink == null)
+                    continue;
+
+                var url = "https://github.com" + downloadLink.Attributes["href"].Value;
+
+                var dInfo = new DownloadInfo
                 {
-                    var url = "https://github.com" + s.Attributes["href"].Value;
+                    DownloadURL = url,
+                    Filename = GitHubHandler.GetUrlParts(url).Last(),
+                    Name = Path.GetFileNameWithoutExtension(GitHubHandler.GetUrlParts(url).Last()),
+                    Version = Regex.Replace(versionNode.InnerText, @"[A-z]", string.Empty),
+                    ChangeDate = DateTime.Parse(timeNode.Attributes["datetime"].Value)
+                };
 
-                    if (!url.Contains("releases") && !url.Contains("archive")) continue;
-
-                    var dInfo = new DownloadInfo
-                    {
-                        DownloadURL = url,
-                        Filename = GitHubHandler.GetUrlParts(url).Last(),
-                        Name = Path.GetFileNameWithoutExtension(GitHubHandler.GetUrlParts(url).Last())
-                    };
-
-                    releases.Add(dInfo);
-                }
+                releases.Add(dInfo);
             }
 
             return releases;
         }
 
-        public static string GetVersion(HtmlAgilityPack.HtmlDocument htmlDoc)
+        private static bool IsReleaseUrl(string url)
         {
-            // get the node that contains all releases (indepandend of label or tags view)
-            // Easy way to get XPATH search: use chrome, inspect element, highlight the needed data, right-click and copy XPATH
-            var timeLineNode = htmlDoc.DocumentNode.SelectSingleNode(xPathGitHubTimeLine);
-            var lableNode = timeLineNode.SelectSingleNode(xPathGitHubLabel);
-            var tagsNode = timeLineNode.SelectSingleNode(xPathGitHubTags);
-            var tagsNode2 = timeLineNode.SelectSingleNode(xPathGitHubTags2);
-
-            if (lableNode == null && tagsNode == null && tagsNode2 == null)
-            {
-                return null;
-            }
-
-            // get data from label or tag view.
-            HtmlNode versionNode = null;
-            if (lableNode != null)
-            {
-                versionNode = lableNode.SelectSingleNode(xPathGitHubLabelVersion);
-            }
-            else if (tagsNode != null)
-            {
-                versionNode = tagsNode.SelectSingleNode(xPathGitHubTagsVersion);
-            }
-            else //if (tagsNode2 != null)
-            {
-                versionNode = tagsNode2.SelectSingleNode(xPathGitHubTags2Version);
-            }
-
-            if (versionNode != null)
-                return Regex.Replace(versionNode.InnerText, @"[A-z]", string.Empty);
-
-            return null;
-        }
-
-        public static DateTime GetChangeDate(HtmlAgilityPack.HtmlDocument htmlDoc)
-        {
-            var changeDate = DateTime.MinValue;
-
-            // get the node that contains all releases (indepandend of label or tags view)
-            // Easy way to get XPATH search: use chrome, inspect element, highlight the needed data, right-click and copy XPATH
-            var timeLineNode = htmlDoc.DocumentNode.SelectSingleNode(xPathGitHubTimeLine);
-            var lableNode = timeLineNode.SelectSingleNode(xPathGitHubLabel);
-            var tagsNode = timeLineNode.SelectSingleNode(xPathGitHubTags);
-            var tagsNode2 = timeLineNode.SelectSingleNode(xPathGitHubTags2);
-
-            if (lableNode == null && tagsNode == null && tagsNode2 == null)
-            {
-                return changeDate;
-            }
-
-            // get data from label or tag view.
-            HtmlNode updateNode = null;
-            if (lableNode != null)
-            {
-                updateNode = lableNode.SelectSingleNode(xPathGitHubLabelDate);
-            }
-            else if (tagsNode != null)
-            {
-                updateNode = tagsNode.SelectSingleNode(xPathGitHubTagsDate);
-            }
-            else //if (tagsNode2 != null)
-            {
-                updateNode = tagsNode2.SelectSingleNode(xPathGitHubTags2Date);
-            }
-
-            if (updateNode != null)
-                changeDate = DateTime.Parse(updateNode.Attributes["datetime"].Value);
-
-            return changeDate;
+            return url.Contains("/releases/download/");
         }
     }
 }

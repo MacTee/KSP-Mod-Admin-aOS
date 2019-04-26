@@ -133,11 +133,9 @@
     <Compile Include="Utils\ModPackHandler.cs" />
     <Compile Include="Utils\SiteHandler\CurseForgeHandler.cs" />
     <Compile Include="Utils\SiteHandler\CurseHandler.cs" />
-    <Compile Include="Utils\SiteHandler\BitbucketHandler.cs" />
+    <Compile Include="Utils\SiteHandler\GitHubHandler.cs" />
     <Compile Include="Utils\SiteHandler\SpacedockHandler.cs" />
     <Compile Include="Utils\SiteHandler\KSPForumHandler.cs" />
-    <Compile Include="Utils\SiteHandler\GitHubHandler.cs" />
-    <Compile Include="Utils\SiteHandler\KerbalStuffHandler.cs" />
     <Compile Include="Utils\SiteHandler\SiteHandlerManager.cs" />
     <Compile Include="Utils\SiteHandler\ISiteHandler.cs" />
     <Compile Include="Utils\ScanInfo.cs" />

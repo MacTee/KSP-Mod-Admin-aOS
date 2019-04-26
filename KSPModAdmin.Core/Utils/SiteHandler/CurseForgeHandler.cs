@@ -4,6 +4,7 @@ using System.Linq;
 using HtmlAgilityPack;
 using KSPModAdmin.Core.Controller;
 using KSPModAdmin.Core.Model;
+using Newtonsoft.Json.Linq;
 
 namespace KSPModAdmin.Core.Utils.SiteHandler
 {
@@ -320,9 +321,9 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
 
         public static string GetModId(HtmlDocument doc)
         {
-            HtmlNode idNode = doc.DocumentNode.SelectSingleNode(xPathModId);
-            var productID = idNode.Attributes["data-id"].Value.Trim('/');
-            return productID;
+            HtmlNode idNode = doc.DocumentNode.SelectSingleNode("//*[@id='content']/section/div/main/header/div[3]/a[1]"); // xPathModId);
+            var jObject = JObject.Parse(idNode.Attributes["data-nurture-data"].Value);
+            return (string)jObject["ProjectID"];
         }
 
         public static DateTime GetModCreationDate(HtmlDocument doc)

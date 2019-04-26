@@ -13,7 +13,7 @@ namespace KSPModAdmin.UnitTests
         [ClassInitialize]
         public static void InitTests(TestContext testContext)
         {
-            string url = "https://github.com/MuMech/MechJeb2/releases";
+            string url = "https://github.com/KSP-RO/RealismOverhaul/releases"; // https://github.com/RemoteTechnologiesGroup/RemoteTech/releases
             HtmlWeb web = new HtmlWeb();
             GitHubHtmlDocument = web.Load(url);
         }
@@ -27,19 +27,13 @@ namespace KSPModAdmin.UnitTests
         }
 
         [TestMethod]
-        public void GetVersion_Success()
+        public void GetUrlParts_Success()
         {
-            var version = GitHubParser.GetVersion(GitHubHtmlDocument);
+            var parts = GitHubHandler.GetUrlParts("https://github.com/KSP-RO/RealismOverhaul/releases");
+            var parts2 = GitHubHandler.GetUrlParts("https://github.com/krpc/krpc/releases");
 
-            Assert.IsTrue(new Version(version) > new Version(2, 6, 0));
-        }
-
-        [TestMethod]
-        public void GetChangeDate_Success()
-        {
-            var changeDate = GitHubParser.GetChangeDate(GitHubHtmlDocument);
-
-            Assert.IsTrue(changeDate != DateTime.MinValue);
+            Assert.IsTrue(parts.Count >= 4);
+            Assert.IsTrue(parts2.Count >= 4);
         }
     }
 }

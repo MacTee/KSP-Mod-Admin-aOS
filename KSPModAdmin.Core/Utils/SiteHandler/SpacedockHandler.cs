@@ -229,9 +229,9 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
             string version = string.Empty;
             foreach (var child in jToken.Children<JObject>())
             {
-                if (child["ksp_version"] != null)
+                if (child["game_version"] != null)
                 {
-                    version = child["ksp_version"].ToString();
+                    version = child["game_version"].ToString();
                     break;
                 }
 
