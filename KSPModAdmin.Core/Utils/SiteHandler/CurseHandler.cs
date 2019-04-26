@@ -1,9 +1,7 @@
-﻿using System.Net;
-using HtmlAgilityPack;
-using KSPModAdmin.Core.Controller;
+﻿using HtmlAgilityPack;
 using KSPModAdmin.Core.Model;
 
-namespace KSPModAdmin.Core.Utils
+namespace KSPModAdmin.Core.Utils.SiteHandler
 {
     /// <summary>
     /// Handles the GetModInfo and Mod download for mods on Cures.
@@ -13,18 +11,6 @@ namespace KSPModAdmin.Core.Utils
         private const string NAME = "Curse";
         private const string URL = "http://www.curseforge.com/kerbal/ksp-mods/";
         private const string URL1 = "https://www.curseforge.com/kerbal/ksp-mods/";
-
-        private const string XPATHCURSEFORGEURL = "XPathCurseForgeUrl";
-
-        private string XPathCurseForgeUrl
-        {
-            get
-            {
-                if (!OptionsController.OtherAppOptions.ContainsKey(XPATHCURSEFORGEURL))
-                    OptionsController.OtherAppOptions.Add(XPATHCURSEFORGEURL, "//*[@id='content']/section/div/aside/div[2]/div[3]/p/a");
-                return OptionsController.OtherAppOptions[XPATHCURSEFORGEURL];
-            }
-        }
 
 
         /// <summary>
@@ -121,8 +107,7 @@ namespace KSPModAdmin.Core.Utils
         {
             HtmlWeb web = new HtmlWeb();
             HtmlDocument doc = web.Load(url);
-            HtmlNode curseUrlNode = doc.DocumentNode.SelectSingleNode(XPathCurseForgeUrl);
-            url = curseUrlNode.Attributes["href"].Value;
+            url = CurseForgeParser.GetCurseForgeUrl(doc); ;
             url += url.EndsWith("/") ? "files/latest" : "/files/latest";
             return url;
         }

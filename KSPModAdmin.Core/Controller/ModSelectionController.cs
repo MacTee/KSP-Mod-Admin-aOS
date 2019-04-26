@@ -10,6 +10,7 @@ using FolderSelect;
 using KSPModAdmin.Core.Model;
 using KSPModAdmin.Core.Utils;
 using KSPModAdmin.Core.Utils.Controls.Aga.Controls.Tree.Helper;
+using KSPModAdmin.Core.Utils.SiteHandler;
 using KSPModAdmin.Core.Views;
 using SharpCompress.Archive;
 
@@ -95,6 +96,7 @@ namespace KSPModAdmin.Core.Controller
 
             View.AddActionKey(VirtualKey.VK_DELETE, DeleteMod);
             View.AddActionKey(VirtualKey.VK_BACK, DeleteMod);
+            View.AddActionKey(VirtualKey.VK_A, AddMod, new ModifierKey[] { ModifierKey.AnyControl });
         }
 
 
@@ -185,6 +187,17 @@ namespace KSPModAdmin.Core.Controller
         protected static bool DeleteMod(ActionKeyInfo keyState)
         {
             RemoveMod(View.SelectedMods.ToArray());
+            return true;
+        }
+
+        /// <summary>
+        /// ActionKey callback function to handle the keys control + a.
+        /// Opens the AddMod dialog.
+        /// </summary>
+        /// <returns>True, cause we have handled the key.</returns>
+        protected static bool AddMod(ActionKeyInfo keyState)
+        {
+            OpenAddModDialog();
             return true;
         }
 

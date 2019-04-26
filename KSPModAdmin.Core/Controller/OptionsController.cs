@@ -642,12 +642,16 @@ namespace KSPModAdmin.Core.Controller
                 updateDLG.PostDownloadAction = PostDownloadAction;
                 updateDLG.Message = GetDownloadMSG(parameter);
 
-                if (updateDLG.ShowDialog(View.ParentForm) != DialogResult.OK)
-                    return;
+                View.InvokeIfRequired(() => {
 
-                DownloadPath = updateDLG.DownloadPath;
-                PostDownloadAction = updateDLG.PostDownloadAction;
-                DownloadNewAdminVersion();
+                    if (updateDLG.ShowDialog(View.ParentForm) != DialogResult.OK)
+                        return;
+
+                    DownloadPath = updateDLG.DownloadPath;
+                    PostDownloadAction = updateDLG.PostDownloadAction;
+                    DownloadNewAdminVersion();
+
+                });
             }
             else
             {

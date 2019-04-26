@@ -1,7 +1,6 @@
-﻿using System.Net;
-using KSPModAdmin.Core.Model;
+﻿using KSPModAdmin.Core.Model;
 
-namespace KSPModAdmin.Core.Utils
+namespace KSPModAdmin.Core.Utils.SiteHandler
 {
     /// <summary>
     /// Interface for SiteHandlers.

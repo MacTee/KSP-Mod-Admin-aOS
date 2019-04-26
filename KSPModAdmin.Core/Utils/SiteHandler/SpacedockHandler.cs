@@ -1,8 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Text;
 using KSPModAdmin.Core.Controller;
 using KSPModAdmin.Core.Model;
 using Newtonsoft.Json.Linq;
@@ -39,10 +37,6 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
         /// <returns>True if the passed URL is a valid Spacedock URL, otherwise false.</returns>
         public bool IsValidURL(string url)
         {
-            // Should we perhaps put valid hostnames into an array? Would keep the next line growing out of control 
-            // return (!string.IsNullOrEmpty(url) && (url.ToLower().StartsWith(URL) || url.ToLower().StartsWith(URL2) || url.ToLower().StartsWith(URL3)));
-
-            // yes ;)
             return (!string.IsNullOrEmpty(url) && VALIDURLS.Any(x => url.StartsWith(x, StringComparison.CurrentCultureIgnoreCase)));
         }
 
@@ -87,74 +81,22 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
             if (string.IsNullOrEmpty(content))
                 return null;
 
-            JObject jObject = JObject.Parse(content);
-
             var modInfo = new ModInfo
             {
                 SiteHandlerName = Name,
                 ModURL = url,
-                AdditionalURL = GetString(jObject["website"]),
-                ProductID = GetString(jObject["id"]),
-                Name = GetString(jObject["name"]),
-                Downloads = GetString(jObject["downloads"]),
-                Author = GetString(jObject["author"]),
-                Version = GetVersion(jObject["versions"] as JToken),
-                KSPVersion = GetKSPVersion(jObject["versions"] as JToken),
-                Note = GetString(jObject["description"])
+                AdditionalURL = SpacedockParser.GetAdditionalURL(content),
+                ProductID = SpacedockParser.GetProductID(content),
+                Name = SpacedockParser.GetModName(content),
+                Downloads = SpacedockParser.GetDownloadCount(content),
+                Author = SpacedockParser.GetAuthor(content),
+                Version = SpacedockParser.GetVersion(content),
+                KSPVersion = SpacedockParser.GetKSPVersion(content),
+                Note = SpacedockParser.GetNote(content)
             };
             ////modInfo.CreationDate = kerbalMod.Versions.Last().Date; // TODO when KS API supports dates from versions
 
             return modInfo;
-        }
-
-        private static string GetString(JToken jToken)
-        {
-            if (jToken == null)
-                return string.Empty;
-
-            return (string)jToken;
-        }
-
-        private static string GetVersion(JToken jToken)
-        {
-            if (jToken == null)
-                return string.Empty;
-
-            string version = string.Empty;
-            foreach (var child in jToken.Children<JObject>())
-            {
-                if (child["friendly_version"] != null)
-                {
-                    version = child["friendly_version"].ToString();
-                    break;
-                }
-                
-                // just inspect the first child.
-                break;
-            }
-
-            return version;
-        }
-
-        private static string GetKSPVersion(JToken jToken)
-        {
-            if (jToken == null)
-                return string.Empty;
-
-            string version = string.Empty;
-            foreach (var child in jToken.Children<JObject>())
-            {
-                if (child["ksp_version"] != null)
-                {
-                    version = child["ksp_version"].ToString();
-                    break;
-                }
-                
-                // just inspect the first child.
-                break;
-            }
-
-            return version;
         }
 
         /// <summary>
@@ -180,12 +122,9 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
             if (modInfo == null)
                 return false;
 
-            string downloadUrl = GetDownloadURL(modInfo);
-
-            ////string siteContent = www.Load(GetFilesURL(modInfo.ModURL));
-            ////string filename = GetFileName(siteContent);
             modInfo.LocalPath = Path.Combine(OptionsController.DownloadPath, GetDownloadName(modInfo));
 
+            string downloadUrl = GetDownloadURL(modInfo);
             Www.DownloadFile(downloadUrl, modInfo.LocalPath, downloadProgressCallback);
 
             return File.Exists(modInfo.LocalPath);
@@ -209,6 +148,98 @@ namespace KSPModAdmin.Core.Utils.SiteHandler
         private string GetDownloadName(ModInfo modInfo)
         {
             return (modInfo.Name.Replace(' ', '_') + '-' + modInfo.Version + ".zip");
+        }
+    }
+
+    public class SpacedockParser
+    {
+        public static string GetAdditionalURL(string content)
+        {
+            JObject jObject = JObject.Parse(content);
+            return GetString(jObject["website"]);
+        }
+        public static string GetProductID(string content)
+        {
+            JObject jObject = JObject.Parse(content);
+            return GetString(jObject["id"]);
+        }
+        public static string GetModName(string content)
+        {
+            JObject jObject = JObject.Parse(content);
+            return GetString(jObject["name"]);
+        }
+        public static string GetDownloadCount(string content)
+        {
+            JObject jObject = JObject.Parse(content);
+            return GetString(jObject["downloads"]);
+        }
+        public static string GetAuthor(string content)
+        {
+            JObject jObject = JObject.Parse(content);
+            return GetString(jObject["author"]);
+        }
+        public static string GetVersion(string content)
+        {
+            JObject jObject = JObject.Parse(content);
+            return GetVersion(jObject["versions"]);
+        }
+        public static string GetKSPVersion(string content)
+        {
+            JObject jObject = JObject.Parse(content);
+            return GetKSPVersion(jObject["versions"]);
+        }
+        public static string GetNote(string content)
+        {
+            JObject jObject = JObject.Parse(content);
+            return GetString(jObject["description"]);
+        }
+
+        private static string GetString(JToken jToken)
+        {
+            if (jToken == null)
+                return string.Empty;
+
+            return (string)jToken;
+        }
+        private static string GetVersion(JToken jToken)
+        {
+            if (jToken == null)
+                return string.Empty;
+
+            string version = string.Empty;
+            foreach (var child in jToken.Children<JObject>())
+            {
+                if (child["friendly_version"] != null)
+                {
+                    version = child["friendly_version"].ToString();
+                    break;
+                }
+
+                // just inspect the first child.
+                break;
+            }
+
+            return version;
+        }
+        private static string GetKSPVersion(JToken jToken)
+        {
+            if (jToken == null)
+                return string.Empty;
+
+            string version = string.Empty;
+            foreach (var child in jToken.Children<JObject>())
+            {
+                if (child["game_version"] != null)
+                {
+                    version = child["game_version"].ToString();
+                    break;
+                }
+
+                // just inspect the first child.
+                break;
+            }
+
+            return version;
         }
     }
 }

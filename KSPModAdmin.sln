@@ -30,6 +30,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KSPModAdmin.Plugin.FlagsTab
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KSPModAdmin.Plugin.PartsAndCraftsTab", "KSPModAdmin.Plugin.PartsAndCraftsTab\KSPModAdmin.Plugin.PartsAndCraftsTab.csproj", "{8D812F36-171B-4FCE-BCFA-DCEED4648C01}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KSPModAdmin.Plugin.ModBrowserTab", "KSPModAdmin.Plugin.ModBrowserTab\KSPModAdmin.Plugin.ModBrowserTab.csproj", "{68EB78D3-28ED-4286-927A-6DBEBD21F999}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KSPModAdmin.UnitTests", "KSPModAdmin.UnitTests\KSPModAdmin.UnitTests.csproj", "{C71DA898-9690-4675-A7E1-93CF8100C36C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug MONO|Any CPU = Debug MONO|Any CPU
@@ -186,6 +190,38 @@ Global
 		{8D812F36-171B-4FCE-BCFA-DCEED4648C01}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8D812F36-171B-4FCE-BCFA-DCEED4648C01}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{8D812F36-171B-4FCE-BCFA-DCEED4648C01}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{68EB78D3-28ED-4286-927A-6DBEBD21F999}.Debug MONO|Any CPU.ActiveCfg = Debug MONO|Any CPU
+		{68EB78D3-28ED-4286-927A-6DBEBD21F999}.Debug MONO|Any CPU.Build.0 = Debug MONO|Any CPU
+		{68EB78D3-28ED-4286-927A-6DBEBD21F999}.Debug MONO|Mixed Platforms.ActiveCfg = Debug MONO|Any CPU
+		{68EB78D3-28ED-4286-927A-6DBEBD21F999}.Debug MONO|Mixed Platforms.Build.0 = Debug MONO|Any CPU
+		{68EB78D3-28ED-4286-927A-6DBEBD21F999}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68EB78D3-28ED-4286-927A-6DBEBD21F999}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68EB78D3-28ED-4286-927A-6DBEBD21F999}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{68EB78D3-28ED-4286-927A-6DBEBD21F999}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{68EB78D3-28ED-4286-927A-6DBEBD21F999}.Release MONO|Any CPU.ActiveCfg = Release MONO|Any CPU
+		{68EB78D3-28ED-4286-927A-6DBEBD21F999}.Release MONO|Any CPU.Build.0 = Release MONO|Any CPU
+		{68EB78D3-28ED-4286-927A-6DBEBD21F999}.Release MONO|Mixed Platforms.ActiveCfg = Release MONO|Any CPU
+		{68EB78D3-28ED-4286-927A-6DBEBD21F999}.Release MONO|Mixed Platforms.Build.0 = Release MONO|Any CPU
+		{68EB78D3-28ED-4286-927A-6DBEBD21F999}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68EB78D3-28ED-4286-927A-6DBEBD21F999}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68EB78D3-28ED-4286-927A-6DBEBD21F999}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{68EB78D3-28ED-4286-927A-6DBEBD21F999}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{C71DA898-9690-4675-A7E1-93CF8100C36C}.Debug MONO|Any CPU.ActiveCfg = Debug|Any CPU
+		{C71DA898-9690-4675-A7E1-93CF8100C36C}.Debug MONO|Any CPU.Build.0 = Debug|Any CPU
+		{C71DA898-9690-4675-A7E1-93CF8100C36C}.Debug MONO|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C71DA898-9690-4675-A7E1-93CF8100C36C}.Debug MONO|Mixed Platforms.Build.0 = Debug|Any CPU
+		{C71DA898-9690-4675-A7E1-93CF8100C36C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C71DA898-9690-4675-A7E1-93CF8100C36C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C71DA898-9690-4675-A7E1-93CF8100C36C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C71DA898-9690-4675-A7E1-93CF8100C36C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{C71DA898-9690-4675-A7E1-93CF8100C36C}.Release MONO|Any CPU.ActiveCfg = Release|Any CPU
+		{C71DA898-9690-4675-A7E1-93CF8100C36C}.Release MONO|Any CPU.Build.0 = Release|Any CPU
+		{C71DA898-9690-4675-A7E1-93CF8100C36C}.Release MONO|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C71DA898-9690-4675-A7E1-93CF8100C36C}.Release MONO|Mixed Platforms.Build.0 = Release|Any CPU
+		{C71DA898-9690-4675-A7E1-93CF8100C36C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C71DA898-9690-4675-A7E1-93CF8100C36C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C71DA898-9690-4675-A7E1-93CF8100C36C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C71DA898-9690-4675-A7E1-93CF8100C36C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -197,5 +233,9 @@ Global
 		{30494873-E614-47FB-9009-514CAA154DCB} = {D5B2A420-6DCA-4F04-AF5E-4DB783342122}
 		{5F053D87-BCF1-4D3A-9EEF-D441C120E795} = {D5B2A420-6DCA-4F04-AF5E-4DB783342122}
 		{8D812F36-171B-4FCE-BCFA-DCEED4648C01} = {D5B2A420-6DCA-4F04-AF5E-4DB783342122}
+		{68EB78D3-28ED-4286-927A-6DBEBD21F999} = {D5B2A420-6DCA-4F04-AF5E-4DB783342122}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6064CB14-CF77-4D53-9E27-3870A2B2BBEC}
 	EndGlobalSection
 EndGlobal

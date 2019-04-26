@@ -126,7 +126,6 @@ namespace KSPModAdmin.Core.Utils
             try
             {
                 key = (VirtualKey)msg.WParam.ToInt32();
-                kdLPHelper = new KeyDownLParamHelper(msg.LParam.ToInt32());
             }
             catch (Exception)
             {
@@ -134,7 +133,7 @@ namespace KSPModAdmin.Core.Utils
             }
 
             if (msg.Msg == WM_KEYDOWN)
-                CaptureControlKeysState(key, true, kdLPHelper.Extended);
+                CaptureControlKeysState(key, true);
 
             if (msg.Msg == WM_KEYDOWN && mActionKeys.ContainsKey(key))
             {
@@ -147,7 +146,7 @@ namespace KSPModAdmin.Core.Utils
                 }
             }
             else if (msg.Msg == WM_KEYUP)
-                CaptureControlKeysState(key, false, kdLPHelper.Extended);
+                CaptureControlKeysState(key, false);
 
             return false;
         }
@@ -194,7 +193,7 @@ namespace KSPModAdmin.Core.Utils
         /// </summary>
         /// <param name="key">The control key to save the state for.</param>
         /// <param name="pressState">The state of control key.</param>
-        private void CaptureControlKeysState(VirtualKey key, bool pressState, bool right = false)
+        private void CaptureControlKeysState(VirtualKey key, bool pressState) //, bool right = false)
         {
             switch (key)
             {
@@ -211,9 +210,9 @@ namespace KSPModAdmin.Core.Utils
                 ////    break;
 
                 case VirtualKey.VK_CONTROL:
-                    if (right)
+                    //if (right)
                         mControlKeysState.RControl = pressState;
-                    else
+                    //else
                         mControlKeysState.LControl = pressState;
                     break;
                 
